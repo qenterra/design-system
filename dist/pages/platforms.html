@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="macOS, iOS, iPadOS, web, and browser-extension adapters.">
+  <meta name="color-scheme" content="light dark">
+  <title>Platforms · QenTerra Design System</title>
+  <script>(function(){var t=localStorage.getItem('qds-theme');if(t==='light'||t==='dark'){document.documentElement.dataset.theme=t;}})();</script>
+  <link rel="stylesheet" href="../assets/styles.css">
+
+</head>
+<body data-root="../" data-standalone="false">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="progress-line" data-progress aria-hidden="true"></div>
+  <div class="site-shell">
+    <aside class="sidebar" aria-label="Design system navigation">
+      <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">Q</span><span class="brand-copy"><span class="brand-title">QenTerra Design System</span><span class="brand-meta">Semantic core · 1.0.0</span></span></a>
+      <p class="nav-label">Reference</p>
+      <nav class="site-nav"><a href="../index.html"><span class="nav-glyph" aria-hidden="true">01</span><span>Overview</span></a>
+<a href="../pages/foundations.html"><span class="nav-glyph" aria-hidden="true">Aa</span><span>Foundations</span></a>
+<a href="../pages/components.html"><span class="nav-glyph" aria-hidden="true">□</span><span>Components</span></a>
+<a href="../pages/patterns.html"><span class="nav-glyph" aria-hidden="true">↳</span><span>Patterns</span></a>
+<a href="../pages/motion.html"><span class="nav-glyph" aria-hidden="true">→</span><span>Motion</span></a>
+<a href="../pages/content.html"><span class="nav-glyph" aria-hidden="true">Tx</span><span>Content</span></a>
+<a href="../pages/accessibility.html"><span class="nav-glyph" aria-hidden="true">A+</span><span>Accessibility</span></a>
+<a href="../pages/platforms.html" aria-current="page"><span class="nav-glyph" aria-hidden="true">⌘</span><span>Platforms</span></a>
+<a href="../pages/products.html"><span class="nav-glyph" aria-hidden="true">Q</span><span>Products</span></a>
+<a href="../pages/audit.html"><span class="nav-glyph" aria-hidden="true">✓</span><span>Evidence</span></a>
+<a href="../pages/governance.html"><span class="nav-glyph" aria-hidden="true">◇</span><span>Governance</span></a></nav>
+      <div class="sidebar-footer">
+        <div class="appearance-control" role="group" aria-label="Appearance"><button type="button" data-theme-choice="system" aria-pressed="true">System</button><button type="button" data-theme-choice="light" aria-pressed="false">Light</button><button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button></div>
+        <p class="sidebar-note">Exact values come from machine-readable tokens. Product shells remain deliberately distinct.</p>
+      </div>
+    </aside>
+    <button class="scrim" data-scrim aria-label="Close navigation"></button>
+    <div class="main-column">
+      <header class="topbar"><button class="menu-button" type="button" data-menu-button aria-expanded="false" aria-label="Open navigation">☰</button><p class="topbar-title">Platforms</p><div class="search-wrap"><input class="search-input" type="search" data-search aria-label="Search design system" placeholder="Search components, states, products…" autocomplete="off"><div class="search-results" data-search-results role="region" aria-label="Search results"></div></div><span class="key-hint" aria-hidden="true">⌘ K</span></header>
+      <main class="content" id="main-content">
+
+        <header class="page-intro"><p class="page-eyebrow">QenTerra Design System</p><h1>Platforms</h1><p class="page-summary">macOS, iOS, iPadOS, web, and browser-extension adapters.</p></header>
+        <section class="doc-section" id="section-14"><span class="section-number">14</span><h2>Platform layers</h2><div class="prose"><h3 id="s14-14-1-macos">14.1 macOS</h3>
+<ul>
+<li>Use native menus, commands, toolbar placement, split views, settings scenes, file panels, Quick Look, and Finder integration.</li>
+<li>Windows are resizable and define minimum/ideal states.</li>
+<li>Keyboard and pointer are first-class.</li>
+<li>Avoid unnecessary modality.</li>
+<li>Custom rails and tables must reproduce native focus, selection, and accessibility semantics.</li>
+</ul>
+<h3 id="s14-14-2-ios">14.2 iOS</h3>
+<ul>
+<li>Use touch-first targets, Dynamic Type, safe areas, native navigation stacks, sheets, and tab bars.</li>
+<li>Do not shrink macOS density into a phone.</li>
+<li>Primary actions remain reachable and do not hide behind hover or context menus.</li>
+</ul>
+<h3 id="s14-14-3-ipados">14.3 iPadOS</h3>
+<ul>
+<li>Use split views, sidebars, inspectors, pointer and keyboard support.</li>
+<li>Define compact, half-width, and full-width behavior.</li>
+<li>Support multitasking and Stage Manager size changes without recreating state.</li>
+</ul>
+<h3 id="s14-14-4-web">14.4 Web</h3>
+<ul>
+<li>Use semantic HTML before ARIA.</li>
+<li>Support keyboard, focus-visible, reduced motion, forced colors, touch, 200% zoom, print, and responsive navigation.</li>
+<li>Do not imitate macOS controls pixel-for-pixel when browser conventions are clearer.</li>
+<li>Use CSS custom properties generated from semantic tokens.</li>
+</ul>
+<h3 id="s14-14-5-browser-extensions">14.5 Browser extensions</h3>
+<ul>
+<li>Popup, side panel, overlay dock, bottom sheet, and options page are separate layout modes.</li>
+<li>Overlays remain within viewport and outside clipped host-page containers.</li>
+<li>Host-page styles and scripts are isolated.</li>
+<li>Selection and hover are distinct; leaving the overlay does not mutate a locked selection.</li>
+<li>Critical controls remain visible at narrow widths and with localization expansion.</li>
+</ul></div></section>
+        <footer class="page-footer"><span>QenTerra Design System 1.0.0</span><span>System first · Dark signature · Light complete</span></footer>
+      </main>
+    </div>
+  </div>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

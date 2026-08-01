@@ -1,0 +1,78 @@
+{
+  "$schema": "../schemas/token-file.schema.json",
+  "meta": {
+    "name": "QenTerra Component Tokens",
+    "version": "1.0.0",
+    "type": "components",
+    "description": "Shared component metrics and mandatory state contracts."
+  },
+  "button": {
+    "heights": {"compact": 28, "standard": 32, "prominent": 40},
+    "paddingX": {"compact": 10, "standard": 12, "prominent": 16},
+    "radius": "{radius.control}",
+    "iconGap": "{space.2}",
+    "roles": ["primary", "secondary", "quiet", "destructive", "icon", "menuRow", "link"],
+    "states": ["default", "hover", "pressed", "focused", "selected", "disabled", "loading"]
+  },
+  "interactiveRow": {
+    "heights": {"compact": 40, "standard": 48, "comfortable": 56},
+    "radius": "{radius.control}",
+    "paddingX": "{space.3}",
+    "gap": "{space.3}",
+    "states": ["default", "hover", "pressed", "focused", "selected", "disabled", "unavailable"]
+  },
+  "group": {
+    "radius": "{radius.group}",
+    "padding": "{space.4}",
+    "gap": "{space.3}",
+    "border": "border.default",
+    "surface": "surface.secondary"
+  },
+  "panel": {
+    "radius": "{radius.panel}",
+    "padding": "{space.5}",
+    "gap": "{space.4}",
+    "surface": "surface.overlay"
+  },
+  "field": {
+    "height": 32,
+    "radius": "{radius.control}",
+    "paddingX": "{space.3}",
+    "states": ["pristine", "editing", "valid", "invalid", "disabled", "readOnly"]
+  },
+  "table": {
+    "rowHeights": {"compact": 40, "standard": 48},
+    "headerHeight": 32,
+    "columnGap": "{space.4}",
+    "selectionRequiresTextOrShape": true,
+    "sortRequiresDirection": true
+  },
+  "navigation": {
+    "railCompact": 64,
+    "sidebarCompact": 214,
+    "sidebarStandard": 256,
+    "itemHeight": 40,
+    "minimumIconTarget": 28,
+    "states": ["default", "hover", "focused", "selected", "disabled"]
+  },
+  "overlay": {
+    "popoverMaxWidth": 360,
+    "dialogReadableWidth": 480,
+    "sheetReadableWidth": 640,
+    "scrim": "fill.scrim",
+    "focusTrapRequired": true,
+    "restoreFocusRequired": true
+  },
+  "keycap": {
+    "height": 24,
+    "paddingX": 7,
+    "radius": "{radius.control}",
+    "gap": 4
+  },
+  "status": {
+    "iconSize": 14,
+    "gap": 6,
+    "colorAloneForbidden": true,
+    "requiredParts": ["symbol-or-shape", "plain-language-label"]
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "$schema": "../schemas/token-file.schema.json",
+  "meta": {
+    "name": "QenTerra Foundation Tokens",
+    "version": "1.0.0",
+    "type": "foundation",
+    "description": "Raw values. Product code should prefer semantic tokens."
+  },
+  "color": {
+    "graphite": {
+      "0": "#FFFFFF",
+      "25": "#FAFAFB",
+      "50": "#F4F4F6",
+      "100": "#E8E8EC",
+      "150": "#E0E0E6",
+      "200": "#D2D2D8",
+      "300": "#B9B9C0",
+      "400": "#94949D",
+      "500": "#6A6A73",
+      "600": "#56565E",
+      "700": "#3B3B41",
+      "800": "#27272B",
+      "850": "#202023",
+      "900": "#1A1A1C",
+      "950": "#171719",
+      "1000": "#0F0F11"
+    },
+    "red": {
+      "light": "#D84A42",
+      "dark": "#E5695E",
+      "recording": "#E5695E"
+    },
+    "orange": {
+      "light": "#B96200",
+      "dark": "#F0A342"
+    },
+    "green": {
+      "light": "#267A3A",
+      "dark": "#5EC26F"
+    },
+    "blue": {
+      "light": "#2468C9",
+      "dark": "#68A4F1"
+    }
+  },
+  "space": {
+    "0": 0,
+    "1": 4,
+    "2": 8,
+    "3": 12,
+    "4": 16,
+    "5": 20,
+    "6": 24,
+    "8": 32,
+    "10": 40,
+    "12": 48,
+    "16": 64,
+    "20": 80
+  },
+  "radius": {
+    "none": 0,
+    "control": 6,
+    "group": 10,
+    "panel": 14,
+    "hero": 18,
+    "floating": 20,
+    "pill": 999
+  },
+  "stroke": {
+    "hairline": 0.5,
+    "default": 1,
+    "focus": 2,
+    "emphasis": 2
+  },
+  "opacity": {
+    "disabled": 0.42,
+    "faint": 0.46,
+    "secondary": 0.68,
+    "hover": 0.045,
+    "selection": 0.085,
+    "selectionStrong": 0.14,
+    "dividerDark": 0.13,
+    "dividerLight": 0.12,
+    "scrim": 0.46
+  },
+  "size": {
+    "controlCompact": 28,
+    "controlStandard": 32,
+    "controlProminent": 40,
+    "targetPointer": 28,
+    "targetTouch": 44,
+    "rowCompact": 40,
+    "rowStandard": 48,
+    "rowComfortable": 56,
+    "railCompact": 64,
+    "sidebarCompact": 214,
+    "sidebarStandard": 256,
+    "contentReadable": 760,
+    "iconXS": 12,
+    "iconS": 14,
+    "iconM": 16,
+    "iconL": 20,
+    "iconXL": 24
+  },
+  "zIndex": {
+    "content": 0,
+    "chrome": 10,
+    "popover": 30,
+    "modal": 40,
+    "toast": 50,
+    "tooltip": 60
+  }
+}

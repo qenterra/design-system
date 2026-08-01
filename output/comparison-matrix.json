@@ -1,0 +1,58 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "date": "2026-08-01",
+    "scale": "1-5 relative assessment",
+    "liveNativeQA": false
+  },
+  "applications": {
+    "Cadence": {
+      "commit": "3d96b5a",
+      "visualIdentity": 5,
+      "adaptiveAppearance": 5,
+      "layoutTokenDiscipline": 2,
+      "typography": 4,
+      "workflow": 4,
+      "statesRecovery": 4,
+      "motion": 2,
+      "microcopy": 3,
+      "localization": 1,
+      "accessibility": 3,
+      "documentationCurrency": 3
+    },
+    "Unspool": {
+      "commit": "54b29f1",
+      "visualIdentity": 4,
+      "adaptiveAppearance": 5,
+      "layoutTokenDiscipline": 5,
+      "typography": 5,
+      "workflow": 5,
+      "statesRecovery": 5,
+      "motion": 4,
+      "microcopy": 4,
+      "localization": 2,
+      "accessibility": 4,
+      "documentationCurrency": 2
+    },
+    "Lilt": {
+      "commit": "3d0ca81",
+      "visualIdentity": 4,
+      "adaptiveAppearance": 1,
+      "layoutTokenDiscipline": 2,
+      "typography": 2,
+      "workflow": 4,
+      "statesRecovery": 5,
+      "motion": 5,
+      "microcopy": 5,
+      "localization": 5,
+      "accessibility": 3,
+      "documentationCurrency": 2
+    }
+  },
+  "approvedCore": {
+    "visualFoundation": "Cadence",
+    "componentAndWorkflowDiscipline": "Unspool",
+    "stateMotionCopyArchitecture": "Lilt",
+    "identicalProductShells": false
+  }
+}

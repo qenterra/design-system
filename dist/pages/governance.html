@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Versioning, exceptions, AI protocol, maintenance, and adoption.">
+  <meta name="color-scheme" content="light dark">
+  <title>Governance · QenTerra Design System</title>
+  <script>(function(){var t=localStorage.getItem('qds-theme');if(t==='light'||t==='dark'){document.documentElement.dataset.theme=t;}})();</script>
+  <link rel="stylesheet" href="../assets/styles.css">
+
+</head>
+<body data-root="../" data-standalone="false">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="progress-line" data-progress aria-hidden="true"></div>
+  <div class="site-shell">
+    <aside class="sidebar" aria-label="Design system navigation">
+      <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">Q</span><span class="brand-copy"><span class="brand-title">QenTerra Design System</span><span class="brand-meta">Semantic core · 1.0.0</span></span></a>
+      <p class="nav-label">Reference</p>
+      <nav class="site-nav"><a href="../index.html"><span class="nav-glyph" aria-hidden="true">01</span><span>Overview</span></a>
+<a href="../pages/foundations.html"><span class="nav-glyph" aria-hidden="true">Aa</span><span>Foundations</span></a>
+<a href="../pages/components.html"><span class="nav-glyph" aria-hidden="true">□</span><span>Components</span></a>
+<a href="../pages/patterns.html"><span class="nav-glyph" aria-hidden="true">↳</span><span>Patterns</span></a>
+<a href="../pages/motion.html"><span class="nav-glyph" aria-hidden="true">→</span><span>Motion</span></a>
+<a href="../pages/content.html"><span class="nav-glyph" aria-hidden="true">Tx</span><span>Content</span></a>
+<a href="../pages/accessibility.html"><span class="nav-glyph" aria-hidden="true">A+</span><span>Accessibility</span></a>
+<a href="../pages/platforms.html"><span class="nav-glyph" aria-hidden="true">⌘</span><span>Platforms</span></a>
+<a href="../pages/products.html"><span class="nav-glyph" aria-hidden="true">Q</span><span>Products</span></a>
+<a href="../pages/audit.html"><span class="nav-glyph" aria-hidden="true">✓</span><span>Evidence</span></a>
+<a href="../pages/governance.html" aria-current="page"><span class="nav-glyph" aria-hidden="true">◇</span><span>Governance</span></a></nav>
+      <div class="sidebar-footer">
+        <div class="appearance-control" role="group" aria-label="Appearance"><button type="button" data-theme-choice="system" aria-pressed="true">System</button><button type="button" data-theme-choice="light" aria-pressed="false">Light</button><button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button></div>
+        <p class="sidebar-note">Exact values come from machine-readable tokens. Product shells remain deliberately distinct.</p>
+      </div>
+    </aside>
+    <button class="scrim" data-scrim aria-label="Close navigation"></button>
+    <div class="main-column">
+      <header class="topbar"><button class="menu-button" type="button" data-menu-button aria-expanded="false" aria-label="Open navigation">☰</button><p class="topbar-title">Governance</p><div class="search-wrap"><input class="search-input" type="search" data-search aria-label="Search design system" placeholder="Search components, states, products…" autocomplete="off"><div class="search-results" data-search-results role="region" aria-label="Search results"></div></div><span class="key-hint" aria-hidden="true">⌘ K</span></header>
+      <main class="content" id="main-content">
+
+        <header class="page-intro"><p class="page-eyebrow">QenTerra Design System</p><h1>Governance</h1><p class="page-summary">Versioning, exceptions, AI protocol, maintenance, and adoption.</p></header>
+        <section class="doc-section" id="section-18"><span class="section-number">18</span><h2>Governance</h2><div class="prose"><h3 id="s18-18-1-change-types">18.1 Change types</h3>
+<ul>
+<li>patch: clarification or non-breaking correction;</li>
+<li>minor: additive token, component, pattern, or platform guidance;</li>
+<li>major: renamed/removed semantic token, behavior contract change, or product migration requirement.</li>
+</ul>
+<h3 id="s18-18-2-token-lifecycle">18.2 Token lifecycle</h3>
+<ol>
+<li>State the problem and affected consumers.</li>
+<li>Reuse an existing semantic role if meaning matches.</li>
+<li>Add a foundation value only when the scale cannot express the requirement.</li>
+<li>Add or change semantic mapping.</li>
+<li>Update component/pattern documentation.</li>
+<li>Regenerate CSS and Swift.</li>
+<li>Run validation and visual comparison.</li>
+<li>Add migration notes and changelog entry.</li>
+</ol>
+<h3 id="s18-18-3-exceptions">18.3 Exceptions</h3>
+<p>An exception records:</p>
+<ul>
+<li>product and platform;</li>
+<li>user need;</li>
+<li>why the shared rule fails;</li>
+<li>exact scope;</li>
+<li>accessibility impact;</li>
+<li>expiry or review trigger;</li>
+<li>owner/source file.</li>
+</ul>
+<p>Exceptions do not modify family foundations silently.</p>
+<h3 id="s18-18-4-new-component-gate">18.4 New component gate</h3>
+<p>Before creating a component, confirm:</p>
+<ul>
+<li>no existing component can compose the result;</li>
+<li>anatomy and content roles are named;</li>
+<li>every mandatory state is defined;</li>
+<li>keyboard and screen-reader behavior is defined;</li>
+<li>responsive and localization behavior is defined;</li>
+<li>reduced motion/transparency and increased contrast are defined;</li>
+<li>platform-native alternatives were evaluated;</li>
+<li>test and screenshot cases exist.</li>
+</ul>
+<h3 id="s18-18-5-deprecation">18.5 Deprecation</h3>
+<p>Deprecated tokens/components remain documented for one migration window with replacement guidance. Validators may warn first and fail after the announced major version.</p></div></section>
+<section class="doc-section" id="section-19"><span class="section-number">19</span><h2>AI implementation protocol</h2><div class="prose"><p>When an AI builds or reviews UI:</p>
+<ol>
+<li>Read this file, the platform layer, and product profile.</li>
+<li>Identify the primary user task and consequence of failure.</li>
+<li>Choose a pattern before choosing components.</li>
+<li>Resolve exact tokens from JSON or generated adapters.</li>
+<li>Enumerate states and accessibility behavior before code.</li>
+<li>Use realistic localized content, not lorem ipsum.</li>
+<li>Implement the smallest coherent component set.</li>
+<li>Run project-specific verification.</li>
+<li>Render all required appearances and constrained sizes.</li>
+<li>Report automated, visual, live, and unverified evidence separately.</li>
+</ol>
+<p>The AI must not:</p>
+<ul>
+<li>infer current UI from stale screenshots;</li>
+<li>introduce a new raw color, duration, radius, or string source casually;</li>
+<li>call static compilation visual QA;</li>
+<li>call screenshots accessibility QA;</li>
+<li>claim a fallback outcome as the requested outcome;</li>
+<li>copy a product-specific component into the family core without a second valid consumer.</li>
+</ul></div></section>
+<section class="doc-section" id="section-20"><span class="section-number">20</span><h2>Maintenance procedure</h2><div class="prose"><p>To update the design system:</p>
+<ol>
+<li>Read <code>AGENTS.md</code>, this file, affected token files, and relevant product evidence.</li>
+<li>Add or update an ADR in <code>docs/decisions/</code> for a normative change.</li>
+<li>Change source tokens/docs/templates/site fragments.</li>
+<li>Run <code>python3 scripts/build.py</code>.</li>
+<li>Run <code>python3 scripts/verify.py</code>.</li>
+<li>Inspect desktop and mobile screenshots in both appearances.</li>
+<li>Update <code>CHANGELOG.md</code> and version according to change type.</li>
+<li>Update Obsidian routing instructions only when workflow or product contract changes; do not duplicate token values.</li>
+<li>Commit source and generated artifacts together after verification.</li>
+</ol></div></section>
+<section class="doc-section" id="section-21"><span class="section-number">21</span><h2>Definition of done for product adoption</h2><div class="prose"><p>A product is compliant only when:</p>
+<ul>
+<li>semantic tokens replace local duplicates;</li>
+<li>required component states are implemented;</li>
+<li>product-specific exceptions are documented;</li>
+<li>user-facing strings use the localization source;</li>
+<li>keyboard and accessibility behaviors are verified;</li>
+<li>appearance and constrained-layout screenshots are current;</li>
+<li>empty/loading/error/recovery states are exercised;</li>
+<li>raw token and stale-doc validators pass;</li>
+<li>remaining live gaps are explicit.</li>
+</ul>
+<p>Visual similarity alone is not adoption.</p></div></section>
+        <footer class="page-footer"><span>QenTerra Design System 1.0.0</span><span>System first · Dark signature · Light complete</span></footer>
+      </main>
+    </div>
+  </div>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

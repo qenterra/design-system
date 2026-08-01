@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "status": "passed",
+  "checks": {
+    "pythonSyntax": "passed",
+    "deterministicBuild": "passed",
+    "negativeTests": "passed",
+    "tokensLinksContrastPlaceholders": "passed",
+    "javascriptSyntax": "passed",
+    "gitWhitespace": "passed"
+  },
+  "generatedSha256": {
+    "generated/qds-tokens.css": "9becd1b30ee722e8a47fc89a99d621f6324bd5eae1333fb9cf80a8941231d28a",
+    "generated/QDSGeneratedTokens.swift": "2139a417ca0f4058ae0938643818e48b0f0b890cdbc2f9e434e6ee19e2bd1c1b",
+    "generated/TOKEN_REFERENCE.md": "276d3dff6e326a3e16e2c3c8c6ca2bad2f2d1c6941dc2609867710c16548658c",
+    "dist/index.html": "f99ba8a167a32e758cf0dc6727783c953cd7bde97569668a382e832886284114",
+    "dist/qenterra-design-system.html": "81bc55a1ecc47424f84c667024913c0250f5f809fa83937fc92230f2f4c681a7"
+  },
+  "manualNotProven": [
+    "native application rendering",
+    "VoiceOver and screen-reader output",
+    "production app migration",
+    "live Obsidian rendering"
+  ]
+}

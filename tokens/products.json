@@ -1,0 +1,36 @@
+{
+  "$schema": "../schemas/token-file.schema.json",
+  "meta": {
+    "name": "QenTerra Product Profiles",
+    "version": "1.0.0",
+    "type": "products",
+    "description": "Deliberate inheritance and exceptions for current products."
+  },
+  "Cadence": {
+    "profile": "immersive-content",
+    "density": "standard",
+    "defaultNavigation": "expanded-rail",
+    "keep": ["adaptive Soft Graphite palette", "three-pane library", "track table", "import review", "persistent player", "Now Playing", "queue", "guide mechanics", "trash recovery"],
+    "adapt": ["navigation states", "settings containers", "buttons", "row interaction", "copy and localization", "screenshot harness"],
+    "replace": ["scattered radii and durations", "duplicate rail symbols", "manual disabled hover/focus", "non-durable save language"],
+    "appSpecific": ["artwork haze", "transport controls", "audio path", "lyrics editor", "music metadata", "playback queue"]
+  },
+  "Unspool": {
+    "profile": "operational-dense",
+    "density": "compact",
+    "defaultNavigation": "responsive-compact-rail",
+    "keep": ["file table", "filename-first hierarchy", "selection summary", "download preflight", "conflict resolution", "operation history", "synthetic fixtures", "Quick Look and Finder"],
+    "adapt": ["toolbar wrapping", "settings rows", "scoped issue architecture", "localization", "responsive rail"],
+    "replace": ["invisible filter overflow", "pristine-field errors", "unnamed toggles", "unconfirmed session discard", "global string error banner"],
+    "appSpecific": ["Telegram chat sidebar", "message range", "sender filters", "attachment taxonomy", "Skip/Replace/Save a Copy", "download queue"]
+  },
+  "Lilt": {
+    "profile": "transient-capability",
+    "density": "compact",
+    "defaultNavigation": "menu-bar-plus-settings-sidebar",
+    "keep": ["state vocabulary", "short semantic motion", "String Catalog", "privacy language", "HUD", "Quick History", "keycaps", "real-signal-only", "diagnostics preview"],
+    "adapt": ["adaptive palette", "typography", "settings components", "button roles", "optional onboarding semantics", "model cards"],
+    "replace": ["forced dark mode", "raw half-point typography", "generic recovery", "broken focus restoration", "fake trial flow", "stale visual sources", "unwired app icon"],
+    "appSpecific": ["recording red", "signal bars", "recording timer", "hold-to-talk", "model lifecycle", "clipboard versus insertion", "menu-bar-only shell"]
+  }
+}

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Reusable task flows for risk, permissions, recovery, privacy, and settings.">
+  <meta name="color-scheme" content="light dark">
+  <title>Patterns · QenTerra Design System</title>
+  <script>(function(){var t=localStorage.getItem('qds-theme');if(t==='light'||t==='dark'){document.documentElement.dataset.theme=t;}})();</script>
+  <link rel="stylesheet" href="../assets/styles.css">
+
+</head>
+<body data-root="../" data-standalone="false">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="progress-line" data-progress aria-hidden="true"></div>
+  <div class="site-shell">
+    <aside class="sidebar" aria-label="Design system navigation">
+      <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">Q</span><span class="brand-copy"><span class="brand-title">QenTerra Design System</span><span class="brand-meta">Semantic core · 1.0.0</span></span></a>
+      <p class="nav-label">Reference</p>
+      <nav class="site-nav"><a href="../index.html"><span class="nav-glyph" aria-hidden="true">01</span><span>Overview</span></a>
+<a href="../pages/foundations.html"><span class="nav-glyph" aria-hidden="true">Aa</span><span>Foundations</span></a>
+<a href="../pages/components.html"><span class="nav-glyph" aria-hidden="true">□</span><span>Components</span></a>
+<a href="../pages/patterns.html" aria-current="page"><span class="nav-glyph" aria-hidden="true">↳</span><span>Patterns</span></a>
+<a href="../pages/motion.html"><span class="nav-glyph" aria-hidden="true">→</span><span>Motion</span></a>
+<a href="../pages/content.html"><span class="nav-glyph" aria-hidden="true">Tx</span><span>Content</span></a>
+<a href="../pages/accessibility.html"><span class="nav-glyph" aria-hidden="true">A+</span><span>Accessibility</span></a>
+<a href="../pages/platforms.html"><span class="nav-glyph" aria-hidden="true">⌘</span><span>Platforms</span></a>
+<a href="../pages/products.html"><span class="nav-glyph" aria-hidden="true">Q</span><span>Products</span></a>
+<a href="../pages/audit.html"><span class="nav-glyph" aria-hidden="true">✓</span><span>Evidence</span></a>
+<a href="../pages/governance.html"><span class="nav-glyph" aria-hidden="true">◇</span><span>Governance</span></a></nav>
+      <div class="sidebar-footer">
+        <div class="appearance-control" role="group" aria-label="Appearance"><button type="button" data-theme-choice="system" aria-pressed="true">System</button><button type="button" data-theme-choice="light" aria-pressed="false">Light</button><button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button></div>
+        <p class="sidebar-note">Exact values come from machine-readable tokens. Product shells remain deliberately distinct.</p>
+      </div>
+    </aside>
+    <button class="scrim" data-scrim aria-label="Close navigation"></button>
+    <div class="main-column">
+      <header class="topbar"><button class="menu-button" type="button" data-menu-button aria-expanded="false" aria-label="Open navigation">☰</button><p class="topbar-title">Patterns</p><div class="search-wrap"><input class="search-input" type="search" data-search aria-label="Search design system" placeholder="Search components, states, products…" autocomplete="off"><div class="search-results" data-search-results role="region" aria-label="Search results"></div></div><span class="key-hint" aria-hidden="true">⌘ K</span></header>
+      <main class="content" id="main-content">
+
+        <header class="page-intro"><p class="page-eyebrow">QenTerra Design System</p><h1>Patterns</h1><p class="page-summary">Reusable task flows for risk, permissions, recovery, privacy, and settings.</p></header>
+        <section class="doc-section" id="section-10"><span class="section-number">10</span><h2>Core patterns</h2><div class="prose"><h3 id="s10-10-1-select-review-execute-complete-recover">10.1 Select → Review → Execute → Complete/Recover</h3>
+<p>Use for imports, downloads, destructive batches, exports, and migrations.</p>
+<p>Select shows scope. Review shows count, size, destination, conflicts, and exclusions. Execute exposes progress and cancellation semantics. Complete shows outcomes and recovery.</p>
+<h3 id="s10-10-2-destructive-action">10.2 Destructive action</h3>
+<p>Classify consequence:</p>
+<ul>
+<li>reversible immediately: execute with Undo;</li>
+<li>recoverable later: explain destination and restore;</li>
+<li>destructive but scoped: confirmation with exact object/count;</li>
+<li>irreversible and broad: additional friction and explicit consequence.</li>
+</ul>
+<h3 id="s10-10-3-permission-request">10.3 Permission request</h3>
+<p>Explain the user benefit before the system prompt. Distinguish required from optional permissions. A fallback mode is presented as a mode, not an error.</p>
+<h3 id="s10-10-4-onboarding">10.4 Onboarding</h3>
+<p>Onboarding is short, skippable, truthful, and does not perform actions automatically. Required and optional steps are visually distinct. Trials use isolated destinations and do not pollute history or external applications.</p>
+<h3 id="s10-10-5-search-and-filters">10.5 Search and filters</h3>
+<p>Show scope, active filters, removable tokens, clear-all, result count, and no-results recovery. Critical filters remain discoverable at constrained widths.</p>
+<h3 id="s10-10-6-multi-selection">10.6 Multi-selection</h3>
+<p>Support platform conventions. Bulk action summaries show visible and hidden selected counts. Changing filters must not silently operate on hidden objects without disclosure.</p>
+<h3 id="s10-10-7-offline-and-stale-data">10.7 Offline and stale data</h3>
+<p>Name whether data is current, cached, partial, or unavailable. Preserve usable cached content. Retry is scoped and does not erase current state.</p>
+<h3 id="s10-10-8-focus-restoration">10.8 Focus restoration</h3>
+<p>Before opening a focus-taking floating surface, capture the target context. On action:</p>
+<ol>
+<li>validate target still exists;</li>
+<li>dismiss or deactivate the surface;</li>
+<li>restore target focus;</li>
+<li>perform the action;</li>
+<li>report fallback honestly.</li>
+</ol>
+<h3 id="s10-10-9-privacy-safe-export">10.9 Privacy-safe export</h3>
+<p>Preview what is included and excluded. Default to minimum necessary data. Never include transcripts, private chat content, credentials, local home paths, or session data without explicit scope and warning.</p>
+<h3 id="s10-10-10-settings">10.10 Settings</h3>
+<p>Settings describe durable user choices, not transient commands. Use a native Settings window/scene when configuration is substantial and not part of the primary workflow. Embedded Settings may remain when operational status and configuration must be observed together, but it still uses the shared Settings grammar.</p></div></section>
+        <footer class="page-footer"><span>QenTerra Design System 1.0.0</span><span>System first · Dark signature · Light complete</span></footer>
+      </main>
+    </div>
+  </div>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

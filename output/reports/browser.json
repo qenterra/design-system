@@ -1,0 +1,108 @@
+{
+  "status": "passed",
+  "checks": {
+    "searchAndEscape": "passed",
+    "mobileNavigationAndEscape": "passed",
+    "semanticStructure": "passed",
+    "responsiveOverflow": "passed",
+    "consoleErrors": "none"
+  },
+  "captures": [
+    {
+      "name": "overview-dark-wide",
+      "path": "index.html",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "theme": "dark",
+      "reducedMotion": false,
+      "title": "Overview · QenTerra Design System",
+      "sections": 3,
+      "structure": {
+        "oneH1": true,
+        "namedInteractiveElements": true,
+        "sequentialHeadingLevels": true,
+        "oneMainLandmark": true,
+        "noHorizontalOverflow": true
+      }
+    },
+    {
+      "name": "foundations-light-desktop",
+      "path": "pages/foundations.html",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "theme": "light",
+      "reducedMotion": false,
+      "title": "Foundations · QenTerra Design System",
+      "sections": 2,
+      "structure": {
+        "oneH1": true,
+        "namedInteractiveElements": true,
+        "sequentialHeadingLevels": true,
+        "oneMainLandmark": true,
+        "noHorizontalOverflow": true
+      }
+    },
+    {
+      "name": "components-dark-mobile",
+      "path": "pages/components.html",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "dark",
+      "reducedMotion": true,
+      "title": "Components · QenTerra Design System",
+      "sections": 6,
+      "structure": {
+        "oneH1": true,
+        "namedInteractiveElements": true,
+        "sequentialHeadingLevels": true,
+        "oneMainLandmark": true,
+        "noHorizontalOverflow": true
+      }
+    },
+    {
+      "name": "products-light-tablet",
+      "path": "pages/products.html",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "theme": "light",
+      "reducedMotion": false,
+      "title": "Products · QenTerra Design System",
+      "sections": 2,
+      "structure": {
+        "oneH1": true,
+        "namedInteractiveElements": true,
+        "sequentialHeadingLevels": true,
+        "oneMainLandmark": true,
+        "noHorizontalOverflow": true
+      }
+    },
+    {
+      "name": "standalone-dark-desktop",
+      "path": "qenterra-design-system.html",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "theme": "dark",
+      "reducedMotion": true,
+      "title": "QenTerra Design System · QenTerra Design System",
+      "sections": 25,
+      "structure": {
+        "oneH1": true,
+        "namedInteractiveElements": true,
+        "sequentialHeadingLevels": true,
+        "oneMainLandmark": true,
+        "noHorizontalOverflow": true
+      }
+    }
+  ],
+  "consoleErrors": []
+}

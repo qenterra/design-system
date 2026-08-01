@@ -1,0 +1,44 @@
+{
+  "$schema": "../schemas/token-file.schema.json",
+  "meta": {
+    "name": "QenTerra Platform Adapters",
+    "version": "1.0.0",
+    "type": "platforms",
+    "description": "Platform-specific constraints over the shared semantic core."
+  },
+  "macOS": {
+    "input": "pointer-keyboard",
+    "minimumTarget": 28,
+    "defaultControlHeight": 32,
+    "navigation": ["toolbar", "sidebar", "rail", "split-view", "menu-bar", "settings-window"],
+    "requirements": ["menu commands", "keyboard shortcuts", "resizable windows", "VoiceOver", "Reduce Motion", "Reduce Transparency", "Increase Contrast"]
+  },
+  "iOS": {
+    "input": "touch-voice-pointer-optional",
+    "minimumTarget": 44,
+    "defaultControlHeight": 44,
+    "navigation": ["navigation-stack", "tab-bar", "sheet", "full-screen-cover"],
+    "requirements": ["Dynamic Type", "VoiceOver", "safe areas", "orientation", "Reduce Motion", "Increase Contrast"]
+  },
+  "iPadOS": {
+    "input": "touch-pointer-keyboard",
+    "minimumTarget": 44,
+    "defaultControlHeight": 44,
+    "navigation": ["navigation-split-view", "sidebar", "toolbar", "inspector", "multiwindow"],
+    "requirements": ["Stage Manager", "keyboard", "pointer", "Dynamic Type", "multitasking widths"]
+  },
+  "web": {
+    "input": "pointer-keyboard-touch",
+    "minimumTargetPointer": 32,
+    "minimumTargetTouch": 44,
+    "breakpoints": {"compact": 480, "medium": 768, "wide": 1024, "max": 1440},
+    "requirements": ["WCAG 2.2 AA", "semantic HTML", "focus-visible", "200% zoom", "reduced motion", "forced colors", "print"]
+  },
+  "browserExtension": {
+    "input": "pointer-keyboard-touch-possible",
+    "minimumTargetPointer": 32,
+    "minimumTargetTouch": 44,
+    "layouts": ["popup", "side-panel", "overlay-dock", "bottom-sheet", "options-page"],
+    "requirements": ["viewport clamping", "host-page isolation", "focus return", "200% zoom", "i18n expansion", "reduced motion"]
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "../schemas/token-file.schema.json",
+  "meta": {
+    "name": "QenTerra Motion Tokens",
+    "version": "1.0.0",
+    "type": "motion",
+    "description": "Short, interruptible, state-explanatory motion."
+  },
+  "durationMs": {
+    "instant": 0,
+    "press": 80,
+    "hover": 100,
+    "floatingFast": 120,
+    "present": 140,
+    "replace": 150,
+    "dismiss": 160,
+    "disclosure": 180,
+    "spatial": 220,
+    "spatialLong": 240
+  },
+  "curve": {
+    "standard": [0.2, 0.0, 0.0, 1.0],
+    "enter": [0.16, 1.0, 0.3, 1.0],
+    "exit": [0.4, 0.0, 1.0, 1.0],
+    "linear": [0.0, 0.0, 1.0, 1.0]
+  },
+  "events": {
+    "feedback.press": {"duration": "press", "curve": "standard", "properties": ["opacity", "scale<=0.98"]},
+    "feedback.hover": {"duration": "hover", "curve": "standard", "properties": ["background", "foreground"]},
+    "state.replace": {"duration": "replace", "curve": "standard", "properties": ["opacity"]},
+    "floating.present": {"duration": "present", "curve": "enter", "properties": ["opacity", "scale:0.98->1"]},
+    "floating.dismiss": {"duration": "dismiss", "curve": "exit", "properties": ["opacity", "scale:1->0.99"]},
+    "disclosure.toggle": {"duration": "disclosure", "curve": "standard", "properties": ["height", "opacity"]},
+    "navigation.spatial": {"duration": "spatial", "curve": "standard", "properties": ["transform", "opacity"]},
+    "progress.continuous": {"duration": "instant", "curve": "linear", "properties": ["measured-progress"]}
+  },
+  "reducedMotion": {
+    "maximumDurationMs": 100,
+    "remove": ["scale", "translation", "parallax", "stagger", "auto-scroll-animation"],
+    "retain": ["opacity", "instant-state-replacement", "measured-progress"]
+  },
+  "prohibited": [
+    "layout-shifting selection",
+    "decorative bounce",
+    "unbounded spring",
+    "cursor trail",
+    "continuous ambient movement",
+    "fake progress",
+    "timer-based loading theatre"
+  ]
+}

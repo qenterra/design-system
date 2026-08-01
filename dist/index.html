@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Shared grammar, principles, and the layered system.">
+  <meta name="color-scheme" content="light dark">
+  <title>Overview · QenTerra Design System</title>
+  <script>(function(){var t=localStorage.getItem('qds-theme');if(t==='light'||t==='dark'){document.documentElement.dataset.theme=t;}})();</script>
+  <link rel="stylesheet" href="assets/styles.css">
+
+</head>
+<body data-root="" data-standalone="false">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="progress-line" data-progress aria-hidden="true"></div>
+  <div class="site-shell">
+    <aside class="sidebar" aria-label="Design system navigation">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">Q</span><span class="brand-copy"><span class="brand-title">QenTerra Design System</span><span class="brand-meta">Semantic core · 1.0.0</span></span></a>
+      <p class="nav-label">Reference</p>
+      <nav class="site-nav"><a href="index.html" aria-current="page"><span class="nav-glyph" aria-hidden="true">01</span><span>Overview</span></a>
+<a href="pages/foundations.html"><span class="nav-glyph" aria-hidden="true">Aa</span><span>Foundations</span></a>
+<a href="pages/components.html"><span class="nav-glyph" aria-hidden="true">□</span><span>Components</span></a>
+<a href="pages/patterns.html"><span class="nav-glyph" aria-hidden="true">↳</span><span>Patterns</span></a>
+<a href="pages/motion.html"><span class="nav-glyph" aria-hidden="true">→</span><span>Motion</span></a>
+<a href="pages/content.html"><span class="nav-glyph" aria-hidden="true">Tx</span><span>Content</span></a>
+<a href="pages/accessibility.html"><span class="nav-glyph" aria-hidden="true">A+</span><span>Accessibility</span></a>
+<a href="pages/platforms.html"><span class="nav-glyph" aria-hidden="true">⌘</span><span>Platforms</span></a>
+<a href="pages/products.html"><span class="nav-glyph" aria-hidden="true">Q</span><span>Products</span></a>
+<a href="pages/audit.html"><span class="nav-glyph" aria-hidden="true">✓</span><span>Evidence</span></a>
+<a href="pages/governance.html"><span class="nav-glyph" aria-hidden="true">◇</span><span>Governance</span></a></nav>
+      <div class="sidebar-footer">
+        <div class="appearance-control" role="group" aria-label="Appearance"><button type="button" data-theme-choice="system" aria-pressed="true">System</button><button type="button" data-theme-choice="light" aria-pressed="false">Light</button><button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button></div>
+        <p class="sidebar-note">Exact values come from machine-readable tokens. Product shells remain deliberately distinct.</p>
+      </div>
+    </aside>
+    <button class="scrim" data-scrim aria-label="Close navigation"></button>
+    <div class="main-column">
+      <header class="topbar"><button class="menu-button" type="button" data-menu-button aria-expanded="false" aria-label="Open navigation">☰</button><p class="topbar-title">Overview</p><div class="search-wrap"><input class="search-input" type="search" data-search aria-label="Search design system" placeholder="Search components, states, products…" autocomplete="off"><div class="search-results" data-search-results role="region" aria-label="Search results"></div></div><span class="key-hint" aria-hidden="true">⌘ K</span></header>
+      <main class="content" id="main-content">
+
+        <section class="hero">
+          <p class="hero-kicker">QenTerra · Version 1.0.0</p>
+          <h1>One grammar.<br>Different products.</h1>
+          <p class="hero-summary">Adaptive Soft Graphite, native behavior, honest state, short motion, and explicit recovery for Cadence, Unspool, Lilt, and whatever comes next.</p>
+          <div class="hero-actions"><a class="button button-primary" href="pages/foundations.html">Explore foundations</a><a class="button button-secondary" href="qenterra-design-system.html">Open standalone master</a></div>
+        </section>
+
+        <header class="page-intro"><p class="page-eyebrow">QenTerra Design System</p><h2>Overview</h2><p class="page-summary">Shared grammar, principles, and the layered system.</p></header>
+        <section class="doc-section" id="section-0"><span class="section-number">00</span><h2>How to use this file</h2><div class="prose"><p>This document defines the shared UX/UI grammar for Cadence, Unspool, Lilt, future native applications, websites, and browser extensions.</p>
+<p>Read in this order:</p>
+<ol>
+<li>Determine the target platform and product profile.</li>
+<li>Read the relevant pattern before selecting components.</li>
+<li>Use semantic tokens from <code>tokens/*.json</code>; never copy values from screenshots.</li>
+<li>Prefer native platform behavior over decorative sameness.</li>
+<li>Verify every mandatory state, accessibility mode, and content boundary.</li>
+</ol>
+<p>Normative words:</p>
+<ul>
+<li><strong>must</strong>: required for compliance;</li>
+<li><strong>should</strong>: default; deviations need a reason;</li>
+<li><strong>may</strong>: optional;</li>
+<li><strong>must not</strong>: prohibited;</li>
+<li><strong>product-specific</strong>: deliberately outside the shared core.</li>
+</ul>
+<p>When this prose and a token file disagree, exact values come from the token file and behavioral meaning comes from this document. Fix the contradiction in the same change.</p></div></section>
+<section class="doc-section" id="section-1"><span class="section-number">01</span><h2>Family thesis</h2><div class="prose"><p>QenTerra products share one interface grammar, not one application shell.</p>
+<p>The system combines:</p>
+<ul>
+<li>Cadence's adaptive Soft Graphite palette, content hierarchy, media browsing, and review-first import flow;</li>
+<li>Unspool's spacing discipline, dense operational layouts, preflight, conflict safety, and recovery;</li>
+<li>Lilt's state language, short semantic motion, privacy copy, localization pipeline, and transient surfaces.</li>
+</ul>
+<p>Family resemblance is visible in:</p>
+<ul>
+<li>color roles;</li>
+<li>typography roles;</li>
+<li>spacing rhythm;</li>
+<li>corner hierarchy;</li>
+<li>button and row states;</li>
+<li>icon treatment;</li>
+<li>motion timing;</li>
+<li>language and error recovery;</li>
+<li>accessibility behavior;</li>
+<li>screenshot and QA evidence.</li>
+</ul>
+<p>Family resemblance is not created by copying:</p>
+<ul>
+<li>the same rail width;</li>
+<li>the same Settings placement;</li>
+<li>the same row height for every density;</li>
+<li>the same app-icon metaphor;</li>
+<li>media-player components into utilities;</li>
+<li>menu-bar HUDs into document windows.</li>
+</ul></div></section>
+<section class="doc-section" id="section-2"><span class="section-number">02</span><h2>Principles</h2><div class="prose"><h3 id="s2-2-1-content-first">2.1 Content first</h3>
+<p>Chrome supports the task and does not compete with it. Original artwork and file content may keep color; surrounding UI remains predominantly graphite and monochrome.</p>
+<h3 id="s2-2-2-honest-state">2.2 Honest state</h3>
+<p>Show what the system actually knows. Never simulate audio level, progress, completion, connectivity, selection, or persistence.</p>
+<h3 id="s2-2-3-direct-manipulation-with-recovery">2.3 Direct manipulation with recovery</h3>
+<p>Actions should operate on visible objects. Risky actions require review, confirmation, Undo, or a recoverable destination according to consequence.</p>
+<h3 id="s2-2-4-recognition-before-recall">2.4 Recognition before recall</h3>
+<p>Important destinations and actions have visible labels until the user deliberately chooses compact mode or space makes a responsive transformation necessary.</p>
+<h3 id="s2-2-5-native-before-custom">2.5 Native before custom</h3>
+<p>Use platform controls, menus, sheets, navigation, typography, accessibility, and keyboard conventions where they satisfy the contract. A custom control must match native semantics, not merely native appearance.</p>
+<h3 id="s2-2-6-calm-not-inert">2.6 Calm, not inert</h3>
+<p>Motion confirms input and explains change. It is brief, interruptible, and absent when it adds no information.</p>
+<h3 id="s2-2-7-accessibility-is-a-state-not-an-appendix">2.7 Accessibility is a state, not an appendix</h3>
+<p>Reduced motion, reduced transparency, increased contrast, keyboard focus, screen readers, text expansion, zoom, and touch/pointer differences are part of the component definition.</p>
+<h3 id="s2-2-8-one-source-for-changing-values">2.8 One source for changing values</h3>
+<p>Exact colors, dimensions, durations, and token names live in <code>tokens/</code>. Documentation refers to semantic roles. Generated CSS and Swift are never edited directly.</p></div></section>
+        <footer class="page-footer"><span>QenTerra Design System 1.0.0</span><span>System first · Dark signature · Light complete</span></footer>
+      </main>
+    </div>
+  </div>
+  <script src="assets/app.js" defer></script>
+</body>
+</html>

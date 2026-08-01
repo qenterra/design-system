@@ -1,0 +1,119 @@
+{
+  "$schema": "../schemas/token-file.schema.json",
+  "meta": {
+    "name": "QenTerra Semantic Tokens",
+    "version": "1.0.0",
+    "type": "semantic",
+    "description": "Meaning-oriented colors and materials for adaptive appearances."
+  },
+  "modes": {
+    "light": {
+      "surface": {
+        "content": "{color.graphite.50}",
+        "secondary": "{color.graphite.100}",
+        "raised": "{color.graphite.150}",
+        "chrome": "{color.graphite.25}",
+        "overlay": "{color.graphite.0}",
+        "inverted": "{color.graphite.950}"
+      },
+      "text": {
+        "primary": "{color.graphite.900}",
+        "secondary": "{color.graphite.600}",
+        "tertiary": "{color.graphite.500}",
+        "disabled": "{color.graphite.400}",
+        "inverted": "{color.graphite.0}",
+        "link": "{color.graphite.900}"
+      },
+      "action": {
+        "primary": "{color.graphite.900}",
+        "primaryContent": "{color.graphite.0}",
+        "secondary": "{color.graphite.100}",
+        "secondaryContent": "{color.graphite.900}",
+        "quietContent": "{color.graphite.800}"
+      },
+      "border": {
+        "subtle": "rgba(15, 15, 17, 0.08)",
+        "default": "rgba(15, 15, 17, 0.12)",
+        "strong": "rgba(15, 15, 17, 0.22)",
+        "focus": "{color.graphite.900}"
+      },
+      "fill": {
+        "hover": "rgba(15, 15, 17, 0.045)",
+        "pressed": "rgba(15, 15, 17, 0.085)",
+        "selected": "rgba(15, 15, 17, 0.075)",
+        "selectedStrong": "rgba(15, 15, 17, 0.14)",
+        "disabled": "rgba(15, 15, 17, 0.04)",
+        "scrim": "rgba(15, 15, 17, 0.46)"
+      },
+      "state": {
+        "success": "{color.green.light}",
+        "warning": "{color.orange.light}",
+        "destructive": "{color.red.light}",
+        "informative": "{color.blue.light}",
+        "recording": "{color.red.recording}"
+      }
+    },
+    "dark": {
+      "surface": {
+        "content": "{color.graphite.950}",
+        "secondary": "{color.graphite.850}",
+        "raised": "{color.graphite.800}",
+        "chrome": "{color.graphite.900}",
+        "overlay": "{color.graphite.800}",
+        "inverted": "{color.graphite.50}"
+      },
+      "text": {
+        "primary": "{color.graphite.0}",
+        "secondary": "{color.graphite.300}",
+        "tertiary": "{color.graphite.400}",
+        "disabled": "{color.graphite.500}",
+        "inverted": "{color.graphite.950}",
+        "link": "{color.graphite.0}"
+      },
+      "action": {
+        "primary": "{color.graphite.0}",
+        "primaryContent": "{color.graphite.950}",
+        "secondary": "{color.graphite.800}",
+        "secondaryContent": "{color.graphite.0}",
+        "quietContent": "{color.graphite.100}"
+      },
+      "border": {
+        "subtle": "rgba(255, 255, 255, 0.07)",
+        "default": "rgba(255, 255, 255, 0.13)",
+        "strong": "rgba(255, 255, 255, 0.24)",
+        "focus": "{color.graphite.0}"
+      },
+      "fill": {
+        "hover": "rgba(255, 255, 255, 0.045)",
+        "pressed": "rgba(255, 255, 255, 0.085)",
+        "selected": "rgba(255, 255, 255, 0.085)",
+        "selectedStrong": "rgba(255, 255, 255, 0.14)",
+        "disabled": "rgba(255, 255, 255, 0.04)",
+        "scrim": "rgba(0, 0, 0, 0.46)"
+      },
+      "state": {
+        "success": "{color.green.dark}",
+        "warning": "{color.orange.dark}",
+        "destructive": "{color.red.dark}",
+        "informative": "{color.blue.dark}",
+        "recording": "{color.red.recording}"
+      }
+    }
+  },
+  "material": {
+    "content": {
+      "kind": "opaque",
+      "usage": "Reading surfaces, tables, forms, settings, media browsers"
+    },
+    "chrome": {
+      "kind": "adaptive-translucent",
+      "fallback": "surface.chrome",
+      "usage": "Title bars, rails, toolbars, player chrome"
+    },
+    "floating": {
+      "kind": "adaptive-translucent",
+      "fallback": "surface.overlay",
+      "usage": "HUD, command palette, transient popovers"
+    }
+  }
+}
