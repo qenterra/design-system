@@ -146,9 +146,82 @@ async function assertUniformSvgIcons(page) {
       invalidChrome: chromeControls.filter((control) => control.querySelectorAll("svg.icon").length !== 1).length
     };
   });
-  if (result.navCount !== 15 || result.invalidNav || result.invalidChrome) {
+  if (result.navCount !== 16 || result.invalidNav || result.invalidChrome) {
     throw new Error(`Icon family mismatch: ${JSON.stringify(result)}`);
   }
+}
+
+async function fillEmailFields(page) {
+  const controls = page.locator("[data-email-field]");
+  for (let index = 0; index < await controls.count(); index += 1) {
+    const control = controls.nth(index);
+    await control.fill((await control.getAttribute("placeholder")) || "Example");
+  }
+}
+
+async function assertEmailComposer(page, baseUrl) {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto(`${baseUrl}/en/pages/email.html`, { waitUntil: "networkidle" });
+  if (await page.locator('[data-email-composer][data-ready="true"]').count() !== 1) {
+    throw new Error("Email composer did not initialize");
+  }
+  if (await page.locator("[data-email-template]").count() !== 48) {
+    throw new Error("Email composer does not expose 48 templates");
+  }
+
+  await page.locator("[data-email-category]").selectOption("account");
+  if (await page.locator("[data-email-template]:visible").count() !== 12) {
+    throw new Error("Account filter does not expose 12 templates");
+  }
+  await page.locator('[data-email-template="account-verify-email"]').click();
+  await page.locator("[data-email-copy-rich]").click();
+  if (await page.locator('[data-email-field][aria-invalid="true"]').count() === 0) {
+    throw new Error("Required fields did not block copy");
+  }
+
+  await fillEmailFields(page);
+  const frame = page.locator("[data-email-preview-frame]");
+  await frame.waitFor({ state: "visible" });
+  const source = await frame.getAttribute("srcdoc");
+  if (!source || source.includes("{{") || source.includes("<script>alert")) {
+    throw new Error("Email preview is unresolved or unsafe");
+  }
+
+  await page.evaluate(() => {
+    Object.defineProperty(navigator, "clipboard", {
+      configurable: true,
+      value: {
+        writeText: async (value) => { window.__qdsCopiedText = value; },
+        write: async (items) => { window.__qdsCopiedItems = items.length; }
+      }
+    });
+  });
+  await page.locator("[data-email-copy-rich]").click();
+  if (await page.evaluate(() => window.__qdsCopiedItems) !== 1) {
+    throw new Error("Rich email copy did not write one clipboard item");
+  }
+  await page.locator("[data-email-copy-subject]").click();
+  if (!(await page.evaluate(() => window.__qdsCopiedText || "")).includes("Verify")) {
+    throw new Error("Subject copy did not use rendered subject");
+  }
+
+  const productValue = await page.locator('[data-email-field="productName"]').inputValue();
+  await page.locator('[data-email-template="account-password-reset"]').click();
+  if (await page.locator('[data-email-field="productName"]').inputValue() !== productValue) {
+    throw new Error("Harmless product field was not retained");
+  }
+  if (await page.locator('[data-email-field="recipientName"]').inputValue() !== "") {
+    throw new Error("Sensitive recipient field survived a template change");
+  }
+
+  await fillEmailFields(page);
+  await page.evaluate(() => Object.defineProperty(navigator, "clipboard", { configurable: true, value: undefined }));
+  await page.locator("[data-email-copy-text]").click();
+  if (await page.locator("[data-email-fallback]:visible").count() !== 1) {
+    throw new Error("Clipboard failure did not expose manual fallback");
+  }
+  const emailStorageKeys = await page.evaluate(() => Object.keys(localStorage).filter((key) => key.toLowerCase().includes("email")));
+  if (emailStorageKeys.length) throw new Error(`Email composer persisted data: ${emailStorageKeys.join(", ")}`);
 }
 
 async function assertScrollSpy(page, baseUrl) {
@@ -287,6 +360,7 @@ async function main() {
     await assertLanguagePickerPosition(page, baseUrl);
     await assertLanguageSwitch(page, baseUrl);
     await assertComponentLab(page, baseUrl);
+    await assertEmailComposer(page, baseUrl);
 
     const captures = [];
     for (const entry of matrix) captures.push(await capture(page, baseUrl, entry));
@@ -313,6 +387,7 @@ async function main() {
       repositoryModule: "passed",
       uniformSvgIcons: "passed",
       componentLab: "passed",
+      emailComposer: "passed",
       pseudoLocalization: "passed",
       visibleFocus: "passed",
       semanticStructure: "passed",

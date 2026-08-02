@@ -2091,7 +2091,7 @@
         },
         {
           "id": "completedSummary",
-          "required": true
+          "required": false
         },
         {
           "id": "referenceId",
@@ -3518,7 +3518,7 @@
         },
         {
           "id": "completedSummary",
-          "required": true
+          "required": false
         },
         {
           "id": "referenceId",
@@ -4544,4 +4544,3 @@
     }
   ]
 }
-

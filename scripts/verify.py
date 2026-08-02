@@ -35,12 +35,17 @@ GENERATED_TARGETS = [
     ROOT / "dist" / "ru" / "index.html",
     ROOT / "dist" / "en" / "pages" / "brand.html",
     ROOT / "dist" / "ru" / "pages" / "brand.html",
+    ROOT / "dist" / "en" / "pages" / "email.html",
+    ROOT / "dist" / "ru" / "pages" / "email.html",
+    ROOT / "dist" / "pages" / "email.html",
     ROOT / "dist" / "en" / "qenterra-design-system.html",
     ROOT / "dist" / "ru" / "qenterra-design-system.html",
     ROOT / "dist" / "assets" / "search-index-en.json",
     ROOT / "dist" / "assets" / "search-index-ru.json",
     ROOT / "dist" / "assets" / "qds-recipes.css",
     ROOT / "dist" / "assets" / "qds-icons.svg",
+    ROOT / "dist" / "assets" / "email-renderer.js",
+    ROOT / "dist" / "assets" / "email-composer.js",
 ]
 
 
@@ -126,6 +131,7 @@ def main() -> int:
         raise RuntimeError("Node.js is required for JavaScript syntax validation; set QDS_NODE")
     run([node, "--check", "src/assets/app.js"])
     run([node, "--check", "src/assets/email-renderer.js"])
+    run([node, "--check", "src/assets/email-composer.js"])
     run([node, "tests/email_renderer.test.js"])
     run([node, "--check", "scripts/render_screenshots.js"])
     run(["git", "diff", "--check"])

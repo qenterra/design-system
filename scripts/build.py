@@ -59,8 +59,8 @@ def pages(locale: str) -> list[tuple[str, str, list[int], str]]:
 def nav_html(current: str, root: str, standalone: bool, locale: str) -> str:
     links = []
     for slug, title, section_numbers, _ in pages(locale):
-        if slug in {"brand", "repositories", "lab", "adoption"}:
-            prefix = {"brand": "brand", "repositories": "repository", "lab": "lab", "adoption": "adoption"}[slug]
+        if slug in {"brand", "repositories", "lab", "adoption", "email"}:
+            prefix = {"brand": "brand", "repositories": "repository", "lab": "lab", "adoption": "adoption", "email": "email"}[slug]
             href = f"#{prefix}-overview" if standalone else f"{root}pages/{slug}.html"
             section_start = section_end = prefix
         elif standalone:
@@ -376,6 +376,74 @@ def render_adoption(locale: str) -> str:
     )
 
 
+def render_email_composer(locale: str) -> str:
+    ui = COPY[locale]["email"]
+    registry = load_json(ROOT / "registry" / "email-templates.json")
+    contacts = load_json(ROOT / "registry" / "contact-channels.json")
+    template_buttons = []
+    for index, template in enumerate(registry["templates"]):
+        copy = template["locales"][locale]
+        selected = ' aria-pressed="true"' if index == 0 else ' aria-pressed="false"'
+        template_buttons.append(
+            f'<button type="button" class="email-template-item" data-email-template="{template["id"]}" '
+            f'data-category="{template["category"]}" data-channel="{template["channel"]}"{selected}>'
+            f'<strong>{escape(copy["name"])}</strong><span>{escape(copy["summary"])}</span></button>'
+        )
+    category_options = ''.join(
+        f'<option value="{key}">{escape(label)}</option>' for key, label in ui["categories"].items()
+    )
+    channel_options = ''.join(
+        f'<option value="{key}">{escape(label)}</option>' for key, label in ui["channels"].items()
+    )
+    registry_json = json.dumps(registry, ensure_ascii=False).replace("</", "<\\/")
+    contacts_json = json.dumps(contacts, ensure_ascii=False).replace("</", "<\\/")
+    labels_json = json.dumps(ui, ensure_ascii=False).replace("</", "<\\/")
+    return f'''
+    <section class="doc-section email-library" id="email-overview" data-nav-slug="email" data-email-composer>
+      <span class="section-number">E</span><h2>{escape(ui["title"])}</h2>
+      <p class="email-intro">{escape(ui["intro"])}</p>
+      <p class="email-privacy" role="note">{escape(ui["privacy"])}</p>
+      <div class="email-workspace">
+        <aside class="email-browser" aria-label="{escape(ui["templates"], quote=True)}">
+          <label class="email-control"><span>{escape(ui["search"])}</span><input type="search" data-email-search placeholder="{escape(ui["search_placeholder"], quote=True)}" autocomplete="off"></label>
+          <div class="email-filter-row">
+            <label class="email-control"><span>{escape(ui["category"])}</span><select data-email-category><option value="">{escape(ui["all"])}</option>{category_options}</select></label>
+            <label class="email-control"><span>{escape(ui["channel"])}</span><select data-email-channel><option value="">{escape(ui["all"])}</option>{channel_options}</select></label>
+          </div>
+          <div class="email-template-list" data-email-template-list>{''.join(template_buttons)}</div>
+          <p class="email-no-results" data-email-no-results hidden>{escape(ui["no_templates"])}</p>
+        </aside>
+        <div class="email-editor">
+          <form class="email-form" data-email-form novalidate>
+            <header><p class="page-eyebrow" data-email-selected-category></p><h3 data-email-selected-title></h3><p data-email-selected-summary></p></header>
+            <div class="email-fields" data-email-fields></div>
+          </form>
+          <section class="email-preview-panel" aria-labelledby="email-preview-title">
+            <div class="email-preview-head"><h3 id="email-preview-title">{escape(ui["preview"])}</h3>
+              <div class="email-segmented" role="group" aria-label="{escape(ui["preview"], quote=True)}">
+                <button type="button" data-email-width="desktop" aria-pressed="true">{escape(ui["desktop"])}</button><button type="button" data-email-width="mobile" aria-pressed="false">{escape(ui["mobile"])}</button>
+                <button type="button" data-email-appearance="light" aria-pressed="true">{escape(ui["light"])}</button><button type="button" data-email-appearance="dark" aria-pressed="false">{escape(ui["dark"])}</button>
+              </div>
+            </div>
+            <div class="email-preview" data-email-preview data-width="desktop"><p data-email-preview-empty>{escape(ui["preview_empty"])}</p><iframe data-email-preview-frame title="{escape(ui["preview"], quote=True)}" hidden></iframe></div>
+          </section>
+          <div class="email-actions">
+            <button class="button button-secondary" type="button" data-email-copy-subject>{escape(ui["copy_subject"])}</button>
+            <button class="button button-primary" type="button" data-email-copy-rich>{escape(ui["copy_rich"])}</button>
+            <button class="button button-secondary" type="button" data-email-copy-text>{escape(ui["copy_text"])}</button>
+            <button class="button button-secondary" type="button" data-email-copy-html>{escape(ui["copy_html"])}</button>
+            <button class="button button-quiet" type="button" data-email-reset>{escape(ui["reset"])}</button>
+          </div>
+          <div class="email-copy-fallback" data-email-fallback hidden><label for="email-fallback-value">{escape(ui["fallback"])}</label><textarea id="email-fallback-value" data-email-fallback-value readonly></textarea></div>
+          <p class="email-live" data-email-live role="status" aria-live="polite"></p>
+        </div>
+      </div>
+      <script type="application/json" id="qds-email-registry">{registry_json}</script>
+      <script type="application/json" id="qds-contact-channels">{contacts_json}</script>
+      <script type="application/json" id="qds-email-labels">{labels_json}</script>
+    </section>'''
+
+
 def brand_sections(locale: str) -> list[tuple[str, str, str]]:
     suffix = ".ru.md" if locale == "ru" else ".md"
     documents = ("MASTER", "QENTERRA", "NYX", "ASSET_CATALOG")
@@ -481,6 +549,8 @@ def shell(
     source_css: str = "",
     recipe_css: str = "",
     source_js: str = "",
+    email_renderer_js: str = "",
+    email_composer_js: str = "",
     search_index: list[dict] | None = None,
 ) -> str:
     if standalone:
@@ -488,12 +558,12 @@ def shell(
             '@import url("./qds-recipes.css");', ""
         )
         styles = f"<style>{token_css}\n{recipe_css}\n{inline_css}</style>"
-        scripts = f"<script>window.QDS_SEARCH_INDEX={json.dumps(search_index or [], ensure_ascii=False)};</script><script>{source_js}</script>"
+        scripts = f"<script>window.QDS_SEARCH_INDEX={json.dumps(search_index or [], ensure_ascii=False)};</script><script>{source_js}</script><script>{email_renderer_js}</script><script>{email_composer_js}</script>"
         data = f'data-root="" data-site-root="" data-standalone="true" data-locale="{locale}"'
         stylesheet = ""
     else:
         styles = ""
-        scripts = f'<script src="{asset_root}assets/app.js" defer></script>'
+        scripts = f'<script src="{asset_root}assets/app.js" defer></script><script src="{asset_root}assets/email-renderer.js" defer></script><script src="{asset_root}assets/email-composer.js" defer></script>'
         data = f'data-root="{asset_root}" data-site-root="{site_root}" data-standalone="false" data-locale="{locale}"'
         stylesheet = f'<link rel="stylesheet" href="{asset_root}assets/styles.css">'
 
@@ -568,6 +638,7 @@ def build() -> None:
     tokens = {name: data for name, data in token_files}
     icons = load_json(ROOT / "registry" / "icons.json")
     components = component_registry()
+    email_registry = load_json(ROOT / "registry" / "email-templates.json")
     token_css = generate_css(
         tokens["foundation"],
         tokens["semantic"],
@@ -622,11 +693,15 @@ def build() -> None:
     source_css = (ROOT / "src" / "assets" / "styles.css").read_text(encoding="utf-8")
     recipe_css = (ROOT / "src" / "assets" / "recipes.css").read_text(encoding="utf-8")
     source_js = (ROOT / "src" / "assets" / "app.js").read_text(encoding="utf-8")
+    email_renderer_js = (ROOT / "src" / "assets" / "email-renderer.js").read_text(encoding="utf-8")
+    email_composer_js = (ROOT / "src" / "assets" / "email-composer.js").read_text(encoding="utf-8")
     atomic_write(dist / "assets" / "qds-tokens.css", token_css)
     atomic_write(dist / "assets" / "qds-icons.svg", svg_sprite)
     shutil.copyfile(ROOT / "src" / "assets" / "recipes.css", dist / "assets" / "qds-recipes.css")
     shutil.copyfile(ROOT / "src" / "assets" / "styles.css", dist / "assets" / "styles.css")
     shutil.copyfile(ROOT / "src" / "assets" / "app.js", dist / "assets" / "app.js")
+    shutil.copyfile(ROOT / "src" / "assets" / "email-renderer.js", dist / "assets" / "email-renderer.js")
+    shutil.copyfile(ROOT / "src" / "assets" / "email-composer.js", dist / "assets" / "email-composer.js")
     shutil.copyfile(ROOT / "src" / "assets" / "recipes.css", ROOT / "packages" / "css" / "recipes.css")
 
     locale_builds: dict[str, tuple[str, list[Section], list[dict]]] = {}
@@ -702,6 +777,17 @@ def build() -> None:
                 "text": COPY[locale]["pages"]["adoption"][1],
             }
         )
+        search_index.append(
+            {
+                "section": "E",
+                "anchor": "email-overview",
+                "order": 91,
+                "title": COPY[locale]["pages"]["email"][0],
+                "page": COPY[locale]["pages"]["email"][0],
+                "path": "pages/email.html",
+                "text": " ".join(template["locales"][locale]["name"] + " " + template["locales"][locale]["summary"] for template in email_registry["templates"]),
+            }
+        )
         atomic_write(
             dist / "assets" / f"search-index-{locale}.json",
             json.dumps(search_index, ensure_ascii=False, indent=2) + "\n",
@@ -723,6 +809,8 @@ def build() -> None:
                 sections_html = render_component_lab(locale)
             elif slug == "adoption":
                 sections_html = render_adoption(locale)
+            elif slug == "email":
+                sections_html = render_email_composer(locale)
             else:
                 sections_html = "\n".join(render_section(section_map[number], locale, slug) for number in numbers)
             if slug == "components":
@@ -759,6 +847,7 @@ def build() -> None:
                 standalone_sections.append(render_component_catalog(locale))
                 standalone_sections.append(render_component_lab(locale))
                 standalone_sections.append(render_adoption(locale))
+                standalone_sections.append(render_email_composer(locale))
             if section.number == 17:
                 standalone_sections.append(render_audit_appendix(locale))
         standalone_sections.append(render_brand_module(locale))
@@ -778,6 +867,8 @@ def build() -> None:
             source_css=source_css,
             recipe_css=recipe_css,
             source_js=source_js,
+            email_renderer_js=email_renderer_js,
+            email_composer_js=email_composer_js,
             search_index=search_index,
         )
         atomic_write(locale_root / "qenterra-design-system.html", standalone)
@@ -792,6 +883,7 @@ def build() -> None:
             compatibility_sections.append(render_component_catalog("en"))
             compatibility_sections.append(render_component_lab("en"))
             compatibility_sections.append(render_adoption("en"))
+            compatibility_sections.append(render_email_composer("en"))
         if section.number == 17:
             compatibility_sections.append(render_audit_appendix("en"))
     compatibility_sections.append(render_brand_module("en"))
@@ -811,6 +903,8 @@ def build() -> None:
         source_css=source_css,
         recipe_css=recipe_css,
         source_js=source_js,
+        email_renderer_js=email_renderer_js,
+        email_composer_js=email_composer_js,
         search_index=english_search,
     )
     atomic_write(dist / "qenterra-design-system.html", compatibility)

@@ -10,6 +10,7 @@ public enum QDSIcon: String, CaseIterable, Sendable {
     case patterns = "patterns"
     case motion = "motion"
     case content = "content"
+    case email = "email"
     case accessibility = "accessibility"
     case platforms = "platforms"
     case products = "products"

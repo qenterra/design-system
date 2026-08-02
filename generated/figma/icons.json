@@ -51,6 +51,12 @@
     },
     {
       "category": "navigation",
+      "id": "email",
+      "meaning": "Email templates",
+      "svg": "<rect x=\"2.25\" y=\"3.5\" width=\"11.5\" height=\"9\" rx=\"1.25\"/><path d=\"m3 4.5 5 4 5-4\"/>"
+    },
+    {
+      "category": "navigation",
       "id": "accessibility",
       "meaning": "Accessibility",
       "svg": "<circle cx=\"8\" cy=\"3.25\" r=\"1.25\"/><path d=\"M3 5.5h10M8 5.5v3M5 14l3-5.5L11 14\"/>"

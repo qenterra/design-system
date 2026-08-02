@@ -46,7 +46,7 @@
     {
       "name": "standalone-en-dark-desktop",
       "changedPixels": 0,
-      "totalPixels": 77710080
+      "totalPixels": 79407360
     },
     {
       "name": "standalone-ru-motion-dark",
@@ -62,6 +62,26 @@
       "name": "repositories-ru-light-desktop",
       "changedPixels": 0,
       "totalPixels": 1152000
+    },
+    {
+      "name": "email-en-dark-desktop",
+      "changedPixels": 0,
+      "totalPixels": 2604960
+    },
+    {
+      "name": "email-ru-light-mobile",
+      "changedPixels": 0,
+      "totalPixels": 1036620
+    },
+    {
+      "name": "email-en-light-tablet",
+      "changedPixels": 0,
+      "totalPixels": 1768704
+    },
+    {
+      "name": "email-ru-dark-desktop",
+      "changedPixels": 0,
+      "totalPixels": 2382080
     }
   ],
   "errors": []

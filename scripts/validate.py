@@ -723,6 +723,7 @@ def validate_browser_evidence(root: Path) -> list[str]:
         "repositoryModule",
         "uniformSvgIcons",
         "componentLab",
+        "emailComposer",
         "pseudoLocalization",
         "visibleFocus",
     ):

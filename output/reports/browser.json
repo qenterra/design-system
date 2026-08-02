@@ -12,6 +12,7 @@
     "repositoryModule": "passed",
     "uniformSvgIcons": "passed",
     "componentLab": "passed",
+    "emailComposer": "passed",
     "pseudoLocalization": "passed",
     "visibleFocus": "passed",
     "semanticStructure": "passed",
@@ -190,7 +191,7 @@
       "reducedMotion": true,
       "locale": "en",
       "title": "QenTerra Design System",
-      "sections": 43,
+      "sections": 44,
       "structure": {
         "oneH1": true,
         "namedInteractiveElements": true,
@@ -210,7 +211,7 @@
       "reducedMotion": false,
       "locale": "ru",
       "title": "QenTerra Design System",
-      "sections": 43,
+      "sections": 44,
       "structure": {
         "oneH1": true,
         "namedInteractiveElements": true,
@@ -251,6 +252,86 @@
       "locale": "ru",
       "title": "Репозитории · QenTerra Design System",
       "sections": 12,
+      "structure": {
+        "oneH1": true,
+        "namedInteractiveElements": true,
+        "sequentialHeadingLevels": true,
+        "oneMainLandmark": true,
+        "noHorizontalOverflow": true
+      }
+    },
+    {
+      "name": "email-en-dark-desktop",
+      "path": "en/pages/email.html",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "theme": "dark",
+      "reducedMotion": false,
+      "locale": "en",
+      "title": "Email templates · QenTerra Design System",
+      "sections": 1,
+      "structure": {
+        "oneH1": true,
+        "namedInteractiveElements": true,
+        "sequentialHeadingLevels": true,
+        "oneMainLandmark": true,
+        "noHorizontalOverflow": true
+      }
+    },
+    {
+      "name": "email-ru-light-mobile",
+      "path": "ru/pages/email.html",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "reducedMotion": true,
+      "locale": "ru",
+      "title": "Шаблоны писем · QenTerra Design System",
+      "sections": 1,
+      "structure": {
+        "oneH1": true,
+        "namedInteractiveElements": true,
+        "sequentialHeadingLevels": true,
+        "oneMainLandmark": true,
+        "noHorizontalOverflow": true
+      }
+    },
+    {
+      "name": "email-en-light-tablet",
+      "path": "en/pages/email.html",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "theme": "light",
+      "reducedMotion": false,
+      "locale": "en",
+      "title": "Email templates · QenTerra Design System",
+      "sections": 1,
+      "structure": {
+        "oneH1": true,
+        "namedInteractiveElements": true,
+        "sequentialHeadingLevels": true,
+        "oneMainLandmark": true,
+        "noHorizontalOverflow": true
+      }
+    },
+    {
+      "name": "email-ru-dark-desktop",
+      "path": "ru/pages/email.html",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "theme": "dark",
+      "reducedMotion": true,
+      "locale": "ru",
+      "title": "Шаблоны писем · QenTerra Design System",
+      "sections": 1,
       "structure": {
         "oneH1": true,
         "namedInteractiveElements": true,
