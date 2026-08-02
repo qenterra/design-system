@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "sourceLabel": "Verified source collection",
+  "assetCount": 1,
+  "totalBytes": 123456,
+  "assets": [
+    {
+      "sourcePath": "Nyx/Portrait Example.png",
+      "canonicalPath": "assets/brand/nyx/character-assets/portraits/Portrait Example.png",
+      "category": "nyx.character.portrait",
+      "extension": ".png",
+      "mimeType": "image/png",
+      "bytes": 123456,
+      "sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+      "lfs": true,
+      "width": 4096,
+      "height": 4096,
+      "mode": "rgba",
+      "bitDepth": 8
+    }
+  ]
+}

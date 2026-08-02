@@ -1,0 +1,47 @@
+{
+  "canvas": {
+    "width": 4096,
+    "height": 4096,
+    "mode": "RGBA"
+  },
+  "categories": {
+    "full-body": {
+      "vertical_margin_min": 308,
+      "outer_margin_min": 1
+    },
+    "portraits": {
+      "vertical_margin_min": 268,
+      "outer_margin_min": 1
+    },
+    "compositions": {
+      "outer_margin_min": 64
+    },
+    "decorative": {
+      "vertical_margin_min": 308,
+      "outer_margin_min": 1
+    }
+  },
+  "backgrounds": {
+    "light": "#EEECE8",
+    "dark": "#23242A",
+    "upscale": "#808080"
+  },
+  "processing": {
+    "chroma_distance_threshold": 42,
+    "band_radius": 6,
+    "dominance_threshold": 20.0,
+    "noise_level": 1,
+    "scale": 4,
+    "neutralize_saturation": 8,
+    "neutralize_max_luminance": 160
+  },
+  "allowed_silhouette_pairs": [
+    {
+      "first": "decorative/Duotone.png",
+      "second": "decorative/Line Art.png",
+      "reason": "Intentional matched-pose style comparison retained from the approved collection"
+    }
+  ],
+  "silhouette_duplicate_threshold": 0.995,
+  "fringe_dominance_threshold": 24
+}
