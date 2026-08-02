@@ -3,6 +3,7 @@ __pycache__/
 *.pyc
 .venv/
 node_modules/
+.build/
 output/tmp/
 output/server.log
 output/.server.pid
