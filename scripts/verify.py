@@ -125,6 +125,8 @@ def main() -> int:
     if not node:
         raise RuntimeError("Node.js is required for JavaScript syntax validation; set QDS_NODE")
     run([node, "--check", "src/assets/app.js"])
+    run([node, "--check", "src/assets/email-renderer.js"])
+    run([node, "tests/email_renderer.test.js"])
     run([node, "--check", "scripts/render_screenshots.js"])
     run(["git", "diff", "--check"])
     run(["git", "diff", "--cached", "--check"])
