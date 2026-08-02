@@ -79,6 +79,10 @@ Add `packages/swift/` as a local Swift Package Manager dependency or reference `
 
 Add exceptions to the product profile, not foundation values. Record need, scope, accessibility impact, and review trigger. An exception requires a real product constraint, not visual preference.
 
+## Consumer doctor
+
+Start product adoption from `templates/design/qds-consumer.json` and `qds-exceptions.json`. Run `scripts/audit_consumer.py` against the product and write reports to `/private/tmp` or another path outside the consumer. The doctor is read-only and deliberately narrow: it validates declarations, detects local adapter usage, reports raw colors, and applies exact rule/path exceptions. Extend a rule only with a negative test and proof that pass and fail fixtures remain unchanged. Product-native build, rendering, accessibility, permissions, data, and recovery checks remain mandatory.
+
 ## Visual verification
 
 `evidence/screenshots.json` is the exact capture matrix. Committed baselines live in `output/screenshots/`; current renders live only under ignored `output/tmp/`. Update baselines intentionally with `QDS_UPDATE_SCREENSHOTS=1`, then run `scripts/compare_screenshots.py` with the configured image Python. Inspect them at full size for clipping, contrast, hierarchy, focus, responsive navigation, and appearance parity. Automated screenshots do not prove screen-reader or native-app behavior.

@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.6.0
+
+### Added
+
+- Strict consumer manifest and exception schemas with reusable templates.
+- Read-only consumer doctor for source boundaries, declared local adapters, raw colors, and exact exceptions.
+- Passing/failing synthetic fixtures, mutation guards, and a bilingual adoption page.
+
 ## 1.5.0
 
 ### Added

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://qenterra.local/schemas/consumer-manifest.schema.json",
+  "title": "QDS consumer manifest",
+  "type": "object",
+  "required": ["schemaVersion", "product", "platforms", "adapters", "sourceRoots", "exceptions"],
+  "properties": {
+    "schemaVersion": {"type": "integer", "enum": [1]},
+    "product": {"type": "string", "minLength": 2},
+    "platforms": {"type": "array", "minItems": 1, "items": {"type": "string", "enum": ["macOS", "iOS", "iPadOS", "web", "browser-extension"]}},
+    "adapters": {
+      "type": "object",
+      "required": ["swift", "css"],
+      "properties": {"swift": {"type": "boolean"}, "css": {"type": "boolean"}},
+      "additionalProperties": false
+    },
+    "sourceRoots": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "exceptions": {"type": "string"}
+  },
+  "additionalProperties": false
+}

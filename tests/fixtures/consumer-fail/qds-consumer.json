@@ -1,0 +1,1 @@
+{"schemaVersion":1,"product":"Faultline","platforms":["web"],"adapters":{"swift":false,"css":true},"sourceRoots":["src"],"exceptions":"qds-exceptions.json"}

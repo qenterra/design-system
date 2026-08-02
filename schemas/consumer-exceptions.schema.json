@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://qenterra.local/schemas/consumer-exceptions.schema.json",
+  "title": "QDS consumer exceptions",
+  "type": "object",
+  "required": ["schemaVersion", "exceptions"],
+  "properties": {
+    "schemaVersion": {"type": "integer", "enum": [1]},
+    "exceptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "rule", "path", "reason", "reviewTrigger"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+          "rule": {"type": "string", "enum": ["raw-color", "missing-swift-adapter", "missing-css-adapter"]},
+          "path": {"type": "string"},
+          "reason": {"type": "string", "minLength": 12},
+          "reviewTrigger": {"type": "string", "minLength": 8}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

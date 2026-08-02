@@ -56,8 +56,8 @@ def pages(locale: str) -> list[tuple[str, str, list[int], str]]:
 def nav_html(current: str, root: str, standalone: bool, locale: str) -> str:
     links = []
     for slug, title, section_numbers, _ in pages(locale):
-        if slug in {"brand", "repositories", "lab"}:
-            prefix = {"brand": "brand", "repositories": "repository", "lab": "lab"}[slug]
+        if slug in {"brand", "repositories", "lab", "adoption"}:
+            prefix = {"brand": "brand", "repositories": "repository", "lab": "lab", "adoption": "adoption"}[slug]
             href = f"#{prefix}-overview" if standalone else f"{root}pages/{slug}.html"
             section_start = section_end = prefix
         elif standalone:
@@ -362,6 +362,17 @@ def render_component_lab(locale: str) -> str:
     )
 
 
+def render_adoption(locale: str) -> str:
+    filename = "CONSUMER_ADOPTION.ru.md" if locale == "ru" else "CONSUMER_ADOPTION.md"
+    lines = (ROOT / "docs" / filename).read_text(encoding="utf-8").splitlines()
+    title = lines[0][2:] if lines and lines[0].startswith("# ") else COPY[locale]["pages"]["adoption"][0]
+    body = "\n".join(lines[1:]).strip()
+    return (
+        '<section class="doc-section" id="adoption-overview" data-nav-slug="adoption"><span class="section-number">D</span>'
+        f'<h2>{title}</h2><div class="prose">{render(body, id_prefix="adoption-")}</div></section>'
+    )
+
+
 def brand_sections(locale: str) -> list[tuple[str, str, str]]:
     suffix = ".ru.md" if locale == "ru" else ".md"
     documents = ("MASTER", "QENTERRA", "NYX", "ASSET_CATALOG")
@@ -659,6 +670,17 @@ def build() -> None:
                     "text": component["summary"][locale],
                 }
             )
+        search_index.append(
+            {
+                "section": "D",
+                "anchor": "adoption-overview",
+                "order": 90,
+                "title": COPY[locale]["pages"]["adoption"][0],
+                "page": COPY[locale]["pages"]["adoption"][0],
+                "path": "pages/adoption.html",
+                "text": COPY[locale]["pages"]["adoption"][1],
+            }
+        )
         atomic_write(
             dist / "assets" / f"search-index-{locale}.json",
             json.dumps(search_index, ensure_ascii=False, indent=2) + "\n",
@@ -678,6 +700,8 @@ def build() -> None:
                 sections_html = render_repository_module(locale)
             elif slug == "lab":
                 sections_html = render_component_lab(locale)
+            elif slug == "adoption":
+                sections_html = render_adoption(locale)
             else:
                 sections_html = "\n".join(render_section(section_map[number], locale, slug) for number in numbers)
             if slug == "components":
@@ -713,6 +737,7 @@ def build() -> None:
             if section.number == 9:
                 standalone_sections.append(render_component_catalog(locale))
                 standalone_sections.append(render_component_lab(locale))
+                standalone_sections.append(render_adoption(locale))
             if section.number == 17:
                 standalone_sections.append(render_audit_appendix(locale))
         standalone_sections.append(render_brand_module(locale))
@@ -745,6 +770,7 @@ def build() -> None:
         if section.number == 9:
             compatibility_sections.append(render_component_catalog("en"))
             compatibility_sections.append(render_component_lab("en"))
+            compatibility_sections.append(render_adoption("en"))
         if section.number == 17:
             compatibility_sections.append(render_audit_appendix("en"))
     compatibility_sections.append(render_brand_module("en"))

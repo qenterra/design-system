@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "exceptions": [
+    {
+      "id": "{short-id}",
+      "rule": "{raw-color|missing-swift-adapter|missing-css-adapter}",
+      "path": "{relative/path}",
+      "reason": "{why the shared contract cannot satisfy the real constraint}",
+      "reviewTrigger": "{event or date that forces review}"
+    }
+  ]
+}

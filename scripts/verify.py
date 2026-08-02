@@ -64,6 +64,7 @@ def main() -> int:
                 "scripts/lib/schema_tools.py",
                 "scripts/lib/pseudo_locales.py",
                 "scripts/compare_screenshots.py",
+                "scripts/audit_consumer.py",
                 "scripts/brand/validate_brand_assets.py",
                 "scripts/brand/validate_nyx_assets.py",
                 "scripts/brand/validate_nyx_wallpapers.py",
@@ -72,6 +73,7 @@ def main() -> int:
                 "scripts/brand/process_nyx_asset.py",
                 "tests/test_brand_assets.py",
                 "tests/test_validator.py",
+                "tests/test_consumer_doctor.py",
             ],
             env=environment,
         )
@@ -84,6 +86,7 @@ def main() -> int:
         raise RuntimeError("Build is not deterministic")
 
     run([python, "-m", "unittest", "discover", "-s", "tests", "-v"])
+    run([python, "scripts/audit_consumer.py", "tests/fixtures/consumer-pass"])
     run([python, "scripts/validate.py"])
     run([python, "scripts/brand/validate_brand_assets.py", "--check-git-lfs"])
     run([python, "scripts/brand/validate_telegram_stickers.py"])

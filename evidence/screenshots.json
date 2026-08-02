@@ -8,6 +8,7 @@
     {"name": "lab-en-dark-desktop", "path": "en/pages/lab.html?density=standard&width=standard", "viewport": {"width": 1280, "height": 900}, "theme": "dark", "reducedMotion": false},
     {"name": "lab-ru-long-mobile", "path": "ru/pages/lab.html?density=compact&width=long", "viewport": {"width": 390, "height": 844}, "theme": "light", "reducedMotion": true},
     {"name": "lab-en-rtl-tablet", "path": "en/pages/lab.html?density=standard&width=rtl", "viewport": {"width": 768, "height": 1024}, "theme": "light", "reducedMotion": false},
+    {"name": "adoption-en-light-desktop", "path": "en/pages/adoption.html", "viewport": {"width": 1280, "height": 900}, "theme": "light", "reducedMotion": false},
     {"name": "products-ru-light-tablet", "path": "ru/pages/products.html", "viewport": {"width": 768, "height": 1024}, "theme": "light", "reducedMotion": false},
     {"name": "standalone-en-dark-desktop", "path": "en/qenterra-design-system.html", "viewport": {"width": 1280, "height": 900}, "theme": "dark", "reducedMotion": true},
     {"name": "standalone-ru-motion-dark", "path": "ru/qenterra-design-system.html", "viewport": {"width": 1280, "height": 900}, "theme": "dark", "reducedMotion": false, "scrollTarget": "#section-11", "fullPage": false},

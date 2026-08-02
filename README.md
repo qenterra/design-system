@@ -42,7 +42,7 @@ Open `http://localhost:8000/` for automatic language selection, choose `dist/en/
 
 ## Status
 
-Version 1.5.0 adds the machine-readable component registry, bilingual Component Lab with stable story URLs, density and pseudo-locale stress modes, expanded browser accessibility checks, and selected SwiftUI primitives. Product migrations remain separate from this repository.
+Version 1.6.0 adds read-only consumer manifests, explicit exceptions, a machine-readable product doctor, synthetic negative fixtures, and a bilingual adoption guide. Product migrations remain explicit consumer work, never silent mutation by this repository.
 
 ## Repository boundary
 

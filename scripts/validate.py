@@ -360,6 +360,7 @@ def validate_html_tree(dist: Path) -> list[str]:
         required.update(f"brand-{key}" for key in BRAND_SECTION_KEYS)
         required.update(f"repository-{key}" for key in REPOSITORY_SECTION_KEYS)
         required.add("lab-overview")
+        required.add("adoption-overview")
         missing = sorted(required - record.ids)
         if missing:
             errors.append(f"{label}: missing sections {missing}")
@@ -420,6 +421,9 @@ def validate_localized_sources(root: Path) -> list[str]:
     for filename in ("COMPONENT_CATALOG.md", "COMPONENT_CATALOG.ru.md"):
         if not (root / "docs" / filename).is_file():
             errors.append(f"docs/{filename}: missing localized component catalog")
+    for filename in ("CONSUMER_ADOPTION.md", "CONSUMER_ADOPTION.ru.md"):
+        if not (root / "docs" / filename).is_file():
+            errors.append(f"docs/{filename}: missing localized consumer adoption guide")
     repository_headings: dict[str, list[str]] = {}
     for locale, filename in (("en", "STANDARD.md"), ("ru", "STANDARD.ru.md")):
         path = root / "docs" / "repository" / filename

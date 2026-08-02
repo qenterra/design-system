@@ -146,7 +146,7 @@ async function assertUniformSvgIcons(page) {
       invalidChrome: chromeControls.filter((control) => control.querySelectorAll("svg.icon").length !== 1).length
     };
   });
-  if (result.navCount !== 14 || result.invalidNav || result.invalidChrome) {
+  if (result.navCount !== 15 || result.invalidNav || result.invalidChrome) {
     throw new Error(`Icon family mismatch: ${JSON.stringify(result)}`);
   }
 }

@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "product": "{PRODUCT_NAME}",
+  "platforms": ["{macOS|iOS|iPadOS|web|browser-extension}"],
+  "adapters": {"swift": false, "css": false},
+  "sourceRoots": ["{SOURCE_ROOT}"],
+  "exceptions": "qds-exceptions.json"
+}

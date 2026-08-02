@@ -1,5 +1,5 @@
 {
-  "version": "1.5.0",
+  "version": "1.6.0",
   "manifestSchemaVersion": 1,
   "status": "passed",
   "checks": {
@@ -140,6 +140,26 @@
       }
     },
     {
+      "name": "adoption-en-light-desktop",
+      "path": "en/pages/adoption.html",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "theme": "light",
+      "reducedMotion": false,
+      "locale": "en",
+      "title": "Adoption · QenTerra Design System",
+      "sections": 1,
+      "structure": {
+        "oneH1": true,
+        "namedInteractiveElements": true,
+        "sequentialHeadingLevels": true,
+        "oneMainLandmark": true,
+        "noHorizontalOverflow": true
+      }
+    },
+    {
       "name": "products-ru-light-tablet",
       "path": "ru/pages/products.html",
       "viewport": {
@@ -170,7 +190,7 @@
       "reducedMotion": true,
       "locale": "en",
       "title": "QenTerra Design System",
-      "sections": 42,
+      "sections": 43,
       "structure": {
         "oneH1": true,
         "namedInteractiveElements": true,
@@ -190,7 +210,7 @@
       "reducedMotion": false,
       "locale": "ru",
       "title": "QenTerra Design System",
-      "sections": 42,
+      "sections": 43,
       "structure": {
         "oneH1": true,
         "namedInteractiveElements": true,
