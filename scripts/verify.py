@@ -73,6 +73,7 @@ def main() -> int:
                 "scripts/lib/schema_tools.py",
                 "scripts/lib/pseudo_locales.py",
                 "scripts/lib/figma_export.py",
+                "scripts/lib/email_templates.py",
                 "scripts/compare_screenshots.py",
                 "scripts/audit_consumer.py",
                 "scripts/brand/validate_brand_assets.py",
@@ -86,6 +87,7 @@ def main() -> int:
                 "tests/test_validator.py",
                 "tests/test_consumer_doctor.py",
                 "tests/test_brand_browser.py",
+                "tests/test_email_templates.py",
             ],
             env=environment,
         )
