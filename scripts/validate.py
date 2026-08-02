@@ -18,6 +18,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from lib.token_tools import flatten, generate_svg_sprite, generate_swift_icons, get_path, load_json, resolve  # noqa: E402
 from lib.schema_tools import validate_schema  # noqa: E402
 from lib.figma_export import generate_figma_exports  # noqa: E402
+from lib.email_templates import validate_email_registry  # noqa: E402
 from lib.markdown_renderer import split_numbered_sections  # noqa: E402
 from lib.site_locales import BRAND_SECTION_KEYS, PAGE_GROUPS, REPOSITORY_SECTION_KEYS  # noqa: E402
 from brand.validate_brand_assets import validate_brand_assets  # noqa: E402
@@ -749,6 +750,7 @@ def run(root: Path = ROOT) -> dict[str, Any]:
     errors.extend(validate_repository_hygiene(root))
     errors.extend(validate_brand_sources(root))
     errors.extend(validate_contact_channels(root, version))
+    errors.extend(validate_email_registry(root, version))
     errors.extend(validate_component_registry(root, version))
     errors.extend(validate_icon_registry(root, version))
     errors.extend(validate_figma_exports(root, tokens))

@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from lib.email_templates import validate_email_data  # noqa: E402
+from lib.email_templates import load_email_registry, validate_email_data, validate_email_registry  # noqa: E402
 
 
 CONTACTS = {
@@ -18,6 +18,16 @@ CONTACTS = {
 
 
 class EmailTemplateValidatorTests(unittest.TestCase):
+    def test_canonical_registry_passes(self) -> None:
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+        self.assertEqual(validate_email_registry(ROOT, version), [])
+
+    def test_canonical_catalog_has_48_unique_templates(self) -> None:
+        registry = load_email_registry(ROOT)
+        identifiers = [template["id"] for template in registry["templates"]]
+        self.assertEqual(len(identifiers), 48)
+        self.assertEqual(len(set(identifiers)), 48)
+
     def valid_registry(self) -> dict:
         return {
             "$schema": "../schemas/email-templates.schema.json",
