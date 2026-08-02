@@ -18,7 +18,7 @@ Open `http://localhost:8000/` for automatic language selection, choose `dist/en/
 
 - `docs/MASTER.md` and `docs/MASTER.ru.md` — normative English and Russian AI/developer references.
 - `tokens/` and focused `schemas/` — exact machine-readable values, product profiles, and fail-closed contracts.
-- `registry/` — canonical semantic registries, including contact-channel roles.
+- `registry/` — canonical semantic registries, including contact-channel roles and the bilingual email catalogue.
 - `generated/figma/` — deterministic design-tool handoff payloads, never a parallel source.
 - `generated/` — compatibility copies of generated CSS and Swift adapters.
 - `packages/swift/` and `packages/css/` — connectable local typed tokens and opt-in component recipes.
@@ -30,6 +30,7 @@ Open `http://localhost:8000/` for automatic language selection, choose `dist/en/
 - `docs/brand/`, `templates/brand/`, and `scripts/brand/` — bilingual brand canon, reusable briefs, processing tools, and QA.
 - `output/` — audit evidence, validation reports, and rendered screenshots.
 - `docs/MAINTENANCE.md` — update and release workflow.
+- `docs/EMAIL.md` and `docs/EMAIL.ru.md` — human-operated email rules, catalogue, authoring, copying, and QA.
 
 ## Principles
 
@@ -43,7 +44,7 @@ Open `http://localhost:8000/` for automatic language selection, choose `dist/en/
 
 ## Status
 
-Version 1.7.0 adds the semantic icon registry with generated Swift/site adapters, deterministic Figma handoff exports, and a searchable brand asset browser that is hard-blocked from writing into the repository. Product migrations remain explicit consumer work.
+Version 1.8.0 adds a human-operated bilingual library of 48 correspondence and transactional email scenarios, an email-safe renderer, and a local stateless gallery/composer. It sends nothing, stores nothing, makes no external requests, and provides no marketing or newsletter path. Product migrations remain explicit consumer work.
 
 ## Repository boundary
 

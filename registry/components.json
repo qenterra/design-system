@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/component-registry.schema.json",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "components": [
     {
       "id": "button",

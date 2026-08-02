@@ -112,7 +112,7 @@
       secondary: "#f0f0f2",
       text: "#18181b",
       muted: "#5d5d66",
-      border: "#ddddE1".toLowerCase(),
+      border: "#dddde1",
       action: "#18181b",
       actionText: "#ffffff"
     };

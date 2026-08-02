@@ -10,6 +10,7 @@
 - Brand briefs and QA: `templates/brand/` and `scripts/brand/`.
 - Generated output: `generated/`, `packages/*` generated adapters, and `dist/`.
 - Semantic registries: `registry/`; each registry has a focused schema and a validator-owned invariant.
+- Human email contracts: `registry/email-templates.json`, `schemas/email-templates.schema.json`, and the normative `docs/EMAIL.md` / `docs/EMAIL.ru.md` pair.
 
 Never edit generated files directly.
 
@@ -70,6 +71,14 @@ Complete `templates/design/component-spec.md`, then add the executable contract 
 ## Repository documentation
 
 Use `docs/repository/STANDARD.md` or `STANDARD.ru.md` for the normative repository contract and select starting files from `templates/repository/`. Templates are never copied blindly: remove irrelevant sections, replace every placeholder, and verify product, privacy, legal, dependency, release, and screenshot claims against the current repository. Keep the design system as the single source; do not recreate a standalone documentation-standard folder.
+
+## Human-operated email templates
+
+Use the local Email page to select, fill, preview, and copy a message. It is deliberately not a mail client: do not add sending, account access, recipient storage, drafts, history, analytics, remote assets, newsletter lists, or marketing categories.
+
+To add or change a scenario, update the registry in both locales, keep variables structurally identical, choose the contact channel by role, and classify every field by privacy. Add a new global field only when existing semantics cannot represent the value. Required fields must be necessary for truth or safe action; conditional detail should remain optional. Keep one CTA maximum and require an absolute HTTPS URL.
+
+Run focused Python and Node tests, build both locales, execute the browser composer contract, update the exact screenshot matrix intentionally, and inspect Light/Dark desktop/mobile output. Finally paste representative rich and plain versions into supported real email clients and verify the subject, preheader, hierarchy, wrapping, link destination, footer address, and dark-mode behavior. Automated HTML checks do not replace this client QA.
 
 ## Local token packages
 

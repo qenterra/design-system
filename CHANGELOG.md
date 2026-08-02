@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.8.0
+
+### Added
+
+- Human-operated English/Russian catalogue of 48 correspondence, support, account, operation, and payment email scenarios.
+- Email-safe table renderer with inline styles, plain-text parity, HTTPS-only actions, escaped values, and explicit contact-channel ownership.
+- Local stateless gallery/composer with search, filters, required-field validation, responsive Light/Dark previews, rich/plain/source copy, and clipboard fallback.
+- Normative bilingual email guidance, decision record, schema, semantic validation, Node tests, and browser evidence.
+
+### Security
+
+- Email tooling is structurally prohibited from sending messages, persisting entered values, making external requests, or supporting marketing and newsletters.
+
 ## 1.7.0
 
 ### Added

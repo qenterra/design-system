@@ -36,6 +36,10 @@ This checklist is the completion contract for the initial local release.
 - [x] English and Russian brand governance covers marks, character identity, categories, stickers, wallpapers, pet assets, generation, processing, and release QA.
 - [x] Reusable brand briefs and focused manifest, sticker, wallpaper, character, processing, and contact-sheet tools are maintained with the canon.
 - [x] Update and contribution instructions explain how to change tokens, prose, generated files, and versioning.
+- [x] A human-operated English/Russian email catalogue covers 48 general correspondence, support, account, operation, and payment scenarios.
+- [x] The local email gallery supports search, category/channel filters, required-field validation, responsive Light/Dark previews, and subject/rich/plain/source copying with a fallback.
+- [x] Email output escapes entered values, accepts only absolute HTTPS actions, contains at most one CTA, and provides semantically equivalent HTML and plain text.
+- [x] Email tooling sends nothing, stores no entered values, makes no external requests, and offers no marketing or newsletter capability.
 
 ## Evidence and governance
 
