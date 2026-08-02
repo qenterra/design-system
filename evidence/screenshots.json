@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "pixelThreshold": 0,
+  "captures": [
+    {"name": "overview-en-dark-wide", "path": "en/index.html", "viewport": {"width": 1440, "height": 1000}, "theme": "dark", "reducedMotion": false},
+    {"name": "foundations-ru-light-desktop", "path": "ru/pages/foundations.html", "viewport": {"width": 1280, "height": 900}, "theme": "light", "reducedMotion": false},
+    {"name": "components-en-dark-mobile", "path": "en/pages/components.html", "viewport": {"width": 390, "height": 844}, "theme": "dark", "reducedMotion": true},
+    {"name": "products-ru-light-tablet", "path": "ru/pages/products.html", "viewport": {"width": 768, "height": 1024}, "theme": "light", "reducedMotion": false},
+    {"name": "standalone-en-dark-desktop", "path": "en/qenterra-design-system.html", "viewport": {"width": 1280, "height": 900}, "theme": "dark", "reducedMotion": true},
+    {"name": "standalone-ru-motion-dark", "path": "ru/qenterra-design-system.html", "viewport": {"width": 1280, "height": 900}, "theme": "dark", "reducedMotion": false, "scrollTarget": "#section-11", "fullPage": false},
+    {"name": "brand-en-dark-desktop", "path": "en/pages/brand.html", "viewport": {"width": 1280, "height": 900}, "theme": "dark", "reducedMotion": false, "scrollTarget": "#brand-nyx", "fullPage": false},
+    {"name": "repositories-ru-light-desktop", "path": "ru/pages/repositories.html", "viewport": {"width": 1280, "height": 900}, "theme": "light", "reducedMotion": false, "scrollTarget": "#repository-verification", "fullPage": false}
+  ]
+}

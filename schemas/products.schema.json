@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://qenterra.local/schemas/products.schema.json",
+  "title": "QenTerra product archetypes",
+  "type": "object",
+  "required": ["$schema", "meta", "immersiveContent", "denseOperations", "transientCapability"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "meta": {"$ref": "token-file.schema.json#/$defs/meta"},
+    "immersiveContent": {"type": "object"},
+    "denseOperations": {"type": "object"},
+    "transientCapability": {"type": "object"}
+  },
+  "additionalProperties": false
+}

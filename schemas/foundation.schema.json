@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://qenterra.local/schemas/foundation.schema.json",
+  "title": "QenTerra foundation tokens",
+  "type": "object",
+  "required": ["$schema", "meta", "color", "space", "radius", "stroke", "opacity", "size", "zIndex"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "meta": {"$ref": "token-file.schema.json#/$defs/meta"},
+    "color": {"type": "object"},
+    "space": {"type": "object", "additionalProperties": {"type": "number"}},
+    "radius": {"type": "object", "additionalProperties": {"type": "number"}},
+    "stroke": {"type": "object", "additionalProperties": {"type": "number"}},
+    "opacity": {"type": "object", "additionalProperties": {"type": "number"}},
+    "size": {"type": "object", "additionalProperties": {"type": "number"}},
+    "zIndex": {"type": "object", "additionalProperties": {"type": "number"}}
+  },
+  "additionalProperties": false
+}

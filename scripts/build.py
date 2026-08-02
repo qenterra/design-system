@@ -370,12 +370,15 @@ def shell(
     standalone: bool = False,
     token_css: str = "",
     source_css: str = "",
+    recipe_css: str = "",
     source_js: str = "",
     search_index: list[dict] | None = None,
 ) -> str:
     if standalone:
-        inline_css = source_css.replace('@import url("./qds-tokens.css");', "")
-        styles = f"<style>{token_css}\n{inline_css}</style>"
+        inline_css = source_css.replace('@import url("./qds-tokens.css");', "").replace(
+            '@import url("./qds-recipes.css");', ""
+        )
+        styles = f"<style>{token_css}\n{recipe_css}\n{inline_css}</style>"
         scripts = f"<script>window.QDS_SEARCH_INDEX={json.dumps(search_index or [], ensure_ascii=False)};</script><script>{source_js}</script>"
         data = f'data-root="" data-site-root="" data-standalone="true" data-locale="{locale}"'
         stylesheet = ""
@@ -386,6 +389,7 @@ def shell(
         stylesheet = f'<link rel="stylesheet" href="{asset_root}assets/styles.css">'
 
     ui = COPY[locale]["ui"]
+    document_title = page_title if page_title == "QenTerra Design System" else f"{page_title} · QenTerra Design System"
     data += (
         f' data-search-empty="{escape(ui["no_results"], quote=True)}"'
         f' data-section-label="{escape(ui["section"], quote=True)}"'
@@ -414,7 +418,7 @@ def shell(
   <meta name="description" content="{escape(page_summary, quote=True)}">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="data:,">
-  <title>{page_title} · QenTerra Design System</title>
+  <title>{document_title}</title>
   {theme_bootstrap(locale)}
   {stylesheet}
   {styles}
@@ -453,8 +457,20 @@ def build() -> None:
     version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
     token_files = load_tokens()
     tokens = {name: data for name, data in token_files}
-    token_css = generate_css(tokens["foundation"], tokens["semantic"], tokens["typography"], tokens["motion"])
-    swift = generate_swift(tokens["foundation"], tokens["semantic"], tokens["motion"])
+    token_css = generate_css(
+        tokens["foundation"],
+        tokens["semantic"],
+        tokens["typography"],
+        tokens["motion"],
+        tokens["components"],
+    )
+    swift = generate_swift(
+        tokens["foundation"],
+        tokens["semantic"],
+        tokens["typography"],
+        tokens["motion"],
+        tokens["components"],
+    )
     token_reference = generate_token_reference(token_files)
     token_snapshot = json.dumps(
         {name: data for name, data in token_files},
@@ -478,10 +494,13 @@ def build() -> None:
         shutil.rmtree(dist)
     (dist / "assets").mkdir(parents=True, exist_ok=True)
     source_css = (ROOT / "src" / "assets" / "styles.css").read_text(encoding="utf-8")
+    recipe_css = (ROOT / "src" / "assets" / "recipes.css").read_text(encoding="utf-8")
     source_js = (ROOT / "src" / "assets" / "app.js").read_text(encoding="utf-8")
     atomic_write(dist / "assets" / "qds-tokens.css", token_css)
+    shutil.copyfile(ROOT / "src" / "assets" / "recipes.css", dist / "assets" / "qds-recipes.css")
     shutil.copyfile(ROOT / "src" / "assets" / "styles.css", dist / "assets" / "styles.css")
     shutil.copyfile(ROOT / "src" / "assets" / "app.js", dist / "assets" / "app.js")
+    shutil.copyfile(ROOT / "src" / "assets" / "recipes.css", ROOT / "packages" / "css" / "recipes.css")
 
     locale_builds: dict[str, tuple[str, list[Section], list[dict]]] = {}
     section_slug = {number: slug for slug, numbers in PAGE_GROUPS for number in numbers}
@@ -509,25 +528,25 @@ def build() -> None:
                     "text": plain_text(section.markdown)[:1200],
                 }
             )
-        for index, (key, title, markdown) in enumerate(brand_sections(locale)):
+        for index, (key, section_title, markdown) in enumerate(brand_sections(locale)):
             search_index.append(
                 {
                     "section": f"B{index}",
                     "anchor": f"brand-{key}",
                     "order": 22 + index,
-                    "title": title,
+                    "title": section_title,
                     "page": COPY[locale]["pages"]["brand"][0],
                     "path": "pages/brand.html",
                     "text": plain_text(markdown)[:1200],
                 }
             )
-        for index, (key, title, markdown) in enumerate(repository_sections(locale)):
+        for index, (key, section_title, markdown) in enumerate(repository_sections(locale)):
             search_index.append(
                 {
                     "section": f"R{index}",
                     "anchor": f"repository-{key}",
                     "order": 22 + len(BRAND_SECTION_KEYS) + index,
-                    "title": title,
+                    "title": section_title,
                     "page": COPY[locale]["pages"]["repositories"][0],
                     "path": "pages/repositories.html",
                     "text": plain_text(markdown)[:1200],
@@ -601,6 +620,7 @@ def build() -> None:
             standalone=True,
             token_css=token_css,
             source_css=source_css,
+            recipe_css=recipe_css,
             source_js=source_js,
             search_index=search_index,
         )
@@ -631,6 +651,7 @@ def build() -> None:
         standalone=True,
         token_css=token_css,
         source_css=source_css,
+        recipe_css=recipe_css,
         source_js=source_js,
         search_index=english_search,
     )

@@ -1,8 +1,8 @@
 {
-  "$schema": "../schemas/token-file.schema.json",
+  "$schema": "../schemas/products.schema.json",
   "meta": {
     "name": "QenTerra Product Archetypes",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "type": "products",
     "description": "Reusable inheritance and exception profiles selected by interaction model."
   },

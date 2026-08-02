@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://qenterra.local/schemas/semantic.schema.json",
+  "title": "QenTerra semantic tokens",
+  "type": "object",
+  "required": ["$schema", "meta", "modes", "material"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "meta": {"$ref": "token-file.schema.json#/$defs/meta"},
+    "modes": {
+      "type": "object",
+      "required": ["light", "dark"],
+      "properties": {"light": {"type": "object"}, "dark": {"type": "object"}},
+      "additionalProperties": false
+    },
+    "material": {"type": "object"}
+  },
+  "additionalProperties": false
+}

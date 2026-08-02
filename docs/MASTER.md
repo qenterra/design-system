@@ -836,6 +836,8 @@ The AI must not:
 - claim a fallback outcome as the requested outcome;
 - copy a product-specific component into the family core without a second valid consumer.
 
+Focused schemas are contracts, not editor decoration. A token change must preserve reference acyclicity and type compatibility. Component metrics use foundation references unless `components.extensions.rawMetricExceptions` contains a narrow, justified exception. Consumers should prefer typed `QDS.Color`, `QDS.Typography`, `QDS.Motion`, and `QDS.Component` APIs or CSS tokens; CSS recipes remain opt-in because native and product-specific shells are allowed to differ.
+
 ## 20. Maintenance procedure
 
 To update the design system:
@@ -845,7 +847,7 @@ To update the design system:
 3. Change source tokens/docs/templates/site fragments.
 4. Run `python3 scripts/build.py`.
 5. Run `python3 scripts/verify.py`.
-6. Inspect desktop and mobile screenshots in both appearances.
+6. Render the exact `evidence/screenshots.json` matrix, compare current pixels to committed baselines, and inspect desktop and mobile captures in both appearances.
 7. Update `CHANGELOG.md` and version according to change type.
 8. Update Obsidian routing instructions only when workflow or product contract changes; do not duplicate token values.
 9. For brand changes, update the asset manifest, preserve Git LFS coverage, run focused Nyx QA, and inspect original/use-size artwork on required backgrounds.

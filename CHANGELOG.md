@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.4.0
+
+### Added
+
+- Focused token schemas, reference-cycle/type checks, and documented raw component-metric exceptions.
+- Typed Swift color, typography, motion, and component APIs while preserving the existing foundation facade.
+- CSS component metrics and opt-in button, field, group, and interactive-row recipes.
+- Exact screenshot manifest and pixel-comparison gate.
+- Canonical `contact@qenterra.com` general channel and `support@qenterra.com` product-support channel with machine-readable roles.
+
+### Fixed
+
+- Standalone reference titles no longer inherit the last rendered repository-section heading.
+
 ## 1.3.0
 
 ### Added

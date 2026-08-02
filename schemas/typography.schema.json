@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://qenterra.local/schemas/typography.schema.json",
+  "title": "QenTerra typography tokens",
+  "type": "object",
+  "required": ["$schema", "meta", "family", "weight", "roles", "rules"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "meta": {"$ref": "token-file.schema.json#/$defs/meta"},
+    "family": {"type": "object", "additionalProperties": {"type": "string"}},
+    "weight": {"type": "object", "additionalProperties": {"type": "number"}},
+    "roles": {"type": "object"},
+    "rules": {"type": "object"}
+  },
+  "additionalProperties": false
+}

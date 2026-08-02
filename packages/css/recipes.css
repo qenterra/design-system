@@ -1,0 +1,72 @@
+/* QDS opt-in component recipes. Import after tokens.css. */
+
+.qds-button {
+  display: inline-flex;
+  min-height: var(--qds-component-button-heights-standard);
+  align-items: center;
+  justify-content: center;
+  gap: var(--qds-component-button-icon-gap);
+  padding-inline: var(--qds-component-button-padding-x-standard);
+  border: var(--qds-stroke-default) solid transparent;
+  border-radius: var(--qds-component-button-radius);
+  font: inherit;
+  font-weight: var(--qds-type-body-emphasized-weight);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--qds-motion-hover) var(--qds-ease-standard),
+    color var(--qds-motion-hover) var(--qds-ease-standard),
+    opacity var(--qds-motion-press) var(--qds-ease-standard);
+}
+
+.qds-button[data-variant="primary"] {
+  background: var(--qds-action-primary);
+  color: var(--qds-action-primary-content);
+}
+
+.qds-button[data-variant="secondary"] {
+  border-color: var(--qds-border-default);
+  background: var(--qds-action-secondary);
+  color: var(--qds-action-secondary-content);
+}
+
+.qds-button:hover:not(:disabled) { background-image: linear-gradient(var(--qds-fill-hover), var(--qds-fill-hover)); }
+.qds-button:active:not(:disabled) { background-image: linear-gradient(var(--qds-fill-pressed), var(--qds-fill-pressed)); }
+.qds-button:focus-visible { outline: var(--qds-stroke-focus) solid var(--qds-border-focus); outline-offset: 2px; }
+.qds-button:disabled, .qds-button[aria-disabled="true"] { opacity: var(--qds-opacity-disabled); cursor: not-allowed; }
+
+.qds-field {
+  min-height: var(--qds-component-field-height);
+  padding-inline: var(--qds-component-field-padding-x);
+  border: var(--qds-stroke-default) solid var(--qds-border-default);
+  border-radius: var(--qds-component-field-radius);
+  background: var(--qds-surface-content);
+  color: var(--qds-text-primary);
+}
+
+.qds-field:focus-visible { outline: var(--qds-stroke-focus) solid var(--qds-border-focus); outline-offset: 1px; }
+.qds-field[aria-invalid="true"] { border-color: var(--qds-state-destructive); }
+
+.qds-group {
+  display: grid;
+  gap: var(--qds-component-group-gap);
+  padding: var(--qds-component-group-padding);
+  border: var(--qds-stroke-default) solid var(--qds-border-default);
+  border-radius: var(--qds-component-group-radius);
+  background: var(--qds-surface-secondary);
+}
+
+.qds-interactive-row {
+  display: flex;
+  min-height: var(--qds-component-interactive-row-heights-standard);
+  align-items: center;
+  gap: var(--qds-component-interactive-row-gap);
+  padding-inline: var(--qds-component-interactive-row-padding-x);
+  border-radius: var(--qds-component-interactive-row-radius);
+}
+
+.qds-interactive-row:hover { background: var(--qds-fill-hover); }
+.qds-interactive-row[aria-selected="true"] { background: var(--qds-fill-selected); }
+
+@media (prefers-reduced-motion: reduce) {
+  .qds-button { transition-duration: 0.01ms; }
+}

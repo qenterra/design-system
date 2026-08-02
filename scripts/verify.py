@@ -20,6 +20,7 @@ GENERATED_TARGETS = [
     ROOT / "packages" / "swift" / "Sources" / "QenTerraDesignTokens" / "QDSGeneratedTokens.swift",
     ROOT / "packages" / "css" / "tokens.css",
     ROOT / "packages" / "css" / "tokens.json",
+    ROOT / "packages" / "css" / "recipes.css",
     ROOT / "dist" / "index.html",
     ROOT / "dist" / "qenterra-design-system.html",
     ROOT / "dist" / "en" / "index.html",
@@ -30,6 +31,7 @@ GENERATED_TARGETS = [
     ROOT / "dist" / "ru" / "qenterra-design-system.html",
     ROOT / "dist" / "assets" / "search-index-en.json",
     ROOT / "dist" / "assets" / "search-index-ru.json",
+    ROOT / "dist" / "assets" / "qds-recipes.css",
 ]
 
 
@@ -59,6 +61,8 @@ def main() -> int:
                 "scripts/lib/markdown_renderer.py",
                 "scripts/lib/site_locales.py",
                 "scripts/lib/token_tools.py",
+                "scripts/lib/schema_tools.py",
+                "scripts/compare_screenshots.py",
                 "scripts/brand/validate_brand_assets.py",
                 "scripts/brand/validate_nyx_assets.py",
                 "scripts/brand/validate_nyx_wallpapers.py",

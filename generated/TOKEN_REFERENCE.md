@@ -292,9 +292,9 @@ Short, interruptible, state-explanatory motion.
 
 Shared component metrics and mandatory state contracts.
 
-- `button.heights.compact`: `28`
-- `button.heights.prominent`: `40`
-- `button.heights.standard`: `32`
+- `button.heights.compact`: `{size.controlCompact}`
+- `button.heights.prominent`: `{size.controlProminent}`
+- `button.heights.standard`: `{size.controlStandard}`
 - `button.iconGap`: `{space.2}`
 - `button.paddingX.compact`: `10`
 - `button.paddingX.prominent`: `16`
@@ -302,7 +302,17 @@ Shared component metrics and mandatory state contracts.
 - `button.radius`: `{radius.control}`
 - `button.roles`: `["primary", "secondary", "quiet", "destructive", "icon", "menuRow", "link"]`
 - `button.states`: `["default", "hover", "pressed", "focused", "selected", "disabled", "loading"]`
-- `field.height`: `32`
+- `extensions.rawMetricExceptions.button.paddingX.compact`: `Optical compact label inset has no reusable foundation role.`
+- `extensions.rawMetricExceptions.button.paddingX.prominent`: `Optical prominent label inset has no reusable foundation role.`
+- `extensions.rawMetricExceptions.button.paddingX.standard`: `Optical standard label inset has no reusable foundation role.`
+- `extensions.rawMetricExceptions.keycap.gap`: `Keycap chord gap is intentionally tighter than component spacing.`
+- `extensions.rawMetricExceptions.keycap.height`: `Keycap optical height is not a general control size.`
+- `extensions.rawMetricExceptions.keycap.paddingX`: `Keycap optical inset is not a general spacing role.`
+- `extensions.rawMetricExceptions.overlay.dialogReadableWidth`: `Readable dialog width is specific to this overlay contract.`
+- `extensions.rawMetricExceptions.overlay.popoverMaxWidth`: `Readable popover cap is specific to this overlay contract.`
+- `extensions.rawMetricExceptions.overlay.sheetReadableWidth`: `Readable sheet width is specific to this overlay contract.`
+- `extensions.rawMetricExceptions.status.gap`: `Status symbol and label use a deliberate optical gap.`
+- `field.height`: `{size.controlStandard}`
 - `field.paddingX`: `{space.3}`
 - `field.radius`: `{radius.control}`
 - `field.states`: `["pristine", "editing", "valid", "invalid", "disabled", "readOnly"]`
@@ -312,9 +322,9 @@ Shared component metrics and mandatory state contracts.
 - `group.radius`: `{radius.group}`
 - `group.surface`: `surface.secondary`
 - `interactiveRow.gap`: `{space.3}`
-- `interactiveRow.heights.comfortable`: `56`
-- `interactiveRow.heights.compact`: `40`
-- `interactiveRow.heights.standard`: `48`
+- `interactiveRow.heights.comfortable`: `{size.rowComfortable}`
+- `interactiveRow.heights.compact`: `{size.rowCompact}`
+- `interactiveRow.heights.standard`: `{size.rowStandard}`
 - `interactiveRow.paddingX`: `{space.3}`
 - `interactiveRow.radius`: `{radius.control}`
 - `interactiveRow.states`: `["default", "hover", "pressed", "focused", "selected", "disabled", "unavailable"]`
@@ -322,11 +332,11 @@ Shared component metrics and mandatory state contracts.
 - `keycap.height`: `24`
 - `keycap.paddingX`: `7`
 - `keycap.radius`: `{radius.control}`
-- `navigation.itemHeight`: `40`
-- `navigation.minimumIconTarget`: `28`
-- `navigation.railCompact`: `64`
-- `navigation.sidebarCompact`: `214`
-- `navigation.sidebarStandard`: `256`
+- `navigation.itemHeight`: `{size.rowCompact}`
+- `navigation.minimumIconTarget`: `{size.targetPointer}`
+- `navigation.railCompact`: `{size.railCompact}`
+- `navigation.sidebarCompact`: `{size.sidebarCompact}`
+- `navigation.sidebarStandard`: `{size.sidebarStandard}`
 - `navigation.states`: `["default", "hover", "focused", "selected", "disabled"]`
 - `overlay.dialogReadableWidth`: `480`
 - `overlay.focusTrapRequired`: `true`
@@ -340,12 +350,12 @@ Shared component metrics and mandatory state contracts.
 - `panel.surface`: `surface.overlay`
 - `status.colorAloneForbidden`: `true`
 - `status.gap`: `6`
-- `status.iconSize`: `14`
+- `status.iconSize`: `{size.iconS}`
 - `status.requiredParts`: `["symbol-or-shape", "plain-language-label"]`
 - `table.columnGap`: `{space.4}`
-- `table.headerHeight`: `32`
-- `table.rowHeights.compact`: `40`
-- `table.rowHeights.standard`: `48`
+- `table.headerHeight`: `{size.controlStandard}`
+- `table.rowHeights.compact`: `{size.rowCompact}`
+- `table.rowHeights.standard`: `{size.rowStandard}`
 - `table.selectionRequiresTextOrShape`: `true`
 - `table.sortRequiresDirection`: `true`
 

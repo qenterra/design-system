@@ -17,9 +17,10 @@ Open `http://localhost:8000/` for automatic language selection, choose `dist/en/
 ## Core files
 
 - `docs/MASTER.md` and `docs/MASTER.ru.md` — normative English and Russian AI/developer references.
-- `tokens/` — exact machine-readable values and product profiles.
+- `tokens/` and focused `schemas/` — exact machine-readable values, product profiles, and fail-closed contracts.
+- `registry/` — canonical semantic registries, including contact-channel roles.
 - `generated/` — compatibility copies of generated CSS and Swift adapters.
-- `packages/swift/` and `packages/css/` — connectable local token packages.
+- `packages/swift/` and `packages/css/` — connectable local typed tokens and opt-in component recipes.
 - `dist/` — multipage reference and standalone HTML.
 - `templates/design/` — interface design and review templates.
 - `templates/repository/` — repository documentation, policy, GitHub, and Wiki templates.
@@ -41,7 +42,7 @@ Open `http://localhost:8000/` for automatic language selection, choose `dist/en/
 
 ## Status
 
-Version 1.3.0 adds the complete canonical QenTerra brand and Nyx asset library, Git LFS storage, bilingual brand governance, reusable production templates, and focused manifest/visual validators. Product migrations remain separate from this repository.
+Version 1.4.0 makes the foundation executable: focused token schemas, cycle and raw-metric guards, typed Swift color/type/motion/component APIs, CSS component metrics and opt-in recipes, exact screenshot evidence, and canonical company/support contact roles. Product migrations remain separate from this repository.
 
 ## Repository boundary
 

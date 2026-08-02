@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from lib.token_tools import flatten, get_path, load_json, resolve  # noqa: E402
+from lib.schema_tools import validate_schema  # noqa: E402
 from lib.markdown_renderer import split_numbered_sections  # noqa: E402
 from lib.site_locales import BRAND_SECTION_KEYS, REPOSITORY_SECTION_KEYS  # noqa: E402
 from brand.validate_brand_assets import validate_brand_assets  # noqa: E402
@@ -130,6 +131,68 @@ def has_reference(path: str, foundation: dict[str, Any], semantic: dict[str, Any
     return False
 
 
+def validate_token_schemas(root: Path, tokens: dict[str, dict[str, Any]]) -> list[str]:
+    errors: list[str] = []
+    schema_root = (root / "schemas").resolve()
+    for name, data in tokens.items():
+        reference = data.get("$schema")
+        if not isinstance(reference, str):
+            errors.append(f"{name}.json:$schema: missing focused schema reference")
+            continue
+        schema_path = (root / "tokens" / reference).resolve()
+        if schema_root not in schema_path.parents or not schema_path.is_file():
+            errors.append(f"{name}.json:$schema: invalid local schema {reference!r}")
+            continue
+        schema = load_json(schema_path)
+        errors.extend(
+            f"{name}.json:{error}" for error in validate_schema(data, schema, schema_path)
+        )
+    return errors
+
+
+def resolved_reference_value(
+    path: str,
+    foundation: dict[str, Any],
+    semantic: dict[str, Any],
+    *,
+    mode: str = "light",
+    chain: tuple[str, ...] = (),
+) -> Any:
+    if path in chain:
+        raise ValueError(f"reference cycle {' -> '.join((*chain, path))}")
+    try:
+        value = get_path(foundation, path)
+    except KeyError:
+        value = get_path(semantic["modes"][mode], path)
+    if isinstance(value, str):
+        match = TOKEN_REFERENCE.match(value)
+        if match:
+            return resolved_reference_value(
+                match.group(1), foundation, semantic, mode=mode, chain=(*chain, path)
+            )
+    return value
+
+
+def validate_component_metrics(components: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    exceptions = components.get("extensions", {}).get("rawMetricExceptions", {})
+    if not isinstance(exceptions, dict):
+        return ["components.json:extensions.rawMetricExceptions must be an object"]
+    values = flatten(
+        {key: value for key, value in components.items() if key not in {"$schema", "meta", "extensions"}}
+    )
+    raw_metrics = {
+        path for path, value in values.items() if isinstance(value, (int, float)) and not isinstance(value, bool)
+    }
+    for path in sorted(raw_metrics - set(exceptions)):
+        errors.append(
+            f"components.json:{path}: raw component metric requires a foundation reference or documented exception"
+        )
+    for path in sorted(set(exceptions) - raw_metrics):
+        errors.append(f"components.json:extensions.rawMetricExceptions.{path}: exception does not name a raw metric")
+    return errors
+
+
 def validate_token_data(version: str, tokens: dict[str, dict[str, Any]]) -> list[str]:
     errors: list[str] = []
     for name in TOKEN_NAMES:
@@ -163,6 +226,18 @@ def validate_token_data(version: str, tokens: dict[str, dict[str, Any]]) -> list
         for location, reference in collect_references(data):
             if not has_reference(reference, foundation, semantic):
                 errors.append(f"{name}.json:{location}: unknown reference {{{reference}}}")
+                continue
+            for mode in ("light", "dark"):
+                try:
+                    value = resolved_reference_value(reference, foundation, semantic, mode=mode)
+                except (KeyError, ValueError) as error:
+                    errors.append(f"{name}.json:{location}: {error}")
+                    break
+                if name == "components" and not isinstance(value, (int, float)):
+                    errors.append(
+                        f"components.json:{location}: metric reference {{{reference}}} resolves to {type(value).__name__}"
+                    )
+                    break
 
     light_keys = set(flatten(semantic["modes"]["light"]))
     dark_keys = set(flatten(semantic["modes"]["dark"]))
@@ -171,6 +246,8 @@ def validate_token_data(version: str, tokens: dict[str, dict[str, Any]]) -> list
             "semantic.json: Light/Dark key parity mismatch: "
             f"light-only={sorted(light_keys - dark_keys)}, dark-only={sorted(dark_keys - light_keys)}"
         )
+    if "components" in tokens:
+        errors.extend(validate_component_metrics(tokens["components"]))
     return errors
 
 
@@ -375,7 +452,7 @@ def validate_packages(root: Path, version: str) -> list[str]:
             errors.append(f"packages/css/package.json: version {manifest.get('version')} does not match VERSION {version}")
         if manifest.get("private") is not True:
             errors.append("packages/css/package.json: local package must remain private")
-        for exported in ("tokens.css", "tokens.json"):
+        for exported in ("tokens.css", "tokens.json", "recipes.css"):
             if not (css_root / exported).is_file():
                 errors.append(f"packages/css/{exported}: missing generated package export")
     if not (swift_root / "Package.swift").is_file():
@@ -388,6 +465,10 @@ def validate_packages(root: Path, version: str) -> list[str]:
     css_generated = css_root / "tokens.css"
     if css_generated.is_file() and css_generated.read_bytes() != (root / "generated" / "qds-tokens.css").read_bytes():
         errors.append("packages/css: generated stylesheet drifted from canonical adapter")
+    recipes = css_root / "recipes.css"
+    recipe_source = root / "src" / "assets" / "recipes.css"
+    if recipes.is_file() and recipe_source.is_file() and recipes.read_bytes() != recipe_source.read_bytes():
+        errors.append("packages/css: component recipes drifted from canonical source")
     return errors
 
 
@@ -455,6 +536,34 @@ def validate_brand_sources(root: Path) -> list[str]:
     return errors
 
 
+def validate_contact_channels(root: Path, version: str) -> list[str]:
+    path = root / "registry" / "contact-channels.json"
+    if not path.is_file():
+        return ["registry/contact-channels.json: missing canonical contact roles"]
+    data = load_json(path)
+    schema_path = (path.parent / data.get("$schema", "")).resolve()
+    if not schema_path.is_file():
+        return ["registry/contact-channels.json:$schema: missing schema"]
+    errors = [
+        f"registry/contact-channels.json:{error}"
+        for error in validate_schema(data, load_json(schema_path), schema_path)
+    ]
+    if data.get("version") != version:
+        errors.append("registry/contact-channels.json: version does not match VERSION")
+    expected = {
+        "contact": "contact@qenterra.com",
+        "support": "support@qenterra.com",
+    }
+    actual = {
+        channel.get("id"): channel.get("address")
+        for channel in data.get("channels", [])
+        if isinstance(channel, dict)
+    }
+    if actual != expected:
+        errors.append(f"registry/contact-channels.json: canonical roles differ: {actual!r}")
+    return errors
+
+
 def validate_placeholders(root: Path) -> list[str]:
     errors: list[str] = []
     scan_roots = [root / "docs", root / "tokens", root / "src", root / "dist", root / "generated", root / "output"]
@@ -479,15 +588,36 @@ def validate_browser_evidence(root: Path) -> list[str]:
         return [f"output/reports/browser.json: invalid JSON: {error}"]
     if report.get("status") != "passed":
         errors.append("output/reports/browser.json: status is not passed")
+    version = (root / "VERSION").read_text(encoding="utf-8").strip()
+    if report.get("version") != version:
+        errors.append(f"output/reports/browser.json: version {report.get('version')!r} does not match {version}")
+    manifest_path = root / "evidence" / "screenshots.json"
+    if not manifest_path.is_file():
+        return [*errors, "evidence/screenshots.json: missing exact screenshot manifest"]
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    expected_names = [capture.get("name") for capture in manifest.get("captures", [])]
     captures = report.get("captures")
-    if not isinstance(captures, list) or len(captures) < 6:
-        errors.append("output/reports/browser.json: expected at least six localized responsive/appearance captures")
+    if not isinstance(captures, list):
+        errors.append("output/reports/browser.json: captures must be an array")
         return errors
+    actual_names = [capture.get("name") if isinstance(capture, dict) else None for capture in captures]
+    if actual_names != expected_names:
+        errors.append(f"output/reports/browser.json: capture manifest mismatch: {actual_names!r}")
+    baseline_names = sorted(path.stem for path in (root / "output" / "screenshots").glob("*.png"))
+    if baseline_names != sorted(expected_names):
+        errors.append("output/screenshots: baselines do not exactly match evidence/screenshots.json")
     for capture in captures:
         name = capture.get("name") if isinstance(capture, dict) else None
         path = root / "output" / "screenshots" / f"{name}.png"
         if not name or not path.is_file() or path.stat().st_size < 10_000:
             errors.append(f"visual evidence missing or too small: {name!r}")
+    diff_path = root / "output" / "reports" / "visual-diff.json"
+    if not diff_path.is_file():
+        errors.append("output/reports/visual-diff.json: missing exact pixel comparison")
+    else:
+        diff = json.loads(diff_path.read_text(encoding="utf-8"))
+        if diff.get("status") != "passed" or diff.get("version") != version:
+            errors.append("output/reports/visual-diff.json: current exact pixel comparison did not pass")
     checks = report.get("checks", {})
     for name in (
         "scrollSpy",
@@ -505,7 +635,8 @@ def validate_browser_evidence(root: Path) -> list[str]:
 def run(root: Path = ROOT) -> dict[str, Any]:
     version = (root / "VERSION").read_text(encoding="utf-8").strip()
     tokens = {name: load_json(root / "tokens" / f"{name}.json") for name in TOKEN_NAMES}
-    errors = validate_token_data(version, tokens)
+    errors = validate_token_schemas(root, tokens)
+    errors.extend(validate_token_data(version, tokens))
     contrast_errors, contrast = validate_contrast(tokens)
     errors.extend(contrast_errors)
     errors.extend(
@@ -519,6 +650,7 @@ def run(root: Path = ROOT) -> dict[str, Any]:
     errors.extend(validate_packages(root, version))
     errors.extend(validate_repository_hygiene(root))
     errors.extend(validate_brand_sources(root))
+    errors.extend(validate_contact_channels(root, version))
     errors.extend(validate_brand_assets(root, check_git_lfs=True))
     errors.extend(validate_placeholders(root))
     errors.extend(validate_browser_evidence(root))

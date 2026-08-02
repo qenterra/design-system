@@ -14,12 +14,14 @@ from validate import (  # noqa: E402
     TOKEN_NAMES,
     validate_contrast,
     validate_brand_sources,
+    validate_contact_channels,
     validate_css,
     validate_html_tree,
     validate_localized_sources,
     validate_packages,
     validate_repository_hygiene,
     validate_token_data,
+    validate_token_schemas,
 )
 
 
@@ -43,6 +45,25 @@ class ValidatorTests(unittest.TestCase):
         tokens["components"]["button"]["radius"] = "{radius.nonexistent}"
         errors = validate_token_data(self.version, tokens)
         self.assertTrue(any("unknown reference" in error for error in errors))
+
+    def test_token_schema_rejects_unknown_top_level_key(self) -> None:
+        tokens = copy.deepcopy(self.tokens)
+        tokens["foundation"]["surprise"] = {"value": 1}
+        errors = validate_token_schemas(ROOT, tokens)
+        self.assertTrue(any("foundation.json:surprise" in error for error in errors))
+
+    def test_reference_cycle_fails(self) -> None:
+        tokens = copy.deepcopy(self.tokens)
+        tokens["foundation"]["space"]["cycleA"] = "{space.cycleB}"
+        tokens["foundation"]["space"]["cycleB"] = "{space.cycleA}"
+        errors = validate_token_data(self.version, tokens)
+        self.assertTrue(any("reference cycle" in error for error in errors))
+
+    def test_unapproved_raw_component_metric_fails(self) -> None:
+        tokens = copy.deepcopy(self.tokens)
+        tokens["components"]["button"]["mysteryInset"] = 13
+        errors = validate_token_data(self.version, tokens)
+        self.assertTrue(any("raw component metric" in error for error in errors))
 
     def test_low_contrast_fails(self) -> None:
         tokens = copy.deepcopy(self.tokens)
@@ -134,6 +155,22 @@ class ValidatorTests(unittest.TestCase):
             (root / "docs" / "brand").mkdir(parents=True)
             errors = validate_brand_sources(root)
             self.assertTrue(any("QENTERRA.md: missing brand reference" in error for error in errors))
+
+    def test_contact_roles_cannot_be_swapped(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            registry = root / "registry"
+            schemas = root / "schemas"
+            registry.mkdir()
+            schemas.mkdir()
+            (schemas / "contact-channels.schema.json").write_bytes(
+                (ROOT / "schemas" / "contact-channels.schema.json").read_bytes()
+            )
+            data = (ROOT / "registry" / "contact-channels.json").read_text(encoding="utf-8")
+            data = data.replace("contact@qenterra.com", "swap@qenterra.com")
+            (registry / "contact-channels.json").write_text(data, encoding="utf-8")
+            errors = validate_contact_channels(root, self.version)
+            self.assertTrue(any("canonical roles differ" in error for error in errors))
 
 
 if __name__ == "__main__":

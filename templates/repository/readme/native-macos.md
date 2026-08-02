@@ -147,6 +147,10 @@ The automated gate covers {AUTOMATED_SCOPE}. Live validation covers
 before opening a pull request and use [SECURITY.md](SECURITY.md) for private
 vulnerability reports.
 
+For product help, email [support@qenterra.com](mailto:support@qenterra.com).
+For general, partnership, press, or business inquiries, email
+[contact@qenterra.com](mailto:contact@qenterra.com).
+
 If {PROJECT_NAME} saves you time, you can
 [buy me a coffee](https://buymeacoffee.com/qenterra).
 

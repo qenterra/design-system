@@ -9,6 +9,7 @@
 - Brand rules and approved artwork: `docs/brand/`, `assets/brand/manifest.json`, and `assets/brand/`.
 - Brand briefs and QA: `templates/brand/` and `scripts/brand/`.
 - Generated output: `generated/`, `packages/*` generated adapters, and `dist/`.
+- Semantic registries: `registry/`; each registry has a focused schema and a validator-owned invariant.
 
 Never edit generated files directly.
 
@@ -72,7 +73,7 @@ Use `docs/repository/STANDARD.md` or `STANDARD.ru.md` for the normative reposito
 
 ## Local token packages
 
-Add `packages/swift/` as a local Swift Package Manager dependency or reference `packages/css/` through a local JavaScript package dependency. `scripts/build.py` generates their adapter payloads from `tokens/*.json`; package manifests and the hand-authored Swift entry point are maintained sources. Package publication requires separate approval.
+Add `packages/swift/` as a local Swift Package Manager dependency or reference `packages/css/` through a local JavaScript package dependency. Swift exposes typed `QDS.Color`, `QDS.Typography`, `QDS.Motion`, and `QDS.Component` APIs while preserving foundation aliases. CSS exports generated tokens by default and opt-in recipes through `recipes.css`. `scripts/build.py` generates adapter payloads from `tokens/*.json`; package manifests, recipes, and the hand-authored Swift facade are maintained sources. Package publication requires separate approval.
 
 ## Product exceptions
 
@@ -80,7 +81,7 @@ Add exceptions to the product profile, not foundation values. Record need, scope
 
 ## Visual verification
 
-The site screenshots are generated into `output/screenshots/`. Inspect them at full size for clipping, contrast, hierarchy, focus, responsive navigation, and appearance parity. Automated screenshots do not prove screen-reader or native-app behavior.
+`evidence/screenshots.json` is the exact capture matrix. Committed baselines live in `output/screenshots/`; current renders live only under ignored `output/tmp/`. Update baselines intentionally with `QDS_UPDATE_SCREENSHOTS=1`, then run `scripts/compare_screenshots.py` with the configured image Python. Inspect them at full size for clipping, contrast, hierarchy, focus, responsive navigation, and appearance parity. Automated screenshots do not prove screen-reader or native-app behavior.
 
 ## Obsidian synchronization
 

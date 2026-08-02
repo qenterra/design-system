@@ -1,0 +1,48 @@
+{
+  "version": "1.4.0",
+  "status": "passed",
+  "pixelThreshold": 0,
+  "captures": [
+    {
+      "name": "overview-en-dark-wide",
+      "changedPixels": 0,
+      "totalPixels": 5124960
+    },
+    {
+      "name": "foundations-ru-light-desktop",
+      "changedPixels": 0,
+      "totalPixels": 6156800
+    },
+    {
+      "name": "components-en-dark-mobile",
+      "changedPixels": 0,
+      "totalPixels": 7096050
+    },
+    {
+      "name": "products-ru-light-tablet",
+      "changedPixels": 0,
+      "totalPixels": 1505280
+    },
+    {
+      "name": "standalone-en-dark-desktop",
+      "changedPixels": 0,
+      "totalPixels": 72341760
+    },
+    {
+      "name": "standalone-ru-motion-dark",
+      "changedPixels": 0,
+      "totalPixels": 1152000
+    },
+    {
+      "name": "brand-en-dark-desktop",
+      "changedPixels": 0,
+      "totalPixels": 1152000
+    },
+    {
+      "name": "repositories-ru-light-desktop",
+      "changedPixels": 0,
+      "totalPixels": 1152000
+    }
+  ],
+  "errors": []
+}

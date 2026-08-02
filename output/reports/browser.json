@@ -1,4 +1,6 @@
 {
+  "version": "1.4.0",
+  "manifestSchemaVersion": 1,
   "status": "passed",
   "checks": {
     "searchAndEscape": "passed",
@@ -104,7 +106,7 @@
       "theme": "dark",
       "reducedMotion": true,
       "locale": "en",
-      "title": "Applying templates · QenTerra Design System",
+      "title": "QenTerra Design System",
       "sections": 41,
       "structure": {
         "oneH1": true,
@@ -124,7 +126,7 @@
       "theme": "dark",
       "reducedMotion": false,
       "locale": "ru",
-      "title": "Применение шаблонов · QenTerra Design System",
+      "title": "QenTerra Design System",
       "sections": 41,
       "structure": {
         "oneH1": true,

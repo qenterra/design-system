@@ -41,7 +41,7 @@ def kebab(value: str) -> str:
 def swift_name(value: str) -> str:
     parts = [part for part in re.split(r"[^a-zA-Z0-9]+", value) if part]
     first = parts[0]
-    identifier = first[:1].lower() + first[1:] + "".join(part.capitalize() for part in parts[1:])
+    identifier = first[:1].lower() + first[1:] + "".join(part[:1].upper() + part[1:] for part in parts[1:])
     keywords = {
         "associatedtype", "class", "deinit", "enum", "extension", "fileprivate", "func", "import",
         "init", "inout", "internal", "let", "open", "operator", "private", "protocol", "public",
@@ -73,7 +73,11 @@ def css_value(value: Any) -> str:
 
 
 def generate_css(
-    foundation: dict[str, Any], semantic: dict[str, Any], typography: dict[str, Any], motion: dict[str, Any]
+    foundation: dict[str, Any],
+    semantic: dict[str, Any],
+    typography: dict[str, Any],
+    motion: dict[str, Any],
+    components: dict[str, Any],
 ) -> str:
     light = flatten(semantic["modes"]["light"])
     dark = flatten(semantic["modes"]["dark"])
@@ -92,8 +96,12 @@ def generate_css(
         *mode_lines(light),
     ]
 
-    for name, value in flatten({key: foundation[key] for key in ("space", "radius", "stroke", "size")}).items():
+    for name, value in flatten(
+        {key: foundation[key] for key in ("space", "radius", "stroke", "size")}
+    ).items():
         lines.append(f"  --qds-{kebab(name)}: {css_value(value)};")
+    for name, value in flatten({key: foundation[key] for key in ("opacity", "zIndex")}).items():
+        lines.append(f"  --qds-{kebab(name)}: {value};")
 
     for name, role in type_roles.items():
         role_name = kebab(name)
@@ -112,6 +120,13 @@ def generate_css(
         lines.append(f"  --qds-motion-{kebab(name)}: {value}ms;")
     for name, curve in motion["curve"].items():
         lines.append(f"  --qds-ease-{kebab(name)}: cubic-bezier({', '.join(str(v) for v in curve)});")
+    for name, value in sorted(
+        flatten({key: value for key, value in components.items() if key not in {"$schema", "meta", "extensions"}}).items()
+    ):
+        if isinstance(value, str) and REFERENCE.match(value):
+            value = resolve(value, foundation)
+        if isinstance(value, (int, float)) and not isinstance(value, bool):
+            lines.append(f"  --qds-component-{kebab(name)}: {css_value(value)};")
     lines.append("}")
 
     lines.extend(["[data-theme=\"dark\"] {", *mode_lines(dark), "}"])
@@ -127,7 +142,13 @@ def generate_css(
     return "\n".join(lines) + "\n"
 
 
-def generate_swift(foundation: dict[str, Any], semantic: dict[str, Any], motion: dict[str, Any]) -> str:
+def generate_swift(
+    foundation: dict[str, Any],
+    semantic: dict[str, Any],
+    typography: dict[str, Any],
+    motion: dict[str, Any],
+    components: dict[str, Any],
+) -> str:
     space = foundation["space"]
     radius = foundation["radius"]
     stroke = foundation["stroke"]
@@ -140,6 +161,54 @@ def generate_swift(foundation: dict[str, Any], semantic: dict[str, Any], motion:
             identifier = swift_name(f"value{name}") if name[0].isdigit() else swift_name(name)
             result.append(f"        public static let {identifier}: Double = {value}{multiplier}")
         return result
+
+    color_light = flatten(semantic["modes"]["light"])
+    color_dark = flatten(semantic["modes"]["dark"])
+
+    color_lines = []
+    for name in sorted(color_light):
+        light = resolve(color_light[name], foundation)
+        dark = resolve(color_dark[name], foundation)
+        color_lines.append(
+            f'        public static let {swift_name(name)} = QDSColorValue(light: "{light}", dark: "{dark}")'
+        )
+
+    typography_lines = []
+    for name, role in typography["roles"].items():
+        family = role.get("family", "sans")
+        transform = role.get("transform")
+        numeric = role.get("numeric")
+        typography_lines.append(
+            "        public static let "
+            f"{swift_name(name)} = QDSTypographyValue("
+            f"family: {json.dumps(typography['family'][family])}, size: {role['size']}, "
+            f"lineHeight: {role['line']}, weight: {role['weight']}, tracking: {role['tracking']}, "
+            f"transform: {json.dumps(transform) if transform else 'nil'}, "
+            f"numeric: {json.dumps(numeric) if numeric else 'nil'})"
+        )
+
+    motion_lines = []
+    for name, event in motion["events"].items():
+        duration = motion["durationMs"][event["duration"]] / 1000
+        curve = motion["curve"][event["curve"]]
+        properties = ", ".join(json.dumps(item) for item in event["properties"])
+        motion_lines.append(
+            f"        public static let {swift_name(name)} = QDSMotionValue("
+            f"seconds: {duration:g}, curve: [{', '.join(f'{item:g}' for item in curve)}], "
+            f"properties: [{properties}])"
+        )
+
+    component_values = flatten(
+        {key: value for key, value in components.items() if key not in {"$schema", "meta", "extensions"}}
+    )
+    component_lines = []
+    for name, value in sorted(component_values.items()):
+        if isinstance(value, str) and REFERENCE.match(value):
+            value = resolve(value, foundation)
+        if isinstance(value, (int, float)) and not isinstance(value, bool):
+            component_lines.append(
+                f"        public static let {swift_name(name)} = QDSComponentMetric(points: {value})"
+            )
 
     return "\n".join(
         [
@@ -175,6 +244,22 @@ def generate_swift(foundation: dict[str, Any], semantic: dict[str, Any], motion:
                 f'        public static let {swift_name(name)} = "{name}"'
                 for name in sorted(flatten(semantic["modes"]["light"]))
             ],
+            "    }",
+            "",
+            "    public enum Color {",
+            *color_lines,
+            "    }",
+            "",
+            "    public enum Typography {",
+            *typography_lines,
+            "    }",
+            "",
+            "    public enum Motion {",
+            *motion_lines,
+            "    }",
+            "",
+            "    public enum Component {",
+            *component_lines,
             "    }",
             "}",
             "",

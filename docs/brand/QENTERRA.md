@@ -48,3 +48,10 @@ These values describe the supplied marks. Interface surfaces still use semantic 
 Use SVG when the consumer supports it safely. Use PNG for fixed raster pipelines, screenshots, stores, or platforms that require it. Choose the smallest raster that still renders at or above its native pixel size; never upscale a smaller logo to fake a larger master.
 
 Every delivered file must already exist in [`../../assets/brand/manifest.json`](../../assets/brand/manifest.json). A derived export becomes canonical only after it is named, placed, manifested, reviewed on light and dark backgrounds, and documented here if it introduces a new role.
+
+## Contact channels
+
+- [`contact@qenterra.com`](mailto:contact@qenterra.com) is the general company and brand address for inquiries, partnerships, press, and business or legal correspondence.
+- [`support@qenterra.com`](mailto:support@qenterra.com) is the product-help address for troubleshooting, bug reports, and accessibility support.
+
+Neither address replaces a repository's private vulnerability-reporting route. Exact machine-readable roles live in [`../../registry/contact-channels.json`](../../registry/contact-channels.json); UI and repository copy must not swap or invent their purposes.

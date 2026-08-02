@@ -8,4 +8,8 @@ import Testing
     #expect(QDS.Size.controlStandard == 32)
     #expect(QDS.MotionSeconds.disclosure == 0.18)
     #expect(QDS.SemanticName.textPrimary == "text.primary")
+    #expect(QDS.Color.textPrimary.value(for: .dark) == "#FFFFFF")
+    #expect(QDS.Typography.body.size == 14)
+    #expect(QDS.Motion.disclosureToggle.seconds == 0.18)
+    #expect(QDS.Component.buttonHeightsStandard.points == 32)
 }

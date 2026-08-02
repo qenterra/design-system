@@ -9,3 +9,9 @@ Reference it from a local web project and import the exported stylesheet:
 ```
 
 JavaScript tooling may import `@qenterra/design-tokens/tokens.json`. Change `tokens/*.json`, then run `python3 scripts/build.py`; do not edit `tokens.css` or `tokens.json` directly.
+
+Reusable component recipes are opt-in so product shells can remain native and distinct:
+
+```css
+@import "@qenterra/design-tokens/recipes.css";
+```

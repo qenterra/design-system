@@ -8,8 +8,10 @@ const { chromium } = require("playwright");
 
 const root = path.resolve(__dirname, "..");
 const dist = path.join(root, "dist");
-const screenshotDirectory = path.join(root, "output", "screenshots");
+const baselineDirectory = path.join(root, "output", "screenshots");
+const screenshotDirectory = path.join(root, "output", "tmp", "screenshots-current");
 const reportPath = path.join(root, "output", "reports", "browser.json");
+const manifestPath = path.join(root, "evidence", "screenshots.json");
 const systemChrome = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 
 const contentTypes = {
@@ -227,6 +229,10 @@ async function assertLanguageSwitch(page, baseUrl) {
 }
 
 async function main() {
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+  const matrix = manifest.captures;
+  if (!Array.isArray(matrix) || matrix.length === 0) throw new Error("Screenshot manifest has no captures");
+  fs.rmSync(screenshotDirectory, { recursive: true, force: true });
   fs.mkdirSync(screenshotDirectory, { recursive: true });
   fs.mkdirSync(path.dirname(reportPath), { recursive: true });
   const server = await startServer();
@@ -265,17 +271,18 @@ async function main() {
     await assertLanguageSwitch(page, baseUrl);
 
     const captures = [];
-    const matrix = [
-      { name: "overview-en-dark-wide", path: "en/index.html", viewport: { width: 1440, height: 1000 }, theme: "dark", reducedMotion: false },
-      { name: "foundations-ru-light-desktop", path: "ru/pages/foundations.html", viewport: { width: 1280, height: 900 }, theme: "light", reducedMotion: false },
-      { name: "components-en-dark-mobile", path: "en/pages/components.html", viewport: { width: 390, height: 844 }, theme: "dark", reducedMotion: true },
-      { name: "products-ru-light-tablet", path: "ru/pages/products.html", viewport: { width: 768, height: 1024 }, theme: "light", reducedMotion: false },
-      { name: "standalone-en-dark-desktop", path: "en/qenterra-design-system.html", viewport: { width: 1280, height: 900 }, theme: "dark", reducedMotion: true },
-      { name: "standalone-ru-motion-dark", path: "ru/qenterra-design-system.html", viewport: { width: 1280, height: 900 }, theme: "dark", reducedMotion: false, scrollTarget: "#section-11", fullPage: false }
-      ,{ name: "brand-en-dark-desktop", path: "en/pages/brand.html", viewport: { width: 1280, height: 900 }, theme: "dark", reducedMotion: false, scrollTarget: "#brand-nyx", fullPage: false }
-      ,{ name: "repositories-ru-light-desktop", path: "ru/pages/repositories.html", viewport: { width: 1280, height: 900 }, theme: "light", reducedMotion: false, scrollTarget: "#repository-verification", fullPage: false }
-    ];
     for (const entry of matrix) captures.push(await capture(page, baseUrl, entry));
+
+    if (process.env.QDS_UPDATE_SCREENSHOTS === "1") {
+      fs.mkdirSync(baselineDirectory, { recursive: true });
+      const expected = new Set(matrix.map((entry) => `${entry.name}.png`));
+      for (const filename of fs.readdirSync(baselineDirectory)) {
+        if (filename.endsWith(".png") && !expected.has(filename)) fs.rmSync(path.join(baselineDirectory, filename));
+      }
+      for (const filename of expected) {
+        fs.copyFileSync(path.join(screenshotDirectory, filename), path.join(baselineDirectory, filename));
+      }
+    }
 
     if (consoleErrors.length) throw new Error(`Browser console errors: ${consoleErrors.join(" | ")}`);
     const checks = {
@@ -291,7 +298,8 @@ async function main() {
       responsiveOverflow: "passed",
       consoleErrors: "none"
     };
-    fs.writeFileSync(reportPath, `${JSON.stringify({ status: "passed", checks, captures, consoleErrors }, null, 2)}\n`);
+    const version = fs.readFileSync(path.join(root, "VERSION"), "utf8").trim();
+    fs.writeFileSync(reportPath, `${JSON.stringify({ version, manifestSchemaVersion: manifest.schemaVersion, status: "passed", checks, captures, consoleErrors }, null, 2)}\n`);
     process.stdout.write(`Rendered ${captures.length} screenshots with no browser errors.\n`);
   } finally {
     await browser.close();
