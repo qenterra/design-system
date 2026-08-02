@@ -42,7 +42,7 @@ Open `http://localhost:8000/` for automatic language selection, choose `dist/en/
 
 ## Status
 
-Version 1.4.0 makes the foundation executable: focused token schemas, cycle and raw-metric guards, typed Swift color/type/motion/component APIs, CSS component metrics and opt-in recipes, exact screenshot evidence, and canonical company/support contact roles. Product migrations remain separate from this repository.
+Version 1.5.0 adds the machine-readable component registry, bilingual Component Lab with stable story URLs, density and pseudo-locale stress modes, expanded browser accessibility checks, and selected SwiftUI primitives. Product migrations remain separate from this repository.
 
 ## Repository boundary
 

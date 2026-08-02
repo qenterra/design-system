@@ -16,6 +16,9 @@
   const themeButtons = Array.from(document.querySelectorAll("[data-theme-choice]"));
   const navigationLinks = Array.from(document.querySelectorAll(".site-nav a[data-nav-slug]"));
   const trackedSections = Array.from(document.querySelectorAll(".doc-section[data-nav-slug]"));
+  const componentLab = document.querySelector(".component-lab");
+  const labDensityButtons = Array.from(document.querySelectorAll("[data-lab-density]"));
+  const labWidthButtons = Array.from(document.querySelectorAll("[data-lab-width]"));
   let searchIndex = window.QDS_SEARCH_INDEX || [];
   let activeResult = -1;
   let menuReturnTarget = null;
@@ -184,6 +187,36 @@
     updateScrollSpy();
   }
 
+  function applyLabChoice(kind, choice, persistUrl) {
+    if (!componentLab) return;
+    componentLab.dataset[kind] = choice;
+    const buttons = kind === "density" ? labDensityButtons : labWidthButtons;
+    buttons.forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset[`lab${kind[0].toUpperCase()}${kind.slice(1)}`] === choice));
+    });
+    if (kind === "width") {
+      componentLab.querySelectorAll("[data-lab-story]").forEach((story) => {
+        story.hidden = story.dataset.width !== choice;
+      });
+    }
+    if (persistUrl) {
+      const url = new URL(window.location.href);
+      url.searchParams.set(kind, choice);
+      history.replaceState(null, "", url);
+    }
+  }
+
+  function initializeComponentLab() {
+    if (!componentLab) return;
+    const params = new URLSearchParams(window.location.search);
+    const density = ["compact", "standard"].includes(params.get("density")) ? params.get("density") : "standard";
+    const width = ["standard", "long", "rtl"].includes(params.get("width")) ? params.get("width") : "standard";
+    applyLabChoice("density", density, false);
+    applyLabChoice("width", width, false);
+    labDensityButtons.forEach((button) => button.addEventListener("click", () => applyLabChoice("density", button.dataset.labDensity, true)));
+    labWidthButtons.forEach((button) => button.addEventListener("click", () => applyLabChoice("width", button.dataset.labWidth, true)));
+  }
+
   async function loadSearchIndex() {
     if (searchIndex.length || standalone) return;
     try {
@@ -295,5 +328,6 @@
   localStorage.setItem("qds-locale", locale);
   applyTheme(currentTheme(), false);
   initializeScrollSpy();
+  initializeComponentLab();
   scheduleViewportUpdate();
 })();

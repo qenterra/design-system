@@ -62,6 +62,7 @@ def main() -> int:
                 "scripts/lib/site_locales.py",
                 "scripts/lib/token_tools.py",
                 "scripts/lib/schema_tools.py",
+                "scripts/lib/pseudo_locales.py",
                 "scripts/compare_screenshots.py",
                 "scripts/brand/validate_brand_assets.py",
                 "scripts/brand/validate_nyx_assets.py",

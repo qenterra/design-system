@@ -65,7 +65,7 @@ Prefer an existing semantic token. Add a raw foundation token only if the curren
 
 ## Adding a component
 
-Complete `templates/design/component-spec.md`. A component is incomplete without anatomy, content rules, all mandatory states, keyboard behavior, screen-reader semantics, responsive rules, localization expansion, reduced motion/transparency, increased contrast, and verification cases.
+Complete `templates/design/component-spec.md`, then add the executable contract and stories to `registry/components.json`. A component is incomplete without anatomy, content rules, all mandatory states, keyboard behavior, screen-reader semantics, responsive rules, localization expansion, reduced motion/transparency, increased contrast, and verification cases. Every registry story has a stable `pages/lab.html#story-{component}-{story}` route; pseudo-long and pseudo-RTL are stress tools, never production translations.
 
 ## Repository documentation
 

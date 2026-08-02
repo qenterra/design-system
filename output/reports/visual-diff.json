@@ -1,5 +1,5 @@
 {
-  "version": "1.4.0",
+  "version": "1.5.0",
   "status": "passed",
   "pixelThreshold": 0,
   "captures": [
@@ -19,6 +19,21 @@
       "totalPixels": 7096050
     },
     {
+      "name": "lab-en-dark-desktop",
+      "changedPixels": 0,
+      "totalPixels": 4309760
+    },
+    {
+      "name": "lab-ru-long-mobile",
+      "changedPixels": 0,
+      "totalPixels": 802620
+    },
+    {
+      "name": "lab-en-rtl-tablet",
+      "changedPixels": 0,
+      "totalPixels": 1244160
+    },
+    {
       "name": "products-ru-light-tablet",
       "changedPixels": 0,
       "totalPixels": 1505280
@@ -26,7 +41,7 @@
     {
       "name": "standalone-en-dark-desktop",
       "changedPixels": 0,
-      "totalPixels": 72341760
+      "totalPixels": 76207360
     },
     {
       "name": "standalone-ru-motion-dark",

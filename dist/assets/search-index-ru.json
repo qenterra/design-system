@@ -340,5 +340,59 @@
     "page": "Репозитории",
     "path": "pages/repositories.html",
     "text": "1. Выберите профиль README по типу продукта. 2. Скопируйте только нужные root, technical, GitHub и Wiki templates. 3. Замените каждый допустимый placeholder и удалите неприменимые optional sections. 4. Сверьте product, privacy, permission, dependency, version и support claims с кодом и build metadata. 5. Добавьте document checks в нормальную команду проверки проекта. 6. Откройте screenshots визуально: link checks не читают текст, нарисованный в пикселях. 7. Для native Wiki отдельно проверьте branch/SHA до правки и published read-back после push. Шаблоны помогают не забыть структуру, но не являются legal advice и не заменяют факты продукта."
+  },
+  {
+    "section": "L0",
+    "anchor": "lab-button",
+    "order": 80,
+    "title": "Кнопка",
+    "page": "Лаборатория компонентов",
+    "path": "pages/lab.html",
+    "text": "Запускает одно явное действие с честной ролью и состоянием."
+  },
+  {
+    "section": "L1",
+    "anchor": "lab-field",
+    "order": 81,
+    "title": "Поле",
+    "page": "Лаборатория компонентов",
+    "path": "pages/lab.html",
+    "text": "Принимает одно значение с постоянной меткой, подсказкой и проверкой."
+  },
+  {
+    "section": "L2",
+    "anchor": "lab-interactive-row",
+    "order": 82,
+    "title": "Интерактивная строка",
+    "page": "Лаборатория компонентов",
+    "path": "pages/lab.html",
+    "text": "Показывает главный текст и одно действие или выбор на уровне строки."
+  },
+  {
+    "section": "L3",
+    "anchor": "lab-group",
+    "order": 83,
+    "title": "Группа",
+    "page": "Лаборатория компонентов",
+    "path": "pages/lab.html",
+    "text": "Объединяет связанные элементы под понятным заголовком."
+  },
+  {
+    "section": "L4",
+    "anchor": "lab-dialog",
+    "order": 84,
+    "title": "Диалог",
+    "page": "Лаборатория компонентов",
+    "path": "pages/lab.html",
+    "text": "Прерывает поток только ради ограниченного решения, которое нельзя оставить встроенным."
+  },
+  {
+    "section": "L5",
+    "anchor": "lab-status",
+    "order": 85,
+    "title": "Статус",
+    "page": "Лаборатория компонентов",
+    "path": "pages/lab.html",
+    "text": "Передаёт результат словами и формой, никогда только цветом."
   }
 ]

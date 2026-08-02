@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.5.0
+
+### Added
+
+- Machine-readable bilingual component registry with validated state/story contracts.
+- Component Lab page with stable story anchors, URL-backed density controls, and pseudo-long/pseudo-RTL modes.
+- Browser gates for lab availability, accessible invalid-field wiring, pseudo-localization, and visible focus.
+- SwiftUI primary-button and group-container primitives backed by typed tokens.
+
 ## 1.4.0
 
 ### Added

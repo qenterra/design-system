@@ -359,6 +359,7 @@ def validate_html_tree(dist: Path) -> list[str]:
         required = {f"section-{number}" for number in range(22)}
         required.update(f"brand-{key}" for key in BRAND_SECTION_KEYS)
         required.update(f"repository-{key}" for key in REPOSITORY_SECTION_KEYS)
+        required.add("lab-overview")
         missing = sorted(required - record.ids)
         if missing:
             errors.append(f"{label}: missing sections {missing}")
@@ -564,6 +565,42 @@ def validate_contact_channels(root: Path, version: str) -> list[str]:
     return errors
 
 
+def validate_component_registry(root: Path, version: str) -> list[str]:
+    path = root / "registry" / "components.json"
+    if not path.is_file():
+        return ["registry/components.json: missing component registry"]
+    data = load_json(path)
+    schema_path = (path.parent / data.get("$schema", "")).resolve()
+    if not schema_path.is_file():
+        return ["registry/components.json:$schema: missing schema"]
+    errors = [
+        f"registry/components.json:{error}"
+        for error in validate_schema(data, load_json(schema_path), schema_path)
+    ]
+    if data.get("version") != version:
+        errors.append("registry/components.json: version does not match VERSION")
+    identifiers: set[str] = set()
+    for component in data.get("components", []):
+        identifier = component.get("id")
+        if identifier in identifiers:
+            errors.append(f"registry/components.json: duplicate component id {identifier!r}")
+        identifiers.add(identifier)
+        states = set(component.get("states", []))
+        story_ids: set[str] = set()
+        for story in component.get("stories", []):
+            story_id = story.get("id")
+            if story_id in story_ids:
+                errors.append(f"registry/components.json:{identifier}: duplicate story id {story_id!r}")
+            story_ids.add(story_id)
+            if story.get("state") not in states:
+                errors.append(
+                    f"registry/components.json:{identifier}/{story_id}: unknown state {story.get('state')!r}"
+                )
+            if story.get("localeWidth", "standard") not in {"standard", "long", "rtl"}:
+                errors.append(f"registry/components.json:{identifier}/{story_id}: invalid localeWidth")
+    return errors
+
+
 def validate_placeholders(root: Path) -> list[str]:
     errors: list[str] = []
     scan_roots = [root / "docs", root / "tokens", root / "src", root / "dist", root / "generated", root / "output"]
@@ -626,6 +663,9 @@ def validate_browser_evidence(root: Path) -> list[str]:
         "brandModule",
         "repositoryModule",
         "uniformSvgIcons",
+        "componentLab",
+        "pseudoLocalization",
+        "visibleFocus",
     ):
         if checks.get(name) != "passed":
             errors.append(f"output/reports/browser.json: {name} did not pass")
@@ -651,6 +691,7 @@ def run(root: Path = ROOT) -> dict[str, Any]:
     errors.extend(validate_repository_hygiene(root))
     errors.extend(validate_brand_sources(root))
     errors.extend(validate_contact_channels(root, version))
+    errors.extend(validate_component_registry(root, version))
     errors.extend(validate_brand_assets(root, check_git_lfs=True))
     errors.extend(validate_placeholders(root))
     errors.extend(validate_browser_evidence(root))

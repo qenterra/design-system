@@ -838,6 +838,8 @@ The AI must not:
 
 Focused schemas are contracts, not editor decoration. A token change must preserve reference acyclicity and type compatibility. Component metrics use foundation references unless `components.extensions.rawMetricExceptions` contains a narrow, justified exception. Consumers should prefer typed `QDS.Color`, `QDS.Typography`, `QDS.Motion`, and `QDS.Component` APIs or CSS tokens; CSS recipes remain opt-in because native and product-specific shells are allowed to differ.
 
+`registry/components.json` is the executable component inventory. Its stories must cover representative states and expose stable Component Lab anchors. Review System/Light/Dark, compact/standard density, constrained widths, pseudo-long, and pseudo-RTL before adoption. Pseudo-locales reveal wrapping and bidirectional bugs; they are not substitutes for human localization. SwiftUI consumers may start with the provided button and group primitives, but platform behavior and product context still override decorative sameness.
+
 ## 20. Maintenance procedure
 
 To update the design system:

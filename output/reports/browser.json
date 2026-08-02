@@ -1,5 +1,5 @@
 {
-  "version": "1.4.0",
+  "version": "1.5.0",
   "manifestSchemaVersion": 1,
   "status": "passed",
   "checks": {
@@ -11,6 +11,9 @@
     "brandModule": "passed",
     "repositoryModule": "passed",
     "uniformSvgIcons": "passed",
+    "componentLab": "passed",
+    "pseudoLocalization": "passed",
+    "visibleFocus": "passed",
     "semanticStructure": "passed",
     "responsiveOverflow": "passed",
     "consoleErrors": "none"
@@ -77,6 +80,66 @@
       }
     },
     {
+      "name": "lab-en-dark-desktop",
+      "path": "en/pages/lab.html?density=standard&width=standard",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "theme": "dark",
+      "reducedMotion": false,
+      "locale": "en",
+      "title": "Component Lab · QenTerra Design System",
+      "sections": 1,
+      "structure": {
+        "oneH1": true,
+        "namedInteractiveElements": true,
+        "sequentialHeadingLevels": true,
+        "oneMainLandmark": true,
+        "noHorizontalOverflow": true
+      }
+    },
+    {
+      "name": "lab-ru-long-mobile",
+      "path": "ru/pages/lab.html?density=compact&width=long",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "reducedMotion": true,
+      "locale": "ru",
+      "title": "Лаборатория компонентов · QenTerra Design System",
+      "sections": 1,
+      "structure": {
+        "oneH1": true,
+        "namedInteractiveElements": true,
+        "sequentialHeadingLevels": true,
+        "oneMainLandmark": true,
+        "noHorizontalOverflow": true
+      }
+    },
+    {
+      "name": "lab-en-rtl-tablet",
+      "path": "en/pages/lab.html?density=standard&width=rtl",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "theme": "light",
+      "reducedMotion": false,
+      "locale": "en",
+      "title": "Component Lab · QenTerra Design System",
+      "sections": 1,
+      "structure": {
+        "oneH1": true,
+        "namedInteractiveElements": true,
+        "sequentialHeadingLevels": true,
+        "oneMainLandmark": true,
+        "noHorizontalOverflow": true
+      }
+    },
+    {
       "name": "products-ru-light-tablet",
       "path": "ru/pages/products.html",
       "viewport": {
@@ -107,7 +170,7 @@
       "reducedMotion": true,
       "locale": "en",
       "title": "QenTerra Design System",
-      "sections": 41,
+      "sections": 42,
       "structure": {
         "oneH1": true,
         "namedInteractiveElements": true,
@@ -127,7 +190,7 @@
       "reducedMotion": false,
       "locale": "ru",
       "title": "QenTerra Design System",
-      "sections": 41,
+      "sections": 42,
       "structure": {
         "oneH1": true,
         "namedInteractiveElements": true,

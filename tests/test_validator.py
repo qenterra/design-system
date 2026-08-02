@@ -15,6 +15,7 @@ from validate import (  # noqa: E402
     validate_contrast,
     validate_brand_sources,
     validate_contact_channels,
+    validate_component_registry,
     validate_css,
     validate_html_tree,
     validate_localized_sources,
@@ -171,6 +172,22 @@ class ValidatorTests(unittest.TestCase):
             (registry / "contact-channels.json").write_text(data, encoding="utf-8")
             errors = validate_contact_channels(root, self.version)
             self.assertTrue(any("canonical roles differ" in error for error in errors))
+
+    def test_component_registry_rejects_unknown_story_state(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            registry = root / "registry"
+            schemas = root / "schemas"
+            registry.mkdir()
+            schemas.mkdir()
+            (schemas / "component-registry.schema.json").write_bytes(
+                (ROOT / "schemas" / "component-registry.schema.json").read_bytes()
+            )
+            data = (ROOT / "registry" / "components.json").read_text(encoding="utf-8")
+            data = data.replace('"state": "default"', '"state": "imaginary"', 1)
+            (registry / "components.json").write_text(data, encoding="utf-8")
+            errors = validate_component_registry(root, self.version)
+            self.assertTrue(any("unknown state" in error for error in errors))
 
 
 if __name__ == "__main__":

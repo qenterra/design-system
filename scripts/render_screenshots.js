@@ -75,6 +75,23 @@ async function assertAccessibleStructure(page, label) {
   if (result.skipped) throw new Error(`${label}: skipped heading level`);
 }
 
+async function assertComponentLab(page, baseUrl) {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto(`${baseUrl}/en/pages/lab.html?density=compact&width=standard#story-button-primary`, { waitUntil: "networkidle" });
+  if ((await page.locator("[data-lab-story]:visible").count()) < 6) throw new Error("Component Lab standard stories are missing");
+  await page.locator('[data-lab-width="long"]').click();
+  if (!page.url().includes("width=long")) throw new Error("Component Lab controls are not URL-addressable");
+  if ((await page.locator('[data-lab-story][data-width="long"]:visible').count()) < 2) throw new Error("Pseudo-long stories are missing");
+  await page.locator('[data-lab-width="rtl"]').click();
+  if ((await page.locator('[data-lab-story][data-width="rtl"]:visible [dir="rtl"]').count()) < 1) throw new Error("Pseudo-RTL story is missing");
+  await page.goto(`${baseUrl}/en/pages/lab.html?width=standard#story-field-invalid`, { waitUntil: "networkidle" });
+  const invalid = page.locator('#story-field-invalid input[aria-invalid="true"][aria-describedby]');
+  if ((await invalid.count()) !== 1) throw new Error("Invalid field story lacks accessible error wiring");
+  await page.locator("#story-button-primary button").focus();
+  const outline = await page.locator("#story-button-primary button").evaluate((element) => getComputedStyle(element).outlineStyle);
+  if (outline === "none") throw new Error("Component Lab focus treatment is not visible");
+}
+
 async function capture(page, baseUrl, entry) {
   await page.setViewportSize(entry.viewport);
   await page.emulateMedia({ colorScheme: entry.theme === "dark" ? "dark" : "light", reducedMotion: entry.reducedMotion ? "reduce" : "no-preference" });
@@ -129,7 +146,7 @@ async function assertUniformSvgIcons(page) {
       invalidChrome: chromeControls.filter((control) => control.querySelectorAll("svg.icon").length !== 1).length
     };
   });
-  if (result.navCount !== 13 || result.invalidNav || result.invalidChrome) {
+  if (result.navCount !== 14 || result.invalidNav || result.invalidChrome) {
     throw new Error(`Icon family mismatch: ${JSON.stringify(result)}`);
   }
 }
@@ -269,6 +286,7 @@ async function main() {
     await assertScrollSpy(page, baseUrl);
     await assertLanguagePickerPosition(page, baseUrl);
     await assertLanguageSwitch(page, baseUrl);
+    await assertComponentLab(page, baseUrl);
 
     const captures = [];
     for (const entry of matrix) captures.push(await capture(page, baseUrl, entry));
@@ -294,6 +312,9 @@ async function main() {
       brandModule: "passed",
       repositoryModule: "passed",
       uniformSvgIcons: "passed",
+      componentLab: "passed",
+      pseudoLocalization: "passed",
+      visibleFocus: "passed",
       semanticStructure: "passed",
       responsiveOverflow: "passed",
       consoleErrors: "none"

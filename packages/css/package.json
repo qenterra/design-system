@@ -1,6 +1,6 @@
 {
   "name": "@qenterra/design-tokens",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Local CSS and JSON adapters for QenTerra Design System tokens.",
   "private": true,
   "sideEffects": [

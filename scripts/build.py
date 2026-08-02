@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from lib.markdown_renderer import Section, plain_text, render, split_numbered_sections  # noqa: E402
+from lib.pseudo_locales import pseudo_long, pseudo_rtl  # noqa: E402
 from lib.site_locales import (  # noqa: E402
     BRAND_SECTION_KEYS,
     COPY,
@@ -55,8 +56,8 @@ def pages(locale: str) -> list[tuple[str, str, list[int], str]]:
 def nav_html(current: str, root: str, standalone: bool, locale: str) -> str:
     links = []
     for slug, title, section_numbers, _ in pages(locale):
-        if slug in {"brand", "repositories"}:
-            prefix = "brand" if slug == "brand" else "repository"
+        if slug in {"brand", "repositories", "lab"}:
+            prefix = {"brand": "brand", "repositories": "repository", "lab": "lab"}[slug]
             href = f"#{prefix}-overview" if standalone else f"{root}pages/{slug}.html"
             section_start = section_end = prefix
         elif standalone:
@@ -264,6 +265,100 @@ def render_component_catalog(locale: str) -> str:
         '<section class="doc-section" id="component-catalog" data-nav-slug="components"><span class="section-number">C</span>'
         f'<h2>{COPY[locale]["appendix"]["catalog"]}</h2><div class="prose">'
         f'{render(path.read_text(encoding="utf-8"), heading_offset=2, id_prefix="catalog-")}</div></section>'
+    )
+
+
+def component_registry() -> dict:
+    return load_json(ROOT / "registry" / "components.json")
+
+
+def lab_copy(locale: str, value: str, width: str | None) -> str:
+    if width == "long":
+        return pseudo_long(value)
+    if width == "rtl":
+        return pseudo_rtl(value)
+    return value
+
+
+def render_lab_sample(component_id: str, story: dict, locale: str, unique: str) -> str:
+    ru = locale == "ru"
+    width = story.get("localeWidth")
+    label = lab_copy(locale, "Продолжить" if ru else "Continue", width)
+    state = story["state"]
+    if component_id == "button":
+        disabled = " disabled" if state == "disabled" else ""
+        variant = story.get("variant", "secondary")
+        return f'<button class="qds-button" data-variant="{variant}"{disabled}>{label}</button>'
+    if component_id == "field":
+        control_id = f"{unique}-control"
+        field_label = lab_copy(locale, "Название коллекции" if ru else "Collection name", width)
+        error = "Введите непустое название." if ru else "Enter a non-empty name."
+        invalid = state == "invalid"
+        disabled = " disabled" if state == "disabled" else ""
+        described = f' aria-describedby="{unique}-error"' if invalid else ""
+        invalid_attribute = ' aria-invalid="true"' if invalid else ""
+        error_html = f'<span class="lab-error" id="{unique}-error">{error}</span>' if invalid else ""
+        return (
+            f'<label class="lab-field" for="{control_id}"><span>{field_label}</span>'
+            f'<input class="qds-field" id="{control_id}" aria-label="{escape(field_label, quote=True)}"{disabled}{described}'
+            f'{invalid_attribute} value=""></label>{error_html}'
+        )
+    if component_id == "interactive-row":
+        selected = ' aria-selected="true"' if state == "selected" else ' aria-selected="false"'
+        unavailable = ' aria-disabled="true"' if state == "unavailable" else ""
+        title = "Локальная библиотека" if ru else "Local library"
+        detail = "Недоступно" if ru and state == "unavailable" else "Unavailable" if state == "unavailable" else "48 items"
+        return f'<div class="qds-interactive-row" role="option" tabindex="0"{selected}{unavailable}><strong>{title}</strong><span>{detail}</span></div>'
+    if component_id == "group":
+        title = lab_copy(locale, "Хранение" if ru else "Storage", width)
+        return f'<fieldset class="qds-group"><legend>{title}</legend><label><input type="checkbox" checked> {lab_copy(locale, "Сохранять историю локально" if ru else "Keep local history", width)}</label></fieldset>'
+    if component_id == "dialog":
+        title = "Не удалось завершить" if ru and state == "error" else "Could not complete" if state == "error" else "Удалить правило?" if ru else "Delete rule?"
+        return f'<div class="lab-dialog" role="dialog" aria-modal="false" aria-labelledby="{unique}-title"><strong id="{unique}-title">{title}</strong><p>{"Изменение можно отменить позже." if ru else "You can recover this change later."}</p><button class="qds-button" data-variant="secondary">{"Отмена" if ru else "Cancel"}</button></div>'
+    status_label = {"success": ("Готово", "Complete"), "warning": ("Нужно проверить", "Needs review"), "destructive": ("Не удалось", "Failed")}.get(state, ("Состояние", "Status"))
+    return f'<span class="lab-status lab-status-{state}" role="status"><span aria-hidden="true">●</span>{status_label[0 if ru else 1]}</span>'
+
+
+def render_component_lab(locale: str) -> str:
+    registry = component_registry()
+    ru = locale == "ru"
+    controls = (
+        '<div class="lab-toolbar" aria-label="{}">'
+        '<span>{}</span><button type="button" data-lab-density="compact" aria-pressed="false">{}</button>'
+        '<button type="button" data-lab-density="standard" aria-pressed="true">{}</button>'
+        '<span>{}</span><button type="button" data-lab-width="standard" aria-pressed="true">{}</button>'
+        '<button type="button" data-lab-width="long" aria-pressed="false">Pseudo-long</button>'
+        '<button type="button" data-lab-width="rtl" aria-pressed="false">Pseudo-RTL</button></div>'
+    ).format(
+        "Настройки лаборатории" if ru else "Lab controls",
+        "Плотность" if ru else "Density",
+        "Компактная" if ru else "Compact",
+        "Стандартная" if ru else "Standard",
+        "Текст" if ru else "Content",
+        "Обычный" if ru else "Standard",
+    )
+    components = []
+    for component in registry["components"]:
+        component_id = component["id"]
+        stories = []
+        for story in component["stories"]:
+            story_id = f"story-{component_id}-{story['id']}"
+            width = story.get("localeWidth", "standard")
+            stories.append(
+                f'<article class="lab-story" id="{story_id}" data-lab-story data-width="{width}">'
+                f'<div class="lab-story-head"><code>{component_id}/{story["id"]}</code><span>{story["state"]}</span></div>'
+                f'<div class="lab-canvas" dir="{"rtl" if width == "rtl" else "ltr"}">'
+                f'{render_lab_sample(component_id, story, locale, story_id)}</div></article>'
+            )
+        components.append(
+            f'<section class="lab-component" id="lab-{component_id}"><header><h3>{component["name"][locale]}</h3>'
+            f'<p>{component["summary"][locale]}</p></header><div class="lab-story-grid">{"".join(stories)}</div></section>'
+        )
+    return (
+        '<section class="doc-section component-lab" id="lab-overview" data-nav-slug="lab" data-density="standard" data-width="all">'
+        f'<span class="section-number">L</span><h2>{"Исполняемая лаборатория компонентов" if ru else "Executable component laboratory"}</h2>'
+        f'<p class="lab-intro">{"Каждый пример имеет постоянный URL и проходит проверки тем, плотности и локализации." if ru else "Every story has a stable URL and participates in appearance, density, and localization checks."}</p>'
+        f'{controls}{"".join(components)}</section>'
     )
 
 
@@ -552,6 +647,18 @@ def build() -> None:
                     "text": plain_text(markdown)[:1200],
                 }
             )
+        for index, component in enumerate(component_registry()["components"]):
+            search_index.append(
+                {
+                    "section": f"L{index}",
+                    "anchor": f"lab-{component['id']}",
+                    "order": 80 + index,
+                    "title": component["name"][locale],
+                    "page": COPY[locale]["pages"]["lab"][0],
+                    "path": "pages/lab.html",
+                    "text": component["summary"][locale],
+                }
+            )
         atomic_write(
             dist / "assets" / f"search-index-{locale}.json",
             json.dumps(search_index, ensure_ascii=False, indent=2) + "\n",
@@ -569,6 +676,8 @@ def build() -> None:
                 sections_html = render_brand_module(locale)
             elif slug == "repositories":
                 sections_html = render_repository_module(locale)
+            elif slug == "lab":
+                sections_html = render_component_lab(locale)
             else:
                 sections_html = "\n".join(render_section(section_map[number], locale, slug) for number in numbers)
             if slug == "components":
@@ -603,6 +712,7 @@ def build() -> None:
             standalone_sections.append(render_section(section, locale, slug))
             if section.number == 9:
                 standalone_sections.append(render_component_catalog(locale))
+                standalone_sections.append(render_component_lab(locale))
             if section.number == 17:
                 standalone_sections.append(render_audit_appendix(locale))
         standalone_sections.append(render_brand_module(locale))
@@ -634,6 +744,7 @@ def build() -> None:
         compatibility_sections.append(render_section(section, "en", slug))
         if section.number == 9:
             compatibility_sections.append(render_component_catalog("en"))
+            compatibility_sections.append(render_component_lab("en"))
         if section.number == 17:
             compatibility_sections.append(render_audit_appendix("en"))
     compatibility_sections.append(render_brand_module("en"))

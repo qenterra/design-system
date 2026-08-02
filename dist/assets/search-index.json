@@ -340,5 +340,59 @@
     "page": "Repositories",
     "path": "pages/repositories.html",
     "text": "The files under templates/repository/ are starting points, not blind copy targets. Select the smallest set that matches the repository type, replace every placeholder, remove irrelevant sections, and verify every claim against the current implementation before committing. Use templates/repository/readme/ for the repository class, root/ for canonical policy and legal files, docs/ for technical documentation, github/ for repository-hosting metadata, and wiki/ for optional long-form product guidance. The standard remains authoritative when a template and the rules appear to disagree."
+  },
+  {
+    "section": "L0",
+    "anchor": "lab-button",
+    "order": 80,
+    "title": "Button",
+    "page": "Component Lab",
+    "path": "pages/lab.html",
+    "text": "Starts one explicit action with a truthful role and state."
+  },
+  {
+    "section": "L1",
+    "anchor": "lab-field",
+    "order": 81,
+    "title": "Field",
+    "page": "Component Lab",
+    "path": "pages/lab.html",
+    "text": "Collects one value with persistent label, help, and validation."
+  },
+  {
+    "section": "L2",
+    "anchor": "lab-interactive-row",
+    "order": 82,
+    "title": "Interactive row",
+    "page": "Component Lab",
+    "path": "pages/lab.html",
+    "text": "Presents a dominant label and one row-level action or selection."
+  },
+  {
+    "section": "L3",
+    "anchor": "lab-group",
+    "order": 83,
+    "title": "Group",
+    "page": "Component Lab",
+    "path": "pages/lab.html",
+    "text": "Collects related controls under one plain-language heading."
+  },
+  {
+    "section": "L4",
+    "anchor": "lab-dialog",
+    "order": 84,
+    "title": "Dialog",
+    "page": "Component Lab",
+    "path": "pages/lab.html",
+    "text": "Interrupts only for a bounded decision that cannot stay inline."
+  },
+  {
+    "section": "L5",
+    "anchor": "lab-status",
+    "order": 85,
+    "title": "Status",
+    "page": "Component Lab",
+    "path": "pages/lab.html",
+    "text": "Communicates outcome with words and shape, never color alone."
   }
 ]
