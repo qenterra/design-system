@@ -2,7 +2,7 @@
   "$schema": "../schemas/token-file.schema.json",
   "meta": {
     "name": "QenTerra Product Profiles",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "type": "products",
     "description": "Deliberate inheritance and exceptions for current products."
   },

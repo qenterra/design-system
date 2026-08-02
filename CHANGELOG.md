@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.1.0
+
+### Added
+
+- Complete English and Russian multipage and standalone references.
+- Locale-aware entry page and an accessible language menu that preserves the current page and stable section fragment.
+- Standalone scroll-spy navigation with `aria-current="location"`.
+
+### Changed
+
+- Unified navigation, search, menu, and language controls under one inline SVG icon family.
+- Extended build output and search indexes for both locales.
+- Kept AI working plans and scratch artifacts outside the repository boundary.
+
+### Removed
+
+- Tracked `docs/superpowers/` working files.
+
 ## 1.0.0
 
 ### Added

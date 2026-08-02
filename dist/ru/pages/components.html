@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Элементы управления, контейнеры, навигация, оверлеи, обратная связь и прогресс.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:,">
+  <title>Компоненты · QenTerra Design System</title>
+  <script>(function(){var t=localStorage.getItem('qds-theme');if(t==='light'||t==='dark'){document.documentElement.dataset.theme=t;}localStorage.setItem('qds-locale','ru');}());</script>
+  <link rel="stylesheet" href="../../assets/styles.css">
+
+</head>
+<body data-root="../../" data-site-root="../" data-standalone="false" data-locale="ru" data-search-empty="Разделы не найдены. Попробуйте название компонента, состояния, платформы или продукта." data-section-label="Раздел">
+  <a class="skip-link" href="#main-content">Перейти к содержанию</a>
+  <div class="progress-line" data-progress aria-hidden="true"></div>
+  <div class="site-shell">
+    <aside class="sidebar" aria-label="Навигация по дизайн-системе">
+      <div class="sidebar-head"><div class="language-picker"><button class="language-button" type="button" data-language-button aria-haspopup="menu" aria-expanded="false" aria-label="Выбрать язык"><svg class="icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.5"/><path d="M2.7 8h10.6M8 2.5c1.5 1.5 2.25 3.33 2.25 5.5S9.5 12 8 13.5C6.5 12 5.75 10.17 5.75 8S6.5 4 8 2.5"/></svg><span>RU</span></button><div class="language-menu" data-language-menu role="menu" aria-label="Язык" hidden><a role="menuitem" href="../../en/pages/components.html" data-locale-target="en"><span>English</span><span class="language-code">EN</span></a><a role="menuitem" href="../../ru/pages/components.html" data-locale-target="ru" aria-current="true"><span>Русский</span><span class="language-code">RU</span></a></div></div><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">Q</span><span class="brand-copy"><span class="brand-title">QenTerra Design System</span><span class="brand-meta">Семантическое ядро · 1.1.0</span></span></a></div>
+      <p class="nav-label">Справочник</p>
+      <nav class="site-nav"><a href="../index.html" data-nav-slug="index" data-section-start="0" data-section-end="2"><span class="nav-glyph"><svg class="icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h4v4H3zM9 3h4v4H9zM3 9h4v4H3zM9 9h4v4H9z"/></svg></span><span>Обзор</span></a>
+<a href="../pages/foundations.html" data-nav-slug="foundations" data-section-start="3" data-section-end="4"><span class="nav-glyph"><svg class="icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="10" cy="10" r="3"/><path d="M8.1 3.8a5.5 5.5 0 1 1-4.3 4.3"/></svg></span><span>Основы</span></a>
+<a href="../pages/components.html" data-nav-slug="components" data-section-start="5" data-section-end="9" aria-current="page"><span class="nav-glyph"><svg class="icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="4.5" height="4.5" rx="1"/><rect x="9" y="2.5" width="4.5" height="4.5" rx="1"/><rect x="2.5" y="9" width="11" height="4.5" rx="1"/></svg></span><span>Компоненты</span></a>
+<a href="../pages/patterns.html" data-nav-slug="patterns" data-section-start="10" data-section-end="10"><span class="nav-glyph"><svg class="icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3.5h4a2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h2"/><path d="m11 10.5 2 2-2 2"/></svg></span><span>Сценарии</span></a>
+<a href="../pages/motion.html" data-nav-slug="motion" data-section-start="11" data-section-end="11"><span class="nav-glyph"><svg class="icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3.5 11.5 8 5 12.5z"/><path d="M2.5 3.5v9"/></svg></span><span>Анимация</span></a>
+<a href="../pages/content.html" data-nav-slug="content" data-section-start="12" data-section-end="12"><span class="nav-glyph"><svg class="icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h10M5.5 4v8M3.5 12h4M9.5 8h3M11 6.5v5"/></svg></span><span>Текст</span></a>
+<a href="../pages/accessibility.html" data-nav-slug="accessibility" data-section-start="13" data-section-end="13"><span class="nav-glyph"><svg class="icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="3.25" r="1.25"/><path d="M3 5.5h10M8 5.5v3M5 14l3-5.5L11 14"/></svg></span><span>Доступность</span></a>
+<a href="../pages/platforms.html" data-nav-slug="platforms" data-section-start="14" data-section-end="14"><span class="nav-glyph"><svg class="icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="9" height="7" rx="1.25"/><path d="M5 13h3M6.5 10v3"/><rect x="11" y="6.5" width="3" height="6" rx=".75"/></svg></span><span>Платформы</span></a>
+<a href="../pages/products.html" data-nav-slug="products" data-section-start="15" data-section-end="16"><span class="nav-glyph"><svg class="icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m8 2.5 5 2.75v5.5L8 13.5l-5-2.75v-5.5zM3.2 5.4 8 8l4.8-2.6M8 8v5.3"/></svg></span><span>Продукты</span></a>
+<a href="../pages/audit.html" data-nav-slug="audit" data-section-start="17" data-section-end="17"><span class="nav-glyph"><svg class="icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.5"/><path d="m5.2 8.1 1.8 1.8 3.8-4"/></svg></span><span>Доказательства</span></a>
+<a href="../pages/governance.html" data-nav-slug="governance" data-section-start="18" data-section-end="21"><span class="nav-glyph"><svg class="icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.25 13 4v3.6c0 3.1-2.1 5.3-5 6.15-2.9-.85-5-3.05-5-6.15V4z"/><path d="m5.7 7.8 1.45 1.45 3.15-3.1"/></svg></span><span>Управление</span></a></nav>
+      <div class="sidebar-footer">
+        <div class="appearance-control" role="group" aria-label="Тема"><button type="button" data-theme-choice="system" aria-pressed="true">Система</button><button type="button" data-theme-choice="light" aria-pressed="false">Светлая</button><button type="button" data-theme-choice="dark" aria-pressed="false">Тёмная</button></div>
+        <p class="sidebar-note">Точные значения берутся из машиночитаемых токенов. Оболочки продуктов намеренно остаются разными.</p>
+      </div>
+    </aside>
+    <button class="scrim" data-scrim aria-label="Закрыть навигацию"></button>
+    <div class="main-column">
+      <header class="topbar"><button class="menu-button" type="button" data-menu-button aria-expanded="false" aria-label="Открыть навигацию"><svg class="icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 4h11M2.5 8h11M2.5 12h11"/></svg></button><p class="topbar-title">Компоненты</p><div class="search-wrap"><span class="search-icon"><svg class="icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="4.25"/><path d="m10.2 10.2 3.3 3.3"/></svg></span><input class="search-input" type="search" data-search aria-label="Поиск по дизайн-системе" placeholder="Компоненты, состояния, продукты…" autocomplete="off"><div class="search-results" data-search-results role="region" aria-label="Результаты поиска"></div></div><span class="key-hint" aria-hidden="true">⌘ K</span></header>
+      <main class="content" id="main-content">
+
+        <header class="page-intro"><p class="page-eyebrow">QenTerra Design System</p><h1>Компоненты</h1><p class="page-summary">Элементы управления, контейнеры, навигация, оверлеи, обратная связь и прогресс.</p></header>
+        <section class="doc-section" id="section-5" data-nav-slug="components"><span class="section-number">05</span><h2>Элементы управления</h2><div class="prose"><h3 id="s5-5-1">5.1 Кнопки</h3>
+<p>Роли: <code>primary</code> завершает или продвигает задачу; <code>secondary</code> — безопасная альтернатива; <code>quiet</code> — контекст; <code>destructive</code> — явно названное удаление; <code>icon</code> — знакомое компактное действие; <code>menuRow</code> — команда в custom menu list; <code>link</code> — навигация к docs/policy/content.</p>
+<ul>
+<li>Одна primary на поверхность.</li>
+<li>Подпись начинается с глагола и называет результат.</li>
+<li>Ellipsis только если до завершения нужен ещё ввод.</li>
+<li>Loading сохраняет ширину и показывает state/progress text.</li>
+<li>Disabled объясняет неочевидную причину.</li>
+<li>Destructive не становится primary из-за позиции.</li>
+</ul>
+<h3 id="s5-5-2">5.2 Кнопки-иконки</h3>
+<p>Они имеют стабильную hit area, accessible label, видимый focus, hover help и не меняют геометрию. Если символ не считывается сразу, используйте текст.</p>
+<h3 id="s5-5-3">5.3 Поля</h3>
+<p>Состояния: <code>pristine</code>, <code>editing</code>, <code>valid</code>, <code>invalid</code>, <code>disabled</code>, <code>readOnly</code>. Не показывайте ошибку до взаимодействия. Валидируйте по blur, паузе или submit по цене ошибки. Не давайте helper text прыгать. Error copy называет требование и действие. Label всегда видим; placeholder — пример. Secure fields не выдают секреты в logs, screenshots и accessibility hints.</p>
+<h3 id="s5-5-4">5.4 Поиск</h3>
+<p>Определите scope, clear, shortcut, empty query, result count, no-results и persistence. Не делите query state между разными контекстами без явного переноса.</p>
+<h3 id="s5-5-5">5.5 Элементы выбора</h3>
+<p>Checkbox — независимые опции; radio group — ровно один выбор; switch — немедленная постоянная настройка; segmented control — peer views/modes, не destructive actions.</p>
+<h3 id="s5-5-6-pickers-sliders-steppers">5.6 Pickers, sliders, steppers</h3>
+<p>Picker для discrete values, slider для диапазона с полезным approximate manipulation, stepper для точного шага. Текущее значение всегда показано текстом.</p>
+<h3 id="s5-5-7-chips-tokens-badges-keycaps">5.7 Chips, tokens, badges, keycaps</h3>
+<p>Filter token удаляется и называет scope. Status badge содержит текст. Count badge учитывает plural rules. Keycap использует одну нотацию и пробел между modifier и key: <code>⌥ Space</code>. Chip не становится крошечной двусмысленной кнопкой.</p></div></section><aside class="specimen" aria-label="Элементы управления и честные состояния"><div class="specimen-header"><h3>Элементы управления и честные состояния</h3><p>Одно основное действие. Ошибки появляются после взаимодействия.</p></div>
+    <div class="specimen-canvas">
+      <button class="button button-primary">Продолжить</button>
+      <button class="button button-secondary">Проверить файлы</button>
+      <button class="button button-quiet">Показать подробности</button>
+      <button class="button button-destructive">Удалить правило</button>
+      <span class="status-demo status-success"><span class="status-dot"></span>Установлено</span>
+      <span class="status-demo status-warning"><span class="status-dot"></span>Нужна проверка</span>
+      <span class="status-demo status-destructive"><span class="status-dot"></span>Запись</span>
+      <span class="key-hint">⌥ Space</span>
+    </div>
+    <div class="specimen-canvas">
+      <div class="field-demo"><label for="demo-name">Название коллекции</label><input id="demo-name" value="Вечернее прослушивание"><small>Сохранено локально в Cadence.</small></div>
+      <div class="field-demo is-error"><label for="demo-api">API ID</label><input id="demo-api" value="не-число" aria-invalid="true"><small>Введите положительный числовой API ID.</small></div>
+    </div>
+    </aside>
+<section class="doc-section" id="section-6" data-nav-slug="components"><span class="section-number">06</span><h2>Контейнеры и данные</h2><div class="prose"><h3 id="s6-6-1">6.1 Группа и карточка</h3>
+<p>Группируйте связанное, но не оборачивайте всё в карточки. Карточка нужна для семантической границы, независимого действия или elevated lifecycle.</p>
+<h3 id="s6-6-2-settings-section-row">6.2 Settings section и row</h3>
+<p>Settings row — одна accessible unit из label, optional description и trailing control. API не допускает unnamed control. Description объясняет последствие, а не повторяет label. Section header группирует решения, а не продаёт их.</p>
+<h3 id="s6-6-3">6.3 Интерактивная строка</h3>
+<p>Общая row владеет hover, press, focus, selection, disabled и unavailable. Фичи не передают hardcoded <code>false</code>, чтобы их подавить. В строках с несколькими действиями row activation отделен от embedded links/controls. Double click и Return имеют один primary meaning там, где этого ждёт desktop.</p>
+<h3 id="s6-6-4">6.4 Списки, таблицы, сетки и деревья</h3>
+<p>List — одномерные peers; table — выровненные сравнимые атрибуты; grid — визуальное сканирование без смысла позиции; tree — иерархия.</p>
+<p>Таблица имеет dominant first column, visible sort direction, keyboard selection, поведение column resize, long values, empty/no-results/loading/error и accessible row/column semantics. Selection переживает sorting только для того же object. Перед bulk action сообщаются hidden selected items.</p>
+<h3 id="s6-6-5">6.5 Плитки расширений и файлов</h3>
+<p>Когда главное — имя файла, используйте нейтральную extension tile. Не заменяйте filename сгенерированным media title. Thumbnail нужен только когда визуальный контент реально помогает selection.</p>
+<h3 id="s6-6-6">6.6 Медиастроки</h3>
+<p>Artwork может вести строку. Title первичен, creator вторичен, codec/quality — compact metadata. Embedded links не запускают playback и не ломают multi-selection.</p></div></section><aside class="specimen" aria-label="Доступная грамматика настроек"><div class="specimen-header"><h3>Доступная грамматика настроек</h3><p>Подпись, последствие и элемент управления образуют одно целое.</p></div>
+    <div class="specimen-canvas">
+      <div class="settings-demo">
+        <div class="settings-row"><div class="settings-copy"><strong>Следовать системной теме</strong><span>Использовать текущую светлую или тёмную тему macOS.</span></div><button class="switch" type="button" role="switch" aria-checked="true" aria-label="Следовать системной теме"></button></div>
+        <div class="settings-row"><div class="settings-copy"><strong>Хранить локальную историю</strong><span>Сохранять завершённые операции для восстановления.</span></div><span class="status-demo"><span class="status-dot"></span>30 дней</span></div>
+        <div class="settings-row"><div class="settings-copy"><strong>Папка загрузок</strong><span>Файлы остаются под вашим контролем.</span></div><button class="button button-secondary">Выбрать…</button></div>
+      </div>
+    </div>
+    </aside><aside class="specimen" aria-label="Плотные данные без визуального шума"><div class="specimen-header"><h3>Плотные данные без визуального шума</h3><p>Стабильные столбцы, выделение формой и доминирующее первое поле.</p></div><div class="specimen-canvas">
+    <div class="mini-table">
+      <div class="mini-table-row"><strong>Original filename.flac</strong><span>54,2 МБ</span><span>Сегодня</span></div>
+      <div class="mini-table-row is-selected"><strong>Interview notes.pdf</strong><span>1,8 МБ</span><span>28 июля</span></div>
+      <div class="mini-table-row"><strong>Cover artwork.png</strong><span>3,1 МБ</span><span>27 июля</span></div>
+    </div>
+    </div></aside>
+<section class="doc-section" id="section-7" data-nav-slug="components"><span class="section-number">07</span><h2>Навигация</h2><div class="prose"><p>Общая навигация задаёт states, icon treatment, label behavior, keyboard movement, focus, persistence и responsive transformation, но не одну оболочку.</p>
+<h3 id="s7-7-1-rail">7.1 Rail</h3>
+<p>Rail нужен для малого стабильного набора top-level destinations. Expanded помогает узнаванию, compact экономит место. Каждое направление имеет уникальный символ. Expansion сохраняет icon anchors и анимирует только width/label opacity. Compact не скрывает current location.</p>
+<p>Продуктовые defaults: Cadence expanded на новой установке; Unspool compact или responsive; Lilt без application rail вне Settings.</p>
+<h3 id="s7-7-2-sidebar">7.2 Sidebar</h3>
+<p>Для labeled sources, categories и Settings sections. Поддерживает keyboard movement, selection, scrolling и visible current item. Custom sidebar не теряет arrow navigation и screen-reader semantics.</p>
+<h3 id="s7-7-3-toolbar">7.3 Toolbar</h3>
+<p>Содержит частые контекстные действия. Search следует platform placement. Overflow явно уходит в labeled More; критические действия не исчезают в horizontal scroll.</p>
+<h3 id="s7-7-4-tabs-segmented-navigation">7.4 Tabs и segmented navigation</h3>
+<p>Для малого числа peer views. Сохраняйте state при переключении, если этого ждут. Active tab не является кликабельной анимацией без state effect.</p>
+<h3 id="s7-7-5-breadcrumb-contextual-back">7.5 Breadcrumb и contextual Back</h3>
+<p>Breadcrumb нужен для глубокой web/document hierarchy. Native apps используют labeled contextual Back, если destination зависит от entry source. Одного chevron недостаточно.</p></div></section>
+<section class="doc-section" id="section-8" data-nav-slug="components"><span class="section-number">08</span><h2>Оверлеи и временные поверхности</h2><div class="prose"><h3 id="s8-8-1-menu">8.1 Menu</h3>
+<p>Содержит немедленные команды. Группируйте, показывайте shortcuts, отделяйте destructive и по возможности объясняйте disabled.</p>
+<h3 id="s8-8-2-popover">8.2 Popover</h3>
+<p>Короткий контекстный выбор или inspector, закрываемый без потери работы. Остаётся в viewport и возвращает focus инициатору.</p>
+<h3 id="s8-8-3-sheet">8.3 Sheet</h3>
+<p>Сфокусированная задача с input, review или несколькими решениями. Сохраняет unsaved work, если accidental dismiss дорог.</p>
+<h3 id="s8-8-4-dialog-alert">8.4 Dialog и alert</h3>
+<p>Alert — для interruption, permission, destructive confirmation или failure, требующего решения. Title называет ситуацию, body — последствие, actions — outcomes. Не используйте generic <code>OK</code>, когда есть result verb, и не подтверждайте безобидное reversible.</p>
+<h3 id="s8-8-5-toast-banner">8.5 Toast и banner</h3>
+<p>Toast — transient completion без решения; banner — persistent status в scope поверхности или app. Они не заменяют inline field/row errors.</p>
+<h3 id="s8-8-6-hud-command-panel">8.6 HUD и command panel</h3>
+<p>HUD передаёт transient status без кражи keyboard focus. Command/search panel может забрать focus, но сохраняет и возвращает source target до action в другом app. Multi-display placement идёт от active target window, а не mouse position.</p></div></section>
+<section class="doc-section" id="section-9" data-nav-slug="components"><span class="section-number">09</span><h2>Обратная связь и прогресс</h2><div class="prose"><h3 id="s9-9-1">9.1 Загрузка</h3>
+<p>Skeleton — когда форма контента известна; indeterminate indicator — когда длительность неизвестна; determinate progress — только по измерениям. Таймер не создаёт фальшивый progress.</p>
+<h3 id="s9-9-2">9.2 Жизненный цикл операции</h3>
+<p>Различайте preparing, waiting, running, paused, verifying, completing, completed, failed, cancelling, cancelled, interrupted/recoverable. Actions соответствуют lifecycle. При cancellation остатка уже completed results не исчезают без явного обещания.</p>
+<h3 id="s9-9-3-empty-no-results">9.3 Empty и no-results</h3>
+<p>Empty означает пустую коллекцию. No-results означает, что фильтры или поиск исключили существующий контент. Им нужны разные copy и recovery.</p>
+<h3 id="s9-9-4">9.4 Ошибки</h3>
+<p>Field error привязана к input; row error — к object; section notice — к workflow region; banner — к surface/app; alert — блокирует или требует решения. Ошибка называет: что случилось, что осталось safe/saved, что делать. Technical details уходят в optional disclosure или diagnostic export.</p></div></section><section class="doc-section" id="component-catalog" data-nav-slug="components"><span class="section-number">C</span><h2>Полный каталог компонентов</h2><div class="prose"><h3 id="catalog-">Каталог компонентов</h3>
+<p>Каталог задаёт ожидаемый словарь интерфейса, но не требует от каждого продукта всех компонентов. Продукт берёт только обоснованные его задачами элементы, соблюдая общий контракт и адаптер платформы.</p>
+<h4 id="catalog--2">Действия</h4>
+<div class="table-scroll"><table><thead><tr>
+<th>Компонент</th>
+<th>Назначение</th>
+<th>Обязательный контракт</th>
+</tr></thead><tbody>
+<tr>
+<td>Primary button</td>
+<td>Главное завершение/продвижение</td>
+<td>Одна на focused surface; loading, причина disabled, focus</td>
+</tr>
+<tr>
+<td>Secondary button</td>
+<td>Безопасная альтернатива</td>
+<td>Стабильная иерархия рядом с primary</td>
+</tr>
+<tr>
+<td>Quiet button</td>
+<td>Контекстное маловажное</td>
+<td>Hover/focus background; текст, если иконка неясна</td>
+</tr>
+<tr>
+<td>Destructive button</td>
+<td>Трудно восстановимый итог</td>
+<td>Точный глагол, последствие, confirmation/Undo по риску</td>
+</tr>
+<tr>
+<td>Icon button</td>
+<td>Знакомое компактное действие</td>
+<td>Accessible name, tooltip/help, стабильная hit area</td>
+</tr>
+<tr>
+<td>Split button</td>
+<td>Default и связанные альтернативы</td>
+<td>Default безопасен и част; menu имеет keyboard semantics</td>
+</tr>
+<tr>
+<td>Link</td>
+<td>Навигация или docs</td>
+<td>Различим на hover/focus не только цветом</td>
+</tr>
+<tr>
+<td>Menu row</td>
+<td>Команда в custom surface</td>
+<td>Role, shortcut, disabled reason, отделение destructive</td>
+</tr>
+</tbody></table></div>
+<h4 id="catalog--3">Текст и формы</h4>
+<div class="table-scroll"><table><thead><tr>
+<th>Компонент</th>
+<th>Назначение</th>
+<th>Обязательный контракт</th>
+</tr></thead><tbody>
+<tr>
+<td>Text field</td>
+<td>Короткое значение</td>
+<td>Постоянный label; pristine/editing/valid/invalid</td>
+</tr>
+<tr>
+<td>Secure field</td>
+<td>Секрет</td>
+<td>Без утечки в logs/screenshots; явный reveal</td>
+</tr>
+<tr>
+<td>Text area/editor</td>
+<td>Многострочный контент</td>
+<td>Resize/scroll ownership, undo, selection, long text</td>
+</tr>
+<tr>
+<td>Search field</td>
+<td>Запрос в named scope</td>
+<td>Clear, shortcut, count, no-results, persistence</td>
+</tr>
+<tr>
+<td>Token field</td>
+<td>Набор discrete values</td>
+<td>Keyboard removal, overflow, duplicate prevention</td>
+</tr>
+<tr>
+<td>Number field</td>
+<td>Точное число</td>
+<td>Locale, min/max, units, частичный invalid input</td>
+</tr>
+<tr>
+<td>Date/time picker</td>
+<td>Дата или время</td>
+<td>Locale, timezone, keyboard, unavailable ranges</td>
+</tr>
+<tr>
+<td>File/folder picker</td>
+<td>Путь под контролем человека</td>
+<td>Security scope, recent state, recovery inaccessible path</td>
+</tr>
+<tr>
+<td>Drop zone</td>
+<td>Прямой ввод файлов/данных</td>
+<td>Keyboard alternative, accepted types, review до mutation</td>
+</tr>
+</tbody></table></div>
+<h4 id="catalog--4">Выбор и регулировка</h4>
+<div class="table-scroll"><table><thead><tr>
+<th>Компонент</th>
+<th>Назначение</th>
+<th>Обязательный контракт</th>
+</tr></thead><tbody>
+<tr>
+<td>Checkbox</td>
+<td>Независимый Boolean</td>
+<td>Label входит в control; mixed по смыслу</td>
+</tr>
+<tr>
+<td>Radio group</td>
+<td>Один из вариантов</td>
+<td>Arrow navigation, group label, one selected</td>
+</tr>
+<tr>
+<td>Switch</td>
+<td>Немедленная durable setting</td>
+<td>Ясное последствие; без Apply, если не deferred</td>
+</tr>
+<tr>
+<td>Segmented control</td>
+<td>Малый peer mode/view set</td>
+<td>Selection виден формой; не скрывает destructive</td>
+</tr>
+<tr>
+<td>Picker/select</td>
+<td>Discrete list</td>
+<td>Current value, keyboard menu, long labels</td>
+</tr>
+<tr>
+<td>Slider</td>
+<td>Приблизительный диапазон</td>
+<td>Текстовое value, keyboard increments, min/max</td>
+</tr>
+<tr>
+<td>Stepper</td>
+<td>Точные шаги</td>
+<td>Текстовое value, bounds, press-repeat</td>
+</tr>
+<tr>
+<td>Rating</td>
+<td>Упорядоченное preference</td>
+<td>Нецветовое value и keyboard; редко</td>
+</tr>
+</tbody></table></div>
+<h4 id="catalog--5">Компактные метаданные</h4>
+<div class="table-scroll"><table><thead><tr>
+<th>Компонент</th>
+<th>Назначение</th>
+<th>Обязательный контракт</th>
+</tr></thead><tbody>
+<tr>
+<td>Badge</td>
+<td>Count/status</td>
+<td>Plural/localization, не только цвет</td>
+</tr>
+<tr>
+<td>Filter token</td>
+<td>Active removable filter</td>
+<td>Scope name, remove, keyboard overflow</td>
+</tr>
+<tr>
+<td>Chip</td>
+<td>Категория/действие</td>
+<td>Поведение явно, не decorative ambiguity</td>
+</tr>
+<tr>
+<td>Keycap</td>
+<td>Shortcut</td>
+<td>Одна нотация, screen-reader expansion, platform mapping</td>
+</tr>
+<tr>
+<td>Extension tile</td>
+<td>Тип файла</td>
+<td>Нейтрален, filename первичен</td>
+</tr>
+<tr>
+<td>Avatar/artwork</td>
+<td>Личность/медиа</td>
+<td>Fallback, privacy, alt/accessibility</td>
+</tr>
+</tbody></table></div>
+<h4 id="catalog--6">Навигация</h4>
+<div class="table-scroll"><table><thead><tr>
+<th>Компонент</th>
+<th>Назначение</th>
+<th>Обязательный контракт</th>
+</tr></thead><tbody>
+<tr>
+<td>Rail</td>
+<td>Стабильные top-level destinations</td>
+<td>Compact/expanded, unique symbols, current-location cue</td>
+</tr>
+<tr>
+<td>Sidebar</td>
+<td>Labeled sources/sections</td>
+<td>Arrow navigation, selection, resize/scroll</td>
+</tr>
+<tr>
+<td>Toolbar</td>
+<td>Частые contextual actions</td>
+<td>Overflow priority, keyboard/menu parity, wrapping</td>
+</tr>
+<tr>
+<td>Tab bar</td>
+<td>Peer destinations/views</td>
+<td>Current state, touch targets, preserved state</td>
+</tr>
+<tr>
+<td>Breadcrumb</td>
+<td>Глубокая иерархия</td>
+<td>Current, truncation, keyboard links</td>
+</tr>
+<tr>
+<td>Contextual Back</td>
+<td>Возврат к entry source</td>
+<td>Видимый label при неочевидной history</td>
+</tr>
+<tr>
+<td>Pagination</td>
+<td>Большой discrete result set</td>
+<td>Current/total, disabled bounds, URL state в web</td>
+</tr>
+<tr>
+<td>Step indicator</td>
+<td>Порядок setup/task</td>
+<td>Required/optional, current/completed/error</td>
+</tr>
+</tbody></table></div>
+<h4 id="catalog--7">Контейнеры</h4>
+<div class="table-scroll"><table><thead><tr>
+<th>Компонент</th>
+<th>Назначение</th>
+<th>Обязательный контракт</th>
+</tr></thead><tbody>
+<tr>
+<td>Group</td>
+<td>Связанный контент</td>
+<td>Heading/label, spacing, без лишней elevation</td>
+</tr>
+<tr>
+<td>Card</td>
+<td>Независимый object/action lifecycle</td>
+<td>Ясная граница и action ownership</td>
+</tr>
+<tr>
+<td>Settings section</td>
+<td>Связанные durable choices</td>
+<td>Title, optional description, stable rows</td>
+</tr>
+<tr>
+<td>Settings row</td>
+<td>Label + consequence + control</td>
+<td>Одна accessible unit; unnamed control невозможен</td>
+</tr>
+<tr>
+<td>Inspector</td>
+<td>Context detail/editing</td>
+<td>Selection relation, resize, focus return</td>
+</tr>
+<tr>
+<td>Split view</td>
+<td>Связанные contexts</td>
+<td>Minimums, divider accessibility, persistence</td>
+</tr>
+<tr>
+<td>Scroll region</td>
+<td>Владелец overflow</td>
+<td>Visible affordance, focus, без nested scroll</td>
+</tr>
+<tr>
+<td>Disclosure/accordion</td>
+<td>Optional detail</td>
+<td>Expanded, keyboard, reduced motion, не скрывает critical</td>
+</tr>
+</tbody></table></div>
+<h4 id="catalog--8">Коллекции и данные</h4>
+<div class="table-scroll"><table><thead><tr>
+<th>Компонент</th>
+<th>Назначение</th>
+<th>Обязательный контракт</th>
+</tr></thead><tbody>
+<tr>
+<td>List</td>
+<td>Одномерные peers</td>
+<td>Selection/action, empty/loading/error</td>
+</tr>
+<tr>
+<td>Table</td>
+<td>Сравнимые fields</td>
+<td>Sort, resize, keyboard, accessible headers</td>
+</tr>
+<tr>
+<td>Grid</td>
+<td>Визуальное сканирование</td>
+<td>Reading order, adaptive columns, selected/focus</td>
+</tr>
+<tr>
+<td>Tree</td>
+<td>Иерархия</td>
+<td>Disclosure, levels, arrows, partial loading</td>
+</tr>
+<tr>
+<td>Timeline/history</td>
+<td>Операции по порядку</td>
+<td>Time/order, current/interrupted/completed</td>
+</tr>
+<tr>
+<td>Activity row</td>
+<td>Текущая операция</td>
+<td>Progress, pause/resume/cancel, retained completed</td>
+</tr>
+<tr>
+<td>Media row</td>
+<td>Artwork + metadata</td>
+<td>Playback отделён от embedded links</td>
+</tr>
+<tr>
+<td>File row</td>
+<td>Filename + operations</td>
+<td>Original name первично, conflict/status явен</td>
+</tr>
+<tr>
+<td>Chart</td>
+<td>Количественная связь</td>
+<td>Text/table alternative, units, нецветовые series</td>
+</tr>
+</tbody></table></div>
+<h4 id="catalog--9">Обратная связь и статус</h4>
+<div class="table-scroll"><table><thead><tr>
+<th>Компонент</th>
+<th>Назначение</th>
+<th>Обязательный контракт</th>
+</tr></thead><tbody>
+<tr>
+<td>Inline help</td>
+<td>Локальное объяснение</td>
+<td>Не заменяет label; доступно по focus</td>
+</tr>
+<tr>
+<td>Field error</td>
+<td>Один invalid input</td>
+<td>После interaction; requirement + recovery</td>
+</tr>
+<tr>
+<td>Row error</td>
+<td>Сбой object</td>
+<td>Object опознаваем; retry/details</td>
+</tr>
+<tr>
+<td>Inline notice</td>
+<td>Локальный non-blocking state</td>
+<td>Scope и next action</td>
+</tr>
+<tr>
+<td>Banner</td>
+<td>Persistent state surface/app</td>
+<td>Severity, scope, dismiss/recovery</td>
+</tr>
+<tr>
+<td>Toast</td>
+<td>Transient completion</td>
+<td>Без decision; screen-reader announcement</td>
+</tr>
+<tr>
+<td>Status badge</td>
+<td>Compact lifecycle</td>
+<td>Symbol/shape + words</td>
+</tr>
+<tr>
+<td>Empty state</td>
+<td>Пустая коллекция</td>
+<td>Cause/context и primary next action</td>
+</tr>
+<tr>
+<td>No-results</td>
+<td>Query исключил контент</td>
+<td>Clear filters/query и retain context</td>
+</tr>
+<tr>
+<td>Skeleton</td>
+<td>Известная форма loading</td>
+<td><code>aria-busy</code>, reduced motion, без false structure</td>
+</tr>
+<tr>
+<td>Spinner</td>
+<td>Неизвестное короткое ожидание</td>
+<td>Label по смыслу; не fake progress</td>
+</tr>
+<tr>
+<td>Progress bar</td>
+<td>Измеренное completion</td>
+<td>Numeric/value semantics, lifecycle actions</td>
+</tr>
+</tbody></table></div>
+<h4 id="catalog--10">Оверлеи</h4>
+<div class="table-scroll"><table><thead><tr>
+<th>Компонент</th>
+<th>Назначение</th>
+<th>Обязательный контракт</th>
+</tr></thead><tbody>
+<tr>
+<td>Tooltip/help</td>
+<td>Дополнительное объяснение</td>
+<td>Hover/focus, delay, dismiss, не critical-only</td>
+</tr>
+<tr>
+<td>Menu/context menu</td>
+<td>Немедленные команды</td>
+<td>Keyboard, shortcuts, grouping, disabled/destructive</td>
+</tr>
+<tr>
+<td>Popover</td>
+<td>Короткий выбор/detail</td>
+<td>Viewport clamp, dismissal, focus return</td>
+</tr>
+<tr>
+<td>Sheet</td>
+<td>Focused input/review</td>
+<td>Unsaved work, hierarchy, focus trap</td>
+</tr>
+<tr>
+<td>Alert</td>
+<td>Blocking situation</td>
+<td>Specific title, consequence, concrete actions</td>
+</tr>
+<tr>
+<td>Confirmation dialog</td>
+<td>Рискованный итог</td>
+<td>Exact scope/count и what remains</td>
+</tr>
+<tr>
+<td>HUD</td>
+<td>Non-focus transient status</td>
+<td>Real signal, не ловит pointer снаружи</td>
+</tr>
+<tr>
+<td>Command/search panel</td>
+<td>Focus-taking fast action</td>
+<td>Target capture/restore, Escape, count, keyboard-first</td>
+</tr>
+</tbody></table></div>
+<h4 id="catalog--11">Продуктовые архетипы</h4>
+<div class="table-scroll"><table><thead><tr>
+<th>Архетип</th>
+<th>Общий контракт</th>
+<th>Пример</th>
+</tr></thead><tbody>
+<tr>
+<td>Persistent player</td>
+<td>Стабильный transport/status layer</td>
+<td>Cadence</td>
+</tr>
+<tr>
+<td>Playback queue</td>
+<td>Ordered selection, reorder, undo, unavailable</td>
+<td>Cadence</td>
+</tr>
+<tr>
+<td>Preflight summary</td>
+<td>Scope/count/size/destination/conflicts</td>
+<td>Unspool</td>
+</tr>
+<tr>
+<td>Conflict resolver</td>
+<td>Safe default и explicit alternatives</td>
+<td>Unspool</td>
+</tr>
+<tr>
+<td>Recording HUD</td>
+<td>Real signal, timer, state, non-focus</td>
+<td>Lilt</td>
+</tr>
+<tr>
+<td>Quick history</td>
+<td>Search, selection, insert/copy, recovery</td>
+<td>Lilt</td>
+</tr>
+<tr>
+<td>Model lifecycle card</td>
+<td>Download/verify/install/load/recovery/license</td>
+<td>Lilt</td>
+</tr>
+</tbody></table></div>
+<h4 id="catalog--12">Приёмка компонента</h4>
+<p>Компонент принят, только если его назначение, anatomy, content rules, semantic tokens, mandatory states, interaction, keyboard, screen-reader behavior, responsive transformation, localization expansion, reduced settings и verification cases задокументированы и реализованы на целевой платформе.</p></div></section>
+        <footer class="page-footer"><span>QenTerra Design System 1.1.0</span><span>Сначала система · Фирменная тёмная тема · Полноценная светлая</span></footer>
+      </main>
+    </div>
+  </div>
+  <script src="../../assets/app.js" defer></script>
+</body>
+</html>

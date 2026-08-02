@@ -19,6 +19,12 @@ GENERATED_TARGETS = [
     ROOT / "generated" / "TOKEN_REFERENCE.md",
     ROOT / "dist" / "index.html",
     ROOT / "dist" / "qenterra-design-system.html",
+    ROOT / "dist" / "en" / "index.html",
+    ROOT / "dist" / "ru" / "index.html",
+    ROOT / "dist" / "en" / "qenterra-design-system.html",
+    ROOT / "dist" / "ru" / "qenterra-design-system.html",
+    ROOT / "dist" / "assets" / "search-index-en.json",
+    ROOT / "dist" / "assets" / "search-index-ru.json",
 ]
 
 
@@ -46,6 +52,7 @@ def main() -> int:
                 "scripts/validate.py",
                 "scripts/verify.py",
                 "scripts/lib/markdown_renderer.py",
+                "scripts/lib/site_locales.py",
                 "scripts/lib/token_tools.py",
                 "tests/test_validator.py",
             ],

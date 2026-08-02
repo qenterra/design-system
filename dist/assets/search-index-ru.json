@@ -1,0 +1,156 @@
+[
+  {
+    "section": 0,
+    "title": "Как пользоваться этим файлом",
+    "page": "Обзор",
+    "path": "index.html",
+    "text": "Этот документ задаёт общую UX/UI-грамматику Cadence, Unspool, Lilt, будущих нативных приложений, сайтов и браузерных расширений. Читайте в таком порядке: 1. Определите целевую платформу и профиль продукта. 2. Перед выбором компонентов прочитайте нужный сценарий. 3. Берите семантические токены из tokens/ .json ; никогда не копируйте значения со скриншотов. 4. Предпочитайте нативное поведение платформы декоративной одинаковости. 5. Проверяйте все обязательные состояния, режимы доступности и границы контента. Нормативные слова: - обязан : требуется для соответствия; - следует : вариант по умолчанию; отклонение требует причины; - может : необязательно; - запрещено : недопустимо; - специфично для продукта : намеренно не входит в общее ядро. Если текст и файл токенов расходятся, точные значения берутся из токенов, а смысл поведения — из этого документа. Исправьте противоречие в той же правке."
+  },
+  {
+    "section": 1,
+    "title": "Семейная модель",
+    "page": "Обзор",
+    "path": "index.html",
+    "text": "Продукты QenTerra делят одну грамматику интерфейса, а не одну оболочку приложения. Система объединяет: - адаптивную палитру Soft Graphite, иерархию контента, медиа-браузинг и review-first импорт Cadence; - дисциплину отступов, плотные операционные компоновки, preflight, безопасное разрешение конфликтов и восстановление Unspool; - язык состояний, короткую семантическую анимацию, privacy-copy, конвейер локализации и transient-поверхности Lilt. Семейное сходство видно в цветовых и типографических ролях, ритме отступов, иерархии скруглений, состояниях кнопок и строк, иконках, тайминге анимации, языке и восстановлении после ошибок, доступности, скриншотах и QA-доказательствах. Семейность не создаётся копированием одинаковой ширины rail, расположения Settings, высоты строк для всех density, метафоры app icon, медиаплеера в утилиты или menu-bar HUD в окна документов."
+  },
+  {
+    "section": 2,
+    "title": "Принципы",
+    "page": "Обзор",
+    "path": "index.html",
+    "text": "2.1 Сначала контент Chrome помогает задаче и не спорит с ней за внимание. Оригинальные обложки и файловый контент могут сохранять цвет; окружающий UI остаётся преимущественно графитовым и монохромным. 2.2 Честное состояние Показывайте только то, что система действительно знает. Не имитируйте уровень аудио, прогресс, завершение, сеть, выбор или сохранение. 2.3 Прямое управление с восстановлением Действия должны работать с видимыми объектами. Рискованные действия требуют просмотра, подтверждения, Undo или восстанавливаемого места по цене последствий. 2.4 Узнавание важнее вспоминания Важные разделы и действия имеют видимые подписи, пока пользователь сам не выберет compact-режим или responsive-преобразование не станет необходимым. 2.5 Сначала нативное Используйте платформенные controls, menus, sheets, navigation, typography, accessibility и keyboard conventions, если они выполняют контракт. Кастомный control обязан совпадать с нативной семантикой, а не только видом. 2.6 Спокойно, но не мёртво Анимация подтверждает ввод и объясняет изменение. Она короткая, прерываемая и отсутствует, если не добавляет информации. 2.7 Доступность — состояние, а не приложение Reduced Motion, Reduced Transp"
+  },
+  {
+    "section": 3,
+    "title": "Основы",
+    "page": "Основы",
+    "path": "pages/foundations.html",
+    "text": "3.1 Тема Все продукты обязаны поддерживать System как выбор по умолчанию, полноценную Light и фирменную Dark . Смена темы сохраняет иерархию, смысл статусов, фокус и контраст. Светлая тема не создаётся наивной инверсией тёмной. 3.2 Цвет Графитовая шкала основы живёт в tokens/foundation.json , семантические цвета для каждой темы — в tokens/semantic.json . Поверхности: surface.content для длинного контента, таблиц, форм и браузеров; surface.secondary для групп и боковых областей; surface.raised для карточек, selection и inspectors; surface.chrome для title bars, rails и toolbars; surface.overlay для dialogs, command panels и fallback HUD; surface.inverted для редкой инверсии. Текст: text.primary — заголовки, значения и главные подписи; text.secondary — описания; text.tertiary — низкоприоритетные, но читаемые метаданные; text.disabled — недоступное, не инструкция; text.link — навигация с нецветовым focus/hover-affordance. Действия: action.primary — одно доминирующее действие; action.secondary — безопасная альтернатива; action.quiet — контекстное; state.destructive — необратимое или трудно восстановимое; state.success , state.warning , state.informative — статус с текстом или символом;"
+  },
+  {
+    "section": 4,
+    "title": "Состояния взаимодействия",
+    "page": "Основы",
+    "path": "pages/foundations.html",
+    "text": "Каждый interactive component определяет default, hover, pressed, keyboard focus, selected, disabled, loading, unavailable/error, Increased Contrast и Reduced Motion/Transparency. Focus показывает, куда пойдёт keyboard input; selection — какой объект выбран; hover — временное pointer preview. Не сводите их к одному boolean."
+  },
+  {
+    "section": 5,
+    "title": "Элементы управления",
+    "page": "Компоненты",
+    "path": "pages/components.html",
+    "text": "5.1 Кнопки Роли: primary завершает или продвигает задачу; secondary — безопасная альтернатива; quiet — контекст; destructive — явно названное удаление; icon — знакомое компактное действие; menuRow — команда в custom menu list; link — навигация к docs/policy/content. - Одна primary на поверхность. - Подпись начинается с глагола и называет результат. - Ellipsis только если до завершения нужен ещё ввод. - Loading сохраняет ширину и показывает state/progress text. - Disabled объясняет неочевидную причину. - Destructive не становится primary из-за позиции. 5.2 Кнопки-иконки Они имеют стабильную hit area, accessible label, видимый focus, hover help и не меняют геометрию. Если символ не считывается сразу, используйте текст. 5.3 Поля Состояния: pristine , editing , valid , invalid , disabled , readOnly . Не показывайте ошибку до взаимодействия. Валидируйте по blur, паузе или submit по цене ошибки. Не давайте helper text прыгать. Error copy называет требование и действие. Label всегда видим; placeholder — пример. Secure fields не выдают секреты в logs, screenshots и accessibility hints. 5.4 Поиск Определите scope, clear, shortcut, empty query, result count, no-results и persistence. Не дели"
+  },
+  {
+    "section": 6,
+    "title": "Контейнеры и данные",
+    "page": "Компоненты",
+    "path": "pages/components.html",
+    "text": "6.1 Группа и карточка Группируйте связанное, но не оборачивайте всё в карточки. Карточка нужна для семантической границы, независимого действия или elevated lifecycle. 6.2 Settings section и row Settings row — одна accessible unit из label, optional description и trailing control. API не допускает unnamed control. Description объясняет последствие, а не повторяет label. Section header группирует решения, а не продаёт их. 6.3 Интерактивная строка Общая row владеет hover, press, focus, selection, disabled и unavailable. Фичи не передают hardcoded false , чтобы их подавить. В строках с несколькими действиями row activation отделен от embedded links/controls. Double click и Return имеют один primary meaning там, где этого ждёт desktop. 6.4 Списки, таблицы, сетки и деревья List — одномерные peers; table — выровненные сравнимые атрибуты; grid — визуальное сканирование без смысла позиции; tree — иерархия. Таблица имеет dominant first column, visible sort direction, keyboard selection, поведение column resize, long values, empty/no-results/loading/error и accessible row/column semantics. Selection переживает sorting только для того же object. Перед bulk action сообщаются hidden selected it"
+  },
+  {
+    "section": 7,
+    "title": "Навигация",
+    "page": "Компоненты",
+    "path": "pages/components.html",
+    "text": "Общая навигация задаёт states, icon treatment, label behavior, keyboard movement, focus, persistence и responsive transformation, но не одну оболочку. 7.1 Rail Rail нужен для малого стабильного набора top-level destinations. Expanded помогает узнаванию, compact экономит место. Каждое направление имеет уникальный символ. Expansion сохраняет icon anchors и анимирует только width/label opacity. Compact не скрывает current location. Продуктовые defaults: Cadence expanded на новой установке; Unspool compact или responsive; Lilt без application rail вне Settings. 7.2 Sidebar Для labeled sources, categories и Settings sections. Поддерживает keyboard movement, selection, scrolling и visible current item. Custom sidebar не теряет arrow navigation и screen-reader semantics. 7.3 Toolbar Содержит частые контекстные действия. Search следует platform placement. Overflow явно уходит в labeled More; критические действия не исчезают в horizontal scroll. 7.4 Tabs и segmented navigation Для малого числа peer views. Сохраняйте state при переключении, если этого ждут. Active tab не является кликабельной анимацией без state effect. 7.5 Breadcrumb и contextual Back Breadcrumb нужен для глубокой web/docum"
+  },
+  {
+    "section": 8,
+    "title": "Оверлеи и временные поверхности",
+    "page": "Компоненты",
+    "path": "pages/components.html",
+    "text": "8.1 Menu Содержит немедленные команды. Группируйте, показывайте shortcuts, отделяйте destructive и по возможности объясняйте disabled. 8.2 Popover Короткий контекстный выбор или inspector, закрываемый без потери работы. Остаётся в viewport и возвращает focus инициатору. 8.3 Sheet Сфокусированная задача с input, review или несколькими решениями. Сохраняет unsaved work, если accidental dismiss дорог. 8.4 Dialog и alert Alert — для interruption, permission, destructive confirmation или failure, требующего решения. Title называет ситуацию, body — последствие, actions — outcomes. Не используйте generic OK , когда есть result verb, и не подтверждайте безобидное reversible. 8.5 Toast и banner Toast — transient completion без решения; banner — persistent status в scope поверхности или app. Они не заменяют inline field/row errors. 8.6 HUD и command panel HUD передаёт transient status без кражи keyboard focus. Command/search panel может забрать focus, но сохраняет и возвращает source target до action в другом app. Multi-display placement идёт от active target window, а не mouse position."
+  },
+  {
+    "section": 9,
+    "title": "Обратная связь и прогресс",
+    "page": "Компоненты",
+    "path": "pages/components.html",
+    "text": "9.1 Загрузка Skeleton — когда форма контента известна; indeterminate indicator — когда длительность неизвестна; determinate progress — только по измерениям. Таймер не создаёт фальшивый progress. 9.2 Жизненный цикл операции Различайте preparing, waiting, running, paused, verifying, completing, completed, failed, cancelling, cancelled, interrupted/recoverable. Actions соответствуют lifecycle. При cancellation остатка уже completed results не исчезают без явного обещания. 9.3 Empty и no-results Empty означает пустую коллекцию. No-results означает, что фильтры или поиск исключили существующий контент. Им нужны разные copy и recovery. 9.4 Ошибки Field error привязана к input; row error — к object; section notice — к workflow region; banner — к surface/app; alert — блокирует или требует решения. Ошибка называет: что случилось, что осталось safe/saved, что делать. Technical details уходят в optional disclosure или diagnostic export."
+  },
+  {
+    "section": 10,
+    "title": "Базовые сценарии",
+    "page": "Сценарии",
+    "path": "pages/patterns.html",
+    "text": "10.1 Select → Review → Execute → Complete/Recover Для imports, downloads, destructive batches, exports и migrations. Select показывает scope; Review — count, size, destination, conflicts и exclusions; Execute — progress и cancellation semantics; Complete — outcomes и recovery. 10.2 Разрушительное действие - Мгновенно reversible: выполнить с Undo. - Recoverable later: объяснить destination и restore. - Destructive but scoped: confirmation с точным object/count. - Irreversible and broad: дополнительное friction и явное последствие. 10.3 Запрос разрешения До system prompt объясните выгоду. Различайте required и optional. Fallback — режим, а не ошибка. 10.4 Onboarding Короткий, skippable, truthful и не делает ничего автоматически. Required и optional различаются. Trial использует isolated destination и не засоряет history/external apps. 10.5 Поиск и фильтры Показывайте scope, active filters, removable tokens, clear-all, result count и recovery no-results. Критические фильтры остаются discoverable на узкой ширине. 10.6 Multi-selection Следуйте platform conventions. Bulk summary показывает visible и hidden counts. Смена фильтра не применяет действие к hidden objects молча. 10.7 Offline и"
+  },
+  {
+    "section": 11,
+    "title": "Анимация",
+    "page": "Анимация",
+    "path": "pages/motion.html",
+    "text": "Точные длительности и кривые — в tokens/motion.json . Классы: немедленная обратная связь, замена состояния, раскрытие, появление плавающей поверхности, пространственная навигация и измеряемый непрерывный прогресс. - Анимация не меняет смысл выбора. - Смена состояния прерываема и завершается на текущем вводе. - Повторяющаяся декоративная анимация запрещена. - Пружины допустимы только для нативного физического взаимодействия с ограниченным смещением; обычный интерфейс использует семантические кривые. - Прогресс отражает реальную работу. - Автопрокрутка останавливается и отключается при уменьшении движения. - Режим уменьшенного движения оставляет короткую смену прозрачности или мгновенную замену, убирая масштабирование, перемещение, параллакс и каскадные задержки."
+  },
+  {
+    "section": 12,
+    "title": "UX-тексты и локализация",
+    "page": "Текст",
+    "path": "pages/content.html",
+    "text": "12.1 Голос Спокойный, прямой, конкретный и честный. Без marketing language в operational UI и без очеловечивания ошибок, когда нужна точность. 12.2 Подписи Действия начинаются с глагола и называют result: Download 2 Files , Reveal in Finder , Retry Verification . Описания и messages — sentence case, краткие native titles — platform capitalization. Один concept имеет один термин. 12.3 Статус Сообщайте actual outcome: Copied to Clipboard не Inserted ; Saved for this session не Saved ; Cached results не Up to date ; No speech detected лучше internal recognition code. 12.4 Текст ошибки Избегайте Something went wrong , Unknown error , Lilt needs help , generic Configure и internal API terms без user consequence. Называйте причину, preserved state и scoped action. 12.5 Подтверждение Title спрашивает или называет последствие. Body объясняет, что изменится и что останется. Destructive label повторяет конкретный глагол. 12.6 Локализация - Все user-facing strings живут в platform localization source. - Используйте plural rules, а не concatenation. - Даты, время, байты, decimals и lists форматируются по locale. - Key parity проверяется автоматически. - Layout тестируется при 30% expansion и l"
+  },
+  {
+    "section": 13,
+    "title": "Доступность",
+    "page": "Доступность",
+    "path": "pages/accessibility.html",
+    "text": "13.1 Клавиатура Каждое action достижимо. Focus order следует reading/task order. Focus виден отдельно от selection. Escape закрывает reversible overlays. Return активирует selected primary object там, где это принято. Arrow keys управляют composite widgets по platform conventions. Shortcuts видны в menus/help. 13.2 Скринридеры Controls имеют names, values, roles, state и actions. Связанные визуальные фрагменты группируются в смысловые units. Progress и counts анонсируются без болтовни. 13.3 Контраст и цвет Обычный web text целится в WCAG AA. Native UI использует semantic colors и проверяет Increased Contrast. Status не зависит только от hue. 13.4 Размер текста и zoom Веб поддерживает 200% zoom без потери controls и horizontal page scroll. Native layouts переживают text-size и localization expansion. Fixed row heights проверяются или становятся adaptive. 13.5 Движение и прозрачность Reduced Motion и Reduced Transparency сохраняют понимание и interaction. Increased Contrast усиливает границы без смены иерархии. 13.6 Touch и pointer Touch targets соответствуют platform minimum. Pointer UI может быть плотнее, но hit regions остаются удобными. Hover-only information доступна через focus"
+  },
+  {
+    "section": 14,
+    "title": "Платформенные слои",
+    "page": "Платформы",
+    "path": "pages/platforms.html",
+    "text": "14.1 macOS Нативные menus, commands, toolbar placement, split views, Settings scenes, file panels, Quick Look и Finder integration. Resizable windows с minimum/ideal states. Keyboard и pointer первоклассны. Без лишней модальности. Custom rails/tables воспроизводят native focus, selection и accessibility semantics. 14.2 iOS Touch-first targets, Dynamic Type, safe areas, native navigation stacks, sheets и tab bars. Не сжимайте macOS density до телефона. Primary actions достижимы без hover/context menu. 14.3 iPadOS Split views, sidebars, inspectors, pointer и keyboard. Опишите compact, half-width и full-width. Multitasking и Stage Manager меняют размер без пересоздания state. 14.4 Веб Semantic HTML до ARIA. Keyboard, focus-visible, reduced motion, forced colors, touch, 200% zoom, print и responsive navigation. Не копируйте macOS pixel-perfect, если browser conventions яснее. CSS custom properties генерируются из semantic tokens. 14.5 Браузерные расширения Popup, side panel, overlay dock, bottom sheet и options page — разные layout modes. Overlays остаются в viewport и вне clipped host containers. Host styles/scripts изолированы. Selection и hover разделены; mouse leave не меняе locked"
+  },
+  {
+    "section": 15,
+    "title": "Профили продуктов",
+    "page": "Продукты",
+    "path": "pages/products.html",
+    "text": "Точные arrays живут в tokens/products.json . 15.1 Cadence Сохранить адаптивную палитру, трёхпанельную библиотеку, таблицу треков, проверку импорта, постоянный проигрыватель, экран «Сейчас играет», очередь, руководство и восстановление из корзины. Адаптировать состояния навигации, контейнеры настроек, кнопки, взаимодействие со строками, локализацию и создание скриншотов. Заменить повторяющиеся навигационные символы, разрозненные скругления и длительности, подавленные состояния наведения и фокуса, а также формулировки сохранения, обещающие больше фактического результата. Специфичными для продукта остаются дымка обложки, транспортные элементы, аудиотракт, тексты песен, метаданные и семантика очереди. Приоритеты: сделать умные коллекции устойчивыми между запусками или изменить обещание; исправить скриншоты с реальной производственной темой; раскрывать навигацию при новой установке и назначить разделам уникальные символы; централизовать состояния строк; принять общие токены и String Catalog; завершить действия альбомов и исполнителей с приоритетом воспроизведения. 15.2 Unspool Сохранить таблицу с приоритетом исходного имени файла, сводку выбора, предварительную проверку, варианты разреш"
+  },
+  {
+    "section": 16,
+    "title": "Иконки приложений",
+    "page": "Продукты",
+    "path": "pages/products.html",
+    "text": "Семейность строится на общем оптическом весе, контролируемой биоморфной или гранёной конструкции, сдержанном графитовом или монохромном материале, контрасте с учётом темы, одинаковых безопасных зонах и плотности силуэта, согласованных свете, прозрачности и глубине, а также проверке в размерах 16, 32, 64, 128, 256, 512 и 1024 пикселя. Метафоры остаются разными: не превращайте всё в плитки с буквами и не навязывайте геометрию Cadence несвязанным понятиям."
+  },
+  {
+    "section": 17,
+    "title": "Документация и скриншоты",
+    "page": "Доказательства",
+    "path": "pages/audit.html",
+    "text": "Каждый продукт имеет воспроизводимый стенд скриншотов с синтетическими данными. Матрица включает системную, светлую и тёмную темы; минимальную и широкую компоновку; основной сценарий; пустое состояние; отсутствие результатов; загрузку и прогресс; ошибку и восстановление; наведение, фокус и выбор; уменьшение движения и прозрачности, повышенный контраст; проверку приватности и визуальный просмотр. Скриншоты доказывают только геометрию и внешний вид, но не работу клавиатуры, скринридера, сохранения, сети и восстановления."
+  },
+  {
+    "section": 18,
+    "title": "Управление",
+    "page": "Управление",
+    "path": "pages/governance.html",
+    "text": "18.1 Типы изменений - patch: уточнение или совместимое исправление; - minor: новый токен, компонент, сценарий или платформенное правило; - major: переименование или удаление семантического токена, изменение контракта поведения либо обязательной миграции продукта. 18.2 Жизненный цикл токена 1. Опишите проблему и потребителей. 2. Повторно используйте семантическую роль, если смысл совпадает. 3. Значение основы добавляется, только если существующая шкала не выражает нужное. 4. Добавьте или измените семантическое сопоставление. 5. Обновите документацию компонента и сценария. 6. Перегенерируйте CSS и Swift. 7. Запустите валидацию и визуальное сравнение. 8. Добавьте примечания по миграции и changelog. 18.3 Исключения Записывают продукт и платформу, пользовательскую потребность, причину неприменимости общего правила, точную область, влияние на доступность, условие пересмотра и владельца или источник. Исключение не меняет основу молча. 18.4 Gate нового компонента Проверьте, что результат нельзя собрать из существующих компонентов; анатомия и роли контента названы; обязательные состояния, клавиатура и скринридер, адаптивность и локализация, уменьшение движения и прозрачности, повышенный кон"
+  },
+  {
+    "section": 19,
+    "title": "Протокол AI-реализации",
+    "page": "Управление",
+    "path": "pages/governance.html",
+    "text": "При сборке или ревью AI: 1. Читает этот файл, платформенный слой и профиль продукта. 2. Определяет основную пользовательскую задачу и цену ошибки. 3. Выбирает сценарий до компонентов. 4. Получает точные токены из JSON и сгенерированных адаптеров. 5. Перечисляет состояния и требования доступности до кода. 6. Берёт реалистичный локализованный контент, а не lorem ipsum. 7. Собирает минимальный связный набор компонентов. 8. Запускает проектные проверки. 9. Рендерит темы и ограниченные размеры. 10. Разделяет автоматические, визуальные, живые и непроверенные доказательства. AI запрещено восстанавливать текущий интерфейс по устаревшим скриншотам; небрежно добавлять сырые цвета, длительности, скругления или источники строк; называть статическую компиляцию визуальной проверкой; считать скриншоты проверкой доступности; выдавать запасной результат за запрошенный; переносить специфичный для продукта компонент в семейное ядро без второго реального потребителя."
+  },
+  {
+    "section": 20,
+    "title": "Сопровождение",
+    "page": "Управление",
+    "path": "pages/governance.html",
+    "text": "1. Прочитайте AGENTS.md , этот файл, затронутые токены и доказательства продукта. 2. Добавьте или обновите ADR для нормативного изменения. 3. Меняйте исходные токены, документацию, шаблоны и фрагменты сайта. 4. Запустите python3 scripts/build.py . 5. Запустите python3 scripts/verify.py . 6. Осмотрите настольную и мобильную компоновку в обеих темах и на обоих языках. 7. Обновите changelog и версию. 8. Меняйте маршрутизацию Obsidian только при смене рабочего процесса или контракта продукта; не дублируйте значения токенов. 9. Коммитьте исходники и сгенерированные артефакты вместе после проверки."
+  },
+  {
+    "section": 21,
+    "title": "Готовность продукта к внедрению",
+    "page": "Управление",
+    "path": "pages/governance.html",
+    "text": "Продукт соответствует системе, когда семантические токены заменили локальные дубликаты; обязательные состояния компонентов реализованы; продуктовые исключения задокументированы; видимые пользователю строки локализованы; клавиатура и доступность проверены; скриншоты актуальны; пустота, загрузка, ошибка и восстановление пройдены; валидаторы сырых токенов и устаревшей документации прошли; пробелы живой проверки названы явно. Одного визуального сходства недостаточно."
+  }
+]

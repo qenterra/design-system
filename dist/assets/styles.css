@@ -22,6 +22,40 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+.language-gateway {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: var(--qds-space-6);
+}
+
+.language-gateway-card {
+  width: min(100%, 560px);
+  padding: clamp(28px, 6vw, 56px);
+  border: var(--qds-stroke-default) solid var(--qds-border-default);
+  border-radius: var(--qds-radius-panel);
+  background: var(--qds-surface-raised);
+  box-shadow: 0 20px 60px rgb(0 0 0 / 14%);
+}
+
+.language-gateway-card h1 {
+  margin: 0 0 var(--qds-space-4);
+  font-size: var(--qds-type-screen-title-size);
+  line-height: var(--qds-type-screen-title-line);
+}
+
+.language-gateway-card > p:not(.page-eyebrow) {
+  margin: var(--qds-space-2) 0;
+  color: var(--qds-text-secondary);
+}
+
+.language-gateway-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--qds-space-3);
+  margin-top: var(--qds-space-6);
+}
+
 button,
 input,
 select,
@@ -92,16 +126,95 @@ a:hover {
   backdrop-filter: blur(24px) saturate(115%);
 }
 
+.sidebar-head {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  align-items: center;
+  min-height: 72px;
+  border-bottom: var(--qds-stroke-hairline) solid var(--qds-border-subtle);
+}
+
 .brand {
   display: grid;
   grid-template-columns: 40px minmax(0, 1fr);
   gap: var(--qds-space-3);
   align-items: center;
   min-height: 72px;
-  padding: var(--qds-space-4);
-  border-bottom: var(--qds-stroke-hairline) solid var(--qds-border-subtle);
+  padding: var(--qds-space-3) var(--qds-space-3) var(--qds-space-3) 0;
   color: inherit;
   text-decoration: none;
+}
+
+.language-picker {
+  position: relative;
+  justify-self: center;
+}
+
+.language-button {
+  display: inline-grid;
+  min-width: 48px;
+  height: var(--qds-size-control-standard);
+  grid-template-columns: 16px auto;
+  gap: var(--qds-space-1);
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--qds-space-2);
+  border: var(--qds-stroke-default) solid var(--qds-border-default);
+  border-radius: var(--qds-radius-control);
+  background: var(--qds-surface-secondary);
+  color: var(--qds-text-secondary);
+  cursor: pointer;
+  font-size: var(--qds-type-compact-metadata-size);
+  font-weight: 600;
+}
+
+.language-button:hover,
+.language-button[aria-expanded="true"] {
+  background: var(--qds-fill-hover);
+  color: var(--qds-text-primary);
+}
+
+.language-menu {
+  position: absolute;
+  z-index: 80;
+  top: calc(100% + var(--qds-space-2));
+  left: 0;
+  display: grid;
+  width: 184px;
+  gap: var(--qds-space-1);
+  padding: var(--qds-space-2);
+  border: var(--qds-stroke-default) solid var(--qds-border-strong);
+  border-radius: var(--qds-radius-panel);
+  background: var(--qds-surface-overlay);
+  box-shadow: 0 16px 44px rgb(0 0 0 / 18%);
+}
+
+.language-menu[hidden] {
+  display: none;
+}
+
+.language-menu a {
+  display: flex;
+  min-height: var(--qds-size-row-compact);
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--qds-space-4);
+  padding: var(--qds-space-2) var(--qds-space-3);
+  border-radius: var(--qds-radius-control);
+  color: var(--qds-text-secondary);
+  text-decoration: none;
+}
+
+.language-menu a:hover,
+.language-menu a[aria-current="true"] {
+  background: var(--qds-fill-hover);
+  color: var(--qds-text-primary);
+}
+
+.language-code {
+  color: var(--qds-text-tertiary);
+  font-family: var(--qds-type-monospaced-data-family);
+  font-size: var(--qds-type-compact-metadata-size);
 }
 
 .brand-mark {
@@ -174,7 +287,8 @@ a:hover {
   color: var(--qds-text-primary);
 }
 
-.site-nav a[aria-current="page"] {
+.site-nav a[aria-current="page"],
+.site-nav a[aria-current="location"] {
   background: var(--qds-fill-selected);
   color: var(--qds-text-primary);
   font-weight: 600;
@@ -186,11 +300,14 @@ a:hover {
   height: 20px;
   flex: 0 0 20px;
   place-items: center;
-  border: var(--qds-stroke-default) solid currentColor;
-  border-radius: 5px;
-  font-size: 9px;
-  font-weight: 700;
-  opacity: 0.72;
+  opacity: 0.78;
+}
+
+.icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
 }
 
 .sidebar-footer {
@@ -282,14 +399,15 @@ a:hover {
   position: relative;
 }
 
-.search-wrap::before {
+.search-icon {
   position: absolute;
   top: 50%;
   left: var(--qds-space-3);
+  display: grid;
+  place-items: center;
   color: var(--qds-text-tertiary);
-  content: "⌕";
-  font-size: 18px;
-  transform: translateY(-54%);
+  pointer-events: none;
+  transform: translateY(-50%);
 }
 
 .search-input {

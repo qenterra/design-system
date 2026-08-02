@@ -15,6 +15,8 @@ from validate import (  # noqa: E402
     validate_contrast,
     validate_css,
     validate_html_tree,
+    validate_localized_sources,
+    validate_repository_hygiene,
     validate_token_data,
 )
 
@@ -58,6 +60,21 @@ class ValidatorTests(unittest.TestCase):
             errors = validate_html_tree(root)
             self.assertTrue(any("broken link" in error for error in errors))
             self.assertFalse((root / "missing.html").exists())
+
+    def test_missing_russian_master_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "docs").mkdir()
+            (root / "docs" / "MASTER.md").write_text("# Master\n\n## 0. Overview\n", encoding="utf-8")
+            errors = validate_localized_sources(root)
+            self.assertTrue(any("MASTER.ru.md" in error for error in errors))
+
+    def test_superpowers_directory_fails_repository_hygiene(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "docs" / "superpowers").mkdir(parents=True)
+            errors = validate_repository_hygiene(root)
+            self.assertTrue(any("docs/superpowers" in error for error in errors))
 
 
 if __name__ == "__main__":

@@ -7,47 +7,20 @@ import json
 import shutil
 import sys
 import tempfile
+from html import escape
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from lib.markdown_renderer import Section, plain_text, render, split_numbered_sections  # noqa: E402
+from lib.site_locales import COPY, PAGE_GROUPS, SPECIMENS, icon  # noqa: E402
 from lib.token_tools import (  # noqa: E402
     generate_css,
     generate_swift,
     generate_token_reference,
     load_json,
 )
-
-
-PAGES = [
-    ("index", "Overview", [0, 1, 2], "Shared grammar, principles, and the layered system."),
-    ("foundations", "Foundations", [3, 4], "Appearance, color, type, spacing, material, layout, and states."),
-    ("components", "Components", [5, 6, 7, 8, 9], "Controls, containers, navigation, overlays, feedback, and progress."),
-    ("patterns", "Patterns", [10], "Reusable task flows for risk, permissions, recovery, privacy, and settings."),
-    ("motion", "Motion", [11], "Short, interruptible, state-explanatory movement."),
-    ("content", "Content", [12], "UX writing, outcomes, errors, localization, and terminology."),
-    ("accessibility", "Accessibility", [13], "Keyboard, screen readers, contrast, zoom, motion, and input modes."),
-    ("platforms", "Platforms", [14], "macOS, iOS, iPadOS, web, and browser-extension adapters."),
-    ("products", "Products", [15, 16], "Cadence, Unspool, Lilt, app icons, and migration priorities."),
-    ("audit", "Evidence", [17], "Cross-product audit, screenshot confidence, and current design debt."),
-    ("governance", "Governance", [18, 19, 20, 21], "Versioning, exceptions, AI protocol, maintenance, and adoption."),
-]
-
-GLYPHS = {
-    "index": "01",
-    "foundations": "Aa",
-    "components": "□",
-    "patterns": "↳",
-    "motion": "→",
-    "content": "Tx",
-    "accessibility": "A+",
-    "platforms": "⌘",
-    "products": "Q",
-    "audit": "✓",
-    "governance": "◇",
-}
 
 
 def atomic_write(path: Path, content: str) -> None:
@@ -64,176 +37,195 @@ def load_tokens() -> list[tuple[str, dict]]:
     return [(name, load_json(ROOT / "tokens" / f"{name}.json")) for name in names]
 
 
-def nav_html(current: str, root: str, standalone: bool) -> str:
+def pages(locale: str) -> list[tuple[str, str, list[int], str]]:
+    return [
+        (slug, COPY[locale]["pages"][slug][0], numbers, COPY[locale]["pages"][slug][1])
+        for slug, numbers in PAGE_GROUPS
+    ]
+
+
+def nav_html(current: str, root: str, standalone: bool, locale: str) -> str:
     links = []
-    for slug, title, section_numbers, _ in PAGES:
+    for slug, title, section_numbers, _ in pages(locale):
         if standalone:
             href = f"#section-{section_numbers[0]}"
         elif slug == "index":
             href = f"{root}index.html"
         else:
             href = f"{root}pages/{slug}.html"
-        current_attr = ' aria-current="page"' if slug == current else ""
+        current_attr = ' aria-current="page"' if slug == current and not standalone else ""
         links.append(
-            f'<a href="{href}"{current_attr}><span class="nav-glyph" aria-hidden="true">'
-            f'{GLYPHS[slug]}</span><span>{title}</span></a>'
+            f'<a href="{href}" data-nav-slug="{slug}" data-section-start="{section_numbers[0]}" '
+            f'data-section-end="{section_numbers[-1]}"{current_attr}>'
+            f'<span class="nav-glyph">{icon(slug)}</span><span>{title}</span></a>'
         )
     return "\n".join(links)
 
 
-def color_specimen() -> str:
-    roles = [
-        ("Content", "--qds-surface-content"),
-        ("Secondary", "--qds-surface-secondary"),
-        ("Raised", "--qds-surface-raised"),
-        ("Chrome", "--qds-surface-chrome"),
-        ("Primary action", "--qds-action-primary"),
-        ("Selected", "--qds-fill-selected-strong"),
-    ]
+def color_specimen(locale: str) -> str:
+    copy = SPECIMENS[locale]
+    roles = list(zip(copy["color_roles"], [
+        "--qds-surface-content", "--qds-surface-secondary", "--qds-surface-raised",
+        "--qds-surface-chrome", "--qds-action-primary", "--qds-fill-selected-strong",
+    ]))
     swatches = "".join(
         f'<div class="swatch" style="--swatch:var({token})"><div class="swatch-color"></div>'
         f'<div class="swatch-copy"><strong>{name}</strong><span>{token}</span></div></div>'
         for name, token in roles
     )
-    return specimen("Adaptive color roles", "Switch System, Light, and Dark in the sidebar.", f'<div class="swatch-grid">{swatches}</div>')
+    return specimen(copy["color_title"], copy["color_note"], f'<div class="swatch-grid">{swatches}</div>')
 
 
-def typography_specimen() -> str:
-    roles = [
-        ("display", "Family resemblance without cloned shells"),
-        ("screen-title", "Foundations and semantic roles"),
-        ("section-title", "Review before risky operations"),
-        ("body", "Content remains primary; chrome supports the task."),
-        ("metadata", "48 files · 2.4 GB · Local only"),
-        ("monospaced-data", "24-bit / 96 kHz · 03:42"),
-    ]
+def typography_specimen(locale: str) -> str:
+    specimen_copy = SPECIMENS[locale]
+    roles = list(zip(
+        ["display", "screen-title", "section-title", "body", "metadata", "monospaced-data"],
+        specimen_copy["type_examples"],
+    ))
     rows = "".join(
         f'<div class="type-row"><span class="type-label">{role}</span>'
         f'<span style="font-family:var(--qds-type-{role}-family);font-size:var(--qds-type-{role}-size);'
         f'line-height:var(--qds-type-{role}-line);font-weight:var(--qds-type-{role}-weight);'
-        f'letter-spacing:var(--qds-type-{role}-tracking)">{copy}</span></div>'
-        for role, copy in roles
+        f'letter-spacing:var(--qds-type-{role}-tracking)">{example}</span></div>'
+        for role, example in roles
     )
-    return specimen("Semantic typography", "System fonts, explicit roles, no half-point archaeology.", f'<div class="type-stack">{rows}</div>')
+    return specimen(
+        specimen_copy["type_title"],
+        specimen_copy["type_note"],
+        f'<div class="type-stack">{rows}</div>',
+    )
 
 
-def spacing_specimen() -> str:
+def spacing_specimen(locale: str) -> str:
+    copy = SPECIMENS[locale]
     values = [("space.1", 4), ("space.2", 8), ("space.3", 12), ("space.4", 16), ("space.6", 24), ("space.8", 32), ("space.12", 48)]
     rows = "".join(
         f'<div class="spacing-row"><span class="type-label">{name} · {value}px</span>'
         f'<span class="spacing-bar" style="width:{value * 4}px"></span></div>'
         for name, value in values
     )
-    return specimen("Four-point rhythm", "Foundation scale before local compensation.", f'<div class="spacing-stack">{rows}</div>')
+    return specimen(copy["spacing_title"], copy["spacing_note"], f'<div class="spacing-stack">{rows}</div>')
 
 
-def component_specimen() -> str:
-    canvas = """
+def component_specimen(locale: str) -> str:
+    copy = SPECIMENS[locale]
+    controls = copy["controls"]
+    field = copy["field"]
+    canvas = f"""
     <div class="specimen-canvas">
-      <button class="button button-primary">Continue</button>
-      <button class="button button-secondary">Review Files</button>
-      <button class="button button-quiet">Show Details</button>
-      <button class="button button-destructive">Delete Rule</button>
-      <span class="status-demo status-success"><span class="status-dot"></span>Installed</span>
-      <span class="status-demo status-warning"><span class="status-dot"></span>Needs review</span>
-      <span class="status-demo status-destructive"><span class="status-dot"></span>Recording</span>
+      <button class="button button-primary">{controls[0]}</button>
+      <button class="button button-secondary">{controls[1]}</button>
+      <button class="button button-quiet">{controls[2]}</button>
+      <button class="button button-destructive">{controls[3]}</button>
+      <span class="status-demo status-success"><span class="status-dot"></span>{controls[4]}</span>
+      <span class="status-demo status-warning"><span class="status-dot"></span>{controls[5]}</span>
+      <span class="status-demo status-destructive"><span class="status-dot"></span>{controls[6]}</span>
       <span class="key-hint">⌥ Space</span>
     </div>
     <div class="specimen-canvas">
-      <div class="field-demo"><label for="demo-name">Collection name</label><input id="demo-name" value="Evening listening"><small>Saved locally in Cadence.</small></div>
-      <div class="field-demo is-error"><label for="demo-api">API ID</label><input id="demo-api" value="not-a-number" aria-invalid="true"><small>Enter a positive numeric API ID.</small></div>
+      <div class="field-demo"><label for="demo-name">{field[0]}</label><input id="demo-name" value="{field[1]}"><small>{field[2]}</small></div>
+      <div class="field-demo is-error"><label for="demo-api">{field[3]}</label><input id="demo-api" value="{field[4]}" aria-invalid="true"><small>{field[5]}</small></div>
     </div>
     """
-    return specimen("Controls and truthful states", "One primary action. Errors wait for interaction.", canvas)
+    return specimen(copy["controls_title"], copy["controls_note"], canvas)
 
 
-def settings_specimen() -> str:
-    canvas = """
+def settings_specimen(locale: str) -> str:
+    copy = SPECIMENS[locale]
+    values = copy["settings"]
+    canvas = f"""
     <div class="specimen-canvas">
       <div class="settings-demo">
-        <div class="settings-row"><div class="settings-copy"><strong>Follow system appearance</strong><span>Use the current macOS Light or Dark setting.</span></div><button class="switch" type="button" role="switch" aria-checked="true" aria-label="Follow system appearance"></button></div>
-        <div class="settings-row"><div class="settings-copy"><strong>Keep local history</strong><span>Retain completed operations for recovery.</span></div><span class="status-demo"><span class="status-dot"></span>30 days</span></div>
-        <div class="settings-row"><div class="settings-copy"><strong>Download folder</strong><span>Files remain under your control.</span></div><button class="button button-secondary">Choose…</button></div>
+        <div class="settings-row"><div class="settings-copy"><strong>{values[0]}</strong><span>{values[1]}</span></div><button class="switch" type="button" role="switch" aria-checked="true" aria-label="{values[0]}"></button></div>
+        <div class="settings-row"><div class="settings-copy"><strong>{values[2]}</strong><span>{values[3]}</span></div><span class="status-demo"><span class="status-dot"></span>{values[4]}</span></div>
+        <div class="settings-row"><div class="settings-copy"><strong>{values[5]}</strong><span>{values[6]}</span></div><button class="button button-secondary">{values[7]}</button></div>
       </div>
     </div>
     """
-    return specimen("Accessible settings grammar", "Label, consequence, and trailing control form one unit.", canvas)
+    return specimen(copy["settings_title"], copy["settings_note"], canvas)
 
 
-def table_specimen() -> str:
-    rows = """
+def table_specimen(locale: str) -> str:
+    copy = SPECIMENS[locale]
+    values = copy["table"]
+    rows = f"""
     <div class="mini-table">
-      <div class="mini-table-row"><strong>Original filename.flac</strong><span>54.2 MB</span><span>Today</span></div>
-      <div class="mini-table-row is-selected"><strong>Interview notes.pdf</strong><span>1.8 MB</span><span>Jul 28</span></div>
-      <div class="mini-table-row"><strong>Cover artwork.png</strong><span>3.1 MB</span><span>Jul 27</span></div>
+      <div class="mini-table-row"><strong>{values[0]}</strong><span>{values[1]}</span><span>{values[2]}</span></div>
+      <div class="mini-table-row is-selected"><strong>{values[3]}</strong><span>{values[4]}</span><span>{values[5]}</span></div>
+      <div class="mini-table-row"><strong>{values[6]}</strong><span>{values[7]}</span><span>{values[8]}</span></div>
     </div>
     """
-    return specimen("Dense data without visual noise", "Stable columns, shape-based selection, dominant first field.", f'<div class="specimen-canvas">{rows}</div>')
+    return specimen(copy["table_title"], copy["table_note"], f'<div class="specimen-canvas">{rows}</div>')
 
 
-def motion_specimen() -> str:
+def motion_specimen(locale: str) -> str:
+    copy = SPECIMENS[locale]
     cards = "".join(
         f'<div class="motion-card" tabindex="0"><span>{label}</span><small>{duration}</small></div>'
-        for label, duration in [("Press", "80 ms"), ("Hover", "100 ms"), ("Replace", "150 ms"), ("Spatial", "220 ms")]
+        for label, duration in zip(copy["motion"], ["80 ms", "100 ms", "150 ms", "220 ms"])
     )
-    return specimen("Motion tokens", "Hover or focus. Reduced Motion removes displacement.", f'<div class="specimen-canvas"><div class="motion-grid">{cards}</div></div>')
+    return specimen(copy["motion_title"], copy["motion_note"], f'<div class="specimen-canvas"><div class="motion-grid">{cards}</div></div>')
 
 
-def product_specimen() -> str:
+def product_specimen(locale: str) -> str:
+    copy = SPECIMENS[locale]
     cards = []
-    for name, profile, pattern in [
-        ("Cadence", "Immersive content", ["is-large", "", "is-accent"]),
-        ("Unspool", "Operational dense", ["", "is-large", ""]),
-        ("Lilt", "Transient capability", ["is-accent", "", "is-large"]),
-    ]:
+    for name, profile, pattern in zip(
+        ["Cadence", "Unspool", "Lilt"], copy["profiles"],
+        [["is-large", "", "is-accent"], ["", "is-large", ""], ["is-accent", "", "is-large"]],
+    ):
         blocks = "".join(f'<div class="mini-block {kind}"></div>' for kind in pattern)
         cards.append(
             f'<article class="product-card"><div class="product-card-copy"><strong>{name}</strong><span>{profile}</span></div>'
             f'<div class="mini-shell"><div class="mini-shell-rail"></div><div class="mini-shell-body">{blocks}</div></div></article>'
         )
-    return specimen("One family, three shells", "Shared grammar does not erase product structure.", f'<div class="product-grid">{"".join(cards)}</div>')
+    return specimen(copy["products_title"], copy["products_note"], f'<div class="product-grid">{"".join(cards)}</div>')
 
 
-def accessibility_specimen() -> str:
-    canvas = """
+def accessibility_specimen(locale: str) -> str:
+    copy = SPECIMENS[locale]
+    values = copy["accessibility"]
+    canvas = f"""
     <div class="specimen-canvas">
-      <button class="button button-primary">Visible focus</button>
-      <span class="status-demo status-warning"><span class="status-dot"></span>Partial results</span>
-      <span class="status-demo status-info"><span class="status-dot"></span>Copied to Clipboard</span>
+      <button class="button button-primary">{values[0]}</button>
+      <span class="status-demo status-warning"><span class="status-dot"></span>{values[1]}</span>
+      <span class="status-demo status-info"><span class="status-dot"></span>{values[2]}</span>
       <span class="key-hint">Esc</span>
     </div>
     """
-    return specimen("Meaning beyond color", "Tab through controls; status always includes words or shape.", canvas)
+    return specimen(copy["accessibility_title"], copy["accessibility_note"], canvas)
 
 
 def specimen(title: str, note: str, body: str) -> str:
     return f'<aside class="specimen" aria-label="{title}"><div class="specimen-header"><h3>{title}</h3><p>{note}</p></div>{body}</aside>'
 
 
-def specimens_for(section_number: int) -> str:
+def specimens_for(section_number: int, locale: str) -> str:
     return {
-        3: color_specimen() + typography_specimen() + spacing_specimen(),
-        5: component_specimen(),
-        6: settings_specimen() + table_specimen(),
-        11: motion_specimen(),
-        13: accessibility_specimen(),
-        15: product_specimen(),
+        3: color_specimen(locale) + typography_specimen(locale) + spacing_specimen(locale),
+        5: component_specimen(locale),
+        6: settings_specimen(locale) + table_specimen(locale),
+        11: motion_specimen(locale),
+        13: accessibility_specimen(locale),
+        15: product_specimen(locale),
     }.get(section_number, "")
 
 
-def render_section(section: Section) -> str:
+def render_section(section: Section, locale: str, nav_slug: str) -> str:
     return (
-        f'<section class="doc-section" id="section-{section.number}">'
+        f'<section class="doc-section" id="section-{section.number}" data-nav-slug="{nav_slug}">'
         f'<span class="section-number">{section.number:02d}</span>'
         f'<h2>{section.title}</h2><div class="prose">{render(section.markdown, id_prefix=f"s{section.number}-")}</div></section>'
-        f'{specimens_for(section.number)}'
+        f'{specimens_for(section.number, locale)}'
     )
 
 
-def render_audit_appendix() -> str:
+def render_audit_appendix(locale: str) -> str:
+    suffix = ".ru" if locale == "ru" else ""
+    appendix = COPY[locale]["appendix"]
     sources = [
-        ("audit-brief.md", "A", "Current-state audit", "audit-app-"),
-        ("obsidian-instruction-audit.md", "B", "Instruction-system audit", "audit-instructions-"),
+        (f"audit-brief{suffix}.md", "A", appendix["audit"], "audit-app-"),
+        (f"obsidian-instruction-audit{suffix}.md", "B", appendix["instructions"], "audit-instructions-"),
     ]
     sections = []
     for filename, marker, title, prefix in sources:
@@ -241,26 +233,50 @@ def render_audit_appendix() -> str:
         if not audit_path.exists():
             continue
         sections.append(
-            f'<section class="doc-section" id="audit-appendix-{marker.lower()}"><span class="section-number">{marker}</span>'
+            f'<section class="doc-section" id="audit-appendix-{marker.lower()}" data-nav-slug="audit"><span class="section-number">{marker}</span>'
             f'<h2>{title}</h2><div class="prose">'
             f'{render(audit_path.read_text(encoding="utf-8"), heading_offset=2, id_prefix=prefix)}</div></section>'
         )
     return "".join(sections)
 
 
-def render_component_catalog() -> str:
-    path = ROOT / "docs" / "COMPONENT_CATALOG.md"
+def render_component_catalog(locale: str) -> str:
+    filename = "COMPONENT_CATALOG.ru.md" if locale == "ru" else "COMPONENT_CATALOG.md"
+    path = ROOT / "docs" / filename
     if not path.exists():
         return ""
     return (
-        '<section class="doc-section" id="component-catalog"><span class="section-number">C</span>'
-        '<h2>Complete component catalog</h2><div class="prose">'
+        '<section class="doc-section" id="component-catalog" data-nav-slug="components"><span class="section-number">C</span>'
+        f'<h2>{COPY[locale]["appendix"]["catalog"]}</h2><div class="prose">'
         f'{render(path.read_text(encoding="utf-8"), heading_offset=2, id_prefix="catalog-")}</div></section>'
     )
 
 
-def theme_bootstrap() -> str:
-    return """<script>(function(){var t=localStorage.getItem('qds-theme');if(t==='light'||t==='dark'){document.documentElement.dataset.theme=t;}})();</script>"""
+def theme_bootstrap(locale: str) -> str:
+    return (
+        "<script>(function(){var t=localStorage.getItem('qds-theme');"
+        "if(t==='light'||t==='dark'){document.documentElement.dataset.theme=t;}"
+        f"localStorage.setItem('qds-locale','{locale}');"
+        "}());</script>"
+    )
+
+
+def language_menu(locale: str, targets: dict[str, str]) -> str:
+    ui = COPY[locale]["ui"]
+    links = []
+    for code, label_key in [("en", "english"), ("ru", "russian")]:
+        current = ' aria-current="true"' if code == locale else ""
+        links.append(
+            f'<a role="menuitem" href="{targets[code]}" data-locale-target="{code}"{current}>'
+            f'<span>{ui[label_key]}</span><span class="language-code">{COPY[code]["code"]}</span></a>'
+        )
+    return (
+        '<div class="language-picker">'
+        f'<button class="language-button" type="button" data-language-button aria-haspopup="menu" '
+        f'aria-expanded="false" aria-label="{ui["choose_language"]}">{icon("globe")}<span>{COPY[locale]["code"]}</span></button>'
+        f'<div class="language-menu" data-language-menu role="menu" aria-label="{ui["language"]}" hidden>{"".join(links)}</div>'
+        '</div>'
+    )
 
 
 def shell(
@@ -269,8 +285,11 @@ def shell(
     page_title: str,
     page_summary: str,
     section_html: str,
-    root: str,
+    site_root: str,
+    asset_root: str,
     version: str,
+    locale: str,
+    language_targets: dict[str, str],
     standalone: bool = False,
     token_css: str = "",
     source_css: str = "",
@@ -281,63 +300,69 @@ def shell(
         inline_css = source_css.replace('@import url("./qds-tokens.css");', "")
         styles = f"<style>{token_css}\n{inline_css}</style>"
         scripts = f"<script>window.QDS_SEARCH_INDEX={json.dumps(search_index or [], ensure_ascii=False)};</script><script>{source_js}</script>"
-        data = 'data-root="" data-standalone="true"'
+        data = f'data-root="" data-site-root="" data-standalone="true" data-locale="{locale}"'
         stylesheet = ""
     else:
         styles = ""
-        scripts = f'<script src="{root}assets/app.js" defer></script>'
-        data = f'data-root="{root}" data-standalone="false"'
-        stylesheet = f'<link rel="stylesheet" href="{root}assets/styles.css">'
+        scripts = f'<script src="{asset_root}assets/app.js" defer></script>'
+        data = f'data-root="{asset_root}" data-site-root="{site_root}" data-standalone="false" data-locale="{locale}"'
+        stylesheet = f'<link rel="stylesheet" href="{asset_root}assets/styles.css">'
 
-    home = "#section-0" if standalone else f"{root}index.html"
-    master_link = "#section-0" if standalone else f"{root}qenterra-design-system.html"
-    foundations_link = "#section-3" if standalone else f"{root}pages/foundations.html"
+    ui = COPY[locale]["ui"]
+    data += (
+        f' data-search-empty="{escape(ui["no_results"], quote=True)}"'
+        f' data-section-label="{escape(ui["section"], quote=True)}"'
+    )
+    home = "#section-0" if standalone else f"{site_root}index.html"
+    master_link = "#section-0" if standalone else f"{site_root}qenterra-design-system.html"
+    foundations_link = "#section-3" if standalone else f"{site_root}pages/foundations.html"
     hero = ""
     intro_heading = "h1"
     if page_slug == "index":
         intro_heading = "h2"
         hero = f"""
         <section class="hero">
-          <p class="hero-kicker">QenTerra · Version {version}</p>
-          <h1>One grammar.<br>Different products.</h1>
-          <p class="hero-summary">Adaptive Soft Graphite, native behavior, honest state, short motion, and explicit recovery for Cadence, Unspool, Lilt, and whatever comes next.</p>
-          <div class="hero-actions"><a class="button button-primary" href="{foundations_link}">Explore foundations</a><a class="button button-secondary" href="{master_link}">Open standalone master</a></div>
+          <p class="hero-kicker">{ui["hero_kicker"].format(version=version)}</p>
+          <h1>{ui["hero_title"]}</h1>
+          <p class="hero-summary">{ui["hero_summary"]}</p>
+          <div class="hero-actions"><a class="button button-primary" href="{foundations_link}">{ui["explore_foundations"]}</a><a class="button button-secondary" href="{master_link}">{ui["open_master"]}</a></div>
         </section>
         """
 
     return f"""<!doctype html>
-<html lang="en">
+<html lang="{locale}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="{page_summary}">
+  <meta name="description" content="{escape(page_summary, quote=True)}">
   <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:,">
   <title>{page_title} · QenTerra Design System</title>
-  {theme_bootstrap()}
+  {theme_bootstrap(locale)}
   {stylesheet}
   {styles}
 </head>
 <body {data}>
-  <a class="skip-link" href="#main-content">Skip to content</a>
+  <a class="skip-link" href="#main-content">{ui["skip"]}</a>
   <div class="progress-line" data-progress aria-hidden="true"></div>
   <div class="site-shell">
-    <aside class="sidebar" aria-label="Design system navigation">
-      <a class="brand" href="{home}"><span class="brand-mark" aria-hidden="true">Q</span><span class="brand-copy"><span class="brand-title">QenTerra Design System</span><span class="brand-meta">Semantic core · {version}</span></span></a>
-      <p class="nav-label">Reference</p>
-      <nav class="site-nav">{nav_html(page_slug, root, standalone)}</nav>
+    <aside class="sidebar" aria-label="{ui["navigation"]}">
+      <div class="sidebar-head">{language_menu(locale, language_targets)}<a class="brand" href="{home}"><span class="brand-mark" aria-hidden="true">Q</span><span class="brand-copy"><span class="brand-title">QenTerra Design System</span><span class="brand-meta">{ui["semantic_core"]} · {version}</span></span></a></div>
+      <p class="nav-label">{ui["reference"]}</p>
+      <nav class="site-nav">{nav_html(page_slug, site_root, standalone, locale)}</nav>
       <div class="sidebar-footer">
-        <div class="appearance-control" role="group" aria-label="Appearance"><button type="button" data-theme-choice="system" aria-pressed="true">System</button><button type="button" data-theme-choice="light" aria-pressed="false">Light</button><button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button></div>
-        <p class="sidebar-note">Exact values come from machine-readable tokens. Product shells remain deliberately distinct.</p>
+        <div class="appearance-control" role="group" aria-label="{ui["appearance"]}"><button type="button" data-theme-choice="system" aria-pressed="true">{ui["system"]}</button><button type="button" data-theme-choice="light" aria-pressed="false">{ui["light"]}</button><button type="button" data-theme-choice="dark" aria-pressed="false">{ui["dark"]}</button></div>
+        <p class="sidebar-note">{ui["sidebar_note"]}</p>
       </div>
     </aside>
-    <button class="scrim" data-scrim aria-label="Close navigation"></button>
+    <button class="scrim" data-scrim aria-label="{ui["close_navigation"]}"></button>
     <div class="main-column">
-      <header class="topbar"><button class="menu-button" type="button" data-menu-button aria-expanded="false" aria-label="Open navigation">☰</button><p class="topbar-title">{page_title}</p><div class="search-wrap"><input class="search-input" type="search" data-search aria-label="Search design system" placeholder="Search components, states, products…" autocomplete="off"><div class="search-results" data-search-results role="region" aria-label="Search results"></div></div><span class="key-hint" aria-hidden="true">⌘ K</span></header>
+      <header class="topbar"><button class="menu-button" type="button" data-menu-button aria-expanded="false" aria-label="{ui["open_navigation"]}">{icon("menu")}</button><p class="topbar-title">{page_title}</p><div class="search-wrap"><span class="search-icon">{icon("search")}</span><input class="search-input" type="search" data-search aria-label="{ui["search_label"]}" placeholder="{ui["search_placeholder"]}" autocomplete="off"><div class="search-results" data-search-results role="region" aria-label="{ui["search_results"]}"></div></div><span class="key-hint" aria-hidden="true">⌘ K</span></header>
       <main class="content" id="main-content">
         {hero}
-        <header class="page-intro"><p class="page-eyebrow">QenTerra Design System</p><{intro_heading}>{page_title}</{intro_heading}><p class="page-summary">{page_summary}</p></header>
+        <header class="page-intro"><p class="page-eyebrow">{ui["eyebrow"]}</p><{intro_heading}>{page_title}</{intro_heading}><p class="page-summary">{page_summary}</p></header>
         {section_html}
-        <footer class="page-footer"><span>QenTerra Design System {version}</span><span>System first · Dark signature · Light complete</span></footer>
+        <footer class="page-footer"><span>QenTerra Design System {version}</span><span>{ui["footer"]}</span></footer>
       </main>
     </div>
   </div>
@@ -349,12 +374,6 @@ def shell(
 
 def build() -> None:
     version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-    title, sections = split_numbered_sections((ROOT / "docs" / "MASTER.md").read_text(encoding="utf-8"))
-    section_map = {section.number: section for section in sections}
-    expected = set(range(22))
-    if set(section_map) != expected:
-        raise ValueError(f"MASTER sections must be exactly 0–21; got {sorted(section_map)}")
-
     token_files = load_tokens()
     tokens = {name: data for name, data in token_files}
     token_css = generate_css(tokens["foundation"], tokens["semantic"], tokens["typography"], tokens["motion"])
@@ -366,76 +385,174 @@ def build() -> None:
     atomic_write(ROOT / "generated" / "TOKEN_REFERENCE.md", token_reference)
 
     dist = ROOT / "dist"
+    if dist.exists():
+        shutil.rmtree(dist)
     (dist / "assets").mkdir(parents=True, exist_ok=True)
-    (dist / "pages").mkdir(parents=True, exist_ok=True)
     source_css = (ROOT / "src" / "assets" / "styles.css").read_text(encoding="utf-8")
     source_js = (ROOT / "src" / "assets" / "app.js").read_text(encoding="utf-8")
     atomic_write(dist / "assets" / "qds-tokens.css", token_css)
     shutil.copyfile(ROOT / "src" / "assets" / "styles.css", dist / "assets" / "styles.css")
     shutil.copyfile(ROOT / "src" / "assets" / "app.js", dist / "assets" / "app.js")
 
-    search_index = []
-    section_to_page: dict[int, tuple[str, str]] = {}
-    for slug, page_title, numbers, _ in PAGES:
-        path = "index.html" if slug == "index" else f"pages/{slug}.html"
-        for number in numbers:
-            section_to_page[number] = (path, page_title)
-    for section in sections:
-        path, page_title = section_to_page[section.number]
-        search_index.append(
-            {
-                "section": section.number,
-                "title": section.title,
-                "page": page_title,
-                "path": path,
-                "text": plain_text(section.markdown)[:1200],
+    locale_builds: dict[str, tuple[str, list[Section], list[dict]]] = {}
+    section_slug = {number: slug for slug, numbers in PAGE_GROUPS for number in numbers}
+
+    for locale in ("en", "ru"):
+        master_name = "MASTER.ru.md" if locale == "ru" else "MASTER.md"
+        title, sections = split_numbered_sections((ROOT / "docs" / master_name).read_text(encoding="utf-8"))
+        section_map = {section.number: section for section in sections}
+        expected = set(range(22))
+        if set(section_map) != expected:
+            raise ValueError(f"{master_name} sections must be exactly 0–21; got {sorted(section_map)}")
+
+        search_index: list[dict] = []
+        for section in sections:
+            slug = section_slug[section.number]
+            path = "index.html" if slug == "index" else f"pages/{slug}.html"
+            search_index.append(
+                {
+                    "section": section.number,
+                    "title": section.title,
+                    "page": COPY[locale]["pages"][slug][0],
+                    "path": path,
+                    "text": plain_text(section.markdown)[:1200],
+                }
+            )
+        atomic_write(
+            dist / "assets" / f"search-index-{locale}.json",
+            json.dumps(search_index, ensure_ascii=False, indent=2) + "\n",
+        )
+        if locale == "en":
+            atomic_write(
+                dist / "assets" / "search-index.json",
+                json.dumps(search_index, ensure_ascii=False, indent=2) + "\n",
+            )
+
+        locale_root = dist / locale
+        (locale_root / "pages").mkdir(parents=True, exist_ok=True)
+        for slug, page_title, numbers, summary in pages(locale):
+            sections_html = "\n".join(render_section(section_map[number], locale, slug) for number in numbers)
+            if slug == "components":
+                sections_html += render_component_catalog(locale)
+            if slug == "audit":
+                sections_html += render_audit_appendix(locale)
+            is_index = slug == "index"
+            site_root = "" if is_index else "../"
+            asset_root = "../" if is_index else "../../"
+            relative_page = "index.html" if is_index else f"pages/{slug}.html"
+            language_targets = {
+                code: f"../{code}/{relative_page}" if is_index else f"../../{code}/{relative_page}"
+                for code in ("en", "ru")
             }
-        )
-    atomic_write(dist / "assets" / "search-index.json", json.dumps(search_index, ensure_ascii=False, indent=2) + "\n")
+            document = shell(
+                page_slug=slug,
+                page_title=page_title,
+                page_summary=summary,
+                section_html=sections_html,
+                site_root=site_root,
+                asset_root=asset_root,
+                version=version,
+                locale=locale,
+                language_targets=language_targets,
+            )
+            target = locale_root / relative_page
+            atomic_write(target, document)
 
-    for slug, page_title, numbers, summary in PAGES:
-        sections_html = "\n".join(render_section(section_map[number]) for number in numbers)
-        if slug == "components":
-            sections_html += render_component_catalog()
-        if slug == "audit":
-            sections_html += render_audit_appendix()
-        root = "" if slug == "index" else "../"
-        document = shell(
-            page_slug=slug,
-            page_title=page_title,
-            page_summary=summary,
-            section_html=sections_html,
-            root=root,
+        standalone_sections = []
+        for section in sections:
+            slug = section_slug[section.number]
+            standalone_sections.append(render_section(section, locale, slug))
+            if section.number == 9:
+                standalone_sections.append(render_component_catalog(locale))
+            if section.number == 17:
+                standalone_sections.append(render_audit_appendix(locale))
+        standalone = shell(
+            page_slug="index",
+            page_title=title,
+            page_summary=COPY[locale]["ui"]["standalone_summary"],
+            section_html="\n".join(standalone_sections),
+            site_root="",
+            asset_root="",
             version=version,
+            locale=locale,
+            language_targets={code: f"../{code}/qenterra-design-system.html" for code in ("en", "ru")},
+            standalone=True,
+            token_css=token_css,
+            source_css=source_css,
+            source_js=source_js,
+            search_index=search_index,
         )
-        target = dist / "index.html" if slug == "index" else dist / "pages" / f"{slug}.html"
-        atomic_write(target, document)
+        atomic_write(locale_root / "qenterra-design-system.html", standalone)
+        locale_builds[locale] = (title, sections, search_index)
 
-    standalone_sections = []
-    for section in sections:
-        standalone_sections.append(render_section(section))
+    english_title, english_sections, english_search = locale_builds["en"]
+    compatibility_sections = []
+    for section in english_sections:
+        slug = section_slug[section.number]
+        compatibility_sections.append(render_section(section, "en", slug))
         if section.number == 9:
-            standalone_sections.append(render_component_catalog())
-    all_sections = "\n".join(standalone_sections) + render_audit_appendix()
-    standalone = shell(
+            compatibility_sections.append(render_component_catalog("en"))
+        if section.number == 17:
+            compatibility_sections.append(render_audit_appendix("en"))
+    compatibility = shell(
         page_slug="index",
-        page_title=title,
-        page_summary="Complete standalone human reference for the QenTerra family design system.",
-        section_html=all_sections,
-        root="",
+        page_title=english_title,
+        page_summary=COPY["en"]["ui"]["standalone_summary"],
+        section_html="\n".join(compatibility_sections),
+        site_root="",
+        asset_root="",
         version=version,
+        locale="en",
+        language_targets={"en": "qenterra-design-system.html", "ru": "ru/qenterra-design-system.html"},
         standalone=True,
         token_css=token_css,
         source_css=source_css,
         source_js=source_js,
-        search_index=search_index,
+        search_index=english_search,
     )
-    atomic_write(dist / "qenterra-design-system.html", standalone)
+    atomic_write(dist / "qenterra-design-system.html", compatibility)
+
+    (dist / "pages").mkdir(parents=True, exist_ok=True)
+    for slug, page_title, _, summary in pages("en"):
+        if slug == "index":
+            continue
+        target = f"../en/pages/{slug}.html"
+        redirect = f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{escape(summary, quote=True)}">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <title>{page_title} · QenTerra Design System</title>
+  <script>(function(){{location.replace('{target}'+location.search+location.hash);}}());</script>
+</head>
+<body class="language-gateway"><main class="language-gateway-card"><p class="page-eyebrow">QenTerra Design System</p><h1>{page_title}</h1><p>This reference moved to the English locale tree.</p><p><a class="button button-primary" href="{target}">Continue</a></p></main></body>
+</html>"""
+        atomic_write(dist / "pages" / f"{slug}.html", redirect)
+
+    gateway = f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:,">
+  <title>QenTerra Design System</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script>(function(){{var saved=localStorage.getItem('qds-locale');var lang=saved==='ru'||(!saved&&navigator.language.toLowerCase().startsWith('ru'))?'ru':'en';location.replace(lang+'/index.html'+location.hash);}}());</script>
+</head>
+<body class="language-gateway"><main class="language-gateway-card"><p class="page-eyebrow">QenTerra Design System</p><h1>Choose language · Выберите язык</h1><p>Open the complete reference in English or Russian.</p><p>Откройте полный справочник на русском или английском.</p><nav class="language-gateway-links" aria-label="Language · Язык"><a class="button button-primary" href="en/index.html">English</a><a class="button button-secondary" href="ru/index.html">Русский</a></nav></main></body>
+</html>"""
+    atomic_write(dist / "index.html", gateway)
 
     print(f"Built QenTerra Design System {version}")
-    print(f"  Sections: {len(sections)}")
-    print(f"  Pages: {len(PAGES)} + standalone")
-    print(f"  Search entries: {len(search_index)}")
+    print(f"  Locales: {len(locale_builds)}")
+    print(f"  Sections per locale: {len(english_sections)}")
+    print(f"  Pages per locale: {len(PAGE_GROUPS)} + standalone")
+    print(f"  Search entries per locale: {len(english_search)}")
 
 
 if __name__ == "__main__":

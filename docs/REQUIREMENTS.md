@@ -23,6 +23,10 @@ This checklist is the completion contract for the initial local release.
 - [x] A fully standalone `dist/qenterra-design-system.html` contains the complete human reference with inline CSS and JavaScript.
 - [x] The site itself uses the design system and supports System, Light, and Dark.
 - [x] The site supports keyboard navigation, visible focus, reduced motion, increased contrast, print, mobile widths, and search.
+- [x] English and Russian references contain equivalent complete content, locale-specific search indexes, and stable section anchors.
+- [x] The language menu is keyboard accessible and preserves the equivalent page and stable section fragment.
+- [x] Standalone navigation follows the visible document section and exposes it through `aria-current="location"`.
+- [x] Navigation, search, menu, and language controls use one consistent inline SVG icon family.
 - [x] Templates cover components, screens, product profiles, decisions, copy, accessibility, screenshots, motion, and migrations.
 - [x] Update and contribution instructions explain how to change tokens, prose, generated files, and versioning.
 
@@ -35,3 +39,4 @@ This checklist is the completion contract for the initial local release.
 - [x] The repository is local-only, has no remote, and has a clean committed `main` branch.
 - [x] Relevant Obsidian app/extension instructions are audited and synchronized with the canonical repository.
 - [x] Obsidian templates, routing maps, README, changelog, and a focused validator are updated and pass their gates.
+- [x] `docs/superpowers/` is absent and AI working artifacts are excluded from repository sources.

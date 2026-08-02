@@ -10,6 +10,7 @@ const root = path.resolve(__dirname, "..");
 const dist = path.join(root, "dist");
 const screenshotDirectory = path.join(root, "output", "screenshots");
 const reportPath = path.join(root, "output", "reports", "browser.json");
+const systemChrome = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 
 const contentTypes = {
   ".css": "text/css; charset=utf-8",
@@ -82,17 +83,28 @@ async function capture(page, baseUrl, entry) {
     else document.documentElement.dataset.theme = theme;
   }, entry.theme);
   await page.reload({ waitUntil: "networkidle" });
+  if (entry.scrollTarget) {
+    await page.locator(entry.scrollTarget).evaluate((element) => {
+      document.documentElement.style.scrollBehavior = "auto";
+      window.scrollTo(0, Math.max(0, element.offsetTop - 80));
+    });
+    await page.waitForTimeout(150);
+  }
   await assertNoOverflow(page, entry.name);
   await assertAccessibleStructure(page, entry.name);
   const main = page.locator("main");
   if ((await main.count()) !== 1) throw new Error(`${entry.name}: expected one main landmark`);
-  await page.screenshot({ path: path.join(screenshotDirectory, `${entry.name}.png`), fullPage: true });
+  await page.screenshot({
+    path: path.join(screenshotDirectory, `${entry.name}.png`),
+    fullPage: entry.fullPage !== false
+  });
   return {
     name: entry.name,
     path: entry.path,
     viewport: entry.viewport,
     theme: entry.theme,
     reducedMotion: entry.reducedMotion,
+    locale: await page.locator("html").getAttribute("lang"),
     title: await page.title(),
     sections: await page.locator(".doc-section").count(),
     structure: {
@@ -105,6 +117,63 @@ async function capture(page, baseUrl, entry) {
   };
 }
 
+async function assertUniformSvgIcons(page) {
+  const result = await page.evaluate(() => {
+    const navGlyphs = Array.from(document.querySelectorAll(".nav-glyph"));
+    const chromeControls = Array.from(document.querySelectorAll(".language-button, .menu-button, .search-icon"));
+    return {
+      navCount: navGlyphs.length,
+      invalidNav: navGlyphs.filter((glyph) => glyph.querySelectorAll("svg.icon").length !== 1 || (glyph.textContent || "").trim()).length,
+      invalidChrome: chromeControls.filter((control) => control.querySelectorAll("svg.icon").length !== 1).length
+    };
+  });
+  if (result.navCount !== 11 || result.invalidNav || result.invalidChrome) {
+    throw new Error(`Icon family mismatch: ${JSON.stringify(result)}`);
+  }
+}
+
+async function assertScrollSpy(page, baseUrl) {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto(`${baseUrl}/en/qenterra-design-system.html#section-11`, { waitUntil: "networkidle" });
+  await page.locator("#section-11").evaluate((element) => {
+    document.documentElement.style.scrollBehavior = "auto";
+    window.scrollTo(0, Math.max(0, element.offsetTop - 80));
+  });
+  await page.waitForTimeout(150);
+  const motionCurrent = await page.locator('.site-nav a[data-nav-slug="motion"][aria-current="location"]').count();
+  if (motionCurrent !== 1) throw new Error("Scroll-spy did not activate Motion at section 11");
+
+  await page.locator("#section-18").evaluate((element) => window.scrollTo(0, Math.max(0, element.offsetTop - 80)));
+  await page.waitForTimeout(150);
+  const governanceCurrent = await page.locator('.site-nav a[data-nav-slug="governance"][aria-current="location"]').count();
+  if (governanceCurrent !== 1) throw new Error("Scroll-spy did not activate Governance at section 18");
+}
+
+async function assertLanguageSwitch(page, baseUrl) {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto(`${baseUrl}/en/pages/components.html#section-6`, { waitUntil: "networkidle" });
+  await page.locator("[data-language-button]").click();
+  await page.locator('[data-locale-target="ru"]').click();
+  await page.waitForURL(/\/ru\/pages\/components\.html#section-6$/);
+  const state = await page.evaluate(() => ({
+    lang: document.documentElement.lang,
+    heading: document.querySelector(".page-intro h1")?.textContent?.trim(),
+    hash: location.hash,
+    stored: localStorage.getItem("qds-locale")
+  }));
+  if (state.lang !== "ru" || state.heading !== "Компоненты" || state.hash !== "#section-6" || state.stored !== "ru") {
+    throw new Error(`Language switch lost locale, page, or fragment: ${JSON.stringify(state)}`);
+  }
+
+  const button = page.locator("[data-language-button]");
+  await button.focus();
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("Escape");
+  const menuHidden = await page.locator("[data-language-menu]").getAttribute("hidden");
+  const focused = await button.evaluate((element) => element === document.activeElement);
+  if (menuHidden === null || !focused) throw new Error("Language menu Escape behavior or focus restoration failed");
+}
+
 async function main() {
   fs.mkdirSync(screenshotDirectory, { recursive: true });
   fs.mkdirSync(path.dirname(reportPath), { recursive: true });
@@ -112,7 +181,9 @@ async function main() {
   const address = server.address();
   const port = typeof address === "object" && address ? address.port : 0;
   const baseUrl = `http://127.0.0.1:${port}`;
-  const browser = await chromium.launch({ headless: true });
+  const requestedBrowser = process.env.QDS_CHROMIUM_PATH;
+  const executablePath = requestedBrowser || (fs.existsSync(systemChrome) ? systemChrome : undefined);
+  const browser = await chromium.launch({ headless: true, executablePath });
   const page = await browser.newPage();
   const consoleErrors = [];
   page.on("console", (message) => {
@@ -121,7 +192,7 @@ async function main() {
   page.on("pageerror", (error) => consoleErrors.push(error.message));
 
   try {
-    await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
+    await page.goto(`${baseUrl}/en/index.html`, { waitUntil: "networkidle" });
     await page.locator("[data-search]").fill("motion");
     await page.locator("[data-search-results] .search-result").first().waitFor();
     await page.keyboard.press("Escape");
@@ -136,13 +207,18 @@ async function main() {
     await page.keyboard.press("Escape");
     if (await page.locator("body.nav-open").count()) throw new Error("Escape did not close mobile navigation");
 
+    await assertUniformSvgIcons(page);
+    await assertScrollSpy(page, baseUrl);
+    await assertLanguageSwitch(page, baseUrl);
+
     const captures = [];
     const matrix = [
-      { name: "overview-dark-wide", path: "index.html", viewport: { width: 1440, height: 1000 }, theme: "dark", reducedMotion: false },
-      { name: "foundations-light-desktop", path: "pages/foundations.html", viewport: { width: 1280, height: 900 }, theme: "light", reducedMotion: false },
-      { name: "components-dark-mobile", path: "pages/components.html", viewport: { width: 390, height: 844 }, theme: "dark", reducedMotion: true },
-      { name: "products-light-tablet", path: "pages/products.html", viewport: { width: 768, height: 1024 }, theme: "light", reducedMotion: false },
-      { name: "standalone-dark-desktop", path: "qenterra-design-system.html", viewport: { width: 1280, height: 900 }, theme: "dark", reducedMotion: true }
+      { name: "overview-en-dark-wide", path: "en/index.html", viewport: { width: 1440, height: 1000 }, theme: "dark", reducedMotion: false },
+      { name: "foundations-ru-light-desktop", path: "ru/pages/foundations.html", viewport: { width: 1280, height: 900 }, theme: "light", reducedMotion: false },
+      { name: "components-en-dark-mobile", path: "en/pages/components.html", viewport: { width: 390, height: 844 }, theme: "dark", reducedMotion: true },
+      { name: "products-ru-light-tablet", path: "ru/pages/products.html", viewport: { width: 768, height: 1024 }, theme: "light", reducedMotion: false },
+      { name: "standalone-en-dark-desktop", path: "en/qenterra-design-system.html", viewport: { width: 1280, height: 900 }, theme: "dark", reducedMotion: true },
+      { name: "standalone-ru-motion-dark", path: "ru/qenterra-design-system.html", viewport: { width: 1280, height: 900 }, theme: "dark", reducedMotion: false, scrollTarget: "#section-11", fullPage: false }
     ];
     for (const entry of matrix) captures.push(await capture(page, baseUrl, entry));
 
@@ -150,6 +226,9 @@ async function main() {
     const checks = {
       searchAndEscape: "passed",
       mobileNavigationAndEscape: "passed",
+      scrollSpy: "passed",
+      languageSwitch: "passed",
+      uniformSvgIcons: "passed",
       semanticStructure: "passed",
       responsiveOverflow: "passed",
       consoleErrors: "none"

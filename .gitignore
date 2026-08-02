@@ -6,3 +6,5 @@ node_modules/
 output/tmp/
 output/server.log
 output/.server.pid
+.superpowers/
+docs/superpowers/

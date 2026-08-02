@@ -5,71 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Keyboard, screen readers, contrast, zoom, motion, and input modes.">
   <meta name="color-scheme" content="light dark">
-  <title>Accessibility · QenTerra Design System</title>
-  <script>(function(){var t=localStorage.getItem('qds-theme');if(t==='light'||t==='dark'){document.documentElement.dataset.theme=t;}})();</script>
+  <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../assets/styles.css">
-
+  <title>Accessibility · QenTerra Design System</title>
+  <script>(function(){location.replace('../en/pages/accessibility.html'+location.search+location.hash);}());</script>
 </head>
-<body data-root="../" data-standalone="false">
-  <a class="skip-link" href="#main-content">Skip to content</a>
-  <div class="progress-line" data-progress aria-hidden="true"></div>
-  <div class="site-shell">
-    <aside class="sidebar" aria-label="Design system navigation">
-      <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">Q</span><span class="brand-copy"><span class="brand-title">QenTerra Design System</span><span class="brand-meta">Semantic core · 1.0.0</span></span></a>
-      <p class="nav-label">Reference</p>
-      <nav class="site-nav"><a href="../index.html"><span class="nav-glyph" aria-hidden="true">01</span><span>Overview</span></a>
-<a href="../pages/foundations.html"><span class="nav-glyph" aria-hidden="true">Aa</span><span>Foundations</span></a>
-<a href="../pages/components.html"><span class="nav-glyph" aria-hidden="true">□</span><span>Components</span></a>
-<a href="../pages/patterns.html"><span class="nav-glyph" aria-hidden="true">↳</span><span>Patterns</span></a>
-<a href="../pages/motion.html"><span class="nav-glyph" aria-hidden="true">→</span><span>Motion</span></a>
-<a href="../pages/content.html"><span class="nav-glyph" aria-hidden="true">Tx</span><span>Content</span></a>
-<a href="../pages/accessibility.html" aria-current="page"><span class="nav-glyph" aria-hidden="true">A+</span><span>Accessibility</span></a>
-<a href="../pages/platforms.html"><span class="nav-glyph" aria-hidden="true">⌘</span><span>Platforms</span></a>
-<a href="../pages/products.html"><span class="nav-glyph" aria-hidden="true">Q</span><span>Products</span></a>
-<a href="../pages/audit.html"><span class="nav-glyph" aria-hidden="true">✓</span><span>Evidence</span></a>
-<a href="../pages/governance.html"><span class="nav-glyph" aria-hidden="true">◇</span><span>Governance</span></a></nav>
-      <div class="sidebar-footer">
-        <div class="appearance-control" role="group" aria-label="Appearance"><button type="button" data-theme-choice="system" aria-pressed="true">System</button><button type="button" data-theme-choice="light" aria-pressed="false">Light</button><button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button></div>
-        <p class="sidebar-note">Exact values come from machine-readable tokens. Product shells remain deliberately distinct.</p>
-      </div>
-    </aside>
-    <button class="scrim" data-scrim aria-label="Close navigation"></button>
-    <div class="main-column">
-      <header class="topbar"><button class="menu-button" type="button" data-menu-button aria-expanded="false" aria-label="Open navigation">☰</button><p class="topbar-title">Accessibility</p><div class="search-wrap"><input class="search-input" type="search" data-search aria-label="Search design system" placeholder="Search components, states, products…" autocomplete="off"><div class="search-results" data-search-results role="region" aria-label="Search results"></div></div><span class="key-hint" aria-hidden="true">⌘ K</span></header>
-      <main class="content" id="main-content">
-
-        <header class="page-intro"><p class="page-eyebrow">QenTerra Design System</p><h1>Accessibility</h1><p class="page-summary">Keyboard, screen readers, contrast, zoom, motion, and input modes.</p></header>
-        <section class="doc-section" id="section-13"><span class="section-number">13</span><h2>Accessibility</h2><div class="prose"><h3 id="s13-13-1-keyboard">13.1 Keyboard</h3>
-<ul>
-<li>Every action is reachable.</li>
-<li>Focus order follows reading/task order.</li>
-<li>Focus is visible independently of selection.</li>
-<li>Escape closes reversible overlays.</li>
-<li>Return activates the primary selected object where conventional.</li>
-<li>Arrow keys navigate composite widgets according to platform conventions.</li>
-<li>Shortcuts appear in menus and help where discoverability matters.</li>
-</ul>
-<h3 id="s13-13-2-screen-readers">13.2 Screen readers</h3>
-<p>Controls have names, values, roles, state, and available actions. Related visual fragments are grouped into meaningful accessible units. Progress and result counts announce without excessive chatter.</p>
-<h3 id="s13-13-3-contrast-and-color">13.3 Contrast and color</h3>
-<p>Normal text targets WCAG AA on web. Native UI uses platform semantic colors and is verified under Increased Contrast. Status never relies on hue alone.</p>
-<h3 id="s13-13-4-text-size-and-zoom">13.4 Text size and zoom</h3>
-<p>Web supports 200% zoom without loss of controls or horizontal page scrolling. Native layouts survive platform text-size and localization expansion. Fixed row heights must be tested or made adaptive.</p>
-<h3 id="s13-13-5-motion-and-transparency">13.5 Motion and transparency</h3>
-<p>Reduced Motion and Reduced Transparency preserve comprehension and interaction. Increased Contrast strengthens boundaries without changing hierarchy.</p>
-<h3 id="s13-13-6-touch-and-pointer">13.6 Touch and pointer</h3>
-<p>Touch targets meet platform minimums. Pointer interfaces may use denser visuals but maintain usable hit regions. Hover-only information also appears on focus or tap.</p></div></section><aside class="specimen" aria-label="Meaning beyond color"><div class="specimen-header"><h3>Meaning beyond color</h3><p>Tab through controls; status always includes words or shape.</p></div>
-    <div class="specimen-canvas">
-      <button class="button button-primary">Visible focus</button>
-      <span class="status-demo status-warning"><span class="status-dot"></span>Partial results</span>
-      <span class="status-demo status-info"><span class="status-dot"></span>Copied to Clipboard</span>
-      <span class="key-hint">Esc</span>
-    </div>
-    </aside>
-        <footer class="page-footer"><span>QenTerra Design System 1.0.0</span><span>System first · Dark signature · Light complete</span></footer>
-      </main>
-    </div>
-  </div>
-  <script src="../assets/app.js" defer></script>
-</body>
+<body class="language-gateway"><main class="language-gateway-card"><p class="page-eyebrow">QenTerra Design System</p><h1>Accessibility</h1><p>This reference moved to the English locale tree.</p><p><a class="button button-primary" href="../en/pages/accessibility.html">Continue</a></p></main></body>
 </html>

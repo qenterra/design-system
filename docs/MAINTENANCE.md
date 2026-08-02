@@ -2,13 +2,15 @@
 
 ## Sources of truth
 
-- Behavioral rules: `docs/MASTER.md`.
+- Behavioral rules: `docs/MASTER.md` and its complete Russian counterpart `docs/MASTER.ru.md`.
 - Exact values: `tokens/*.json`.
-- Reference UI: `src/assets/` plus generated content from `docs/MASTER.md`.
+- Reference UI: `src/assets/` plus generated content from both master files and both component catalogs.
 - Reusable work products: `templates/`.
 - Generated output: `generated/` and `dist/`.
 
 Never edit generated files directly.
+
+AI working specs, implementation plans, handoffs, scratch notes, and tool-only artifacts are not project sources. Create them in a unique system temporary directory and never stage them. Durable product documentation, ADRs, requirements, and maintenance instructions remain normal repository content.
 
 ## Change workflow
 
@@ -17,12 +19,14 @@ Never edit generated files directly.
 3. Decide whether the change is foundation, semantic, platform, component, or product-specific.
 4. Add an ADR for normative or breaking decisions.
 5. Update sources.
-6. Run `python3 scripts/build.py`.
-7. Run `python3 scripts/verify.py`.
-8. Inspect Light/Dark desktop and mobile renders.
-9. Update `CHANGELOG.md` and `VERSION`.
-10. Update Obsidian routing only when workflow or product contracts change.
-11. Commit source and generated output together.
+6. Apply every normative content change to both `docs/MASTER.md` and `docs/MASTER.ru.md`; keep section numbers and stable anchors identical.
+7. Update both component catalogs and localized audit evidence when the affected material appears there.
+8. Run `python3 scripts/build.py`.
+9. Run `python3 scripts/verify.py`.
+10. Inspect English/Russian, Light/Dark, desktop/mobile, and standalone renders.
+11. Update `CHANGELOG.md` and `VERSION`.
+12. Update Obsidian routing only when workflow or product contracts change.
+13. Commit source and generated output together.
 
 ## Versioning
 
@@ -31,6 +35,10 @@ Never edit generated files directly.
 - Major: renamed or removed semantic token, changed behavior contract, or required migration.
 
 All token files, generated files, the site, and `VERSION` must report the same version.
+
+## Localization parity
+
+English and Russian are equally complete reference locales. Do not ship a language selector that translates only navigation chrome. Both masters must contain numbered sections 0–21 in the same order; shared stable fragment IDs must continue to resolve in both locale trees. Search indexes are generated independently from localized content. When localized terminology cannot be translated literally, preserve the semantic contract and record the wording decision in the relevant source document.
 
 ## Adding a token
 

@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "passed",
   "checks": {
     "pythonSyntax": "passed",
@@ -10,11 +10,17 @@
     "gitWhitespace": "passed"
   },
   "generatedSha256": {
-    "generated/qds-tokens.css": "9becd1b30ee722e8a47fc89a99d621f6324bd5eae1333fb9cf80a8941231d28a",
-    "generated/QDSGeneratedTokens.swift": "2139a417ca0f4058ae0938643818e48b0f0b890cdbc2f9e434e6ee19e2bd1c1b",
+    "generated/qds-tokens.css": "d0fb7763856e960795af1c396d1d8a02dc21aabb819c5d7d141a66b947c16f50",
+    "generated/QDSGeneratedTokens.swift": "9bb6cb4725910be86c5f99ca79263aa960bb6dc83523280a874052c2a76c84b1",
     "generated/TOKEN_REFERENCE.md": "276d3dff6e326a3e16e2c3c8c6ca2bad2f2d1c6941dc2609867710c16548658c",
-    "dist/index.html": "f99ba8a167a32e758cf0dc6727783c953cd7bde97569668a382e832886284114",
-    "dist/qenterra-design-system.html": "81bc55a1ecc47424f84c667024913c0250f5f809fa83937fc92230f2f4c681a7"
+    "dist/index.html": "553ff408862ce6fea49c7aca34133e66d7e4a25be43f59ded59ca8da67f245a7",
+    "dist/qenterra-design-system.html": "528970c3dace02e0097b3edc2003bc20726428d29dcf046bfdb67d603de9c8a6",
+    "dist/en/index.html": "03ba82290bf8f45372df1f72744416a389732b7dad1d661958b3376cf11f64b3",
+    "dist/ru/index.html": "bafcd0757098d525fc84c4f68b006a30a7fc731248a14de2556205a640599700",
+    "dist/en/qenterra-design-system.html": "71c2d32a406ada7b49b2692bad5cb8bc64625b0f03adeabe1eb081bdc9fde80a",
+    "dist/ru/qenterra-design-system.html": "215300c3eba72a2ee469c2ac0a6e795db18c5b9d02091b770db77eb13d55e67f",
+    "dist/assets/search-index-en.json": "2cfeef1059f7b73b4c79525146d28705e8284277bb8413eab2b4d93077682a41",
+    "dist/assets/search-index-ru.json": "8cbfa7d178553f69b77c5b2fef3899e40bcf73f7c6b8bf0e0793435112efc8c6"
   },
   "manualNotProven": [
     "native application rendering",

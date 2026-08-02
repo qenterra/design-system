@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from lib.token_tools import flatten, get_path, load_json, resolve  # noqa: E402
+from lib.markdown_renderer import split_numbered_sections  # noqa: E402
 
 
 TOKEN_NAMES = ["foundation", "semantic", "typography", "motion", "components", "platforms", "products"]
@@ -32,6 +33,7 @@ class ValidationError(Exception):
 @dataclass
 class HtmlRecord:
     path: Path
+    language: str | None
     ids: set[str]
     duplicate_ids: set[str]
     links: list[tuple[str, str | None]]
@@ -44,6 +46,7 @@ class ReferenceParser(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.path = path
         self.ids: set[str] = set()
+        self.language: str | None = None
         self.duplicate_ids: set[str] = set()
         self.links: list[tuple[str, str | None]] = []
         self.scripts: list[str] = []
@@ -51,6 +54,8 @@ class ReferenceParser(HTMLParser):
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         values = dict(attrs)
+        if tag == "html":
+            self.language = values.get("lang")
         identifier = values.get("id")
         if identifier:
             if identifier in self.ids:
@@ -64,7 +69,15 @@ class ReferenceParser(HTMLParser):
             self.stylesheets.append(values["href"])
 
     def record(self) -> HtmlRecord:
-        return HtmlRecord(self.path, self.ids, self.duplicate_ids, self.links, self.scripts, self.stylesheets)
+        return HtmlRecord(
+            self.path,
+            self.language,
+            self.ids,
+            self.duplicate_ids,
+            self.links,
+            self.scripts,
+            self.stylesheets,
+        )
 
 
 def parse_html(path: Path) -> HtmlRecord:
@@ -218,6 +231,9 @@ def validate_html_tree(dist: Path) -> list[str]:
         return ["dist: no HTML files"]
 
     for path, record in records.items():
+        relative = path.relative_to(dist)
+        if relative.parts and relative.parts[0] in {"en", "ru"} and record.language != relative.parts[0]:
+            errors.append(f"{relative}: html lang must be {relative.parts[0]!r}, got {record.language!r}")
         if record.duplicate_ids:
             errors.append(f"{path.relative_to(dist)}: duplicate IDs {sorted(record.duplicate_ids)}")
         for href, _ in record.links:
@@ -239,20 +255,69 @@ def validate_html_tree(dist: Path) -> list[str]:
             if not target.exists():
                 errors.append(f"{path.relative_to(dist)}: missing asset {asset}")
 
-    standalone = dist / "qenterra-design-system.html"
-    if standalone.exists():
+    for locale, standalone in [
+        ("en", dist / "en" / "qenterra-design-system.html"),
+        ("ru", dist / "ru" / "qenterra-design-system.html"),
+        ("en", dist / "qenterra-design-system.html"),
+    ]:
+        label = standalone.relative_to(dist)
+        if not standalone.exists():
+            errors.append(f"dist: missing {label}")
+            continue
         record = records[standalone.resolve()]
         required = {f"section-{number}" for number in range(22)}
         missing = sorted(required - record.ids)
         if missing:
-            errors.append(f"standalone: missing sections {missing}")
+            errors.append(f"{label}: missing sections {missing}")
         text = standalone.read_text(encoding="utf-8")
         if 'src="' in text or 'rel="stylesheet"' in text:
-            errors.append("standalone: external script or stylesheet reference found")
+            errors.append(f"{label}: external script or stylesheet reference found")
         if len(text.encode("utf-8")) < 100_000:
-            errors.append("standalone: unexpectedly small; full reference may be missing")
-    else:
-        errors.append("dist: missing qenterra-design-system.html")
+            errors.append(f"{label}: unexpectedly small; full reference may be missing")
+
+    indexes: dict[str, list[dict[str, Any]]] = {}
+    for locale in ("en", "ru"):
+        path = dist / "assets" / f"search-index-{locale}.json"
+        if not path.is_file():
+            errors.append(f"dist: missing assets/search-index-{locale}.json")
+            continue
+        indexes[locale] = json.loads(path.read_text(encoding="utf-8"))
+        sections = [item.get("section") for item in indexes[locale]]
+        if sections != list(range(22)):
+            errors.append(f"assets/search-index-{locale}.json: expected sections 0–21, got {sections}")
+    if set(indexes) == {"en", "ru"}:
+        if len(indexes["en"]) != len(indexes["ru"]):
+            errors.append("localized search indexes have different entry counts")
+        if [item.get("title") for item in indexes["en"]] == [item.get("title") for item in indexes["ru"]]:
+            errors.append("Russian search index is not localized")
+    return errors
+
+
+def validate_localized_sources(root: Path) -> list[str]:
+    errors: list[str] = []
+    sections_by_locale: dict[str, list[int]] = {}
+    for locale, filename in (("en", "MASTER.md"), ("ru", "MASTER.ru.md")):
+        path = root / "docs" / filename
+        if not path.is_file():
+            errors.append(f"docs/{filename}: missing localized master")
+            continue
+        _, sections = split_numbered_sections(path.read_text(encoding="utf-8"))
+        sections_by_locale[locale] = [section.number for section in sections]
+        if sections_by_locale[locale] != list(range(22)):
+            errors.append(f"docs/{filename}: expected numbered sections 0–21, got {sections_by_locale[locale]}")
+    if set(sections_by_locale) == {"en", "ru"} and sections_by_locale["en"] != sections_by_locale["ru"]:
+        errors.append("English and Russian master section order differs")
+    for filename in ("COMPONENT_CATALOG.md", "COMPONENT_CATALOG.ru.md"):
+        if not (root / "docs" / filename).is_file():
+            errors.append(f"docs/{filename}: missing localized component catalog")
+    return errors
+
+
+def validate_repository_hygiene(root: Path) -> list[str]:
+    errors: list[str] = []
+    for relative in (Path(".superpowers"), Path("docs/superpowers")):
+        if (root / relative).exists():
+            errors.append(f"{relative}: AI working directory must stay outside the repository")
     return errors
 
 
@@ -281,14 +346,18 @@ def validate_browser_evidence(root: Path) -> list[str]:
     if report.get("status") != "passed":
         errors.append("output/reports/browser.json: status is not passed")
     captures = report.get("captures")
-    if not isinstance(captures, list) or len(captures) < 5:
-        errors.append("output/reports/browser.json: expected at least five responsive/appearance captures")
+    if not isinstance(captures, list) or len(captures) < 6:
+        errors.append("output/reports/browser.json: expected at least six localized responsive/appearance captures")
         return errors
     for capture in captures:
         name = capture.get("name") if isinstance(capture, dict) else None
         path = root / "output" / "screenshots" / f"{name}.png"
         if not name or not path.is_file() or path.stat().st_size < 10_000:
             errors.append(f"visual evidence missing or too small: {name!r}")
+    checks = report.get("checks", {})
+    for name in ("scrollSpy", "languageSwitch", "uniformSvgIcons"):
+        if checks.get(name) != "passed":
+            errors.append(f"output/reports/browser.json: {name} did not pass")
     return errors
 
 
@@ -305,6 +374,8 @@ def run(root: Path = ROOT) -> dict[str, Any]:
         )
     )
     errors.extend(validate_html_tree(root / "dist"))
+    errors.extend(validate_localized_sources(root))
+    errors.extend(validate_repository_hygiene(root))
     errors.extend(validate_placeholders(root))
     errors.extend(validate_browser_evidence(root))
     result = {"version": version, "errors": errors, "contrast": contrast}

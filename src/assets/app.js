@@ -3,29 +3,31 @@
 
   const body = document.body;
   const root = body.dataset.root || "";
+  const siteRoot = body.dataset.siteRoot || "";
+  const locale = body.dataset.locale || "en";
   const standalone = body.dataset.standalone === "true";
   const searchInput = document.querySelector("[data-search]");
   const searchResults = document.querySelector("[data-search-results]");
   const menuButton = document.querySelector("[data-menu-button]");
   const scrim = document.querySelector("[data-scrim]");
   const progress = document.querySelector("[data-progress]");
+  const languageButton = document.querySelector("[data-language-button]");
+  const languageMenu = document.querySelector("[data-language-menu]");
   const themeButtons = Array.from(document.querySelectorAll("[data-theme-choice]"));
+  const navigationLinks = Array.from(document.querySelectorAll(".site-nav a[data-nav-slug]"));
+  const trackedSections = Array.from(document.querySelectorAll(".doc-section[data-nav-slug]"));
   let searchIndex = window.QDS_SEARCH_INDEX || [];
   let activeResult = -1;
   let menuReturnTarget = null;
+  let scrollFrame = 0;
 
   function applyTheme(choice, persist) {
-    if (choice === "system") {
-      document.documentElement.removeAttribute("data-theme");
-    } else {
-      document.documentElement.dataset.theme = choice;
-    }
+    if (choice === "system") document.documentElement.removeAttribute("data-theme");
+    else document.documentElement.dataset.theme = choice;
     themeButtons.forEach((button) => {
       button.setAttribute("aria-pressed", String(button.dataset.themeChoice === choice));
     });
-    if (persist) {
-      localStorage.setItem("qds-theme", choice);
-    }
+    if (persist) localStorage.setItem("qds-theme", choice);
   }
 
   function currentTheme() {
@@ -42,13 +44,32 @@
   function closeNavigation(restoreFocus) {
     body.classList.remove("nav-open");
     menuButton?.setAttribute("aria-expanded", "false");
-    if (restoreFocus && menuReturnTarget instanceof HTMLElement) {
-      menuReturnTarget.focus();
-    }
+    if (restoreFocus && menuReturnTarget instanceof HTMLElement) menuReturnTarget.focus();
+  }
+
+  function openLanguageMenu() {
+    if (!languageMenu || !languageButton) return;
+    languageMenu.hidden = false;
+    languageButton.setAttribute("aria-expanded", "true");
+  }
+
+  function closeLanguageMenu(restoreFocus) {
+    if (!languageMenu || !languageButton) return;
+    languageMenu.hidden = true;
+    languageButton.setAttribute("aria-expanded", "false");
+    if (restoreFocus) languageButton.focus();
+  }
+
+  function moveLanguageFocus(direction) {
+    if (!languageMenu) return;
+    const links = Array.from(languageMenu.querySelectorAll("a"));
+    if (!links.length) return;
+    const current = Math.max(0, links.indexOf(document.activeElement));
+    links[(current + direction + links.length) % links.length].focus();
   }
 
   function normalized(value) {
-    return value.toLocaleLowerCase().trim();
+    return value.toLocaleLowerCase(locale).trim();
   }
 
   function closeSearch() {
@@ -60,7 +81,7 @@
 
   function resultUrl(item) {
     if (standalone) return `#section-${item.section}`;
-    return `${root}${item.path}#section-${item.section}`;
+    return `${siteRoot}${item.path}#section-${item.section}`;
   }
 
   function renderSearch(query) {
@@ -86,7 +107,7 @@
     if (!matches.length) {
       const empty = document.createElement("p");
       empty.className = "search-empty";
-      empty.textContent = "No matching section. Try a component, state, platform, or product name.";
+      empty.textContent = body.dataset.searchEmpty || "No matching section.";
       searchResults.append(empty);
     } else {
       matches.forEach(({ item }) => {
@@ -96,7 +117,7 @@
         const title = document.createElement("strong");
         title.textContent = item.title;
         const meta = document.createElement("span");
-        meta.textContent = `${item.page} · Section ${item.section}`;
+        meta.textContent = `${item.page} · ${body.dataset.sectionLabel || "Section"} ${item.section}`;
         link.append(title, meta);
         link.addEventListener("click", closeSearch);
         searchResults.append(link);
@@ -121,10 +142,51 @@
     progress.style.width = `${Math.min(100, Math.max(0, ratio * 100))}%`;
   }
 
+  function setActiveNavigation(slug) {
+    if (!standalone) return;
+    navigationLinks.forEach((link) => {
+      if (link.dataset.navSlug === slug) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+
+  function updateScrollSpy() {
+    scrollFrame = 0;
+    if (!standalone || !trackedSections.length) return;
+    const readingLine = Math.min(240, window.innerHeight * 0.3);
+    let active = trackedSections[0];
+    for (const section of trackedSections) {
+      if (section.getBoundingClientRect().top <= readingLine) active = section;
+      else break;
+    }
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+      active = trackedSections[trackedSections.length - 1];
+    }
+    setActiveNavigation(active.dataset.navSlug);
+  }
+
+  function scheduleViewportUpdate() {
+    updateProgress();
+    if (!scrollFrame) scrollFrame = window.requestAnimationFrame(updateScrollSpy);
+  }
+
+  function initializeScrollSpy() {
+    if (!standalone || !trackedSections.length) return;
+    const observer = new IntersectionObserver(scheduleViewportUpdate, {
+      rootMargin: "-24% 0px -66% 0px",
+      threshold: [0, 0.01, 1]
+    });
+    trackedSections.forEach((section) => observer.observe(section));
+    navigationLinks.forEach((link) => {
+      link.addEventListener("click", () => setActiveNavigation(link.dataset.navSlug));
+    });
+    updateScrollSpy();
+  }
+
   async function loadSearchIndex() {
     if (searchIndex.length || standalone) return;
     try {
-      const response = await fetch(`${root}assets/search-index.json`);
+      const response = await fetch(`${root}assets/search-index-${locale}.json`);
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       searchIndex = await response.json();
     } catch (error) {
@@ -134,6 +196,36 @@
 
   themeButtons.forEach((button) => {
     button.addEventListener("click", () => applyTheme(button.dataset.themeChoice, true));
+  });
+
+  languageButton?.addEventListener("click", () => {
+    if (languageMenu?.hidden) openLanguageMenu();
+    else closeLanguageMenu(false);
+  });
+  languageButton?.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      openLanguageMenu();
+      languageMenu?.querySelector("a")?.focus();
+    }
+  });
+  languageMenu?.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      event.preventDefault();
+      moveLanguageFocus(event.key === "ArrowDown" ? 1 : -1);
+    } else if (event.key === "Escape") {
+      event.preventDefault();
+      closeLanguageMenu(true);
+    }
+  });
+  languageMenu?.querySelectorAll("[data-locale-target]").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      localStorage.setItem("qds-locale", link.dataset.localeTarget);
+      const target = new URL(link.href, window.location.href);
+      if (window.location.hash) target.hash = window.location.hash;
+      window.location.assign(target.href);
+    });
   });
 
   menuButton?.addEventListener("click", () => {
@@ -147,8 +239,9 @@
     if (searchInput.value) renderSearch(searchInput.value);
   });
   searchInput?.addEventListener("input", async (event) => {
+    const value = event.currentTarget.value;
     await loadSearchIndex();
-    renderSearch(event.currentTarget.value);
+    renderSearch(value);
   });
   searchInput?.addEventListener("keydown", (event) => {
     if (event.key === "ArrowDown") {
@@ -168,11 +261,13 @@
 
   document.addEventListener("pointerdown", (event) => {
     if (!searchResults?.contains(event.target) && event.target !== searchInput) closeSearch();
+    if (!languageMenu?.contains(event.target) && !languageButton?.contains(event.target)) closeLanguageMenu(false);
   });
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
-      if (body.classList.contains("nav-open")) closeNavigation(true);
+      if (languageMenu && !languageMenu.hidden) closeLanguageMenu(true);
+      else if (body.classList.contains("nav-open")) closeNavigation(true);
       else closeSearch();
     }
     if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
@@ -189,11 +284,15 @@
     }
   });
 
-  window.addEventListener("scroll", updateProgress, { passive: true });
+  window.addEventListener("scroll", scheduleViewportUpdate, { passive: true });
+  window.addEventListener("hashchange", scheduleViewportUpdate);
   window.addEventListener("resize", () => {
     if (window.innerWidth > 920) closeNavigation(false);
+    scheduleViewportUpdate();
   });
 
+  localStorage.setItem("qds-locale", locale);
   applyTheme(currentTheme(), false);
-  updateProgress();
+  initializeScrollSpy();
+  scheduleViewportUpdate();
 })();

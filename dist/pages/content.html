@@ -5,84 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="UX writing, outcomes, errors, localization, and terminology.">
   <meta name="color-scheme" content="light dark">
-  <title>Content · QenTerra Design System</title>
-  <script>(function(){var t=localStorage.getItem('qds-theme');if(t==='light'||t==='dark'){document.documentElement.dataset.theme=t;}})();</script>
+  <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../assets/styles.css">
-
+  <title>Content · QenTerra Design System</title>
+  <script>(function(){location.replace('../en/pages/content.html'+location.search+location.hash);}());</script>
 </head>
-<body data-root="../" data-standalone="false">
-  <a class="skip-link" href="#main-content">Skip to content</a>
-  <div class="progress-line" data-progress aria-hidden="true"></div>
-  <div class="site-shell">
-    <aside class="sidebar" aria-label="Design system navigation">
-      <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">Q</span><span class="brand-copy"><span class="brand-title">QenTerra Design System</span><span class="brand-meta">Semantic core · 1.0.0</span></span></a>
-      <p class="nav-label">Reference</p>
-      <nav class="site-nav"><a href="../index.html"><span class="nav-glyph" aria-hidden="true">01</span><span>Overview</span></a>
-<a href="../pages/foundations.html"><span class="nav-glyph" aria-hidden="true">Aa</span><span>Foundations</span></a>
-<a href="../pages/components.html"><span class="nav-glyph" aria-hidden="true">□</span><span>Components</span></a>
-<a href="../pages/patterns.html"><span class="nav-glyph" aria-hidden="true">↳</span><span>Patterns</span></a>
-<a href="../pages/motion.html"><span class="nav-glyph" aria-hidden="true">→</span><span>Motion</span></a>
-<a href="../pages/content.html" aria-current="page"><span class="nav-glyph" aria-hidden="true">Tx</span><span>Content</span></a>
-<a href="../pages/accessibility.html"><span class="nav-glyph" aria-hidden="true">A+</span><span>Accessibility</span></a>
-<a href="../pages/platforms.html"><span class="nav-glyph" aria-hidden="true">⌘</span><span>Platforms</span></a>
-<a href="../pages/products.html"><span class="nav-glyph" aria-hidden="true">Q</span><span>Products</span></a>
-<a href="../pages/audit.html"><span class="nav-glyph" aria-hidden="true">✓</span><span>Evidence</span></a>
-<a href="../pages/governance.html"><span class="nav-glyph" aria-hidden="true">◇</span><span>Governance</span></a></nav>
-      <div class="sidebar-footer">
-        <div class="appearance-control" role="group" aria-label="Appearance"><button type="button" data-theme-choice="system" aria-pressed="true">System</button><button type="button" data-theme-choice="light" aria-pressed="false">Light</button><button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button></div>
-        <p class="sidebar-note">Exact values come from machine-readable tokens. Product shells remain deliberately distinct.</p>
-      </div>
-    </aside>
-    <button class="scrim" data-scrim aria-label="Close navigation"></button>
-    <div class="main-column">
-      <header class="topbar"><button class="menu-button" type="button" data-menu-button aria-expanded="false" aria-label="Open navigation">☰</button><p class="topbar-title">Content</p><div class="search-wrap"><input class="search-input" type="search" data-search aria-label="Search design system" placeholder="Search components, states, products…" autocomplete="off"><div class="search-results" data-search-results role="region" aria-label="Search results"></div></div><span class="key-hint" aria-hidden="true">⌘ K</span></header>
-      <main class="content" id="main-content">
-
-        <header class="page-intro"><p class="page-eyebrow">QenTerra Design System</p><h1>Content</h1><p class="page-summary">UX writing, outcomes, errors, localization, and terminology.</p></header>
-        <section class="doc-section" id="section-12"><span class="section-number">12</span><h2>UX writing and localization</h2><div class="prose"><h3 id="s12-12-1-voice">12.1 Voice</h3>
-<p>Calm, direct, specific, and honest. Avoid marketing language inside operational UI. Do not anthropomorphize errors when precision is needed.</p>
-<h3 id="s12-12-2-labels">12.2 Labels</h3>
-<ul>
-<li>Start with a verb for actions.</li>
-<li>Name the result: <code>Download 2 Files</code>, <code>Reveal in Finder</code>, <code>Retry Verification</code>.</li>
-<li>Use sentence case by default for descriptions and messages.</li>
-<li>Use platform-standard capitalization for short native control titles when required.</li>
-<li>Use one term per concept across products and documentation.</li>
-</ul>
-<h3 id="s12-12-3-status">12.3 Status</h3>
-<p>Report the actual outcome:</p>
-<ul>
-<li><code>Copied to Clipboard</code> is not <code>Inserted</code>;</li>
-<li><code>Saved for this session</code> is not <code>Saved</code>;</li>
-<li><code>Cached results</code> are not <code>Up to date</code>;</li>
-<li><code>No speech detected</code> is better than an internal recognition code.</li>
-</ul>
-<h3 id="s12-12-4-error-copy">12.4 Error copy</h3>
-<p>Avoid:</p>
-<ul>
-<li><code>Something went wrong</code>;</li>
-<li><code>Unknown error</code>;</li>
-<li><code>Lilt needs help</code>;</li>
-<li>generic <code>Configure</code>;</li>
-<li>internal API terminology without user consequence.</li>
-</ul>
-<p>Prefer specific cause, preserved state, and scoped action.</p>
-<h3 id="s12-12-5-confirmation-copy">12.5 Confirmation copy</h3>
-<p>The title asks or states the consequence. The body explains what changes and what remains. Destructive action labels repeat the concrete verb.</p>
-<h3 id="s12-12-6-localization">12.6 Localization</h3>
-<ul>
-<li>All user-facing strings live in the platform localization source.</li>
-<li>Use plural rules, not string concatenation.</li>
-<li>Date, time, byte size, decimal, and list formatting use locale-aware formatters.</li>
-<li>Key parity is validated automatically.</li>
-<li>Layout is tested with at least 30% expansion and long unbreakable values.</li>
-<li>HTML is not injected through untranslated strings.</li>
-<li>Typed/generated localization keys are preferred over duplicated default values.</li>
-</ul></div></section>
-        <footer class="page-footer"><span>QenTerra Design System 1.0.0</span><span>System first · Dark signature · Light complete</span></footer>
-      </main>
-    </div>
-  </div>
-  <script src="../assets/app.js" defer></script>
-</body>
+<body class="language-gateway"><main class="language-gateway-card"><p class="page-eyebrow">QenTerra Design System</p><h1>Content</h1><p>This reference moved to the English locale tree.</p><p><a class="button button-primary" href="../en/pages/content.html">Continue</a></p></main></body>
 </html>
