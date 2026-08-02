@@ -77,6 +77,22 @@ class ValidatorTests(unittest.TestCase):
             errors = validate_repository_hygiene(root)
             self.assertTrue(any("docs/superpowers" in error for error in errors))
 
+    def test_nested_superpowers_directory_fails_repository_hygiene(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "assets" / "brand" / "superpowers").mkdir(parents=True)
+            errors = validate_repository_hygiene(root)
+            self.assertTrue(any("assets/brand/superpowers" in error for error in errors))
+
+    def test_ds_store_fails_repository_hygiene(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            hidden = root / "assets" / "brand" / ".DS_Store"
+            hidden.parent.mkdir(parents=True)
+            hidden.write_bytes(b"finder metadata")
+            errors = validate_repository_hygiene(root)
+            self.assertTrue(any("Finder metadata" in error for error in errors))
+
     def test_existing_product_name_fails_universal_guide(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

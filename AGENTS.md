@@ -22,3 +22,5 @@ Read `docs/MASTER.md` or `docs/MASTER.ru.md` first for any design or UI work. Ex
 - Treat `docs/repository/STANDARD.md` and `templates/repository/` as the sole repository-documentation source; never recreate a parallel standard repository.
 - Consume token adapters through the local packages when practical. Do not publish them without explicit approval.
 - Create AI working specs, plans, handoffs, scratch notes, and tool artifacts only in a unique system temporary directory. Never add `.superpowers/` or `docs/superpowers/` to the repository.
+- Store canonical brand assets only under `assets/brand/`; every PNG there must use Git LFS and every asset must be covered by `assets/brand/manifest.json`.
+- Generate contact sheets, validation reports, asset-processing intermediates, backups, and prompt outputs outside the repository. The repository contains approved source assets and durable documentation, not the production mess that created them.

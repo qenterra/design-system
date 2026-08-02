@@ -373,9 +373,15 @@ def validate_packages(root: Path, version: str) -> list[str]:
 
 def validate_repository_hygiene(root: Path) -> list[str]:
     errors: list[str] = []
-    for relative in (Path(".superpowers"), Path("docs/superpowers")):
-        if (root / relative).exists():
-            errors.append(f"{relative}: AI working directory must stay outside the repository")
+    forbidden_parts = {"superpowers", "contact-sheets", "brand-working"}
+    for path in root.rglob("*"):
+        if ".git" in path.relative_to(root).parts:
+            continue
+        relative = path.relative_to(root)
+        if any(part.lower() in forbidden_parts for part in relative.parts):
+            errors.append(f"{relative}: temporary or AI working path must stay outside the repository")
+        if path.name == ".DS_Store":
+            errors.append(f"{relative}: Finder metadata must not enter the repository")
     universal_sources = [
         root / "README.md",
         root / "docs" / "MASTER.md",

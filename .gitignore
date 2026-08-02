@@ -7,5 +7,7 @@ node_modules/
 output/tmp/
 output/server.log
 output/.server.pid
+output/contact-sheets/
+output/brand-validation*.json
 .superpowers/
 docs/superpowers/
