@@ -8,7 +8,7 @@ Baseline: 1,034 lines and 86,915 Unicode characters before synchronization.
 
 The corpus was large but not gratuitously duplicated at the file level. Each retained file has a distinct trigger: product domain, repository publication layer, browser-extension engineering phase, or exceptional history-reconstruction workflow. Deleting files to make the count look prettier would merge unrelated safety boundaries and make agents read more irrelevant text.
 
-The actual problem was source ownership. Shared design facts flowed transitively through Cadence instructions, so Lilt and Unspool could inherit a stale product-specific interpretation. Exact palette and timing values were also duplicated in Cadence prose while the new machine-readable source did not exist.
+The source-ownership problem is now resolved across both interface design and repository documentation. Shared rules route to one canonical repository; product instructions retain only product facts and live verification boundaries.
 
 ## Corrected defects
 
@@ -22,6 +22,8 @@ The actual problem was source ownership. Shared design facts flowed transitively
 - Added component and product-profile working templates without copying token values.
 - Added a focused read-only validator with negative self-tests for missing files, version drift, and missing instruction references.
 - Updated Obsidian routing and README documentation.
+- Repointed repository, legal, Wiki, family-style, and screenshot instructions to the bilingual repository module and categorized templates in this repository.
+- Extended the focused validator to cover local packages, repository locale parity, stable repository anchors, deprecated-path rejection, and universal-guide naming.
 
 ## Retained intentionally
 
@@ -43,7 +45,7 @@ Architecture, UI/motion, localization, Pages/screenshots, and release audit rema
 
 ### Repository files
 
-Public tree, legal/privacy, Wiki, screenshots, and family documentation remain separate from product UI. `repository-documentation-standard` owns publication structure; `qenterra-design-system` owns interface grammar and visual evidence requirements.
+Public tree, legal/privacy, Wiki, screenshots, and family documentation remain separate instruction domains, but their shared sources now live together: `docs/repository/` and `templates/repository/` own repository structure while `docs/MASTER.md`, `tokens/`, and `templates/design/` own interface grammar and visual evidence requirements.
 
 ## Deletion result
 
@@ -53,10 +55,10 @@ No instruction file was deleted. The audit found no orphaned or truly redundant 
 
 1. Obsidian root `AGENTS.md` and `_agents/index.md`.
 2. `Дизайн-система QenTerra — применение и развитие.md` for UX/UI work.
-3. Design-system `AGENTS.md`, `docs/MASTER.md`, platform layer, and product profile.
+3. Design-system `AGENTS.md`, then `docs/MASTER.md`/tokens for UX/UI or `docs/repository/STANDARD.md`/`templates/repository/` for repository documentation.
 4. Product-specific Obsidian instruction.
 5. Current repository source, tests, specifications, and rendered evidence.
 
 ## Verification boundary
 
-The audit verifies static routing, token/version ownership, template coverage, and validator behavior. It does not prove live Obsidian rendering or production migration of the three applications.
+The audit verifies static routing, token/version/package ownership, bilingual repository-module parity, template coverage, and validator behavior. It does not prove live Obsidian rendering, native product rendering, or external publication.

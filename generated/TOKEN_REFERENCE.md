@@ -382,28 +382,25 @@ Platform-specific constraints over the shared semantic core.
 - `web.minimumTargetTouch`: `44`
 - `web.requirements`: `["WCAG 2.2 AA", "semantic HTML", "focus-visible", "200% zoom", "reduced motion", "forced colors", "print"]`
 
-## QenTerra Product Profiles
+## QenTerra Product Archetypes
 
-Deliberate inheritance and exceptions for current products.
+Reusable inheritance and exception profiles selected by interaction model.
 
-- `Cadence.adapt`: `["navigation states", "settings containers", "buttons", "row interaction", "copy and localization", "screenshot harness"]`
-- `Cadence.appSpecific`: `["artwork haze", "transport controls", "audio path", "lyrics editor", "music metadata", "playback queue"]`
-- `Cadence.defaultNavigation`: `expanded-rail`
-- `Cadence.density`: `standard`
-- `Cadence.keep`: `["adaptive Soft Graphite palette", "three-pane library", "track table", "import review", "persistent player", "Now Playing", "queue", "guide mechanics", "trash recovery"]`
-- `Cadence.profile`: `immersive-content`
-- `Cadence.replace`: `["scattered radii and durations", "duplicate rail symbols", "manual disabled hover/focus", "non-durable save language"]`
-- `Lilt.adapt`: `["adaptive palette", "typography", "settings components", "button roles", "optional onboarding semantics", "model cards"]`
-- `Lilt.appSpecific`: `["recording red", "signal bars", "recording timer", "hold-to-talk", "model lifecycle", "clipboard versus insertion", "menu-bar-only shell"]`
-- `Lilt.defaultNavigation`: `menu-bar-plus-settings-sidebar`
-- `Lilt.density`: `compact`
-- `Lilt.keep`: `["state vocabulary", "short semantic motion", "String Catalog", "privacy language", "HUD", "Quick History", "keycaps", "real-signal-only", "diagnostics preview"]`
-- `Lilt.profile`: `transient-capability`
-- `Lilt.replace`: `["forced dark mode", "raw half-point typography", "generic recovery", "broken focus restoration", "fake trial flow", "stale visual sources", "unwired app icon"]`
-- `Unspool.adapt`: `["toolbar wrapping", "settings rows", "scoped issue architecture", "localization", "responsive rail"]`
-- `Unspool.appSpecific`: `["Telegram chat sidebar", "message range", "sender filters", "attachment taxonomy", "Skip/Replace/Save a Copy", "download queue"]`
-- `Unspool.defaultNavigation`: `responsive-compact-rail`
-- `Unspool.density`: `compact`
-- `Unspool.keep`: `["file table", "filename-first hierarchy", "selection summary", "download preflight", "conflict resolution", "operation history", "synthetic fixtures", "Quick Look and Finder"]`
-- `Unspool.profile`: `operational-dense`
-- `Unspool.replace`: `["invisible filter overflow", "pristine-field errors", "unnamed toggles", "unconfirmed session discard", "global string error banner"]`
+- `denseOperations.adapt`: `["toolbar wrapping", "settings rows", "scoped issue architecture", "localization", "responsive navigation"]`
+- `denseOperations.defaultNavigation`: `responsive-compact-rail`
+- `denseOperations.density`: `compact`
+- `denseOperations.keep`: `["object-first hierarchy", "selection summary", "preflight", "conflict resolution", "operation history", "synthetic fixtures", "system integration"]`
+- `denseOperations.profile`: `operational-dense`
+- `denseOperations.replace`: `["invisible filter overflow", "pristine-field errors", "unnamed toggles", "unconfirmed session discard", "global untyped errors"]`
+- `immersiveContent.adapt`: `["navigation states", "settings containers", "buttons", "row interaction", "copy and localization", "screenshot harness"]`
+- `immersiveContent.defaultNavigation`: `expanded-rail`
+- `immersiveContent.density`: `standard`
+- `immersiveContent.keep`: `["adaptive Soft Graphite palette", "persistent content hierarchy", "stable data tables", "review-first import", "persistent task controls", "queue semantics", "guide mechanics", "recoverable removal"]`
+- `immersiveContent.profile`: `immersive-content`
+- `immersiveContent.replace`: `["scattered radii and durations", "duplicate navigation symbols", "suppressed hover and focus", "persistence claims stronger than reality"]`
+- `transientCapability.adapt`: `["adaptive palette", "typography", "settings components", "button roles", "onboarding requirements", "lifecycle cards"]`
+- `transientCapability.defaultNavigation`: `transient-plus-settings-sidebar`
+- `transientCapability.density`: `compact`
+- `transientCapability.keep`: `["honest state vocabulary", "short semantic motion", "localization", "privacy language", "HUD", "quick history", "keycaps", "real-signal-only feedback", "diagnostics preview"]`
+- `transientCapability.profile`: `transient-capability`
+- `transientCapability.replace`: `["forced appearance", "undersized typography", "generic recovery", "broken focus restoration", "fake trial flows", "stale visual sources"]`

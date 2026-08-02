@@ -125,15 +125,15 @@ This catalog defines the expected interface vocabulary. It does not require ever
 
 ## Product archetypes
 
-| Archetype | Shared contract | Product example |
+| Archetype | Shared contract | Typical context |
 | --- | --- | --- |
-| Persistent player | Stable transport/status layer | Cadence |
-| Playback queue | Ordered selection, reorder, undo, unavailable state | Cadence |
-| Preflight summary | Scope/count/size/destination/conflicts | Unspool |
-| Conflict resolver | Safe default and explicit alternatives | Unspool |
-| Recording HUD | Real signal, timer, state, non-focus | Lilt |
-| Quick history | Search, selection, insert/copy, recovery | Lilt |
-| Model lifecycle card | Download/verify/install/load/recovery/license | Lilt |
+| Persistent player | Stable transport/status layer | Media library |
+| Playback queue | Ordered selection, reorder, undo, unavailable state | Ordered content |
+| Preflight summary | Scope/count/size/destination/conflicts | Batch operation |
+| Conflict resolver | Safe default and explicit alternatives | File or data transfer |
+| Recording HUD | Real signal, timer, state, non-focus | Active capture |
+| Quick history | Search, selection, insert/copy, recovery | Transient utility |
+| Model lifecycle card | Download/verify/install/load/recovery/license | Local capability |
 
 ## Component acceptance
 

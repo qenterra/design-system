@@ -6,7 +6,7 @@
 
 Корпус велик, но не бессмысленно дублирован на уровне файлов. У каждого сохранённого файла свой trigger: домен продукта, publication layer, этап browser-extension engineering или exceptional history reconstruction. Удаление ради красивого счётчика смешало бы safety boundaries и заставило агентов читать больше лишнего.
 
-Настоящая проблема была в source ownership. Общие design facts транзитивно шли через Cadence, поэтому Lilt и Unspool могли наследовать устаревшую продуктовую трактовку. Точные palette/timing values также дублировались в Cadence prose до появления machine-readable source.
+Проблема source ownership теперь закрыта и для interface design, и для repository documentation. Общие правила ведут в один canonical repository; продуктовые инструкции сохраняют только факты продукта и границы live verification.
 
 ## Исправленные дефекты
 
@@ -20,6 +20,8 @@
 - Добавлены component и product-profile templates без копии token values.
 - Добавлен read-only validator с negative tests на missing files, version drift и missing references.
 - Обновлены Obsidian routing и README.
+- Repository, legal, Wiki, family-style и screenshot instructions переведены на bilingual repository module и категоризированные templates в этом репозитории.
+- Focused validator теперь проверяет local packages, repository locale parity, стабильные repository anchors, запрет deprecated path и универсальность гайда.
 
 ## Намеренно сохранено
 
@@ -41,7 +43,7 @@ Architecture, UI/motion, localization, Pages/screenshots и release audit ост
 
 ### Repository files
 
-Public tree, legal/privacy, Wiki, screenshots и family documentation остаются отдельно от product UI. `repository-documentation-standard` владеет publication structure; `qenterra-design-system` — interface grammar и visual evidence.
+Public tree, legal/privacy, Wiki, screenshots и family documentation остаются отдельными instruction domains, но их общие sources теперь собраны вместе: `docs/repository/` и `templates/repository/` владеют repository structure, а `docs/MASTER.md`, `tokens/` и `templates/design/` — interface grammar и visual evidence.
 
 ## Результат удаления
 
@@ -51,10 +53,10 @@ Public tree, legal/privacy, Wiki, screenshots и family documentation остаю
 
 1. Obsidian root `AGENTS.md` и `_agents/index.md`.
 2. `Дизайн-система QenTerra — применение и развитие.md` для UX/UI.
-3. Design-system `AGENTS.md`, `docs/MASTER.md`, platform layer и product profile.
+3. Design-system `AGENTS.md`, затем `docs/MASTER.md`/tokens для UX/UI или `docs/repository/STANDARD.md`/`templates/repository/` для repository documentation.
 4. Product-specific Obsidian instruction.
 5. Current repository source, tests, specs и rendered evidence.
 
 ## Граница проверки
 
-Аудит проверяет static routing, token/version ownership, templates и validator behavior. Он не доказывает live Obsidian rendering или production migration трёх приложений.
+Аудит проверяет static routing, token/version/package ownership, parity bilingual repository module, templates и validator behavior. Он не доказывает live Obsidian rendering, native product rendering или external publication.

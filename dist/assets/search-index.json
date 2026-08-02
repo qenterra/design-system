@@ -1,20 +1,26 @@
 [
   {
     "section": 0,
+    "anchor": "section-0",
+    "order": 0,
     "title": "How to use this file",
     "page": "Overview",
     "path": "index.html",
-    "text": "This document defines the shared UX/UI grammar for Cadence, Unspool, Lilt, future native applications, websites, and browser extensions. Read in this order: 1. Determine the target platform and product profile. 2. Read the relevant pattern before selecting components. 3. Use semantic tokens from tokens/ .json ; never copy values from screenshots. 4. Prefer native platform behavior over decorative sameness. 5. Verify every mandatory state, accessibility mode, and content boundary. Normative words: - must : required for compliance; - should : default; deviations need a reason; - may : optional; - must not : prohibited; - product-specific : deliberately outside the shared core. When this prose and a token file disagree, exact values come from the token file and behavioral meaning comes from this document. Fix the contradiction in the same change."
+    "text": "This document defines the shared UX/UI grammar for current and future native applications, websites, and browser extensions. Read in this order: 1. Determine the target platform and product profile. 2. Read the relevant pattern before selecting components. 3. Use semantic tokens from tokens/ .json ; never copy values from screenshots. 4. Prefer native platform behavior over decorative sameness. 5. Verify every mandatory state, accessibility mode, and content boundary. Normative words: - must : required for compliance; - should : default; deviations need a reason; - may : optional; - must not : prohibited; - product-specific : deliberately outside the shared core. When this prose and a token file disagree, exact values come from the token file and behavioral meaning comes from this document. Fix the contradiction in the same change."
   },
   {
     "section": 1,
+    "anchor": "section-1",
+    "order": 1,
     "title": "Family thesis",
     "page": "Overview",
     "path": "index.html",
-    "text": "QenTerra products share one interface grammar, not one application shell. The system combines: - Cadence's adaptive Soft Graphite palette, content hierarchy, media browsing, and review-first import flow; - Unspool's spacing discipline, dense operational layouts, preflight, conflict safety, and recovery; - Lilt's state language, short semantic motion, privacy copy, localization pipeline, and transient surfaces. Family resemblance is visible in: - color roles; - typography roles; - spacing rhythm; - corner hierarchy; - button and row states; - icon treatment; - motion timing; - language and error recovery; - accessibility behavior; - screenshot and QA evidence. Family resemblance is not created by copying: - the same rail width; - the same Settings placement; - the same row height for every density; - the same app-icon metaphor; - media-player components into utilities; - menu-bar HUDs into document windows."
+    "text": "QenTerra products share one interface grammar, not one application shell. The system combines an adaptive Soft Graphite palette and content hierarchy with disciplined dense layouts, review-first flows, preflight, conflict safety, honest state language, short semantic motion, privacy copy, localization, transient surfaces, and explicit recovery. Family resemblance is visible in: - color roles; - typography roles; - spacing rhythm; - corner hierarchy; - button and row states; - icon treatment; - motion timing; - language and error recovery; - accessibility behavior; - screenshot and QA evidence. Family resemblance is not created by copying: - the same rail width; - the same Settings placement; - the same row height for every density; - the same app-icon metaphor; - media-player components into utilities; - menu-bar HUDs into document windows."
   },
   {
     "section": 2,
+    "anchor": "section-2",
+    "order": 2,
     "title": "Principles",
     "page": "Overview",
     "path": "index.html",
@@ -22,6 +28,8 @@
   },
   {
     "section": 3,
+    "anchor": "section-3",
+    "order": 3,
     "title": "Foundations",
     "page": "Foundations",
     "path": "pages/foundations.html",
@@ -29,6 +37,8 @@
   },
   {
     "section": 4,
+    "anchor": "section-4",
+    "order": 4,
     "title": "Interaction states",
     "page": "Foundations",
     "path": "pages/foundations.html",
@@ -36,6 +46,8 @@
   },
   {
     "section": 5,
+    "anchor": "section-5",
+    "order": 5,
     "title": "Controls",
     "page": "Components",
     "path": "pages/components.html",
@@ -43,6 +55,8 @@
   },
   {
     "section": 6,
+    "anchor": "section-6",
+    "order": 6,
     "title": "Containers and data display",
     "page": "Components",
     "path": "pages/components.html",
@@ -50,13 +64,17 @@
   },
   {
     "section": 7,
+    "anchor": "section-7",
+    "order": 7,
     "title": "Navigation",
     "page": "Components",
     "path": "pages/components.html",
-    "text": "Shared navigation defines states, icon treatment, label behavior, keyboard movement, focus, persistence, and responsive transformation. It does not define one universal shell. 7.1 Rail - Use for a small stable set of top-level destinations. - Expanded mode prioritizes recognition; compact mode prioritizes space. - Each destination needs a unique symbol. - Expansion keeps icon anchors stable and animates width/label opacity only. - Compact mode must not hide the current location entirely. Product defaults: - Cadence: expanded for new installations; - Unspool: compact or responsive based on width; - Lilt: no application rail outside Settings. 7.2 Sidebar Use for labeled sources, categories, or settings sections. It supports keyboard movement, selection, scrolling, and a visible current item. Do not build a custom sidebar that loses arrow navigation or screen-reader semantics. 7.3 Toolbar Toolbars contain frequent contextual actions. Search uses platform placement where available. Overflow is explicit through a labeled More menu; critical actions do not disappear into invisible horizontal scrolling. 7.4 Tabs and segmented navigation Use for a small number of peer views. Preserve state"
+    "text": "Shared navigation defines states, icon treatment, label behavior, keyboard movement, focus, persistence, and responsive transformation. It does not define one universal shell. 7.1 Rail - Use for a small stable set of top-level destinations. - Expanded mode prioritizes recognition; compact mode prioritizes space. - Each destination needs a unique symbol. - Expansion keeps icon anchors stable and animates width/label opacity only. - Compact mode must not hide the current location entirely. Archetype defaults: - content libraries: expanded when recognition is more important than density; - operational workspaces: compact or responsive based on width; - transient utilities: no application rail outside full-window settings or history. 7.2 Sidebar Use for labeled sources, categories, or settings sections. It supports keyboard movement, selection, scrolling, and a visible current item. Do not build a custom sidebar that loses arrow navigation or screen-reader semantics. 7.3 Toolbar Toolbars contain frequent contextual actions. Search uses platform placement where available. Overflow is explicit through a labeled More menu; critical actions do not disappear into invisible horizontal scroll"
   },
   {
     "section": 8,
+    "anchor": "section-8",
+    "order": 8,
     "title": "Overlays and transient surfaces",
     "page": "Components",
     "path": "pages/components.html",
@@ -64,6 +82,8 @@
   },
   {
     "section": 9,
+    "anchor": "section-9",
+    "order": 9,
     "title": "Feedback and progress",
     "page": "Components",
     "path": "pages/components.html",
@@ -71,6 +91,8 @@
   },
   {
     "section": 10,
+    "anchor": "section-10",
+    "order": 10,
     "title": "Core patterns",
     "page": "Patterns",
     "path": "pages/patterns.html",
@@ -78,6 +100,8 @@
   },
   {
     "section": 11,
+    "anchor": "section-11",
+    "order": 11,
     "title": "Motion",
     "page": "Motion",
     "path": "pages/motion.html",
@@ -85,13 +109,17 @@
   },
   {
     "section": 12,
+    "anchor": "section-12",
+    "order": 12,
     "title": "UX writing and localization",
     "page": "Content",
     "path": "pages/content.html",
-    "text": "12.1 Voice Calm, direct, specific, and honest. Avoid marketing language inside operational UI. Do not anthropomorphize errors when precision is needed. 12.2 Labels - Start with a verb for actions. - Name the result: Download 2 Files , Reveal in Finder , Retry Verification . - Use sentence case by default for descriptions and messages. - Use platform-standard capitalization for short native control titles when required. - Use one term per concept across products and documentation. 12.3 Status Report the actual outcome: - Copied to Clipboard is not Inserted ; - Saved for this session is not Saved ; - Cached results are not Up to date ; - No speech detected is better than an internal recognition code. 12.4 Error copy Avoid: - Something went wrong ; - Unknown error ; - Lilt needs help ; - generic Configure ; - internal API terminology without user consequence. Prefer specific cause, preserved state, and scoped action. 12.5 Confirmation copy The title asks or states the consequence. The body explains what changes and what remains. Destructive action labels repeat the concrete verb. 12.6 Localization - All user-facing strings live in the platform localization source. - Use plural rules, "
+    "text": "12.1 Voice Calm, direct, specific, and honest. Avoid marketing language inside operational UI. Do not anthropomorphize errors when precision is needed. 12.2 Labels - Start with a verb for actions. - Name the result: Download 2 Files , Reveal in Finder , Retry Verification . - Use sentence case by default for descriptions and messages. - Use platform-standard capitalization for short native control titles when required. - Use one term per concept across products and documentation. 12.3 Status Report the actual outcome: - Copied to Clipboard is not Inserted ; - Saved for this session is not Saved ; - Cached results are not Up to date ; - No speech detected is better than an internal recognition code. 12.4 Error copy Avoid: - Something went wrong ; - Unknown error ; - The app needs help ; - generic Configure ; - internal API terminology without user consequence. Prefer specific cause, preserved state, and scoped action. 12.5 Confirmation copy The title asks or states the consequence. The body explains what changes and what remains. Destructive action labels repeat the concrete verb. 12.6 Localization - All user-facing strings live in the platform localization source. - Use plural rule"
   },
   {
     "section": 13,
+    "anchor": "section-13",
+    "order": 13,
     "title": "Accessibility",
     "page": "Accessibility",
     "path": "pages/accessibility.html",
@@ -99,6 +127,8 @@
   },
   {
     "section": 14,
+    "anchor": "section-14",
+    "order": 14,
     "title": "Platform layers",
     "page": "Platforms",
     "path": "pages/platforms.html",
@@ -106,20 +136,26 @@
   },
   {
     "section": 15,
-    "title": "Product profiles",
-    "page": "Products",
+    "anchor": "section-15",
+    "order": 15,
+    "title": "Product archetypes",
+    "page": "Product archetypes",
     "path": "pages/products.html",
-    "text": "Exact profile arrays live in tokens/products.json . 15.1 Cadence Keep the adaptive palette, three-pane library, track table, import review, persistent player, Now Playing, queue, Guide, and Trash recovery. Adapt navigation states, settings containers, buttons, row interaction, localization, and screenshot capture. Replace duplicate navigation symbols, scattered radii/durations, manually suppressed hover/focus, and save language that exceeds persistence. Product-specific: artwork haze, transport, audio path, lyrics, metadata, queue semantics. Migration priorities: 1. Make Smart Collections durable or change the promise. 2. Fix production-themed screenshots. 3. Expand new-install navigation and use unique symbols. 4. Centralize interactive row states. 5. Adopt shared tokens and String Catalog. 6. Complete playback-first Album and Artist actions. 15.2 Unspool Keep the filename-first table, selection summary, preflight, conflict choices, operation history, fixtures, Quick Look, and Finder integration. Adapt the rail, toolbar wrapping, settings rows, issue placement, localization, and motion mapping. Replace invisible filter overflow, pristine errors, unnamed toggles, unconfirmed interr"
+    "text": "Exact profile arrays live in tokens/products.json . Choose an archetype by interaction model, not by branding; a product may combine them when boundaries remain explicit. 15.1 Immersive content Use for libraries and browsers where persistent content hierarchy, rich media, selection, queues, and long-lived state dominate. Keep adaptive surfaces, review-first imports, persistent task controls, stable tables, and recoverable removal. Adapt density and navigation to the platform. Replace duplicate symbols, scattered visual constants, suppressed interaction states, and persistence claims that exceed reality. 15.2 Dense operations Use for file, transfer, batch, and administration workflows. Keep filename-first or object-first hierarchy, selection summaries, preflight, conflict resolution, scoped progress, operation history, and system integration. Adapt rail density, toolbar wrapping, issue placement, localization, and motion. Replace invisible overflow, pristine-field errors, unnamed toggles, silent session discard, and global untyped errors. 15.3 Transient capability Use for menu-bar utilities, HUDs, capture tools, quick history, and background capabilities surfaced briefly. Keep hones"
   },
   {
     "section": 16,
+    "anchor": "section-16",
+    "order": 16,
     "title": "App icons",
-    "page": "Products",
+    "page": "Product archetypes",
     "path": "pages/products.html",
-    "text": "App icons form a family through: - shared optical weight; - controlled biomorphic or faceted construction; - restrained graphite/monochrome material; - appearance-aware foreground/background contrast; - consistent safe zones and silhouette density; - matching lighting, translucency, and depth rules; - validation at 16, 32, 64, 128, 256, 512, and 1024 pixels where supported. They must remain semantically distinct. Do not turn every icon into a letter tile or force Cadence geometry onto unrelated concepts."
+    "text": "App icons form a family through: - shared optical weight; - controlled biomorphic or faceted construction; - restrained graphite/monochrome material; - appearance-aware foreground/background contrast; - consistent safe zones and silhouette density; - matching lighting, translucency, and depth rules; - validation at 16, 32, 64, 128, 256, 512, and 1024 pixels where supported. They must remain semantically distinct. Do not turn every icon into a letter tile or force one product's geometry onto unrelated concepts."
   },
   {
     "section": 17,
+    "anchor": "section-17",
+    "order": 17,
     "title": "Documentation and screenshots",
     "page": "Evidence",
     "path": "pages/audit.html",
@@ -127,6 +163,8 @@
   },
   {
     "section": 18,
+    "anchor": "section-18",
+    "order": 18,
     "title": "Governance",
     "page": "Governance",
     "path": "pages/governance.html",
@@ -134,6 +172,8 @@
   },
   {
     "section": 19,
+    "anchor": "section-19",
+    "order": 19,
     "title": "AI implementation protocol",
     "page": "Governance",
     "path": "pages/governance.html",
@@ -141,6 +181,8 @@
   },
   {
     "section": 20,
+    "anchor": "section-20",
+    "order": 20,
     "title": "Maintenance procedure",
     "page": "Governance",
     "path": "pages/governance.html",
@@ -148,9 +190,119 @@
   },
   {
     "section": 21,
+    "anchor": "section-21",
+    "order": 21,
     "title": "Definition of done for product adoption",
     "page": "Governance",
     "path": "pages/governance.html",
     "text": "A product is compliant only when: - semantic tokens replace local duplicates; - required component states are implemented; - product-specific exceptions are documented; - user-facing strings use the localization source; - keyboard and accessibility behaviors are verified; - appearance and constrained-layout screenshots are current; - empty/loading/error/recovery states are exercised; - raw token and stale-doc validators pass; - remaining live gaps are explicit. Visual similarity alone is not adoption."
+  },
+  {
+    "section": "R0",
+    "anchor": "repository-overview",
+    "order": 22,
+    "title": "Repository Documentation Standard",
+    "page": "Repositories",
+    "path": "pages/repositories.html",
+    "text": ""
+  },
+  {
+    "section": "R1",
+    "anchor": "repository-principles",
+    "order": 23,
+    "title": "Principles",
+    "page": "Repositories",
+    "path": "pages/repositories.html",
+    "text": "1. One spine, product-specific facts. Every README follows the same order, but distribution and permission sections use the appropriate product profile. 2. User path before implementation detail. Explain what the product does, its current status, and how to use or install it before architecture. 3. Verified claims only. Read manifests, entitlements, network clients, storage code, dependency metadata, and release artifacts before writing privacy or compatibility claims. 4. Public documentation is not an attic. Completed plans, agent output, remediation briefs, private runbooks, and historical implementation notes do not belong in the public tree. 5. Honest gaps are part of the product status. Separate automated checks, live validation, and remaining manual acceptance. 6. Templates are disposable scaffolding. Remove unused sections instead of leaving empty headings or generic filler."
+  },
+  {
+    "section": "R2",
+    "anchor": "repository-root-files",
+    "order": 24,
+    "title": "Canonical root files",
+    "page": "Repositories",
+    "path": "pages/repositories.html",
+    "text": "File Policy --- --- README.md Required. Product overview, status, interface, setup, development, limitations, and document index. LICENSE Required for a public source repository. Publish only an explicitly selected license with the correct copyright holder. CHANGELOG.md Required for versioned or release-oriented products. Use Keep a Changelog and Semantic Versioning where they actually apply. CONTRIBUTING.md Recommended. Keep setup, checks, privacy rules, and pull-request expectations project-specific. PRIVACY.md Required when the product handles user data, external services, broad permissions, accounts, media, history, or local persistence. SECURITY.md Required. Define supported versions, a private report route, sanitization rules, and security boundaries. TERMS OF USE.md Recommended for end-user products; required when external services, user content, downloads, or potentially sensitive capabilities are involved. THIRD PARTY NOTICES.md Required when runtime code, models, fonts, media, downloaded assets, or other licensed components are included or fetched. .github/FUNDING.yml Required for public QenTerra products. Contains only the approved Buy Me a Coffee custom URL. CODE OF CON"
+  },
+  {
+    "section": "R3",
+    "anchor": "repository-readme",
+    "order": 25,
+    "title": "README information architecture",
+    "page": "Repositories",
+    "path": "pages/repositories.html",
+    "text": "Use this order for both README profiles: 1. Hero: icon, product name, one-line description, truthful badges, short links. 2. Product summary and distribution/status notice. 3. Interface: real built UI using isolated synthetic fixtures. 4. Capabilities: user outcomes, grouped by task. 5. Get started: download/install for published products, build from source for source-only products. 6. How it works: only when the data flow helps the user understand safety, privacy, or limitations. 7. Permissions and privacy: capability-to-purpose mapping and links to full policy documents. 8. Development: reproducible setup and one canonical verification command. 9. Architecture or project structure: compact summary plus a link to details. 10. Current limitations and verification gaps. 11. Documentation index. 12. Contributing, support, and license. The README is a map, not a second copy of every guide. Detailed build steps, dependency update procedures, troubleshooting, and release runbooks belong in their dedicated documents."
+  },
+  {
+    "section": "R4",
+    "anchor": "repository-technical-docs",
+    "order": 26,
+    "title": "Technical documentation",
+    "page": "Repositories",
+    "path": "pages/repositories.html",
+    "text": "Non-trivial repositories should provide: File Purpose --- --- docs/README.md Public documentation index and audience map. docs/BUILDING.md Clean-checkout setup, source of truth, build, verification, and local-only paths. docs/ARCHITECTURE.md Runtime flow, component boundaries, persistence, concurrency, security, and generation rules. docs/DEPENDENCIES.md Runtime versus development dependencies, version policy, licenses, sources, and update procedure. docs/TROUBLESHOOTING.md Symptom-first recovery steps that do not weaken security or integrity checks. Product design or brand documents are optional public contributor documents. Implementation plans and completed remediation specifications stay in the private work knowledge base."
+  },
+  {
+    "section": "R5",
+    "anchor": "repository-wiki",
+    "order": 27,
+    "title": "GitHub Wiki",
+    "page": "Repositories",
+    "path": "pages/repositories.html",
+    "text": "Published QenTerra products use a native GitHub Wiki as the user-guide layer. The common core is Home.md , Sidebar.md , Getting-Started.md , Feature-Overview.md , Privacy-and-Security.md , and Troubleshooting.md . Sidebar groups appear in the order Use , Understand , Build , and Policies . Wiki does not duplicate root legal files or complete contributor guides. It links to their canonical versions in the main repository. Images remain under main docs/images/ and are embedded with absolute raw GitHub URLs. Buy Me a Coffee remains limited to README and .github/FUNDING.yml ."
+  },
+  {
+    "section": "R6",
+    "anchor": "repository-style",
+    "order": 28,
+    "title": "Naming and style",
+    "page": "Repositories",
+    "path": "pages/repositories.html",
+    "text": "- Repository-authored documentation is English. - Use sentence case for headings. - Use Privacy Policy , Security Policy , Terms of Use , and Third-party notices consistently. - Use ISO dates: Effective date: YYYY-MM-DD . - Use THIRD PARTY NOTICES.md and TERMS OF USE.md across all repositories. - Use relative links for repository files and meaningful alt text for images. - Use sh for portable shell snippets unless Bash-specific syntax is required. - Use direct, factual copy. Avoid unverified superlatives, roadmap promises, fake metrics, and badges that do not resolve to a real source. - State source-only, unsigned, unnotarized, prerelease, or store-review status near the top of the README. - Render the canonical product icon at 128 px and place the Buy Me a Coffee badge last in the hero badge row."
+  },
+  {
+    "section": "R7",
+    "anchor": "repository-privacy-legal",
+    "order": 29,
+    "title": "Privacy and legal source-of-truth checks",
+    "page": "Repositories",
+    "path": "pages/repositories.html",
+    "text": "Before changing legal documents, inspect: - application entitlements or extension permissions; - network clients, external services, and explicit browser-opening actions; - local storage paths, retention bounds, deletion behavior, and account actions; - runtime, downloaded, bundled, and build-only dependencies; - model, media, font, and website-script licenses; - release archives, not just source manifests. Do not state that data “never leaves the device” when an operating-system sync provider or required external service can process it. Name that boundary."
+  },
+  {
+    "section": "R8",
+    "anchor": "repository-drift",
+    "order": 30,
+    "title": "Drift protection",
+    "page": "Repositories",
+    "path": "pages/repositories.html",
+    "text": "Every repository validation command should check, at minimum: - all local Markdown and HTML links resolve; - no unresolved template marker remains outside the template tree; - README version, supported security range, archive names, and changelog agree with the canonical version source; - every direct runtime dependency appears in THIRD PARTY NOTICES.md ; - declared permissions or entitlements appear in the privacy documentation; - referenced screenshots exist under docs/images/ ; - internal plan directories and machine-specific paths are absent from the public tree. - Funding YAML contains only https://buymeacoffee.com/qenterra ; - every Wiki page is covered by Sidebar.md , internal links omit .md , and raw screenshot URLs resolve. Allow explicit synthetic test paths and small product icons. A validator that reports known fixtures as privacy leaks or icons as screenshots needs scoped allowlists; otherwise people learn to ignore it, which is how useful gates die."
+  },
+  {
+    "section": "R9",
+    "anchor": "repository-synchronization",
+    "order": 31,
+    "title": "Change synchronization",
+    "page": "Repositories",
+    "path": "pages/repositories.html",
+    "text": "Change Documents to review --- --- User-visible behavior README, changelog, screenshots, troubleshooting Permission, entitlement, network, storage, or retention README, privacy, security, terms Dependency or model dependency guide, notices, license texts, build guide Supported OS, browser, IDE, or toolchain README, building, contributing, CI Distribution or release status README, changelog, security support table, release links Architecture or persistence boundary architecture, security, contributing source-of-truth rules New external service README, privacy, terms, security, notices when applicable"
+  },
+  {
+    "section": "R10",
+    "anchor": "repository-verification",
+    "order": 32,
+    "title": "Verification vocabulary",
+    "page": "Repositories",
+    "path": "pages/repositories.html",
+    "text": "Use these labels consistently: - Automated: lint, format, unit tests, builds, link checks, manifest checks. - Live: exercised in the built product with the real operating-system or service boundary. - Manual gap: still requires hardware, account, permission, accessibility, visual, store, or external-service acceptance. Never compress all three into “tested.” That word has buried enough context."
+  },
+  {
+    "section": "R11",
+    "anchor": "repository-templates",
+    "order": 33,
+    "title": "Applying templates",
+    "page": "Repositories",
+    "path": "pages/repositories.html",
+    "text": "The files under templates/repository/ are starting points, not blind copy targets. Select the smallest set that matches the repository type, replace every placeholder, remove irrelevant sections, and verify every claim against the current implementation before committing. Use templates/repository/readme/ for the repository class, root/ for canonical policy and legal files, docs/ for technical documentation, github/ for repository-hosting metadata, and wiki/ for optional long-form product guidance. The standard remains authoritative when a template and the rules appear to disagree."
   }
 ]

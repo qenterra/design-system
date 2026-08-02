@@ -5,6 +5,8 @@
     "mobileNavigationAndEscape": "passed",
     "scrollSpy": "passed",
     "languageSwitch": "passed",
+    "languagePickerPosition": "passed",
+    "repositoryModule": "passed",
     "uniformSvgIcons": "passed",
     "semanticStructure": "passed",
     "responsiveOverflow": "passed",
@@ -81,7 +83,7 @@
       "theme": "light",
       "reducedMotion": false,
       "locale": "ru",
-      "title": "Продукты · QenTerra Design System",
+      "title": "Архетипы продуктов · QenTerra Design System",
       "sections": 2,
       "structure": {
         "oneH1": true,
@@ -101,8 +103,8 @@
       "theme": "dark",
       "reducedMotion": true,
       "locale": "en",
-      "title": "QenTerra Design System · QenTerra Design System",
-      "sections": 25,
+      "title": "Applying templates · QenTerra Design System",
+      "sections": 37,
       "structure": {
         "oneH1": true,
         "namedInteractiveElements": true,
@@ -121,8 +123,28 @@
       "theme": "dark",
       "reducedMotion": false,
       "locale": "ru",
-      "title": "QenTerra Design System · QenTerra Design System",
-      "sections": 25,
+      "title": "Применение шаблонов · QenTerra Design System",
+      "sections": 37,
+      "structure": {
+        "oneH1": true,
+        "namedInteractiveElements": true,
+        "sequentialHeadingLevels": true,
+        "oneMainLandmark": true,
+        "noHorizontalOverflow": true
+      }
+    },
+    {
+      "name": "repositories-ru-light-desktop",
+      "path": "ru/pages/repositories.html",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "theme": "light",
+      "reducedMotion": false,
+      "locale": "ru",
+      "title": "Репозитории · QenTerra Design System",
+      "sections": 12,
       "structure": {
         "oneH1": true,
         "namedInteractiveElements": true,

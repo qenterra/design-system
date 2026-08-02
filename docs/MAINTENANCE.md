@@ -5,8 +5,8 @@
 - Behavioral rules: `docs/MASTER.md` and its complete Russian counterpart `docs/MASTER.ru.md`.
 - Exact values: `tokens/*.json`.
 - Reference UI: `src/assets/` plus generated content from both master files and both component catalogs.
-- Reusable work products: `templates/`.
-- Generated output: `generated/` and `dist/`.
+- Reusable work products: `templates/design/` and `templates/repository/`.
+- Generated output: `generated/`, `packages/*` generated adapters, and `dist/`.
 
 Never edit generated files directly.
 
@@ -46,7 +46,15 @@ Prefer an existing semantic token. Add a raw foundation token only if the curren
 
 ## Adding a component
 
-Complete `templates/component-spec.md`. A component is incomplete without anatomy, content rules, all mandatory states, keyboard behavior, screen-reader semantics, responsive rules, localization expansion, reduced motion/transparency, increased contrast, and verification cases.
+Complete `templates/design/component-spec.md`. A component is incomplete without anatomy, content rules, all mandatory states, keyboard behavior, screen-reader semantics, responsive rules, localization expansion, reduced motion/transparency, increased contrast, and verification cases.
+
+## Repository documentation
+
+Use `docs/repository/STANDARD.md` or `STANDARD.ru.md` for the normative repository contract and select starting files from `templates/repository/`. Templates are never copied blindly: remove irrelevant sections, replace every placeholder, and verify product, privacy, legal, dependency, release, and screenshot claims against the current repository. Keep the design system as the single source; do not recreate a standalone documentation-standard folder.
+
+## Local token packages
+
+Add `packages/swift/` as a local Swift Package Manager dependency or reference `packages/css/` through a local JavaScript package dependency. `scripts/build.py` generates their adapter payloads from `tokens/*.json`; package manifests and the hand-authored Swift entry point are maintained sources. Package publication requires separate approval.
 
 ## Product exceptions
 

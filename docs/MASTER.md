@@ -1,10 +1,10 @@
 # QenTerra Design System
 
-Version 1.1.0 · Normative reference for humans and AI agents
+Version 1.2.0 · Normative reference for humans and AI agents
 
 ## 0. How to use this file
 
-This document defines the shared UX/UI grammar for Cadence, Unspool, Lilt, future native applications, websites, and browser extensions.
+This document defines the shared UX/UI grammar for current and future native applications, websites, and browser extensions.
 
 Read in this order:
 
@@ -28,11 +28,7 @@ When this prose and a token file disagree, exact values come from the token file
 
 QenTerra products share one interface grammar, not one application shell.
 
-The system combines:
-
-- Cadence's adaptive Soft Graphite palette, content hierarchy, media browsing, and review-first import flow;
-- Unspool's spacing discipline, dense operational layouts, preflight, conflict safety, and recovery;
-- Lilt's state language, short semantic motion, privacy copy, localization pipeline, and transient surfaces.
+The system combines an adaptive Soft Graphite palette and content hierarchy with disciplined dense layouts, review-first flows, preflight, conflict safety, honest state language, short semantic motion, privacy copy, localization, transient surfaces, and explicit recovery.
 
 Family resemblance is visible in:
 
@@ -130,7 +126,7 @@ Action roles:
 - `action.quiet`: low-emphasis contextual action;
 - `state.destructive`: irreversible or difficult-to-recover action;
 - `state.success`, `state.warning`, `state.informative`: status, always with text or symbol;
-- `state.recording`: product-specific Lilt recording role.
+- `state.recording`: product-specific active capture role.
 
 Rules:
 
@@ -246,7 +242,7 @@ Rules:
 - Selected state may change fill or rendering mode without changing geometry.
 - Status icons are paired with text or another non-color indicator.
 
-App icons share construction rules, not metaphors: safe zone, silhouette density, material, lighting, appearance specialization, and small-size testing. Cadence, Unspool, and Lilt keep distinct marks.
+App icons share construction rules, not metaphors: safe zone, silhouette density, material, lighting, appearance specialization, and small-size testing. Every product keeps a distinct, task-relevant mark.
 
 ### 3.10 Imagery and media
 
@@ -421,11 +417,11 @@ Shared navigation defines states, icon treatment, label behavior, keyboard movem
 - Expansion keeps icon anchors stable and animates width/label opacity only.
 - Compact mode must not hide the current location entirely.
 
-Product defaults:
+Archetype defaults:
 
-- Cadence: expanded for new installations;
-- Unspool: compact or responsive based on width;
-- Lilt: no application rail outside Settings.
+- content libraries: expanded when recognition is more important than density;
+- operational workspaces: compact or responsive based on width;
+- transient utilities: no application rail outside full-window settings or history.
 
 ### 7.2 Sidebar
 
@@ -626,7 +622,7 @@ Avoid:
 
 - `Something went wrong`;
 - `Unknown error`;
-- `Lilt needs help`;
+- `The app needs help`;
 - generic `Configure`;
 - internal API terminology without user consequence.
 
@@ -715,66 +711,21 @@ Touch targets meet platform minimums. Pointer interfaces may use denser visuals 
 - Selection and hover are distinct; leaving the overlay does not mutate a locked selection.
 - Critical controls remain visible at narrow widths and with localization expansion.
 
-## 15. Product profiles
+## 15. Product archetypes
 
-Exact profile arrays live in `tokens/products.json`.
+Exact profile arrays live in `tokens/products.json`. Choose an archetype by interaction model, not by branding; a product may combine them when boundaries remain explicit.
 
-### 15.1 Cadence
+### 15.1 Immersive content
 
-Keep the adaptive palette, three-pane library, track table, import review, persistent player, Now Playing, queue, Guide, and Trash recovery.
+Use for libraries and browsers where persistent content hierarchy, rich media, selection, queues, and long-lived state dominate. Keep adaptive surfaces, review-first imports, persistent task controls, stable tables, and recoverable removal. Adapt density and navigation to the platform. Replace duplicate symbols, scattered visual constants, suppressed interaction states, and persistence claims that exceed reality.
 
-Adapt navigation states, settings containers, buttons, row interaction, localization, and screenshot capture.
+### 15.2 Dense operations
 
-Replace duplicate navigation symbols, scattered radii/durations, manually suppressed hover/focus, and save language that exceeds persistence.
+Use for file, transfer, batch, and administration workflows. Keep filename-first or object-first hierarchy, selection summaries, preflight, conflict resolution, scoped progress, operation history, and system integration. Adapt rail density, toolbar wrapping, issue placement, localization, and motion. Replace invisible overflow, pristine-field errors, unnamed toggles, silent session discard, and global untyped errors.
 
-Product-specific: artwork haze, transport, audio path, lyrics, metadata, queue semantics.
+### 15.3 Transient capability
 
-Migration priorities:
-
-1. Make Smart Collections durable or change the promise.
-2. Fix production-themed screenshots.
-3. Expand new-install navigation and use unique symbols.
-4. Centralize interactive row states.
-5. Adopt shared tokens and String Catalog.
-6. Complete playback-first Album and Artist actions.
-
-### 15.2 Unspool
-
-Keep the filename-first table, selection summary, preflight, conflict choices, operation history, fixtures, Quick Look, and Finder integration.
-
-Adapt the rail, toolbar wrapping, settings rows, issue placement, localization, and motion mapping.
-
-Replace invisible filter overflow, pristine errors, unnamed toggles, unconfirmed interrupted-session discard, and the global string error banner.
-
-Product-specific: Telegram sources, message range, sender filters, attachment taxonomy, conflict vocabulary, download queue.
-
-Migration priorities:
-
-1. Reconcile compact/responsive rail with the specification.
-2. Reflow critical filters without hidden horizontal scrolling.
-3. Introduce field interaction state.
-4. Make Settings rows accessible by construction.
-5. Implement scoped typed issues and recovery.
-6. Rebuild current synthetic screenshot coverage.
-
-### 15.3 Lilt
-
-Keep state vocabulary, semantic motion, localization, privacy language, HUD, Quick History, keycaps, real-signal-only behavior, and diagnostics preview.
-
-Adapt the palette, typography, settings grammar, buttons, onboarding requirement semantics, model cards, and semantic colors.
-
-Replace forced Dark appearance, half-point typography, generic recovery, broken target restoration, non-isolated trial flow, stale visual sources, and the unwired icon pipeline.
-
-Product-specific: recording red, signal bars, timer, hold-to-talk, models, clipboard/insertion distinction, menu-bar-only shell.
-
-Migration priorities:
-
-1. Fix insertion target preservation.
-2. Build a real isolated trial destination.
-3. Adopt adaptive System/Light/Dark tokens.
-4. Raise and tokenize supporting typography.
-5. Map errors to specific recovery.
-6. Wire and verify the app icon.
+Use for menu-bar utilities, HUDs, capture tools, quick history, and background capabilities surfaced briefly. Keep honest state vocabulary, real-signal-only feedback, semantic motion, privacy language, keycaps, target restoration, and diagnostics. Adapt palette, typography, settings, onboarding requirements, and lifecycle cards. Replace forced appearance, undersized type, generic recovery, fake trials, broken focus restoration, and stale visual sources.
 
 ## 16. App icons
 
@@ -788,7 +739,7 @@ App icons form a family through:
 - matching lighting, translucency, and depth rules;
 - validation at 16, 32, 64, 128, 256, 512, and 1024 pixels where supported.
 
-They must remain semantically distinct. Do not turn every icon into a letter tile or force Cadence geometry onto unrelated concepts.
+They must remain semantically distinct. Do not turn every icon into a letter tile or force one product's geometry onto unrelated concepts.
 
 ## 17. Documentation and screenshots
 

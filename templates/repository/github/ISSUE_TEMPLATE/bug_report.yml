@@ -1,0 +1,60 @@
+name: Bug report
+description: "Report a reproducible problem in {PROJECT_NAME}"
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Search existing issues first. Report security vulnerabilities through GitHub private vulnerability reporting.
+  - type: input
+    id: version
+    attributes:
+      label: "{PROJECT_NAME} version or commit"
+      placeholder: "{VERSION_OR_COMMIT_EXAMPLE}"
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Include the relevant operating system, browser, hardware, and toolchain versions.
+      placeholder: "{ENVIRONMENT_EXAMPLE}"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      placeholder: |
+        1. Open …
+        2. Select …
+        3. Observe …
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Screenshots, video, or logs
+      description: Replace accounts, content, filenames, paths, and credentials with synthetic values.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I tested the latest supported release or current main branch.
+          required: true
+        - label: This report does not contain a security vulnerability or private data.
+          required: true

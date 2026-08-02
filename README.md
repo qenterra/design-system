@@ -1,8 +1,8 @@
 # QenTerra Design System
 
-Shared UX/UI grammar for Cadence, Unspool, Lilt, and future QenTerra products.
+Shared UX/UI grammar for QenTerra native applications, websites, browser extensions, and future products.
 
-The system combines Cadence's adaptive Soft Graphite visual foundation, Unspool's component and workflow discipline, and Lilt's state, motion, privacy, and localization architecture.
+The system combines an adaptive Soft Graphite foundation with disciplined components, honest state, short motion, privacy-aware copy, localization, and explicit recovery.
 
 ## Quick start
 
@@ -18,9 +18,12 @@ Open `http://localhost:8000/` for automatic language selection, choose `dist/en/
 
 - `docs/MASTER.md` and `docs/MASTER.ru.md` — normative English and Russian AI/developer references.
 - `tokens/` — exact machine-readable values and product profiles.
-- `generated/` — generated CSS and Swift adapters.
+- `generated/` — compatibility copies of generated CSS and Swift adapters.
+- `packages/swift/` and `packages/css/` — connectable local token packages.
 - `dist/` — multipage reference and standalone HTML.
-- `templates/` — component, screen, copy, accessibility, screenshot, and migration templates.
+- `templates/design/` — interface design and review templates.
+- `templates/repository/` — repository documentation, policy, GitHub, and Wiki templates.
+- `docs/repository/` — normative bilingual repository documentation standard.
 - `output/` — audit evidence, validation reports, and rendered screenshots.
 - `docs/MAINTENANCE.md` — update and release workflow.
 
@@ -36,7 +39,7 @@ Open `http://localhost:8000/` for automatic language selection, choose `dist/en/
 
 ## Status
 
-Version 1.1.0 adds a complete Russian reference, locale-aware navigation, standalone scroll tracking, and one consistent SVG icon family. Production migration of Cadence, Unspool, and Lilt is intentionally separate from this repository.
+Version 1.2.0 adds a bilingual repository-documentation module, categorized templates, a right-aligned language picker, and connectable local SwiftPM/CSS token packages. Product migrations remain separate from this repository.
 
 ## Repository boundary
 

@@ -17,6 +17,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from lib.token_tools import flatten, get_path, load_json, resolve  # noqa: E402
 from lib.markdown_renderer import split_numbered_sections  # noqa: E402
+from lib.site_locales import REPOSITORY_SECTION_KEYS  # noqa: E402
 
 
 TOKEN_NAMES = ["foundation", "semantic", "typography", "motion", "components", "platforms", "products"]
@@ -266,6 +267,7 @@ def validate_html_tree(dist: Path) -> list[str]:
             continue
         record = records[standalone.resolve()]
         required = {f"section-{number}" for number in range(22)}
+        required.update(f"repository-{key}" for key in REPOSITORY_SECTION_KEYS)
         missing = sorted(required - record.ids)
         if missing:
             errors.append(f"{label}: missing sections {missing}")
@@ -282,9 +284,19 @@ def validate_html_tree(dist: Path) -> list[str]:
             errors.append(f"dist: missing assets/search-index-{locale}.json")
             continue
         indexes[locale] = json.loads(path.read_text(encoding="utf-8"))
-        sections = [item.get("section") for item in indexes[locale]]
-        if sections != list(range(22)):
-            errors.append(f"assets/search-index-{locale}.json: expected sections 0–21, got {sections}")
+        numeric_sections = [item.get("section") for item in indexes[locale] if isinstance(item.get("section"), int)]
+        if numeric_sections != list(range(22)):
+            errors.append(
+                f"assets/search-index-{locale}.json: expected numbered sections 0–21, got {numeric_sections}"
+            )
+        repository_anchors = [
+            item.get("anchor") for item in indexes[locale] if str(item.get("section", "")).startswith("R")
+        ]
+        expected_anchors = [f"repository-{key}" for key in REPOSITORY_SECTION_KEYS]
+        if repository_anchors != expected_anchors:
+            errors.append(
+                f"assets/search-index-{locale}.json: repository anchors differ: {repository_anchors}"
+            )
     if set(indexes) == {"en", "ru"}:
         if len(indexes["en"]) != len(indexes["ru"]):
             errors.append("localized search indexes have different entry counts")
@@ -310,6 +322,52 @@ def validate_localized_sources(root: Path) -> list[str]:
     for filename in ("COMPONENT_CATALOG.md", "COMPONENT_CATALOG.ru.md"):
         if not (root / "docs" / filename).is_file():
             errors.append(f"docs/{filename}: missing localized component catalog")
+    repository_headings: dict[str, list[str]] = {}
+    for locale, filename in (("en", "STANDARD.md"), ("ru", "STANDARD.ru.md")):
+        path = root / "docs" / "repository" / filename
+        if not path.is_file():
+            errors.append(f"docs/repository/{filename}: missing localized repository standard")
+            continue
+        text = path.read_text(encoding="utf-8")
+        repository_headings[locale] = re.findall(r"^##\s+(.+)$", text, flags=re.MULTILINE)
+        if len(repository_headings[locale]) != len(REPOSITORY_SECTION_KEYS) - 1:
+            errors.append(
+                f"docs/repository/{filename}: expected {len(REPOSITORY_SECTION_KEYS) - 1} H2 sections, "
+                f"got {len(repository_headings[locale])}"
+            )
+    if set(repository_headings) == {"en", "ru"} and len(repository_headings["en"]) != len(
+        repository_headings["ru"]
+    ):
+        errors.append("English and Russian repository standard section counts differ")
+    return errors
+
+
+def validate_packages(root: Path, version: str) -> list[str]:
+    errors: list[str] = []
+    css_root = root / "packages" / "css"
+    swift_root = root / "packages" / "swift"
+    manifest_path = css_root / "package.json"
+    if not manifest_path.is_file():
+        errors.append("packages/css/package.json: missing local CSS package manifest")
+    else:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        if manifest.get("version") != version:
+            errors.append(f"packages/css/package.json: version {manifest.get('version')} does not match VERSION {version}")
+        if manifest.get("private") is not True:
+            errors.append("packages/css/package.json: local package must remain private")
+        for exported in ("tokens.css", "tokens.json"):
+            if not (css_root / exported).is_file():
+                errors.append(f"packages/css/{exported}: missing generated package export")
+    if not (swift_root / "Package.swift").is_file():
+        errors.append("packages/swift/Package.swift: missing SwiftPM manifest")
+    swift_generated = swift_root / "Sources" / "QenTerraDesignTokens" / "QDSGeneratedTokens.swift"
+    if not swift_generated.is_file():
+        errors.append("packages/swift: missing generated Swift source")
+    elif swift_generated.read_bytes() != (root / "generated" / "QDSGeneratedTokens.swift").read_bytes():
+        errors.append("packages/swift: generated Swift source drifted from canonical adapter")
+    css_generated = css_root / "tokens.css"
+    if css_generated.is_file() and css_generated.read_bytes() != (root / "generated" / "qds-tokens.css").read_bytes():
+        errors.append("packages/css: generated stylesheet drifted from canonical adapter")
     return errors
 
 
@@ -318,6 +376,20 @@ def validate_repository_hygiene(root: Path) -> list[str]:
     for relative in (Path(".superpowers"), Path("docs/superpowers")):
         if (root / relative).exists():
             errors.append(f"{relative}: AI working directory must stay outside the repository")
+    universal_sources = [
+        root / "README.md",
+        root / "docs" / "MASTER.md",
+        root / "docs" / "MASTER.ru.md",
+        root / "docs" / "COMPONENT_CATALOG.md",
+        root / "docs" / "COMPONENT_CATALOG.ru.md",
+        root / "tokens" / "products.json",
+        root / "scripts" / "lib" / "site_locales.py",
+        root / "scripts" / "build.py",
+    ]
+    product_names = re.compile(r"\b(Cadence|Unspool|Lilt)\b")
+    for path in universal_sources:
+        if path.is_file() and product_names.search(path.read_text(encoding="utf-8")):
+            errors.append(f"{path.relative_to(root)}: universal guide contains an existing product name")
     return errors
 
 
@@ -355,7 +427,13 @@ def validate_browser_evidence(root: Path) -> list[str]:
         if not name or not path.is_file() or path.stat().st_size < 10_000:
             errors.append(f"visual evidence missing or too small: {name!r}")
     checks = report.get("checks", {})
-    for name in ("scrollSpy", "languageSwitch", "uniformSvgIcons"):
+    for name in (
+        "scrollSpy",
+        "languageSwitch",
+        "languagePickerPosition",
+        "repositoryModule",
+        "uniformSvgIcons",
+    ):
         if checks.get(name) != "passed":
             errors.append(f"output/reports/browser.json: {name} did not pass")
     return errors
@@ -375,6 +453,7 @@ def run(root: Path = ROOT) -> dict[str, Any]:
     )
     errors.extend(validate_html_tree(root / "dist"))
     errors.extend(validate_localized_sources(root))
+    errors.extend(validate_packages(root, version))
     errors.extend(validate_repository_hygiene(root))
     errors.extend(validate_placeholders(root))
     errors.extend(validate_browser_evidence(root))

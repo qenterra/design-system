@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import re
 import shutil
 import sys
 import tempfile
@@ -14,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from lib.markdown_renderer import Section, plain_text, render, split_numbered_sections  # noqa: E402
-from lib.site_locales import COPY, PAGE_GROUPS, SPECIMENS, icon  # noqa: E402
+from lib.site_locales import COPY, PAGE_GROUPS, REPOSITORY_SECTION_KEYS, SPECIMENS, icon  # noqa: E402
 from lib.token_tools import (  # noqa: E402
     generate_css,
     generate_swift,
@@ -47,16 +48,22 @@ def pages(locale: str) -> list[tuple[str, str, list[int], str]]:
 def nav_html(current: str, root: str, standalone: bool, locale: str) -> str:
     links = []
     for slug, title, section_numbers, _ in pages(locale):
-        if standalone:
+        if slug == "repositories":
+            href = "#repository-overview" if standalone else f"{root}pages/repositories.html"
+            section_start = section_end = "repository"
+        elif standalone:
             href = f"#section-{section_numbers[0]}"
+            section_start, section_end = section_numbers[0], section_numbers[-1]
         elif slug == "index":
             href = f"{root}index.html"
+            section_start, section_end = section_numbers[0], section_numbers[-1]
         else:
             href = f"{root}pages/{slug}.html"
+            section_start, section_end = section_numbers[0], section_numbers[-1]
         current_attr = ' aria-current="page"' if slug == current and not standalone else ""
         links.append(
-            f'<a href="{href}" data-nav-slug="{slug}" data-section-start="{section_numbers[0]}" '
-            f'data-section-end="{section_numbers[-1]}"{current_attr}>'
+            f'<a href="{href}" data-nav-slug="{slug}" data-section-start="{section_start}" '
+            f'data-section-end="{section_end}"{current_attr}>'
             f'<span class="nav-glyph">{icon(slug)}</span><span>{title}</span></a>'
         )
     return "\n".join(links)
@@ -171,7 +178,7 @@ def product_specimen(locale: str) -> str:
     copy = SPECIMENS[locale]
     cards = []
     for name, profile, pattern in zip(
-        ["Cadence", "Unspool", "Lilt"], copy["profiles"],
+        copy["archetypes"], copy["profiles"],
         [["is-large", "", "is-accent"], ["", "is-large", ""], ["is-accent", "", "is-large"]],
     ):
         blocks = "".join(f'<div class="mini-block {kind}"></div>' for kind in pattern)
@@ -250,6 +257,39 @@ def render_component_catalog(locale: str) -> str:
         f'<h2>{COPY[locale]["appendix"]["catalog"]}</h2><div class="prose">'
         f'{render(path.read_text(encoding="utf-8"), heading_offset=2, id_prefix="catalog-")}</div></section>'
     )
+
+
+def repository_sections(locale: str) -> list[tuple[str, str, str]]:
+    filename = "STANDARD.ru.md" if locale == "ru" else "STANDARD.md"
+    text = (ROOT / "docs" / "repository" / filename).read_text(encoding="utf-8")
+    lines = text.splitlines()
+    if not lines or not lines[0].startswith("# "):
+        raise ValueError(f"{filename}: expected one H1 title")
+    title = lines[0][2:].strip()
+    headings = [index for index, line in enumerate(lines) if re.match(r"^##\s+\S", line)]
+    expected = len(REPOSITORY_SECTION_KEYS) - 1
+    if len(headings) != expected:
+        raise ValueError(f"{filename}: expected {expected} H2 sections, got {len(headings)}")
+    first_heading = headings[0] if headings else len(lines)
+    intro = "\n".join(lines[1:first_heading]).strip()
+    sections = [(REPOSITORY_SECTION_KEYS[0], title, intro)]
+    for offset, start in enumerate(headings):
+        end = headings[offset + 1] if offset + 1 < len(headings) else len(lines)
+        heading = lines[start][3:].strip()
+        body = "\n".join(lines[start + 1 : end]).strip()
+        sections.append((REPOSITORY_SECTION_KEYS[offset + 1], heading, body))
+    return sections
+
+
+def render_repository_module(locale: str) -> str:
+    rendered = []
+    for index, (key, title, markdown) in enumerate(repository_sections(locale)):
+        rendered.append(
+            f'<section class="doc-section" id="repository-{key}" data-nav-slug="repositories">'
+            f'<span class="section-number">R{index}</span><h2>{title}</h2>'
+            f'<div class="prose">{render(markdown, id_prefix=f"repository-{key}-")}</div></section>'
+        )
+    return "".join(rendered)
 
 
 def theme_bootstrap(locale: str) -> str:
@@ -347,7 +387,7 @@ def shell(
   <div class="progress-line" data-progress aria-hidden="true"></div>
   <div class="site-shell">
     <aside class="sidebar" aria-label="{ui["navigation"]}">
-      <div class="sidebar-head">{language_menu(locale, language_targets)}<a class="brand" href="{home}"><span class="brand-mark" aria-hidden="true">Q</span><span class="brand-copy"><span class="brand-title">QenTerra Design System</span><span class="brand-meta">{ui["semantic_core"]} · {version}</span></span></a></div>
+      <div class="sidebar-head"><a class="brand" href="{home}"><span class="brand-mark" aria-hidden="true">Q</span><span class="brand-copy"><span class="brand-title">QenTerra Design System</span><span class="brand-meta">{ui["semantic_core"]} · {version}</span></span></a></div>
       <p class="nav-label">{ui["reference"]}</p>
       <nav class="site-nav">{nav_html(page_slug, site_root, standalone, locale)}</nav>
       <div class="sidebar-footer">
@@ -357,7 +397,7 @@ def shell(
     </aside>
     <button class="scrim" data-scrim aria-label="{ui["close_navigation"]}"></button>
     <div class="main-column">
-      <header class="topbar"><button class="menu-button" type="button" data-menu-button aria-expanded="false" aria-label="{ui["open_navigation"]}">{icon("menu")}</button><p class="topbar-title">{page_title}</p><div class="search-wrap"><span class="search-icon">{icon("search")}</span><input class="search-input" type="search" data-search aria-label="{ui["search_label"]}" placeholder="{ui["search_placeholder"]}" autocomplete="off"><div class="search-results" data-search-results role="region" aria-label="{ui["search_results"]}"></div></div><span class="key-hint" aria-hidden="true">⌘ K</span></header>
+      <header class="topbar"><button class="menu-button" type="button" data-menu-button aria-expanded="false" aria-label="{ui["open_navigation"]}">{icon("menu")}</button><p class="topbar-title">{page_title}</p><div class="search-wrap"><span class="search-icon">{icon("search")}</span><input class="search-input" type="search" data-search aria-label="{ui["search_label"]}" placeholder="{ui["search_placeholder"]}" autocomplete="off"><div class="search-results" data-search-results role="region" aria-label="{ui["search_results"]}"></div></div><span class="key-hint" aria-hidden="true">⌘ K</span>{language_menu(locale, language_targets)}</header>
       <main class="content" id="main-content">
         {hero}
         <header class="page-intro"><p class="page-eyebrow">{ui["eyebrow"]}</p><{intro_heading}>{page_title}</{intro_heading}><p class="page-summary">{page_summary}</p></header>
@@ -379,10 +419,22 @@ def build() -> None:
     token_css = generate_css(tokens["foundation"], tokens["semantic"], tokens["typography"], tokens["motion"])
     swift = generate_swift(tokens["foundation"], tokens["semantic"], tokens["motion"])
     token_reference = generate_token_reference(token_files)
+    token_snapshot = json.dumps(
+        {name: data for name, data in token_files},
+        ensure_ascii=False,
+        indent=2,
+        sort_keys=True,
+    ) + "\n"
 
     atomic_write(ROOT / "generated" / "qds-tokens.css", token_css)
     atomic_write(ROOT / "generated" / "QDSGeneratedTokens.swift", swift)
     atomic_write(ROOT / "generated" / "TOKEN_REFERENCE.md", token_reference)
+    atomic_write(
+        ROOT / "packages" / "swift" / "Sources" / "QenTerraDesignTokens" / "QDSGeneratedTokens.swift",
+        swift,
+    )
+    atomic_write(ROOT / "packages" / "css" / "tokens.css", token_css)
+    atomic_write(ROOT / "packages" / "css" / "tokens.json", token_snapshot)
 
     dist = ROOT / "dist"
     if dist.exists():
@@ -412,10 +464,24 @@ def build() -> None:
             search_index.append(
                 {
                     "section": section.number,
+                    "anchor": f"section-{section.number}",
+                    "order": section.number,
                     "title": section.title,
                     "page": COPY[locale]["pages"][slug][0],
                     "path": path,
                     "text": plain_text(section.markdown)[:1200],
+                }
+            )
+        for index, (key, title, markdown) in enumerate(repository_sections(locale)):
+            search_index.append(
+                {
+                    "section": f"R{index}",
+                    "anchor": f"repository-{key}",
+                    "order": 22 + index,
+                    "title": title,
+                    "page": COPY[locale]["pages"]["repositories"][0],
+                    "path": "pages/repositories.html",
+                    "text": plain_text(markdown)[:1200],
                 }
             )
         atomic_write(
@@ -431,7 +497,11 @@ def build() -> None:
         locale_root = dist / locale
         (locale_root / "pages").mkdir(parents=True, exist_ok=True)
         for slug, page_title, numbers, summary in pages(locale):
-            sections_html = "\n".join(render_section(section_map[number], locale, slug) for number in numbers)
+            sections_html = (
+                render_repository_module(locale)
+                if slug == "repositories"
+                else "\n".join(render_section(section_map[number], locale, slug) for number in numbers)
+            )
             if slug == "components":
                 sections_html += render_component_catalog(locale)
             if slug == "audit":
@@ -466,6 +536,7 @@ def build() -> None:
                 standalone_sections.append(render_component_catalog(locale))
             if section.number == 17:
                 standalone_sections.append(render_audit_appendix(locale))
+        standalone_sections.append(render_repository_module(locale))
         standalone = shell(
             page_slug="index",
             page_title=title,
@@ -494,6 +565,7 @@ def build() -> None:
             compatibility_sections.append(render_component_catalog("en"))
         if section.number == 17:
             compatibility_sections.append(render_audit_appendix("en"))
+    compatibility_sections.append(render_repository_module("en"))
     compatibility = shell(
         page_slug="index",
         page_title=english_title,

@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.2.0
+
+### Added
+
+- Complete English and Russian repository-documentation standard with stable site anchors.
+- Categorized repository README, root-policy, technical-docs, GitHub, and Wiki templates.
+- Connectable private local CSS/JSON package and local SwiftPM token package with tests.
+- Repository locale-parity, package-drift, and negative validation gates.
+
+### Changed
+
+- Moved the language picker from the sidebar to the upper-right top bar.
+- Moved interface work templates under `templates/design/` and made public guidance product-independent.
+- Absorbed the former standalone repository-documentation standard into this repository as its sole maintained source.
+
 ## 1.1.0
 
 ### Added

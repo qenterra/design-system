@@ -127,7 +127,7 @@ async function assertUniformSvgIcons(page) {
       invalidChrome: chromeControls.filter((control) => control.querySelectorAll("svg.icon").length !== 1).length
     };
   });
-  if (result.navCount !== 11 || result.invalidNav || result.invalidChrome) {
+  if (result.navCount !== 12 || result.invalidNav || result.invalidChrome) {
     throw new Error(`Icon family mismatch: ${JSON.stringify(result)}`);
   }
 }
@@ -147,6 +147,45 @@ async function assertScrollSpy(page, baseUrl) {
   await page.waitForTimeout(150);
   const governanceCurrent = await page.locator('.site-nav a[data-nav-slug="governance"][aria-current="location"]').count();
   if (governanceCurrent !== 1) throw new Error("Scroll-spy did not activate Governance at section 18");
+
+  await page.locator("#repository-overview").evaluate((element) => window.scrollTo(0, Math.max(0, element.offsetTop - 80)));
+  await page.waitForTimeout(150);
+  const repositoryCurrent = await page.locator('.site-nav a[data-nav-slug="repositories"][aria-current="location"]').count();
+  if (repositoryCurrent !== 1) throw new Error("Scroll-spy did not activate Repository documentation");
+}
+
+async function assertLanguagePickerPosition(page, baseUrl) {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto(`${baseUrl}/en/index.html`, { waitUntil: "networkidle" });
+  const desktop = await page.evaluate(() => {
+    const picker = document.querySelector(".topbar > .language-picker");
+    const sidebarPicker = document.querySelector(".sidebar .language-picker");
+    const topbar = document.querySelector(".topbar");
+    if (!picker || !topbar) return { present: false };
+    const pickerBox = picker.getBoundingClientRect();
+    const topbarBox = topbar.getBoundingClientRect();
+    return {
+      present: true,
+      sidebarAbsent: !sidebarPicker,
+      alignedRight: Math.abs(pickerBox.right - topbarBox.right) <= 64,
+      insideViewport: pickerBox.right <= innerWidth && pickerBox.left >= 0
+    };
+  });
+  if (!desktop.present || !desktop.sidebarAbsent || !desktop.alignedRight || !desktop.insideViewport) {
+    throw new Error(`Desktop language picker is not in the upper-right top bar: ${JSON.stringify(desktop)}`);
+  }
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.reload({ waitUntil: "networkidle" });
+  await page.locator("[data-language-button]").click();
+  const mobile = await page.locator("[data-language-menu]").evaluate((menu) => {
+    const box = menu.getBoundingClientRect();
+    return { left: box.left, right: box.right, width: innerWidth };
+  });
+  if (mobile.left < 0 || mobile.right > mobile.width) {
+    throw new Error(`Mobile language menu leaves viewport: ${JSON.stringify(mobile)}`);
+  }
+  await page.keyboard.press("Escape");
 }
 
 async function assertLanguageSwitch(page, baseUrl) {
@@ -172,6 +211,14 @@ async function assertLanguageSwitch(page, baseUrl) {
   const menuHidden = await page.locator("[data-language-menu]").getAttribute("hidden");
   const focused = await button.evaluate((element) => element === document.activeElement);
   if (menuHidden === null || !focused) throw new Error("Language menu Escape behavior or focus restoration failed");
+
+  await page.goto(`${baseUrl}/en/pages/repositories.html#repository-verification`, { waitUntil: "networkidle" });
+  await page.locator("[data-language-button]").click();
+  await page.locator('[data-locale-target="ru"]').click();
+  await page.waitForURL(/\/ru\/pages\/repositories\.html#repository-verification$/);
+  if ((await page.locator("html").getAttribute("lang")) !== "ru") {
+    throw new Error("Repository module language switch lost its locale");
+  }
 }
 
 async function main() {
@@ -209,6 +256,7 @@ async function main() {
 
     await assertUniformSvgIcons(page);
     await assertScrollSpy(page, baseUrl);
+    await assertLanguagePickerPosition(page, baseUrl);
     await assertLanguageSwitch(page, baseUrl);
 
     const captures = [];
@@ -219,6 +267,7 @@ async function main() {
       { name: "products-ru-light-tablet", path: "ru/pages/products.html", viewport: { width: 768, height: 1024 }, theme: "light", reducedMotion: false },
       { name: "standalone-en-dark-desktop", path: "en/qenterra-design-system.html", viewport: { width: 1280, height: 900 }, theme: "dark", reducedMotion: true },
       { name: "standalone-ru-motion-dark", path: "ru/qenterra-design-system.html", viewport: { width: 1280, height: 900 }, theme: "dark", reducedMotion: false, scrollTarget: "#section-11", fullPage: false }
+      ,{ name: "repositories-ru-light-desktop", path: "ru/pages/repositories.html", viewport: { width: 1280, height: 900 }, theme: "light", reducedMotion: false, scrollTarget: "#repository-verification", fullPage: false }
     ];
     for (const entry of matrix) captures.push(await capture(page, baseUrl, entry));
 
@@ -228,6 +277,8 @@ async function main() {
       mobileNavigationAndEscape: "passed",
       scrollSpy: "passed",
       languageSwitch: "passed",
+      languagePickerPosition: "passed",
+      repositoryModule: "passed",
       uniformSvgIcons: "passed",
       semanticStructure: "passed",
       responsiveOverflow: "passed",

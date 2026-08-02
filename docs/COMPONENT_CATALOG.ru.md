@@ -125,15 +125,15 @@
 
 ## Продуктовые архетипы
 
-| Архетип | Общий контракт | Пример |
+| Архетип | Общий контракт | Типичный контекст |
 | --- | --- | --- |
-| Persistent player | Стабильный transport/status layer | Cadence |
-| Playback queue | Ordered selection, reorder, undo, unavailable | Cadence |
-| Preflight summary | Scope/count/size/destination/conflicts | Unspool |
-| Conflict resolver | Safe default и explicit alternatives | Unspool |
-| Recording HUD | Real signal, timer, state, non-focus | Lilt |
-| Quick history | Search, selection, insert/copy, recovery | Lilt |
-| Model lifecycle card | Download/verify/install/load/recovery/license | Lilt |
+| Persistent player | Стабильный transport/status layer | Медиатека |
+| Playback queue | Ordered selection, reorder, undo, unavailable | Упорядоченный контент |
+| Preflight summary | Scope/count/size/destination/conflicts | Пакетная операция |
+| Conflict resolver | Safe default и explicit alternatives | Передача файлов или данных |
+| Recording HUD | Real signal, timer, state, non-focus | Активный захват |
+| Quick history | Search, selection, insert/copy, recovery | Временная утилита |
+| Model lifecycle card | Download/verify/install/load/recovery/license | Локальная возможность |
 
 ## Приёмка компонента
 

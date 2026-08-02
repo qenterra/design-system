@@ -80,8 +80,9 @@
   }
 
   function resultUrl(item) {
-    if (standalone) return `#section-${item.section}`;
-    return `${siteRoot}${item.path}#section-${item.section}`;
+    const anchor = item.anchor || `section-${item.section}`;
+    if (standalone) return `#${anchor}`;
+    return `${siteRoot}${item.path}#${anchor}`;
   }
 
   function renderSearch(query) {
@@ -101,7 +102,7 @@
         return { item, score: haystack.includes(value) ? titleMatch : 99 };
       })
       .filter((entry) => entry.score < 99)
-      .sort((a, b) => a.score - b.score || a.item.section - b.item.section)
+      .sort((a, b) => a.score - b.score || (a.item.order ?? 0) - (b.item.order ?? 0))
       .slice(0, 10);
 
     if (!matches.length) {

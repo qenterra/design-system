@@ -6,7 +6,7 @@ Read `docs/MASTER.md` or `docs/MASTER.ru.md` first for any design or UI work. Ex
 
 1. Identify the affected foundation, component, pattern, platform, or product profile.
 2. Read the relevant section of `docs/MASTER.md` and the referenced token file.
-3. Change source files only: `tokens/`, `src/`, `docs/`, or `templates/`.
+3. Change source files only: `tokens/`, `src/`, `docs/`, `templates/`, package manifests, or the hand-authored Swift package facade.
 4. Run `python3 scripts/verify.py`.
 5. Inspect generated HTML and screenshots before claiming visual completion.
 6. Update `CHANGELOG.md` and `VERSION` for any normative change.
@@ -19,4 +19,6 @@ Read `docs/MASTER.md` or `docs/MASTER.ru.md` first for any design or UI work. Ex
 - Do not add raw colors, ad hoc motion durations, or one-off radii to product code when a semantic token exists.
 - Do not claim live app, VoiceOver, or native rendering QA from static site checks.
 - Keep the repository local until the user explicitly requests publication.
+- Treat `docs/repository/STANDARD.md` and `templates/repository/` as the sole repository-documentation source; never recreate a parallel standard repository.
+- Consume token adapters through the local packages when practical. Do not publish them without explicit approval.
 - Create AI working specs, plans, handoffs, scratch notes, and tool artifacts only in a unique system temporary directory. Never add `.superpowers/` or `docs/superpowers/` to the repository.

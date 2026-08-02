@@ -16,6 +16,7 @@ from validate import (  # noqa: E402
     validate_css,
     validate_html_tree,
     validate_localized_sources,
+    validate_packages,
     validate_repository_hygiene,
     validate_token_data,
 )
@@ -75,6 +76,37 @@ class ValidatorTests(unittest.TestCase):
             (root / "docs" / "superpowers").mkdir(parents=True)
             errors = validate_repository_hygiene(root)
             self.assertTrue(any("docs/superpowers" in error for error in errors))
+
+    def test_existing_product_name_fails_universal_guide(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            root.mkdir(exist_ok=True)
+            (root / "README.md").write_text("A guide for Cadence", encoding="utf-8")
+            errors = validate_repository_hygiene(root)
+            self.assertTrue(any("universal guide contains" in error for error in errors))
+
+    def test_css_package_version_drift_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "packages" / "css").mkdir(parents=True)
+            (root / "packages" / "css" / "package.json").write_text(
+                '{"version":"0.0.0","private":true}', encoding="utf-8"
+            )
+            errors = validate_packages(root, self.version)
+            self.assertTrue(any("does not match VERSION" in error for error in errors))
+
+    def test_repository_locale_section_drift_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            docs = root / "docs"
+            repository = docs / "repository"
+            repository.mkdir(parents=True)
+            (docs / "MASTER.md").write_text("# Master\n", encoding="utf-8")
+            (docs / "MASTER.ru.md").write_text("# Мастер\n", encoding="utf-8")
+            (repository / "STANDARD.md").write_text("# Standard\n\n## Only one\n", encoding="utf-8")
+            (repository / "STANDARD.ru.md").write_text("# Стандарт\n", encoding="utf-8")
+            errors = validate_localized_sources(root)
+            self.assertTrue(any("repository standard section counts differ" in error for error in errors))
 
 
 if __name__ == "__main__":

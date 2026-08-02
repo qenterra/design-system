@@ -17,6 +17,9 @@ GENERATED_TARGETS = [
     ROOT / "generated" / "qds-tokens.css",
     ROOT / "generated" / "QDSGeneratedTokens.swift",
     ROOT / "generated" / "TOKEN_REFERENCE.md",
+    ROOT / "packages" / "swift" / "Sources" / "QenTerraDesignTokens" / "QDSGeneratedTokens.swift",
+    ROOT / "packages" / "css" / "tokens.css",
+    ROOT / "packages" / "css" / "tokens.json",
     ROOT / "dist" / "index.html",
     ROOT / "dist" / "qenterra-design-system.html",
     ROOT / "dist" / "en" / "index.html",
@@ -68,6 +71,19 @@ def main() -> int:
 
     run([python, "-m", "unittest", "discover", "-s", "tests", "-v"])
     run([python, "scripts/validate.py"])
+    with tempfile.TemporaryDirectory(prefix="qds-swift-") as swift_cache:
+        swift_environment = environment.copy()
+        swift_environment["CLANG_MODULE_CACHE_PATH"] = str(Path(swift_cache) / "clang-modules")
+        swift_environment["SWIFTPM_MODULECACHE_OVERRIDE"] = str(Path(swift_cache) / "swift-modules")
+        swift_base = [
+            "--package-path",
+            "packages/swift",
+            "--scratch-path",
+            str(Path(swift_cache) / "build"),
+            "--disable-sandbox",
+        ]
+        run(["swift", "build", *swift_base], env=swift_environment)
+        run(["swift", "run", *swift_base, "QDSContractCheck"], env=swift_environment)
 
     node = os.environ.get("QDS_NODE") or shutil.which("node")
     if not node:
@@ -85,11 +101,13 @@ def main() -> int:
             "deterministicBuild": "passed",
             "negativeTests": "passed",
             "tokensLinksContrastPlaceholders": "passed",
+            "swiftPackageBuildAndContract": "passed",
             "javascriptSyntax": "passed",
             "gitWhitespace": "passed"
         },
         "generatedSha256": second,
         "manualNotProven": [
+            "Swift package test-target execution without a complete Xcode test runtime",
             "native application rendering",
             "VoiceOver and screen-reader output",
             "production app migration",

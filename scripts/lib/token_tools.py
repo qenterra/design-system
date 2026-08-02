@@ -39,8 +39,18 @@ def kebab(value: str) -> str:
 
 
 def swift_name(value: str) -> str:
-    parts = re.split(r"[^a-zA-Z0-9]+", value)
-    return parts[0].lower() + "".join(part.capitalize() for part in parts[1:])
+    parts = [part for part in re.split(r"[^a-zA-Z0-9]+", value) if part]
+    first = parts[0]
+    identifier = first[:1].lower() + first[1:] + "".join(part.capitalize() for part in parts[1:])
+    keywords = {
+        "associatedtype", "class", "deinit", "enum", "extension", "fileprivate", "func", "import",
+        "init", "inout", "internal", "let", "open", "operator", "private", "protocol", "public",
+        "rethrows", "static", "struct", "subscript", "typealias", "var", "break", "continue",
+        "default", "defer", "do", "else", "fallthrough", "for", "guard", "if", "in", "repeat",
+        "return", "switch", "where", "while", "as", "catch", "false", "is", "nil", "super",
+        "self", "Self", "throw", "throws", "true", "try",
+    }
+    return f"`{identifier}`" if identifier in keywords else identifier
 
 
 def flatten(mapping: dict[str, Any], prefix: tuple[str, ...] = ()) -> dict[str, Any]:
@@ -120,6 +130,7 @@ def generate_css(
 def generate_swift(foundation: dict[str, Any], semantic: dict[str, Any], motion: dict[str, Any]) -> str:
     space = foundation["space"]
     radius = foundation["radius"]
+    stroke = foundation["stroke"]
     sizes = foundation["size"]
     durations = motion["durationMs"]
 
@@ -137,12 +148,18 @@ def generate_swift(foundation: dict[str, Any], semantic: dict[str, Any], motion:
             "import Foundation",
             "",
             "public enum QDSGeneratedTokens {",
+            f'    public static let version = "{foundation["meta"]["version"]}"',
+            "",
             "    public enum Space {",
             *constants(space),
             "    }",
             "",
             "    public enum Radius {",
             *constants(radius),
+            "    }",
+            "",
+            "    public enum Stroke {",
+            *constants(stroke),
             "    }",
             "",
             "    public enum Size {",
