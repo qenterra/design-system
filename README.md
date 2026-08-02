@@ -19,6 +19,7 @@ Open `http://localhost:8000/` for automatic language selection, choose `dist/en/
 - `docs/MASTER.md` and `docs/MASTER.ru.md` — normative English and Russian AI/developer references.
 - `tokens/` and focused `schemas/` — exact machine-readable values, product profiles, and fail-closed contracts.
 - `registry/` — canonical semantic registries, including contact-channel roles.
+- `generated/figma/` — deterministic design-tool handoff payloads, never a parallel source.
 - `generated/` — compatibility copies of generated CSS and Swift adapters.
 - `packages/swift/` and `packages/css/` — connectable local typed tokens and opt-in component recipes.
 - `dist/` — multipage reference and standalone HTML.
@@ -42,7 +43,7 @@ Open `http://localhost:8000/` for automatic language selection, choose `dist/en/
 
 ## Status
 
-Version 1.6.0 adds read-only consumer manifests, explicit exceptions, a machine-readable product doctor, synthetic negative fixtures, and a bilingual adoption guide. Product migrations remain explicit consumer work, never silent mutation by this repository.
+Version 1.7.0 adds the semantic icon registry with generated Swift/site adapters, deterministic Figma handoff exports, and a searchable brand asset browser that is hard-blocked from writing into the repository. Product migrations remain explicit consumer work.
 
 ## Repository boundary
 

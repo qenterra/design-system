@@ -872,3 +872,7 @@ A product is compliant only when:
 Visual similarity alone is not adoption.
 
 Begin adoption with the consumer manifest and read-only doctor. A product declares platforms, source roots, expected local adapters, and a separate exception file. Doctor output distinguishes schema/boundary errors from actionable findings and never writes inside the consumer. Exceptions match an exact rule and path, explain the real constraint, and carry a review trigger. A passing static report is evidence for covered source rules only; it does not prove native rendering, accessibility APIs, permissions, persistence, or recovery.
+
+Interface icons come from `registry/icons.json`: one semantic ID, category, meaning, and reviewed 16-point SVG fragment. Web/site consumers use generated metadata or sprite output; native products prefer a platform symbol when its meaning and optical weight match, otherwise the registry asset. A symbol never replaces a visible label when the action or outcome is ambiguous.
+
+Design-tool handoff comes only from deterministic `generated/figma/` payloads. Importers preserve collection names, modes, and types, surface unsupported fields, and start in a scratch file. Generated JSON is not proof of a published Figma library. The temporary brand browser is a search aid and is prohibited from writing into the repository.

@@ -1,0 +1,271 @@
+{
+  "components": [
+    {
+      "accessibility": [
+        "native-button",
+        "visible-focus",
+        "disabled-state-announced",
+        "loading-name-stable"
+      ],
+      "anatomy": [
+        "label",
+        "optional-leading-icon",
+        "optional-progress"
+      ],
+      "id": "button",
+      "name": {
+        "en": "Button",
+        "ru": "Кнопка"
+      },
+      "states": [
+        "default",
+        "hover",
+        "pressed",
+        "focused",
+        "disabled",
+        "loading"
+      ],
+      "stories": [
+        {
+          "id": "primary",
+          "state": "default",
+          "variant": "primary"
+        },
+        {
+          "id": "secondary",
+          "state": "default",
+          "variant": "secondary"
+        },
+        {
+          "id": "disabled",
+          "state": "disabled",
+          "variant": "primary"
+        },
+        {
+          "id": "long-copy",
+          "localeWidth": "long",
+          "state": "default",
+          "variant": "secondary"
+        }
+      ],
+      "summary": {
+        "en": "Starts one explicit action with a truthful role and state.",
+        "ru": "Запускает одно явное действие с честной ролью и состоянием."
+      }
+    },
+    {
+      "accessibility": [
+        "programmatic-label",
+        "described-error",
+        "error-not-color-only",
+        "autocomplete-explicit"
+      ],
+      "anatomy": [
+        "label",
+        "control",
+        "optional-help",
+        "optional-error"
+      ],
+      "id": "field",
+      "name": {
+        "en": "Field",
+        "ru": "Поле"
+      },
+      "states": [
+        "pristine",
+        "editing",
+        "valid",
+        "invalid",
+        "disabled",
+        "readOnly"
+      ],
+      "stories": [
+        {
+          "id": "pristine",
+          "state": "pristine"
+        },
+        {
+          "id": "invalid",
+          "state": "invalid"
+        },
+        {
+          "id": "disabled",
+          "state": "disabled"
+        },
+        {
+          "id": "rtl",
+          "localeWidth": "rtl",
+          "state": "pristine"
+        }
+      ],
+      "summary": {
+        "en": "Collects one value with persistent label, help, and validation.",
+        "ru": "Принимает одно значение с постоянной меткой, подсказкой и проверкой."
+      }
+    },
+    {
+      "accessibility": [
+        "single-focus-target",
+        "selection-announced",
+        "status-has-text"
+      ],
+      "anatomy": [
+        "leading-symbol",
+        "primary-label",
+        "supporting-text",
+        "trailing-control"
+      ],
+      "id": "interactive-row",
+      "name": {
+        "en": "Interactive row",
+        "ru": "Интерактивная строка"
+      },
+      "states": [
+        "default",
+        "hover",
+        "focused",
+        "selected",
+        "disabled",
+        "unavailable"
+      ],
+      "stories": [
+        {
+          "id": "default",
+          "state": "default"
+        },
+        {
+          "id": "selected",
+          "state": "selected"
+        },
+        {
+          "id": "unavailable",
+          "state": "unavailable"
+        }
+      ],
+      "summary": {
+        "en": "Presents a dominant label and one row-level action or selection.",
+        "ru": "Показывает главный текст и одно действие или выбор на уровне строки."
+      }
+    },
+    {
+      "accessibility": [
+        "fieldset-or-labelled-region",
+        "heading-order",
+        "children-remain-focusable"
+      ],
+      "anatomy": [
+        "heading",
+        "optional-summary",
+        "content"
+      ],
+      "id": "group",
+      "name": {
+        "en": "Group",
+        "ru": "Группа"
+      },
+      "states": [
+        "default",
+        "disabled"
+      ],
+      "stories": [
+        {
+          "id": "settings",
+          "state": "default"
+        },
+        {
+          "id": "long-copy",
+          "localeWidth": "long",
+          "state": "default"
+        }
+      ],
+      "summary": {
+        "en": "Collects related controls under one plain-language heading.",
+        "ru": "Объединяет связанные элементы под понятным заголовком."
+      }
+    },
+    {
+      "accessibility": [
+        "dialog-role",
+        "labelled-title",
+        "focus-trap",
+        "focus-restored",
+        "escape-when-safe"
+      ],
+      "anatomy": [
+        "title",
+        "consequence",
+        "content",
+        "actions",
+        "close-control"
+      ],
+      "id": "dialog",
+      "name": {
+        "en": "Dialog",
+        "ru": "Диалог"
+      },
+      "states": [
+        "presented",
+        "busy",
+        "error"
+      ],
+      "stories": [
+        {
+          "id": "confirmation",
+          "state": "presented"
+        },
+        {
+          "id": "error",
+          "state": "error"
+        }
+      ],
+      "summary": {
+        "en": "Interrupts only for a bounded decision that cannot stay inline.",
+        "ru": "Прерывает поток только ради ограниченного решения, которое нельзя оставить встроенным."
+      }
+    },
+    {
+      "accessibility": [
+        "live-region-only-when-needed",
+        "meaning-beyond-color",
+        "no-icon-only-outcome"
+      ],
+      "anatomy": [
+        "symbol-or-shape",
+        "plain-language-label",
+        "optional-detail"
+      ],
+      "id": "status",
+      "name": {
+        "en": "Status",
+        "ru": "Статус"
+      },
+      "states": [
+        "success",
+        "warning",
+        "destructive",
+        "informative",
+        "recording"
+      ],
+      "stories": [
+        {
+          "id": "success",
+          "state": "success"
+        },
+        {
+          "id": "warning",
+          "state": "warning"
+        },
+        {
+          "id": "error",
+          "state": "destructive"
+        }
+      ],
+      "summary": {
+        "en": "Communicates outcome with words and shape, never color alone.",
+        "ru": "Передаёт результат словами и формой, никогда только цветом."
+      }
+    }
+  ],
+  "format": "qds-figma-components-v1",
+  "version": "1.7.0"
+}

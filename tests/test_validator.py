@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import json
 import sys
 import tempfile
 import unittest
@@ -16,6 +17,7 @@ from validate import (  # noqa: E402
     validate_brand_sources,
     validate_contact_channels,
     validate_component_registry,
+    validate_icon_registry,
     validate_css,
     validate_html_tree,
     validate_localized_sources,
@@ -188,6 +190,24 @@ class ValidatorTests(unittest.TestCase):
             (registry / "components.json").write_text(data, encoding="utf-8")
             errors = validate_component_registry(root, self.version)
             self.assertTrue(any("unknown state" in error for error in errors))
+
+    def test_icon_registry_rejects_duplicate_ids(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            registry = root / "registry"
+            schemas = root / "schemas"
+            generated = root / "generated"
+            registry.mkdir()
+            schemas.mkdir()
+            generated.mkdir()
+            (schemas / "icon-registry.schema.json").write_bytes(
+                (ROOT / "schemas" / "icon-registry.schema.json").read_bytes()
+            )
+            data = load_json(ROOT / "registry" / "icons.json")
+            data["icons"].append(copy.deepcopy(data["icons"][0]))
+            (registry / "icons.json").write_text(json.dumps(data), encoding="utf-8")
+            errors = validate_icon_registry(root, self.version)
+            self.assertTrue(any("ids must be unique" in error for error in errors))
 
 
 if __name__ == "__main__":

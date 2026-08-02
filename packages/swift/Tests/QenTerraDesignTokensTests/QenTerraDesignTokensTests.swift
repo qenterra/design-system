@@ -12,4 +12,5 @@ import Testing
     #expect(QDS.Typography.body.size == 14)
     #expect(QDS.Motion.disclosureToggle.seconds == 0.18)
     #expect(QDS.Component.buttonHeightsStandard.points == 32)
+    #expect(QDS.Icon.globe.rawValue == "globe")
 }

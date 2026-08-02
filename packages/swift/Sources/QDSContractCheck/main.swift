@@ -10,5 +10,6 @@ precondition(QDS.Color.textPrimary.value(for: .light) == "#1A1A1C")
 precondition(QDS.Typography.body.lineHeight == 20)
 precondition(QDS.Motion.feedbackPress.seconds == 0.08)
 precondition(QDS.Component.navigationSidebarStandard.points == 256)
+precondition(QDS.Icon.success.rawValue == "success")
 
 print("QenTerraDesignTokens \(QDS.version) contract passed")

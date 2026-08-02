@@ -52,6 +52,8 @@ Every brand change follows the same sequence:
 
 The repository contains approved assets and durable specifications. Raw generations, prompt experiments, source backups, RGB/alpha intermediates, upscaler output, contact sheets, QA reports, and AI plans belong in `/private/tmp`, `/tmp`, or the platform temporary directory. A useful source format may enter the repository only after its ongoing role, ownership, naming, and validation are documented.
 
+For browsing the canonical library, run `scripts/brand/build_asset_browser.py --output /private/tmp/...`. The searchable HTML is temporary evidence and the script rejects every output path inside this repository.
+
 ## Exceptions
 
 A product may adapt placement, scale, crop, or density when its platform requires it. It may not silently recolor a mark, redesign Nyx, weaken accessibility, or create a parallel asset library. Record exceptions with scope, reason, owner, accessibility impact, and review trigger.

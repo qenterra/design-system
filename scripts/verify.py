@@ -16,10 +16,18 @@ ROOT = Path(__file__).resolve().parents[1]
 GENERATED_TARGETS = [
     ROOT / "generated" / "qds-tokens.css",
     ROOT / "generated" / "QDSGeneratedTokens.swift",
+    ROOT / "generated" / "QDSGeneratedIcons.swift",
+    ROOT / "generated" / "qds-icons.svg",
+    ROOT / "generated" / "figma" / "variables.json",
+    ROOT / "generated" / "figma" / "styles.json",
+    ROOT / "generated" / "figma" / "components.json",
+    ROOT / "generated" / "figma" / "icons.json",
     ROOT / "generated" / "TOKEN_REFERENCE.md",
     ROOT / "packages" / "swift" / "Sources" / "QenTerraDesignTokens" / "QDSGeneratedTokens.swift",
+    ROOT / "packages" / "swift" / "Sources" / "QenTerraDesignTokens" / "QDSGeneratedIcons.swift",
     ROOT / "packages" / "css" / "tokens.css",
     ROOT / "packages" / "css" / "tokens.json",
+    ROOT / "packages" / "css" / "icons.json",
     ROOT / "packages" / "css" / "recipes.css",
     ROOT / "dist" / "index.html",
     ROOT / "dist" / "qenterra-design-system.html",
@@ -32,6 +40,7 @@ GENERATED_TARGETS = [
     ROOT / "dist" / "assets" / "search-index-en.json",
     ROOT / "dist" / "assets" / "search-index-ru.json",
     ROOT / "dist" / "assets" / "qds-recipes.css",
+    ROOT / "dist" / "assets" / "qds-icons.svg",
 ]
 
 
@@ -63,6 +72,7 @@ def main() -> int:
                 "scripts/lib/token_tools.py",
                 "scripts/lib/schema_tools.py",
                 "scripts/lib/pseudo_locales.py",
+                "scripts/lib/figma_export.py",
                 "scripts/compare_screenshots.py",
                 "scripts/audit_consumer.py",
                 "scripts/brand/validate_brand_assets.py",
@@ -71,9 +81,11 @@ def main() -> int:
                 "scripts/brand/validate_telegram_stickers.py",
                 "scripts/brand/build_nyx_asset_contacts.py",
                 "scripts/brand/process_nyx_asset.py",
+                "scripts/brand/build_asset_browser.py",
                 "tests/test_brand_assets.py",
                 "tests/test_validator.py",
                 "tests/test_consumer_doctor.py",
+                "tests/test_brand_browser.py",
             ],
             env=environment,
         )

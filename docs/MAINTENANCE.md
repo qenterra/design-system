@@ -87,6 +87,12 @@ Start product adoption from `templates/design/qds-consumer.json` and `qds-except
 
 `evidence/screenshots.json` is the exact capture matrix. Committed baselines live in `output/screenshots/`; current renders live only under ignored `output/tmp/`. Update baselines intentionally with `QDS_UPDATE_SCREENSHOTS=1`, then run `scripts/compare_screenshots.py` with the configured image Python. Inspect them at full size for clipping, contrast, hierarchy, focus, responsive navigation, and appearance parity. Automated screenshots do not prove screen-reader or native-app behavior.
 
+## Icons, asset browser, and Figma
+
+Add interface symbols to `registry/icons.json`, not to an adapter-specific private list. Keep one meaning per ID and prefer native symbols in native products when semantics and optical weight match. Build generates Swift identifiers, site SVG sprite, CSS-package metadata, and Figma icon payloads.
+
+Generate the brand asset browser only into a unique system temporary directory with `scripts/brand/build_asset_browser.py --output /private/tmp/...`; the script blocks repository paths. `generated/figma/` is derived handoff data. Read `docs/FIGMA.md`, import into a scratch file first, and never treat a successful JSON build as proof that a maintained Figma library was updated.
+
 ## Obsidian synchronization
 
 The Obsidian knowledge base routes agents to this repository and stores durable product contracts. It must not duplicate exact values from `tokens/`. Run its focused design-system reference validator and normal session gate after instruction changes.

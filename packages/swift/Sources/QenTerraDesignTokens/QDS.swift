@@ -81,4 +81,5 @@ public enum QDS {
     public typealias Typography = QDSGeneratedTokens.Typography
     public typealias Motion = QDSGeneratedTokens.Motion
     public typealias Component = QDSGeneratedTokens.Component
+    public typealias Icon = QDSIcon
 }

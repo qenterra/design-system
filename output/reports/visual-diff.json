@@ -1,5 +1,5 @@
 {
-  "version": "1.6.0",
+  "version": "1.7.0",
   "status": "passed",
   "pixelThreshold": 0,
   "captures": [
@@ -46,7 +46,7 @@
     {
       "name": "standalone-en-dark-desktop",
       "changedPixels": 0,
-      "totalPixels": 77361920
+      "totalPixels": 77710080
     },
     {
       "name": "standalone-ru-motion-dark",

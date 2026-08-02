@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from lib.markdown_renderer import Section, plain_text, render, split_numbered_sections  # noqa: E402
+from lib.figma_export import generate_figma_exports  # noqa: E402
 from lib.pseudo_locales import pseudo_long, pseudo_rtl  # noqa: E402
 from lib.site_locales import (  # noqa: E402
     BRAND_SECTION_KEYS,
@@ -26,7 +27,9 @@ from lib.site_locales import (  # noqa: E402
 )
 from lib.token_tools import (  # noqa: E402
     generate_css,
+    generate_svg_sprite,
     generate_swift,
+    generate_swift_icons,
     generate_token_reference,
     load_json,
 )
@@ -563,6 +566,8 @@ def build() -> None:
     version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
     token_files = load_tokens()
     tokens = {name: data for name, data in token_files}
+    icons = load_json(ROOT / "registry" / "icons.json")
+    components = component_registry()
     token_css = generate_css(
         tokens["foundation"],
         tokens["semantic"],
@@ -578,6 +583,9 @@ def build() -> None:
         tokens["components"],
     )
     token_reference = generate_token_reference(token_files)
+    swift_icons = generate_swift_icons(icons)
+    svg_sprite = generate_svg_sprite(icons)
+    figma_exports = generate_figma_exports(tokens, components, icons)
     token_snapshot = json.dumps(
         {name: data for name, data in token_files},
         ensure_ascii=False,
@@ -587,13 +595,25 @@ def build() -> None:
 
     atomic_write(ROOT / "generated" / "qds-tokens.css", token_css)
     atomic_write(ROOT / "generated" / "QDSGeneratedTokens.swift", swift)
+    atomic_write(ROOT / "generated" / "QDSGeneratedIcons.swift", swift_icons)
+    atomic_write(ROOT / "generated" / "qds-icons.svg", svg_sprite)
+    for filename, payload in figma_exports.items():
+        atomic_write(
+            ROOT / "generated" / "figma" / filename,
+            json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True),
+        )
     atomic_write(ROOT / "generated" / "TOKEN_REFERENCE.md", token_reference)
     atomic_write(
         ROOT / "packages" / "swift" / "Sources" / "QenTerraDesignTokens" / "QDSGeneratedTokens.swift",
         swift,
     )
+    atomic_write(
+        ROOT / "packages" / "swift" / "Sources" / "QenTerraDesignTokens" / "QDSGeneratedIcons.swift",
+        swift_icons,
+    )
     atomic_write(ROOT / "packages" / "css" / "tokens.css", token_css)
     atomic_write(ROOT / "packages" / "css" / "tokens.json", token_snapshot)
+    atomic_write(ROOT / "packages" / "css" / "icons.json", json.dumps(icons, indent=2, sort_keys=True) + "\n")
 
     dist = ROOT / "dist"
     if dist.exists():
@@ -603,6 +623,7 @@ def build() -> None:
     recipe_css = (ROOT / "src" / "assets" / "recipes.css").read_text(encoding="utf-8")
     source_js = (ROOT / "src" / "assets" / "app.js").read_text(encoding="utf-8")
     atomic_write(dist / "assets" / "qds-tokens.css", token_css)
+    atomic_write(dist / "assets" / "qds-icons.svg", svg_sprite)
     shutil.copyfile(ROOT / "src" / "assets" / "recipes.css", dist / "assets" / "qds-recipes.css")
     shutil.copyfile(ROOT / "src" / "assets" / "styles.css", dist / "assets" / "styles.css")
     shutil.copyfile(ROOT / "src" / "assets" / "app.js", dist / "assets" / "app.js")

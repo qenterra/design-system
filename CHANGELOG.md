@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.7.0
+
+### Added
+
+- Semantic interface-icon registry with focused schema, generated Swift identifiers, site sprite, and CSS-package metadata.
+- Deterministic Figma-ready variables, styles, components, and icon payloads with bilingual handoff guidance.
+- Searchable temporary brand asset browser with a fail-closed repository-output guard.
+
 ## 1.6.0
 
 ### Added

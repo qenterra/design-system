@@ -15,10 +15,11 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from lib.token_tools import flatten, get_path, load_json, resolve  # noqa: E402
+from lib.token_tools import flatten, generate_svg_sprite, generate_swift_icons, get_path, load_json, resolve  # noqa: E402
 from lib.schema_tools import validate_schema  # noqa: E402
+from lib.figma_export import generate_figma_exports  # noqa: E402
 from lib.markdown_renderer import split_numbered_sections  # noqa: E402
-from lib.site_locales import BRAND_SECTION_KEYS, REPOSITORY_SECTION_KEYS  # noqa: E402
+from lib.site_locales import BRAND_SECTION_KEYS, PAGE_GROUPS, REPOSITORY_SECTION_KEYS  # noqa: E402
 from brand.validate_brand_assets import validate_brand_assets  # noqa: E402
 
 
@@ -457,7 +458,7 @@ def validate_packages(root: Path, version: str) -> list[str]:
             errors.append(f"packages/css/package.json: version {manifest.get('version')} does not match VERSION {version}")
         if manifest.get("private") is not True:
             errors.append("packages/css/package.json: local package must remain private")
-        for exported in ("tokens.css", "tokens.json", "recipes.css"):
+        for exported in ("tokens.css", "tokens.json", "recipes.css", "icons.json"):
             if not (css_root / exported).is_file():
                 errors.append(f"packages/css/{exported}: missing generated package export")
     if not (swift_root / "Package.swift").is_file():
@@ -467,6 +468,9 @@ def validate_packages(root: Path, version: str) -> list[str]:
         errors.append("packages/swift: missing generated Swift source")
     elif swift_generated.read_bytes() != (root / "generated" / "QDSGeneratedTokens.swift").read_bytes():
         errors.append("packages/swift: generated Swift source drifted from canonical adapter")
+    swift_icons = swift_root / "Sources" / "QenTerraDesignTokens" / "QDSGeneratedIcons.swift"
+    if not swift_icons.is_file() or swift_icons.read_bytes() != (root / "generated" / "QDSGeneratedIcons.swift").read_bytes():
+        errors.append("packages/swift: generated icon identifiers drifted from canonical registry")
     css_generated = css_root / "tokens.css"
     if css_generated.is_file() and css_generated.read_bytes() != (root / "generated" / "qds-tokens.css").read_bytes():
         errors.append("packages/css: generated stylesheet drifted from canonical adapter")
@@ -605,6 +609,56 @@ def validate_component_registry(root: Path, version: str) -> list[str]:
     return errors
 
 
+def validate_icon_registry(root: Path, version: str) -> list[str]:
+    path = root / "registry" / "icons.json"
+    if not path.is_file():
+        return ["registry/icons.json: missing semantic icon registry"]
+    data = load_json(path)
+    schema_path = (path.parent / data.get("$schema", "")).resolve()
+    errors = (
+        [
+            f"registry/icons.json:{error}"
+            for error in validate_schema(data, load_json(schema_path), schema_path)
+        ]
+        if schema_path.is_file()
+        else ["registry/icons.json:$schema: missing schema"]
+    )
+    if data.get("version") != version:
+        errors.append("registry/icons.json: version does not match VERSION")
+    identifiers = [item.get("id") for item in data.get("icons", [])]
+    if len(identifiers) != len(set(identifiers)):
+        errors.append("registry/icons.json: icon ids must be unique")
+    required = {slug for slug, _ in PAGE_GROUPS} | {"search", "menu", "globe", "chevron"}
+    missing = sorted(required - set(identifiers))
+    if missing:
+        errors.append(f"registry/icons.json: missing required site icons {missing}")
+    for item in data.get("icons", []):
+        fragment = item.get("svg", "").lower()
+        if any(forbidden in fragment for forbidden in ("<script", "<style", " onload=", " onclick=")):
+            errors.append(f"registry/icons.json:{item.get('id')}: unsafe SVG fragment")
+    generated_swift = root / "generated" / "QDSGeneratedIcons.swift"
+    generated_svg = root / "generated" / "qds-icons.svg"
+    if generated_swift.is_file() and generated_swift.read_text(encoding="utf-8") != generate_swift_icons(data):
+        errors.append("generated/QDSGeneratedIcons.swift: drifted from icon registry")
+    if generated_svg.is_file() and generated_svg.read_text(encoding="utf-8") != generate_svg_sprite(data):
+        errors.append("generated/qds-icons.svg: drifted from icon registry")
+    return errors
+
+
+def validate_figma_exports(root: Path, tokens: dict[str, dict[str, Any]]) -> list[str]:
+    components = load_json(root / "registry" / "components.json")
+    icons = load_json(root / "registry" / "icons.json")
+    expected = generate_figma_exports(tokens, components, icons)
+    errors: list[str] = []
+    for filename, payload in expected.items():
+        path = root / "generated" / "figma" / filename
+        if not path.is_file():
+            errors.append(f"generated/figma/{filename}: missing deterministic export")
+        elif load_json(path) != payload:
+            errors.append(f"generated/figma/{filename}: drifted from canonical sources")
+    return errors
+
+
 def validate_placeholders(root: Path) -> list[str]:
     errors: list[str] = []
     scan_roots = [root / "docs", root / "tokens", root / "src", root / "dist", root / "generated", root / "output"]
@@ -696,6 +750,8 @@ def run(root: Path = ROOT) -> dict[str, Any]:
     errors.extend(validate_brand_sources(root))
     errors.extend(validate_contact_channels(root, version))
     errors.extend(validate_component_registry(root, version))
+    errors.extend(validate_icon_registry(root, version))
+    errors.extend(validate_figma_exports(root, tokens))
     errors.extend(validate_brand_assets(root, check_git_lfs=True))
     errors.extend(validate_placeholders(root))
     errors.extend(validate_browser_evidence(root))

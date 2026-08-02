@@ -1,6 +1,6 @@
 {
   "name": "@qenterra/design-tokens",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Local CSS and JSON adapters for QenTerra Design System tokens.",
   "private": true,
   "sideEffects": [
@@ -11,12 +11,14 @@
     ".": "./tokens.css",
     "./tokens.css": "./tokens.css",
     "./recipes.css": "./recipes.css",
-    "./tokens.json": "./tokens.json"
+    "./tokens.json": "./tokens.json",
+    "./icons.json": "./icons.json"
   },
   "files": [
     "tokens.css",
     "recipes.css",
     "tokens.json",
+    "icons.json",
     "README.md"
   ]
 }
