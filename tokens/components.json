@@ -2,7 +2,7 @@
   "$schema": "../schemas/components.schema.json",
   "meta": {
     "name": "QenTerra Component Tokens",
-    "version": "1.8.0",
+    "version": "1.8.1",
     "type": "components",
     "description": "Shared component metrics and mandatory state contracts."
   },

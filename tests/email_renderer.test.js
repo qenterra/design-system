@@ -18,6 +18,27 @@ function valuesFor(template, locale) {
   ]));
 }
 
+function contrastBetween(hexA, hexB) {
+  const luminance = (hex) => {
+    const channels = hex.match(/[a-f\d]{2}/gi).map((value) => parseInt(value, 16) / 255);
+    const linear = channels.map((value) => value <= 0.03928 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4);
+    return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2];
+  };
+  const a = luminance(hexA);
+  const b = luminance(hexB);
+  return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+}
+
+function assertReadableTitle(output, template, locale, appearance) {
+  const card = output.html.match(/data-email-card[^>]+background:(#[a-f\d]{6})/i);
+  const title = output.html.match(/data-email-title[^>]+color:(#[a-f\d]{6})/i);
+  assert.ok(card && title, `${template.id}/${locale}/${appearance}: missing explicit title palette`);
+  assert.ok(
+    contrastBetween(card[1], title[1]) >= 4.5,
+    `${template.id}/${locale}/${appearance}: title contrast is below 4.5:1`
+  );
+}
+
 function assertSafeOutput(output, template, locale) {
   assert.equal(output.valid, true, `${template.id}/${locale}: ${output.errors.join(" | ")}`);
   assert.ok(output.subject.length > 3);
@@ -37,8 +58,14 @@ for (const template of registry.templates) {
   for (const locale of ["en", "ru"]) {
     const output = renderer.render(template, fieldMap, valuesFor(template, locale), locale, channels, "light");
     assertSafeOutput(output, template, locale);
+    assert.match(output.html, /<meta name="color-scheme" content="light">/);
+    assert.doesNotMatch(output.html, /prefers-color-scheme/);
+    assertReadableTitle(output, template, locale, "light");
     const dark = renderer.render(template, fieldMap, valuesFor(template, locale), locale, channels, "dark");
     assertSafeOutput(dark, template, locale);
+    assert.match(dark.html, /<meta name="color-scheme" content="dark">/);
+    assert.doesNotMatch(dark.html, /prefers-color-scheme/);
+    assertReadableTitle(dark, template, locale, "dark");
   }
 }
 

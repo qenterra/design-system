@@ -13,7 +13,7 @@ The Email page may read the committed template and contact registries, accept te
 - add telemetry, tracking pixels, link rewriting, open receipts, or analytics;
 - support newsletters, campaigns, marketing, bulk delivery, or unsubscribe flows.
 
-Reloading the page clears the working values. Switching templates clears every personal, sensitive, security, and financial value. Only `productName`, classified as public, may be retained in memory during the current page session.
+Reloading the page clears the working values. Switching templates retains only fields used by both scenarios, so a name or product does not need to be entered again when it still has the same meaning. Unrelated fields leave the active in-memory state. Clear fields removes every current value and preview.
 
 ## Channel ownership
 
@@ -45,7 +45,7 @@ Every localized scenario defines:
 1. a human-readable name and usage summary;
 2. a specific subject and hidden preheader;
 3. an eyebrow and one message title;
-4. short paragraphs containing verified facts;
+4. one canonical greeting followed by short paragraphs containing verified facts without restating the title;
 5. optional structured details;
 6. at most one contextual callout;
 7. at most one primary action with a visible fallback URL;
@@ -88,8 +88,8 @@ URLs must be absolute HTTPS URLs. The renderer rejects other schemes and escapes
 
 ## Human workflow
 
-1. Open the local Email page in the required language.
-2. Search or filter by category and responsible channel.
+1. Open the local Email page; the reference-site language controls only its interface.
+2. Choose the email language independently, then search or filter by category and responsible channel.
 3. Read the scenario summary; select the narrowest truthful template.
 4. Fill fields from verified product, support, account, operation, or payment state.
 5. Inspect both desktop/mobile width and Light/Dark preview where relevant.
@@ -105,7 +105,7 @@ If rich clipboard access fails, the page exposes a selected fallback value for m
 
 The renderer produces a complete HTML document and plain text. HTML uses escaped values, presentation tables, inline CSS, a system-font stack, explicit colors, and visible fallback URLs. It contains no JavaScript, forms, attachments, CSS variables, external fonts, remote images, tracking, or hidden operational claims.
 
-One `@media (prefers-color-scheme: dark)` enhancement is progressive only; inline colors keep the message readable where media queries are stripped. Email clients vary, so compatibility still requires real-client QA.
+Light and Dark email appearances are explicit deterministic outputs. Each declares only its selected color scheme and uses a complete inline palette; it never partially recolors itself from the operating-system preference. Email clients vary, so compatibility still requires real-client QA.
 
 ## Adding or changing a template
 

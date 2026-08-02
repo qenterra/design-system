@@ -8,7 +8,7 @@
   const registry = parsePayload("qds-email-registry");
   const contactRegistry = parsePayload("qds-contact-channels");
   const labels = parsePayload("qds-email-labels");
-  const locale = document.documentElement.lang === "ru" ? "ru" : "en";
+  const pageLocale = document.documentElement.lang === "ru" ? "ru" : "en";
   const fieldMap = Object.fromEntries(registry.fields.map((field) => [field.id, field]));
   const channels = Object.fromEntries(contactRegistry.channels.map((channel) => [channel.id, channel.address]));
   const templateMap = Object.fromEntries(registry.templates.map((template) => [template.id, template]));
@@ -30,6 +30,7 @@
     previewEmpty: root.querySelector("[data-email-preview-empty]"),
     widthButtons: Array.from(root.querySelectorAll("[data-email-width]")),
     appearanceButtons: Array.from(root.querySelectorAll("[data-email-appearance]")),
+    localeButtons: Array.from(root.querySelectorAll("[data-email-locale]")),
     copySubject: root.querySelector("[data-email-copy-subject]"),
     copyRich: root.querySelector("[data-email-copy-rich]"),
     copyText: root.querySelector("[data-email-copy-text]"),
@@ -43,12 +44,13 @@
   const state = {
     templateId: registry.templates[0].id,
     values: {},
+    locale: pageLocale,
     width: "desktop",
     appearance: "light"
   };
 
   function normalized(value) {
-    return String(value || "").toLocaleLowerCase(locale).trim();
+    return String(value || "").toLocaleLowerCase(state.locale).trim();
   }
 
   function selectedTemplate() {
@@ -67,7 +69,7 @@
     let visible = 0;
     for (const button of elements.templateButtons) {
       const template = templateMap[button.dataset.emailTemplate];
-      const copy = template.locales[locale];
+      const copy = template.locales[state.locale];
       const matchesQuery = !query || normalized(`${copy.name} ${copy.summary} ${copy.subject}`).includes(query);
       const matchesCategory = !category || template.category === category;
       const matchesChannel = !channel || template.channel === channel;
@@ -79,7 +81,7 @@
 
   function fieldControl(reference) {
     const field = fieldMap[reference.id];
-    const copy = field.locales[locale];
+    const copy = field.locales[state.locale];
     const wrapper = document.createElement("div");
     wrapper.className = "email-field";
     const controlId = `email-field-${field.id}`;
@@ -132,13 +134,16 @@
 
   function renderForm() {
     const template = selectedTemplate();
-    const copy = template.locales[locale];
+    const copy = template.locales[state.locale];
     elements.selectedCategory.textContent = `${labels.categories[template.category]} · ${channels[template.channel]}`;
     elements.selectedTitle.textContent = copy.name;
     elements.selectedSummary.textContent = copy.summary;
     elements.fields.replaceChildren(...template.fields.map(fieldControl));
     elements.templateButtons.forEach((button) => {
-      button.setAttribute("aria-pressed", String(button.dataset.emailTemplate === template.id));
+      const selected = button.dataset.emailTemplate === template.id;
+      button.setAttribute("aria-pressed", String(selected));
+      if (selected) button.setAttribute("aria-current", "true");
+      else button.removeAttribute("aria-current");
     });
     hideFallback();
     updatePreview();
@@ -158,7 +163,7 @@
 
   function output(markErrors) {
     const rendered = window.QDSEmailRenderer.render(
-      selectedTemplate(), fieldMap, state.values, locale, channels, state.appearance
+      selectedTemplate(), fieldMap, state.values, state.locale, channels, state.appearance
     );
     if (markErrors) showErrors(rendered.errors);
     return rendered;
@@ -179,14 +184,24 @@
   }
 
   function selectTemplate(identifier) {
-    if (identifier === state.templateId) return;
+    const nextTemplate = templateMap[identifier];
+    if (!nextTemplate) return;
+    const compatibleFields = new Set(nextTemplate.fields.map((reference) => reference.id));
     const retained = {};
-    for (const field of registry.fields) {
-      if (field.retainAcrossTemplates && state.values[field.id]) retained[field.id] = state.values[field.id];
+    for (const [fieldId, value] of Object.entries(state.values)) {
+      if (compatibleFields.has(fieldId) && fieldMap[fieldId].retainAcrossTemplates) retained[fieldId] = value;
     }
     state.templateId = identifier;
     state.values = retained;
     renderForm();
+  }
+
+  function renderTemplateListCopy() {
+    for (const button of elements.templateButtons) {
+      const copy = templateMap[button.dataset.emailTemplate].locales[state.locale];
+      button.querySelector("strong").textContent = copy.name;
+      button.querySelector("span").textContent = copy.summary;
+    }
   }
 
   function hideFallback() {
@@ -248,13 +263,22 @@
     elements.appearanceButtons.forEach((candidate) => candidate.setAttribute("aria-pressed", String(candidate === button)));
     updatePreview();
   }));
+  elements.localeButtons.forEach((button) => button.addEventListener("click", () => {
+    state.locale = button.dataset.emailLocale;
+    elements.localeButtons.forEach((candidate) => candidate.setAttribute("aria-pressed", String(candidate === button)));
+    renderTemplateListCopy();
+    filterTemplates();
+    renderForm();
+  }));
   elements.copySubject.addEventListener("click", () => copy("subject"));
   elements.copyRich.addEventListener("click", () => copy("rich"));
   elements.copyText.addEventListener("click", () => copy("text"));
   elements.copyHtml.addEventListener("click", () => copy("html"));
   elements.reset.addEventListener("click", () => {
     state.values = {};
+    elements.form.reset();
     renderForm();
+    announce(labels.cleared);
     elements.fields.querySelector("input, textarea")?.focus();
   });
 

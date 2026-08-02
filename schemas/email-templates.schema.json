@@ -50,7 +50,10 @@
         "type": {"type": "string", "enum": ["shortText", "longText", "url", "code", "dateTime", "amount", "boolean"]},
         "privacy": {"type": "string", "enum": ["public", "personal", "sensitive", "security", "financial"]},
         "maxLength": {"type": "integer"},
-        "retainAcrossTemplates": {"type": "boolean"},
+        "retainAcrossTemplates": {
+          "type": "boolean",
+          "description": "Whether a value may carry to another template that declares the same field."
+        },
         "locales": {
           "type": "object",
           "required": ["en", "ru"],

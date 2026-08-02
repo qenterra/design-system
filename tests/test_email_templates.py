@@ -6,6 +6,7 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from lib.email_templates import load_email_registry, validate_email_data, validate_email_registry  # noqa: E402
@@ -14,6 +15,11 @@ from lib.email_templates import load_email_registry, validate_email_data, valida
 CONTACTS = {
     "contact": "contact@qenterra.com",
     "support": "support@qenterra.com",
+}
+
+GREETINGS = {
+    "en": "Hello {{recipientName}}.",
+    "ru": "Здравствуйте, {{recipientName}}.",
 }
 
 
@@ -31,7 +37,7 @@ class EmailTemplateValidatorTests(unittest.TestCase):
     def valid_registry(self) -> dict:
         return {
             "$schema": "../schemas/email-templates.schema.json",
-            "version": "1.8.0",
+            "version": VERSION,
             "capabilities": {
                 "sendsEmail": False,
                 "persistsInput": False,
@@ -44,7 +50,7 @@ class EmailTemplateValidatorTests(unittest.TestCase):
                     "type": "shortText",
                     "privacy": "personal",
                     "maxLength": 80,
-                    "retainAcrossTemplates": False,
+                    "retainAcrossTemplates": True,
                     "locales": {
                         "en": {"label": "Recipient name", "help": "Use the name from the conversation.", "example": "Alex"},
                         "ru": {"label": "Имя получателя", "help": "Используйте имя из переписки.", "example": "Алекс"},
@@ -55,7 +61,7 @@ class EmailTemplateValidatorTests(unittest.TestCase):
                     "type": "url",
                     "privacy": "sensitive",
                     "maxLength": 2048,
-                    "retainAcrossTemplates": False,
+                    "retainAcrossTemplates": True,
                     "locales": {
                         "en": {"label": "Action link", "help": "Use an HTTPS link.", "example": "https://example.invalid/action"},
                         "ru": {"label": "Ссылка действия", "help": "Используйте HTTPS-ссылку.", "example": "https://example.invalid/action"},
@@ -82,7 +88,7 @@ class EmailTemplateValidatorTests(unittest.TestCase):
                 "preheader": "The next step is ready.",
                 "eyebrow": "QenTerra",
                 "title": "Your update",
-                "paragraphs": [{"text": f"Hello {name}, this message explains the result."}],
+                "paragraphs": [{"text": GREETINGS["en"]}, {"text": "The message explains the next step."}],
                 "details": [],
                 "closing": "QenTerra",
                 "receipt": "You received this message after a direct request or account action.",
@@ -94,7 +100,7 @@ class EmailTemplateValidatorTests(unittest.TestCase):
                 "preheader": "Следующий шаг готов.",
                 "eyebrow": "QenTerra",
                 "title": "Ваше обновление",
-                "paragraphs": [{"text": f"Здравствуйте, {name}. Это письмо объясняет результат."}],
+                "paragraphs": [{"text": GREETINGS["ru"]}, {"text": "Письмо объясняет следующий шаг."}],
                 "details": [],
                 "closing": "QenTerra",
                 "receipt": "Вы получили это письмо после прямого обращения или действия с аккаунтом.",
@@ -118,11 +124,11 @@ class EmailTemplateValidatorTests(unittest.TestCase):
         }
 
     def assert_error(self, registry: dict, fragment: str) -> None:
-        errors = validate_email_data(registry, "1.8.0", CONTACTS)
+        errors = validate_email_data(registry, VERSION, CONTACTS)
         self.assertTrue(any(fragment in error for error in errors), errors)
 
     def test_valid_miniature_registry_passes(self) -> None:
-        self.assertEqual(validate_email_data(self.valid_registry(), "1.8.0", CONTACTS), [])
+        self.assertEqual(validate_email_data(self.valid_registry(), VERSION, CONTACTS), [])
 
     def test_duplicate_template_id_fails(self) -> None:
         registry = self.valid_registry()
@@ -133,6 +139,13 @@ class EmailTemplateValidatorTests(unittest.TestCase):
         registry = self.valid_registry()
         del registry["templates"][0]["locales"]["ru"]
         self.assert_error(registry, "locales must be exactly")
+
+    def test_repeated_outcome_in_greeting_fails(self) -> None:
+        registry = self.valid_registry()
+        registry["templates"][0]["locales"]["en"]["paragraphs"][0]["text"] = (
+            "Hello {{recipientName}}, your update is ready."
+        )
+        self.assert_error(registry, "first paragraph must be the canonical greeting")
 
     def test_unknown_variable_fails(self) -> None:
         registry = self.valid_registry()
@@ -155,6 +168,11 @@ class EmailTemplateValidatorTests(unittest.TestCase):
         registry = self.valid_registry()
         registry["fields"][1]["locales"]["en"]["example"] = "http://example.invalid/action"
         self.assert_error(registry, "HTTPS example")
+
+    def test_incompatible_retention_policy_fails(self) -> None:
+        registry = self.valid_registry()
+        registry["fields"][0]["retainAcrossTemplates"] = False
+        self.assert_error(registry, "compatible values must remain available")
 
     def test_remote_image_block_fails(self) -> None:
         registry = self.valid_registry()
@@ -179,7 +197,7 @@ class EmailTemplateValidatorTests(unittest.TestCase):
     def test_input_is_not_mutated(self) -> None:
         registry = self.valid_registry()
         before = copy.deepcopy(registry)
-        validate_email_data(registry, "1.8.0", CONTACTS)
+        validate_email_data(registry, VERSION, CONTACTS)
         self.assertEqual(registry, before)
 
 

@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.8.1
+
+### Fixed
+
+- Made every selected email template visibly and semantically current.
+- Preserved filled values shared by the next template and made field clearing deterministic and announced.
+- Removed partial automatic dark-mode overrides that made Light-email text unreadable on dark systems.
+
+### Changed
+
+- Added an email-language control independent from the reference-site language.
+- Reworked all localized message openings into one greeting followed by outcome/action content, removing title-to-paragraph repetition.
+
 ## 1.8.0
 
 ### Added

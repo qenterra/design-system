@@ -1,5 +1,5 @@
 {
-  "version": "1.8.0",
+  "version": "1.8.1",
   "status": "passed",
   "pixelThreshold": 0,
   "captures": [
@@ -46,7 +46,7 @@
     {
       "name": "standalone-en-dark-desktop",
       "changedPixels": 0,
-      "totalPixels": 80131840
+      "totalPixels": 80316160
     },
     {
       "name": "standalone-ru-motion-dark",
@@ -66,22 +66,22 @@
     {
       "name": "email-en-dark-desktop",
       "changedPixels": 0,
-      "totalPixels": 2604960
+      "totalPixels": 2714400
     },
     {
       "name": "email-ru-light-mobile",
       "changedPixels": 0,
-      "totalPixels": 1036620
+      "totalPixels": 1058460
     },
     {
       "name": "email-en-light-tablet",
       "changedPixels": 0,
-      "totalPixels": 1768704
+      "totalPixels": 1827072
     },
     {
       "name": "email-ru-dark-desktop",
       "changedPixels": 0,
-      "totalPixels": 2382080
+      "totalPixels": 2438400
     }
   ],
   "errors": []

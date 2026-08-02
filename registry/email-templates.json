@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/email-templates.schema.json",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "capabilities": {
     "sendsEmail": false,
     "persistsInput": false,
@@ -13,7 +13,7 @@
       "type": "shortText",
       "privacy": "personal",
       "maxLength": 80,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "Recipient name",
@@ -51,7 +51,7 @@
       "type": "shortText",
       "privacy": "personal",
       "maxLength": 160,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "Request topic",
@@ -70,7 +70,7 @@
       "type": "shortText",
       "privacy": "sensitive",
       "maxLength": 64,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "Reference",
@@ -89,7 +89,7 @@
       "type": "longText",
       "privacy": "sensitive",
       "maxLength": 1200,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "Details needed",
@@ -108,7 +108,7 @@
       "type": "dateTime",
       "privacy": "personal",
       "maxLength": 100,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "Next update",
@@ -127,7 +127,7 @@
       "type": "shortText",
       "privacy": "sensitive",
       "maxLength": 120,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "Permission",
@@ -146,7 +146,7 @@
       "type": "longText",
       "privacy": "sensitive",
       "maxLength": 1200,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "Next steps",
@@ -165,7 +165,7 @@
       "type": "longText",
       "privacy": "sensitive",
       "maxLength": 1200,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "Workaround",
@@ -184,7 +184,7 @@
       "type": "shortText",
       "privacy": "public",
       "maxLength": 80,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "Fix version",
@@ -203,7 +203,7 @@
       "type": "url",
       "privacy": "sensitive",
       "maxLength": 2048,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "Update link",
@@ -222,7 +222,7 @@
       "type": "url",
       "privacy": "security",
       "maxLength": 2048,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "Action link",
@@ -241,7 +241,7 @@
       "type": "code",
       "privacy": "security",
       "maxLength": 32,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "One-time code",
@@ -260,7 +260,7 @@
       "type": "dateTime",
       "privacy": "sensitive",
       "maxLength": 100,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "Date and time",
@@ -279,7 +279,7 @@
       "type": "shortText",
       "privacy": "sensitive",
       "maxLength": 240,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "Event context",
@@ -298,7 +298,7 @@
       "type": "dateTime",
       "privacy": "sensitive",
       "maxLength": 100,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "Deletion date",
@@ -317,7 +317,7 @@
       "type": "longText",
       "privacy": "sensitive",
       "maxLength": 1200,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "Completed result",
@@ -336,7 +336,7 @@
       "type": "longText",
       "privacy": "sensitive",
       "maxLength": 1200,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "Remaining work",
@@ -355,7 +355,7 @@
       "type": "longText",
       "privacy": "sensitive",
       "maxLength": 800,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "Known reason",
@@ -374,7 +374,7 @@
       "type": "shortText",
       "privacy": "sensitive",
       "maxLength": 240,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "Result counts",
@@ -393,7 +393,7 @@
       "type": "dateTime",
       "privacy": "security",
       "maxLength": 100,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "Link expiry",
@@ -412,7 +412,7 @@
       "type": "shortText",
       "privacy": "personal",
       "maxLength": 80,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "Inviter name",
@@ -431,7 +431,7 @@
       "type": "shortText",
       "privacy": "sensitive",
       "maxLength": 100,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "Access role",
@@ -450,7 +450,7 @@
       "type": "amount",
       "privacy": "financial",
       "maxLength": 80,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "Amount",
@@ -469,7 +469,7 @@
       "type": "shortText",
       "privacy": "financial",
       "maxLength": 80,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "Payment reference",
@@ -488,7 +488,7 @@
       "type": "shortText",
       "privacy": "financial",
       "maxLength": 160,
-      "retainAcrossTemplates": false,
+      "retainAcrossTemplates": true,
       "locales": {
         "en": {
           "label": "Expected timing",
@@ -534,7 +534,7 @@
           "title": "We have your message",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, we received your inquiry about “{{requestTopic}}”."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "We will review it and reply with a concrete next step."
@@ -562,7 +562,7 @@
           "title": "Сообщение у нас",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Мы получили обращение по теме «{{requestTopic}}»."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Мы изучим его и ответим с конкретным следующим шагом."
@@ -613,7 +613,7 @@
           "title": "One more detail will help",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, thank you for the context."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Please send the requested information below so we can answer accurately."
@@ -641,7 +641,7 @@
           "title": "Уточним детали",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Спасибо за контекст."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Пришлите сведения ниже, чтобы мы могли ответить точно."
@@ -692,7 +692,7 @@
           "title": "We need more time",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, we do not have a complete answer yet."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "We will update you by {{replyCheckpoint}}, even if the review is still in progress."
@@ -720,7 +720,7 @@
           "title": "Нам нужно больше времени",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Полного ответа пока нет."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Мы сообщим новости до {{replyCheckpoint}}, даже если проверка продолжится."
@@ -771,7 +771,7 @@
           "title": "Support will continue from here",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, your question belongs with {{productName}} support."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Continue this conversation; there is no need to send the request again."
@@ -795,7 +795,7 @@
           "title": "Дальше поможет поддержка",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Ваш вопрос относится к поддержке {{productName}}."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Продолжайте эту переписку — повторно отправлять запрос не нужно."
@@ -842,7 +842,7 @@
           "title": "Thank you for the proposal",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, we received your proposal about “{{requestTopic}}”."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "We will reply when we have a decision or a specific question."
@@ -870,7 +870,7 @@
           "title": "Спасибо за предложение",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Мы получили предложение по теме «{{requestTopic}}»."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Мы ответим, когда будет решение или конкретный вопрос."
@@ -925,7 +925,7 @@
           "title": "We have your press request",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, we received your question about “{{requestTopic}}”."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "We will respond by {{replyCheckpoint}}. Reply with the exact publication time if that misses your deadline."
@@ -957,7 +957,7 @@
           "title": "Запрос у нас",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Мы получили вопрос по теме «{{requestTopic}}»."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Мы ответим до {{replyCheckpoint}}. Если это позже дедлайна, пришлите точное время публикации."
@@ -1008,7 +1008,7 @@
           "title": "This is outside our scope",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, we reviewed your request."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "QenTerra cannot provide this service or make this decision. We do not want to imply otherwise."
@@ -1032,7 +1032,7 @@
           "title": "Это вне нашей компетенции",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Мы рассмотрели ваш запрос."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "QenTerra не может предоставить эту услугу или принять такое решение. Не будем создавать обратное впечатление."
@@ -1075,7 +1075,7 @@
           "title": "We are declining this request",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, thank you for considering QenTerra."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "We are not able to take on this request. This is not a promise for a later date."
@@ -1099,7 +1099,7 @@
           "title": "Мы отклоняем запрос",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Спасибо, что обратились в QenTerra."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Мы не можем взяться за этот запрос. Это не обещание вернуться к нему позже."
@@ -1142,7 +1142,7 @@
           "title": "This conversation is complete",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, we have completed the requested correspondence."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Reply in this thread if the same matter needs another response."
@@ -1166,7 +1166,7 @@
           "title": "Переписка завершена",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Мы завершили запрошенную переписку."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Ответьте в этой цепочке, если по тому же вопросу понадобится новый ответ."
@@ -1213,7 +1213,7 @@
           "title": "Your support request is recorded",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, we received your support request."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "We will review the details and reply with the next useful step."
@@ -1237,7 +1237,7 @@
           "title": "Запрос зарегистрирован",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Мы получили ваш запрос в поддержку."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Мы изучим детали и ответим со следующим полезным шагом."
@@ -1284,7 +1284,7 @@
           "title": "Help us match your environment",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, we need the exact {{productName}} and operating-system versions."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Open the product’s About screen and system information, then reply with both numbers."
@@ -1308,7 +1308,7 @@
           "title": "Помогите повторить окружение",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Нам нужны точные версии {{productName}} и операционной системы."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Откройте экран «О программе» и сведения о системе, затем пришлите оба номера."
@@ -1355,7 +1355,7 @@
           "title": "What happened before the issue?",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, send the shortest sequence that reliably shows the problem in {{productName}}."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Include the starting state, actions, expected result, and actual result."
@@ -1379,7 +1379,7 @@
           "title": "Что произошло перед проблемой?",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Пришлите кратчайшую последовательность, которая стабильно показывает проблему в {{productName}}."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Укажите исходное состояние, действия, ожидаемый и фактический результат."
@@ -1426,7 +1426,7 @@
           "title": "A diagnostic report can help",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, the current details are not enough to identify the cause in {{productName}}."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Export the diagnostic report, review it, remove unrelated personal content, and never include passwords, codes, or recovery keys."
@@ -1450,7 +1450,7 @@
           "title": "Поможет диагностический отчёт",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Текущих сведений недостаточно, чтобы определить причину в {{productName}}."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Экспортируйте отчёт, удалите лишние личные данные и никогда не включайте пароли, коды или ключи восстановления."
@@ -1497,7 +1497,7 @@
           "title": "Show only the affected area",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, a screenshot of the affected {{productName}} area would help."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Crop it and hide names, addresses, notifications, paths, account details, and other windows."
@@ -1521,7 +1521,7 @@
           "title": "Покажите только нужную область",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Поможет скриншот проблемной области {{productName}}."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Обрежьте его и скройте имена, адреса, уведомления, пути, данные аккаунта и другие окна."
@@ -1576,7 +1576,7 @@
           "title": "A system permission needs attention",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, {{productName}} cannot complete the action while this permission is unavailable."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Follow the listed steps, then return to the same action."
@@ -1608,7 +1608,7 @@
           "title": "Нужно системное разрешение",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. {{productName}} не может выполнить действие, пока разрешение недоступно."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Выполните указанные шаги и вернитесь к тому же действию."
@@ -1671,7 +1671,7 @@
           "title": "We confirmed this issue",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, “{{requestTopic}}” is a known issue in {{productName}}."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Use the verified next step below. We will not claim a release date until it is confirmed."
@@ -1703,7 +1703,7 @@
           "title": "Мы подтвердили проблему",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. «{{requestTopic}}» — известная проблема в {{productName}}."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Используйте проверенный следующий шаг ниже. Мы не обещаем дату релиза без подтверждения."
@@ -1762,7 +1762,7 @@
           "title": "A temporary route is available",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, the underlying {{productName}} issue is not resolved yet."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Use the workaround below and stop if the result differs from what is described."
@@ -1790,7 +1790,7 @@
           "title": "Есть временный способ",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Основная проблема в {{productName}} пока не исправлена."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Используйте способ ниже и остановитесь, если результат отличается от описанного."
@@ -1845,7 +1845,7 @@
           "title": "We have not reproduced the issue",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, the reported issue did not appear in our current {{productName}} environment."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "This does not invalidate the report. Send the requested evidence so we can compare the difference."
@@ -1873,7 +1873,7 @@
           "title": "Проблема пока не повторилась",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. В нашем текущем окружении {{productName}} проблема не появилась."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Это не делает сообщение неверным. Пришлите запрошенные данные, чтобы сравнить различия."
@@ -1928,7 +1928,7 @@
           "title": "The fix is prepared",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, we prepared a fix for the reported issue."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "It is planned for {{fixVersion}}, but is not available to install yet."
@@ -1956,7 +1956,7 @@
           "title": "Исправление подготовлено",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Мы подготовили исправление сообщённой проблемы."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Оно запланировано для {{fixVersion}}, но пока недоступно для установки."
@@ -2015,7 +2015,7 @@
           "title": "The fix is ready to install",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, the fix is available in {{fixVersion}}."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Update through the official route, then repeat the original action."
@@ -2048,7 +2048,7 @@
           "title": "Исправление можно установить",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Исправление доступно в версии {{fixVersion}}."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Обновитесь по официальной ссылке и повторите исходное действие."
@@ -2108,7 +2108,7 @@
           "title": "The issue is resolved",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, the reported {{productName}} issue is resolved."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "No further action is required unless the problem returns."
@@ -2136,7 +2136,7 @@
           "title": "Проблема решена",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Сообщённая проблема в {{productName}} решена."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Дополнительных действий не требуется, если проблема не вернётся."
@@ -2191,7 +2191,7 @@
           "title": "Did this resolve the issue?",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, we completed the recorded change for {{productName}}."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Repeat the original action and reply with whether the expected result appears."
@@ -2219,7 +2219,7 @@
           "title": "Проблема решена?",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Мы выполнили указанное изменение для {{productName}}."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Повторите исходное действие и сообщите, появился ли ожидаемый результат."
@@ -2270,7 +2270,7 @@
           "title": "We are closing this request for now",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, we have not received the information needed to continue the {{productName}} investigation."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Reply in this conversation with the missing details to reopen it."
@@ -2294,7 +2294,7 @@
           "title": "Пока закрываем запрос",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Мы не получили данные для продолжения проверки {{productName}}."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Ответьте в этой переписке с недостающими сведениями, чтобы открыть запрос снова."
@@ -2349,7 +2349,7 @@
           "title": "Thank you for reporting this barrier",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, we received your report about “{{requestTopic}}” in {{productName}}."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "We understand that it blocks or complicates a real task. Follow the verified next step below."
@@ -2381,7 +2381,7 @@
           "title": "Спасибо, что сообщили о барьере",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Мы получили сообщение о проблеме «{{requestTopic}}» в {{productName}}."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Мы понимаем, что она блокирует или усложняет реальную задачу. Выполните проверенный шаг ниже."
@@ -2444,7 +2444,7 @@
           "title": "This workflow is not supported",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, {{productName}} does not support “{{requestTopic}}” in its current design."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Use the supported route below. This is not a promise for a future release."
@@ -2476,7 +2476,7 @@
           "title": "Этот сценарий не поддерживается",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. В текущем дизайне {{productName}} не поддерживает «{{requestTopic}}»."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Используйте поддерживаемый способ ниже. Это не обещание будущего релиза."
@@ -2531,7 +2531,7 @@
           "title": "Your account is ready",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, your {{productName}} account is ready."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Open the product to review the essentials and choose what to do first."
@@ -2555,7 +2555,7 @@
           "title": "Аккаунт готов",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Ваш аккаунт {{productName}} готов."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Откройте продукт, проверьте основные настройки и выберите первое действие."
@@ -2602,7 +2602,7 @@
           "title": "Confirm this email address",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, confirm that this address belongs to your {{productName}} account."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "If you did not request this, do not open the link."
@@ -2626,7 +2626,7 @@
           "title": "Подтвердите этот адрес",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Подтвердите, что адрес принадлежит аккаунту {{productName}}."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Если вы ничего не запрашивали, не открывайте ссылку."
@@ -2677,7 +2677,7 @@
           "title": "Use this code to sign in",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, enter the code below only in {{productName}}."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "It was requested at {{eventDateTime}}. Support will never ask you to send it."
@@ -2706,7 +2706,7 @@
           "title": "Используйте код для входа",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Введите код ниже только в {{productName}}."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Он запрошен {{eventDateTime}}. Поддержка никогда не попросит прислать его."
@@ -2758,7 +2758,7 @@
           "title": "Choose a new password",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, a password reset was requested for your account."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "QenTerra will never ask you to email your current or new password. Ignore the link if this was not you."
@@ -2782,7 +2782,7 @@
           "title": "Выберите новый пароль",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Для вашего аккаунта запросили сброс пароля."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "QenTerra никогда не просит присылать пароль по почте. Не открывайте ссылку, если это были не вы."
@@ -2833,7 +2833,7 @@
           "title": "Password change confirmed",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, your password changed at {{eventDateTime}}."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "If this was not you, use the secure recovery route immediately."
@@ -2862,7 +2862,7 @@
           "title": "Изменение пароля подтверждено",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Ваш пароль изменён {{eventDateTime}}."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Если это были не вы, сразу используйте безопасное восстановление."
@@ -2918,7 +2918,7 @@
           "title": "Review this email change",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, an email change was requested at {{eventDateTime}}."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Review or cancel it through the secure account route."
@@ -2947,7 +2947,7 @@
           "title": "Проверьте изменение адреса",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. {{eventDateTime}} запросили изменение адреса почты."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Проверьте или отмените его через безопасный раздел аккаунта."
@@ -3003,7 +3003,7 @@
           "title": "Email address changed",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, the account email changed at {{eventDateTime}}."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "If this was not you, recover the account immediately."
@@ -3032,7 +3032,7 @@
           "title": "Адрес почты изменён",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Адрес почты аккаунта изменён {{eventDateTime}}."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Если это были не вы, немедленно восстановите аккаунт."
@@ -3092,7 +3092,7 @@
           "title": "A new session started",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, a new sign-in occurred at {{eventDateTime}}."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Review the approximate context. If it was not you, end the session and change your password."
@@ -3125,7 +3125,7 @@
           "title": "Началась новая сессия",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. {{eventDateTime}} выполнен новый вход."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Проверьте примерный контекст. Если это были не вы, завершите сессию и смените пароль."
@@ -3189,7 +3189,7 @@
           "title": "Unusual account activity",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, unusual activity was recorded at {{eventDateTime}}."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "This does not prove compromise, but it requires review. Never email passwords, codes, or recovery keys."
@@ -3222,7 +3222,7 @@
           "title": "Необычная активность аккаунта",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. {{eventDateTime}} зафиксирована необычная активность."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Это не доказывает взлом, но требует проверки. Не отправляйте по почте пароли, коды или ключи."
@@ -3282,7 +3282,7 @@
           "title": "Sign-in is temporarily blocked",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, sign-in is temporarily blocked to protect the account."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Follow the verified recovery steps. Do not send credentials by email."
@@ -3311,7 +3311,7 @@
           "title": "Вход временно заблокирован",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Вход временно заблокирован для защиты аккаунта."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Выполните проверенные шаги. Не отправляйте учётные данные по почте."
@@ -3367,7 +3367,7 @@
           "title": "Account deletion is scheduled",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, account deletion is scheduled for {{deletionDate}}."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Review or cancel the request through the secure route. Act immediately if you did not request it."
@@ -3396,7 +3396,7 @@
           "title": "Удаление запланировано",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Удаление аккаунта запланировано на {{deletionDate}}."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Проверьте или отмените запрос через безопасную ссылку. Действуйте сразу, если это были не вы."
@@ -3452,7 +3452,7 @@
           "title": "Account deletion completed",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, your account was deleted on {{deletionDate}}."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "The recorded result appears below. This does not override retention explicitly required by law or security obligations."
@@ -3480,7 +3480,7 @@
           "title": "Удаление завершено",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Ваш аккаунт удалён {{deletionDate}}."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Результат указан ниже. Это не отменяет хранение, прямо требуемое законом или безопасностью."
@@ -3535,7 +3535,7 @@
           "title": "The operation completed",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, the requested operation completed."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "The recorded result is ready to use. No further action is required."
@@ -3563,7 +3563,7 @@
           "title": "Операция завершена",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Запрошенная операция завершена."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Зафиксированный результат готов. Дополнительных действий не требуется."
@@ -3626,7 +3626,7 @@
           "title": "Part of the operation completed",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, the operation produced a partial result."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Review completed work, remaining work, and the next step before using the result."
@@ -3662,7 +3662,7 @@
           "title": "Часть операции завершена",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Операция дала частичный результат."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Перед использованием проверьте выполненную часть, остаток и следующий шаг."
@@ -3729,7 +3729,7 @@
           "title": "The operation did not complete",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, the requested operation did not complete."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Review the confirmed reason and next step. Retry only after that."
@@ -3761,7 +3761,7 @@
           "title": "Операция не завершилась",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Запрошенная операция не завершилась."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Проверьте подтверждённую причину и следующий шаг. Только потом повторяйте."
@@ -3824,7 +3824,7 @@
           "title": "Your export is ready",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, the requested export is ready."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "The secure link expires at {{linkExpiry}}. Download it only to a trusted device."
@@ -3857,7 +3857,7 @@
           "title": "Экспорт готов",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Запрошенный экспорт готов."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Безопасная ссылка действует до {{linkExpiry}}. Скачивайте только на доверенное устройство."
@@ -3917,7 +3917,7 @@
           "title": "Use the link before it expires",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, the secure action link expires at {{linkExpiry}}."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "After that, request a new link from the product instead of forwarding this one."
@@ -3946,7 +3946,7 @@
           "title": "Используйте ссылку до окончания срока",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Безопасная ссылка действует до {{linkExpiry}}."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "После этого запросите новую ссылку в продукте, а не пересылайте текущую."
@@ -4002,7 +4002,7 @@
           "title": "Processing is complete",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, the requested processing completed."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Review the outcome counts before using the result."
@@ -4030,7 +4030,7 @@
           "title": "Обработка завершена",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Запрошенная обработка завершена."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Перед использованием результата проверьте итоговые числа."
@@ -4089,7 +4089,7 @@
           "title": "You have a product invitation",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, you were invited with the role {{roleName}}."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Accept only if you recognize the inviter and expected this access."
@@ -4122,7 +4122,7 @@
           "title": "У вас новое приглашение",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Вас пригласили с ролью «{{roleName}}»."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Принимайте приглашение, только если узнаёте отправителя и ожидали доступ."
@@ -4190,7 +4190,7 @@
           "title": "Access role updated",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, your access changed at {{eventDateTime}}."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Review the new role and recorded context. Use the secure route if you did not expect this."
@@ -4227,7 +4227,7 @@
           "title": "Роль доступа обновлена",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Ваш доступ изменён {{eventDateTime}}."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Проверьте новую роль и контекст. Используйте безопасную ссылку, если не ожидали изменения."
@@ -4295,7 +4295,7 @@
           "title": "Your purchase is confirmed",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, your purchase was confirmed at {{eventDateTime}}."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Keep the reference for support. This email never includes full payment-card data."
@@ -4327,7 +4327,7 @@
           "title": "Покупка подтверждена",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Ваша покупка подтверждена {{eventDateTime}}."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Сохраните номер для поддержки. Письмо никогда не содержит полные данные карты."
@@ -4390,7 +4390,7 @@
           "title": "The payment did not complete",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, the payment of {{amount}} did not complete."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "Follow the safe next step. Never send payment details by email."
@@ -4422,7 +4422,7 @@
           "title": "Платёж не завершился",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Платёж {{amount}} не завершился."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Выполните безопасный следующий шаг. Не отправляйте платёжные данные по почте."
@@ -4485,7 +4485,7 @@
           "title": "Your refund was issued",
           "paragraphs": [
             {
-              "text": "Hello {{recipientName}}, a refund of {{amount}} was issued."
+              "text": "Hello {{recipientName}}."
             },
             {
               "text": "The provider expects to post it {{expectedTiming}}. QenTerra cannot accelerate provider settlement."
@@ -4517,7 +4517,7 @@
           "title": "Возврат оформлен",
           "paragraphs": [
             {
-              "text": "Здравствуйте, {{recipientName}}. Возврат {{amount}} оформлен."
+              "text": "Здравствуйте, {{recipientName}}."
             },
             {
               "text": "Провайдер ожидает зачисление {{expectedTiming}}. QenTerra не может ускорить его обработку."

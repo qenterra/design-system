@@ -378,6 +378,7 @@ def render_adoption(locale: str) -> str:
 
 def render_email_composer(locale: str) -> str:
     ui = COPY[locale]["email"]
+    ru = locale == "ru"
     registry = load_json(ROOT / "registry" / "email-templates.json")
     contacts = load_json(ROOT / "registry" / "contact-channels.json")
     template_buttons = []
@@ -420,9 +421,16 @@ def render_email_composer(locale: str) -> str:
           </form>
           <section class="email-preview-panel" aria-labelledby="email-preview-title">
             <div class="email-preview-head"><h3 id="email-preview-title">{escape(ui["preview"])}</h3>
-              <div class="email-segmented" role="group" aria-label="{escape(ui["preview"], quote=True)}">
-                <button type="button" data-email-width="desktop" aria-pressed="true">{escape(ui["desktop"])}</button><button type="button" data-email-width="mobile" aria-pressed="false">{escape(ui["mobile"])}</button>
-                <button type="button" data-email-appearance="light" aria-pressed="true">{escape(ui["light"])}</button><button type="button" data-email-appearance="dark" aria-pressed="false">{escape(ui["dark"])}</button>
+              <div class="email-preview-controls">
+                <div class="email-preview-control"><span>{escape(ui["email_language"])}</span><div class="email-segmented" role="group" aria-label="{escape(ui["email_language"], quote=True)}">
+                  <button type="button" data-email-locale="en" aria-pressed="{"false" if ru else "true"}">English</button><button type="button" data-email-locale="ru" aria-pressed="{"true" if ru else "false"}">Русский</button>
+                </div></div>
+                <div class="email-preview-control"><span>{escape(ui["preview_width"])}</span><div class="email-segmented" role="group" aria-label="{escape(ui["preview_width"], quote=True)}">
+                  <button type="button" data-email-width="desktop" aria-pressed="true">{escape(ui["desktop"])}</button><button type="button" data-email-width="mobile" aria-pressed="false">{escape(ui["mobile"])}</button>
+                </div></div>
+                <div class="email-preview-control"><span>{escape(ui["email_appearance"])}</span><div class="email-segmented" role="group" aria-label="{escape(ui["email_appearance"], quote=True)}">
+                  <button type="button" data-email-appearance="light" aria-pressed="true">{escape(ui["light"])}</button><button type="button" data-email-appearance="dark" aria-pressed="false">{escape(ui["dark"])}</button>
+                </div></div>
               </div>
             </div>
             <div class="email-preview" data-email-preview data-width="desktop"><p data-email-preview-empty>{escape(ui["preview_empty"])}</p><iframe data-email-preview-frame title="{escape(ui["preview"], quote=True)}" hidden></iframe></div>

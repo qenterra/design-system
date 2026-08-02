@@ -13,7 +13,7 @@ Maintain one bilingual registry of 48 human-operated scenarios and a local state
 
 The system uses one QenTerra shell with an optional product name. General correspondence uses `contact@qenterra.com`; product support, accounts, operations, security, and payments use `support@qenterra.com`.
 
-The data contract fixes four capabilities to `false`: sending email, persisting input, external requests, and marketing. Values are escaped, action links require absolute HTTPS, and output contains no scripts, forms, tracking, remote imagery, or full payment credentials. Only the public product name may survive a template switch in the current in-memory page state.
+The data contract fixes four capabilities to `false`: sending email, persisting input, external requests, and marketing. Values are escaped, action links require absolute HTTPS, and output contains no scripts, forms, tracking, remote imagery, or full payment credentials. A template switch may retain values only for fields shared with the next scenario; all state still disappears on reload. Message locale is independent from the reference-site locale.
 
 ## Consequences
 

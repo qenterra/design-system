@@ -1553,11 +1553,12 @@ tr:last-child td {
   display: grid;
   gap: var(--qds-space-1);
   padding: var(--qds-space-3);
-  border: 0;
+  border: var(--qds-stroke-default) solid transparent;
   border-radius: var(--qds-radius-control);
   background: transparent;
   color: var(--qds-text-primary);
   text-align: start;
+  cursor: pointer;
 }
 
 .email-template-item:hover {
@@ -1565,7 +1566,9 @@ tr:last-child td {
 }
 
 .email-template-item[aria-pressed="true"] {
+  border-color: var(--qds-border-strong);
   background: var(--qds-fill-selected-strong);
+  box-shadow: inset 3px 0 0 var(--qds-action-primary);
 }
 
 .email-template-item span,
@@ -1653,6 +1656,19 @@ tr:last-child td {
   gap: var(--qds-space-3);
   padding: var(--qds-space-3) var(--qds-space-4);
   border-bottom: var(--qds-stroke-default) solid var(--qds-border-subtle);
+}
+
+.email-preview-controls,
+.email-preview-control {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--qds-space-2);
+}
+
+.email-preview-control > span {
+  color: var(--qds-text-tertiary);
+  font-size: var(--qds-type-compact-metadata-size);
 }
 
 .email-segmented {

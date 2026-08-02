@@ -33,6 +33,10 @@ PROHIBITED_KEYS = {
     "trackingPixel",
     "unsubscribe",
 }
+CANONICAL_GREETING = {
+    "en": "Hello {{recipientName}}.",
+    "ru": "Здравствуйте, {{recipientName}}.",
+}
 
 
 def load_email_registry(root: Path) -> dict[str, Any]:
@@ -119,6 +123,8 @@ def validate_email_data(
         if identifier in field_by_id:
             errors.append(f"duplicate field id {identifier!r}")
         field_by_id[identifier] = field
+        if field.get("retainAcrossTemplates") is not True:
+            errors.append(f"field {identifier!r}: compatible values must remain available across templates")
         locales = field.get("locales", {})
         if set(locales) != {"en", "ru"}:
             errors.append(f"field {identifier!r}: locales must be exactly en and ru")
@@ -195,6 +201,11 @@ def validate_email_data(
         optional_sections = {"callout", "cta"}
         if ({key for key in english if key in optional_sections} != {key for key in russian if key in optional_sections}):
             errors.append(f"{identifier}: optional locale sections differ")
+        for locale, localized in (("en", english), ("ru", russian)):
+            paragraphs = localized.get("paragraphs", []) if isinstance(localized, dict) else []
+            first_text = paragraphs[0].get("text") if paragraphs and isinstance(paragraphs[0], dict) else None
+            if first_text != CANONICAL_GREETING[locale]:
+                errors.append(f"{identifier}/{locale}: first paragraph must be the canonical greeting")
 
     if expected_count == 48 and category_counts != EXPECTED_CATEGORY_COUNTS:
         errors.append(f"email template category counts differ: {category_counts!r}")

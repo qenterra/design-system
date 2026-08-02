@@ -135,6 +135,7 @@
     }
 
     const copy = template.locales[locale];
+    const scheme = appearance === "dark" ? "dark" : "light";
     const palette = paletteFor(appearance);
     const subject = replaceVariables(copy.subject, values, false);
     const preheader = replaceVariables(copy.preheader, values, false);
@@ -169,12 +170,12 @@
         `<p style="margin:0 0 20px;color:${palette.muted};font:400 12px/18px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;word-break:break-all;">${replaceVariables(cta.fallback, values, true)}<br><a href="${safeUrl}" style="color:${palette.text};">${safeUrl}</a></p>`;
     }
 
-    const html = `<!doctype html><html lang="${locale}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="supported-color-schemes" content="light dark"><title>${escapeHtml(subject)}</title><style>@media (prefers-color-scheme:dark){.qds-email-outer{background:#0f0f11!important}.qds-email-card{background:#18181b!important}}</style></head>` +
+    const html = `<!doctype html><html lang="${locale}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="${scheme}"><meta name="supported-color-schemes" content="${scheme}"><title>${escapeHtml(subject)}</title><style>:root{color-scheme:${scheme}}</style></head>` +
       `<body style="margin:0;padding:0;background:${palette.outer};"><div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">${escapeHtml(preheader)}</div>` +
       `<table class="qds-email-outer" role="presentation" width="100%" cellpadding="0" cellspacing="0" style="width:100%;background:${palette.outer};"><tr><td align="center" style="padding:28px 12px;">` +
-      `<table class="qds-email-card" role="presentation" width="100%" cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;background:${palette.card};border:1px solid ${palette.border};border-radius:14px;border-collapse:separate;overflow:hidden;"><tr><td style="padding:24px 28px 10px;color:${palette.text};font:750 20px/24px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">QenTerra</td></tr>` +
+      `<table class="qds-email-card" data-email-card role="presentation" width="100%" cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;background:${palette.card};border:1px solid ${palette.border};border-radius:14px;border-collapse:separate;overflow:hidden;"><tr><td style="padding:24px 28px 10px;color:${palette.text};font:750 20px/24px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">QenTerra</td></tr>` +
       `<tr><td style="padding:18px 28px 8px;color:${palette.muted};font:700 11px/16px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:.08em;text-transform:uppercase;">${replaceVariables(copy.eyebrow, values, true)}</td></tr>` +
-      `<tr><td style="padding:0 28px 14px;color:${palette.text};font:750 28px/34px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">${replaceVariables(copy.title, values, true)}</td></tr>` +
+      `<tr><td data-email-title style="padding:0 28px 14px;color:${palette.text};font:750 28px/34px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">${replaceVariables(copy.title, values, true)}</td></tr>` +
       `<tr><td style="padding:0 28px 8px;">${paragraphHtml}${detailsHtml}${calloutHtml}${ctaHtml}</td></tr>` +
       `<tr><td style="padding:18px 28px;border-top:1px solid ${palette.border};background:${palette.secondary};color:${palette.muted};font:400 12px/18px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;"><strong style="display:block;color:${palette.text};margin-bottom:4px;">${replaceVariables(copy.closing, values, true)}</strong><a href="mailto:${escapeHtml(channelAddress)}" style="color:${palette.text};">${escapeHtml(channelAddress)}</a><br><span>${replaceVariables(copy.receipt, values, true)}</span></td></tr></table>` +
       `</td></tr></table></body></html>`;

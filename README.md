@@ -44,7 +44,7 @@ Open `http://localhost:8000/` for automatic language selection, choose `dist/en/
 
 ## Status
 
-Version 1.8.0 adds a human-operated bilingual library of 48 correspondence and transactional email scenarios, an email-safe renderer, and a local stateless gallery/composer. It sends nothing, stores nothing, makes no external requests, and provides no marketing or newsletter path. Product migrations remain explicit consumer work.
+Version 1.8.1 refines the human-operated bilingual email library with independent message language, persistent compatible fields while changing scenarios, unambiguous selection and reset states, deterministic Light/Dark rendering, and tighter non-repetitive copy. It sends nothing, stores nothing, makes no external requests, and provides no marketing or newsletter path. Product migrations remain explicit consumer work.
 
 ## Repository boundary
 

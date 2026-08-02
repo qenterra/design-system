@@ -652,8 +652,9 @@ Email templates are production writing tools for a person, not autonomous messag
 - English and Russian copies have semantic parity. A locale may sound natural rather than literal, but may not add or remove a promise, warning, action, deadline, or recovery route.
 - The local composer sends nothing, stores no entered values, makes no external requests, and contains no marketing or newsletter capability.
 - Fill only verified facts. Never invent a completion result, cause, deadline, account event, payment state, or security conclusion.
-- Sensitive and financial fields are cleared when switching templates. Only the public product name may be retained during the current page session.
-- Every output has a specific subject, hidden preheader, one clear title, short paragraphs, optional structured details, at most one primary action, a plain-text equivalent, the responsible address, and a receipt explanation.
+- The message language is chosen independently from the reference-site language. Changing it preserves current field values and updates template names, fields, preview, subject, and copied output together.
+- Switching templates retains only values used by both scenarios; unrelated values leave the active in-memory state. Clear fields removes every current value and preview.
+- Every output has a specific subject, hidden preheader, one clear title, a canonical greeting that does not repeat the outcome, short action-oriented paragraphs, optional structured details, at most one primary action, a plain-text equivalent, the responsible address, and a receipt explanation.
 - Action URLs must be absolute HTTPS URLs. Passwords, recovery secrets, full payment-card data, telemetry pixels, remote imagery, scripts, forms, and attachments are prohibited.
 - Copying rich content is not proof that a message was sent or rendered correctly. The human operator reviews subject, recipients, names, dates, links, amounts, claims, and the final message in the destination email client before sending.
 

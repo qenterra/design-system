@@ -161,6 +161,7 @@ async function fillEmailFields(page) {
 
 async function assertEmailComposer(page, baseUrl) {
   await page.setViewportSize({ width: 1280, height: 900 });
+  await page.emulateMedia({ colorScheme: "dark", reducedMotion: "no-preference" });
   await page.goto(`${baseUrl}/en/pages/email.html`, { waitUntil: "networkidle" });
   if (await page.locator('[data-email-composer][data-ready="true"]').count() !== 1) {
     throw new Error("Email composer did not initialize");
@@ -174,6 +175,19 @@ async function assertEmailComposer(page, baseUrl) {
     throw new Error("Account filter does not expose 12 templates");
   }
   await page.locator('[data-email-template="account-verify-email"]').click();
+  const selectedState = await page.locator('[data-email-template="account-verify-email"]').evaluate((element) => ({
+    pressed: element.getAttribute("aria-pressed"),
+    current: element.getAttribute("aria-current"),
+    background: getComputedStyle(element).backgroundColor,
+    shadow: getComputedStyle(element).boxShadow
+  }));
+  const unselectedBackground = await page.locator('[data-email-template="account-sign-in-code"]').evaluate(
+    (element) => getComputedStyle(element).backgroundColor
+  );
+  if (selectedState.pressed !== "true" || selectedState.current !== "true" ||
+      selectedState.background === unselectedBackground || selectedState.shadow === "none") {
+    throw new Error(`Selected email template lacks a clear current state: ${JSON.stringify(selectedState)}`);
+  }
   await page.locator("[data-email-copy-rich]").click();
   if (await page.locator('[data-email-field][aria-invalid="true"]').count() === 0) {
     throw new Error("Required fields did not block copy");
@@ -186,6 +200,20 @@ async function assertEmailComposer(page, baseUrl) {
   if (!source || source.includes("{{") || source.includes("<script>alert")) {
     throw new Error("Email preview is unresolved or unsafe");
   }
+  const lightContrast = await frame.contentFrame().locator('[data-email-title]').evaluate((element) => {
+    const parse = (value) => (value.match(/[\d.]+/g) || []).slice(0, 3).map(Number);
+    const luminance = (rgb) => {
+      const values = rgb.map((channel) => {
+        const normalized = channel / 255;
+        return normalized <= 0.03928 ? normalized / 12.92 : ((normalized + 0.055) / 1.055) ** 2.4;
+      });
+      return 0.2126 * values[0] + 0.7152 * values[1] + 0.0722 * values[2];
+    };
+    const foreground = luminance(parse(getComputedStyle(element).color));
+    const background = luminance(parse(getComputedStyle(element.closest('[data-email-card]')).backgroundColor));
+    return (Math.max(foreground, background) + 0.05) / (Math.min(foreground, background) + 0.05);
+  });
+  if (lightContrast < 4.5) throw new Error(`Light email text contrast is ${lightContrast.toFixed(2)}:1`);
 
   await page.evaluate(() => {
     Object.defineProperty(navigator, "clipboard", {
@@ -206,13 +234,42 @@ async function assertEmailComposer(page, baseUrl) {
   }
 
   const productValue = await page.locator('[data-email-field="productName"]').inputValue();
+  const recipientValue = await page.locator('[data-email-field="recipientName"]').inputValue();
   await page.locator('[data-email-template="account-password-reset"]').click();
   if (await page.locator('[data-email-field="productName"]').inputValue() !== productValue) {
     throw new Error("Harmless product field was not retained");
   }
-  if (await page.locator('[data-email-field="recipientName"]').inputValue() !== "") {
-    throw new Error("Sensitive recipient field survived a template change");
+  if (await page.locator('[data-email-field="recipientName"]').inputValue() !== recipientValue) {
+    throw new Error("A compatible filled field was lost during a template change");
   }
+
+  await page.locator('[data-email-locale="ru"]').click();
+  if ((await page.locator("html").getAttribute("lang")) !== "en") {
+    throw new Error("Email language changed the page language");
+  }
+  if ((await page.locator("[data-email-selected-title]").textContent()) !== "Сброс пароля") {
+    throw new Error("Email language did not update the selected template copy");
+  }
+  if ((await page.locator('[data-email-template="account-password-reset"] strong').textContent()) !== "Сброс пароля") {
+    throw new Error("Email language did not update the template list");
+  }
+  await frame.contentFrame().locator('[data-email-title]', { hasText: "Выберите новый пароль" }).waitFor();
+  if ((await page.locator('[data-email-field="recipientName"]').inputValue()) !== recipientValue) {
+    throw new Error("Email language change discarded filled values");
+  }
+  await page.locator("[data-email-copy-subject]").click();
+  if (!(await page.evaluate(() => window.__qdsCopiedText || "")).includes("Сбросьте пароль")) {
+    throw new Error("Email language did not update copied output");
+  }
+
+  await page.locator("[data-email-reset]").click();
+  const uncleared = await page.locator("[data-email-field]").evaluateAll((controls) => (
+    controls.filter((control) => control.type === "checkbox" ? control.checked : control.value !== "").length
+  ));
+  if (uncleared || await page.locator("[data-email-preview-frame]:visible").count()) {
+    throw new Error("Clear fields did not reset values and preview");
+  }
+  await page.waitForFunction(() => document.querySelector("[data-email-live]")?.textContent.includes("Fields cleared"));
 
   await fillEmailFields(page);
   await page.evaluate(() => Object.defineProperty(navigator, "clipboard", { configurable: true, value: undefined }));
