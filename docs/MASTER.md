@@ -1,6 +1,6 @@
 # QenTerra Design System
 
-Version 1.2.0 · Normative reference for humans and AI agents
+Version 1.3.0 · Normative reference for humans and AI agents
 
 ## 0. How to use this file
 
@@ -13,6 +13,8 @@ Read in this order:
 3. Use semantic tokens from `tokens/*.json`; never copy values from screenshots.
 4. Prefer native platform behavior over decorative sameness.
 5. Verify every mandatory state, accessibility mode, and content boundary.
+
+For logos, banners, mascot artwork, stickers, wallpapers, or pet animation, also read `docs/brand/MASTER.md`, the relevant brand profile, and `assets/brand/manifest.json`. Brand artwork is canonical content; it does not replace semantic interface tokens.
 
 Normative words:
 
@@ -846,7 +848,8 @@ To update the design system:
 6. Inspect desktop and mobile screenshots in both appearances.
 7. Update `CHANGELOG.md` and version according to change type.
 8. Update Obsidian routing instructions only when workflow or product contract changes; do not duplicate token values.
-9. Commit source and generated artifacts together after verification.
+9. For brand changes, update the asset manifest, preserve Git LFS coverage, run focused Nyx QA, and inspect original/use-size artwork on required backgrounds.
+10. Commit source and generated artifacts together after verification.
 
 ## 21. Definition of done for product adoption
 

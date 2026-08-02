@@ -31,6 +31,10 @@ This checklist is the completion contract for the initial local release.
 - [x] Navigation, search, menu, and language controls use one consistent inline SVG icon family.
 - [x] Templates cover components, screens, product profiles, decisions, copy, accessibility, screenshots, motion, and migrations.
 - [x] The bilingual repository standard and categorized repository templates are part of the same source of truth.
+- [x] The complete QenTerra mark and Nyx library is organized under `assets/brand/` and covered by a machine-readable manifest.
+- [x] All 207 brand PNG files use Git LFS; SVG, JSON, and Markdown remain normal Git files.
+- [x] English and Russian brand governance covers marks, character identity, categories, stickers, wallpapers, pet assets, generation, processing, and release QA.
+- [x] Reusable brand briefs and focused manifest, sticker, wallpaper, character, processing, and contact-sheet tools are maintained with the canon.
 - [x] Update and contribution instructions explain how to change tokens, prose, generated files, and versioning.
 
 ## Evidence and governance
@@ -43,3 +47,4 @@ This checklist is the completion contract for the initial local release.
 - [x] Relevant Obsidian app/extension instructions are audited and synchronized with the canonical repository.
 - [x] Obsidian templates, routing maps, README, changelog, and a focused validator are updated and pass their gates.
 - [x] `docs/superpowers/` is absent and AI working artifacts are excluded from repository sources.
+- [x] The previous standalone brandbook is no longer a parallel authority after hash-verified migration and recoverable retirement.

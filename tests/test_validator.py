@@ -13,6 +13,7 @@ from lib.token_tools import load_json  # noqa: E402
 from validate import (  # noqa: E402
     TOKEN_NAMES,
     validate_contrast,
+    validate_brand_sources,
     validate_css,
     validate_html_tree,
     validate_localized_sources,
@@ -123,6 +124,16 @@ class ValidatorTests(unittest.TestCase):
             (repository / "STANDARD.ru.md").write_text("# Стандарт\n", encoding="utf-8")
             errors = validate_localized_sources(root)
             self.assertTrue(any("repository standard section counts differ" in error for error in errors))
+
+    def test_current_brand_sources_pass(self) -> None:
+        self.assertEqual(validate_brand_sources(ROOT), [])
+
+    def test_missing_brand_pair_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "docs" / "brand").mkdir(parents=True)
+            errors = validate_brand_sources(root)
+            self.assertTrue(any("QENTERRA.md: missing brand reference" in error for error in errors))
 
 
 if __name__ == "__main__":

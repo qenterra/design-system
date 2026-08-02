@@ -24,6 +24,8 @@ GENERATED_TARGETS = [
     ROOT / "dist" / "qenterra-design-system.html",
     ROOT / "dist" / "en" / "index.html",
     ROOT / "dist" / "ru" / "index.html",
+    ROOT / "dist" / "en" / "pages" / "brand.html",
+    ROOT / "dist" / "ru" / "pages" / "brand.html",
     ROOT / "dist" / "en" / "qenterra-design-system.html",
     ROOT / "dist" / "ru" / "qenterra-design-system.html",
     ROOT / "dist" / "assets" / "search-index-en.json",
@@ -57,6 +59,13 @@ def main() -> int:
                 "scripts/lib/markdown_renderer.py",
                 "scripts/lib/site_locales.py",
                 "scripts/lib/token_tools.py",
+                "scripts/brand/validate_brand_assets.py",
+                "scripts/brand/validate_nyx_assets.py",
+                "scripts/brand/validate_nyx_wallpapers.py",
+                "scripts/brand/validate_telegram_stickers.py",
+                "scripts/brand/build_nyx_asset_contacts.py",
+                "scripts/brand/process_nyx_asset.py",
+                "tests/test_brand_assets.py",
                 "tests/test_validator.py",
             ],
             env=environment,
@@ -71,6 +80,11 @@ def main() -> int:
 
     run([python, "-m", "unittest", "discover", "-s", "tests", "-v"])
     run([python, "scripts/validate.py"])
+    run([python, "scripts/brand/validate_brand_assets.py", "--check-git-lfs"])
+    run([python, "scripts/brand/validate_telegram_stickers.py"])
+    image_python = os.environ.get("QDS_IMAGE_PYTHON")
+    if image_python:
+        run([image_python, "scripts/brand/validate_nyx_wallpapers.py"])
     with tempfile.TemporaryDirectory(prefix="qds-swift-") as swift_cache:
         swift_environment = environment.copy()
         swift_environment["CLANG_MODULE_CACHE_PATH"] = str(Path(swift_cache) / "clang-modules")
@@ -100,6 +114,9 @@ def main() -> int:
             "pythonSyntax": "passed",
             "deterministicBuild": "passed",
             "negativeTests": "passed",
+            "brandManifestAndLfs": "passed",
+            "telegramStickerPack": "passed",
+            "wallpaperProfile": "passed" if image_python else "not-run-missing-QDS_IMAGE_PYTHON",
             "tokensLinksContrastPlaceholders": "passed",
             "swiftPackageBuildAndContract": "passed",
             "javascriptSyntax": "passed",
@@ -111,7 +128,9 @@ def main() -> int:
             "native application rendering",
             "VoiceOver and screen-reader output",
             "production app migration",
-            "live Obsidian rendering"
+            "live Obsidian rendering",
+            "deep Nyx pixel/silhouette QA unless run separately with Pillow and NumPy",
+            "Nyx wallpaper pixel QA when QDS_IMAGE_PYTHON is not set",
         ]
     }
     report_path = ROOT / "output" / "reports" / "verification.json"

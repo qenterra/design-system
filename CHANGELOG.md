@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.3.0
+
+### Added
+
+- Canonical QenTerra logo/banner and Nyx library with 221 manifested assets.
+- Git LFS policy and verification for 207 PNG files.
+- Complete English/Russian brand governance, asset catalog, Nyx canon, and reusable production templates.
+- Brand manifest, Telegram sticker, wallpaper, character-asset, contact-sheet, and local processing tools.
+
+### Changed
+
+- Renamed the local repository directory to `design-system` while preserving the visible system name and standalone artifact names.
+- Made the design-system repository the sole reusable authority for brand, Nyx, design, and repository documentation foundations.
+- Reconciled outdated wallpaper instructions with the four-file approved collection and recorded the intentional Duotone/Line Art silhouette pair.
+
 ## 1.2.0
 
 ### Added

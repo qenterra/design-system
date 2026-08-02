@@ -6,6 +6,8 @@
 - Exact values: `tokens/*.json`.
 - Reference UI: `src/assets/` plus generated content from both master files and both component catalogs.
 - Reusable work products: `templates/design/` and `templates/repository/`.
+- Brand rules and approved artwork: `docs/brand/`, `assets/brand/manifest.json`, and `assets/brand/`.
+- Brand briefs and QA: `templates/brand/` and `scripts/brand/`.
 - Generated output: `generated/`, `packages/*` generated adapters, and `dist/`.
 
 Never edit generated files directly.
@@ -27,6 +29,22 @@ AI working specs, implementation plans, handoffs, scratch notes, and tool-only a
 11. Update `CHANGELOG.md` and `VERSION`.
 12. Update Obsidian routing only when workflow or product contracts change.
 13. Commit source and generated output together.
+
+## Brand assets
+
+Brand PNG files live under `assets/brand/` and must be Git LFS objects. SVG, JSON, and Markdown stay in normal Git. Every asset has exactly one record in `assets/brand/manifest.json` with canonical/source paths, category, format, bytes, SHA-256, and image metadata.
+
+Before adding or replacing artwork, read `docs/brand/MASTER.md` or `MASTER.ru.md`, the relevant profile, neighboring assets, and a matching template. Work in a unique system temporary directory. Install only approved final files, update the manifest, and run:
+
+```bash
+python3 scripts/brand/validate_brand_assets.py --check-git-lfs
+python3 scripts/brand/validate_telegram_stickers.py
+QDS_IMAGE_PYTHON=/path/to/python-with-pillow python3 scripts/verify.py
+```
+
+When character assets change, also run `validate_nyx_assets.py` with Python containing Pillow and NumPy and write its report to a system temporary directory. Generate contact sheets outside the repository and inspect them on light and dark backgrounds. Processing tools never download models and require their working directory to remain under the system temporary directory.
+
+Changing identity, palette, category, delivery format, validation rule, canonical path, or asset name is normative. Update both language documents, `CHANGELOG.md`, and `VERSION`; add migration guidance for renamed or removed consumer paths.
 
 ## Versioning
 

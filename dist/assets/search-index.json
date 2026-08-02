@@ -6,7 +6,7 @@
     "title": "How to use this file",
     "page": "Overview",
     "path": "index.html",
-    "text": "This document defines the shared UX/UI grammar for current and future native applications, websites, and browser extensions. Read in this order: 1. Determine the target platform and product profile. 2. Read the relevant pattern before selecting components. 3. Use semantic tokens from tokens/ .json ; never copy values from screenshots. 4. Prefer native platform behavior over decorative sameness. 5. Verify every mandatory state, accessibility mode, and content boundary. Normative words: - must : required for compliance; - should : default; deviations need a reason; - may : optional; - must not : prohibited; - product-specific : deliberately outside the shared core. When this prose and a token file disagree, exact values come from the token file and behavioral meaning comes from this document. Fix the contradiction in the same change."
+    "text": "This document defines the shared UX/UI grammar for current and future native applications, websites, and browser extensions. Read in this order: 1. Determine the target platform and product profile. 2. Read the relevant pattern before selecting components. 3. Use semantic tokens from tokens/ .json ; never copy values from screenshots. 4. Prefer native platform behavior over decorative sameness. 5. Verify every mandatory state, accessibility mode, and content boundary. For logos, banners, mascot artwork, stickers, wallpapers, or pet animation, also read docs/brand/MASTER.md , the relevant brand profile, and assets/brand/manifest.json . Brand artwork is canonical content; it does not replace semantic interface tokens. Normative words: - must : required for compliance; - should : default; deviations need a reason; - may : optional; - must not : prohibited; - product-specific : deliberately outside the shared core. When this prose and a token file disagree, exact values come from the token file and behavioral meaning comes from this document. Fix the contradiction in the same change."
   },
   {
     "section": 1,
@@ -186,7 +186,7 @@
     "title": "Maintenance procedure",
     "page": "Governance",
     "path": "pages/governance.html",
-    "text": "To update the design system: 1. Read AGENTS.md , this file, affected token files, and relevant product evidence. 2. Add or update an ADR in docs/decisions/ for a normative change. 3. Change source tokens/docs/templates/site fragments. 4. Run python3 scripts/build.py . 5. Run python3 scripts/verify.py . 6. Inspect desktop and mobile screenshots in both appearances. 7. Update CHANGELOG.md and version according to change type. 8. Update Obsidian routing instructions only when workflow or product contract changes; do not duplicate token values. 9. Commit source and generated artifacts together after verification."
+    "text": "To update the design system: 1. Read AGENTS.md , this file, affected token files, and relevant product evidence. 2. Add or update an ADR in docs/decisions/ for a normative change. 3. Change source tokens/docs/templates/site fragments. 4. Run python3 scripts/build.py . 5. Run python3 scripts/verify.py . 6. Inspect desktop and mobile screenshots in both appearances. 7. Update CHANGELOG.md and version according to change type. 8. Update Obsidian routing instructions only when workflow or product contract changes; do not duplicate token values. 9. For brand changes, update the asset manifest, preserve Git LFS coverage, run focused Nyx QA, and inspect original/use-size artwork on required backgrounds. 10. Commit source and generated artifacts together after verification."
   },
   {
     "section": 21,
@@ -198,9 +198,45 @@
     "text": "A product is compliant only when: - semantic tokens replace local duplicates; - required component states are implemented; - product-specific exceptions are documented; - user-facing strings use the localization source; - keyboard and accessibility behaviors are verified; - appearance and constrained-layout screenshots are current; - empty/loading/error/recovery states are exercised; - raw token and stale-doc validators pass; - remaining live gaps are explicit. Visual similarity alone is not adoption."
   },
   {
+    "section": "B0",
+    "anchor": "brand-overview",
+    "order": 22,
+    "title": "QenTerra Brand System",
+    "page": "Brand",
+    "path": "pages/brand.html",
+    "text": "This directory is the canonical brand layer of QenTerra Design System. It governs identity assets, the Nyx mascot, asset selection, extension, validation, and release. Product interfaces inherit the design foundations in ../MASTER.md ; brand artwork does not replace semantic UI tokens. Read in this order 1. QENTERRA.md for logos and banners. 2. NYX.md before creating, editing, animating, or placing Nyx. 3. ASSET CATALOG.md to select an existing asset and understand its category. 4. ../../assets/brand/manifest.json for exact paths, hashes, dimensions, formats, and LFS status. 5. ../../templates/brand/ for briefs and release gates. Russian reference: MASTER.ru.md . Sources of truth Concern Canonical source --- --- UI colors, type, spacing, components, motion tokens/ , docs/MASTER.md , component catalog Logo and banner artwork assets/brand/qenterra/ Nyx artwork assets/brand/nyx/ File identity and provenance assets/brand/manifest.json Brand rules docs/brand/ Repeatable briefs templates/brand/ Automated QA scripts/brand/ Never copy numeric UI values from a raster export. Never recreate a logo from memory. Never treat a prompt, contact sheet, cached generation, or old operational note as"
+  },
+  {
+    "section": "B1",
+    "anchor": "brand-qenterra",
+    "order": 23,
+    "title": "QenTerra Marks and Banners",
+    "page": "Brand",
+    "path": "pages/brand.html",
+    "text": "Canonical palette The vector masters use two fixed brand neutrals: - dark graphite 292929 ; - soft white E7E7E7 . These values describe the supplied marks. Interface surfaces still use semantic design-system tokens. Do not sample, approximate, or globally replace colors inside an approved export. Asset families Logos - logos/vector/ is preferred for scalable UI, web, print, and derived exports. - logos/raster/ provides fixed 512, 1024, and 2048 pixel exports. - Filled is the default when the mark must remain stable at small sizes. - Outlined is for larger, quieter placements where the inner detail remains legible. - Dark and Light describe the intended surrounding appearance. Select by rendered contrast, not filename superstition. Banners - banners/vector/ is preferred for responsive headers, documentation, and publication artwork. - banners/raster/ provides 1024, 2048, and 4096 pixel exports. - Standard banners are the default family signature. - Alternative banners are intentional variants, not automatic replacements for the standard form. Placement - Preserve aspect ratio and internal geometry. - Leave clear space around the complete visible mark. Use at least the height of the "
+  },
+  {
+    "section": "B2",
+    "anchor": "brand-nyx",
+    "order": 24,
+    "title": "Nyx Character Canon",
+    "page": "Brand",
+    "path": "pages/brand.html",
+    "text": "Nyx is QenTerra's character mascot: an alternative/goth anime woman with medium-length white hair, expressive dark makeup, a light neutral-warm skin tone, and an all-black wardrobe. The baseline outfit is an oversized black hoodie, black skirt, ripped tights, and chunky black footwear. Recognition outranks the beauty of an isolated frame. Identity invariants - Keep the same facial proportions, medium white hair, dark eye and lip treatment, and strong light-hair/dark-clothing contrast. - Preserve a light neutral-warm skin base. Blush, tears, shadows, makeup, and motivated colored light may vary; an unrelated blue-gray skin cast may not. - Do not turn Nyx into a chibi, pixel character, photoreal person, child, generic white-haired heroine, or another anime character wearing black. - Dark garments need readable folds and separation. Sleeves, torso, legs, props, and hair may not collapse into one black mass. - Anatomy, hands, fingers, gaze, and prop contact must remain plausible at 100% zoom and readable at use size. - Do not add text, watermarks, signatures, or an unrelated product logo to character artwork. Direction and composition One asset communicates one primary function or emot"
+  },
+  {
+    "section": "B3",
+    "anchor": "brand-catalog",
+    "order": 25,
+    "title": "Brand Asset Catalog",
+    "page": "Brand",
+    "path": "pages/brand.html",
+    "text": "The machine-readable catalog is ../../assets/brand/manifest.json . This page explains selection; it does not duplicate every filename or hash. Current inventory Category Count Canonical directory Primary use --- ---: --- --- QenTerra banner raster 24 qenterra/banners/raster/ fixed-size publication and documentation art QenTerra banner vector 8 qenterra/banners/vector/ responsive and scalable banner placement QenTerra logo raster 12 qenterra/logos/raster/ fixed-size consumers QenTerra logo vector 4 qenterra/logos/vector/ preferred scalable mark source Nyx compositions 21 nyx/character-assets/compositions/ copy, cards, comparisons, interface framing Nyx decorative 10 nyx/character-assets/decorative/ expressive graphic accents Nyx full body 56 nyx/character-assets/full-body/ actions, direction, work and daily scenarios Nyx portraits 30 nyx/character-assets/portraits/ emotional states and compact reactions Nyx pet 2 nyx/chatgpt-pet/ pet manifest and animation atlas Nyx Telegram pack 50 nyx/telegram-stickers/ 49 reaction PNG plus emoji map Nyx wallpapers 4 nyx/wallpapers/ selected phone and desktop backgrounds Total: 221 files , 511,408,809 bytes . PNG: 207 , tracked with Git LFS. SVG/J"
+  },
+  {
     "section": "R0",
     "anchor": "repository-overview",
-    "order": 22,
+    "order": 26,
     "title": "Repository Documentation Standard",
     "page": "Repositories",
     "path": "pages/repositories.html",
@@ -209,7 +245,7 @@
   {
     "section": "R1",
     "anchor": "repository-principles",
-    "order": 23,
+    "order": 27,
     "title": "Principles",
     "page": "Repositories",
     "path": "pages/repositories.html",
@@ -218,7 +254,7 @@
   {
     "section": "R2",
     "anchor": "repository-root-files",
-    "order": 24,
+    "order": 28,
     "title": "Canonical root files",
     "page": "Repositories",
     "path": "pages/repositories.html",
@@ -227,7 +263,7 @@
   {
     "section": "R3",
     "anchor": "repository-readme",
-    "order": 25,
+    "order": 29,
     "title": "README information architecture",
     "page": "Repositories",
     "path": "pages/repositories.html",
@@ -236,7 +272,7 @@
   {
     "section": "R4",
     "anchor": "repository-technical-docs",
-    "order": 26,
+    "order": 30,
     "title": "Technical documentation",
     "page": "Repositories",
     "path": "pages/repositories.html",
@@ -245,7 +281,7 @@
   {
     "section": "R5",
     "anchor": "repository-wiki",
-    "order": 27,
+    "order": 31,
     "title": "GitHub Wiki",
     "page": "Repositories",
     "path": "pages/repositories.html",
@@ -254,7 +290,7 @@
   {
     "section": "R6",
     "anchor": "repository-style",
-    "order": 28,
+    "order": 32,
     "title": "Naming and style",
     "page": "Repositories",
     "path": "pages/repositories.html",
@@ -263,7 +299,7 @@
   {
     "section": "R7",
     "anchor": "repository-privacy-legal",
-    "order": 29,
+    "order": 33,
     "title": "Privacy and legal source-of-truth checks",
     "page": "Repositories",
     "path": "pages/repositories.html",
@@ -272,7 +308,7 @@
   {
     "section": "R8",
     "anchor": "repository-drift",
-    "order": 30,
+    "order": 34,
     "title": "Drift protection",
     "page": "Repositories",
     "path": "pages/repositories.html",
@@ -281,7 +317,7 @@
   {
     "section": "R9",
     "anchor": "repository-synchronization",
-    "order": 31,
+    "order": 35,
     "title": "Change synchronization",
     "page": "Repositories",
     "path": "pages/repositories.html",
@@ -290,7 +326,7 @@
   {
     "section": "R10",
     "anchor": "repository-verification",
-    "order": 32,
+    "order": 36,
     "title": "Verification vocabulary",
     "page": "Repositories",
     "path": "pages/repositories.html",
@@ -299,7 +335,7 @@
   {
     "section": "R11",
     "anchor": "repository-templates",
-    "order": 33,
+    "order": 37,
     "title": "Applying templates",
     "page": "Repositories",
     "path": "pages/repositories.html",

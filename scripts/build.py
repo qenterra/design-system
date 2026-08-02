@@ -15,7 +15,14 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from lib.markdown_renderer import Section, plain_text, render, split_numbered_sections  # noqa: E402
-from lib.site_locales import COPY, PAGE_GROUPS, REPOSITORY_SECTION_KEYS, SPECIMENS, icon  # noqa: E402
+from lib.site_locales import (  # noqa: E402
+    BRAND_SECTION_KEYS,
+    COPY,
+    PAGE_GROUPS,
+    REPOSITORY_SECTION_KEYS,
+    SPECIMENS,
+    icon,
+)
 from lib.token_tools import (  # noqa: E402
     generate_css,
     generate_swift,
@@ -48,9 +55,10 @@ def pages(locale: str) -> list[tuple[str, str, list[int], str]]:
 def nav_html(current: str, root: str, standalone: bool, locale: str) -> str:
     links = []
     for slug, title, section_numbers, _ in pages(locale):
-        if slug == "repositories":
-            href = "#repository-overview" if standalone else f"{root}pages/repositories.html"
-            section_start = section_end = "repository"
+        if slug in {"brand", "repositories"}:
+            prefix = "brand" if slug == "brand" else "repository"
+            href = f"#{prefix}-overview" if standalone else f"{root}pages/{slug}.html"
+            section_start = section_end = prefix
         elif standalone:
             href = f"#section-{section_numbers[0]}"
             section_start, section_end = section_numbers[0], section_numbers[-1]
@@ -257,6 +265,35 @@ def render_component_catalog(locale: str) -> str:
         f'<h2>{COPY[locale]["appendix"]["catalog"]}</h2><div class="prose">'
         f'{render(path.read_text(encoding="utf-8"), heading_offset=2, id_prefix="catalog-")}</div></section>'
     )
+
+
+def brand_sections(locale: str) -> list[tuple[str, str, str]]:
+    suffix = ".ru.md" if locale == "ru" else ".md"
+    documents = ("MASTER", "QENTERRA", "NYX", "ASSET_CATALOG")
+    sections = []
+    for key, stem in zip(BRAND_SECTION_KEYS, documents):
+        filename = f"{stem}{suffix}"
+        lines = (ROOT / "docs" / "brand" / filename).read_text(encoding="utf-8").splitlines()
+        if not lines or not lines[0].startswith("# "):
+            raise ValueError(f"docs/brand/{filename}: expected one H1 title")
+        title = lines[0][2:].strip()
+        markdown = "\n".join(lines[1:]).strip()
+        # Repository-relative Markdown links are useful in source docs but invalid in the built site.
+        # Keep their readable labels; the Brand page and catalog expose the same routes directly.
+        markdown = re.sub(r"\[([^]]+)]\((?!https?://|mailto:)[^)]+\)", r"\1", markdown)
+        sections.append((key, title, markdown))
+    return sections
+
+
+def render_brand_module(locale: str) -> str:
+    rendered = []
+    for index, (key, title, markdown) in enumerate(brand_sections(locale)):
+        rendered.append(
+            f'<section class="doc-section" id="brand-{key}" data-nav-slug="brand">'
+            f'<span class="section-number">B{index}</span><h2>{title}</h2>'
+            f'<div class="prose">{render(markdown, id_prefix=f"brand-{key}-")}</div></section>'
+        )
+    return "".join(rendered)
 
 
 def repository_sections(locale: str) -> list[tuple[str, str, str]]:
@@ -472,12 +509,24 @@ def build() -> None:
                     "text": plain_text(section.markdown)[:1200],
                 }
             )
+        for index, (key, title, markdown) in enumerate(brand_sections(locale)):
+            search_index.append(
+                {
+                    "section": f"B{index}",
+                    "anchor": f"brand-{key}",
+                    "order": 22 + index,
+                    "title": title,
+                    "page": COPY[locale]["pages"]["brand"][0],
+                    "path": "pages/brand.html",
+                    "text": plain_text(markdown)[:1200],
+                }
+            )
         for index, (key, title, markdown) in enumerate(repository_sections(locale)):
             search_index.append(
                 {
                     "section": f"R{index}",
                     "anchor": f"repository-{key}",
-                    "order": 22 + index,
+                    "order": 22 + len(BRAND_SECTION_KEYS) + index,
                     "title": title,
                     "page": COPY[locale]["pages"]["repositories"][0],
                     "path": "pages/repositories.html",
@@ -497,11 +546,12 @@ def build() -> None:
         locale_root = dist / locale
         (locale_root / "pages").mkdir(parents=True, exist_ok=True)
         for slug, page_title, numbers, summary in pages(locale):
-            sections_html = (
-                render_repository_module(locale)
-                if slug == "repositories"
-                else "\n".join(render_section(section_map[number], locale, slug) for number in numbers)
-            )
+            if slug == "brand":
+                sections_html = render_brand_module(locale)
+            elif slug == "repositories":
+                sections_html = render_repository_module(locale)
+            else:
+                sections_html = "\n".join(render_section(section_map[number], locale, slug) for number in numbers)
             if slug == "components":
                 sections_html += render_component_catalog(locale)
             if slug == "audit":
@@ -536,6 +586,7 @@ def build() -> None:
                 standalone_sections.append(render_component_catalog(locale))
             if section.number == 17:
                 standalone_sections.append(render_audit_appendix(locale))
+        standalone_sections.append(render_brand_module(locale))
         standalone_sections.append(render_repository_module(locale))
         standalone = shell(
             page_slug="index",
@@ -565,6 +616,7 @@ def build() -> None:
             compatibility_sections.append(render_component_catalog("en"))
         if section.number == 17:
             compatibility_sections.append(render_audit_appendix("en"))
+    compatibility_sections.append(render_brand_module("en"))
     compatibility_sections.append(render_repository_module("en"))
     compatibility = shell(
         page_slug="index",

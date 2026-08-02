@@ -17,7 +17,8 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from lib.token_tools import flatten, get_path, load_json, resolve  # noqa: E402
 from lib.markdown_renderer import split_numbered_sections  # noqa: E402
-from lib.site_locales import REPOSITORY_SECTION_KEYS  # noqa: E402
+from lib.site_locales import BRAND_SECTION_KEYS, REPOSITORY_SECTION_KEYS  # noqa: E402
+from brand.validate_brand_assets import validate_brand_assets  # noqa: E402
 
 
 TOKEN_NAMES = ["foundation", "semantic", "typography", "motion", "components", "platforms", "products"]
@@ -25,6 +26,18 @@ PLACEHOLDERS = re.compile(r"\b(TBD|TODO|FIXME|PLACEHOLDER)\b|\?\?\?")
 CSS_USED = re.compile(r"var\((--qds-[a-z0-9-]+)")
 CSS_DEFINED = re.compile(r"(--qds-[a-z0-9-]+)\s*:")
 TOKEN_REFERENCE = re.compile(r"^\{([^}]+)}$")
+MARKDOWN_LINK = re.compile(r"\[[^]]+]\(([^)]+)\)")
+BRAND_DOC_PAIRS = ("MASTER", "QENTERRA", "NYX", "ASSET_CATALOG")
+BRAND_TEMPLATES = {
+    "brand-asset-brief.md",
+    "manifest.example.json",
+    "nyx-character-asset.md",
+    "nyx-sticker-fix.md",
+    "nyx-sticker-pack.md",
+    "nyx-sticker.md",
+    "nyx-wallpaper.md",
+    "release-checklist.md",
+}
 
 
 class ValidationError(Exception):
@@ -267,6 +280,7 @@ def validate_html_tree(dist: Path) -> list[str]:
             continue
         record = records[standalone.resolve()]
         required = {f"section-{number}" for number in range(22)}
+        required.update(f"brand-{key}" for key in BRAND_SECTION_KEYS)
         required.update(f"repository-{key}" for key in REPOSITORY_SECTION_KEYS)
         missing = sorted(required - record.ids)
         if missing:
@@ -289,6 +303,12 @@ def validate_html_tree(dist: Path) -> list[str]:
             errors.append(
                 f"assets/search-index-{locale}.json: expected numbered sections 0–21, got {numeric_sections}"
             )
+        brand_anchors = [
+            item.get("anchor") for item in indexes[locale] if str(item.get("section", "")).startswith("B")
+        ]
+        expected_brand_anchors = [f"brand-{key}" for key in BRAND_SECTION_KEYS]
+        if brand_anchors != expected_brand_anchors:
+            errors.append(f"assets/search-index-{locale}.json: brand anchors differ: {brand_anchors}")
         repository_anchors = [
             item.get("anchor") for item in indexes[locale] if str(item.get("section", "")).startswith("R")
         ]
@@ -399,6 +419,42 @@ def validate_repository_hygiene(root: Path) -> list[str]:
     return errors
 
 
+def validate_brand_sources(root: Path) -> list[str]:
+    errors: list[str] = []
+    brand_docs = root / "docs" / "brand"
+    for stem in BRAND_DOC_PAIRS:
+        english = brand_docs / f"{stem}.md"
+        russian = brand_docs / f"{stem}.ru.md"
+        for path in (english, russian):
+            if not path.is_file():
+                errors.append(f"{path.relative_to(root)}: missing brand reference")
+        if english.is_file() and russian.is_file():
+            english_headings = len(re.findall(r"^#{1,3} ", english.read_text(encoding="utf-8"), re.MULTILINE))
+            russian_headings = len(re.findall(r"^#{1,3} ", russian.read_text(encoding="utf-8"), re.MULTILINE))
+            if english_headings != russian_headings:
+                errors.append(
+                    f"docs/brand/{stem}: localized heading counts differ "
+                    f"({english_headings} vs {russian_headings})"
+                )
+    if brand_docs.is_dir():
+        for path in sorted(brand_docs.glob("*.md")):
+            for href in MARKDOWN_LINK.findall(path.read_text(encoding="utf-8")):
+                if href.startswith(("http://", "https://", "mailto:", "#")):
+                    continue
+                file_part = href.split("#", 1)[0]
+                if file_part and not (path.parent / file_part).resolve().exists():
+                    errors.append(f"{path.relative_to(root)}: broken local link {href}")
+    template_root = root / "templates" / "brand"
+    actual_templates = {path.name for path in template_root.iterdir()} if template_root.is_dir() else set()
+    if actual_templates != BRAND_TEMPLATES:
+        errors.append(
+            "templates/brand: inventory mismatch: "
+            f"missing={sorted(BRAND_TEMPLATES - actual_templates)}, "
+            f"extra={sorted(actual_templates - BRAND_TEMPLATES)}"
+        )
+    return errors
+
+
 def validate_placeholders(root: Path) -> list[str]:
     errors: list[str] = []
     scan_roots = [root / "docs", root / "tokens", root / "src", root / "dist", root / "generated", root / "output"]
@@ -437,6 +493,7 @@ def validate_browser_evidence(root: Path) -> list[str]:
         "scrollSpy",
         "languageSwitch",
         "languagePickerPosition",
+        "brandModule",
         "repositoryModule",
         "uniformSvgIcons",
     ):
@@ -461,6 +518,8 @@ def run(root: Path = ROOT) -> dict[str, Any]:
     errors.extend(validate_localized_sources(root))
     errors.extend(validate_packages(root, version))
     errors.extend(validate_repository_hygiene(root))
+    errors.extend(validate_brand_sources(root))
+    errors.extend(validate_brand_assets(root, check_git_lfs=True))
     errors.extend(validate_placeholders(root))
     errors.extend(validate_browser_evidence(root))
     result = {"version": version, "errors": errors, "contrast": contrast}

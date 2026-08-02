@@ -24,6 +24,8 @@ Open `http://localhost:8000/` for automatic language selection, choose `dist/en/
 - `templates/design/` — interface design and review templates.
 - `templates/repository/` — repository documentation, policy, GitHub, and Wiki templates.
 - `docs/repository/` — normative bilingual repository documentation standard.
+- `assets/brand/` — canonical QenTerra marks, Nyx library, and machine-readable asset manifest.
+- `docs/brand/`, `templates/brand/`, and `scripts/brand/` — bilingual brand canon, reusable briefs, processing tools, and QA.
 - `output/` — audit evidence, validation reports, and rendered screenshots.
 - `docs/MAINTENANCE.md` — update and release workflow.
 
@@ -39,7 +41,7 @@ Open `http://localhost:8000/` for automatic language selection, choose `dist/en/
 
 ## Status
 
-Version 1.2.0 adds a bilingual repository-documentation module, categorized templates, a right-aligned language picker, and connectable local SwiftPM/CSS token packages. Product migrations remain separate from this repository.
+Version 1.3.0 adds the complete canonical QenTerra brand and Nyx asset library, Git LFS storage, bilingual brand governance, reusable production templates, and focused manifest/visual validators. Product migrations remain separate from this repository.
 
 ## Repository boundary
 

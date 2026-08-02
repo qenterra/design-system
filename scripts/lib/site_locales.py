@@ -17,8 +17,11 @@ PAGE_GROUPS = [
     ("products", [15, 16]),
     ("audit", [17]),
     ("governance", [18, 19, 20, 21]),
+    ("brand", []),
     ("repositories", []),
 ]
+
+BRAND_SECTION_KEYS = ["overview", "qenterra", "nyx", "catalog"]
 
 REPOSITORY_SECTION_KEYS = [
     "overview",
@@ -48,6 +51,7 @@ ICONS = {
     "products": '<path d="m8 2.5 5 2.75v5.5L8 13.5l-5-2.75v-5.5zM3.2 5.4 8 8l4.8-2.6M8 8v5.3"/>',
     "audit": '<circle cx="8" cy="8" r="5.5"/><path d="m5.2 8.1 1.8 1.8 3.8-4"/>',
     "governance": '<path d="M8 2.25 13 4v3.6c0 3.1-2.1 5.3-5 6.15-2.9-.85-5-3.05-5-6.15V4z"/><path d="m5.7 7.8 1.45 1.45 3.15-3.1"/>',
+    "brand": '<path d="m8 2.25 5.25 5.25L8 13.75 2.75 7.5z"/><path d="m8 5.25 2.25 2.25L8 10.25 5.75 7.5z"/>',
     "repositories": '<path d="M2.5 4.5 8 2l5.5 2.5L8 7zM2.5 8 8 10.5 13.5 8M2.5 11.5 8 14l5.5-2.5"/>',
     "search": '<circle cx="7" cy="7" r="4.25"/><path d="m10.2 10.2 3.3 3.3"/>',
     "menu": '<path d="M2.5 4h11M2.5 8h11M2.5 12h11"/>',
@@ -72,6 +76,7 @@ COPY: dict[str, dict[str, Any]] = {
             "products": ("Product archetypes", "Immersive content, dense operations, transient capability, and app icons."),
             "audit": ("Evidence", "Cross-product audit, screenshot confidence, and current design debt."),
             "governance": ("Governance", "Versioning, exceptions, AI protocol, maintenance, and adoption."),
+            "brand": ("Brand", "QenTerra marks, Nyx canon, asset catalog, templates, and quality gates."),
             "repositories": ("Repositories", "README, legal, technical documentation, templates, Wiki, and verification."),
         },
         "ui": {
@@ -128,6 +133,7 @@ COPY: dict[str, dict[str, Any]] = {
             "products": ("Архетипы продуктов", "Иммерсивный контент, плотные операции, временные возможности и иконки приложений."),
             "audit": ("Доказательства", "Межпродуктовый аудит, достоверность скриншотов и текущий дизайн-долг."),
             "governance": ("Управление", "Версионирование, исключения, AI-протокол, сопровождение и внедрение."),
+            "brand": ("Бренд", "Знаки QenTerra, канон Nyx, каталог ассетов, шаблоны и проверки качества."),
             "repositories": ("Репозитории", "README, legal, техническая документация, шаблоны, Wiki и проверка."),
         },
         "ui": {

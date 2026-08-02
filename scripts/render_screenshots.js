@@ -127,7 +127,7 @@ async function assertUniformSvgIcons(page) {
       invalidChrome: chromeControls.filter((control) => control.querySelectorAll("svg.icon").length !== 1).length
     };
   });
-  if (result.navCount !== 12 || result.invalidNav || result.invalidChrome) {
+  if (result.navCount !== 13 || result.invalidNav || result.invalidChrome) {
     throw new Error(`Icon family mismatch: ${JSON.stringify(result)}`);
   }
 }
@@ -152,6 +152,11 @@ async function assertScrollSpy(page, baseUrl) {
   await page.waitForTimeout(150);
   const repositoryCurrent = await page.locator('.site-nav a[data-nav-slug="repositories"][aria-current="location"]').count();
   if (repositoryCurrent !== 1) throw new Error("Scroll-spy did not activate Repository documentation");
+
+  await page.locator("#brand-overview").evaluate((element) => window.scrollTo(0, Math.max(0, element.offsetTop - 80)));
+  await page.waitForTimeout(150);
+  const brandCurrent = await page.locator('.site-nav a[data-nav-slug="brand"][aria-current="location"]').count();
+  if (brandCurrent !== 1) throw new Error("Scroll-spy did not activate Brand");
 }
 
 async function assertLanguagePickerPosition(page, baseUrl) {
@@ -267,6 +272,7 @@ async function main() {
       { name: "products-ru-light-tablet", path: "ru/pages/products.html", viewport: { width: 768, height: 1024 }, theme: "light", reducedMotion: false },
       { name: "standalone-en-dark-desktop", path: "en/qenterra-design-system.html", viewport: { width: 1280, height: 900 }, theme: "dark", reducedMotion: true },
       { name: "standalone-ru-motion-dark", path: "ru/qenterra-design-system.html", viewport: { width: 1280, height: 900 }, theme: "dark", reducedMotion: false, scrollTarget: "#section-11", fullPage: false }
+      ,{ name: "brand-en-dark-desktop", path: "en/pages/brand.html", viewport: { width: 1280, height: 900 }, theme: "dark", reducedMotion: false, scrollTarget: "#brand-nyx", fullPage: false }
       ,{ name: "repositories-ru-light-desktop", path: "ru/pages/repositories.html", viewport: { width: 1280, height: 900 }, theme: "light", reducedMotion: false, scrollTarget: "#repository-verification", fullPage: false }
     ];
     for (const entry of matrix) captures.push(await capture(page, baseUrl, entry));
@@ -278,6 +284,7 @@ async function main() {
       scrollSpy: "passed",
       languageSwitch: "passed",
       languagePickerPosition: "passed",
+      brandModule: "passed",
       repositoryModule: "passed",
       uniformSvgIcons: "passed",
       semanticStructure: "passed",

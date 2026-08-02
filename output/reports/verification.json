@@ -1,36 +1,43 @@
 {
-  "version": "1.2.0",
+  "version": "1.3.0",
   "status": "passed",
   "checks": {
     "pythonSyntax": "passed",
     "deterministicBuild": "passed",
     "negativeTests": "passed",
+    "brandManifestAndLfs": "passed",
+    "telegramStickerPack": "passed",
+    "wallpaperProfile": "passed",
     "tokensLinksContrastPlaceholders": "passed",
     "swiftPackageBuildAndContract": "passed",
     "javascriptSyntax": "passed",
     "gitWhitespace": "passed"
   },
   "generatedSha256": {
-    "generated/qds-tokens.css": "71c84c4ec4dd0408f777b0e236daca75a60d30032426620a8417a4aeaaa52fec",
-    "generated/QDSGeneratedTokens.swift": "23ee541df2a16197cfadfd709066411f08029d409326dd93aee5e5a090cc440a",
+    "generated/qds-tokens.css": "ed6f3dfd7d9f85af3e8af3657f501672e22cfb040c42062be2c4f13ec30c8b11",
+    "generated/QDSGeneratedTokens.swift": "9f89eb1ad52637efebfcc8fd51f24f4572e14776d3ec41eb177db181a2538798",
     "generated/TOKEN_REFERENCE.md": "10d02f6bfd1bd45a8db6c5af876f048c0ed3e0b6ffd21bf0b2b678ed455268c5",
-    "packages/swift/Sources/QenTerraDesignTokens/QDSGeneratedTokens.swift": "23ee541df2a16197cfadfd709066411f08029d409326dd93aee5e5a090cc440a",
-    "packages/css/tokens.css": "71c84c4ec4dd0408f777b0e236daca75a60d30032426620a8417a4aeaaa52fec",
-    "packages/css/tokens.json": "27dea8513e5d24981b39f6aedf872aa127d3a96d5853d89a8fcebfa126c02e18",
+    "packages/swift/Sources/QenTerraDesignTokens/QDSGeneratedTokens.swift": "9f89eb1ad52637efebfcc8fd51f24f4572e14776d3ec41eb177db181a2538798",
+    "packages/css/tokens.css": "ed6f3dfd7d9f85af3e8af3657f501672e22cfb040c42062be2c4f13ec30c8b11",
+    "packages/css/tokens.json": "a2df98cd0af8ec10537a2c7df8e1bae25995392f2f085c39d79905edf16bbf7d",
     "dist/index.html": "553ff408862ce6fea49c7aca34133e66d7e4a25be43f59ded59ca8da67f245a7",
-    "dist/qenterra-design-system.html": "540835d3f9549935d53782a4628b35b478adc517c3fe13634cc75e07b7239a4d",
-    "dist/en/index.html": "839152e5321e1c92f4a80f0b984f5a9a80d03b99a98cc94a67b44c499d75abe5",
-    "dist/ru/index.html": "c1c40c76c39c25fda873b68b6fc7d4ac47973f1a97a4a50febcf3e2e28e898e4",
-    "dist/en/qenterra-design-system.html": "074c1f1aca4df3167f63adf07534f6dd33035e97ef42a886bff0ac41fd4ba96d",
-    "dist/ru/qenterra-design-system.html": "c6eaf5c5a01e124100dd860c0a40d9d5b38fb980009a53e1f5a0b45b02d28b29",
-    "dist/assets/search-index-en.json": "674ada5253d99fd799ebeba5af01dc2ae08272b22f386295cff5d96b0fcae82d",
-    "dist/assets/search-index-ru.json": "5a0032817da75f4249fa3f4ed0e66322392ec7d9a8c6e17c27cd1d6b838a1cc5"
+    "dist/qenterra-design-system.html": "e0cf2e2944f008845f066c1bfd7d4ea6c0a93182d13fc0b964426372bfc2b23d",
+    "dist/en/index.html": "5ddaa50118e8ba25e9466890a2b7110538efb96138b97ef46539fdf8d648fcb9",
+    "dist/ru/index.html": "88bfd2e0337daea444710bd63828c79650c904697678282e58b9f2deeac37d12",
+    "dist/en/pages/brand.html": "ddd3a11580bf70fc3a2a1f97182ce56bd913f3610450bdf06cc0d1661905a761",
+    "dist/ru/pages/brand.html": "9f37b2d1d359e7c9f20437488d154ad1c3304c8dd2bdb3ebf119e39fbb76e60f",
+    "dist/en/qenterra-design-system.html": "a72145e46a638c5972c6d182efd149d29ac683a93c74df7b86423471127367cf",
+    "dist/ru/qenterra-design-system.html": "02a0d4cbbf639d3c7e08527e8db0212f4e6e040ed26923aa3adae018c9ff95b1",
+    "dist/assets/search-index-en.json": "4083d529138a10ce5a49be6424a0ec59eb2d102cc620d95b87ee9ad73d713e90",
+    "dist/assets/search-index-ru.json": "4721f2e3cb518be2aba5273efa75d3305506b4dfd2d2b66b7151fc5e8a643fea"
   },
   "manualNotProven": [
     "Swift package test-target execution without a complete Xcode test runtime",
     "native application rendering",
     "VoiceOver and screen-reader output",
     "production app migration",
-    "live Obsidian rendering"
+    "live Obsidian rendering",
+    "deep Nyx pixel/silhouette QA unless run separately with Pillow and NumPy",
+    "Nyx wallpaper pixel QA when QDS_IMAGE_PYTHON is not set"
   ]
 }
