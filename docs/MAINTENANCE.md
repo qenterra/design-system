@@ -3,6 +3,7 @@
 ## Sources of truth
 
 - Behavioral rules: `docs/MASTER.md` and its complete Russian counterpart `docs/MASTER.ru.md`.
+- Code quality rules: `docs/CODE.md` and its complete Russian counterpart `docs/CODE.ru.md`.
 - Exact values: `tokens/*.json`.
 - Reference UI: `src/assets/` plus generated content from both master files and both component catalogs.
 - Reusable work products: `templates/design/` and `templates/repository/`.
@@ -14,7 +15,7 @@
 
 Never edit generated files directly.
 
-AI working specs, implementation plans, handoffs, scratch notes, and tool-only artifacts are not project sources. Create them in a unique system temporary directory and never stage them. Durable product documentation, ADRs, requirements, and maintenance instructions remain normal repository content.
+AI working specs, implementation plans, handoffs, scratch notes, and tool-only artifacts are not project sources. Create them in a unique system temporary directory and never stage them. `superpowers` paths are prohibited anywhere in the repository. Durable product documentation, ADRs, requirements, and maintenance instructions remain normal repository content.
 
 ## Change workflow
 

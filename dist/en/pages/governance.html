@@ -88,7 +88,9 @@
 </ul>
 <h3 id="s18-18-5-deprecation">18.5 Deprecation</h3>
 <p>Deprecated tokens/components remain documented for one migration window with replacement guidance. Validators may warn first and fail after the announced major version.</p></div></section>
-<section class="doc-section" id="section-19" data-nav-slug="governance"><span class="section-number">19</span><h2>AI implementation protocol</h2><div class="prose"><p>When an AI builds or reviews UI:</p>
+<section class="doc-section" id="section-19" data-nav-slug="governance"><span class="section-number">19</span><h2>AI implementation protocol</h2><div class="prose"><h3 id="s19-19-1-code-system">19.1 Code System</h3>
+<p>When implementing or reviewing product code, read <code>docs/CODE.md</code>, the relevant language profile, the product architecture contract, and its source-of-truth configuration. The Code System requires human-readable module boundaries, explicit state and effects, native platform conventions, and separate automated, live, and manual evidence. It never permits AI working artifacts inside a repository.</p>
+<p>When an AI builds or reviews UI:</p>
 <ol>
 <li>Read this file, the platform layer, and product profile.</li>
 <li>Identify the primary user task and consequence of failure.</li>

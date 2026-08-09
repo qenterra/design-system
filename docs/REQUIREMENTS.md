@@ -31,6 +31,8 @@ This checklist is the completion contract for the initial local release.
 - [x] Navigation, search, menu, and language controls use one consistent inline SVG icon family.
 - [x] Templates cover components, screens, product profiles, decisions, copy, accessibility, screenshots, motion, and migrations.
 - [x] The bilingual repository standard and categorized repository templates are part of the same source of truth.
+- [x] The bilingual Code System defines readable-by-default code, language profiles, contributor requirements, exceptions, and evidence boundaries.
+- [x] Repository contributor, architecture, pull-request, and tooling templates carry the Code System into product repositories without duplicating its canonical rules.
 - [x] The complete QenTerra mark and Nyx library is organized under `assets/brand/` and covered by a machine-readable manifest.
 - [x] All 207 brand PNG files use Git LFS; SVG, JSON, and Markdown remain normal Git files.
 - [x] English and Russian brand governance covers marks, character identity, categories, stickers, wallpapers, pet assets, generation, processing, and release QA.

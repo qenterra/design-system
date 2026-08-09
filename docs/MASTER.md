@@ -828,6 +828,10 @@ Deprecated tokens/components remain documented for one migration window with rep
 
 ## 19. AI implementation protocol
 
+### 19.1 Code System
+
+When implementing or reviewing product code, read `docs/CODE.md`, the relevant language profile, the product architecture contract, and its source-of-truth configuration. The Code System requires human-readable module boundaries, explicit state and effects, native platform conventions, and separate automated, live, and manual evidence. It never permits AI working artifacts inside a repository.
+
 When an AI builds or reviews UI:
 
 1. Read this file, the platform layer, and product profile.
