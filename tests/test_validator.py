@@ -18,6 +18,7 @@ from validate import (  # noqa: E402
     validate_brand_sources,
     validate_contact_channels,
     validate_component_registry,
+    validate_code_system_templates,
     validate_icon_registry,
     validate_css,
     validate_html_tree,
@@ -95,6 +96,25 @@ class ValidatorTests(unittest.TestCase):
             (root / "docs" / "MASTER.md").write_text("# Master\n\n## 0. Overview\n", encoding="utf-8")
             errors = validate_localized_sources(root)
             self.assertTrue(any("MASTER.ru.md" in error for error in errors))
+
+    def test_missing_code_system_document_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            docs = root / "docs"
+            docs.mkdir()
+            (docs / "MASTER.md").write_text("# Master\n", encoding="utf-8")
+            (docs / "MASTER.ru.md").write_text("# Мастер\n", encoding="utf-8")
+            errors = validate_localized_sources(root)
+            self.assertTrue(any("docs/CODE.md" in error for error in errors))
+
+    def test_code_system_template_inventory_and_json_are_validated(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            tooling = root / "templates" / "repository" / "tooling" / "typescript"
+            tooling.mkdir(parents=True)
+            (tooling / ".prettierrc.json").write_text("{ invalid", encoding="utf-8")
+            errors = validate_code_system_templates(root)
+            self.assertTrue(any(".prettierrc.json" in error for error in errors))
 
     def test_master_version_drift_fails(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

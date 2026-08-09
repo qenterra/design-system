@@ -31,6 +31,7 @@ CSS_DEFINED = re.compile(r"(--qds-[a-z0-9-]+)\s*:")
 TOKEN_REFERENCE = re.compile(r"^\{([^}]+)}$")
 MARKDOWN_LINK = re.compile(r"\[[^]]+]\(([^)]+)\)")
 BRAND_DOC_PAIRS = ("MASTER", "QENTERRA", "NYX", "ASSET_CATALOG")
+CODE_DOCUMENT_PAIRS = ("CODE",)
 BRAND_TEMPLATES = {
     "brand-asset-brief.md",
     "manifest.example.json",
@@ -40,6 +41,14 @@ BRAND_TEMPLATES = {
     "nyx-sticker.md",
     "nyx-wallpaper.md",
     "release-checklist.md",
+}
+CODE_TOOLING_TEMPLATES = {
+    "README.md",
+    "swift/.swiftformat",
+    "swift/.swiftlint.yml",
+    "typescript/.prettierrc.json",
+    "typescript/eslint.config.mjs",
+    "typescript/tsconfig.quality.json",
 }
 
 
@@ -438,6 +447,19 @@ def validate_localized_sources(root: Path) -> list[str]:
     for filename in ("CONSUMER_ADOPTION.md", "CONSUMER_ADOPTION.ru.md"):
         if not (root / "docs" / filename).is_file():
             errors.append(f"docs/{filename}: missing localized consumer adoption guide")
+    for stem in CODE_DOCUMENT_PAIRS:
+        english = root / "docs" / f"{stem}.md"
+        russian = root / "docs" / f"{stem}.ru.md"
+        for path in (english, russian):
+            if not path.is_file():
+                errors.append(f"{path.relative_to(root)}: missing localized Code System reference")
+        if english.is_file() and russian.is_file():
+            english_headings = len(re.findall(r"^#{1,3} ", english.read_text(encoding="utf-8"), re.MULTILINE))
+            russian_headings = len(re.findall(r"^#{1,3} ", russian.read_text(encoding="utf-8"), re.MULTILINE))
+            if english_headings != russian_headings:
+                errors.append(
+                    f"docs/{stem}: localized heading counts differ ({english_headings} vs {russian_headings})"
+                )
     repository_headings: dict[str, list[str]] = {}
     for locale, filename in (("en", "STANDARD.md"), ("ru", "STANDARD.ru.md")):
         path = root / "docs" / "repository" / filename
@@ -455,6 +477,31 @@ def validate_localized_sources(root: Path) -> list[str]:
         repository_headings["ru"]
     ):
         errors.append("English and Russian repository standard section counts differ")
+    return errors
+
+
+def validate_code_system_templates(root: Path) -> list[str]:
+    errors: list[str] = []
+    template_root = root / "templates" / "repository" / "tooling"
+    actual_templates = {
+        str(path.relative_to(template_root))
+        for path in template_root.rglob("*")
+        if path.is_file()
+    } if template_root.is_dir() else set()
+    if actual_templates != CODE_TOOLING_TEMPLATES:
+        errors.append(
+            "templates/repository/tooling: inventory mismatch: "
+            f"missing={sorted(CODE_TOOLING_TEMPLATES - actual_templates)}, "
+            f"extra={sorted(actual_templates - CODE_TOOLING_TEMPLATES)}"
+        )
+    for relative_path in ("typescript/.prettierrc.json", "typescript/tsconfig.quality.json"):
+        path = template_root / relative_path
+        if not path.is_file():
+            continue
+        try:
+            json.loads(path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            errors.append(f"templates/repository/tooling/{relative_path}: invalid JSON")
     return errors
 
 
@@ -759,6 +806,7 @@ def run(root: Path = ROOT) -> dict[str, Any]:
     )
     errors.extend(validate_html_tree(root / "dist"))
     errors.extend(validate_localized_sources(root))
+    errors.extend(validate_code_system_templates(root))
     errors.extend(validate_packages(root, version))
     errors.extend(validate_repository_hygiene(root))
     errors.extend(validate_brand_sources(root))
