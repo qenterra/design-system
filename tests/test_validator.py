@@ -184,6 +184,18 @@ class ValidatorTests(unittest.TestCase):
             errors = validate_localized_sources(root)
             self.assertTrue(any("repository standard section counts differ" in error for error in errors))
 
+    def test_repository_standard_requires_code_quality_section(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            repository = root / "docs" / "repository"
+            repository.mkdir(parents=True)
+            (root / "docs" / "MASTER.md").write_text("# Master\n", encoding="utf-8")
+            (root / "docs" / "MASTER.ru.md").write_text("# Мастер\n", encoding="utf-8")
+            (repository / "STANDARD.md").write_text("# Standard\n\n## Only one\n", encoding="utf-8")
+            (repository / "STANDARD.ru.md").write_text("# Стандарт\n\n## Только один\n", encoding="utf-8")
+            errors = validate_localized_sources(root)
+            self.assertTrue(any("expected 12 H2 sections" in error for error in errors))
+
     def test_current_brand_sources_pass(self) -> None:
         self.assertEqual(validate_brand_sources(ROOT), [])
 

@@ -2,6 +2,14 @@
 
 <!-- What changed, why, and which user-visible behavior is affected? -->
 
+## Design and code clarity
+
+<!-- State the main module or boundary affected, why this design is readable to a new contributor, and any material alternative rejected. -->
+
+## Exceptions
+
+<!-- Write "None" or record the rule, path, technical reason, owner, and review date. -->
+
 ## Validation
 
 - [ ] `{CANONICAL_VALIDATION_COMMAND}`

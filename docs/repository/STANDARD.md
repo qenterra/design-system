@@ -60,6 +60,12 @@ The README is a map, not a second copy of every guide. Detailed build steps,
 dependency update procedures, troubleshooting, and release runbooks belong in
 their dedicated documents.
 
+## Code quality
+
+Every repository adopts the applicable QDS Code System language profile and names one canonical verification command. Code must remain understandable to a developer new to the module: its role, dependencies, effects, failures, and verification path are visible through boundaries, names, tests, or focused comments. Keep UI, domain policy, storage, network, and platform effects at explicit boundaries. Do not mix unrelated formatting churn with behavioral changes.
+
+Record a rule exception with its exact rule and path, technical reason, owner, and review date. Pull requests separate automated checks, live checks, and manual gaps; a green static check never substitutes for a real platform boundary.
+
 ## Technical documentation
 
 Non-trivial repositories should provide:

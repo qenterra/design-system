@@ -33,6 +33,7 @@ REPOSITORY_SECTION_KEYS = [
     "principles",
     "root-files",
     "readme",
+    "code-quality",
     "technical-docs",
     "wiki",
     "style",

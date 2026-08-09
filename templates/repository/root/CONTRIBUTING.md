@@ -38,6 +38,13 @@ git diff --check
 Automated checks cover {AUTOMATED_SCOPE}. Changes involving
 {MANUAL_BOUNDARIES} require live or manual acceptance and must report any gap.
 
+## Code quality
+
+- Code must be understandable to a developer unfamiliar with the module: make the unit's role, dependencies, effects, failures, and verification path visible through names, boundaries, tests, or focused comments.
+- Follow the adopted QDS language profile and existing local formatter; do not combine unrelated reformatting with behavioral changes.
+- Keep UI, domain policy, storage, network, and platform effects at explicit boundaries.
+- Record an exception with its rule, path, technical reason, owner, and review date.
+
 ## Dependency changes
 
 A runtime dependency, model, browser script, or bundled asset update must also

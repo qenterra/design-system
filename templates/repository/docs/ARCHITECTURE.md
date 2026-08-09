@@ -16,6 +16,10 @@ flowchart LR
 
 ## Major components
 
+## Module boundaries and change path
+
+Document each module's responsibility, allowed dependencies, and locations of UI, domain policy, storage, network, and platform effects. Name the canonical verification command and the focused tests or live acceptance needed for a safe behavior change.
+
 ### Application state
 
 {STATE_OWNERSHIP_OBSERVABILITY_AND_INTENT_FLOW}
