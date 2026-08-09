@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/contact-channels.schema.json",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "channels": [
     {
       "id": "contact",

@@ -164,6 +164,6 @@
       "svg": "<circle cx=\"8\" cy=\"8\" r=\"5.5\"/><path d=\"M8 7v4M8 5v.1\"/>"
     }
   ],
-  "version": "1.9.0",
+  "version": "1.10.0",
   "viewBox": "0 0 16 16"
 }

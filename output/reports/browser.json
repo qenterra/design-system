@@ -1,5 +1,5 @@
 {
-  "version": "1.9.0",
+  "version": "1.10.0",
   "manifestSchemaVersion": 1,
   "status": "passed",
   "checks": {
@@ -191,7 +191,7 @@
       "reducedMotion": true,
       "locale": "en",
       "title": "QenTerra Design System",
-      "sections": 44,
+      "sections": 45,
       "structure": {
         "oneH1": true,
         "namedInteractiveElements": true,
@@ -211,7 +211,7 @@
       "reducedMotion": false,
       "locale": "ru",
       "title": "QenTerra Design System",
-      "sections": 44,
+      "sections": 45,
       "structure": {
         "oneH1": true,
         "namedInteractiveElements": true,
@@ -251,7 +251,7 @@
       "reducedMotion": false,
       "locale": "ru",
       "title": "Репозитории · QenTerra Design System",
-      "sections": 12,
+      "sections": 13,
       "structure": {
         "oneH1": true,
         "namedInteractiveElements": true,

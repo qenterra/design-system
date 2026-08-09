@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.10.0
+
+### Added
+
+- Added the bilingual QDS Code System: human-readable code rules, explicit state/effect boundaries, AI-change ownership, and language profiles for Swift, TypeScript, Python, and Bash.
+- Added contributor, architecture, pull-request, and tooling templates that make the code-quality contract usable in product repositories.
+- Added validator coverage for Code System localization parity and the exact starter-tooling inventory.
+
 ## 1.9.0
 
 ### Added
