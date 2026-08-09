@@ -108,7 +108,8 @@
 <li>Индекс документации.</li>
 <li>Contributing, support и license.</li>
 </ol>
-<p>README — карта, а не вторая копия каждого руководства. Полные build steps, обновление зависимостей, troubleshooting и release runbooks живут в отдельных документах.</p></div></section><section class="doc-section" id="repository-technical-docs" data-nav-slug="repositories"><span class="section-number">R4</span><h2>Техническая документация</h2><div class="prose"><p>Простым репозиториям не нужно искусственно раздувать <code>docs/</code>, но нетривиальные проекты обычно предоставляют:</p>
+<p>README — карта, а не вторая копия каждого руководства. Полные build steps, обновление зависимостей, troubleshooting и release runbooks живут в отдельных документах.</p></div></section><section class="doc-section" id="repository-code-quality" data-nav-slug="repositories"><span class="section-number">R4</span><h2>Качество кода</h2><div class="prose"><p>Каждый репозиторий принимает нужный языковой профиль QDS Code System и называет одну каноническую команду проверки. Код остаётся понятным разработчику, впервые открывшему модуль: его роль, зависимости, эффекты, ошибки и путь проверки видны через границы, имена, тесты или короткие комментарии. UI, domain policy, storage, network и platform effects остаются на явных границах. Не смешивайте несвязанное форматирование с изменением поведения.</p>
+<p>Исключение из правила фиксирует точные правило и путь, техническую причину, владельца и дату пересмотра. Pull request разделяет automated checks, live checks и manual gaps; зелёная статическая проверка не заменяет реальную платформенную границу.</p></div></section><section class="doc-section" id="repository-technical-docs" data-nav-slug="repositories"><span class="section-number">R5</span><h2>Техническая документация</h2><div class="prose"><p>Простым репозиториям не нужно искусственно раздувать <code>docs/</code>, но нетривиальные проекты обычно предоставляют:</p>
 <div class="table-scroll"><table><thead><tr>
 <th>Файл</th>
 <th>Назначение</th>
@@ -134,8 +135,8 @@
 <td>Восстановление от симптома без ослабления security или integrity checks.</td>
 </tr>
 </tbody></table></div>
-<p>Публичный design/brand-документ допустим, если он нужен contributor. Implementation plans и завершённые remediation specifications остаются во временной рабочей области или приватной базе знаний.</p></div></section><section class="doc-section" id="repository-wiki" data-nav-slug="repositories"><span class="section-number">R5</span><h2>GitHub Wiki</h2><div class="prose"><p>Нативная GitHub Wiki служит пользовательским слоем только когда у продукта действительно есть опубликованный Wiki remote. Общее ядро: <code>Home.md</code>, <code>_Sidebar.md</code>, <code>Getting-Started.md</code>, <code>Feature-Overview.md</code>, <code>Privacy-and-Security.md</code> и <code>Troubleshooting.md</code>. Sidebar группирует страницы в порядке <code>Use</code>, <code>Understand</code>, <code>Build</code>, <code>Policies</code>.</p>
-<p>Wiki не копирует legal-файлы и полные contributor guides, а ссылается на канонические версии основного репозитория. Изображения хранятся один раз в <code>docs/images/</code> и встраиваются абсолютными raw GitHub URLs. Funding не переносится в Wiki автоматически.</p></div></section><section class="doc-section" id="repository-style" data-nav-slug="repositories"><span class="section-number">R6</span><h2>Именование и стиль</h2><div class="prose"><ul>
+<p>Публичный design/brand-документ допустим, если он нужен contributor. Implementation plans и завершённые remediation specifications остаются во временной рабочей области или приватной базе знаний.</p></div></section><section class="doc-section" id="repository-wiki" data-nav-slug="repositories"><span class="section-number">R6</span><h2>GitHub Wiki</h2><div class="prose"><p>Нативная GitHub Wiki служит пользовательским слоем только когда у продукта действительно есть опубликованный Wiki remote. Общее ядро: <code>Home.md</code>, <code>_Sidebar.md</code>, <code>Getting-Started.md</code>, <code>Feature-Overview.md</code>, <code>Privacy-and-Security.md</code> и <code>Troubleshooting.md</code>. Sidebar группирует страницы в порядке <code>Use</code>, <code>Understand</code>, <code>Build</code>, <code>Policies</code>.</p>
+<p>Wiki не копирует legal-файлы и полные contributor guides, а ссылается на канонические версии основного репозитория. Изображения хранятся один раз в <code>docs/images/</code> и встраиваются абсолютными raw GitHub URLs. Funding не переносится в Wiki автоматически.</p></div></section><section class="doc-section" id="repository-style" data-nav-slug="repositories"><span class="section-number">R7</span><h2>Именование и стиль</h2><div class="prose"><ul>
 <li>Repository-authored документация по умолчанию пишется на английском, если продукт не определил другую политику локализации.</li>
 <li>Заголовки используют sentence case.</li>
 <li>Имена политик согласованы: <code>Privacy Policy</code>, <code>Security Policy</code>, <code>Terms of Use</code>, <code>Third-party notices</code>.</li>
@@ -146,7 +147,7 @@
 <li>Текст прямой и фактический: без неподтверждённых превосходных степеней, roadmap promises, fake metrics и пустых badges.</li>
 <li>Source-only, unsigned, unnotarized, prerelease или store-review статус показывается рядом с началом README.</li>
 <li>Иконка продукта визуально отображается в согласованном размере, а порядок badges остаётся семейным только при наличии реальных целей ссылок.</li>
-</ul></div></section><section class="doc-section" id="repository-privacy-legal" data-nav-slug="repositories"><span class="section-number">R7</span><h2>Проверка источников приватности и legal</h2><div class="prose"><p>Перед изменением legal-документов проверьте:</p>
+</ul></div></section><section class="doc-section" id="repository-privacy-legal" data-nav-slug="repositories"><span class="section-number">R8</span><h2>Проверка источников приватности и legal</h2><div class="prose"><p>Перед изменением legal-документов проверьте:</p>
 <ul>
 <li>entitlements приложения или permissions расширения;</li>
 <li>network clients, внешние сервисы и явные действия открытия браузера;</li>
@@ -155,7 +156,7 @@
 <li>лицензии моделей, медиа, шрифтов и website scripts;</li>
 <li>release archives, а не только source manifests.</li>
 </ul>
-<p>Не утверждайте, что данные «никогда не покидают устройство», если системная синхронизация или обязательный внешний сервис может их обрабатывать. Назовите эту границу.</p></div></section><section class="doc-section" id="repository-drift" data-nav-slug="repositories"><span class="section-number">R8</span><h2>Защита от рассинхронизации</h2><div class="prose"><p>Каноническая команда проверки каждого репозитория должна как минимум контролировать:</p>
+<p>Не утверждайте, что данные «никогда не покидают устройство», если системная синхронизация или обязательный внешний сервис может их обрабатывать. Назовите эту границу.</p></div></section><section class="doc-section" id="repository-drift" data-nav-slug="repositories"><span class="section-number">R9</span><h2>Защита от рассинхронизации</h2><div class="prose"><p>Каноническая команда проверки каждого репозитория должна как минимум контролировать:</p>
 <ul>
 <li>разрешение локальных Markdown/HTML-ссылок;</li>
 <li>отсутствие незаменённых маркеров шаблона вне каталога шаблонов;</li>
@@ -167,7 +168,7 @@
 <li>корректность Funding YAML, если funding включён;</li>
 <li>покрытие Wiki sidebar-ом и корректные internal links, если Wiki опубликована.</li>
 </ul>
-<p>Синтетические test paths и маленькие product icons требуют узких allowlists. Валидатор с постоянными false positives быстро превращается в декорацию, а декорации редко спасают релиз.</p></div></section><section class="doc-section" id="repository-synchronization" data-nav-slug="repositories"><span class="section-number">R9</span><h2>Синхронизация изменений</h2><div class="prose"><div class="table-scroll"><table><thead><tr>
+<p>Синтетические test paths и маленькие product icons требуют узких allowlists. Валидатор с постоянными false positives быстро превращается в декорацию, а декорации редко спасают релиз.</p></div></section><section class="doc-section" id="repository-synchronization" data-nav-slug="repositories"><span class="section-number">R10</span><h2>Синхронизация изменений</h2><div class="prose"><div class="table-scroll"><table><thead><tr>
 <th>Изменение</th>
 <th>Документы для проверки</th>
 </tr></thead><tbody>
@@ -199,14 +200,14 @@
 <td>Новый внешний сервис</td>
 <td>README, privacy, terms, security и notices, если применимо</td>
 </tr>
-</tbody></table></div></div></section><section class="doc-section" id="repository-verification" data-nav-slug="repositories"><span class="section-number">R10</span><h2>Словарь проверки</h2><div class="prose"><p>Используйте эти обозначения последовательно:</p>
+</tbody></table></div></div></section><section class="doc-section" id="repository-verification" data-nav-slug="repositories"><span class="section-number">R11</span><h2>Словарь проверки</h2><div class="prose"><p>Используйте эти обозначения последовательно:</p>
 <ul>
 <li><strong>Automated:</strong> lint, format, unit tests, builds, link, manifest и package checks.</li>
 <li><strong>Rendered:</strong> визуально просмотренные screenshots или сгенерированные страницы.</li>
 <li><strong>Live:</strong> сценарий выполнен в собранном продукте с реальной границей ОС или сервиса.</li>
 <li><strong>Manual gap:</strong> ещё требуется hardware, account, permission, accessibility, visual, store или external-service acceptance.</li>
 </ul>
-<p>Не сжимайте эти категории в слово «tested». Оно звучит бодро, но обычно прячет самую полезную половину фактов.</p></div></section><section class="doc-section" id="repository-templates" data-nav-slug="repositories"><span class="section-number">R11</span><h2>Применение шаблонов</h2><div class="prose"><ol>
+<p>Не сжимайте эти категории в слово «tested». Оно звучит бодро, но обычно прячет самую полезную половину фактов.</p></div></section><section class="doc-section" id="repository-templates" data-nav-slug="repositories"><span class="section-number">R12</span><h2>Применение шаблонов</h2><div class="prose"><ol>
 <li>Выберите профиль README по типу продукта.</li>
 <li>Скопируйте только нужные root, technical, GitHub и Wiki templates.</li>
 <li>Замените каждый допустимый placeholder и удалите неприменимые optional sections.</li>

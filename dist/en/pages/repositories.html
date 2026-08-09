@@ -117,7 +117,8 @@
 <li>Documentation index.</li>
 <li>Contributing, support, and license.</li>
 </ol>
-<p>The README is a map, not a second copy of every guide. Detailed build steps, dependency update procedures, troubleshooting, and release runbooks belong in their dedicated documents.</p></div></section><section class="doc-section" id="repository-technical-docs" data-nav-slug="repositories"><span class="section-number">R4</span><h2>Technical documentation</h2><div class="prose"><p>Non-trivial repositories should provide:</p>
+<p>The README is a map, not a second copy of every guide. Detailed build steps, dependency update procedures, troubleshooting, and release runbooks belong in their dedicated documents.</p></div></section><section class="doc-section" id="repository-code-quality" data-nav-slug="repositories"><span class="section-number">R4</span><h2>Code quality</h2><div class="prose"><p>Every repository adopts the applicable QDS Code System language profile and names one canonical verification command. Code must remain understandable to a developer new to the module: its role, dependencies, effects, failures, and verification path are visible through boundaries, names, tests, or focused comments. Keep UI, domain policy, storage, network, and platform effects at explicit boundaries. Do not mix unrelated formatting churn with behavioral changes.</p>
+<p>Record a rule exception with its exact rule and path, technical reason, owner, and review date. Pull requests separate automated checks, live checks, and manual gaps; a green static check never substitutes for a real platform boundary.</p></div></section><section class="doc-section" id="repository-technical-docs" data-nav-slug="repositories"><span class="section-number">R5</span><h2>Technical documentation</h2><div class="prose"><p>Non-trivial repositories should provide:</p>
 <div class="table-scroll"><table><thead><tr>
 <th>File</th>
 <th>Purpose</th>
@@ -143,8 +144,8 @@
 <td>Symptom-first recovery steps that do not weaken security or integrity checks.</td>
 </tr>
 </tbody></table></div>
-<p>Product design or brand documents are optional public contributor documents. Implementation plans and completed remediation specifications stay in the private work knowledge base.</p></div></section><section class="doc-section" id="repository-wiki" data-nav-slug="repositories"><span class="section-number">R5</span><h2>GitHub Wiki</h2><div class="prose"><p>Published QenTerra products use a native GitHub Wiki as the user-guide layer. The common core is <code>Home.md</code>, <code>_Sidebar.md</code>, <code>Getting-Started.md</code>, <code>Feature-Overview.md</code>, <code>Privacy-and-Security.md</code>, and <code>Troubleshooting.md</code>. Sidebar groups appear in the order <code>Use</code>, <code>Understand</code>, <code>Build</code>, and <code>Policies</code>.</p>
-<p>Wiki does not duplicate root legal files or complete contributor guides. It links to their canonical versions in the main repository. Images remain under main <code>docs/images/</code> and are embedded with absolute raw GitHub URLs. Buy Me a Coffee remains limited to README and <code>.github/FUNDING.yml</code>.</p></div></section><section class="doc-section" id="repository-style" data-nav-slug="repositories"><span class="section-number">R6</span><h2>Naming and style</h2><div class="prose"><ul>
+<p>Product design or brand documents are optional public contributor documents. Implementation plans and completed remediation specifications stay in the private work knowledge base.</p></div></section><section class="doc-section" id="repository-wiki" data-nav-slug="repositories"><span class="section-number">R6</span><h2>GitHub Wiki</h2><div class="prose"><p>Published QenTerra products use a native GitHub Wiki as the user-guide layer. The common core is <code>Home.md</code>, <code>_Sidebar.md</code>, <code>Getting-Started.md</code>, <code>Feature-Overview.md</code>, <code>Privacy-and-Security.md</code>, and <code>Troubleshooting.md</code>. Sidebar groups appear in the order <code>Use</code>, <code>Understand</code>, <code>Build</code>, and <code>Policies</code>.</p>
+<p>Wiki does not duplicate root legal files or complete contributor guides. It links to their canonical versions in the main repository. Images remain under main <code>docs/images/</code> and are embedded with absolute raw GitHub URLs. Buy Me a Coffee remains limited to README and <code>.github/FUNDING.yml</code>.</p></div></section><section class="doc-section" id="repository-style" data-nav-slug="repositories"><span class="section-number">R7</span><h2>Naming and style</h2><div class="prose"><ul>
 <li>Repository-authored documentation is English.</li>
 <li>Use sentence case for headings.</li>
 <li>Use <code># Privacy Policy</code>, <code># Security Policy</code>, <code># Terms of Use</code>, and</li>
@@ -159,7 +160,7 @@
 <p>near the top of the README.</p>
 <li>Render the canonical product icon at 128 px and place the Buy Me a Coffee</li>
 <p>badge last in the hero badge row.</p>
-</ul></div></section><section class="doc-section" id="repository-privacy-legal" data-nav-slug="repositories"><span class="section-number">R7</span><h2>Privacy and legal source-of-truth checks</h2><div class="prose"><p>Before changing legal documents, inspect:</p>
+</ul></div></section><section class="doc-section" id="repository-privacy-legal" data-nav-slug="repositories"><span class="section-number">R8</span><h2>Privacy and legal source-of-truth checks</h2><div class="prose"><p>Before changing legal documents, inspect:</p>
 <ul>
 <li>application entitlements or extension permissions;</li>
 <li>network clients, external services, and explicit browser-opening actions;</li>
@@ -168,7 +169,7 @@
 <li>model, media, font, and website-script licenses;</li>
 <li>release archives, not just source manifests.</li>
 </ul>
-<p>Do not state that data “never leaves the device” when an operating-system sync provider or required external service can process it. Name that boundary.</p></div></section><section class="doc-section" id="repository-drift" data-nav-slug="repositories"><span class="section-number">R8</span><h2>Drift protection</h2><div class="prose"><p>Every repository validation command should check, at minimum:</p>
+<p>Do not state that data “never leaves the device” when an operating-system sync provider or required external service can process it. Name that boundary.</p></div></section><section class="doc-section" id="repository-drift" data-nav-slug="repositories"><span class="section-number">R9</span><h2>Drift protection</h2><div class="prose"><p>Every repository validation command should check, at minimum:</p>
 <ul>
 <li>all local Markdown and HTML links resolve;</li>
 <li>no unresolved template marker remains outside the template tree;</li>
@@ -183,7 +184,7 @@
 <li>every Wiki page is covered by <code>_Sidebar.md</code>, internal links omit <code>.md</code>, and</li>
 <p>raw screenshot URLs resolve.</p>
 </ul>
-<p>Allow explicit synthetic test paths and small product icons. A validator that reports known fixtures as privacy leaks or icons as screenshots needs scoped allowlists; otherwise people learn to ignore it, which is how useful gates die.</p></div></section><section class="doc-section" id="repository-synchronization" data-nav-slug="repositories"><span class="section-number">R9</span><h2>Change synchronization</h2><div class="prose"><div class="table-scroll"><table><thead><tr>
+<p>Allow explicit synthetic test paths and small product icons. A validator that reports known fixtures as privacy leaks or icons as screenshots needs scoped allowlists; otherwise people learn to ignore it, which is how useful gates die.</p></div></section><section class="doc-section" id="repository-synchronization" data-nav-slug="repositories"><span class="section-number">R10</span><h2>Change synchronization</h2><div class="prose"><div class="table-scroll"><table><thead><tr>
 <th>Change</th>
 <th>Documents to review</th>
 </tr></thead><tbody>
@@ -215,7 +216,7 @@
 <td>New external service</td>
 <td>README, privacy, terms, security, notices when applicable</td>
 </tr>
-</tbody></table></div></div></section><section class="doc-section" id="repository-verification" data-nav-slug="repositories"><span class="section-number">R10</span><h2>Verification vocabulary</h2><div class="prose"><p>Use these labels consistently:</p>
+</tbody></table></div></div></section><section class="doc-section" id="repository-verification" data-nav-slug="repositories"><span class="section-number">R11</span><h2>Verification vocabulary</h2><div class="prose"><p>Use these labels consistently:</p>
 <ul>
 <li><strong>Automated:</strong> lint, format, unit tests, builds, link checks, manifest checks.</li>
 <li><strong>Live:</strong> exercised in the built product with the real operating-system or</li>
@@ -223,7 +224,7 @@
 <li><strong>Manual gap:</strong> still requires hardware, account, permission, accessibility,</li>
 <p>visual, store, or external-service acceptance.</p>
 </ul>
-<p>Never compress all three into “tested.” That word has buried enough context.</p></div></section><section class="doc-section" id="repository-templates" data-nav-slug="repositories"><span class="section-number">R11</span><h2>Applying templates</h2><div class="prose"><p>The files under <code>templates/repository/</code> are starting points, not blind copy targets. Select the smallest set that matches the repository type, replace every placeholder, remove irrelevant sections, and verify every claim against the current implementation before committing.</p>
+<p>Never compress all three into “tested.” That word has buried enough context.</p></div></section><section class="doc-section" id="repository-templates" data-nav-slug="repositories"><span class="section-number">R12</span><h2>Applying templates</h2><div class="prose"><p>The files under <code>templates/repository/</code> are starting points, not blind copy targets. Select the smallest set that matches the repository type, replace every placeholder, remove irrelevant sections, and verify every claim against the current implementation before committing.</p>
 <p>Use <code>templates/repository/readme/</code> for the repository class, <code>root/</code> for canonical policy and legal files, <code>docs/</code> for technical documentation, <code>github/</code> for repository-hosting metadata, and <code>wiki/</code> for optional long-form product guidance. The standard remains authoritative when a template and the rules appear to disagree.</p></div></section>
         <footer class="page-footer"><span>QenTerra Design System 1.9.0</span><span>System first · Dark signature · Light complete</span></footer>
       </main>
