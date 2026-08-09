@@ -44,7 +44,7 @@ Open `http://localhost:8000/` for automatic language selection, choose `dist/en/
 
 ## Status
 
-Version 1.8.1 refines the human-operated bilingual email library with independent message language, persistent compatible fields while changing scenarios, unambiguous selection and reset states, deterministic Light/Dark rendering, and tighter non-repetitive copy. It sends nothing, stores nothing, makes no external requests, and provides no marketing or newsletter path. Product migrations remain explicit consumer work.
+Version 1.9.0 adds a shared SwiftUI interactive-row state surface, fixes `rgba(...)` semantic-color parsing, validates localized master-version headers, and expands the read-only consumer doctor to cover Swift numeric colors, radii, and motion durations. Product migrations remain explicit consumer work.
 
 ## Repository boundary
 

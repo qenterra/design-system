@@ -36,6 +36,13 @@ class ConsumerDoctorTests(unittest.TestCase):
         self.assertEqual(report["status"], "failed")
         self.assertEqual(rules, {"raw-color", "missing-css-adapter"})
 
+    def test_swift_fixture_reports_raw_semantic_values(self) -> None:
+        fixture = ROOT / "tests" / "fixtures" / "consumer-swift-fail"
+        report = audit_consumer(fixture)
+        rules = {finding["rule"] for finding in report["findings"]}
+        self.assertEqual(report["status"], "failed")
+        self.assertEqual(rules, {"raw-color", "raw-duration", "raw-radius"})
+
     def test_cli_refuses_output_inside_consumer(self) -> None:
         fixture = ROOT / "tests" / "fixtures" / "consumer-pass"
         output = fixture / "forbidden-report.json"

@@ -93,6 +93,8 @@
 | File row | Filename + operations | Original name первично, conflict/status явен |
 | Chart | Количественная связь | Text/table alternative, units, нецветовые series |
 
+Общие поверхности интерактивных строк разрешают состояния в одном порядке: disabled или unavailable, selected, hover, затем default. Focus независимо управляет границей; selected-строка сохраняет сильную нецветовую границу. `QDSInteractiveRowState` и `QDSInteractiveRowSurface` задают этот контракт в SwiftUI.
+
 ## Обратная связь и статус
 
 | Компонент | Назначение | Обязательный контракт |

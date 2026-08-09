@@ -409,12 +409,24 @@ def validate_html_tree(dist: Path) -> list[str]:
 def validate_localized_sources(root: Path) -> list[str]:
     errors: list[str] = []
     sections_by_locale: dict[str, list[int]] = {}
+    version_path = root / "VERSION"
+    expected_version = version_path.read_text(encoding="utf-8").strip() if version_path.is_file() else None
     for locale, filename in (("en", "MASTER.md"), ("ru", "MASTER.ru.md")):
         path = root / "docs" / filename
         if not path.is_file():
             errors.append(f"docs/{filename}: missing localized master")
             continue
-        _, sections = split_numbered_sections(path.read_text(encoding="utf-8"))
+        text = path.read_text(encoding="utf-8")
+        if expected_version:
+            prefix = "Version" if locale == "en" else "Версия"
+            match = re.search(rf"^{prefix}\s+(\d+\.\d+\.\d+)\b", text, flags=re.MULTILINE)
+            if match is None:
+                errors.append(f"docs/{filename}: missing normative version header")
+            elif match.group(1) != expected_version:
+                errors.append(
+                    f"docs/{filename}: version {match.group(1)} does not match VERSION {expected_version}"
+                )
+        _, sections = split_numbered_sections(text)
         sections_by_locale[locale] = [section.number for section in sections]
         if sections_by_locale[locale] != list(range(22)):
             errors.append(f"docs/{filename}: expected numbered sections 0–21, got {sections_by_locale[locale]}")

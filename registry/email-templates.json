@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/email-templates.schema.json",
-  "version": "1.8.1",
+  "version": "1.9.0",
   "capabilities": {
     "sendsEmail": false,
     "persistsInput": false,
@@ -189,12 +189,12 @@
         "en": {
           "label": "Fix version",
           "help": "Release containing the fix.",
-          "example": "1.8.1"
+          "example": "1.9.0"
         },
         "ru": {
           "label": "Версия исправления",
           "help": "Релиз с исправлением.",
-          "example": "1.8.1"
+          "example": "1.9.0"
         }
       }
     },

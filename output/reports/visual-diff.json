@@ -1,5 +1,5 @@
 {
-  "version": "1.8.1",
+  "version": "1.9.0",
   "status": "passed",
   "pixelThreshold": 0,
   "captures": [
@@ -16,7 +16,7 @@
     {
       "name": "components-en-dark-mobile",
       "changedPixels": 0,
-      "totalPixels": 7096050
+      "totalPixels": 7159230
     },
     {
       "name": "lab-en-dark-desktop",
@@ -46,7 +46,7 @@
     {
       "name": "standalone-en-dark-desktop",
       "changedPixels": 0,
-      "totalPixels": 80316160
+      "totalPixels": 80471040
     },
     {
       "name": "standalone-ru-motion-dark",

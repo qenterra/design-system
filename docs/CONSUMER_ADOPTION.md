@@ -6,7 +6,7 @@ The consumer doctor is a read-only migration aid, not an automatic compliance ba
 python3 /path/to/design-system/scripts/audit_consumer.py /path/to/product --output /private/tmp/qds-product-report.json
 ```
 
-The report checks declared local adapters, source-root boundaries, raw colors, and narrowly documented exceptions. It never edits the product and refuses to write its report inside the consumer tree.
+The report checks declared local adapters, source-root boundaries, CSS hex colors, Swift numeric colors, SwiftUI corner radii and animation durations, plus narrowly documented exceptions. It never edits the product and refuses to write its report inside the consumer tree.
 
 ## Adoption order
 

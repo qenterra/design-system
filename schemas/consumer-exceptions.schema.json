@@ -13,7 +13,7 @@
         "required": ["id", "rule", "path", "reason", "reviewTrigger"],
         "properties": {
           "id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
-          "rule": {"type": "string", "enum": ["raw-color", "missing-swift-adapter", "missing-css-adapter"]},
+          "rule": {"type": "string", "enum": ["raw-color", "raw-duration", "raw-radius", "missing-swift-adapter", "missing-css-adapter"]},
           "path": {"type": "string"},
           "reason": {"type": "string", "minLength": 12},
           "reviewTrigger": {"type": "string", "minLength": 8}

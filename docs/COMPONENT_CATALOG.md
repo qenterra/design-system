@@ -93,6 +93,8 @@ This catalog defines the expected interface vocabulary. It does not require ever
 | File row | Filename + operational metadata | Original name primary, conflict/status explicit |
 | Chart | Quantitative relationship | Text/table alternative, scale/units, color-independent series |
 
+Shared interactive-row surfaces resolve state in one order: disabled or unavailable, selected, hover, then default. Focus owns the boundary independently; selected rows retain a strong non-color boundary. `QDSInteractiveRowState` and `QDSInteractiveRowSurface` are the SwiftUI contract for this behavior.
+
 ## Feedback and status
 
 | Component | Use | Required contract |

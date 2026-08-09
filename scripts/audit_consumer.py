@@ -19,6 +19,15 @@ from lib.token_tools import load_json  # noqa: E402
 
 SOURCE_SUFFIXES = {".swift", ".css", ".scss", ".js", ".jsx", ".ts", ".tsx", ".html"}
 RAW_COLOR = re.compile(r"(?<![A-Za-z0-9])#[0-9A-Fa-f]{3}(?:[0-9A-Fa-f]{3})?\b")
+RAW_SWIFT_COLOR = re.compile(
+    r"\b(?:Color|NSColor)\s*\(\s*(?:red|calibratedRed|deviceRed)\s*:|"
+    r"\b(?:calibratedRed|deviceRed)\s*:"
+)
+RAW_SWIFT_RADIUS = re.compile(r"\bcornerRadius\s*:\s*(?:\d+(?:\.\d+)?|\.\d+)")
+RAW_SWIFT_DURATION = re.compile(
+    r"(?:\bAnimation\.[A-Za-z0-9_]+|\.(?:easeIn|easeOut|easeInOut|linear))"
+    r"\s*\([^)]*\bduration\s*:\s*(?:\d+(?:\.\d+)?|\.\d+)"
+)
 
 
 def schema_errors(data: dict[str, Any], name: str) -> list[str]:
@@ -71,8 +80,12 @@ def audit_consumer(consumer_root: Path, manifest_path: Path | None = None) -> di
         swift_adapter = swift_adapter or "import QenTerraDesignTokens" in text
         css_adapter = css_adapter or "@qenterra/design-tokens" in text or "qds-tokens.css" in text
         for line_number, line in enumerate(text.splitlines(), start=1):
-            if RAW_COLOR.search(line) and ("raw-color", relative) not in allowed:
+            if (RAW_COLOR.search(line) or RAW_SWIFT_COLOR.search(line)) and ("raw-color", relative) not in allowed:
                 findings.append({"rule": "raw-color", "path": relative, "line": line_number})
+            if RAW_SWIFT_RADIUS.search(line) and ("raw-radius", relative) not in allowed:
+                findings.append({"rule": "raw-radius", "path": relative, "line": line_number})
+            if RAW_SWIFT_DURATION.search(line) and ("raw-duration", relative) not in allowed:
+                findings.append({"rule": "raw-duration", "path": relative, "line": line_number})
 
     expected = manifest.get("adapters", {})
     if expected.get("swift") and not swift_adapter and ("missing-swift-adapter", "*") not in allowed:

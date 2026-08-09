@@ -1,6 +1,6 @@
 # QenTerra Design System
 
-Version 1.3.0 · Normative reference for humans and AI agents
+Version 1.9.0 · Normative reference for humans and AI agents
 
 ## 0. How to use this file
 
@@ -885,7 +885,7 @@ A product is compliant only when:
 
 Visual similarity alone is not adoption.
 
-Begin adoption with the consumer manifest and read-only doctor. A product declares platforms, source roots, expected local adapters, and a separate exception file. Doctor output distinguishes schema/boundary errors from actionable findings and never writes inside the consumer. Exceptions match an exact rule and path, explain the real constraint, and carry a review trigger. A passing static report is evidence for covered source rules only; it does not prove native rendering, accessibility APIs, permissions, persistence, or recovery.
+Begin adoption with the consumer manifest and read-only doctor. A product declares platforms, source roots, expected local adapters, and a separate exception file. Doctor output distinguishes schema/boundary errors from actionable findings and never writes inside the consumer. Covered Swift rules detect raw numeric colors, animation durations, and corner radii in addition to CSS hex colors. Exceptions match an exact rule and path, explain the real constraint, and carry a review trigger. A passing static report is evidence for covered source rules only; it does not prove native rendering, accessibility APIs, permissions, persistence, or recovery.
 
 Interface icons come from `registry/icons.json`: one semantic ID, category, meaning, and reviewed 16-point SVG fragment. Web/site consumers use generated metadata or sprite output; native products prefer a platform symbol when its meaning and optical weight match, otherwise the registry asset. A symbol never replaces a visible label when the action or outcome is ambiguous.
 

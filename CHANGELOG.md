@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.9.0
+
+### Added
+
+- Added deterministic SwiftUI interactive-row state and surface contracts for hover, focus, selection, disabled, unavailable, and Increased Contrast states.
+- Added read-only consumer-doctor findings for Swift numeric colors, corner radii, and animation durations with exact exception support.
+
+### Fixed
+
+- Preserved channel values and alpha when SwiftUI adapters resolve semantic `rgba(...)` colors.
+- Validated that both localized normative master headers match `VERSION`.
+
 ## 1.8.1
 
 ### Fixed

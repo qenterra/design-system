@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import json
+import shutil
 import sys
 import tempfile
 import unittest
@@ -94,6 +95,20 @@ class ValidatorTests(unittest.TestCase):
             (root / "docs" / "MASTER.md").write_text("# Master\n\n## 0. Overview\n", encoding="utf-8")
             errors = validate_localized_sources(root)
             self.assertTrue(any("MASTER.ru.md" in error for error in errors))
+
+    def test_master_version_drift_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            shutil.copytree(ROOT / "docs", root / "docs")
+            (root / "VERSION").write_text(self.version + "\n", encoding="utf-8")
+            for filename in ("MASTER.md", "MASTER.ru.md"):
+                path = root / "docs" / filename
+                path.write_text(
+                    path.read_text(encoding="utf-8").replace(self.version, "1.3.0", 1),
+                    encoding="utf-8",
+                )
+            errors = validate_localized_sources(root)
+            self.assertTrue(any("version 1.3.0 does not match VERSION" in error for error in errors))
 
     def test_superpowers_directory_fails_repository_hygiene(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

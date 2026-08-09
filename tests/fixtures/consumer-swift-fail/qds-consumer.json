@@ -1,0 +1,1 @@
+{"schemaVersion":1,"product":"CadenceFixture","platforms":["macOS"],"adapters":{"swift":true,"css":false},"sourceRoots":["Sources"],"exceptions":"qds-exceptions.json"}

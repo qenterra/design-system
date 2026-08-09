@@ -67,6 +67,69 @@ public struct QDSComponentMetric: Equatable, Sendable {
     }
 }
 
+public struct QDSInteractiveRowState: Equatable, Sendable {
+    public let isHovered: Bool
+    public let isFocused: Bool
+    public let isSelected: Bool
+    public let isDisabled: Bool
+    public let isUnavailable: Bool
+    public let isIncreasedContrast: Bool
+
+    public init(
+        isHovered: Bool = false,
+        isFocused: Bool = false,
+        isSelected: Bool = false,
+        isDisabled: Bool = false,
+        isUnavailable: Bool = false,
+        isIncreasedContrast: Bool = false
+    ) {
+        self.isHovered = isHovered
+        self.isFocused = isFocused
+        self.isSelected = isSelected
+        self.isDisabled = isDisabled
+        self.isUnavailable = isUnavailable
+        self.isIncreasedContrast = isIncreasedContrast
+    }
+
+    public var fill: QDSColorValue? {
+        if isDisabled || isUnavailable {
+            return QDS.Color.fillDisabled
+        }
+        if isSelected {
+            return isIncreasedContrast
+                ? QDS.Color.fillSelectedStrong
+                : QDS.Color.fillSelected
+        }
+        if isHovered {
+            return QDS.Color.fillHover
+        }
+        return nil
+    }
+
+    public var border: QDSColorValue? {
+        if isDisabled || isUnavailable {
+            return nil
+        }
+        if isFocused {
+            return QDS.Color.borderFocus
+        }
+        if isSelected {
+            return QDS.Color.borderStrong
+        }
+        return nil
+    }
+
+    public var contentOpacity: Double {
+        isDisabled || isUnavailable ? 0.5 : 1
+    }
+
+    public var borderWidth: Double {
+        isFocused && isIncreasedContrast
+            ? QDS.Stroke.focus
+            : QDS.Stroke.hairline
+    }
+}
+
 /// Stable public entry point for locally generated QenTerra design tokens.
 public enum QDS {
     public static let version = QDSGeneratedTokens.version
