@@ -10,8 +10,8 @@ QenTerra Design System documentation is organized by audience and authority.
   executable stories.
 - [Consumer adoption](CONSUMER_ADOPTION.md): package selection, product profiles,
   exceptions, and migration checks.
-- [GitHub Wiki](https://github.com/qenterra/design-system/wiki): shorter task-led
-  guides for authorized collaborators.
+- [Repository README](../README.md): task-led overview, status, setup, and
+  verified limitations.
 
 ## Maintain the system
 

@@ -7,7 +7,7 @@
 <p align="center">Private SwiftPM distribution of QenTerra design tokens, semantic icons, and focused SwiftUI adapters.</p>
 
 <p align="center">
-  <a href="https://github.com/qenterra/design-system-swift/wiki">Wiki</a> ·
+  <a href="https://github.com/qenterra/design-system/blob/main/docs/README.md">Documentation</a> ·
   <a href="https://github.com/qenterra/design-system">Canonical repository</a> ·
   <a href="https://github.com/qenterra/design-system/blob/main/CHANGELOG.md">Changelog</a>
 </p>

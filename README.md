@@ -10,7 +10,7 @@
 <p align="center">Shared interface grammar, implementation contracts, and brand foundations for QenTerra products.</p>
 
 <p align="center">
-  <a href="https://github.com/qenterra/design-system/wiki">Wiki</a> ·
+  <a href="docs/README.md">Documentation</a> ·
   <a href="docs/MASTER.md">English reference</a> ·
   <a href="docs/MASTER.ru.md">Русская версия</a> ·
   <a href="CHANGELOG.md">Changelog</a>
