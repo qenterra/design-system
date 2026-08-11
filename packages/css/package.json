@@ -1,8 +1,17 @@
 {
   "name": "@qenterra/design-tokens",
   "version": "1.11.0",
-  "description": "Local CSS and JSON adapters for QenTerra Design System tokens.",
-  "private": true,
+  "description": "Private CSS, JSON, icon, and recipe adapters for QenTerra Design System.",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qenterra/design-system.git",
+    "directory": "packages/css"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
   "sideEffects": [
     "./tokens.css",
     "./recipes.css"
@@ -15,10 +24,11 @@
     "./icons.json": "./icons.json"
   },
   "files": [
-    "tokens.css",
-    "recipes.css",
-    "tokens.json",
+    "LICENSE",
+    "README.md",
     "icons.json",
-    "README.md"
+    "recipes.css",
+    "tokens.css",
+    "tokens.json"
   ]
 }

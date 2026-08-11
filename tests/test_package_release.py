@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -27,11 +28,19 @@ class PackageReleaseContractTests(unittest.TestCase):
         )
         self._write(
             "packages/css/tokens.json",
-            json.dumps({"meta": {"version": "1.12.0"}}),
+            json.dumps(
+                {
+                    "foundation": {"meta": {"version": "1.12.0"}},
+                    "semantic": {"meta": {"version": "1.12.0"}},
+                }
+            ),
         )
         self._write("packages/css/LICENSE", "Internal use only.\n")
         self._write("packages/css/README.md", "# CSS package\n")
-        self._write("packages/css/icons.json", "{}\n")
+        self._write(
+            "packages/css/icons.json",
+            json.dumps({"version": "1.12.0", "icons": [{"id": "check"}]}),
+        )
         self._write("packages/css/tokens.css", ":root {}\n")
         self._write("packages/css/recipes.css", ".qds {}\n")
         self._write("packages/swift/LICENSE", "Internal use only.\n")
@@ -66,6 +75,16 @@ class PackageReleaseContractTests(unittest.TestCase):
         errors = validate_version_alignment(self.root)
 
         self.assertIn("packages/css/package.json version 1.11.0 != 1.12.0", errors)
+
+    def test_generated_token_family_version_drift_is_reported(self) -> None:
+        self._write(
+            "packages/css/tokens.json",
+            json.dumps({"foundation": {"meta": {"version": "1.11.0"}}}),
+        )
+
+        errors = validate_version_alignment(self.root)
+
+        self.assertIn("packages/css/tokens.json foundation version 1.11.0 != 1.12.0", errors)
 
     def test_css_payload_rejects_unlisted_file(self) -> None:
         self._write("packages/css/internal-audit.md", "private\n")
@@ -119,6 +138,73 @@ class PackageReleaseContractTests(unittest.TestCase):
         self.assertEqual(classify_remote_ref(None, "a" * 40), "missing")
         self.assertEqual(classify_remote_ref("a" * 40, "a" * 40), "matching")
         self.assertEqual(classify_remote_ref("b" * 40, "a" * 40), "conflict")
+
+
+class PackageMetadataTests(unittest.TestCase):
+    repository_root = Path(__file__).resolve().parents[1]
+
+    def test_css_package_is_private_registry_ready(self) -> None:
+        package = json.loads(
+            (self.repository_root / "packages/css/package.json").read_text(encoding="utf-8")
+        )
+
+        self.assertNotIn("private", package)
+        self.assertEqual(package["license"], "UNLICENSED")
+        self.assertEqual(
+            package["repository"],
+            {
+                "type": "git",
+                "url": "git+https://github.com/qenterra/design-system.git",
+                "directory": "packages/css",
+            },
+        )
+        self.assertEqual(
+            package["publishConfig"],
+            {
+                "registry": "https://npm.pkg.github.com",
+                "access": "restricted",
+            },
+        )
+        self.assertEqual(
+            package["files"],
+            [
+                "LICENSE",
+                "README.md",
+                "icons.json",
+                "recipes.css",
+                "tokens.css",
+                "tokens.json",
+            ],
+        )
+
+    def test_root_routes_only_qenterra_scope_to_github_packages(self) -> None:
+        root_package = json.loads(
+            (self.repository_root / "package.json").read_text(encoding="utf-8")
+        )
+        npmrc = (self.repository_root / ".npmrc").read_text(encoding="utf-8")
+
+        self.assertEqual(root_package["workspaces"], ["packages/css"])
+        self.assertEqual(
+            npmrc,
+            "@qenterra:registry=https://npm.pkg.github.com\n",
+        )
+        self.assertNotIn("authToken", npmrc)
+
+    def test_css_export_smoke_check_executes_real_package(self) -> None:
+        result = subprocess.run(
+            [
+                "node",
+                str(self.repository_root / "tests/package-css-smoke.mjs"),
+                str(self.repository_root / "packages/css"),
+            ],
+            cwd=self.repository_root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("CSS package smoke check passed", result.stdout)
 
 
 if __name__ == "__main__":

@@ -2,8 +2,13 @@
   "name": "qenterra-design-system",
   "version": "1.11.0",
   "private": true,
+  "workspaces": [
+    "packages/css"
+  ],
   "scripts": {
-    "test:browser": "node scripts/render_screenshots.js"
+    "test:browser": "node scripts/render_screenshots.js",
+    "package:validate": "python3 scripts/package_release.py validate",
+    "package:css:pack": "npm pack --workspace @qenterra/design-tokens --pack-destination /private/tmp --cache /private/tmp/qds-npm-cache --json"
   },
   "devDependencies": {
     "playwright": "1.62.1"

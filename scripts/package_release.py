@@ -54,7 +54,7 @@ def validate_version_alignment(root: Path) -> list[str]:
     json_versions = {
         "package.json": ("version",),
         "packages/css/package.json": ("version",),
-        "packages/css/tokens.json": ("meta", "version"),
+        "packages/css/icons.json": ("version",),
     }
     for relative_path, keys in json_versions.items():
         path = root / relative_path
@@ -72,6 +72,25 @@ def validate_version_alignment(root: Path) -> list[str]:
             continue
         if value != version:
             errors.append(f"{relative_path} version {value} != {version}")
+
+    tokens_path = root / "packages/css/tokens.json"
+    if not tokens_path.is_file():
+        errors.append("packages/css/tokens.json is missing")
+    else:
+        try:
+            token_families = _json(tokens_path)
+            if not isinstance(token_families, dict) or not token_families:
+                raise ValueError("expected token family object")
+            for family, data in sorted(token_families.items()):
+                if not isinstance(data, dict):
+                    raise ValueError(f"{family} is not an object")
+                actual = data.get("meta", {}).get("version")
+                if actual != version:
+                    errors.append(
+                        f"packages/css/tokens.json {family} version {actual} != {version}"
+                    )
+        except (OSError, json.JSONDecodeError, ValueError, AttributeError) as error:
+            errors.append(f"packages/css/tokens.json version is unreadable: {error}")
 
     swift_path = (
         root
