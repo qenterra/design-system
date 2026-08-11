@@ -271,7 +271,7 @@ class ReleaseWorkflowTests(unittest.TestCase):
         self.assertIn("python3 scripts/package_release.py classify-ref", workflow)
         self.assertIn("d23441a48e516b6c34aea4fa41551a30e30af803", workflow)
         self.assertIn("249970729cb0ef3589644e2896645e5dc5ba9c38", workflow)
-        self.assertIn("330a01c490aca151604b8cf639adc76d48f6c5d4", workflow)
+        self.assertIn("b7c566a772e6b6bfb58ed0dc250532a479d7789f", workflow)
         self.assertNotIn("--force", workflow)
         self.assertNotIn("visibility public", workflow.lower())
         self.assertNotIn("personal_access_token", workflow.lower())
