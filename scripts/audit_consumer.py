@@ -7,6 +7,7 @@ import argparse
 import json
 import re
 import sys
+from datetime import date
 from pathlib import Path
 from typing import Any
 
@@ -25,7 +26,7 @@ RAW_SWIFT_COLOR = re.compile(
 )
 RAW_SWIFT_RADIUS = re.compile(r"\bcornerRadius\s*:\s*(?:\d+(?:\.\d+)?|\.\d+)")
 RAW_SWIFT_DURATION = re.compile(
-    r"(?:\bAnimation\.[A-Za-z0-9_]+|\.(?:easeIn|easeOut|easeInOut|linear))"
+    r"(?:\bAnimation\.[A-Za-z0-9_]+|\.(?:easeIn|easeOut|easeInOut|linear|smooth))"
     r"\s*\([^)]*\bduration\s*:\s*(?:\d+(?:\.\d+)?|\.\d+)"
 )
 
@@ -43,6 +44,26 @@ def inside(path: Path, parent: Path) -> bool:
         return False
 
 
+def exception_review_errors(exceptions: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    today = date.today()
+    for item in exceptions.get("exceptions", []):
+        identifier = item.get("id", "unknown")
+        review_by = item.get("reviewBy")
+        if not isinstance(review_by, str):
+            continue
+        try:
+            review_date = date.fromisoformat(review_by)
+        except ValueError:
+            errors.append(f"exception:{identifier} has an invalid reviewBy date")
+            continue
+        if review_date < today:
+            errors.append(
+                f"exception:{identifier} reviewBy {review_by} has expired"
+            )
+    return errors
+
+
 def audit_consumer(consumer_root: Path, manifest_path: Path | None = None) -> dict[str, Any]:
     consumer_root = consumer_root.resolve()
     explicit_manifest = manifest_path is not None
@@ -55,13 +76,14 @@ def audit_consumer(consumer_root: Path, manifest_path: Path | None = None) -> di
     errors.extend(f"manifest:{error}" for error in schema_errors(manifest, "consumer-manifest.schema.json"))
 
     exceptions_path = (manifest_path.parent / manifest.get("exceptions", "qds-exceptions.json")).resolve()
-    exceptions: dict[str, Any] = {"schemaVersion": 1, "exceptions": []}
+    exceptions: dict[str, Any] = {"schemaVersion": 2, "exceptions": []}
     allowed_exception_root = manifest_path.parent if explicit_manifest else consumer_root
     if not inside(exceptions_path, allowed_exception_root) or not exceptions_path.is_file():
         errors.append("exceptions file is missing beside the manifest")
     else:
         exceptions = load_json(exceptions_path)
         errors.extend(f"exceptions:{error}" for error in schema_errors(exceptions, "consumer-exceptions.schema.json"))
+        errors.extend(exception_review_errors(exceptions))
     allowed = {(item.get("rule"), item.get("path")) for item in exceptions.get("exceptions", [])}
 
     files: list[Path] = []

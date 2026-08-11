@@ -20,6 +20,7 @@ from lib.pseudo_locales import pseudo_long, pseudo_rtl  # noqa: E402
 from lib.site_locales import (  # noqa: E402
     BRAND_SECTION_KEYS,
     COPY,
+    NAV_GROUPS,
     PAGE_GROUPS,
     REPOSITORY_SECTION_KEYS,
     SPECIMENS,
@@ -57,7 +58,7 @@ def pages(locale: str) -> list[tuple[str, str, list[int], str]]:
 
 
 def nav_html(current: str, root: str, standalone: bool, locale: str) -> str:
-    links = []
+    links: dict[str, str] = {}
     for slug, title, section_numbers, _ in pages(locale):
         if slug in {"brand", "repositories", "lab", "adoption", "email"}:
             prefix = {"brand": "brand", "repositories": "repository", "lab": "lab", "adoption": "adoption", "email": "email"}[slug]
@@ -73,12 +74,36 @@ def nav_html(current: str, root: str, standalone: bool, locale: str) -> str:
             href = f"{root}pages/{slug}.html"
             section_start, section_end = section_numbers[0], section_numbers[-1]
         current_attr = ' aria-current="page"' if slug == current and not standalone else ""
-        links.append(
+        links[slug] = (
             f'<a href="{href}" data-nav-slug="{slug}" data-section-start="{section_start}" '
             f'data-section-end="{section_end}"{current_attr}>'
             f'<span class="nav-glyph">{icon(slug)}</span><span>{title}</span></a>'
         )
-    return "\n".join(links)
+    groups = []
+    for group, slugs in NAV_GROUPS:
+        groups.append(
+            f'<section class="nav-group" aria-labelledby="nav-group-{group}">'
+            f'<p class="nav-group-label" id="nav-group-{group}">{COPY[locale]["ui"][f"nav_{group}"]}</p>'
+            f'{"".join(links[slug] for slug in slugs)}</section>'
+        )
+    return "\n".join(groups)
+
+
+def local_toc(section_html: str, locale: str) -> str:
+    entries = []
+    pattern = re.compile(
+        r'<section\s+[^>]*id="([^"]+)"[^>]*>.*?<h([23])[^>]*>(.*?)</h\2>',
+        re.DOTALL,
+    )
+    for identifier, _, raw_title in pattern.findall(section_html):
+        title = re.sub(r"<[^>]+>", "", raw_title).strip()
+        if title:
+            entries.append((identifier, title))
+    if len(entries) < 4:
+        return ""
+    links = "".join(f'<li><a href="#{identifier}">{title}</a></li>' for identifier, title in entries)
+    label = COPY[locale]["ui"]["on_this_page"]
+    return f'<nav class="page-toc" aria-label="{label}"><p>{label}</p><ol>{links}</ol></nav>'
 
 
 def color_specimen(locale: str) -> str:
@@ -252,11 +277,14 @@ def render_audit_appendix(locale: str) -> str:
         if not audit_path.exists():
             continue
         sections.append(
-            f'<section class="doc-section" id="audit-appendix-{marker.lower()}" data-nav-slug="audit"><span class="section-number">{marker}</span>'
+            f'<section class="doc-section" id="audit-appendix-{marker.lower()}"><span class="section-number">{marker}</span>'
             f'<h2>{title}</h2><div class="prose">'
             f'{render(audit_path.read_text(encoding="utf-8"), heading_offset=2, id_prefix=prefix)}</div></section>'
         )
-    return "".join(sections)
+    if not sections:
+        return ""
+    summary = "Исторический контекст аудита" if locale == "ru" else "Historical audit context"
+    return f'<details class="audit-history"><summary>{summary}</summary>{"".join(sections)}</details>'
 
 
 def render_component_catalog(locale: str) -> str:
@@ -290,35 +318,71 @@ def render_lab_sample(component_id: str, story: dict, locale: str, unique: str) 
     state = story["state"]
     if component_id == "button":
         disabled = " disabled" if state == "disabled" else ""
+        busy = ' aria-busy="true" aria-disabled="true"' if state == "loading" else ""
         variant = story.get("variant", "secondary")
-        return f'<button class="qds-button" data-variant="{variant}"{disabled}>{label}</button>'
+        progress = '<span class="lab-progress" aria-hidden="true"></span>' if state == "loading" else ""
+        return (
+            f'<button class="qds-button" data-variant="{variant}" data-lab-state="{state}"'
+            f' aria-label="{escape(label, quote=True)}"{disabled}{busy}>{progress}<span>{label}</span></button>'
+        )
     if component_id == "field":
         control_id = f"{unique}-control"
         field_label = lab_copy(locale, "Название коллекции" if ru else "Collection name", width)
         error = "Введите непустое название." if ru else "Enter a non-empty name."
         invalid = state == "invalid"
         disabled = " disabled" if state == "disabled" else ""
+        readonly = " readonly" if state == "readOnly" else ""
+        value = "Рабочая коллекция" if ru else "Working collection"
+        field_value = value if state in {"editing", "valid", "readOnly"} else ""
         described = f' aria-describedby="{unique}-error"' if invalid else ""
         invalid_attribute = ' aria-invalid="true"' if invalid else ""
         error_html = f'<span class="lab-error" id="{unique}-error">{error}</span>' if invalid else ""
+        valid_html = (
+            f'<span class="lab-valid" id="{unique}-valid">{"Название доступно." if ru else "Name is available."}</span>'
+            if state == "valid"
+            else ""
+        )
+        valid_described = f' aria-describedby="{unique}-valid"' if state == "valid" else ""
         return (
-            f'<label class="lab-field" for="{control_id}"><span>{field_label}</span>'
+            f'<label class="lab-field" data-lab-state="{state}" for="{control_id}"><span>{field_label}</span>'
             f'<input class="qds-field" id="{control_id}" aria-label="{escape(field_label, quote=True)}"{disabled}{described}'
-            f'{invalid_attribute} value=""></label>{error_html}'
+            f'{valid_described}{invalid_attribute}{readonly} value="{escape(field_value, quote=True)}"></label>{error_html}{valid_html}'
         )
     if component_id == "interactive-row":
         selected = ' aria-selected="true"' if state == "selected" else ' aria-selected="false"'
-        unavailable = ' aria-disabled="true"' if state == "unavailable" else ""
+        unavailable = ' aria-disabled="true"' if state in {"disabled", "unavailable"} else ""
+        tabindex = "-1" if state in {"disabled", "unavailable"} else "0"
         title = "Локальная библиотека" if ru else "Local library"
-        detail = "Недоступно" if ru and state == "unavailable" else "Unavailable" if state == "unavailable" else "48 items"
-        return f'<div class="qds-interactive-row" role="option" tabindex="0"{selected}{unavailable}><strong>{title}</strong><span>{detail}</span></div>'
+        detail = (
+            "Недоступно" if ru and state == "unavailable" else
+            "Unavailable" if state == "unavailable" else
+            "Отключено" if ru and state == "disabled" else
+            "Disabled" if state == "disabled" else
+            "48 элементов" if ru else "48 items"
+        )
+        list_label = "Расположения библиотек" if ru else "Library locations"
+        return (
+            f'<div class="lab-option-list" role="listbox" aria-label="{list_label}">'
+            f'<div class="qds-interactive-row" role="option" tabindex="{tabindex}" data-lab-state="{state}"'
+            f'{selected}{unavailable}><strong>{title}</strong><span>{detail}</span></div></div>'
+        )
     if component_id == "group":
         title = lab_copy(locale, "Хранение" if ru else "Storage", width)
-        return f'<fieldset class="qds-group"><legend>{title}</legend><label><input type="checkbox" checked> {lab_copy(locale, "Сохранять историю локально" if ru else "Keep local history", width)}</label></fieldset>'
+        disabled = " disabled" if state == "disabled" else ""
+        return f'<fieldset class="qds-group"{disabled}><legend>{title}</legend><label><input type="checkbox" checked> {lab_copy(locale, "Сохранять историю локально" if ru else "Keep local history", width)}</label></fieldset>'
     if component_id == "dialog":
         title = "Не удалось завершить" if ru and state == "error" else "Could not complete" if state == "error" else "Удалить правило?" if ru else "Delete rule?"
-        return f'<div class="lab-dialog" role="dialog" aria-modal="false" aria-labelledby="{unique}-title"><strong id="{unique}-title">{title}</strong><p>{"Изменение можно отменить позже." if ru else "You can recover this change later."}</p><button class="qds-button" data-variant="secondary">{"Отмена" if ru else "Cancel"}</button></div>'
-    status_label = {"success": ("Готово", "Complete"), "warning": ("Нужно проверить", "Needs review"), "destructive": ("Не удалось", "Failed")}.get(state, ("Состояние", "Status"))
+        busy = ' aria-busy="true"' if state == "busy" else ""
+        disabled = " disabled" if state == "busy" else ""
+        description = "Сохраняем изменения…" if ru and state == "busy" else "Saving changes…" if state == "busy" else "Изменение можно отменить позже." if ru else "You can recover this change later."
+        return f'<div class="lab-dialog" role="dialog" aria-modal="false" aria-labelledby="{unique}-title"{busy}><strong id="{unique}-title">{title}</strong><p>{description}</p><button class="qds-button" data-variant="secondary"{disabled}>{"Отмена" if ru else "Cancel"}</button></div>'
+    status_label = {
+        "success": ("Готово", "Complete"),
+        "warning": ("Нужно проверить", "Needs review"),
+        "destructive": ("Не удалось", "Failed"),
+        "informative": ("Полезная информация", "Helpful information"),
+        "recording": ("Идёт запись", "Recording"),
+    }.get(state, ("Состояние", "Status"))
     return f'<span class="lab-status lab-status-{state}" role="status"><span aria-hidden="true">●</span>{status_label[0 if ru else 1]}</span>'
 
 
@@ -348,7 +412,7 @@ def render_component_lab(locale: str) -> str:
             story_id = f"story-{component_id}-{story['id']}"
             width = story.get("localeWidth", "standard")
             stories.append(
-                f'<article class="lab-story" id="{story_id}" data-lab-story data-width="{width}">'
+                f'<article class="lab-story" id="{story_id}" data-lab-story data-width="{width}" data-state="{story["state"]}">'
                 f'<div class="lab-story-head"><code>{component_id}/{story["id"]}</code><span>{story["state"]}</span></div>'
                 f'<div class="lab-canvas" dir="{"rtl" if width == "rtl" else "ltr"}">'
                 f'{render_lab_sample(component_id, story, locale, story_id)}</div></article>'
@@ -579,12 +643,14 @@ def shell(
     document_title = page_title if page_title == "QenTerra Design System" else f"{page_title} · QenTerra Design System"
     data += (
         f' data-search-empty="{escape(ui["no_results"], quote=True)}"'
+        f' data-search-count="{escape(ui["search_count"], quote=True)}"'
         f' data-section-label="{escape(ui["section"], quote=True)}"'
     )
     home = "#section-0" if standalone else f"{site_root}index.html"
     master_link = "#section-0" if standalone else f"{site_root}qenterra-design-system.html"
     foundations_link = "#section-3" if standalone else f"{site_root}pages/foundations.html"
     hero = ""
+    toc = local_toc(section_html, locale)
     intro_heading = "h1"
     if page_slug == "index":
         intro_heading = "h2"
@@ -614,9 +680,8 @@ def shell(
   <a class="skip-link" href="#main-content">{ui["skip"]}</a>
   <div class="progress-line" data-progress aria-hidden="true"></div>
   <div class="site-shell">
-    <aside class="sidebar" aria-label="{ui["navigation"]}">
+    <aside class="sidebar" id="qds-navigation" data-sidebar aria-label="{ui["navigation"]}">
       <div class="sidebar-head"><a class="brand" href="{home}"><span class="brand-mark" aria-hidden="true">Q</span><span class="brand-copy"><span class="brand-title">QenTerra Design System</span><span class="brand-meta">{ui["semantic_core"]} · {version}</span></span></a></div>
-      <p class="nav-label">{ui["reference"]}</p>
       <nav class="site-nav">{nav_html(page_slug, site_root, standalone, locale)}</nav>
       <div class="sidebar-footer">
         <div class="appearance-control" role="group" aria-label="{ui["appearance"]}"><button type="button" data-theme-choice="system" aria-pressed="true">{ui["system"]}</button><button type="button" data-theme-choice="light" aria-pressed="false">{ui["light"]}</button><button type="button" data-theme-choice="dark" aria-pressed="false">{ui["dark"]}</button></div>
@@ -625,10 +690,11 @@ def shell(
     </aside>
     <button class="scrim" data-scrim aria-label="{ui["close_navigation"]}"></button>
     <div class="main-column">
-      <header class="topbar"><button class="menu-button" type="button" data-menu-button aria-expanded="false" aria-label="{ui["open_navigation"]}">{icon("menu")}</button><p class="topbar-title">{page_title}</p><div class="search-wrap"><span class="search-icon">{icon("search")}</span><input class="search-input" type="search" data-search aria-label="{ui["search_label"]}" placeholder="{ui["search_placeholder"]}" autocomplete="off"><div class="search-results" data-search-results role="region" aria-label="{ui["search_results"]}"></div></div><span class="key-hint" aria-hidden="true">⌘ K</span>{language_menu(locale, language_targets)}</header>
+      <header class="topbar"><button class="menu-button" type="button" data-menu-button aria-controls="qds-navigation" aria-expanded="false" aria-label="{ui["open_navigation"]}">{icon("menu")}</button><p class="topbar-title">{page_title}</p><div class="search-wrap"><span class="search-icon">{icon("search")}</span><input class="search-input" type="search" role="combobox" data-search aria-label="{ui["search_label"]}" placeholder="{ui["search_placeholder"]}" autocomplete="off" aria-autocomplete="list" aria-controls="qds-search-results" aria-expanded="false"><div class="search-results" id="qds-search-results" data-search-results role="listbox" aria-label="{ui["search_results"]}"></div><p class="search-status" id="qds-search-status" data-search-status role="status" aria-live="polite"></p></div><span class="key-hint" aria-hidden="true">⌘ K</span>{language_menu(locale, language_targets)}</header>
       <main class="content" id="main-content">
         {hero}
         <header class="page-intro"><p class="page-eyebrow">{ui["eyebrow"]}</p><{intro_heading}>{page_title}</{intro_heading}><p class="page-summary">{page_summary}</p></header>
+        {toc}
         {section_html}
         <footer class="page-footer"><span>QenTerra Design System {version}</span><span>{ui["footer"]}</span></footer>
       </main>

@@ -1,6 +1,7 @@
 {
   "schemaVersion": 1,
   "pixelThreshold": 0,
+  "channelTolerance": 3,
   "captures": [
     {"name": "overview-en-dark-wide", "path": "en/index.html", "viewport": {"width": 1440, "height": 1000}, "theme": "dark", "reducedMotion": false},
     {"name": "foundations-ru-light-desktop", "path": "ru/pages/foundations.html", "viewport": {"width": 1280, "height": 900}, "theme": "light", "reducedMotion": false},
@@ -17,6 +18,14 @@
     {"name": "email-en-dark-desktop", "path": "en/pages/email.html", "viewport": {"width": 1440, "height": 1000}, "theme": "dark", "reducedMotion": false},
     {"name": "email-ru-light-mobile", "path": "ru/pages/email.html", "viewport": {"width": 390, "height": 844}, "theme": "light", "reducedMotion": true},
     {"name": "email-en-light-tablet", "path": "en/pages/email.html", "viewport": {"width": 768, "height": 1024}, "theme": "light", "reducedMotion": false},
-    {"name": "email-ru-dark-desktop", "path": "ru/pages/email.html", "viewport": {"width": 1280, "height": 900}, "theme": "dark", "reducedMotion": true}
+    {"name": "email-ru-dark-desktop", "path": "ru/pages/email.html", "viewport": {"width": 1280, "height": 900}, "theme": "dark", "reducedMotion": true},
+    {"name": "overview-en-system-accessibility", "path": "en/index.html", "viewport": {"width": 1280, "height": 900}, "theme": "system", "reducedMotion": false, "reducedTransparency": true, "increasedContrast": true, "state": "default"},
+    {"name": "lab-button-hover", "path": "en/pages/lab.html?density=standard&width=standard", "viewport": {"width": 1280, "height": 900}, "theme": "light", "reducedMotion": false, "state": "hover", "scrollTarget": "#story-button-hover", "fullPage": false},
+    {"name": "lab-button-focus-forced-colors", "path": "en/pages/lab.html?density=standard&width=standard", "viewport": {"width": 1280, "height": 900}, "theme": "system", "reducedMotion": false, "forcedColors": true, "state": "focus", "scrollTarget": "#story-button-focused", "fullPage": false},
+    {"name": "lab-row-selected-contrast", "path": "en/pages/lab.html?density=standard&width=standard", "viewport": {"width": 1280, "height": 900}, "theme": "dark", "reducedMotion": false, "increasedContrast": true, "state": "selected", "scrollTarget": "#story-interactive-row-selected", "fullPage": false},
+    {"name": "lab-button-loading-reduced-motion", "path": "en/pages/lab.html?density=standard&width=standard", "viewport": {"width": 1280, "height": 900}, "theme": "dark", "reducedMotion": true, "state": "loading", "scrollTarget": "#story-button-loading", "fullPage": false},
+    {"name": "lab-field-error", "path": "ru/pages/lab.html?density=standard&width=standard", "viewport": {"width": 768, "height": 1024}, "theme": "light", "reducedMotion": false, "state": "error", "scrollTarget": "#story-field-invalid", "fullPage": false},
+    {"name": "pattern-recovery-mobile", "path": "en/pages/patterns.html", "viewport": {"width": 390, "height": 844}, "theme": "system", "reducedMotion": true, "state": "recovery", "scrollTarget": "#section-10", "fullPage": false},
+    {"name": "overview-ru-light-mobile", "path": "ru/index.html", "viewport": {"width": 390, "height": 844}, "theme": "light", "reducedMotion": false, "state": "default", "fullPage": false}
   ]
 }

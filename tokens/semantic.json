@@ -2,7 +2,7 @@
   "$schema": "../schemas/semantic.schema.json",
   "meta": {
     "name": "QenTerra Semantic Tokens",
-    "version": "1.10.0",
+    "version": "1.11.0",
     "type": "semantic",
     "description": "Meaning-oriented colors and materials for adaptive appearances."
   },
@@ -44,6 +44,11 @@
         "selectedStrong": "rgba(15, 15, 17, 0.14)",
         "disabled": "rgba(15, 15, 17, 0.04)",
         "scrim": "rgba(15, 15, 17, 0.46)"
+      },
+      "shadow": {
+        "raised": "0 20px 60px rgba(15, 15, 17, 0.14)",
+        "floating": "0 16px 44px rgba(15, 15, 17, 0.18)",
+        "overlay": "0 20px 60px rgba(15, 15, 17, 0.18)"
       },
       "state": {
         "success": "{color.green.light}",
@@ -90,6 +95,11 @@
         "selectedStrong": "rgba(255, 255, 255, 0.14)",
         "disabled": "rgba(255, 255, 255, 0.04)",
         "scrim": "rgba(0, 0, 0, 0.46)"
+      },
+      "shadow": {
+        "raised": "0 20px 60px rgba(0, 0, 0, 0.28)",
+        "floating": "0 16px 44px rgba(0, 0, 0, 0.34)",
+        "overlay": "0 20px 60px rgba(0, 0, 0, 0.36)"
       },
       "state": {
         "success": "{color.green.dark}",

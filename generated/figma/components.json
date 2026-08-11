@@ -37,8 +37,28 @@
           "variant": "secondary"
         },
         {
+          "id": "hover",
+          "state": "hover",
+          "variant": "primary"
+        },
+        {
+          "id": "pressed",
+          "state": "pressed",
+          "variant": "primary"
+        },
+        {
+          "id": "focused",
+          "state": "focused",
+          "variant": "secondary"
+        },
+        {
           "id": "disabled",
           "state": "disabled",
+          "variant": "primary"
+        },
+        {
+          "id": "loading",
+          "state": "loading",
           "variant": "primary"
         },
         {
@@ -85,12 +105,24 @@
           "state": "pristine"
         },
         {
+          "id": "editing",
+          "state": "editing"
+        },
+        {
+          "id": "valid",
+          "state": "valid"
+        },
+        {
           "id": "invalid",
           "state": "invalid"
         },
         {
           "id": "disabled",
           "state": "disabled"
+        },
+        {
+          "id": "read-only",
+          "state": "readOnly"
         },
         {
           "id": "rtl",
@@ -134,8 +166,20 @@
           "state": "default"
         },
         {
+          "id": "hover",
+          "state": "hover"
+        },
+        {
+          "id": "focused",
+          "state": "focused"
+        },
+        {
           "id": "selected",
           "state": "selected"
+        },
+        {
+          "id": "disabled",
+          "state": "disabled"
         },
         {
           "id": "unavailable",
@@ -171,6 +215,10 @@
         {
           "id": "settings",
           "state": "default"
+        },
+        {
+          "id": "disabled",
+          "state": "disabled"
         },
         {
           "id": "long-copy",
@@ -212,6 +260,10 @@
         {
           "id": "confirmation",
           "state": "presented"
+        },
+        {
+          "id": "busy",
+          "state": "busy"
         },
         {
           "id": "error",
@@ -258,6 +310,14 @@
         {
           "id": "error",
           "state": "destructive"
+        },
+        {
+          "id": "informative",
+          "state": "informative"
+        },
+        {
+          "id": "recording",
+          "state": "recording"
         }
       ],
       "summary": {
@@ -267,5 +327,5 @@
     }
   ],
   "format": "qds-figma-components-v1",
-  "version": "1.10.0"
+  "version": "1.11.0"
 }

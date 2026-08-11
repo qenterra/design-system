@@ -33,6 +33,19 @@ AI working specs, implementation plans, handoffs, scratch notes, and tool-only a
 12. Update Obsidian routing only when workflow or product contracts change.
 13. Commit source and generated output together.
 
+## Local verification dependencies
+
+Install the pinned browser and image runtimes before running the full gate:
+
+```bash
+npm ci
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements-visual.txt
+QDS_IMAGE_PYTHON=.venv/bin/python python3 scripts/verify.py
+```
+
+`scripts/verify.py` fails closed when Playwright, Pillow, NumPy, browser rendering, wallpaper validation, or exact pixel comparison cannot execute. A syntax-only browser check and a skipped image profile are not release evidence.
+
 ## Brand assets
 
 Brand PNG files live under `assets/brand/` and must be Git LFS objects. SVG, JSON, and Markdown stay in normal Git. Every asset has exactly one record in `assets/brand/manifest.json` with canonical/source paths, category, format, bytes, SHA-256, and image metadata.
@@ -95,7 +108,7 @@ Start product adoption from `templates/design/qds-consumer.json` and `qds-except
 
 ## Visual verification
 
-`evidence/screenshots.json` is the exact capture matrix. Committed baselines live in `output/screenshots/`; current renders live only under ignored `output/tmp/`. Update baselines intentionally with `QDS_UPDATE_SCREENSHOTS=1`, then run `scripts/compare_screenshots.py` with the configured image Python. Inspect them at full size for clipping, contrast, hierarchy, focus, responsive navigation, and appearance parity. Automated screenshots do not prove screen-reader or native-app behavior.
+`evidence/screenshots.json` is the exact capture matrix. Committed baselines live in `output/screenshots/`; current renders live only under ignored `output/tmp/`. The pixel threshold remains zero; the separately declared channel tolerance may ignore at most three 8-bit levels of renderer antialias jitter per channel. Update baselines intentionally with `QDS_UPDATE_SCREENSHOTS=1`, then run the full verifier, which renders the current matrix and executes `scripts/compare_screenshots.py` with the configured image Python. Inspect captures at full size for clipping, contrast, hierarchy, focus, responsive navigation, and appearance parity. Automated screenshots do not prove screen-reader or native-app behavior.
 
 ## Icons, asset browser, and Figma
 

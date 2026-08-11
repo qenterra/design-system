@@ -1,8 +1,11 @@
 from __future__ import annotations
 
 import hashlib
+import json
+import shutil
 import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -42,6 +45,34 @@ class ConsumerDoctorTests(unittest.TestCase):
         rules = {finding["rule"] for finding in report["findings"]}
         self.assertEqual(report["status"], "failed")
         self.assertEqual(rules, {"raw-color", "raw-duration", "raw-radius"})
+
+    def test_expired_exception_fails_the_doctor(self) -> None:
+        fixture = ROOT / "tests" / "fixtures" / "consumer-pass"
+        with tempfile.TemporaryDirectory() as directory:
+            consumer = Path(directory) / "consumer"
+            shutil.copytree(fixture, consumer)
+            exceptions_path = consumer / "qds-exceptions.json"
+            exceptions = json.loads(exceptions_path.read_text(encoding="utf-8"))
+            exceptions["exceptions"] = [
+                {
+                    "id": "expired-example",
+                    "rule": "raw-color",
+                    "path": "Sources/App.swift",
+                    "reason": "A test-only exception verifies expiry enforcement.",
+                    "owner": "QDS tests",
+                    "reviewTrigger": "Review whenever the fixture changes.",
+                    "reviewBy": "2000-01-01",
+                }
+            ]
+            exceptions_path.write_text(
+                json.dumps(exceptions),
+                encoding="utf-8"
+            )
+
+            report = audit_consumer(consumer)
+
+        self.assertEqual(report["status"], "failed")
+        self.assertIn("expired-example", " ".join(report["errors"]))
 
     def test_cli_refuses_output_inside_consumer(self) -> None:
         fixture = ROOT / "tests" / "fixtures" / "consumer-pass"

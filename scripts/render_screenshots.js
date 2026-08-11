@@ -12,6 +12,7 @@ const baselineDirectory = path.join(root, "output", "screenshots");
 const screenshotDirectory = path.join(root, "output", "tmp", "screenshots-current");
 const reportPath = path.join(root, "output", "reports", "browser.json");
 const manifestPath = path.join(root, "evidence", "screenshots.json");
+const componentRegistryPath = path.join(root, "registry", "components.json");
 const systemChrome = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 
 const contentTypes = {
@@ -78,7 +79,11 @@ async function assertAccessibleStructure(page, label) {
 async function assertComponentLab(page, baseUrl) {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto(`${baseUrl}/en/pages/lab.html?density=compact&width=standard#story-button-primary`, { waitUntil: "networkidle" });
-  if ((await page.locator("[data-lab-story]:visible").count()) < 6) throw new Error("Component Lab standard stories are missing");
+  const registry = JSON.parse(fs.readFileSync(componentRegistryPath, "utf8"));
+  const expectedStories = registry.components.flatMap((component) => component.stories.map((story) => `story-${component.id}-${story.id}`));
+  const renderedStories = await page.locator("[data-lab-story]").evaluateAll((stories) => stories.map((story) => story.id));
+  const missingStories = expectedStories.filter((story) => !renderedStories.includes(story));
+  if (missingStories.length) throw new Error(`Component Lab stories are missing: ${missingStories.join(", ")}`);
   await page.locator('[data-lab-width="long"]').click();
   if (!page.url().includes("width=long")) throw new Error("Component Lab controls are not URL-addressable");
   if ((await page.locator('[data-lab-story][data-width="long"]:visible').count()) < 2) throw new Error("Pseudo-long stories are missing");
@@ -87,14 +92,73 @@ async function assertComponentLab(page, baseUrl) {
   await page.goto(`${baseUrl}/en/pages/lab.html?width=standard#story-field-invalid`, { waitUntil: "networkidle" });
   const invalid = page.locator('#story-field-invalid input[aria-invalid="true"][aria-describedby]');
   if ((await invalid.count()) !== 1) throw new Error("Invalid field story lacks accessible error wiring");
+  if (await page.locator('[role="option"]:not([role="listbox"] [role="option"])').count()) {
+    throw new Error("Component Lab exposes an option outside a listbox");
+  }
+  if (await page.locator('#story-button-loading button[aria-busy="true"][aria-disabled="true"]').count() !== 1) {
+    throw new Error("Loading button story lacks busy and unavailable semantics");
+  }
+  const loadingAnimation = await page.locator("#story-button-loading .lab-progress").evaluate((element) => getComputedStyle(element).animationName);
+  if (loadingAnimation === "none") throw new Error("Loading button story lacks a progress animation");
+  if (await page.locator('#story-field-read-only input[readonly]').count() !== 1) {
+    throw new Error("Read-only field story lacks the readonly contract");
+  }
   await page.locator("#story-button-primary button").focus();
   const outline = await page.locator("#story-button-primary button").evaluate((element) => getComputedStyle(element).outlineStyle);
   if (outline === "none") throw new Error("Component Lab focus treatment is not visible");
 }
 
+async function assertSiteChrome(page, baseUrl) {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto(`${baseUrl}/en/index.html`, { waitUntil: "networkidle" });
+  const search = page.locator("[data-search]");
+  if (await search.getAttribute("role") !== "combobox") throw new Error("Search is not exposed as a combobox");
+  await search.fill("motion");
+  await page.locator('[data-search-results][role="listbox"] [role="option"]').first().waitFor();
+  if (await search.getAttribute("aria-expanded") !== "true") throw new Error("Search did not expose its expanded state");
+  if (await page.locator(".search-snippet mark").count() < 1) throw new Error("Search results lack contextual highlighting");
+  await page.keyboard.press("ArrowDown");
+  const activeDescendant = await search.getAttribute("aria-activedescendant");
+  if (!activeDescendant || await page.locator(`#${activeDescendant}[aria-selected="true"]`).count() !== 1) {
+    throw new Error("Search keyboard selection lacks aria-activedescendant wiring");
+  }
+  await page.keyboard.press("Escape");
+  if (await page.locator("[data-search-results].is-open").count() || await search.getAttribute("aria-expanded") !== "false") {
+    throw new Error("Escape did not close search results");
+  }
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.reload({ waitUntil: "networkidle" });
+  const sidebar = page.locator("[data-sidebar]");
+  const hiddenState = await sidebar.evaluate((element) => ({ inert: element.inert, hidden: element.getAttribute("aria-hidden") }));
+  if (!hiddenState.inert || hiddenState.hidden !== "true") throw new Error(`Closed mobile navigation remains accessible: ${JSON.stringify(hiddenState)}`);
+  await page.locator("[data-menu-button]").click();
+  const openState = await sidebar.evaluate((element) => ({ inert: element.inert, hidden: element.getAttribute("aria-hidden") }));
+  if (openState.inert || openState.hidden !== "false") throw new Error(`Open mobile navigation is inaccessible: ${JSON.stringify(openState)}`);
+  await page.keyboard.press("Escape");
+  const closedState = await sidebar.evaluate((element) => ({ inert: element.inert, hidden: element.getAttribute("aria-hidden") }));
+  if (!closedState.inert || closedState.hidden !== "true") throw new Error(`Closed mobile navigation leaked focus targets: ${JSON.stringify(closedState)}`);
+  if (!await page.locator("[data-menu-button]").evaluate((element) => element === document.activeElement)) {
+    throw new Error("Closing mobile navigation did not restore focus");
+  }
+}
+
+async function applyCaptureState(page, entry) {
+  if (entry.reducedTransparency) {
+    await page.locator("html").evaluate((element) => { element.dataset.reducedTransparency = "true"; });
+  }
+  if (entry.state === "hover") await page.locator('[data-state="hover"] .qds-button').first().hover();
+  if (entry.state === "focus") await page.locator('[data-state="focused"] .qds-button').first().focus();
+}
+
 async function capture(page, baseUrl, entry) {
   await page.setViewportSize(entry.viewport);
-  await page.emulateMedia({ colorScheme: entry.theme === "dark" ? "dark" : "light", reducedMotion: entry.reducedMotion ? "reduce" : "no-preference" });
+  await page.emulateMedia({
+    colorScheme: entry.theme === "system" ? "no-preference" : entry.theme,
+    reducedMotion: entry.reducedMotion ? "reduce" : "no-preference",
+    contrast: entry.increasedContrast ? "more" : "no-preference",
+    forcedColors: entry.forcedColors ? "active" : "none"
+  });
   await page.goto(`${baseUrl}/${entry.path}`, { waitUntil: "networkidle" });
   await page.evaluate((theme) => {
     localStorage.setItem("qds-theme", theme);
@@ -102,6 +166,7 @@ async function capture(page, baseUrl, entry) {
     else document.documentElement.dataset.theme = theme;
   }, entry.theme);
   await page.reload({ waitUntil: "networkidle" });
+  await applyCaptureState(page, entry);
   if (entry.scrollTarget) {
     await page.locator(entry.scrollTarget).evaluate((element) => {
       document.documentElement.style.scrollBehavior = "auto";
@@ -109,6 +174,9 @@ async function capture(page, baseUrl, entry) {
     });
     await page.waitForTimeout(150);
   }
+  await page.addStyleTag({
+    content: "*, *::before, *::after { animation: none !important; caret-color: transparent !important; transition: none !important; }"
+  });
   await assertNoOverflow(page, entry.name);
   await assertAccessibleStructure(page, entry.name);
   const main = page.locator("main");
@@ -123,6 +191,10 @@ async function capture(page, baseUrl, entry) {
     viewport: entry.viewport,
     theme: entry.theme,
     reducedMotion: entry.reducedMotion,
+    reducedTransparency: entry.reducedTransparency === true,
+    increasedContrast: entry.increasedContrast === true,
+    forcedColors: entry.forcedColors === true,
+    state: entry.state || null,
     locale: await page.locator("html").getAttribute("lang"),
     title: await page.title(),
     sections: await page.locator(".doc-section").count(),
@@ -281,31 +353,24 @@ async function assertEmailComposer(page, baseUrl) {
   if (emailStorageKeys.length) throw new Error(`Email composer persisted data: ${emailStorageKeys.join(", ")}`);
 }
 
-async function assertScrollSpy(page, baseUrl) {
-  await page.setViewportSize({ width: 1280, height: 900 });
-  await page.goto(`${baseUrl}/en/qenterra-design-system.html#section-11`, { waitUntil: "networkidle" });
-  await page.locator("#section-11").evaluate((element) => {
+async function scrollToSectionAndWaitForNavigation(page, target, slug) {
+  await page.locator(target).evaluate((element) => {
     document.documentElement.style.scrollBehavior = "auto";
     window.scrollTo(0, Math.max(0, element.offsetTop - 80));
   });
-  await page.waitForTimeout(150);
-  const motionCurrent = await page.locator('.site-nav a[data-nav-slug="motion"][aria-current="location"]').count();
-  if (motionCurrent !== 1) throw new Error("Scroll-spy did not activate Motion at section 11");
+  await page.waitForFunction(
+    (expected) => document.querySelector(`.site-nav a[data-nav-slug="${expected}"]`)?.getAttribute("aria-current") === "location",
+    slug
+  );
+}
 
-  await page.locator("#section-18").evaluate((element) => window.scrollTo(0, Math.max(0, element.offsetTop - 80)));
-  await page.waitForTimeout(150);
-  const governanceCurrent = await page.locator('.site-nav a[data-nav-slug="governance"][aria-current="location"]').count();
-  if (governanceCurrent !== 1) throw new Error("Scroll-spy did not activate Governance at section 18");
-
-  await page.locator("#repository-overview").evaluate((element) => window.scrollTo(0, Math.max(0, element.offsetTop - 80)));
-  await page.waitForTimeout(150);
-  const repositoryCurrent = await page.locator('.site-nav a[data-nav-slug="repositories"][aria-current="location"]').count();
-  if (repositoryCurrent !== 1) throw new Error("Scroll-spy did not activate Repository documentation");
-
-  await page.locator("#brand-overview").evaluate((element) => window.scrollTo(0, Math.max(0, element.offsetTop - 80)));
-  await page.waitForTimeout(150);
-  const brandCurrent = await page.locator('.site-nav a[data-nav-slug="brand"][aria-current="location"]').count();
-  if (brandCurrent !== 1) throw new Error("Scroll-spy did not activate Brand");
+async function assertScrollSpy(page, baseUrl) {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto(`${baseUrl}/en/qenterra-design-system.html#section-11`, { waitUntil: "networkidle" });
+  await scrollToSectionAndWaitForNavigation(page, "#section-11", "motion");
+  await scrollToSectionAndWaitForNavigation(page, "#section-18", "governance");
+  await scrollToSectionAndWaitForNavigation(page, "#repository-overview", "repositories");
+  await scrollToSectionAndWaitForNavigation(page, "#brand-overview", "brand");
 }
 
 async function assertLanguagePickerPosition(page, baseUrl) {
@@ -397,20 +462,7 @@ async function main() {
   page.on("pageerror", (error) => consoleErrors.push(error.message));
 
   try {
-    await page.goto(`${baseUrl}/en/index.html`, { waitUntil: "networkidle" });
-    await page.locator("[data-search]").fill("motion");
-    await page.locator("[data-search-results] .search-result").first().waitFor();
-    await page.keyboard.press("Escape");
-    if (await page.locator("[data-search-results].is-open").count()) {
-      throw new Error("Escape did not close search results");
-    }
-
-    await page.setViewportSize({ width: 390, height: 844 });
-    await page.reload({ waitUntil: "networkidle" });
-    await page.locator("[data-menu-button]").click();
-    if (!(await page.locator("body.nav-open").count())) throw new Error("Mobile navigation did not open");
-    await page.keyboard.press("Escape");
-    if (await page.locator("body.nav-open").count()) throw new Error("Escape did not close mobile navigation");
+    await assertSiteChrome(page, baseUrl);
 
     await assertUniformSvgIcons(page);
     await assertScrollSpy(page, baseUrl);

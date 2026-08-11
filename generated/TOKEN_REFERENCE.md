@@ -114,6 +114,9 @@ Meaning-oriented colors and materials for adaptive appearances.
 - `modes.dark.fill.scrim`: `rgba(0, 0, 0, 0.46)`
 - `modes.dark.fill.selected`: `rgba(255, 255, 255, 0.085)`
 - `modes.dark.fill.selectedStrong`: `rgba(255, 255, 255, 0.14)`
+- `modes.dark.shadow.floating`: `0 16px 44px rgba(0, 0, 0, 0.34)`
+- `modes.dark.shadow.overlay`: `0 20px 60px rgba(0, 0, 0, 0.36)`
+- `modes.dark.shadow.raised`: `0 20px 60px rgba(0, 0, 0, 0.28)`
 - `modes.dark.state.destructive`: `{color.red.dark}`
 - `modes.dark.state.informative`: `{color.blue.dark}`
 - `modes.dark.state.recording`: `{color.red.recording}`
@@ -146,6 +149,9 @@ Meaning-oriented colors and materials for adaptive appearances.
 - `modes.light.fill.scrim`: `rgba(15, 15, 17, 0.46)`
 - `modes.light.fill.selected`: `rgba(15, 15, 17, 0.075)`
 - `modes.light.fill.selectedStrong`: `rgba(15, 15, 17, 0.14)`
+- `modes.light.shadow.floating`: `0 16px 44px rgba(15, 15, 17, 0.18)`
+- `modes.light.shadow.overlay`: `0 20px 60px rgba(15, 15, 17, 0.18)`
+- `modes.light.shadow.raised`: `0 20px 60px rgba(15, 15, 17, 0.14)`
 - `modes.light.state.destructive`: `{color.red.light}`
 - `modes.light.state.informative`: `{color.blue.light}`
 - `modes.light.state.recording`: `{color.red.recording}`

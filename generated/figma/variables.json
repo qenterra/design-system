@@ -654,6 +654,30 @@
           }
         },
         {
+          "name": "shadow/floating",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Dark": "0 16px 44px rgba(0, 0, 0, 0.34)",
+            "Light": "0 16px 44px rgba(15, 15, 17, 0.18)"
+          }
+        },
+        {
+          "name": "shadow/overlay",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Dark": "0 20px 60px rgba(0, 0, 0, 0.36)",
+            "Light": "0 20px 60px rgba(15, 15, 17, 0.18)"
+          }
+        },
+        {
+          "name": "shadow/raised",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Dark": "0 20px 60px rgba(0, 0, 0, 0.28)",
+            "Light": "0 20px 60px rgba(15, 15, 17, 0.14)"
+          }
+        },
+        {
           "name": "state/destructive",
           "type": "COLOR",
           "valuesByMode": {
@@ -793,5 +817,5 @@
     }
   ],
   "format": "qds-figma-variables-v1",
-  "version": "1.10.0"
+  "version": "1.11.0"
 }

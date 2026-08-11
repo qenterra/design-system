@@ -1,5 +1,33 @@
 # Changelog
 
+## 1.11.0
+
+### Added
+
+- Added complete executable stories for every declared component state, including deterministic focus, loading, validation, disabled, informative, and recording examples.
+- Added System, Reduced Transparency, Increased Contrast, Forced Colors, interaction-state, recovery, and mobile overview captures to the exact browser evidence matrix.
+- Added semantic elevation-shadow roles, grouped global navigation, generated on-page navigation, and contextual search snippets.
+
+### Changed
+
+- Made the full verifier fail closed unless Playwright rendering, wallpaper validation, and exact pixel comparison actually execute.
+- Split visual comparison into a zero changed-pixel threshold and a tightly bounded 3/255 per-channel antialias tolerance.
+- Reworked global search as an accessible combobox/listbox with result counts and keyboard selection.
+- Made the closed mobile navigation inert and hidden from assistive technology, and reduced the mobile overview hero footprint.
+- Collapsed historical audit appendices so current evidence remains the primary reading path.
+
+### Fixed
+
+- Removed raw site shadow and print-color values, added reduced-transparency and forced-colors adaptations, and corrected Russian browser-extension guidance.
+- Wrapped Component Lab options in a listbox and exposed truthful busy, read-only, disabled, and status semantics.
+
+## 1.10.1
+
+### Fixed
+
+- Made consumer exceptions actionable: each records an owner and review date, while the doctor rejects expired entries.
+- Taught the Swift consumer doctor to detect raw `.smooth(duration:)` motion alongside the existing animation forms.
+
 ## 1.10.0
 
 ### Added

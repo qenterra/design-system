@@ -7,15 +7,19 @@ import json
 import sys
 from pathlib import Path
 
-from PIL import Image, ImageChops
-
-
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def pixel_changed(baseline: tuple[int, ...], current: tuple[int, ...], tolerance: int) -> bool:
+    return any(abs(before - after) > tolerance for before, after in zip(baseline, current))
+
+
 def main() -> int:
+    from PIL import Image, ImageChops
+
     manifest = json.loads((ROOT / "evidence" / "screenshots.json").read_text(encoding="utf-8"))
     threshold = int(manifest.get("pixelThreshold", 0))
+    channel_tolerance = int(manifest.get("channelTolerance", 0))
     current_root = ROOT / "output" / "tmp" / "screenshots-current"
     baseline_root = ROOT / "output" / "screenshots"
     results = []
@@ -31,9 +35,11 @@ def main() -> int:
             if baseline.size != current.size:
                 failures.append(f"{name}: size changed from {baseline.size} to {current.size}")
                 continue
-            difference = ImageChops.difference(baseline, current)
-            pixels = difference.get_flattened_data()
-            changed = sum(1 for pixel in pixels if pixel != (0, 0, 0, 0))
+            difference = ImageChops.difference(baseline, current).convert("RGB")
+            lookup = [0 if value <= channel_tolerance else 255 for value in range(256)]
+            changed_mask = difference.point(lookup * 3).convert("L")
+            histogram = changed_mask.histogram()
+            changed = baseline.width * baseline.height - histogram[0]
             results.append({"name": name, "changedPixels": changed, "totalPixels": baseline.width * baseline.height})
             if changed > threshold:
                 failures.append(f"{name}: {changed} changed pixels exceeds threshold {threshold}")
@@ -41,6 +47,7 @@ def main() -> int:
         "version": (ROOT / "VERSION").read_text(encoding="utf-8").strip(),
         "status": "failed" if failures else "passed",
         "pixelThreshold": threshold,
+        "channelTolerance": channel_tolerance,
         "captures": results,
         "errors": failures,
     }

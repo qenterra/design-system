@@ -12,10 +12,12 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from lib.token_tools import load_json  # noqa: E402
+from compare_screenshots import pixel_changed  # noqa: E402
 from validate import (  # noqa: E402
     TOKEN_NAMES,
     validate_contrast,
     validate_brand_sources,
+    validate_browser_evidence,
     validate_contact_channels,
     validate_component_registry,
     validate_code_system_templates,
@@ -79,6 +81,19 @@ class ValidatorTests(unittest.TestCase):
     def test_missing_css_variable_fails(self) -> None:
         errors = validate_css(".x { color: var(--qds-missing-token); }", ":root { --qds-known: #fff; }")
         self.assertTrue(any("undefined QDS variables" in error for error in errors))
+
+    def test_css_requires_forced_colors_and_rejects_raw_visual_values(self) -> None:
+        source = """
+        .card {
+          box-shadow: 0 12px 32px rgb(0 0 0 / 18%);
+          border-color: #888;
+        }
+        @media (prefers-reduced-motion: reduce) {}
+        .card:focus-visible {}
+        """
+        errors = validate_css(source, ":root { --qds-shadow-overlay: none; }")
+        self.assertTrue(any("missing Forced Colors adaptation" in error for error in errors))
+        self.assertTrue(any("raw visual value" in error for error in errors))
 
     def test_broken_html_link_fails_without_writing_target(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -237,6 +252,68 @@ class ValidatorTests(unittest.TestCase):
             (registry / "components.json").write_text(data, encoding="utf-8")
             errors = validate_component_registry(root, self.version)
             self.assertTrue(any("unknown state" in error for error in errors))
+
+    def test_component_registry_requires_story_coverage_for_every_state(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            registry = root / "registry"
+            schemas = root / "schemas"
+            registry.mkdir()
+            schemas.mkdir()
+            (schemas / "component-registry.schema.json").write_bytes(
+                (ROOT / "schemas" / "component-registry.schema.json").read_bytes()
+            )
+            data = load_json(ROOT / "registry" / "components.json")
+            button = next(component for component in data["components"] if component["id"] == "button")
+            button["stories"] = [story for story in button["stories"] if story["state"] != "focused"]
+            (registry / "components.json").write_text(json.dumps(data), encoding="utf-8")
+            errors = validate_component_registry(root, self.version)
+            self.assertTrue(any("missing story coverage" in error and "focused" in error for error in errors))
+
+    def test_browser_evidence_requires_all_accessibility_axes_and_explicit_states(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "evidence").mkdir()
+            (root / "output" / "reports").mkdir(parents=True)
+            (root / "output" / "screenshots").mkdir(parents=True)
+            (root / "VERSION").write_text(self.version + "\n", encoding="utf-8")
+            manifest = load_json(ROOT / "evidence" / "screenshots.json")
+            manifest["captures"] = [
+                {
+                    **capture,
+                    "theme": "dark" if capture.get("theme") == "system" else capture.get("theme"),
+                    "reducedTransparency": False,
+                    "increasedContrast": False,
+                    "forcedColors": False,
+                }
+                for capture in manifest["captures"]
+            ]
+            for capture in manifest["captures"]:
+                capture.pop("state", None)
+            (root / "evidence" / "screenshots.json").write_text(json.dumps(manifest), encoding="utf-8")
+            report = {
+                "status": "passed",
+                "version": self.version,
+                "captures": [{"name": capture["name"]} for capture in manifest["captures"]],
+                "checks": {},
+            }
+            (root / "output" / "reports" / "browser.json").write_text(json.dumps(report), encoding="utf-8")
+            errors = validate_browser_evidence(root)
+            self.assertTrue(any("System theme" in error for error in errors))
+            self.assertTrue(any("Reduced Transparency" in error for error in errors))
+            self.assertTrue(any("Increased Contrast" in error for error in errors))
+            self.assertTrue(any("Forced Colors" in error for error in errors))
+            self.assertTrue(any("explicit interaction states" in error for error in errors))
+
+    def test_full_verifier_executes_browser_and_pixel_gates_without_skips(self) -> None:
+        source = (ROOT / "scripts" / "verify.py").read_text(encoding="utf-8")
+        self.assertIn('run([node, "scripts/render_screenshots.js"]', source)
+        self.assertIn('run([image_python, "scripts/compare_screenshots.py"]', source)
+        self.assertNotIn('"not-run-missing-QDS_IMAGE_PYTHON"', source)
+
+    def test_pixel_comparison_ignores_only_declared_channel_jitter(self) -> None:
+        self.assertFalse(pixel_changed((40, 40, 42, 255), (43, 43, 45, 255), 3))
+        self.assertTrue(pixel_changed((40, 40, 42, 255), (44, 43, 45, 255), 3))
 
     def test_icon_registry_rejects_duplicate_ids(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

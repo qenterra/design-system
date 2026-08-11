@@ -109,9 +109,9 @@ def main() -> int:
     run([python, "scripts/validate.py"])
     run([python, "scripts/brand/validate_brand_assets.py", "--check-git-lfs"])
     run([python, "scripts/brand/validate_telegram_stickers.py"])
-    image_python = os.environ.get("QDS_IMAGE_PYTHON")
-    if image_python:
-        run([image_python, "scripts/brand/validate_nyx_wallpapers.py"])
+    image_python = os.environ.get("QDS_IMAGE_PYTHON") or python
+    run([image_python, "-c", "import PIL, numpy"])
+    run([image_python, "scripts/brand/validate_nyx_wallpapers.py"])
     with tempfile.TemporaryDirectory(prefix="qds-swift-") as swift_cache:
         swift_environment = environment.copy()
         swift_environment["CLANG_MODULE_CACHE_PATH"] = str(Path(swift_cache) / "clang-modules")
@@ -128,12 +128,16 @@ def main() -> int:
 
     node = os.environ.get("QDS_NODE") or shutil.which("node")
     if not node:
-        raise RuntimeError("Node.js is required for JavaScript syntax validation; set QDS_NODE")
+        raise RuntimeError("Node.js is required for JavaScript and browser validation; set QDS_NODE")
+    run([node, "-e", 'require("playwright")'])
     run([node, "--check", "src/assets/app.js"])
     run([node, "--check", "src/assets/email-renderer.js"])
     run([node, "--check", "src/assets/email-composer.js"])
     run([node, "tests/email_renderer.test.js"])
     run([node, "--check", "scripts/render_screenshots.js"])
+    run([node, "scripts/render_screenshots.js"])
+    run([image_python, "scripts/compare_screenshots.py"])
+    run([python, "scripts/validate.py"])
     run(["git", "diff", "--check"])
     run(["git", "diff", "--cached", "--check"])
 
@@ -146,10 +150,12 @@ def main() -> int:
             "negativeTests": "passed",
             "brandManifestAndLfs": "passed",
             "telegramStickerPack": "passed",
-            "wallpaperProfile": "passed" if image_python else "not-run-missing-QDS_IMAGE_PYTHON",
+            "wallpaperProfile": "passed",
             "tokensLinksContrastPlaceholders": "passed",
             "swiftPackageBuildAndContract": "passed",
             "javascriptSyntax": "passed",
+            "browserInteractionAndRendering": "passed",
+            "exactPixelComparison": "passed",
             "gitWhitespace": "passed"
         },
         "generatedSha256": second,
@@ -159,8 +165,7 @@ def main() -> int:
             "VoiceOver and screen-reader output",
             "production app migration",
             "live Obsidian rendering",
-            "deep Nyx pixel/silhouette QA unless run separately with Pillow and NumPy",
-            "Nyx wallpaper pixel QA when QDS_IMAGE_PYTHON is not set",
+            "deep Nyx pixel/silhouette QA unless run separately with validate_nyx_assets.py",
         ]
     }
     report_path = ROOT / "output" / "reports" / "verification.json"

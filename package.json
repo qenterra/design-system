@@ -1,0 +1,11 @@
+{
+  "name": "qenterra-design-system",
+  "version": "1.11.0",
+  "private": true,
+  "scripts": {
+    "test:browser": "node scripts/render_screenshots.js"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}

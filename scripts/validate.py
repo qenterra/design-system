@@ -28,6 +28,7 @@ TOKEN_NAMES = ["foundation", "semantic", "typography", "motion", "components", "
 PLACEHOLDERS = re.compile(r"\b(TBD|TODO|FIXME|PLACEHOLDER)\b|\?\?\?")
 CSS_USED = re.compile(r"var\((--qds-[a-z0-9-]+)")
 CSS_DEFINED = re.compile(r"(--qds-[a-z0-9-]+)\s*:")
+CSS_RAW_VISUAL = re.compile(r"(?<![\w-])(?:#[0-9a-fA-F]{3,8}\b|rgba?\([^)]*\))")
 TOKEN_REFERENCE = re.compile(r"^\{([^}]+)}$")
 MARKDOWN_LINK = re.compile(r"\[[^]]+]\(([^)]+)\)")
 BRAND_DOC_PAIRS = ("MASTER", "QENTERRA", "NYX", "ASSET_CATALOG")
@@ -322,6 +323,11 @@ def validate_css(source_css: str, generated_css: str) -> list[str]:
         errors.append("styles.css: missing Reduced Motion adaptation")
     if "focus-visible" not in source_css:
         errors.append("styles.css: missing focus-visible treatment")
+    if "@media (forced-colors: active)" not in source_css:
+        errors.append("styles.css: missing Forced Colors adaptation")
+    raw_values = sorted(set(CSS_RAW_VISUAL.findall(source_css)))
+    if raw_values:
+        errors.append(f"styles.css: raw visual value must use a semantic token: {', '.join(raw_values)}")
     return errors
 
 
@@ -655,6 +661,7 @@ def validate_component_registry(root: Path, version: str) -> list[str]:
         identifiers.add(identifier)
         states = set(component.get("states", []))
         story_ids: set[str] = set()
+        covered_states: set[str] = set()
         for story in component.get("stories", []):
             story_id = story.get("id")
             if story_id in story_ids:
@@ -664,8 +671,15 @@ def validate_component_registry(root: Path, version: str) -> list[str]:
                 errors.append(
                     f"registry/components.json:{identifier}/{story_id}: unknown state {story.get('state')!r}"
                 )
+            else:
+                covered_states.add(story.get("state"))
             if story.get("localeWidth", "standard") not in {"standard", "long", "rtl"}:
                 errors.append(f"registry/components.json:{identifier}/{story_id}: invalid localeWidth")
+        missing_states = sorted(states - covered_states)
+        if missing_states:
+            errors.append(
+                f"registry/components.json:{identifier}: missing story coverage for {', '.join(missing_states)}"
+            )
     return errors
 
 
@@ -750,7 +764,31 @@ def validate_browser_evidence(root: Path) -> list[str]:
     if not manifest_path.is_file():
         return [*errors, "evidence/screenshots.json: missing exact screenshot manifest"]
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    expected_names = [capture.get("name") for capture in manifest.get("captures", [])]
+    channel_tolerance = manifest.get("channelTolerance")
+    if not isinstance(channel_tolerance, int) or not 0 <= channel_tolerance <= 3:
+        errors.append("evidence/screenshots.json: channelTolerance must be an integer from 0 to 3")
+    manifest_captures = manifest.get("captures", [])
+    themes = {capture.get("theme") for capture in manifest_captures if isinstance(capture, dict)}
+    if "system" not in themes:
+        errors.append("evidence/screenshots.json: missing System theme capture")
+    if not any(capture.get("reducedTransparency") is True for capture in manifest_captures if isinstance(capture, dict)):
+        errors.append("evidence/screenshots.json: missing Reduced Transparency capture")
+    if not any(capture.get("increasedContrast") is True for capture in manifest_captures if isinstance(capture, dict)):
+        errors.append("evidence/screenshots.json: missing Increased Contrast capture")
+    if not any(capture.get("forcedColors") is True for capture in manifest_captures if isinstance(capture, dict)):
+        errors.append("evidence/screenshots.json: missing Forced Colors capture")
+    required_states = {"default", "hover", "focus", "selected", "loading", "error", "recovery"}
+    captured_states = {
+        capture.get("state")
+        for capture in manifest_captures
+        if isinstance(capture, dict) and isinstance(capture.get("state"), str)
+    }
+    missing_states = sorted(required_states - captured_states)
+    if missing_states:
+        errors.append(
+            "evidence/screenshots.json: missing explicit interaction states: " + ", ".join(missing_states)
+        )
+    expected_names = [capture.get("name") for capture in manifest_captures]
     captures = report.get("captures")
     if not isinstance(captures, list):
         errors.append("output/reports/browser.json: captures must be an array")

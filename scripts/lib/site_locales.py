@@ -26,6 +26,13 @@ PAGE_GROUPS = [
     ("repositories", []),
 ]
 
+NAV_GROUPS = [
+    ("learn", ["index", "foundations", "components", "lab", "patterns"]),
+    ("adopt", ["adoption", "platforms", "products", "accessibility"]),
+    ("communicate", ["motion", "content", "email"]),
+    ("maintain", ["audit", "governance", "brand", "repositories"]),
+]
+
 BRAND_SECTION_KEYS = ["overview", "qenterra", "nyx", "catalog"]
 
 REPOSITORY_SECTION_KEYS = [
@@ -76,6 +83,11 @@ COPY: dict[str, dict[str, Any]] = {
             "skip": "Skip to content",
             "navigation": "Design system navigation",
             "reference": "Reference",
+            "nav_learn": "Learn",
+            "nav_adopt": "Adopt",
+            "nav_communicate": "Communicate",
+            "nav_maintain": "Maintain",
+            "on_this_page": "On this page",
             "semantic_core": "Semantic core",
             "appearance": "Appearance",
             "system": "System",
@@ -88,6 +100,7 @@ COPY: dict[str, dict[str, Any]] = {
             "search_placeholder": "Search components, states, products…",
             "search_results": "Search results",
             "no_results": "No matching section. Try a component, state, platform, or product name.",
+            "search_count": "{count} search results",
             "section": "Section",
             "language": "Language",
             "choose_language": "Choose language",
@@ -172,6 +185,11 @@ COPY: dict[str, dict[str, Any]] = {
             "skip": "Перейти к содержанию",
             "navigation": "Навигация по дизайн-системе",
             "reference": "Справочник",
+            "nav_learn": "Изучить",
+            "nav_adopt": "Внедрить",
+            "nav_communicate": "Коммуникация",
+            "nav_maintain": "Поддержка",
+            "on_this_page": "На этой странице",
             "semantic_core": "Семантическое ядро",
             "appearance": "Тема",
             "system": "Система",
@@ -184,6 +202,7 @@ COPY: dict[str, dict[str, Any]] = {
             "search_placeholder": "Компоненты, состояния, продукты…",
             "search_results": "Результаты поиска",
             "no_results": "Разделы не найдены. Попробуйте название компонента, состояния, платформы или продукта.",
+            "search_count": "Результатов поиска: {count}",
             "section": "Раздел",
             "language": "Язык",
             "choose_language": "Выбрать язык",

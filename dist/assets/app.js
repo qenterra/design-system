@@ -8,7 +8,9 @@
   const standalone = body.dataset.standalone === "true";
   const searchInput = document.querySelector("[data-search]");
   const searchResults = document.querySelector("[data-search-results]");
+  const searchStatus = document.querySelector("[data-search-status]");
   const menuButton = document.querySelector("[data-menu-button]");
+  const sidebar = document.querySelector("[data-sidebar]");
   const scrim = document.querySelector("[data-scrim]");
   const progress = document.querySelector("[data-progress]");
   const languageButton = document.querySelector("[data-language-button]");
@@ -39,15 +41,31 @@
 
   function openNavigation() {
     menuReturnTarget = document.activeElement;
+    if (sidebar) {
+      sidebar.inert = false;
+      sidebar.setAttribute("aria-hidden", "false");
+    }
     body.classList.add("nav-open");
     menuButton?.setAttribute("aria-expanded", "true");
     document.querySelector(".site-nav a")?.focus();
   }
 
   function closeNavigation(restoreFocus) {
+    if (restoreFocus && menuReturnTarget instanceof HTMLElement) menuReturnTarget.focus();
     body.classList.remove("nav-open");
     menuButton?.setAttribute("aria-expanded", "false");
-    if (restoreFocus && menuReturnTarget instanceof HTMLElement) menuReturnTarget.focus();
+    if (sidebar && window.matchMedia("(max-width: 920px)").matches) {
+      sidebar.inert = true;
+      sidebar.setAttribute("aria-hidden", "true");
+    }
+  }
+
+  function synchronizeNavigationAvailability() {
+    if (!sidebar) return;
+    const mobile = window.matchMedia("(max-width: 920px)").matches;
+    const hidden = mobile && !body.classList.contains("nav-open");
+    sidebar.inert = hidden;
+    sidebar.setAttribute("aria-hidden", String(hidden));
   }
 
   function openLanguageMenu() {
@@ -79,7 +97,31 @@
     if (!searchResults) return;
     searchResults.classList.remove("is-open");
     searchResults.replaceChildren();
+    searchInput?.setAttribute("aria-expanded", "false");
+    searchInput?.removeAttribute("aria-activedescendant");
+    if (searchStatus) searchStatus.textContent = "";
     activeResult = -1;
+  }
+
+  function appendHighlightedText(target, text, query) {
+    const normalizedText = normalized(text);
+    const start = normalizedText.indexOf(query);
+    if (start < 0) {
+      target.append(document.createTextNode(text));
+      return;
+    }
+    target.append(document.createTextNode(text.slice(0, start)));
+    const mark = document.createElement("mark");
+    mark.textContent = text.slice(start, start + query.length);
+    target.append(mark, document.createTextNode(text.slice(start + query.length)));
+  }
+
+  function searchSnippet(text, query) {
+    const clean = String(text || "").replace(/\s+/g, " ").trim();
+    const match = normalized(clean).indexOf(query);
+    const start = Math.max(0, match < 0 ? 0 : match - 54);
+    const end = Math.min(clean.length, start + 128);
+    return `${start > 0 ? "…" : ""}${clean.slice(start, end)}${end < clean.length ? "…" : ""}`;
   }
 
   function resultUrl(item) {
@@ -100,34 +142,48 @@
 
     const matches = searchIndex
       .map((item) => {
-        const haystack = normalized(`${item.title} ${item.page} ${item.text}`);
-        const titleMatch = normalized(item.title).includes(value) ? 0 : 1;
-        return { item, score: haystack.includes(value) ? titleMatch : 99 };
+        const title = normalized(item.title);
+        const page = normalized(item.page);
+        const text = normalized(item.text);
+        const score = title.startsWith(value) ? 0 : title.includes(value) ? 1 : page.includes(value) ? 2 : text.includes(value) ? 3 : 99;
+        return { item, score };
       })
       .filter((entry) => entry.score < 99)
       .sort((a, b) => a.score - b.score || (a.item.order ?? 0) - (b.item.order ?? 0))
       .slice(0, 10);
 
     if (!matches.length) {
-      const empty = document.createElement("p");
+      const empty = document.createElement("div");
       empty.className = "search-empty";
+      empty.setAttribute("role", "option");
+      empty.setAttribute("aria-disabled", "true");
       empty.textContent = body.dataset.searchEmpty || "No matching section.";
       searchResults.append(empty);
     } else {
-      matches.forEach(({ item }) => {
+      matches.forEach(({ item }, index) => {
         const link = document.createElement("a");
         link.className = "search-result";
+        link.id = `qds-search-result-${index}`;
+        link.setAttribute("role", "option");
+        link.setAttribute("aria-selected", "false");
         link.href = resultUrl(item);
         const title = document.createElement("strong");
-        title.textContent = item.title;
+        appendHighlightedText(title, item.title, value);
         const meta = document.createElement("span");
         meta.textContent = `${item.page} · ${body.dataset.sectionLabel || "Section"} ${item.section}`;
-        link.append(title, meta);
+        const snippet = document.createElement("small");
+        snippet.className = "search-snippet";
+        appendHighlightedText(snippet, searchSnippet(item.text, value), value);
+        link.append(title, meta, snippet);
         link.addEventListener("click", closeSearch);
         searchResults.append(link);
       });
     }
     searchResults.classList.add("is-open");
+    searchInput?.setAttribute("aria-expanded", "true");
+    if (searchStatus) {
+      searchStatus.textContent = (body.dataset.searchCount || "{count} search results").replace("{count}", String(matches.length));
+    }
   }
 
   function moveSearchSelection(direction) {
@@ -135,7 +191,12 @@
     const links = Array.from(searchResults.querySelectorAll("a"));
     if (!links.length) return;
     activeResult = (activeResult + direction + links.length) % links.length;
-    links.forEach((link, index) => link.classList.toggle("is-active", index === activeResult));
+    links.forEach((link, index) => {
+      const active = index === activeResult;
+      link.classList.toggle("is-active", active);
+      link.setAttribute("aria-selected", String(active));
+    });
+    searchInput?.setAttribute("aria-activedescendant", links[activeResult].id);
     links[activeResult].scrollIntoView({ block: "nearest" });
   }
 
@@ -322,11 +383,13 @@
   window.addEventListener("hashchange", scheduleViewportUpdate);
   window.addEventListener("resize", () => {
     if (window.innerWidth > 920) closeNavigation(false);
+    synchronizeNavigationAvailability();
     scheduleViewportUpdate();
   });
 
   localStorage.setItem("qds-locale", locale);
   applyTheme(currentTheme(), false);
+  synchronizeNavigationAvailability();
   initializeScrollSpy();
   initializeComponentLab();
   scheduleViewportUpdate();

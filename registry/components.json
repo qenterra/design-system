@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/component-registry.schema.json",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "components": [
     {
       "id": "button",
@@ -11,7 +11,11 @@
       "stories": [
         {"id": "primary", "state": "default", "variant": "primary"},
         {"id": "secondary", "state": "default", "variant": "secondary"},
+        {"id": "hover", "state": "hover", "variant": "primary"},
+        {"id": "pressed", "state": "pressed", "variant": "primary"},
+        {"id": "focused", "state": "focused", "variant": "secondary"},
         {"id": "disabled", "state": "disabled", "variant": "primary"},
+        {"id": "loading", "state": "loading", "variant": "primary"},
         {"id": "long-copy", "state": "default", "variant": "secondary", "localeWidth": "long"}
       ],
       "accessibility": ["native-button", "visible-focus", "disabled-state-announced", "loading-name-stable"]
@@ -24,8 +28,11 @@
       "states": ["pristine", "editing", "valid", "invalid", "disabled", "readOnly"],
       "stories": [
         {"id": "pristine", "state": "pristine"},
+        {"id": "editing", "state": "editing"},
+        {"id": "valid", "state": "valid"},
         {"id": "invalid", "state": "invalid"},
         {"id": "disabled", "state": "disabled"},
+        {"id": "read-only", "state": "readOnly"},
         {"id": "rtl", "state": "pristine", "localeWidth": "rtl"}
       ],
       "accessibility": ["programmatic-label", "described-error", "error-not-color-only", "autocomplete-explicit"]
@@ -38,7 +45,10 @@
       "states": ["default", "hover", "focused", "selected", "disabled", "unavailable"],
       "stories": [
         {"id": "default", "state": "default"},
+        {"id": "hover", "state": "hover"},
+        {"id": "focused", "state": "focused"},
         {"id": "selected", "state": "selected"},
+        {"id": "disabled", "state": "disabled"},
         {"id": "unavailable", "state": "unavailable"}
       ],
       "accessibility": ["single-focus-target", "selection-announced", "status-has-text"]
@@ -49,7 +59,7 @@
       "summary": {"en": "Collects related controls under one plain-language heading.", "ru": "Объединяет связанные элементы под понятным заголовком."},
       "anatomy": ["heading", "optional-summary", "content"],
       "states": ["default", "disabled"],
-      "stories": [{"id": "settings", "state": "default"}, {"id": "long-copy", "state": "default", "localeWidth": "long"}],
+      "stories": [{"id": "settings", "state": "default"}, {"id": "disabled", "state": "disabled"}, {"id": "long-copy", "state": "default", "localeWidth": "long"}],
       "accessibility": ["fieldset-or-labelled-region", "heading-order", "children-remain-focusable"]
     },
     {
@@ -58,7 +68,7 @@
       "summary": {"en": "Interrupts only for a bounded decision that cannot stay inline.", "ru": "Прерывает поток только ради ограниченного решения, которое нельзя оставить встроенным."},
       "anatomy": ["title", "consequence", "content", "actions", "close-control"],
       "states": ["presented", "busy", "error"],
-      "stories": [{"id": "confirmation", "state": "presented"}, {"id": "error", "state": "error"}],
+      "stories": [{"id": "confirmation", "state": "presented"}, {"id": "busy", "state": "busy"}, {"id": "error", "state": "error"}],
       "accessibility": ["dialog-role", "labelled-title", "focus-trap", "focus-restored", "escape-when-safe"]
     },
     {
@@ -67,7 +77,7 @@
       "summary": {"en": "Communicates outcome with words and shape, never color alone.", "ru": "Передаёт результат словами и формой, никогда только цветом."},
       "anatomy": ["symbol-or-shape", "plain-language-label", "optional-detail"],
       "states": ["success", "warning", "destructive", "informative", "recording"],
-      "stories": [{"id": "success", "state": "success"}, {"id": "warning", "state": "warning"}, {"id": "error", "state": "destructive"}],
+      "stories": [{"id": "success", "state": "success"}, {"id": "warning", "state": "warning"}, {"id": "error", "state": "destructive"}, {"id": "informative", "state": "informative"}, {"id": "recording", "state": "recording"}],
       "accessibility": ["live-region-only-when-needed", "meaning-beyond-color", "no-icon-only-outcome"]
     }
   ]

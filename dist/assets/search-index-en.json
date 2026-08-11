@@ -159,7 +159,7 @@
     "title": "Documentation and screenshots",
     "page": "Evidence",
     "path": "pages/audit.html",
-    "text": "Every product maintains a reproducible screenshot harness with synthetic data. Required matrix: - System, Light, Dark; - minimum and wide window; - primary workflow; - empty; - no results; - loading/progress; - error and recovery; - hover/focus/selection where useful; - Reduced Motion/Transparency and Increased Contrast evidence; - privacy scan and visual inspection. Screenshots prove geometry and appearance only. They do not prove keyboard, screen-reader, persistence, networking, or recovery behavior."
+    "text": "Every product maintains a reproducible screenshot harness with synthetic data. Required matrix: - System, Light, Dark; - minimum and wide window; - primary workflow; - empty; - no results; - loading/progress; - error and recovery; - hover/focus/selection where useful; - Reduced Motion/Transparency, Increased Contrast, and Forced Colors evidence; - explicit default, hover, focus, selected, loading, error, and recovery captures; - privacy scan and visual inspection. The full verifier must execute the browser interaction contract and pixel comparison; a missing browser or image runtime is a failure, never a skipped pass. The changed-pixel threshold is zero, while a separately declared channel tolerance may ignore no more than 3/255 of renderer antialias jitter. Screenshots prove geometry and appearance only. They do not prove keyboard, screen-reader, persistence, networking, or recovery behavior."
   },
   {
     "section": 18,

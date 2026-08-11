@@ -1,7 +1,8 @@
 {
-  "version": "1.10.0",
+  "version": "1.11.0",
   "status": "passed",
   "pixelThreshold": 0,
+  "channelTolerance": 3,
   "captures": [
     {
       "name": "overview-en-dark-wide",
@@ -16,22 +17,22 @@
     {
       "name": "components-en-dark-mobile",
       "changedPixels": 0,
-      "totalPixels": 7159230
+      "totalPixels": 7269210
     },
     {
       "name": "lab-en-dark-desktop",
       "changedPixels": 0,
-      "totalPixels": 4309760
+      "totalPixels": 6086400
     },
     {
       "name": "lab-ru-long-mobile",
       "changedPixels": 0,
-      "totalPixels": 802620
+      "totalPixels": 926640
     },
     {
       "name": "lab-en-rtl-tablet",
       "changedPixels": 0,
-      "totalPixels": 1244160
+      "totalPixels": 1393152
     },
     {
       "name": "adoption-en-light-desktop",
@@ -46,7 +47,7 @@
     {
       "name": "standalone-en-dark-desktop",
       "changedPixels": 0,
-      "totalPixels": 81109760
+      "totalPixels": 73925120
     },
     {
       "name": "standalone-ru-motion-dark",
@@ -82,6 +83,46 @@
       "name": "email-ru-dark-desktop",
       "changedPixels": 0,
       "totalPixels": 2438400
+    },
+    {
+      "name": "overview-en-system-accessibility",
+      "changedPixels": 0,
+      "totalPixels": 4555520
+    },
+    {
+      "name": "lab-button-hover",
+      "changedPixels": 0,
+      "totalPixels": 1152000
+    },
+    {
+      "name": "lab-button-focus-forced-colors",
+      "changedPixels": 0,
+      "totalPixels": 1152000
+    },
+    {
+      "name": "lab-row-selected-contrast",
+      "changedPixels": 0,
+      "totalPixels": 1152000
+    },
+    {
+      "name": "lab-button-loading-reduced-motion",
+      "changedPixels": 0,
+      "totalPixels": 1152000
+    },
+    {
+      "name": "lab-field-error",
+      "changedPixels": 0,
+      "totalPixels": 786432
+    },
+    {
+      "name": "pattern-recovery-mobile",
+      "changedPixels": 0,
+      "totalPixels": 329160
+    },
+    {
+      "name": "overview-ru-light-mobile",
+      "changedPixels": 0,
+      "totalPixels": 329160
     }
   ],
   "errors": []
