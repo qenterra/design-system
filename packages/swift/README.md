@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/qenterra/design-system/main/assets/brand/qenterra/logos/vector/Dark%20Logo%20-%20Filled.svg" width="128" alt="QenTerra logo">
+  <img src="https://github.com/qenterra/design-system/raw/refs/heads/main/assets/brand/qenterra/logos/vector/Dark%20Logo%20-%20Filled.svg" width="128" alt="QenTerra logo">
 </p>
 
 <h1 align="center">QenTerraDesignTokens</h1>
