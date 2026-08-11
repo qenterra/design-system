@@ -1841,6 +1841,10 @@ tr:last-child td {
   .search-result.is-active {
     outline: var(--qds-stroke-focus) solid var(--qds-border-focus);
   }
+
+  :is(.brand-mark, .site-nav a[aria-current]) {
+    border-radius: var(--qds-radius-none);
+  }
 }
 
 @media (forced-colors: active) {

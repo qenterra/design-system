@@ -367,7 +367,19 @@ class ValidatorTests(unittest.TestCase):
 
         self.assertNotIn("systemChrome", source)
         self.assertIn("requestedBrowser || undefined", source)
-        self.assertIn('args: ["--disable-gpu"]', source)
+        self.assertIn('"--disable-gpu"', source)
+        self.assertIn('"--disable-lcd-text"', source)
+        self.assertIn('"--disable-font-subpixel-positioning"', source)
+        self.assertIn('"--deterministic-mode"', source)
+
+    def test_increased_contrast_uses_crisp_navigation_edges(self) -> None:
+        source = (ROOT / "src" / "assets" / "styles.css").read_text(encoding="utf-8")
+        contrast_rules = source.split("@media (prefers-contrast: more)", 1)[1].split(
+            "@media (forced-colors: active)", 1
+        )[0]
+
+        self.assertIn(":is(.brand-mark, .site-nav a[aria-current])", contrast_rules)
+        self.assertIn("border-radius: var(--qds-radius-none)", contrast_rules)
 
     def test_icon_registry_rejects_duplicate_ids(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

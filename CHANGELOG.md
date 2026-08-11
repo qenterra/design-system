@@ -14,6 +14,10 @@
 - Made the full verifier execute Swift package tests and both package-distribution gates instead of treating package tests as an unproven optional stage.
 - Distinguished coordinated local package development from versioned production consumption in the bilingual adoption and governance references.
 
+### Fixed
+
+- Made Increased Contrast navigation edges crisp and disabled platform-dependent Chromium compositing paths so the zero-diff visual gate remains deterministic.
+
 ## 1.11.0
 
 ### Added

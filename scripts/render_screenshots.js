@@ -460,7 +460,12 @@ async function main() {
   const browser = await chromium.launch({
     headless: true,
     executablePath,
-    args: ["--disable-gpu"]
+    args: [
+      "--disable-gpu",
+      "--disable-lcd-text",
+      "--disable-font-subpixel-positioning",
+      "--deterministic-mode"
+    ]
   });
   const page = await browser.newPage();
   const consoleErrors = [];
