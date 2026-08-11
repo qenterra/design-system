@@ -22,6 +22,10 @@ from lib.email_templates import validate_email_registry  # noqa: E402
 from lib.markdown_renderer import split_numbered_sections  # noqa: E402
 from lib.site_locales import BRAND_SECTION_KEYS, PAGE_GROUPS, REPOSITORY_SECTION_KEYS  # noqa: E402
 from brand.validate_brand_assets import validate_brand_assets  # noqa: E402
+from package_release import (  # noqa: E402
+    validate_package_payload,
+    validate_version_alignment,
+)
 
 
 TOKEN_NAMES = ["foundation", "semantic", "typography", "motion", "components", "platforms", "products"]
@@ -522,13 +526,20 @@ def validate_packages(root: Path, version: str) -> list[str]:
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         if manifest.get("version") != version:
             errors.append(f"packages/css/package.json: version {manifest.get('version')} does not match VERSION {version}")
-        if manifest.get("private") is not True:
-            errors.append("packages/css/package.json: local package must remain private")
+        if "private" in manifest:
+            errors.append("packages/css/package.json: private field must be omitted for registry publication")
+        if manifest.get("license") != "UNLICENSED":
+            errors.append("packages/css/package.json: license must be UNLICENSED")
+        publish = manifest.get("publishConfig", {})
+        if publish.get("registry") != "https://npm.pkg.github.com" or publish.get("access") != "restricted":
+            errors.append("packages/css/package.json: private GitHub Packages registry metadata is required")
         for exported in ("tokens.css", "tokens.json", "recipes.css", "icons.json"):
             if not (css_root / exported).is_file():
                 errors.append(f"packages/css/{exported}: missing generated package export")
     if not (swift_root / "Package.swift").is_file():
         errors.append("packages/swift/Package.swift: missing SwiftPM manifest")
+    if not (swift_root / "LICENSE").is_file():
+        errors.append("packages/swift/LICENSE: missing proprietary package policy")
     swift_generated = swift_root / "Sources" / "QenTerraDesignTokens" / "QDSGeneratedTokens.swift"
     if not swift_generated.is_file():
         errors.append("packages/swift: missing generated Swift source")
@@ -544,6 +555,9 @@ def validate_packages(root: Path, version: str) -> list[str]:
     recipe_source = root / "src" / "assets" / "recipes.css"
     if recipes.is_file() and recipe_source.is_file() and recipes.read_bytes() != recipe_source.read_bytes():
         errors.append("packages/css: component recipes drifted from canonical source")
+    errors.extend(validate_version_alignment(root))
+    errors.extend(validate_package_payload(root, "css"))
+    errors.extend(validate_package_payload(root, "swift"))
     return errors
 
 

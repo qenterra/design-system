@@ -21,7 +21,7 @@ Open `http://localhost:8000/` for automatic language selection, choose `dist/en/
 - `registry/` — canonical semantic registries, including contact-channel roles and the bilingual email catalogue.
 - `generated/figma/` — deterministic design-tool handoff payloads, never a parallel source.
 - `generated/` — compatibility copies of generated CSS and Swift adapters.
-- `packages/swift/` and `packages/css/` — connectable local typed tokens and opt-in component recipes.
+- `packages/swift/` and `packages/css/` — canonical sources for private versioned SwiftPM and GitHub npm distributions.
 - `dist/` — multipage reference and standalone HTML.
 - `templates/design/` — interface design and review templates.
 - `templates/repository/` — repository documentation, policy, GitHub, and Wiki templates.
@@ -44,8 +44,14 @@ Open `http://localhost:8000/` for automatic language selection, choose `dist/en/
 
 ## Status
 
-Version 1.9.0 adds a shared SwiftUI interactive-row state surface, fixes `rgba(...)` semantic-color parsing, validates localized master-version headers, and expands the read-only consumer doctor to cover Swift numeric colors, radii, and motion durations. Product migrations remain explicit consumer work.
+Version 1.11.0 is the current canonical release. The next private distribution
+publishes typed Swift tokens through `qenterra/design-system-swift` and CSS,
+JSON, icons, and opt-in recipes through `@qenterra/design-tokens`. Product
+migrations remain explicit consumer work.
 
 ## Repository boundary
 
-This repository is local-only until publication is explicitly approved. It contains no production user data, credentials, private application fixtures, or AI working directories. Temporary AI plans and scratch artifacts belong in a unique system temporary directory, never in the repository.
+This repository and its package distributions are private. It contains no
+production user data, credentials, private application fixtures, or AI working
+directories. Temporary AI plans and scratch artifacts belong in a unique system
+temporary directory, never in the repository.

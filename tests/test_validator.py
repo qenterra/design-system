@@ -186,6 +186,32 @@ class ValidatorTests(unittest.TestCase):
             errors = validate_packages(root, self.version)
             self.assertTrue(any("does not match VERSION" in error for error in errors))
 
+    def test_package_distribution_metadata_is_required(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            css = root / "packages" / "css"
+            swift = root / "packages" / "swift"
+            css.mkdir(parents=True)
+            swift.mkdir(parents=True)
+            (css / "package.json").write_text(
+                json.dumps(
+                    {
+                        "name": "@qenterra/design-tokens",
+                        "version": self.version,
+                        "private": True,
+                        "publishConfig": {"access": "public"},
+                    }
+                ),
+                encoding="utf-8",
+            )
+            (swift / "Package.swift").write_text("// swift-tools-version: 5.9\n", encoding="utf-8")
+
+            errors = validate_packages(root, self.version)
+
+            self.assertTrue(any("private field must be omitted" in error for error in errors))
+            self.assertTrue(any("GitHub Packages registry" in error for error in errors))
+            self.assertTrue(any("packages/swift/LICENSE" in error for error in errors))
+
     def test_repository_locale_section_drift_fails(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

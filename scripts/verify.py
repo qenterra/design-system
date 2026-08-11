@@ -72,6 +72,7 @@ def main() -> int:
                 "scripts/build.py",
                 "scripts/validate.py",
                 "scripts/verify.py",
+                "scripts/package_release.py",
                 "scripts/lib/markdown_renderer.py",
                 "scripts/lib/site_locales.py",
                 "scripts/lib/token_tools.py",
@@ -93,6 +94,7 @@ def main() -> int:
                 "tests/test_consumer_doctor.py",
                 "tests/test_brand_browser.py",
                 "tests/test_email_templates.py",
+                "tests/test_package_release.py",
             ],
             env=environment,
         )
@@ -107,6 +109,7 @@ def main() -> int:
     run([python, "-m", "unittest", "discover", "-s", "tests", "-v"])
     run([python, "scripts/audit_consumer.py", "tests/fixtures/consumer-pass"])
     run([python, "scripts/validate.py"])
+    run([python, "scripts/package_release.py", "validate"])
     run([python, "scripts/brand/validate_brand_assets.py", "--check-git-lfs"])
     run([python, "scripts/brand/validate_telegram_stickers.py"])
     image_python = os.environ.get("QDS_IMAGE_PYTHON") or python
@@ -125,6 +128,7 @@ def main() -> int:
         ]
         run(["swift", "build", *swift_base], env=swift_environment)
         run(["swift", "run", *swift_base, "QDSContractCheck"], env=swift_environment)
+        run(["swift", "test", *swift_base], env=swift_environment)
 
     node = os.environ.get("QDS_NODE") or shutil.which("node")
     if not node:
@@ -134,6 +138,18 @@ def main() -> int:
     run([node, "--check", "src/assets/email-renderer.js"])
     run([node, "--check", "src/assets/email-composer.js"])
     run([node, "tests/email_renderer.test.js"])
+    run([node, "tests/package-css-smoke.mjs", "packages/css"])
+    with tempfile.TemporaryDirectory(prefix="qds-npm-pack-") as npm_cache:
+        run([
+            "npm",
+            "pack",
+            "--workspace",
+            "@qenterra/design-tokens",
+            "--dry-run",
+            "--json",
+            "--cache",
+            npm_cache,
+        ])
     run([node, "--check", "scripts/render_screenshots.js"])
     run([node, "scripts/render_screenshots.js"])
     run([image_python, "scripts/compare_screenshots.py"])
@@ -153,6 +169,7 @@ def main() -> int:
             "wallpaperProfile": "passed",
             "tokensLinksContrastPlaceholders": "passed",
             "swiftPackageBuildAndContract": "passed",
+            "privatePackageDistribution": "passed",
             "javascriptSyntax": "passed",
             "browserInteractionAndRendering": "passed",
             "exactPixelComparison": "passed",
@@ -160,7 +177,6 @@ def main() -> int:
         },
         "generatedSha256": second,
         "manualNotProven": [
-            "Swift package test-target execution without a complete Xcode test runtime",
             "native application rendering",
             "VoiceOver and screen-reader output",
             "production app migration",

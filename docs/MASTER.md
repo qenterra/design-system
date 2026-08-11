@@ -827,6 +827,17 @@ Before creating a component, confirm:
 
 Deprecated tokens/components remain documented for one migration window with replacement guidance. Validators may warn first and fail after the announced major version.
 
+### 18.6 Private package distribution
+
+The canonical design-system repository produces two private, immutable SemVer
+distributions: the filtered `qenterra/design-system-swift` repository and
+GitHub package `@qenterra/design-tokens`. Production consumers use versioned
+remote dependencies; local package paths are limited to coordinated QDS work.
+Publishing requires aligned versions, reviewed payload allowlists, the full
+verification gate, and clean consumer resolution. Credentials are least
+privilege and never part of package contents. A package release proves adapter
+availability, not native product rendering or accessibility acceptance.
+
 ## 19. AI implementation protocol
 
 ### 19.1 Code System

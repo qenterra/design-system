@@ -94,9 +94,28 @@ To add or change a scenario, update the registry in both locales, keep variables
 
 Run focused Python and Node tests, build both locales, execute the browser composer contract, update the exact screenshot matrix intentionally, and inspect Light/Dark desktop/mobile output. Finally paste representative rich and plain versions into supported real email clients and verify the subject, preheader, hierarchy, wrapping, link destination, footer address, and dark-mode behavior. Automated HTML checks do not replace this client QA.
 
-## Local token packages
+## Private token package releases
 
-Add `packages/swift/` as a local Swift Package Manager dependency or reference `packages/css/` through a local JavaScript package dependency. Swift exposes typed `QDS.Color`, `QDS.Typography`, `QDS.Motion`, and `QDS.Component` APIs while preserving foundation aliases. CSS exports generated tokens by default and opt-in recipes through `recipes.css`. `scripts/build.py` generates adapter payloads from `tokens/*.json`; package manifests, recipes, and the hand-authored Swift facade are maintained sources. Package publication requires separate approval.
+`qenterra/design-system` is the canonical source. Versioned Swift consumers use
+the private filtered repository `qenterra/design-system-swift`; web consumers
+use private GitHub package `@qenterra/design-tokens`. Local `packages/swift/`
+and `packages/css/` dependencies are reserved for coordinated QDS development.
+
+Swift exposes typed `QDS.Color`, `QDS.Typography`, `QDS.Motion`, and
+`QDS.Component` APIs while preserving foundation aliases. CSS exports generated
+tokens by default and opt-in recipes through `recipes.css`. `scripts/build.py`
+generates adapters from `tokens/*.json`; package manifests, policy, recipes,
+and the hand-authored Swift facade are maintained sources.
+
+Every release must align `VERSION`, both package payloads, generated metadata,
+and the SemVer tag. Run `python3 scripts/package_release.py validate`, the full
+verifier, an npm tarball inspection, and clean Swift/npm consumer installs
+before publication. Releases are immutable: an existing different ref or npm
+version is a conflict, never a reason to force-push or overwrite. The release
+workflow uses `GITHUB_TOKEN` only for `packages: write` and a write-enabled SSH
+deploy key scoped only to the Swift distribution repository. Consumer
+credentials remain read-only. Remote package success does not prove product UI,
+runtime, or accessibility acceptance.
 
 ## Product exceptions
 
