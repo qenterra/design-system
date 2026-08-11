@@ -1,5 +1,5 @@
 {
-  "version": "1.11.0",
+  "version": "1.12.0",
   "status": "passed",
   "pixelThreshold": 0,
   "channelTolerance": 3,
@@ -37,7 +37,7 @@
     {
       "name": "adoption-en-light-desktop",
       "changedPixels": 0,
-      "totalPixels": 1601280
+      "totalPixels": 1857280
     },
     {
       "name": "products-ru-light-tablet",
@@ -47,7 +47,7 @@
     {
       "name": "standalone-en-dark-desktop",
       "changedPixels": 0,
-      "totalPixels": 73925120
+      "totalPixels": 74453760
     },
     {
       "name": "standalone-ru-motion-dark",

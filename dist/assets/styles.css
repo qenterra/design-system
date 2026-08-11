@@ -1473,6 +1473,17 @@ tr:last-child td {
     border: var(--qds-stroke-default) solid ButtonText;
   }
 
+  .qds-button {
+    forced-color-adjust: none;
+    background: ButtonFace;
+    color: ButtonText;
+  }
+
+  .qds-button[data-variant="primary"] {
+    background: Highlight;
+    color: HighlightText;
+  }
+
   :is(.site-nav a[aria-current], .search-result.is-active, .search-result mark) {
     background: Highlight;
     color: HighlightText;

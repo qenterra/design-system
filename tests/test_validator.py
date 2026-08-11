@@ -95,6 +95,17 @@ class ValidatorTests(unittest.TestCase):
         self.assertTrue(any("missing Forced Colors adaptation" in error for error in errors))
         self.assertTrue(any("raw visual value" in error for error in errors))
 
+    def test_forced_colors_buttons_use_explicit_system_colors(self) -> None:
+        source = (ROOT / "src" / "assets" / "styles.css").read_text(encoding="utf-8")
+        forced_colors = source.split("@media (forced-colors: active)", 1)[1].split(
+            ".component-lab", 1
+        )[0]
+
+        self.assertIn("forced-color-adjust: none", forced_colors)
+        self.assertIn("background: ButtonFace", forced_colors)
+        self.assertIn("background: Highlight", forced_colors)
+        self.assertIn("color: HighlightText", forced_colors)
+
     def test_broken_html_link_fails_without_writing_target(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -340,6 +351,22 @@ class ValidatorTests(unittest.TestCase):
     def test_pixel_comparison_ignores_only_declared_channel_jitter(self) -> None:
         self.assertFalse(pixel_changed((40, 40, 42, 255), (43, 43, 45, 255), 3))
         self.assertTrue(pixel_changed((40, 40, 42, 255), (44, 43, 45, 255), 3))
+
+    def test_capture_disables_layout_effects_before_scrolling(self) -> None:
+        source = (ROOT / "scripts" / "render_screenshots.js").read_text(encoding="utf-8")
+        capture_source = source.split("async function capture", 1)[1].split(
+            "async function assertUniformSvgIcons", 1
+        )[0]
+
+        self.assertLess(capture_source.index("addStyleTag"), capture_source.index("scrollTarget"))
+        self.assertIn("overflow-anchor: none", capture_source)
+        self.assertGreaterEqual(capture_source.count("window.scrollTo"), 2)
+
+    def test_capture_defaults_to_playwright_pinned_chromium(self) -> None:
+        source = (ROOT / "scripts" / "render_screenshots.js").read_text(encoding="utf-8")
+
+        self.assertNotIn("systemChrome", source)
+        self.assertIn("requestedBrowser || undefined", source)
 
     def test_icon_registry_rejects_duplicate_ids(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

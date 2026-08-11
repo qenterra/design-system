@@ -13,7 +13,6 @@ const screenshotDirectory = path.join(root, "output", "tmp", "screenshots-curren
 const reportPath = path.join(root, "output", "reports", "browser.json");
 const manifestPath = path.join(root, "evidence", "screenshots.json");
 const componentRegistryPath = path.join(root, "registry", "components.json");
-const systemChrome = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 
 const contentTypes = {
   ".css": "text/css; charset=utf-8",
@@ -166,21 +165,26 @@ async function capture(page, baseUrl, entry) {
     else document.documentElement.dataset.theme = theme;
   }, entry.theme);
   await page.reload({ waitUntil: "networkidle" });
+  await page.addStyleTag({
+    content: "html, body { scroll-behavior: auto !important; overflow-anchor: none !important; } *, *::before, *::after { animation: none !important; caret-color: transparent !important; transition: none !important; }"
+  });
   await applyCaptureState(page, entry);
+  let targetScrollY = null;
   if (entry.scrollTarget) {
-    await page.locator(entry.scrollTarget).evaluate((element) => {
-      document.documentElement.style.scrollBehavior = "auto";
-      window.scrollTo(0, Math.max(0, element.offsetTop - 80));
+    targetScrollY = await page.locator(entry.scrollTarget).evaluate((element) => {
+      return Math.max(0, Math.round(element.getBoundingClientRect().top + window.scrollY - 80));
     });
+    await page.evaluate((scrollY) => window.scrollTo(0, scrollY), targetScrollY);
     await page.waitForTimeout(150);
   }
-  await page.addStyleTag({
-    content: "*, *::before, *::after { animation: none !important; caret-color: transparent !important; transition: none !important; }"
-  });
   await assertNoOverflow(page, entry.name);
   await assertAccessibleStructure(page, entry.name);
   const main = page.locator("main");
   if ((await main.count()) !== 1) throw new Error(`${entry.name}: expected one main landmark`);
+  if (targetScrollY !== null) {
+    await page.evaluate((scrollY) => window.scrollTo(0, scrollY), targetScrollY);
+    await page.waitForFunction((scrollY) => window.scrollY === scrollY, targetScrollY);
+  }
   await page.screenshot({
     path: path.join(screenshotDirectory, `${entry.name}.png`),
     fullPage: entry.fullPage !== false
@@ -452,7 +456,7 @@ async function main() {
   const port = typeof address === "object" && address ? address.port : 0;
   const baseUrl = `http://127.0.0.1:${port}`;
   const requestedBrowser = process.env.QDS_CHROMIUM_PATH;
-  const executablePath = requestedBrowser || (fs.existsSync(systemChrome) ? systemChrome : undefined);
+  const executablePath = requestedBrowser || undefined;
   const browser = await chromium.launch({ headless: true, executablePath });
   const page = await browser.newPage();
   const consoleErrors = [];

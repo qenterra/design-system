@@ -44,9 +44,9 @@ Open `http://localhost:8000/` for automatic language selection, choose `dist/en/
 
 ## Status
 
-Version 1.11.0 is the current canonical release. The next private distribution
-publishes typed Swift tokens through `qenterra/design-system-swift` and CSS,
-JSON, icons, and opt-in recipes through `@qenterra/design-tokens`. Product
+Version 1.12.0 publishes typed Swift tokens through the private
+`qenterra/design-system-swift` repository and CSS, JSON, icons, and opt-in
+recipes through private GitHub package `@qenterra/design-tokens`. Product
 migrations remain explicit consumer work.
 
 ## Repository boundary

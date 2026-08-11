@@ -1,6 +1,6 @@
 {
   "name": "@qenterra/design-tokens",
-  "version": "1.11.0",
+  "version": "1.12.0",
   "description": "Private CSS, JSON, icon, and recipe adapters for QenTerra Design System.",
   "license": "UNLICENSED",
   "repository": {

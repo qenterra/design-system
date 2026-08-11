@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.12.0
+
+### Added
+
+- Added private, versioned SwiftPM distribution through `qenterra/design-system-swift` and private npm distribution through GitHub Packages.
+- Added fail-closed version, payload allowlist, Git LFS pointer, remote-ref, package metadata, tarball, and clean-consumer release contracts.
+- Added least-privilege release automation with immutable tags, scoped credentials, exact payload evidence, and post-publication read-back.
+
+### Changed
+
+- Expanded Swift and CSS package policy, authentication, API, and local-development documentation.
+- Made the full verifier execute Swift package tests and both package-distribution gates instead of treating package tests as an unproven optional stage.
+- Distinguished coordinated local package development from versioned production consumption in the bilingual adoption and governance references.
+
 ## 1.11.0
 
 ### Added

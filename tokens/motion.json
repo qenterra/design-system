@@ -2,7 +2,7 @@
   "$schema": "../schemas/motion.schema.json",
   "meta": {
     "name": "QenTerra Motion Tokens",
-    "version": "1.11.0",
+    "version": "1.12.0",
     "type": "motion",
     "description": "Short, interruptible, state-explanatory motion."
   },
