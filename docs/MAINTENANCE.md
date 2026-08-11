@@ -117,6 +117,12 @@ deploy key scoped only to the Swift distribution repository. Consumer
 credentials remain read-only. Remote package success does not prove product UI,
 runtime, or accessibility acceptance.
 
+The `Release private packages` workflow supports a read-only
+`workflow_dispatch` preflight by default. A stable tag equal to `VERSION`
+publishes both distributions. The only cross-repository secret is
+`QDS_SWIFT_DEPLOY_KEY`; rotate it by replacing the write-enabled deploy key on
+`design-system-swift` and the matching Actions secret on this repository.
+
 ## Product exceptions
 
 Add exceptions to the product profile, not foundation values. Record need, scope, accessibility impact, and review trigger. An exception requires a real product constraint, not visual preference.

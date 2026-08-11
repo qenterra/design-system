@@ -13,6 +13,7 @@ from scripts.package_release import (
     tree_digest,
     validate_package_payload,
     validate_version_alignment,
+    main as package_release_main,
 )
 
 
@@ -139,6 +140,19 @@ class PackageReleaseContractTests(unittest.TestCase):
         self.assertEqual(classify_remote_ref("a" * 40, "a" * 40), "matching")
         self.assertEqual(classify_remote_ref("b" * 40, "a" * 40), "conflict")
 
+    def test_remote_ref_conflict_cli_fails_closed(self) -> None:
+        status = package_release_main(
+            [
+                "classify-ref",
+                "--existing-sha",
+                "b" * 40,
+                "--expected-sha",
+                "a" * 40,
+            ]
+        )
+
+        self.assertEqual(status, 1)
+
 
 class PackageMetadataTests(unittest.TestCase):
     repository_root = Path(__file__).resolve().parents[1]
@@ -238,6 +252,42 @@ class SwiftPackageTests(unittest.TestCase):
         errors = validate_package_payload(self.repository_root, "swift")
 
         self.assertEqual(errors, [])
+
+
+class ReleaseWorkflowTests(unittest.TestCase):
+    repository_root = Path(__file__).resolve().parents[1]
+
+    def test_workflow_uses_private_least_privilege_publication(self) -> None:
+        workflow = (
+            self.repository_root / ".github/workflows/release-packages.yml"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("permissions:\n  contents: read", workflow)
+        self.assertIn("packages: write", workflow)
+        self.assertEqual(workflow.count("packages: write"), 1)
+        self.assertIn("git subtree split --prefix=packages/swift", workflow)
+        self.assertIn("git@github.com:qenterra/design-system-swift.git", workflow)
+        self.assertIn("QDS_SWIFT_DEPLOY_KEY", workflow)
+        self.assertIn("python3 scripts/package_release.py classify-ref", workflow)
+        self.assertIn("11d5960a326750d5838078e36cf38b85af677262", workflow)
+        self.assertIn("49933ea5288caeca8642d1e84afbd3f7d6820020", workflow)
+        self.assertIn("ea165f8d65b6e75b540449e92b4886f43607fa02", workflow)
+        self.assertNotIn("--force", workflow)
+        self.assertNotIn("visibility public", workflow.lower())
+        self.assertNotIn("personal_access_token", workflow.lower())
+
+    def test_workflow_checks_tag_against_canonical_version(self) -> None:
+        workflow = (
+            self.repository_root / ".github/workflows/release-packages.yml"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn('[[ "$GITHUB_REF_NAME" == "$version" ]]', workflow)
+        self.assertIn("workflow_dispatch:", workflow)
+        self.assertIn("publish:", workflow)
+        self.assertEqual(
+            (self.repository_root / ".nvmrc").read_text(encoding="utf-8"),
+            "22\n",
+        )
 
 
 if __name__ == "__main__":

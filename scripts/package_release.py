@@ -246,6 +246,10 @@ def main(argv: list[str] | None = None) -> int:
     validate_parser = subparsers.add_parser("validate")
     validate_parser.add_argument("--root", type=Path, default=ROOT)
 
+    ref_parser = subparsers.add_parser("classify-ref")
+    ref_parser.add_argument("--existing-sha", default="")
+    ref_parser.add_argument("--expected-sha", required=True)
+
     manifest_parser = subparsers.add_parser("manifest")
     manifest_parser.add_argument("--root", type=Path, default=ROOT)
     manifest_parser.add_argument("--source-sha", required=True)
@@ -262,6 +266,17 @@ def main(argv: list[str] | None = None) -> int:
             return 1
         print(f"Private package contract passed for {canonical_version(arguments.root)}")
         return 0
+
+    if arguments.command == "classify-ref":
+        existing = arguments.existing_sha or None
+        if not SHA.fullmatch(arguments.expected_sha) or (
+            existing is not None and not SHA.fullmatch(existing)
+        ):
+            print("Remote and expected refs must be lowercase 40-character Git SHAs", file=sys.stderr)
+            return 2
+        state = classify_remote_ref(existing, arguments.expected_sha)
+        print(state)
+        return 1 if state == "conflict" else 0
 
     if _inside(arguments.output, arguments.root):
         print("Release manifest output must be outside the repository", file=sys.stderr)

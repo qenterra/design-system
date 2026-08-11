@@ -1,0 +1,179 @@
+name: Release private packages
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish after the full preflight
+        required: true
+        default: false
+        type: boolean
+  push:
+    tags:
+      - "*.*.*"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: qds-private-packages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    runs-on: macos-15
+    steps:
+      - name: Check out canonical sources
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          lfs: true
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Require tag and VERSION alignment
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          version=$(tr -d '[:space:]' < VERSION)
+          [[ "$GITHUB_REF_NAME" == "$version" ]]
+          [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
+      - name: Install deterministic verification dependencies
+        run: |
+          npm ci --cache "$RUNNER_TEMP/npm-cache"
+          python3 -m venv "$RUNNER_TEMP/qds-visual-venv"
+          "$RUNNER_TEMP/qds-visual-venv/bin/python" -m pip install -r requirements-visual.txt
+          npx playwright install chromium
+      - name: Run full fail-closed verification
+        env:
+          QDS_IMAGE_PYTHON: ${{ runner.temp }}/qds-visual-venv/bin/python
+        run: python3 scripts/verify.py
+      - name: Validate filtered Swift history
+        shell: bash
+        run: |
+          tree_sha=$(git subtree split --prefix=packages/swift)
+          git ls-tree -r --name-only "$tree_sha"
+          test -n "$tree_sha"
+
+  publish-swift:
+    needs: preflight
+    if: >-
+      (github.event_name == 'push') ||
+      (github.event_name == 'workflow_dispatch' && inputs.publish)
+    runs-on: macos-15
+    steps:
+      - name: Check out canonical sources
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+      - name: Configure scoped Swift distribution key
+        env:
+          QDS_SWIFT_DEPLOY_KEY: ${{ secrets.QDS_SWIFT_DEPLOY_KEY }}
+        shell: bash
+        run: |
+          install -d -m 700 "$HOME/.ssh"
+          printf '%s\n' "$QDS_SWIFT_DEPLOY_KEY" > "$HOME/.ssh/qds-swift-deploy"
+          chmod 600 "$HOME/.ssh/qds-swift-deploy"
+          printf '%s\n' 'github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl' > "$HOME/.ssh/known_hosts"
+          printf '%s\n' 'Host github.com' '  IdentityFile ~/.ssh/qds-swift-deploy' '  IdentitiesOnly yes' > "$HOME/.ssh/config"
+          chmod 600 "$HOME/.ssh/config" "$HOME/.ssh/known_hosts"
+      - name: Publish immutable Swift ref
+        shell: bash
+        run: |
+          version=$(tr -d '[:space:]' < VERSION)
+          tree_sha=$(git subtree split --prefix=packages/swift)
+          remote=git@github.com:qenterra/design-system-swift.git
+          remote_tag=$(git ls-remote "$remote" "refs/tags/$version" | awk '{print $1}')
+          python3 scripts/package_release.py classify-ref --existing-sha "$remote_tag" --expected-sha "$tree_sha"
+          git remote add swift "$remote"
+          remote_main=$(git ls-remote "$remote" refs/heads/main | awk '{print $1}')
+          if [[ -n "$remote_main" ]]; then
+            git fetch swift refs/heads/main:refs/remotes/swift/main
+            git merge-base --is-ancestor refs/remotes/swift/main "$tree_sha"
+          fi
+          git push --atomic swift "$tree_sha:refs/heads/main" "$tree_sha:refs/tags/$version"
+      - name: Verify clean remote Swift consumer
+        shell: bash
+        run: |
+          version=$(tr -d '[:space:]' < VERSION)
+          consumer="$RUNNER_TEMP/qds-swift-consumer"
+          git clone --depth 1 --branch "$version" git@github.com:qenterra/design-system-swift.git "$consumer"
+          swift build --package-path "$consumer"
+          swift run --package-path "$consumer" QDSContractCheck
+
+  publish-npm:
+    needs: preflight
+    if: >-
+      (github.event_name == 'push') ||
+      (github.event_name == 'workflow_dispatch' && inputs.publish)
+    runs-on: macos-15
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Check out canonical sources
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .nvmrc
+          registry-url: https://npm.pkg.github.com
+          scope: "@qenterra"
+      - name: Publish immutable npm version
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          version=$(tr -d '[:space:]' < VERSION)
+          npm ci --cache "$RUNNER_TEMP/npm-cache"
+          local_json=$(npm pack --workspace @qenterra/design-tokens --pack-destination "$RUNNER_TEMP" --cache "$RUNNER_TEMP/npm-cache" --json)
+          local_integrity=$(printf '%s' "$local_json" | python3 -c 'import json,sys; print(json.load(sys.stdin)[0]["integrity"])')
+          remote_integrity=$(npm view "@qenterra/design-tokens@$version" dist.integrity 2>/dev/null || true)
+          if [[ -n "$remote_integrity" ]]; then
+            [[ "$remote_integrity" == "$local_integrity" ]]
+          else
+            npm publish --workspace @qenterra/design-tokens
+          fi
+      - name: Verify clean remote npm consumer
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          version=$(tr -d '[:space:]' < VERSION)
+          consumer="$RUNNER_TEMP/qds-npm-consumer"
+          mkdir -p "$consumer"
+          cd "$consumer"
+          npm init --yes
+          printf '%s\n' '@qenterra:registry=https://npm.pkg.github.com' '//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}' > .npmrc
+          npm install --save-exact "@qenterra/design-tokens@$version" --cache "$RUNNER_TEMP/npm-cache"
+          node "$GITHUB_WORKSPACE/tests/package-css-smoke.mjs" node_modules/@qenterra/design-tokens
+
+  release-evidence:
+    needs: [publish-swift, publish-npm]
+    runs-on: macos-15
+    steps:
+      - name: Check out canonical sources
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .nvmrc
+      - name: Build release manifest
+        shell: bash
+        run: |
+          npm ci --cache "$RUNNER_TEMP/npm-cache"
+          npm pack --workspace @qenterra/design-tokens --pack-destination "$RUNNER_TEMP" --cache "$RUNNER_TEMP/npm-cache"
+          tree_sha=$(git subtree split --prefix=packages/swift)
+          tarball=$(find "$RUNNER_TEMP" -maxdepth 1 -name 'qenterra-design-tokens-*.tgz' -print -quit)
+          python3 scripts/package_release.py manifest --source-sha "$GITHUB_SHA" --swift-tree-sha "$tree_sha" --npm-tarball "$tarball" --output "$RUNNER_TEMP/qds-package-release.json"
+      - name: Upload private release evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: qds-private-package-release-${{ github.ref_name }}
+          path: ${{ runner.temp }}/qds-package-release.json
+          if-no-files-found: error
+          retention-days: 30
