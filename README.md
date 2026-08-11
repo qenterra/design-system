@@ -1,57 +1,148 @@
-# QenTerra Design System
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/brand/qenterra/logos/vector/Dark%20Logo%20-%20Filled.svg">
+    <img src="assets/brand/qenterra/logos/vector/Light%20Logo%20-%20Filled.svg" width="128" alt="QenTerra logo">
+  </picture>
+</p>
 
-Shared UX/UI grammar for QenTerra native applications, websites, browser extensions, and future products.
+<h1 align="center">QenTerra Design System</h1>
 
-The system combines an adaptive Soft Graphite foundation with disciplined components, honest state, short motion, privacy-aware copy, localization, and explicit recovery.
+<p align="center">Shared interface grammar, implementation contracts, and brand foundations for QenTerra products.</p>
 
-## Quick start
+<p align="center">
+  <a href="https://github.com/qenterra/design-system/wiki">Wiki</a> ·
+  <a href="docs/MASTER.md">English reference</a> ·
+  <a href="docs/MASTER.ru.md">Русская версия</a> ·
+  <a href="CHANGELOG.md">Changelog</a>
+</p>
 
-```bash
-python3 scripts/build.py
-python3 scripts/verify.py
+> **Status:** private, proprietary source of truth. Version `1.12.0` is
+> distributed through the private SwiftPM repository
+> [`qenterra/design-system-swift`](https://github.com/qenterra/design-system-swift)
+> and the restricted GitHub package `@qenterra/design-tokens`.
+
+QDS combines adaptive Soft Graphite foundations with typed design tokens,
+accessible component contracts, product profiles, brand governance, repository
+standards, and deterministic verification. Native platform conventions remain
+authoritative; shared semantics do not require identical product shells.
+
+## Interface
+
+![QDS reference overview in Dark appearance](output/screenshots/overview-en-dark-wide.png)
+
+The generated reference covers English and Russian, System/Light/Dark
+appearance, desktop and mobile layouts, accessibility profiles, component
+stories, brand assets, repository guidance, and human-operated email templates.
+
+## Capabilities
+
+- **Foundations:** color, typography, spacing, sizing, radius, borders,
+  materials, iconography, layout, density, elevation, and motion.
+- **Components and patterns:** executable states, keyboard and assistive
+  semantics, localization stress cases, recovery, permissions, destructive
+  actions, progress, and responsive behavior.
+- **Platform delivery:** generated CSS/JSON assets, typed Swift tokens and
+  SwiftUI adapters, semantic icons, and opt-in recipes.
+- **Product governance:** explicit consumer profiles, narrowly scoped
+  exceptions, adoption audits, repository documentation, and code-quality
+  contracts.
+- **Brand system:** canonical QenTerra marks and Nyx assets with manifest,
+  Git LFS, processing boundaries, and focused validation.
+
+## Get started
+
+For a clean checkout:
+
+```sh
+npm ci
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements-visual.txt
+QDS_IMAGE_PYTHON=.venv/bin/python python3 scripts/verify.py
 python3 -m http.server 8000 --directory dist
 ```
 
-Open `http://localhost:8000/` for automatic language selection, choose `dist/en/` or `dist/ru/`, or open either localized standalone reference directly.
+Open `http://localhost:8000/`. The full verifier builds the reference twice,
+checks deterministic output, runs unit and package gates, builds and tests the
+Swift package, renders the browser matrix, and performs exact screenshot
+comparison. See [Building from source](docs/BUILDING.md) for toolchain details.
 
-## Core files
+## How it works
 
-- `docs/MASTER.md` and `docs/MASTER.ru.md` — normative English and Russian AI/developer references.
-- `tokens/` and focused `schemas/` — exact machine-readable values, product profiles, and fail-closed contracts.
-- `registry/` — canonical semantic registries, including contact-channel roles and the bilingual email catalogue.
-- `generated/figma/` — deterministic design-tool handoff payloads, never a parallel source.
-- `generated/` — compatibility copies of generated CSS and Swift adapters.
-- `packages/swift/` and `packages/css/` — canonical sources for private versioned SwiftPM and GitHub npm distributions.
-- `dist/` — multipage reference and standalone HTML.
-- `templates/design/` — interface design and review templates.
-- `templates/repository/` — repository documentation, policy, GitHub, and Wiki templates.
-- `docs/repository/` — normative bilingual repository documentation standard.
-- `assets/brand/` — canonical QenTerra marks, Nyx library, and machine-readable asset manifest.
-- `docs/brand/`, `templates/brand/`, and `scripts/brand/` — bilingual brand canon, reusable briefs, processing tools, and QA.
-- `output/` — audit evidence, validation reports, and rendered screenshots.
-- `docs/MAINTENANCE.md` — update and release workflow.
-- `docs/EMAIL.md` and `docs/EMAIL.ru.md` — human-operated email rules, catalogue, authoring, copying, and QA.
+`tokens/*.json`, focused registries and schemas, and the bilingual normative
+references are maintained sources. `scripts/build.py` validates those inputs
+and generates the reference site, platform adapters, Figma handoff data, and
+package payloads. Generated files are committed as evidence and distribution
+artifacts, but they are never edited directly.
 
-## Principles
+```text
+tokens + registries + docs + src
+                 │
+                 ▼
+          scripts/build.py
+                 │
+       ┌─────────┼─────────┐
+       ▼         ▼         ▼
+     dist/    generated/  packages/
+```
 
-- Shared semantics and behavior; product-specific shells.
-- System typography and adaptive Soft Graphite.
-- Opaque content, translucent functional chrome.
-- Honest state, review before risk, and explicit recovery.
-- Short interruptible motion.
-- Accessibility and localization as component states.
-- Exact values live once in tokens and are generated into platform adapters.
+## Privacy and security
 
-## Status
+This repository contains design-system sources and synthetic verification
+fixtures, not production user data. Do not commit credentials, private product
+fixtures, customer content, or AI working directories. Package and release
+credentials must stay read-only for consumers and narrowly scoped for
+automation. Report vulnerabilities privately as described in
+[SECURITY.md](SECURITY.md).
 
-Version 1.12.0 publishes typed Swift tokens through the private
-`qenterra/design-system-swift` repository and CSS, JSON, icons, and opt-in
-recipes through private GitHub package `@qenterra/design-tokens`. Product
-migrations remain explicit consumer work.
+## Development
 
-## Repository boundary
+1. Read the affected section of [the master reference](docs/MASTER.md) and its
+   Russian counterpart.
+2. Change maintained sources under `tokens/`, `registry/`, `schemas/`, `src/`,
+   `docs/`, `templates/`, package manifests, or the hand-authored Swift facade.
+3. Run `python3 scripts/verify.py` with the pinned image environment.
+4. Inspect the generated HTML and the relevant screenshots at full size.
+5. Update `VERSION` and `CHANGELOG.md` for normative changes.
 
-This repository and its package distributions are private. It contains no
-production user data, credentials, private application fixtures, or AI working
-directories. Temporary AI plans and scratch artifacts belong in a unique system
-temporary directory, never in the repository.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for source boundaries and pull-request
+expectations.
+
+## Architecture
+
+The repository keeps definition, generation, distribution, and evidence as
+separate layers. Product-specific exceptions live in product profiles instead
+of weakening shared foundations. Package repositories are filtered release
+surfaces; this repository remains the sole owner of token and adapter sources.
+
+See [Architecture](docs/ARCHITECTURE.md), [Dependencies](docs/DEPENDENCIES.md),
+and [Maintenance](docs/MAINTENANCE.md).
+
+## Current limitations
+
+- Package verification proves resolution and representative API use, not
+  rendering or accessibility inside every consumer product.
+- Browser screenshots do not prove native SwiftUI rendering, VoiceOver output,
+  hardware behavior, or live external-service boundaries.
+- Figma handoff JSON is generated, but a successful build does not prove a
+  maintained Figma library was updated.
+- Product migration remains explicit consumer work; QDS does not rewrite
+  application interfaces automatically. Shocking, yes.
+
+## Documentation
+
+- [Documentation index](docs/README.md)
+- [Normative reference](docs/MASTER.md) and [Russian reference](docs/MASTER.ru.md)
+- [Component catalog](docs/COMPONENT_CATALOG.md)
+- [Consumer adoption](docs/CONSUMER_ADOPTION.md)
+- [Code system](docs/CODE.md)
+- [Repository standard](docs/repository/STANDARD.md)
+- [Brand governance](docs/brand/MASTER.md)
+- [Decision records](docs/decisions/)
+- [Troubleshooting](docs/TROUBLESHOOTING.md)
+
+## Support and license
+
+Use GitHub Issues for reproducible non-security problems and
+`support@qenterra.com` when repository access prevents issue reporting. This
+repository is proprietary; use and redistribution require QenTerra
+authorization. See [LICENSE](LICENSE).
