@@ -13,6 +13,7 @@
 - Expanded Swift and CSS package policy, authentication, API, and local-development documentation.
 - Made the full verifier execute Swift package tests and both package-distribution gates instead of treating package tests as an unproven optional stage.
 - Distinguished coordinated local package development from versioned production consumption in the bilingual adoption and governance references.
+- Split exact browser baselines into declared local and GitHub macOS renderer profiles instead of comparing unlike system-font environments.
 
 ### Fixed
 

@@ -2,6 +2,7 @@
   "schemaVersion": 1,
   "pixelThreshold": 0,
   "channelTolerance": 3,
+  "profiles": ["local", "github-macos-15-arm64"],
   "captures": [
     {"name": "overview-en-dark-wide", "path": "en/index.html", "viewport": {"width": 1440, "height": 1000}, "theme": "dark", "reducedMotion": false},
     {"name": "foundations-ru-light-desktop", "path": "ru/pages/foundations.html", "viewport": {"width": 1280, "height": 900}, "theme": "light", "reducedMotion": false},

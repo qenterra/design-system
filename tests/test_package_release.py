@@ -299,6 +299,7 @@ class ReleaseWorkflowTests(unittest.TestCase):
         self.assertIn("output/tmp/screenshots-current", workflow)
         self.assertIn("output/reports/browser.json", workflow)
         self.assertIn("output/reports/visual-diff.json", workflow)
+        self.assertIn("QDS_SCREENSHOT_PROFILE: github-macos-15-arm64", workflow)
 
 
 if __name__ == "__main__":

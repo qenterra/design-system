@@ -49,6 +49,7 @@ jobs:
       - name: Run full fail-closed verification
         env:
           QDS_IMAGE_PYTHON: ${{ runner.temp }}/qds-visual-venv/bin/python
+          QDS_SCREENSHOT_PROFILE: github-macos-15-arm64
         run: python3 scripts/verify.py
       - name: Upload preflight visual diagnostics
         if: ${{ always() }}

@@ -1,5 +1,6 @@
 {
   "version": "1.12.0",
+  "profile": "local",
   "status": "passed",
   "pixelThreshold": 0,
   "channelTolerance": 3,

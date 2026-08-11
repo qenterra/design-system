@@ -133,7 +133,9 @@ Start product adoption from `templates/design/qds-consumer.json` and `qds-except
 
 ## Visual verification
 
-`evidence/screenshots.json` is the exact capture matrix. Committed baselines live in `output/screenshots/`; current renders live only under ignored `output/tmp/`. The pixel threshold remains zero; the separately declared channel tolerance may ignore at most three 8-bit levels of renderer antialias jitter per channel. Update baselines intentionally with `QDS_UPDATE_SCREENSHOTS=1`, then run the full verifier, which renders the current matrix and executes `scripts/compare_screenshots.py` with the configured image Python. Inspect captures at full size for clipping, contrast, hierarchy, focus, responsive navigation, and appearance parity. Automated screenshots do not prove screen-reader or native-app behavior.
+`evidence/screenshots.json` is the exact capture matrix and the allowlist of renderer profiles. Local baselines live directly in `output/screenshots/`; CI baselines live in `output/screenshots/profiles/<profile>/`; current renders live only under ignored `output/tmp/`. Select a non-local profile with `QDS_SCREENSHOT_PROFILE=<profile>`. A profile must contain the full matrix: silently falling back to another machine's baseline is prohibited because system fonts and layout metrics differ.
+
+The pixel threshold remains zero; the separately declared channel tolerance may ignore at most three 8-bit levels of renderer antialias jitter per channel. Update the selected profile intentionally with `QDS_UPDATE_SCREENSHOTS=1`, then run the full verifier, which renders the current matrix and executes `scripts/compare_screenshots.py` with the configured image Python. GitHub release preflight preserves current captures and visual reports as a short-lived diagnostic artifact even when comparison fails. Inspect captures at full size for clipping, contrast, hierarchy, focus, responsive navigation, and appearance parity. Automated screenshots do not prove screen-reader or native-app behavior.
 
 ## Icons, asset browser, and Figma
 

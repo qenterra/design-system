@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -20,8 +21,15 @@ def main() -> int:
     manifest = json.loads((ROOT / "evidence" / "screenshots.json").read_text(encoding="utf-8"))
     threshold = int(manifest.get("pixelThreshold", 0))
     channel_tolerance = int(manifest.get("channelTolerance", 0))
+    profile = os.environ.get("QDS_SCREENSHOT_PROFILE", "local")
+    profiles = manifest.get("profiles", ["local"])
+    if profile not in profiles:
+        print(f"Unknown screenshot profile: {profile}", file=sys.stderr)
+        return 1
     current_root = ROOT / "output" / "tmp" / "screenshots-current"
     baseline_root = ROOT / "output" / "screenshots"
+    if profile != "local":
+        baseline_root = baseline_root / "profiles" / profile
     results = []
     failures = []
     for capture in manifest["captures"]:
@@ -45,6 +53,7 @@ def main() -> int:
                 failures.append(f"{name}: {changed} changed pixels exceeds threshold {threshold}")
     report = {
         "version": (ROOT / "VERSION").read_text(encoding="utf-8").strip(),
+        "profile": profile,
         "status": "failed" if failures else "passed",
         "pixelThreshold": threshold,
         "channelTolerance": channel_tolerance,

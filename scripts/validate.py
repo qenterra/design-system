@@ -778,6 +778,19 @@ def validate_browser_evidence(root: Path) -> list[str]:
     if not manifest_path.is_file():
         return [*errors, "evidence/screenshots.json: missing exact screenshot manifest"]
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    profiles = manifest.get("profiles", ["local"])
+    if (
+        not isinstance(profiles, list)
+        or not profiles
+        or profiles[0] != "local"
+        or len(profiles) != len(set(profiles))
+        or any(not isinstance(profile, str) or not profile for profile in profiles)
+    ):
+        errors.append("evidence/screenshots.json: profiles must be unique strings beginning with local")
+        profiles = ["local"]
+    report_profile = report.get("profile", "local")
+    if report_profile not in profiles:
+        errors.append(f"output/reports/browser.json: unknown screenshot profile {report_profile!r}")
     channel_tolerance = manifest.get("channelTolerance")
     if not isinstance(channel_tolerance, int) or not 0 <= channel_tolerance <= 3:
         errors.append("evidence/screenshots.json: channelTolerance must be an integer from 0 to 3")
@@ -810,14 +823,19 @@ def validate_browser_evidence(root: Path) -> list[str]:
     actual_names = [capture.get("name") if isinstance(capture, dict) else None for capture in captures]
     if actual_names != expected_names:
         errors.append(f"output/reports/browser.json: capture manifest mismatch: {actual_names!r}")
-    baseline_names = sorted(path.stem for path in (root / "output" / "screenshots").glob("*.png"))
-    if baseline_names != sorted(expected_names):
-        errors.append("output/screenshots: baselines do not exactly match evidence/screenshots.json")
-    for capture in captures:
-        name = capture.get("name") if isinstance(capture, dict) else None
-        path = root / "output" / "screenshots" / f"{name}.png"
-        if not name or not path.is_file() or path.stat().st_size < 10_000:
-            errors.append(f"visual evidence missing or too small: {name!r}")
+    for profile in profiles:
+        baseline_root = root / "output" / "screenshots"
+        if profile != "local":
+            baseline_root = baseline_root / "profiles" / profile
+        baseline_names = sorted(path.stem for path in baseline_root.glob("*.png"))
+        if baseline_names != sorted(expected_names):
+            errors.append(
+                f"output/screenshots: {profile!r} baselines do not exactly match evidence/screenshots.json"
+            )
+        for name in expected_names:
+            path = baseline_root / f"{name}.png"
+            if not name or not path.is_file() or path.stat().st_size < 10_000:
+                errors.append(f"visual evidence missing or too small for {profile!r}: {name!r}")
     diff_path = root / "output" / "reports" / "visual-diff.json"
     if not diff_path.is_file():
         errors.append("output/reports/visual-diff.json: missing exact pixel comparison")
@@ -825,6 +843,8 @@ def validate_browser_evidence(root: Path) -> list[str]:
         diff = json.loads(diff_path.read_text(encoding="utf-8"))
         if diff.get("status") != "passed" or diff.get("version") != version:
             errors.append("output/reports/visual-diff.json: current exact pixel comparison did not pass")
+        if diff.get("profile", "local") != report_profile:
+            errors.append("output/reports/visual-diff.json: screenshot profile does not match browser evidence")
     checks = report.get("checks", {})
     for name in (
         "scrollSpy",

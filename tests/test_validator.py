@@ -381,6 +381,23 @@ class ValidatorTests(unittest.TestCase):
         self.assertIn(":is(.brand-mark, .site-nav a[aria-current])", contrast_rules)
         self.assertIn("border-radius: var(--qds-radius-none)", contrast_rules)
 
+    def test_visual_evidence_declares_complete_renderer_profiles(self) -> None:
+        manifest = load_json(ROOT / "evidence" / "screenshots.json")
+        expected_names = sorted(capture["name"] for capture in manifest["captures"])
+
+        self.assertEqual(manifest["profiles"], ["local", "github-macos-15-arm64"])
+        for profile in manifest["profiles"]:
+            baseline_root = ROOT / "output" / "screenshots"
+            if profile != "local":
+                baseline_root = baseline_root / "profiles" / profile
+            actual_names = sorted(path.stem for path in baseline_root.glob("*.png"))
+            self.assertEqual(actual_names, expected_names)
+
+        renderer = (ROOT / "scripts" / "render_screenshots.js").read_text(encoding="utf-8")
+        comparator = (ROOT / "scripts" / "compare_screenshots.py").read_text(encoding="utf-8")
+        self.assertIn("QDS_SCREENSHOT_PROFILE", renderer)
+        self.assertIn("QDS_SCREENSHOT_PROFILE", comparator)
+
     def test_icon_registry_rejects_duplicate_ids(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

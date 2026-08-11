@@ -8,7 +8,7 @@ const { chromium } = require("playwright");
 
 const root = path.resolve(__dirname, "..");
 const dist = path.join(root, "dist");
-const baselineDirectory = path.join(root, "output", "screenshots");
+const baselineRoot = path.join(root, "output", "screenshots");
 const screenshotDirectory = path.join(root, "output", "tmp", "screenshots-current");
 const reportPath = path.join(root, "output", "reports", "browser.json");
 const manifestPath = path.join(root, "evidence", "screenshots.json");
@@ -448,6 +448,14 @@ async function main() {
   const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
   const matrix = manifest.captures;
   if (!Array.isArray(matrix) || matrix.length === 0) throw new Error("Screenshot manifest has no captures");
+  const screenshotProfile = process.env.QDS_SCREENSHOT_PROFILE || "local";
+  const profiles = manifest.profiles || ["local"];
+  if (!profiles.includes(screenshotProfile)) {
+    throw new Error(`Unknown screenshot profile: ${screenshotProfile}`);
+  }
+  const baselineDirectory = screenshotProfile === "local"
+    ? baselineRoot
+    : path.join(baselineRoot, "profiles", screenshotProfile);
   fs.rmSync(screenshotDirectory, { recursive: true, force: true });
   fs.mkdirSync(screenshotDirectory, { recursive: true });
   fs.mkdirSync(path.dirname(reportPath), { recursive: true });
@@ -517,7 +525,7 @@ async function main() {
       consoleErrors: "none"
     };
     const version = fs.readFileSync(path.join(root, "VERSION"), "utf8").trim();
-    fs.writeFileSync(reportPath, `${JSON.stringify({ version, manifestSchemaVersion: manifest.schemaVersion, status: "passed", checks, captures, consoleErrors }, null, 2)}\n`);
+    fs.writeFileSync(reportPath, `${JSON.stringify({ version, manifestSchemaVersion: manifest.schemaVersion, profile: screenshotProfile, status: "passed", checks, captures, consoleErrors }, null, 2)}\n`);
     process.stdout.write(`Rendered ${captures.length} screenshots with no browser errors.\n`);
   } finally {
     await browser.close();

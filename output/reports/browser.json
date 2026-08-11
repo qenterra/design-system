@@ -1,6 +1,7 @@
 {
   "version": "1.12.0",
   "manifestSchemaVersion": 1,
+  "profile": "local",
   "status": "passed",
   "checks": {
     "searchAndEscape": "passed",
