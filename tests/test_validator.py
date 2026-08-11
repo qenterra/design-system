@@ -367,6 +367,7 @@ class ValidatorTests(unittest.TestCase):
 
         self.assertNotIn("systemChrome", source)
         self.assertIn("requestedBrowser || undefined", source)
+        self.assertIn('args: ["--disable-gpu"]', source)
 
     def test_icon_registry_rejects_duplicate_ids(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

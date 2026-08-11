@@ -457,7 +457,11 @@ async function main() {
   const baseUrl = `http://127.0.0.1:${port}`;
   const requestedBrowser = process.env.QDS_CHROMIUM_PATH;
   const executablePath = requestedBrowser || undefined;
-  const browser = await chromium.launch({ headless: true, executablePath });
+  const browser = await chromium.launch({
+    headless: true,
+    executablePath,
+    args: ["--disable-gpu"]
+  });
   const page = await browser.newPage();
   const consoleErrors = [];
   page.on("console", (message) => {
