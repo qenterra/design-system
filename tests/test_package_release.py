@@ -289,6 +289,17 @@ class ReleaseWorkflowTests(unittest.TestCase):
             "22\n",
         )
 
+    def test_preflight_preserves_visual_diagnostics_on_failure(self) -> None:
+        workflow = (
+            self.repository_root / ".github/workflows/release-packages.yml"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("Upload preflight visual diagnostics", workflow)
+        self.assertIn("if: ${{ always() }}", workflow)
+        self.assertIn("output/tmp/screenshots-current", workflow)
+        self.assertIn("output/reports/browser.json", workflow)
+        self.assertIn("output/reports/visual-diff.json", workflow)
+
 
 if __name__ == "__main__":
     unittest.main()
