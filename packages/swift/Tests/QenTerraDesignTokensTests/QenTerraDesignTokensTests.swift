@@ -3,6 +3,15 @@ import SwiftUI
 import Testing
 @testable import QenTerraDesignTokens
 
+@Test func publicFacadeVersionAndTypesRemainAvailable() {
+    #expect(QDS.version == "1.11.0")
+    #expect(QDSIcon.success.rawValue == "success")
+
+    _ = QDSPrimaryButtonStyle(appearance: .light)
+    _ = QDSGroupContainer(appearance: .light)
+    _ = QDSInteractiveRowSurface(state: .init(), appearance: .light) { Text("Row") }
+}
+
 @Test func stableAPIExposesGeneratedScales() {
     #expect(QDS.Space.value4 == 16)
     #expect(QDS.Radius.control == 6)

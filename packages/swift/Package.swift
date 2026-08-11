@@ -2,6 +2,7 @@
 import PackageDescription
 
 let package = Package(
+    // Keep this package dependency-free: it is the foundation consumed by apps.
     name: "QenTerraDesignTokens",
     platforms: [
         .macOS(.v13),

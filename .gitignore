@@ -4,6 +4,7 @@ __pycache__/
 .venv/
 node_modules/
 .build/
+packages/swift/.swiftpm/
 output/tmp/
 output/server.log
 output/.server.pid

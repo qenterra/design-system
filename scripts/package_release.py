@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 from typing import Literal
@@ -116,6 +117,33 @@ def _files(root: Path) -> list[Path]:
     return sorted(path for path in root.rglob("*") if path.is_file())
 
 
+def _package_files(repository_root: Path, package_root: Path) -> list[Path]:
+    """Return files eligible for Git publication, including staged new files."""
+    if not (repository_root / ".git").exists():
+        return _files(package_root)
+    result = subprocess.run(
+        [
+            "git",
+            "-C",
+            str(repository_root),
+            "ls-files",
+            "--cached",
+            "--others",
+            "--exclude-standard",
+            "--",
+            package_root.relative_to(repository_root).as_posix(),
+        ],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    return sorted(
+        repository_root / relative
+        for relative in result.stdout.splitlines()
+        if (repository_root / relative).is_file()
+    )
+
+
 def validate_package_payload(root: Path, package: str) -> list[str]:
     """Reject package files outside the reviewed allowlists."""
     if package not in {"css", "swift"}:
@@ -125,7 +153,7 @@ def validate_package_payload(root: Path, package: str) -> list[str]:
         return [f"packages/{package} is missing"]
 
     errors: list[str] = []
-    files = _files(package_root)
+    files = _package_files(root, package_root)
     for path in files:
         relative = path.relative_to(package_root)
         if DENIED_PARTS.intersection(relative.parts):

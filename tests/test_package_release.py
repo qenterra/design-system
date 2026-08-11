@@ -207,5 +207,38 @@ class PackageMetadataTests(unittest.TestCase):
         self.assertIn("CSS package smoke check passed", result.stdout)
 
 
+class SwiftPackageTests(unittest.TestCase):
+    repository_root = Path(__file__).resolve().parents[1]
+
+    def test_swift_manifest_preserves_supported_contract(self) -> None:
+        manifest = (self.repository_root / "packages/swift/Package.swift").read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn(".macOS(.v13)", manifest)
+        self.assertIn(".iOS(.v16)", manifest)
+        self.assertEqual(manifest.count(".library("), 1)
+        self.assertNotIn("dependencies:", manifest.split("targets:", 1)[0])
+
+    def test_swift_distribution_has_policy_and_remote_usage(self) -> None:
+        license_text = (self.repository_root / "packages/swift/LICENSE").read_text(
+            encoding="utf-8"
+        )
+        readme = (self.repository_root / "packages/swift/README.md").read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn("proprietary", license_text.lower())
+        self.assertIn("qenterra/design-system-swift.git", readme)
+        self.assertIn("QDSContractCheck", readme)
+        self.assertIn("QDSInteractiveRowSurface", readme)
+        self.assertIn("read-only", readme)
+
+    def test_repository_swift_payload_contains_only_distribution_files(self) -> None:
+        errors = validate_package_payload(self.repository_root, "swift")
+
+        self.assertEqual(errors, [])
+
+
 if __name__ == "__main__":
     unittest.main()
