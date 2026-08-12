@@ -24,6 +24,18 @@ class PackageReleaseContractTests(unittest.TestCase):
         self._write("VERSION", "1.12.0\n")
         self._write("package.json", json.dumps({"version": "1.12.0"}))
         self._write(
+            "package-lock.json",
+            json.dumps(
+                {
+                    "version": "1.12.0",
+                    "packages": {
+                        "": {"version": "1.12.0"},
+                        "packages/css": {"version": "1.12.0"},
+                    },
+                }
+            ),
+        )
+        self._write(
             "packages/css/package.json",
             json.dumps({"name": "@qenterra/design-tokens", "version": "1.12.0"}),
         )
@@ -76,6 +88,24 @@ class PackageReleaseContractTests(unittest.TestCase):
         errors = validate_version_alignment(self.root)
 
         self.assertIn("packages/css/package.json version 1.11.0 != 1.12.0", errors)
+
+    def test_package_lock_version_drift_is_reported(self) -> None:
+        self._write(
+            "package-lock.json",
+            json.dumps(
+                {
+                    "version": "1.11.0",
+                    "packages": {
+                        "": {"version": "1.12.0"},
+                        "packages/css": {"version": "1.12.0"},
+                    },
+                }
+            ),
+        )
+
+        errors = validate_version_alignment(self.root)
+
+        self.assertIn("package-lock.json version 1.11.0 != 1.12.0", errors)
 
     def test_generated_token_family_version_drift_is_reported(self) -> None:
         self._write(

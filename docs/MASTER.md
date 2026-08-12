@@ -1,6 +1,6 @@
 # QenTerra Design System
 
-Version 2.0.0 · Normative reference for humans and AI agents
+Version 2.1.0 · Normative reference for humans and AI agents
 
 ## 0. How to use this file
 
@@ -298,6 +298,8 @@ Focus, selection, and hover are different states:
 
 Do not merge them into one visual boolean.
 
+Equivalent states preserve a control or row's box, alignment, scroll position, and focused target. A hover-only affordance reserves its space or has an equally available menu/keyboard path; it must not push adjacent content or move focus merely by appearing.
+
 ## 5. Controls
 
 ### 5.1 Buttons
@@ -395,6 +397,8 @@ Tables require:
 - empty/no-results/loading/error states;
 - accessible row and column semantics.
 
+When a filename, path, identifier, or dense value is visually truncated, preserve its complete meaningful value through a native tooltip or accessible description. Truncation may simplify scanning; it must not erase information for keyboard or assistive-technology users.
+
 Selection must survive sorting only when the underlying object remains the same. Hidden selected items must be reported before bulk action.
 
 ### 6.5 Extension and file tiles
@@ -447,7 +451,7 @@ Menus contain immediate commands. Group related actions, show shortcuts, separat
 
 ### 8.2 Popover
 
-Use for a short contextual choice or inspector that can be dismissed without losing work. It must remain within the viewport and return focus to its initiator.
+Use for a short contextual choice or inspector that can be dismissed without losing work. It must remain within the viewport and return focus to its initiator. On web and browser extensions, render a layer that could escape an overflow container as a sibling outside the clipped ancestor, position it in viewport coordinates, and clamp it with a safe inset using `border-box` sizing. The layer must not create horizontal overflow.
 
 ### 8.3 Sheet
 
@@ -724,6 +728,7 @@ Touch targets meet platform minimums. Pointer interfaces may use denser visuals 
 - Host-page styles and scripts are isolated.
 - Selection and hover are distinct; leaving the overlay does not mutate a locked selection.
 - Critical controls remain visible at narrow widths and with localization expansion.
+- Browser verification proves `scrollWidth` does not exceed the visible document width at each declared narrow/long localized state; visual inspection alone is insufficient.
 
 ## 15. Product archetypes
 

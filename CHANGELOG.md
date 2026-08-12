@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.1.0
+
+### Added
+
+- Added deterministic rendered-source digests so browser evidence is rejected when it does not describe the current QDS reference inputs.
+- Added stable interactive-geometry, accessible-truncation, viewport-layer, and horizontal-overflow contracts to the shared component and browser-extension guidance.
+
+### Changed
+
+- Required executable pass/fail contracts for new or changed blocking validators and a fresh rendered primary-task review for material visual changes when an independent reviewer is available.
+
 ## 2.0.0
 
 ### Added

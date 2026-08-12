@@ -373,7 +373,7 @@ Platform-specific constraints over the shared semantic core.
 - `browserExtension.layouts`: `["popup", "side-panel", "overlay-dock", "bottom-sheet", "options-page"]`
 - `browserExtension.minimumTargetPointer`: `32`
 - `browserExtension.minimumTargetTouch`: `44`
-- `browserExtension.requirements`: `["viewport clamping", "host-page isolation", "focus return", "200% zoom", "i18n expansion", "reduced motion"]`
+- `browserExtension.requirements`: `["viewport clamping", "host-page isolation", "focus return", "no horizontal overflow", "200% zoom", "i18n expansion", "reduced motion"]`
 - `iOS.defaultControlHeight`: `44`
 - `iOS.input`: `touch-voice-pointer-optional`
 - `iOS.minimumTarget`: `44`

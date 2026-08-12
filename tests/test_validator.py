@@ -14,6 +14,10 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from lib.token_tools import load_json  # noqa: E402
+from lib.reference_sources import (  # noqa: E402
+    rendered_reference_source_digest,
+    rendered_reference_source_paths,
+)
 from compare_screenshots import pixel_changed  # noqa: E402
 from validate import (  # noqa: E402
     TOKEN_NAMES,
@@ -322,7 +326,8 @@ class ValidatorTests(unittest.TestCase):
     def test_browser_evidence_requires_all_accessibility_axes_and_explicit_states(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            (root / "evidence").mkdir()
+            self.copy_rendered_reference_sources(root)
+            (root / "evidence").mkdir(exist_ok=True)
             (root / "output" / "reports").mkdir(parents=True)
             (root / "output" / "screenshots").mkdir(parents=True)
             (root / "VERSION").write_text(self.version + "\n", encoding="utf-8")
@@ -348,17 +353,82 @@ class ValidatorTests(unittest.TestCase):
             }
             (root / "output" / "reports" / "browser.json").write_text(json.dumps(report), encoding="utf-8")
             errors = validate_browser_evidence(root)
+            self.assertTrue(any("source digest is missing" in error for error in errors))
             self.assertTrue(any("System theme" in error for error in errors))
             self.assertTrue(any("Reduced Transparency" in error for error in errors))
             self.assertTrue(any("Increased Contrast" in error for error in errors))
             self.assertTrue(any("Forced Colors" in error for error in errors))
             self.assertTrue(any("explicit interaction states" in error for error in errors))
 
+    def test_browser_evidence_rejects_stale_source_digest(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.copy_rendered_reference_sources(root)
+            (root / "evidence").mkdir(exist_ok=True)
+            (root / "output" / "reports").mkdir(parents=True)
+            (root / "VERSION").write_text(self.version + "\n", encoding="utf-8")
+            manifest = load_json(ROOT / "evidence" / "screenshots.json")
+            (root / "evidence" / "screenshots.json").write_text(json.dumps(manifest), encoding="utf-8")
+            report = {
+                "status": "passed",
+                "version": self.version,
+                "sourceDigest": "stale-evidence",
+                "captures": [{"name": capture["name"]} for capture in manifest["captures"]],
+                "checks": {},
+            }
+            (root / "output" / "reports" / "browser.json").write_text(json.dumps(report), encoding="utf-8")
+
+            errors = validate_browser_evidence(root)
+
+            self.assertTrue(any("source digest is stale" in error for error in errors))
+
+    def test_browser_evidence_accepts_current_source_digest(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.copy_rendered_reference_sources(root)
+            (root / "evidence").mkdir(exist_ok=True)
+            (root / "output" / "reports").mkdir(parents=True)
+            (root / "VERSION").write_text(self.version + "\n", encoding="utf-8")
+            manifest = load_json(ROOT / "evidence" / "screenshots.json")
+            (root / "evidence" / "screenshots.json").write_text(json.dumps(manifest), encoding="utf-8")
+            report = {
+                "status": "passed",
+                "version": self.version,
+                "sourceDigest": rendered_reference_source_digest(root),
+                "captures": [{"name": capture["name"]} for capture in manifest["captures"]],
+                "checks": {},
+            }
+            (root / "output" / "reports" / "browser.json").write_text(json.dumps(report), encoding="utf-8")
+
+            errors = validate_browser_evidence(root)
+
+            self.assertFalse(any("source digest" in error for error in errors))
+
+    def test_rendered_reference_digest_changes_for_capture_inputs(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.copy_rendered_reference_sources(root)
+            baseline = rendered_reference_source_digest(root)
+
+            for relative_path in ("evidence/screenshots.json", "scripts/render_screenshots.js"):
+                path = root / relative_path
+                path.write_text(path.read_text(encoding="utf-8") + "\n// digest fixture mutation\n", encoding="utf-8")
+                self.assertNotEqual(baseline, rendered_reference_source_digest(root), relative_path)
+                path.write_bytes((ROOT / relative_path).read_bytes())
+
+    @staticmethod
+    def copy_rendered_reference_sources(destination: Path) -> None:
+        for source in rendered_reference_source_paths(ROOT):
+            target = destination / source.relative_to(ROOT)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, target)
+
     def test_full_verifier_executes_browser_and_pixel_gates_without_skips(self) -> None:
         source = (ROOT / "scripts" / "verify.py").read_text(encoding="utf-8")
         self.assertIn('run([node, "scripts/render_screenshots.js"]', source)
         self.assertIn('run([image_python, "scripts/compare_screenshots.py"]', source)
         self.assertNotIn('"not-run-missing-QDS_IMAGE_PYTHON"', source)
+        self.assertLess(source.index('run([node, "scripts/render_screenshots.js"]'), source.index('run([python, "scripts/validate.py"])'))
 
     def test_pixel_comparison_ignores_only_declared_channel_jitter(self) -> None:
         self.assertFalse(pixel_changed((40, 40, 42, 255), (43, 43, 45, 255), 3))

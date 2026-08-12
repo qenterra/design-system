@@ -6,7 +6,7 @@
 
 | Компонент | Назначение | Обязательный контракт |
 | --- | --- | --- |
-| Primary button | Главное завершение/продвижение | Одна на focused surface; loading, причина disabled, focus |
+| Primary button | Главное завершение/продвижение | Одна на focused surface; loading, причина disabled, focus, стабильный box во всех состояниях |
 | Secondary button | Безопасная альтернатива | Стабильная иерархия рядом с primary |
 | Quiet button | Контекстное маловажное | Hover/focus background; текст, если иконка неясна |
 | Destructive button | Трудно восстановимый итог | Точный глагол, последствие, confirmation/Undo по риску |
@@ -84,7 +84,7 @@
 | Компонент | Назначение | Обязательный контракт |
 | --- | --- | --- |
 | List | Одномерные peers | Selection/action, empty/loading/error |
-| Table | Сравнимые fields | Sort, resize, keyboard, accessible headers |
+| Table | Сравнимые fields | Sort, resize, keyboard, accessible headers, полное accessible value при обрезании |
 | Grid | Визуальное сканирование | Reading order, adaptive columns, selected/focus |
 | Tree | Иерархия | Disclosure, levels, arrows, partial loading |
 | Timeline/history | Операции по порядку | Time/order, current/interrupted/completed |
@@ -118,7 +118,7 @@
 | --- | --- | --- |
 | Tooltip/help | Дополнительное объяснение | Hover/focus, delay, dismiss, не critical-only |
 | Menu/context menu | Немедленные команды | Keyboard, shortcuts, grouping, disabled/destructive |
-| Popover | Короткий выбор/detail | Viewport clamp, dismissal, focus return |
+| Popover | Короткий выбор/detail | Viewport clamp, вне clipping ancestor в web/extensions, dismissal, focus return, без horizontal overflow |
 | Sheet | Focused input/review | Unsaved work, hierarchy, focus trap |
 | Alert | Blocking situation | Specific title, consequence, concrete actions |
 | Confirmation dialog | Рискованный итог | Exact scope/count и what remains |
@@ -139,4 +139,4 @@
 
 ## Приёмка компонента
 
-Компонент принят, только если его назначение, anatomy, content rules, semantic tokens, mandatory states, interaction, keyboard, screen-reader behavior, responsive transformation, localization expansion, reduced settings и verification cases задокументированы и реализованы на целевой платформе.
+Компонент принят, только если его назначение, anatomy, content rules, semantic tokens, mandatory states, стабильная геометрия интерактивных состояний, interaction, keyboard, screen-reader behavior, responsive transformation, localization expansion, reduced settings и verification cases задокументированы и реализованы на целевой платформе.

@@ -1,7 +1,8 @@
 {
-  "version": "2.0.0",
+  "version": "2.1.0",
   "manifestSchemaVersion": 1,
   "profile": "local",
+  "sourceDigest": "sha256:5fdd89f765a90a4deb033d40473cb86028a1ff8fdf21b960827c0fddcffde3de",
   "status": "passed",
   "checks": {
     "searchAndEscape": "passed",

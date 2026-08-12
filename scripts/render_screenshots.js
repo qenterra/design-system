@@ -2,6 +2,7 @@
 "use strict";
 
 const fs = require("fs");
+const { execFileSync } = require("child_process");
 const http = require("http");
 const path = require("path");
 const { chromium } = require("playwright");
@@ -12,6 +13,13 @@ const baselineRoot = path.join(root, "output", "screenshots");
 const screenshotDirectory = path.join(root, "output", "tmp", "screenshots-current");
 const reportPath = path.join(root, "output", "reports", "browser.json");
 const manifestPath = path.join(root, "evidence", "screenshots.json");
+
+function renderedReferenceSourceDigest() {
+  return execFileSync("python3", [path.join(root, "scripts", "source_digest.py")], {
+    cwd: root,
+    encoding: "utf8"
+  }).trim();
+}
 const componentRegistryPath = path.join(root, "registry", "components.json");
 
 const contentTypes = {
@@ -564,7 +572,8 @@ async function main() {
       consoleErrors: "none"
     };
     const version = fs.readFileSync(path.join(root, "VERSION"), "utf8").trim();
-    fs.writeFileSync(reportPath, `${JSON.stringify({ version, manifestSchemaVersion: manifest.schemaVersion, profile: screenshotProfile, status: "passed", checks, captures, consoleErrors }, null, 2)}\n`);
+    const sourceDigest = renderedReferenceSourceDigest();
+    fs.writeFileSync(reportPath, `${JSON.stringify({ version, manifestSchemaVersion: manifest.schemaVersion, profile: screenshotProfile, sourceDigest, status: "passed", checks, captures, consoleErrors }, null, 2)}\n`);
     process.stdout.write(`Rendered ${captures.length} screenshots with no browser errors.\n`);
   } finally {
     await browser.close();

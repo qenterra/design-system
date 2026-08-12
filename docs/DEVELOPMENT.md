@@ -40,7 +40,7 @@ The canonical verification command must cover mechanical checks. Browser, native
 
 ## Review, commits, and release
 
-Review behavior, boundaries, failure handling, privacy, accessibility, tests, documentation, and generated drift. Use `COMMITS.md` for atomic history. Each commit keeps source, tests, and generated counterparts coherent.
+Review behavior, boundaries, failure handling, privacy, accessibility, tests, documentation, and generated drift. For a material visual change, review an unarranged first-load render and a trace of the primary task; use a reviewer who did not build the change where one is available. Record that review as rendered evidence and name its absence as a manual gap. Use `COMMITS.md` for atomic history. Each commit keeps source, tests, and generated counterparts coherent.
 
 Before release, update version, changelog, support range, migration notes, notices, screenshots, and distribution metadata. Build from a clean checkout. Sign, notarize, package, publish, or deploy only through the repository's documented release path.
 

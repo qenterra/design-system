@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/component-registry.schema.json",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "components": [
     {
       "id":"button","name":{"en":"Button","ru":"Кнопка"},"summary":{"en":"Starts one named action.","ru":"Запускает одно названное действие."},

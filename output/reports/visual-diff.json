@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0",
+  "version": "2.1.0",
   "profile": "local",
   "status": "passed",
   "pixelThreshold": 0,
@@ -13,12 +13,12 @@
     {
       "name": "foundations-ru-light-desktop",
       "changedPixels": 0,
-      "totalPixels": 6209280
+      "totalPixels": 6306560
     },
     {
       "name": "components-en-dark-mobile",
       "changedPixels": 0,
-      "totalPixels": 7269210
+      "totalPixels": 7408440
     },
     {
       "name": "lab-en-dark-desktop",
@@ -48,7 +48,7 @@
     {
       "name": "standalone-en-dark-desktop",
       "changedPixels": 0,
-      "totalPixels": 97185280
+      "totalPixels": 97904640
     },
     {
       "name": "standalone-ru-motion-dark",

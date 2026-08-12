@@ -2,7 +2,7 @@
   "$schema": "../schemas/platforms.schema.json",
   "meta": {
     "name": "QenTerra Platform Adapters",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "type": "platforms",
     "description": "Platform-specific constraints over the shared semantic core."
   },
@@ -39,6 +39,6 @@
     "minimumTargetPointer": 32,
     "minimumTargetTouch": 44,
     "layouts": ["popup", "side-panel", "overlay-dock", "bottom-sheet", "options-page"],
-    "requirements": ["viewport clamping", "host-page isolation", "focus return", "200% zoom", "i18n expansion", "reduced motion"]
+    "requirements": ["viewport clamping", "host-page isolation", "focus return", "no horizontal overflow", "200% zoom", "i18n expansion", "reduced motion"]
   }
 }

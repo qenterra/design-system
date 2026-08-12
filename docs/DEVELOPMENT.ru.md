@@ -40,7 +40,7 @@
 
 ## Ревью, коммиты и релиз
 
-Проверяйте поведение, границы, обработку отказа, приватность, доступность, тесты, документацию и generated drift. Для атомарной истории используйте `COMMITS.ru.md`. Каждый коммит сохраняет согласованность source, tests и generated counterparts.
+Проверяйте поведение, границы, обработку отказа, приватность, доступность, тесты, документацию и generated drift. Для material visual change просматривайте нерасставленный first-load render и trace основной задачи; используйте reviewer, не строившего изменение, когда он доступен. Записывайте такой просмотр как rendered evidence, а его отсутствие называйте manual gap. Для атомарной истории используйте `COMMITS.ru.md`. Каждый коммит сохраняет согласованность source, tests и generated counterparts.
 
 Перед релизом обновите версию, changelog, support range, migration notes, notices, screenshots и distribution metadata. Соберите artifact из чистого checkout. Подписывайте, notarize, package, publish или deploy только через документированный release path репозитория.
 

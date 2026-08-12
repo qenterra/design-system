@@ -56,11 +56,15 @@ def validate_version_alignment(root: Path) -> list[str]:
         "package.json": ("version",),
         "packages/css/package.json": ("version",),
         "packages/css/icons.json": ("version",),
+        "package-lock.json": ("version",),
+        "package-lock.json#root": ("packages", "", "version"),
+        "package-lock.json#css": ("packages", "packages/css", "version"),
     }
     for relative_path, keys in json_versions.items():
-        path = root / relative_path
+        display_path, _, _ = relative_path.partition("#")
+        path = root / display_path
         if not path.is_file():
-            errors.append(f"{relative_path} is missing")
+            errors.append(f"{display_path} is missing")
             continue
         try:
             value: object = _json(path)

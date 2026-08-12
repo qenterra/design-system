@@ -6,7 +6,7 @@ This catalog defines the expected interface vocabulary. It does not require ever
 
 | Component | Use | Required contract |
 | --- | --- | --- |
-| Primary button | Dominant completion/advance | One per focused surface; loading, disabled reason, focus |
+| Primary button | Dominant completion/advance | One per focused surface; loading, disabled reason, focus, stable box across states |
 | Secondary button | Safe alternative | Stable hierarchy beside primary |
 | Quiet button | Contextual low-priority action | Hover/focus background; visible label when icon is unclear |
 | Destructive button | Difficult-to-recover result | Exact verb, consequence, confirmation/Undo according to risk |
@@ -84,7 +84,7 @@ This catalog defines the expected interface vocabulary. It does not require ever
 | Component | Use | Required contract |
 | --- | --- | --- |
 | List | One-dimensional peers | Selection/action semantics, empty/loading/error |
-| Table | Comparable aligned fields | Sort direction, resize, keyboard, accessible headers |
+| Table | Comparable aligned fields | Sort direction, resize, keyboard, accessible headers, full accessible value for truncation |
 | Grid | Visual scanning | Reading order, adaptive columns, selected/focus distinction |
 | Tree | Hierarchy | Disclosure, levels, arrow navigation, partial loading |
 | Timeline/history | Ordered operations | Time/order, current/interrupted/completed distinctions |
@@ -118,7 +118,7 @@ Shared interactive-row surfaces resolve state in one order: disabled or unavaila
 | --- | --- | --- |
 | Tooltip/help | Supplemental explanation | Hover and focus, delay, dismiss, not critical-only content |
 | Menu/context menu | Immediate commands | Keyboard, shortcuts, grouping, disabled/destructive rules |
-| Popover | Short contextual choice/detail | Viewport clamp, dismissal, focus return |
+| Popover | Short contextual choice/detail | Viewport clamp, outside clipping ancestor on web/extensions, dismissal, focus return, no horizontal overflow |
 | Sheet | Focused input/review task | Unsaved work, primary/cancel hierarchy, focus trap where required |
 | Alert | Blocking situation/decision | Specific title, consequence, concrete actions |
 | Confirmation dialog | Risky outcome | Exact scope/count and what remains |
@@ -139,4 +139,4 @@ Shared interactive-row surfaces resolve state in one order: disabled or unavaila
 
 ## Component acceptance
 
-A component is accepted only when its purpose, anatomy, content rules, semantic tokens, mandatory states, interaction, keyboard, screen-reader behavior, responsive transformation, localization expansion, reduced settings, and verification cases are documented and implemented for the target platform.
+A component is accepted only when its purpose, anatomy, content rules, semantic tokens, mandatory states, stable interactive geometry, interaction, keyboard, screen-reader behavior, responsive transformation, localization expansion, reduced settings, and verification cases are documented and implemented for the target platform.

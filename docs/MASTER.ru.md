@@ -1,6 +1,6 @@
 # QenTerra Design System
 
-Версия 2.0.0 · Нормативный справочник для людей и AI-агентов
+Версия 2.1.0 · Нормативный справочник для людей и AI-агентов
 
 ## 0. Как пользоваться этим файлом
 
@@ -148,6 +148,8 @@ SF Symbols являются единственными interface icon assets. `r
 
 Каждый interactive component определяет default, hover, pressed, keyboard focus, selected, disabled, loading, unavailable/error, Increased Contrast и Reduced Motion/Transparency. Focus показывает, куда пойдёт keyboard input; selection — какой объект выбран; hover — временное pointer preview. Не сводите их к одному boolean.
 
+Эквивалентные состояния сохраняют box, выравнивание, scroll position и focused target контрола или строки. Hover-only affordance резервирует место либо имеет равнодоступный menu/keyboard path; его появление не сдвигает соседний контент и не переносит focus.
+
 ## 5. Элементы управления
 
 ### 5.1 Кнопки
@@ -203,7 +205,7 @@ Settings row — одна accessible unit из label, optional description и tr
 
 List — одномерные peers; table — выровненные сравнимые атрибуты; grid — визуальное сканирование без смысла позиции; tree — иерархия.
 
-Таблица имеет dominant first column, visible sort direction, keyboard selection, поведение column resize, long values, empty/no-results/loading/error и accessible row/column semantics. Selection переживает sorting только для того же object. Перед bulk action сообщаются hidden selected items.
+Таблица имеет dominant first column, visible sort direction, keyboard selection, поведение column resize, long values, empty/no-results/loading/error и accessible row/column semantics. Когда filename, path, identifier или плотное значение визуально обрезано, полное значимое значение сохраняется через native tooltip либо accessible description. Обрезание может упрощать scanning, но не должно скрывать информацию от keyboard или assistive-technology пользователей. Selection переживает sorting только для того же object. Перед bulk action сообщаются hidden selected items.
 
 ### 6.5 Плитки расширений и файлов
 
@@ -247,7 +249,7 @@ Breadcrumb нужен для глубокой web/document hierarchy. Native app
 
 ### 8.2 Popover
 
-Короткий контекстный выбор или inspector, закрываемый без потери работы. Остаётся в viewport и возвращает focus инициатору.
+Короткий контекстный выбор или inspector, закрываемый без потери работы. Остаётся в viewport и возвращает focus инициатору. В web и browser extensions слой, который может выйти за `overflow`-контейнер, рендерится соседним элементом вне clipped ancestor, позиционируется в viewport coordinates и зажимается safe inset с `border-box` sizing. Слой не создаёт horizontal overflow.
 
 ### 8.3 Sheet
 
@@ -432,7 +434,7 @@ Semantic HTML до ARIA. Keyboard, focus-visible, reduced motion, forced colors,
 
 ### 14.5 Браузерные расширения
 
-Popup, side panel, overlay dock, bottom sheet и options page — разные layout modes. Overlays остаются в viewport и вне clipped host containers. Host styles/scripts изолированы. Selection и hover разделены; уход указателя не меняет зафиксированный выбор. Critical controls видны на narrow widths и localization expansion.
+Popup, side panel, overlay dock, bottom sheet и options page — разные layout modes. Overlays остаются в viewport и вне clipped host containers. Host styles/scripts изолированы. Selection и hover разделены; уход указателя не меняет зафиксированный выбор. Critical controls видны на narrow widths и localization expansion. Browser verification доказывает, что `scrollWidth` не превышает видимую ширину документа во всех declared narrow/long localized states; одного визуального просмотра недостаточно.
 
 ## 15. Архетипы продуктов
 

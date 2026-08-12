@@ -20,6 +20,7 @@ from lib.schema_tools import validate_schema  # noqa: E402
 from lib.figma_export import generate_figma_exports  # noqa: E402
 from lib.email_templates import validate_email_registry  # noqa: E402
 from lib.markdown_renderer import split_numbered_sections  # noqa: E402
+from lib.reference_sources import rendered_reference_source_digest  # noqa: E402
 from lib.site_locales import BRAND_SECTION_KEYS, DEVELOPMENT_SECTION_KEYS, PAGE_GROUPS, REPOSITORY_SECTION_KEYS  # noqa: E402
 from brand.validate_brand_assets import validate_brand_assets  # noqa: E402
 from package_release import (  # noqa: E402
@@ -760,6 +761,20 @@ def validate_browser_evidence(root: Path) -> list[str]:
     version = (root / "VERSION").read_text(encoding="utf-8").strip()
     if report.get("version") != version:
         errors.append(f"output/reports/browser.json: version {report.get('version')!r} does not match {version}")
+    try:
+        expected_source_digest = rendered_reference_source_digest(root)
+    except FileNotFoundError as error:
+        errors.append(f"output/reports/browser.json: cannot verify source digest: {error}")
+    else:
+        actual_source_digest = report.get("sourceDigest")
+        if not isinstance(actual_source_digest, str) or not actual_source_digest:
+            errors.append(
+                "output/reports/browser.json: source digest is missing; rerun scripts/render_screenshots.js"
+            )
+        elif actual_source_digest != expected_source_digest:
+            errors.append(
+                "output/reports/browser.json: source digest is stale; rerun scripts/build.py and scripts/render_screenshots.js"
+            )
     manifest_path = root / "evidence" / "screenshots.json"
     if not manifest_path.is_file():
         return [*errors, "evidence/screenshots.json: missing exact screenshot manifest"]

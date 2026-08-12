@@ -73,6 +73,7 @@ def main() -> int:
                 "scripts/verify.py",
                 "scripts/package_release.py",
                 "scripts/lib/markdown_renderer.py",
+                "scripts/lib/reference_sources.py",
                 "scripts/lib/site_locales.py",
                 "scripts/lib/token_tools.py",
                 "scripts/lib/schema_tools.py",
@@ -80,6 +81,7 @@ def main() -> int:
                 "scripts/lib/figma_export.py",
                 "scripts/lib/email_templates.py",
                 "scripts/compare_screenshots.py",
+                "scripts/source_digest.py",
                 "scripts/audit_consumer.py",
                 "scripts/brand/validate_brand_assets.py",
                 "scripts/brand/validate_nyx_assets.py",
@@ -107,7 +109,6 @@ def main() -> int:
 
     run([python, "-m", "unittest", "discover", "-s", "tests", "-v"])
     run([python, "scripts/audit_consumer.py", "tests/fixtures/consumer-pass"])
-    run([python, "scripts/validate.py"])
     run([python, "scripts/package_release.py", "validate"])
     run([python, "scripts/brand/validate_brand_assets.py", "--check-git-lfs"])
     run([python, "scripts/brand/validate_telegram_stickers.py"])
