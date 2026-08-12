@@ -8,8 +8,8 @@
 | --- | ---: | --- | --- |
 | Растровые баннеры QenTerra | 24 | `qenterra/banners/raster/` | фиксированные публикационные материалы |
 | Векторные баннеры QenTerra | 8 | `qenterra/banners/vector/` | адаптивное и масштабируемое размещение |
-| Растровые логотипы QenTerra | 12 | `qenterra/logos/raster/` | потребители с фиксированным размером |
-| Векторные логотипы QenTerra | 4 | `qenterra/logos/vector/` | предпочтительный масштабируемый мастер |
+| Растровые логотипы QenTerra | 7 | `qenterra/logos/raster/` | потребители с фиксированным размером и утверждённые обработки Dry/Wet |
+| Векторные логотипы QenTerra | 1 | `qenterra/logos/vector/` | предпочтительный масштабируемый мастер |
 | Композиции Nyx | 21 | `nyx/character-assets/compositions/` | текст, карточки, сравнения и UI-зоны |
 | Decorative Nyx | 10 | `nyx/character-assets/decorative/` | выразительные графические акценты |
 | Full body Nyx | 56 | `nyx/character-assets/full-body/` | действия, направления, рабочие и бытовые сцены |
@@ -18,7 +18,7 @@
 | Telegram-пак Nyx | 50 | `nyx/telegram-stickers/` | 49 PNG-реакций и карта эмодзи |
 | Обои Nyx | 4 | `nyx/wallpapers/` | отобранные телефонные и desktop-фоны |
 
-Итого: **221 файл**, **511 408 809 байт**. PNG: **207**, хранятся через Git LFS. SVG/JSON/Markdown: **14**, обычный Git.
+Итого: **213 файлов**, **512 119 490 байт**. PNG: **202**, хранятся через Git LFS. SVG/JSON/Markdown: **11**, обычный Git.
 
 ## Правило выбора
 

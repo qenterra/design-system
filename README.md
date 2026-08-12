@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/brand/qenterra/logos/vector/Dark%20Logo%20-%20Filled.svg">
-    <img src="assets/brand/qenterra/logos/vector/Light%20Logo%20-%20Filled.svg" width="128" alt="QenTerra logo">
+    <source media="(prefers-color-scheme: dark)" srcset="assets/brand/qenterra/logos/vector/QenTerra%20Logo.svg">
+    <img src="assets/brand/qenterra/logos/raster/QenTerra%20Logo%20-%20Dry%20on%20Graphite.png" width="128" alt="QenTerra logo">
   </picture>
 </p>
 

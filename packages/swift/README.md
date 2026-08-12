@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/qenterra/design-system/raw/refs/heads/main/assets/brand/qenterra/logos/vector/Dark%20Logo%20-%20Filled.svg" width="128" alt="QenTerra logo">
+  <img src="https://github.com/qenterra/design-system/raw/refs/heads/main/assets/brand/qenterra/logos/vector/QenTerra%20Logo.svg" width="128" alt="QenTerra logo">
 </p>
 
 <h1 align="center">QenTerraDesignTokens</h1>
@@ -12,7 +12,7 @@
   <a href="https://github.com/qenterra/design-system/blob/main/CHANGELOG.md">Changelog</a>
 </p>
 
-> **Status:** private, proprietary distribution mirror. Release `2.0.0` is
+> **Status:** private, proprietary distribution mirror. Release `3.0.0` is
 > generated and filtered from `packages/swift/` in the canonical private
 > `qenterra/design-system` repository. Do not edit generated token or icon files
 > in this repository.
@@ -38,7 +38,7 @@ Add the private distribution from an authorized consumer:
 ```swift
 .package(
     url: "https://github.com/qenterra/design-system-swift.git",
-    from: "2.0.0"
+    from: "3.0.0"
 )
 ```
 

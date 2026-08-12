@@ -8,8 +8,8 @@ The machine-readable catalog is [`../../assets/brand/manifest.json`](../../asset
 | --- | ---: | --- | --- |
 | QenTerra banner raster | 24 | `qenterra/banners/raster/` | fixed-size publication and documentation art |
 | QenTerra banner vector | 8 | `qenterra/banners/vector/` | responsive and scalable banner placement |
-| QenTerra logo raster | 12 | `qenterra/logos/raster/` | fixed-size consumers |
-| QenTerra logo vector | 4 | `qenterra/logos/vector/` | preferred scalable mark source |
+| QenTerra logo raster | 7 | `qenterra/logos/raster/` | fixed-size consumers and approved Dry/Wet treatments |
+| QenTerra logo vector | 1 | `qenterra/logos/vector/` | preferred scalable mark source |
 | Nyx compositions | 21 | `nyx/character-assets/compositions/` | copy, cards, comparisons, interface framing |
 | Nyx decorative | 10 | `nyx/character-assets/decorative/` | expressive graphic accents |
 | Nyx full body | 56 | `nyx/character-assets/full-body/` | actions, direction, work and daily scenarios |
@@ -18,7 +18,7 @@ The machine-readable catalog is [`../../assets/brand/manifest.json`](../../asset
 | Nyx Telegram pack | 50 | `nyx/telegram-stickers/` | 49 reaction PNG plus emoji map |
 | Nyx wallpapers | 4 | `nyx/wallpapers/` | selected phone and desktop backgrounds |
 
-Total: **221 files**, **511,408,809 bytes**. PNG: **207**, tracked with Git LFS. SVG/JSON/Markdown: **14**, tracked as normal Git files.
+Total: **213 files**, **512,119,490 bytes**. PNG: **202**, tracked with Git LFS. SVG/JSON/Markdown: **11**, tracked as normal Git files.
 
 ## Selection rule
 

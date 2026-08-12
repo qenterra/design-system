@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0",
+  "version": "3.0.0",
   "profile": "local",
   "status": "passed",
   "pixelThreshold": 0,
@@ -48,7 +48,7 @@
     {
       "name": "standalone-en-dark-desktop",
       "changedPixels": 0,
-      "totalPixels": 97185280
+      "totalPixels": 97477120
     },
     {
       "name": "standalone-ru-motion-dark",

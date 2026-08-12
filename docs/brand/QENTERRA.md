@@ -2,10 +2,10 @@
 
 ## Canonical palette
 
-The vector masters use two fixed brand neutrals:
+The current vector master uses two fixed brand neutrals:
 
-- dark graphite `#292929`;
-- soft white `#E7E7E7`.
+- mid graphite `#6A6A73`;
+- soft white `#E8E8EC`.
 
 These values describe the supplied marks. Interface surfaces still use semantic design-system tokens. Do not sample, approximate, or globally replace colors inside an approved export.
 
@@ -13,11 +13,10 @@ These values describe the supplied marks. Interface surfaces still use semantic 
 
 ### Logos
 
-- `logos/vector/` is preferred for scalable UI, web, print, and derived exports.
-- `logos/raster/` provides fixed 512, 1024, and 2048 pixel exports.
-- `Filled` is the default when the mark must remain stable at small sizes.
-- `Outlined` is for larger, quieter placements where the inner detail remains legible.
-- `Dark` and `Light` describe the intended surrounding appearance. Select by rendered contrast, not filename superstition.
+- `logos/vector/QenTerra Logo.svg` is the only scalable master and is preferred for dark graphite surfaces, web, print, and derived exports.
+- `logos/raster/` provides transparent 512, 1024, and 2048 pixel exports rendered from that master.
+- The supplied `Dry` and `Wet` 1024 pixel treatments are separate approved raster deliveries; each also has an `on Graphite` version for an opaque contrast field.
+- Do not invent `Filled`, `Outlined`, `Dark`, or `Light` variants. Select the supplied file by actual surface contrast and delivery requirement.
 
 ### Banners
 
@@ -40,7 +39,7 @@ These values describe the supplied marks. Interface surfaces still use semantic 
 - no rotation, skew, stretch, perspective, or independent movement of parts;
 - no reconstruction with live type or substituted glyphs;
 - no extra border, container, badge, or slogan unless a documented composition requires it;
-- no mixing filled and outlined parts from different exports;
+- no mixing or reconstructing pieces from separate exports;
 - no low-resolution raster when a vector or larger canonical export is available.
 
 ## Export choice
@@ -48,6 +47,10 @@ These values describe the supplied marks. Interface surfaces still use semantic 
 Use SVG when the consumer supports it safely. Use PNG for fixed raster pipelines, screenshots, stores, or platforms that require it. Choose the smallest raster that still renders at or above its native pixel size; never upscale a smaller logo to fake a larger master.
 
 Every delivered file must already exist in [`../../assets/brand/manifest.json`](../../assets/brand/manifest.json). A derived export becomes canonical only after it is named, placed, manifested, reviewed on light and dark backgrounds, and documented here if it introduces a new role.
+
+## Migration from 2.x
+
+The `Dark/Light Logo` and `Filled/Outlined` paths were retired in 3.0. Replace scalable consumers with `logos/vector/QenTerra Logo.svg`. Use the transparent raster exports only at or below their native dimensions; use an approved `on Graphite` raster when the mark needs its own opaque contrast field on a light or busy surface.
 
 ## Contact channels
 

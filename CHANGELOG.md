@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.0.0
+
+### Changed
+
+- Replaced the legacy QenTerra logo family with one SVG master, transparent 512/1024/2048 raster exports, and the approved Dry/Wet 1024 treatments.
+
+### Breaking
+
+- Retired the `Dark/Light Logo` and `Filled/Outlined` asset paths; migrate scalable consumers to `qenterra/logos/vector/QenTerra Logo.svg` and use the documented raster delivery profiles when an opaque contrast field is required.
+
 ## 2.0.0
 
 ### Added

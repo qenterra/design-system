@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import sys
 import tempfile
 import unittest
@@ -16,7 +17,9 @@ class BrandBrowserTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             target = build_browser(Path(directory) / "browser")
             text = target.read_text(encoding="utf-8")
-            self.assertIn("221 canonical files", text)
+            manifest = json.loads((ROOT / "assets" / "brand" / "manifest.json").read_text(encoding="utf-8"))
+            self.assertIn(f"{manifest['assetCount']} canonical files", text)
+            self.assertIn("QenTerra Logo.svg", text)
             self.assertIn("data-asset", text)
 
     def test_repository_output_is_rejected_before_write(self) -> None:
