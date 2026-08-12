@@ -1,5 +1,5 @@
 {
-  "version": "1.12.0",
+  "version": "2.0.0",
   "profile": "local",
   "status": "passed",
   "pixelThreshold": 0,
@@ -8,12 +8,12 @@
     {
       "name": "overview-en-dark-wide",
       "changedPixels": 0,
-      "totalPixels": 5124960
+      "totalPixels": 5015520
     },
     {
       "name": "foundations-ru-light-desktop",
       "changedPixels": 0,
-      "totalPixels": 6156800
+      "totalPixels": 6209280
     },
     {
       "name": "components-en-dark-mobile",
@@ -23,17 +23,17 @@
     {
       "name": "lab-en-dark-desktop",
       "changedPixels": 0,
-      "totalPixels": 6086400
+      "totalPixels": 15573760
     },
     {
       "name": "lab-ru-long-mobile",
       "changedPixels": 0,
-      "totalPixels": 926640
+      "totalPixels": 1934400
     },
     {
       "name": "lab-en-rtl-tablet",
       "changedPixels": 0,
-      "totalPixels": 1393152
+      "totalPixels": 2935296
     },
     {
       "name": "adoption-en-light-desktop",
@@ -48,7 +48,7 @@
     {
       "name": "standalone-en-dark-desktop",
       "changedPixels": 0,
-      "totalPixels": 74453760
+      "totalPixels": 97185280
     },
     {
       "name": "standalone-ru-motion-dark",
@@ -73,7 +73,7 @@
     {
       "name": "email-ru-light-mobile",
       "changedPixels": 0,
-      "totalPixels": 1058460
+      "totalPixels": 1050660
     },
     {
       "name": "email-en-light-tablet",
@@ -88,7 +88,7 @@
     {
       "name": "overview-en-system-accessibility",
       "changedPixels": 0,
-      "totalPixels": 4555520
+      "totalPixels": 4458240
     },
     {
       "name": "lab-button-hover",

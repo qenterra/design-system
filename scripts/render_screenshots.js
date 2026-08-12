@@ -102,8 +102,26 @@ async function assertComponentLab(page, baseUrl) {
   if (await page.locator('#story-field-read-only input[readonly]').count() !== 1) {
     throw new Error("Read-only field story lacks the readonly contract");
   }
-  await page.locator("#story-button-primary button").focus();
-  const outline = await page.locator("#story-button-primary button").evaluate((element) => getComputedStyle(element).outlineStyle);
+  const switchControl = page.locator("#story-switch-off [data-demo-switch]");
+  await switchControl.click();
+  if (await switchControl.getAttribute("aria-checked") !== "true") {
+    throw new Error("Switch demonstration does not expose its changed state");
+  }
+  const segment = page.locator("#story-segmented-control-default [data-demo-segment]").last();
+  await segment.click();
+  if (await segment.getAttribute("aria-checked") !== "true") {
+    throw new Error("Segmented control demonstration does not expose selection");
+  }
+  const banner = page.locator("#story-banner-informative [data-demo-banner]");
+  await banner.locator("[data-demo-dismiss]").click();
+  if (await banner.getAttribute("hidden") === null) {
+    throw new Error("Banner demonstration cannot be dismissed");
+  }
+  const primaryButton = page.locator("#story-button-primary button");
+  await primaryButton.focus();
+  await page.keyboard.press("Tab");
+  await page.keyboard.press("Shift+Tab");
+  const outline = await primaryButton.evaluate((element) => getComputedStyle(element).outlineStyle);
   if (outline === "none") throw new Error("Component Lab focus treatment is not visible");
 }
 
@@ -134,6 +152,8 @@ async function assertSiteChrome(page, baseUrl) {
   await page.locator("[data-menu-button]").click();
   const openState = await sidebar.evaluate((element) => ({ inert: element.inert, hidden: element.getAttribute("aria-hidden") }));
   if (openState.inert || openState.hidden !== "false") throw new Error(`Open mobile navigation is inaccessible: ${JSON.stringify(openState)}`);
+  const isolatedContent = await page.locator(".main-column").evaluate((element) => ({ inert: element.inert, hidden: element.getAttribute("aria-hidden") }));
+  if (!isolatedContent.inert || isolatedContent.hidden !== "true") throw new Error(`Open mobile navigation did not isolate main content: ${JSON.stringify(isolatedContent)}`);
   await page.keyboard.press("Escape");
   const closedState = await sidebar.evaluate((element) => ({ inert: element.inert, hidden: element.getAttribute("aria-hidden") }));
   if (!closedState.inert || closedState.hidden !== "true") throw new Error(`Closed mobile navigation leaked focus targets: ${JSON.stringify(closedState)}`);
@@ -167,6 +187,13 @@ async function capture(page, baseUrl, entry) {
   await page.reload({ waitUntil: "networkidle" });
   await page.addStyleTag({
     content: "html, body { scroll-behavior: auto !important; overflow-anchor: none !important; } *, *::before, *::after { animation: none !important; caret-color: transparent !important; transition: none !important; }"
+  });
+  await page.locator("progress:not([value])").evaluateAll((controls) => {
+    controls.forEach((control) => {
+      control.dataset.captureState = "indeterminate";
+      control.value = 0.42;
+      control.max = 1;
+    });
   });
   await applyCaptureState(page, entry);
   let targetScrollY = null;
@@ -212,19 +239,29 @@ async function capture(page, baseUrl, entry) {
   };
 }
 
-async function assertUniformSvgIcons(page) {
+async function assertUniformSfSymbols(page) {
   const result = await page.evaluate(() => {
     const navGlyphs = Array.from(document.querySelectorAll(".nav-glyph"));
     const chromeControls = Array.from(document.querySelectorAll(".language-button, .menu-button, .search-icon"));
     return {
       navCount: navGlyphs.length,
-      invalidNav: navGlyphs.filter((glyph) => glyph.querySelectorAll("svg.icon").length !== 1 || (glyph.textContent || "").trim()).length,
-      invalidChrome: chromeControls.filter((control) => control.querySelectorAll("svg.icon").length !== 1).length
+      invalidNav: navGlyphs.filter((glyph) => glyph.querySelectorAll("img.sf-symbol[data-sf-symbol]").length !== 1 || (glyph.textContent || "").trim()).length,
+      invalidChrome: chromeControls.filter((control) => control.querySelectorAll("img.sf-symbol[data-sf-symbol]").length !== 1).length,
+      nonSystemPayloads: document.querySelectorAll(".sf-symbol:not([src^='data:image/png;base64,'])").length
     };
   });
-  if (result.navCount !== 16 || result.invalidNav || result.invalidChrome) {
-    throw new Error(`Icon family mismatch: ${JSON.stringify(result)}`);
+  if (result.navCount !== 17 || result.invalidNav || result.invalidChrome || result.nonSystemPayloads) {
+    throw new Error(`SF Symbols contract mismatch: ${JSON.stringify(result)}`);
   }
+}
+
+async function assertNyxGallery(page, baseUrl) {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto(`${baseUrl}/en/pages/brand.html#brand-nyx`, { waitUntil: "networkidle" });
+  const images = page.locator("#brand-nyx .nyx-gallery img");
+  if (await images.count() !== 4) throw new Error("Nyx gallery does not expose four canonical examples");
+  const invalid = await images.evaluateAll((items) => items.filter((item) => !item.alt || !item.complete || item.naturalWidth === 0).length);
+  if (invalid) throw new Error(`Nyx gallery has ${invalid} missing or inaccessible images`);
 }
 
 async function fillEmailFields(page) {
@@ -485,11 +522,12 @@ async function main() {
   try {
     await assertSiteChrome(page, baseUrl);
 
-    await assertUniformSvgIcons(page);
+    await assertUniformSfSymbols(page);
     await assertScrollSpy(page, baseUrl);
     await assertLanguagePickerPosition(page, baseUrl);
     await assertLanguageSwitch(page, baseUrl);
     await assertComponentLab(page, baseUrl);
+    await assertNyxGallery(page, baseUrl);
     await assertEmailComposer(page, baseUrl);
 
     const captures = [];
@@ -515,7 +553,8 @@ async function main() {
       languagePickerPosition: "passed",
       brandModule: "passed",
       repositoryModule: "passed",
-      uniformSvgIcons: "passed",
+      sfSymbols: "passed",
+      nyxGallery: "passed",
       componentLab: "passed",
       emailComposer: "passed",
       pseudoLocalization: "passed",

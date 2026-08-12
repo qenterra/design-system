@@ -14,7 +14,7 @@
     {"name": "products-ru-light-tablet", "path": "ru/pages/products.html", "viewport": {"width": 768, "height": 1024}, "theme": "light", "reducedMotion": false},
     {"name": "standalone-en-dark-desktop", "path": "en/qenterra-design-system.html", "viewport": {"width": 1280, "height": 900}, "theme": "dark", "reducedMotion": true},
     {"name": "standalone-ru-motion-dark", "path": "ru/qenterra-design-system.html", "viewport": {"width": 1280, "height": 900}, "theme": "dark", "reducedMotion": false, "scrollTarget": "#section-11", "fullPage": false},
-    {"name": "brand-en-dark-desktop", "path": "en/pages/brand.html", "viewport": {"width": 1280, "height": 900}, "theme": "dark", "reducedMotion": false, "scrollTarget": "#brand-nyx", "fullPage": false},
+    {"name": "brand-en-dark-desktop", "path": "en/pages/brand.html", "viewport": {"width": 1280, "height": 900}, "theme": "dark", "reducedMotion": false, "scrollTarget": ".nyx-gallery", "fullPage": false},
     {"name": "repositories-ru-light-desktop", "path": "ru/pages/repositories.html", "viewport": {"width": 1280, "height": 900}, "theme": "light", "reducedMotion": false, "scrollTarget": "#repository-verification", "fullPage": false},
     {"name": "email-en-dark-desktop", "path": "en/pages/email.html", "viewport": {"width": 1440, "height": 1000}, "theme": "dark", "reducedMotion": false},
     {"name": "email-ru-light-mobile", "path": "ru/pages/email.html", "viewport": {"width": 390, "height": 844}, "theme": "light", "reducedMotion": true},

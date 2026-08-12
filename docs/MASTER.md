@@ -1,10 +1,10 @@
 # QenTerra Design System
 
-Version 1.12.0 · Normative reference for humans and AI agents
+Version 2.0.0 · Normative reference for humans and AI agents
 
 ## 0. How to use this file
 
-This document defines the shared UX/UI grammar for current and future native applications, websites, and browser extensions.
+This document defines reusable UX/UI rules for native applications, websites, and browser extensions.
 
 Read in this order:
 
@@ -26,13 +26,11 @@ Normative words:
 
 When this prose and a token file disagree, exact values come from the token file and behavioral meaning comes from this document. Fix the contradiction in the same change.
 
-## 1. Family thesis
+## 1. System scope
 
-QenTerra products share one interface grammar, not one application shell.
+QDS standardizes semantics, behavior, accessibility, and evidence. It does not prescribe a single application shell.
 
-The system combines an adaptive Soft Graphite palette and content hierarchy with disciplined dense layouts, review-first flows, preflight, conflict safety, honest state language, short semantic motion, privacy copy, localization, transient surfaces, and explicit recovery.
-
-Family resemblance is visible in:
+Shared rules cover:
 
 - color roles;
 - typography roles;
@@ -45,7 +43,7 @@ Family resemblance is visible in:
 - accessibility behavior;
 - screenshot and QA evidence.
 
-Family resemblance is not created by copying:
+Shared rules do not require:
 
 - the same rail width;
 - the same Settings placement;
@@ -60,7 +58,7 @@ Family resemblance is not created by copying:
 
 Chrome supports the task and does not compete with it. Original artwork and file content may keep color; surrounding UI remains predominantly graphite and monochrome.
 
-### 2.2 Honest state
+### 2.2 Accurate status
 
 Show what the system actually knows. Never simulate audio level, progress, completion, connectivity, selection, or persistence.
 
@@ -232,7 +230,7 @@ Elevation is communicated primarily by surface role, border, and occlusion. Shad
 
 ### 3.9 Iconography
 
-Apple platforms use SF Symbols first. Web surfaces use a consistent outline symbol set or project-owned SVGs with equivalent optical weight.
+SF Symbols are the only interface icon artwork. `registry/icons.json` maps each semantic role to one system name and minimum OS. SwiftUI and AppKit render symbols through system APIs. The local HTML prototype renders previews from AppKit during the macOS build; it does not define a web icon package.
 
 Rules:
 
@@ -903,6 +901,6 @@ Visual similarity alone is not adoption.
 
 Begin adoption with the consumer manifest and read-only doctor. A product declares platforms, source roots, expected local adapters, and a separate exception file. Doctor output distinguishes schema/boundary errors from actionable findings and never writes inside the consumer. Covered Swift rules detect raw numeric colors, animation durations, and corner radii in addition to CSS hex colors. Exceptions match an exact rule and path, explain the real constraint, and carry a review trigger. A passing static report is evidence for covered source rules only; it does not prove native rendering, accessibility APIs, permissions, persistence, or recovery.
 
-Interface icons come from `registry/icons.json`: one semantic ID, category, meaning, and reviewed 16-point SVG fragment. Web/site consumers use generated metadata or sprite output; native products prefer a platform symbol when its meaning and optical weight match, otherwise the registry asset. A symbol never replaces a visible label when the action or outcome is ambiguous.
+Interface icons come from `registry/icons.json`: one semantic ID, category, meaning, SF Symbol system name, and minimum OS. Apple-platform consumers use the system symbol directly. Generated HTML previews are evidence for the local macOS application prototype and are not redistributable source artwork. A symbol never replaces a visible label when the action or outcome is ambiguous.
 
 Design-tool handoff comes only from deterministic `generated/figma/` payloads. Importers preserve collection names, modes, and types, surface unsupported fields, and start in a scratch file. Generated JSON is not proof of a published Figma library. The temporary brand browser is a search aid and is prohibited from writing into the repository.

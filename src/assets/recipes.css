@@ -29,8 +29,8 @@
   color: var(--qds-action-secondary-content);
 }
 
-.qds-button:hover:not(:disabled) { background-image: linear-gradient(var(--qds-fill-hover), var(--qds-fill-hover)); }
-.qds-button:active:not(:disabled) { background-image: linear-gradient(var(--qds-fill-pressed), var(--qds-fill-pressed)); }
+.qds-button:hover:not(:disabled) { background: var(--qds-fill-hover); }
+.qds-button:active:not(:disabled) { background: var(--qds-fill-pressed); }
 .qds-button:focus-visible { outline: var(--qds-stroke-focus) solid var(--qds-border-focus); outline-offset: 2px; }
 .qds-button:disabled, .qds-button[aria-disabled="true"] { opacity: var(--qds-opacity-disabled); cursor: not-allowed; }
 

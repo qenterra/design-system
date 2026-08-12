@@ -6,7 +6,7 @@ Accepted
 
 ## Context
 
-Cadence, Unspool, and Lilt share a visual direction but have different tasks, densities, shells, and interaction risks. Copying one application's layout would damage the others, while sharing colors alone would leave behavior inconsistent.
+Applications can share a visual direction while serving different tasks, densities, shells, and interaction risks. Copying one layout across contexts damages native workflows, while sharing colors alone leaves behavior inconsistent.
 
 ## Decision
 

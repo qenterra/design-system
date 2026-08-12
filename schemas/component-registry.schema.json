@@ -12,11 +12,24 @@
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["id", "name", "summary", "anatomy", "states", "stories", "accessibility"],
+        "required": ["id", "name", "summary", "status", "category", "platforms", "lifecycle", "anatomy", "states", "stories", "keyboard", "accessibility", "localization", "evidence"],
         "properties": {
           "id": {"type": "string", "pattern": "^[a-z][a-z0-9-]+$"},
-          "name": {"type": "object", "required": ["en", "ru"], "properties": {"en": {"type": "string"}, "ru": {"type": "string"}}, "additionalProperties": false},
-          "summary": {"type": "object", "required": ["en", "ru"], "properties": {"en": {"type": "string"}, "ru": {"type": "string"}}, "additionalProperties": false},
+          "name": {"$ref": "#/$defs/localized"},
+          "summary": {"$ref": "#/$defs/localized"},
+          "status": {"enum": ["stable", "beta", "deprecated"]},
+          "category": {"enum": ["control", "input", "navigation", "overlay", "feedback", "layout"]},
+          "platforms": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["macOS", "iOS", "iPadOS", "web"]}},
+          "lifecycle": {
+            "type": "object",
+            "required": ["introduced", "review"],
+            "properties": {
+              "introduced": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+              "review": {"enum": ["minor", "major"]},
+              "replacement": {"type": "string"}
+            },
+            "additionalProperties": false
+          },
           "anatomy": {"type": "array", "minItems": 1, "items": {"type": "string"}},
           "states": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
           "stories": {
@@ -34,10 +47,21 @@
               "additionalProperties": false
             }
           },
-          "accessibility": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+          "keyboard": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "accessibility": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "localization": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "evidence": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["schema", "unit", "browser", "visual", "manual"]}}
         },
         "additionalProperties": false
       }
+    }
+  },
+  "$defs": {
+    "localized": {
+      "type": "object",
+      "required": ["en", "ru"],
+      "properties": {"en": {"type": "string", "minLength": 1}, "ru": {"type": "string", "minLength": 1}},
+      "additionalProperties": false
     }
   },
   "additionalProperties": false

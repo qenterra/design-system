@@ -1,5 +1,26 @@
 # Changelog
 
+## 2.0.0
+
+### Added
+
+- Added bilingual lifecycle, commit, and license standards covering discovery through retirement.
+- Expanded the executable component registry from six to eighteen components with lifecycle, platform, keyboard, localization, and evidence contracts.
+- Added interactive control, navigation, overlay, feedback, progress, and empty-state stories.
+- Added a generated Nyx gallery built from four canonical manifest-backed assets.
+
+### Changed
+
+- Replaced custom SVG icon artwork with SF Symbol system names and macOS-rendered local previews.
+- Rewrote the reference hero, navigation summaries, and specimens with direct task-focused copy.
+- Removed application-specific migration briefs and named examples from universal guidance.
+- Added Development to the generated site with code, commit, license, release, operation, and retirement guidance.
+
+### Fixed
+
+- Made the main document inert while mobile navigation is open and restored focus after dismissal.
+- Added working state changes and dismissal behavior to Component Lab demonstrations.
+
 ## 1.12.0
 
 ### Added

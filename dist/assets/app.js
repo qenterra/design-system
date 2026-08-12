@@ -11,6 +11,7 @@
   const searchStatus = document.querySelector("[data-search-status]");
   const menuButton = document.querySelector("[data-menu-button]");
   const sidebar = document.querySelector("[data-sidebar]");
+  const mainColumn = document.querySelector(".main-column");
   const scrim = document.querySelector("[data-scrim]");
   const progress = document.querySelector("[data-progress]");
   const languageButton = document.querySelector("[data-language-button]");
@@ -21,6 +22,7 @@
   const componentLab = document.querySelector(".component-lab");
   const labDensityButtons = Array.from(document.querySelectorAll("[data-lab-density]"));
   const labWidthButtons = Array.from(document.querySelectorAll("[data-lab-width]"));
+  const nyxImages = Array.from(document.querySelectorAll("[data-nyx-src]"));
   let searchIndex = window.QDS_SEARCH_INDEX || [];
   let activeResult = -1;
   let menuReturnTarget = null;
@@ -46,18 +48,26 @@
       sidebar.setAttribute("aria-hidden", "false");
     }
     body.classList.add("nav-open");
+    if (mainColumn && window.matchMedia("(max-width: 920px)").matches) {
+      mainColumn.inert = true;
+      mainColumn.setAttribute("aria-hidden", "true");
+    }
     menuButton?.setAttribute("aria-expanded", "true");
     document.querySelector(".site-nav a")?.focus();
   }
 
   function closeNavigation(restoreFocus) {
-    if (restoreFocus && menuReturnTarget instanceof HTMLElement) menuReturnTarget.focus();
     body.classList.remove("nav-open");
     menuButton?.setAttribute("aria-expanded", "false");
+    if (mainColumn) {
+      mainColumn.inert = false;
+      mainColumn.removeAttribute("aria-hidden");
+    }
     if (sidebar && window.matchMedia("(max-width: 920px)").matches) {
       sidebar.inert = true;
       sidebar.setAttribute("aria-hidden", "true");
     }
+    if (restoreFocus && menuReturnTarget instanceof HTMLElement) menuReturnTarget.focus();
   }
 
   function synchronizeNavigationAvailability() {
@@ -276,6 +286,41 @@
     applyLabChoice("width", width, false);
     labDensityButtons.forEach((button) => button.addEventListener("click", () => applyLabChoice("density", button.dataset.labDensity, true)));
     labWidthButtons.forEach((button) => button.addEventListener("click", () => applyLabChoice("width", button.dataset.labWidth, true)));
+
+    componentLab.addEventListener("click", (event) => {
+      const switchControl = event.target.closest("[data-demo-switch]");
+      if (switchControl) {
+        switchControl.setAttribute("aria-checked", String(switchControl.getAttribute("aria-checked") !== "true"));
+        return;
+      }
+      const segment = event.target.closest("[data-demo-segment]");
+      if (segment) {
+        const group = segment.parentElement;
+        const stateAttribute = segment.getAttribute("role") === "tab" ? "aria-selected" : "aria-checked";
+        group?.querySelectorAll("[data-demo-segment]").forEach((item) => item.setAttribute(stateAttribute, String(item === segment)));
+        return;
+      }
+      const dismiss = event.target.closest("[data-demo-dismiss]");
+      if (dismiss) {
+        dismiss.closest("[data-demo-banner], [data-demo-toast]")?.setAttribute("hidden", "");
+        return;
+      }
+      const showToast = event.target.closest("[data-demo-show-toast]");
+      if (showToast) {
+        showToast.insertAdjacentHTML("afterend", `<div class="lab-toast" role="status" data-demo-toast>${locale === "ru" ? "Сохранено" : "Saved"}</div>`);
+        showToast.disabled = true;
+        return;
+      }
+      const restoreBanner = event.target.closest("[data-demo-restore-banner]");
+      if (restoreBanner) {
+        restoreBanner.insertAdjacentHTML("afterend", `<div class="lab-banner" role="status" data-demo-banner>${locale === "ru" ? "Проверьте настройки перед продолжением." : "Review settings before continuing."}</div>`);
+        restoreBanner.disabled = true;
+      }
+    });
+
+    componentLab.querySelectorAll('[data-demo-mixed="true"]').forEach((control) => {
+      control.indeterminate = true;
+    });
   }
 
   async function loadSearchIndex() {
@@ -388,6 +433,9 @@
   });
 
   localStorage.setItem("qds-locale", locale);
+  nyxImages.forEach((image) => {
+    image.src = `${root}${image.dataset.nyxSrc}`;
+  });
   applyTheme(currentTheme(), false);
   synchronizeNavigationAvailability();
   initializeScrollSpy();

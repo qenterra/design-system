@@ -51,6 +51,28 @@
 
 Вопрос ревью: **сможет ли разработчик, впервые открывший модуль, безопасно внести нужное изменение без экскурсии по всему репозиторию?** Если нет, улучшите границу, имя, документацию, локальную структуру или тест до расширения фичи.
 
+## Устройство файлов и модулей
+
+- Размещайте одну публичную ответственность в файле или небольшой папке. Разделяйте файл, когда накопились независимые причины для изменений, а не по произвольному числу строк.
+- Держите constructors и public entry points рядом с создаваемыми типами. Private parsing, mapping, persistence и rendering helpers размещайте рядом с владельцем.
+- Импортируйте только прямые зависимости. Facade может давать стабильную public surface, но не скрывает cycles или global mutable state.
+- Удаляйте dead code, закомментированные реализации, неиспользуемые flags и compatibility branches после конца support window.
+
+## Оформление кода и примеров
+
+- Доверьте whitespace formatter репозитория. Не выравнивайте код вручную так, чтобы следующая смена имени разрушила раскладку.
+- Переносите expressions по смысловым границам: arguments, collection entries, chained stages и Boolean clauses.
+- Пример кода содержит imports, input, expected result, failure behavior и запускающую команду, когда эти детали влияют на использование.
+- Небольшой законченный пример лучше большого фрагмента с отсутствующими types. Помечайте illustrative pseudocode как pseudocode.
+- Logs, IDs, paths, commands и machine output используют monospace. UI labels и обычный текст его не используют.
+
+## Generated, vendored и migrated code
+
+- Generated files называют generator, а каноническая команда проверки отклоняет ручной drift.
+- Vendored code сохраняет upstream source, version, license, local modifications и update procedure.
+- Migration отделяет mechanical transformation от behavior changes. До массового применения проверьте повторяемость transform.
+- Compatibility code называет условие удаления. Постоянная папка `legacy` является немаркированным продуктовым решением, а не migration plan.
+
 ## Профили языков
 
 ### Swift и нативные платформы Apple

@@ -51,6 +51,28 @@ Code is readable when a developer who did not author the module can change it sa
 
 Review prompt: **Could a developer opening this module for the first time make the requested change safely without a tour through the whole repository?** If not, improve the boundary, name, documentation, local structure, or test before expanding the feature.
 
+## File and module design
+
+- Put one public responsibility in a file or a small directory. Split a file when independent reasons to change have accumulated, not at an arbitrary line count.
+- Keep constructors and public entry points close to the types they create. Keep private parsing, mapping, persistence, and rendering helpers near their owner.
+- Import only direct dependencies. A facade may expose a stable public surface, but it must not hide cycles or global mutable state.
+- Delete dead code, commented-out implementations, unused flags, and compatibility branches after their supported window ends.
+
+## Formatting code and examples
+
+- Let the repository formatter decide whitespace. Do not align code by hand in a way that collapses on the next rename.
+- Wrap expressions at semantic boundaries: arguments, collection entries, chained stages, and Boolean clauses.
+- A code example includes imports, input, expected result, failure behavior, and the command that runs it when those details affect use.
+- Prefer a complete small example over a large excerpt with missing types. Mark illustrative pseudocode as pseudocode.
+- Logs, IDs, paths, commands, and machine output use monospace formatting. UI labels and prose do not.
+
+## Generated, vendored, and migrated code
+
+- Generated files name the generator and reject manual drift in the canonical verification command.
+- Vendored code keeps its upstream source, version, license, local modifications, and update procedure.
+- A migration separates mechanical transformation from behavior changes. Verify the transform is repeatable before applying it across the repository.
+- Compatibility code names its removal condition. A permanent `legacy` folder is an unlabeled product decision, not a migration plan.
+
 ## Language profiles
 
 ### Swift and native Apple platforms

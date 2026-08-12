@@ -2,7 +2,7 @@
   "$schema": "../schemas/foundation.schema.json",
   "meta": {
     "name": "QenTerra Foundation Tokens",
-    "version": "1.12.0",
+    "version": "2.0.0",
     "type": "foundation",
     "description": "Raw values. Product code should prefer semantic tokens."
   },

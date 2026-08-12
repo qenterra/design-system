@@ -1,6 +1,12 @@
 #if canImport(SwiftUI)
 import SwiftUI
 
+public extension Image {
+    init(qds icon: QDSIcon) {
+        self.init(systemName: icon.systemName)
+    }
+}
+
 public extension Color {
     init(qds value: QDSColorValue, appearance: QDSAppearance) {
         let source = value.value(for: appearance)

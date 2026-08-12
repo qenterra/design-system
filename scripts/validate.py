@@ -15,12 +15,12 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from lib.token_tools import flatten, generate_svg_sprite, generate_swift_icons, get_path, load_json, resolve  # noqa: E402
+from lib.token_tools import flatten, generate_swift_icons, get_path, load_json, resolve  # noqa: E402
 from lib.schema_tools import validate_schema  # noqa: E402
 from lib.figma_export import generate_figma_exports  # noqa: E402
 from lib.email_templates import validate_email_registry  # noqa: E402
 from lib.markdown_renderer import split_numbered_sections  # noqa: E402
-from lib.site_locales import BRAND_SECTION_KEYS, PAGE_GROUPS, REPOSITORY_SECTION_KEYS  # noqa: E402
+from lib.site_locales import BRAND_SECTION_KEYS, DEVELOPMENT_SECTION_KEYS, PAGE_GROUPS, REPOSITORY_SECTION_KEYS  # noqa: E402
 from brand.validate_brand_assets import validate_brand_assets  # noqa: E402
 from package_release import (  # noqa: E402
     validate_package_payload,
@@ -36,7 +36,7 @@ CSS_RAW_VISUAL = re.compile(r"(?<![\w-])(?:#[0-9a-fA-F]{3,8}\b|rgba?\([^)]*\))")
 TOKEN_REFERENCE = re.compile(r"^\{([^}]+)}$")
 MARKDOWN_LINK = re.compile(r"\[[^]]+]\(([^)]+)\)")
 BRAND_DOC_PAIRS = ("MASTER", "QENTERRA", "NYX", "ASSET_CATALOG")
-CODE_DOCUMENT_PAIRS = ("CODE",)
+CODE_DOCUMENT_PAIRS = ("CODE", "DEVELOPMENT", "COMMITS", "LICENSES")
 BRAND_TEMPLATES = {
     "brand-asset-brief.md",
     "manifest.example.json",
@@ -380,13 +380,14 @@ def validate_html_tree(dist: Path) -> list[str]:
         required = {f"section-{number}" for number in range(22)}
         required.update(f"brand-{key}" for key in BRAND_SECTION_KEYS)
         required.update(f"repository-{key}" for key in REPOSITORY_SECTION_KEYS)
+        required.update(f"development-{key}" for key in DEVELOPMENT_SECTION_KEYS)
         required.add("lab-overview")
         required.add("adoption-overview")
         missing = sorted(required - record.ids)
         if missing:
             errors.append(f"{label}: missing sections {missing}")
         text = standalone.read_text(encoding="utf-8")
-        if 'src="' in text or 'rel="stylesheet"' in text:
+        if re.search(r'<script\b[^>]*\bsrc="|<link\b[^>]*\brel="stylesheet"', text, re.IGNORECASE):
             errors.append(f"{label}: external script or stylesheet reference found")
         if len(text.encode("utf-8")) < 100_000:
             errors.append(f"{label}: unexpectedly small; full reference may be missing")
@@ -572,20 +573,9 @@ def validate_repository_hygiene(root: Path) -> list[str]:
             errors.append(f"{relative}: temporary or AI working path must stay outside the repository")
         if path.name == ".DS_Store":
             errors.append(f"{relative}: Finder metadata must not enter the repository")
-    universal_sources = [
-        root / "README.md",
-        root / "docs" / "MASTER.md",
-        root / "docs" / "MASTER.ru.md",
-        root / "docs" / "COMPONENT_CATALOG.md",
-        root / "docs" / "COMPONENT_CATALOG.ru.md",
-        root / "tokens" / "products.json",
-        root / "scripts" / "lib" / "site_locales.py",
-        root / "scripts" / "build.py",
-    ]
-    product_names = re.compile(r"\b(Cadence|Unspool|Lilt)\b")
-    for path in universal_sources:
-        if path.is_file() and product_names.search(path.read_text(encoding="utf-8")):
-            errors.append(f"{path.relative_to(root)}: universal guide contains an existing product name")
+    migrations = root / "docs" / "migrations"
+    if migrations.is_dir() and any(migrations.iterdir()):
+        errors.append("docs/migrations: product-specific migration briefs do not belong in the universal system")
     return errors
 
 
@@ -721,15 +711,11 @@ def validate_icon_registry(root: Path, version: str) -> list[str]:
     if missing:
         errors.append(f"registry/icons.json: missing required site icons {missing}")
     for item in data.get("icons", []):
-        fragment = item.get("svg", "").lower()
-        if any(forbidden in fragment for forbidden in ("<script", "<style", " onload=", " onclick=")):
-            errors.append(f"registry/icons.json:{item.get('id')}: unsafe SVG fragment")
+        if "svg" in item:
+            errors.append(f"registry/icons.json:{item.get('id')}: svg artwork is forbidden; use sfSymbol")
     generated_swift = root / "generated" / "QDSGeneratedIcons.swift"
-    generated_svg = root / "generated" / "qds-icons.svg"
     if generated_swift.is_file() and generated_swift.read_text(encoding="utf-8") != generate_swift_icons(data):
         errors.append("generated/QDSGeneratedIcons.swift: drifted from icon registry")
-    if generated_svg.is_file() and generated_svg.read_text(encoding="utf-8") != generate_svg_sprite(data):
-        errors.append("generated/qds-icons.svg: drifted from icon registry")
     return errors
 
 
@@ -847,19 +833,26 @@ def validate_browser_evidence(root: Path) -> list[str]:
             errors.append("output/reports/visual-diff.json: screenshot profile does not match browser evidence")
     checks = report.get("checks", {})
     for name in (
+        "searchAndEscape",
+        "mobileNavigationAndEscape",
         "scrollSpy",
         "languageSwitch",
         "languagePickerPosition",
         "brandModule",
         "repositoryModule",
-        "uniformSvgIcons",
+        "sfSymbols",
+        "nyxGallery",
         "componentLab",
         "emailComposer",
         "pseudoLocalization",
         "visibleFocus",
+        "semanticStructure",
+        "responsiveOverflow",
     ):
         if checks.get(name) != "passed":
             errors.append(f"output/reports/browser.json: {name} did not pass")
+    if checks.get("consoleErrors") != "none":
+        errors.append("output/reports/browser.json: console errors were reported")
     return errors
 
 

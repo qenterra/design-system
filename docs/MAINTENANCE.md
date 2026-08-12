@@ -139,7 +139,7 @@ The pixel threshold remains zero; the separately declared channel tolerance may 
 
 ## Icons, asset browser, and Figma
 
-Add interface symbols to `registry/icons.json`, not to an adapter-specific private list. Keep one meaning per ID and prefer native symbols in native products when semantics and optical weight match. Build generates Swift identifiers, site SVG sprite, CSS-package metadata, and Figma icon payloads.
+Add interface symbols to `registry/icons.json`, not to an adapter-specific private list. Each entry must name an SF Symbol, its semantic role, and minimum macOS version. SwiftUI and AppKit render the symbol through system APIs; the local documentation build renders PNG previews with AppKit for inspection. Build also generates Swift identifiers, CSS-package metadata, and the Figma handoff payload. SVG interface icons are not part of the system.
 
 Generate the brand asset browser only into a unique system temporary directory with `scripts/brand/build_asset_browser.py --output /private/tmp/...`; the script blocks repository paths. `generated/figma/` is derived handoff data. Read `docs/FIGMA.md`, import into a scratch file first, and never treat a successful JSON build as proof that a maintained Figma library was updated.
 

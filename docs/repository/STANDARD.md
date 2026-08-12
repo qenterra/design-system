@@ -64,6 +64,8 @@ their dedicated documents.
 
 Every repository adopts the applicable QDS Code System language profile and names one canonical verification command. Code must remain understandable to a developer new to the module: its role, dependencies, effects, failures, and verification path are visible through boundaries, names, tests, or focused comments. Keep UI, domain policy, storage, network, and platform effects at explicit boundaries. Do not mix unrelated formatting churn with behavioral changes.
 
+Follow the QDS development lifecycle from a sourced problem through operation and retirement. Use the QDS commit standard for atomic history and breaking-change notes. A repository may narrow allowed scopes, but it must not redefine commit types with conflicting meanings.
+
 Record a rule exception with its exact rule and path, technical reason, owner, and review date. Pull requests separate automated checks, live checks, and manual gaps; a green static check never substitutes for a real platform boundary.
 
 ## Technical documentation
@@ -121,6 +123,8 @@ Before changing legal documents, inspect:
 - runtime, downloaded, bundled, and build-only dependencies;
 - model, media, font, and website-script licenses;
 - release archives, not just source manifests.
+
+Apply the QDS license standard to the resolved dependency graph and the shipped artifact. Record SPDX identifiers, required notices, source offers, asset restrictions, and license compatibility. System-provided platform artwork is not a reusable project asset.
 
 Do not state that data “never leaves the device” when an operating-system sync
 provider or required external service can process it. Name that boundary.

@@ -1,5 +1,5 @@
 {
-  "version": "1.12.0",
+  "version": "2.0.0",
   "manifestSchemaVersion": 1,
   "profile": "local",
   "status": "passed",
@@ -11,7 +11,8 @@
     "languagePickerPosition": "passed",
     "brandModule": "passed",
     "repositoryModule": "passed",
-    "uniformSvgIcons": "passed",
+    "sfSymbols": "passed",
+    "nyxGallery": "passed",
     "componentLab": "passed",
     "emailComposer": "passed",
     "pseudoLocalization": "passed",
@@ -203,7 +204,7 @@
       "forcedColors": false,
       "state": null,
       "locale": "ru",
-      "title": "Архетипы продуктов · QenTerra Design System",
+      "title": "Контексты взаимодействия · QenTerra Design System",
       "sections": 2,
       "structure": {
         "oneH1": true,
@@ -228,7 +229,7 @@
       "state": null,
       "locale": "en",
       "title": "QenTerra Design System",
-      "sections": 45,
+      "sections": 47,
       "structure": {
         "oneH1": true,
         "namedInteractiveElements": true,
@@ -252,7 +253,7 @@
       "state": null,
       "locale": "ru",
       "title": "QenTerra Design System",
-      "sections": 45,
+      "sections": 47,
       "structure": {
         "oneH1": true,
         "namedInteractiveElements": true,

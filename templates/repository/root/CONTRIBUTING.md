@@ -67,5 +67,16 @@ update:
   remaining manual gaps.
 - Keep unrelated formatting and generated changes out of the patch.
 
+## Commits
+
+- Use `type(optional-scope): imperative outcome` with a QDS commit type.
+- Keep one reviewable change per commit and include its tests and generated counterparts.
+- Mark consumer migrations with `!` and a `BREAKING CHANGE:` footer.
+- Inspect the staged diff and run the smallest complete gate before committing.
+
+## License review
+
+Before adding code, a package, model, font, icon, image, dataset, or downloaded artifact, record its source, version, SPDX identifier or exact terms, delivery form, attribution, and redistribution limits. Update `THIRD_PARTY_NOTICES.md` and any required license texts in the same change.
+
 By contributing, you agree that your contribution can be distributed under
 the project's [license](LICENSE).

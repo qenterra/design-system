@@ -53,3 +53,5 @@ The authoritative dependency inputs are {MANIFESTS_LOCKFILES_PIN_METADATA_AND_LO
 When a dependency changes, review its source, version, checksum when available,
 license text, notices, generated artifact, runtime contents, privacy/security
 impact, and verification evidence together.
+
+Record the command and artifact digest used to compare the resolved dependency graph with the distributed archive. Unresolved license terms block release; a package name in this file does not replace the required license text or source offer.

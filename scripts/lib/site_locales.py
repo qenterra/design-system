@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import base64
 from pathlib import Path
 from typing import Any
 
@@ -12,6 +13,7 @@ PAGE_GROUPS = [
     ("foundations", [3, 4]),
     ("components", [5, 6, 7, 8, 9]),
     ("lab", []),
+    ("development", []),
     ("adoption", []),
     ("patterns", [10]),
     ("motion", [11]),
@@ -28,7 +30,7 @@ PAGE_GROUPS = [
 
 NAV_GROUPS = [
     ("learn", ["index", "foundations", "components", "lab", "patterns"]),
-    ("adopt", ["adoption", "platforms", "products", "accessibility"]),
+    ("build", ["development", "adoption", "platforms", "products", "accessibility"]),
     ("communicate", ["motion", "content", "email"]),
     ("maintain", ["audit", "governance", "brand", "repositories"]),
 ]
@@ -51,10 +53,21 @@ REPOSITORY_SECTION_KEYS = [
     "templates",
 ]
 
+DEVELOPMENT_SECTION_KEYS = ["lifecycle", "code", "commits", "licenses"]
+
 
 _ROOT = Path(__file__).resolve().parents[2]
 _ICON_DATA = json.loads((_ROOT / "registry" / "icons.json").read_text(encoding="utf-8"))
-ICONS = {item["id"]: item["svg"] for item in _ICON_DATA["icons"]}
+ICONS = {item["id"]: item for item in _ICON_DATA["icons"]}
+_ICON_DATA_URIS: dict[str, str] = {}
+
+
+def configure_icon_assets(directory: Path) -> None:
+    """Load locally rendered SF Symbols for generated reference pages."""
+    _ICON_DATA_URIS.clear()
+    for identifier in ICONS:
+        payload = (directory / f"{identifier}.png").read_bytes()
+        _ICON_DATA_URIS[identifier] = "data:image/png;base64," + base64.b64encode(payload).decode("ascii")
 
 
 COPY: dict[str, dict[str, Any]] = {
@@ -62,10 +75,11 @@ COPY: dict[str, dict[str, Any]] = {
         "name": "English",
         "code": "EN",
         "pages": {
-            "index": ("Overview", "Shared grammar, principles, and the layered system."),
+            "index": ("Overview", "Scope, principles, ownership, and system layers."),
             "foundations": ("Foundations", "Appearance, color, type, spacing, material, layout, and states."),
             "components": ("Components", "Controls, containers, navigation, overlays, feedback, and progress."),
             "lab": ("Component Lab", "Executable stories across states, density, appearance, and localization stress."),
+            "development": ("Development", "Lifecycle, code, commits, licensing, release, operation, and retirement."),
             "adoption": ("Adoption", "Read-only consumer manifests, exceptions, doctor reports, and migration order."),
             "patterns": ("Patterns", "Reusable task flows for risk, permissions, recovery, privacy, and settings."),
             "motion": ("Motion", "Short, interruptible, state-explanatory movement."),
@@ -73,7 +87,7 @@ COPY: dict[str, dict[str, Any]] = {
             "email": ("Email templates", "Human-operated service and transactional messages with safe copy-ready output."),
             "accessibility": ("Accessibility", "Keyboard, screen readers, contrast, zoom, motion, and input modes."),
             "platforms": ("Platforms", "macOS, iOS, iPadOS, web, and browser-extension adapters."),
-            "products": ("Product archetypes", "Immersive content, dense operations, transient capability, and app icons."),
+            "products": ("Interaction contexts", "Immersive content, dense operations, transient capability, and app icons."),
             "audit": ("Evidence", "Cross-product audit, screenshot confidence, and current design debt."),
             "governance": ("Governance", "Versioning, exceptions, AI protocol, maintenance, and adoption."),
             "brand": ("Brand", "QenTerra marks, Nyx canon, asset catalog, templates, and quality gates."),
@@ -84,7 +98,7 @@ COPY: dict[str, dict[str, Any]] = {
             "navigation": "Design system navigation",
             "reference": "Reference",
             "nav_learn": "Learn",
-            "nav_adopt": "Adopt",
+            "nav_build": "Build",
             "nav_communicate": "Communicate",
             "nav_maintain": "Maintain",
             "on_this_page": "On this page",
@@ -93,13 +107,13 @@ COPY: dict[str, dict[str, Any]] = {
             "system": "System",
             "light": "Light",
             "dark": "Dark",
-            "sidebar_note": "Exact values come from machine-readable tokens. Product shells remain deliberately distinct.",
+            "sidebar_note": "Tokens define values. Platform rules define behavior.",
             "open_navigation": "Open navigation",
             "close_navigation": "Close navigation",
             "search_label": "Search design system",
-            "search_placeholder": "Search components, states, products…",
+            "search_placeholder": "Search components, states, or rules…",
             "search_results": "Search results",
-            "no_results": "No matching section. Try a component, state, platform, or product name.",
+            "no_results": "No matching section. Try a component, state, platform, or rule.",
             "search_count": "{count} search results",
             "section": "Section",
             "language": "Language",
@@ -107,19 +121,17 @@ COPY: dict[str, dict[str, Any]] = {
             "english": "English",
             "russian": "Russian",
             "hero_kicker": "QenTerra · Version {version}",
-            "hero_title": "One grammar.<br>Different products.",
-            "hero_summary": "Adaptive Soft Graphite, native behavior, honest state, short motion, and explicit recovery for current and future products.",
+            "hero_title": "Design, build,<br>and verify.",
+            "hero_summary": "Tokens, components, platform behavior, code standards, release checks, and recovery rules in one versioned system.",
             "explore_foundations": "Explore foundations",
             "open_master": "Open standalone master",
             "eyebrow": "QenTerra Design System",
-            "footer": "System first · Dark signature · Light complete",
-            "standalone_summary": "Complete standalone human reference for the QenTerra family design system.",
+            "footer": "macOS-first · versioned · verified",
+            "standalone_summary": "Complete standalone reference for QenTerra Design System.",
             "gateway_title": "Choose language",
             "gateway_summary": "Open the complete QenTerra Design System reference in English or Russian.",
         },
         "appendix": {
-            "audit": "Current-state audit",
-            "instructions": "Instruction-system audit",
             "catalog": "Complete component catalog",
         },
         "email": {
@@ -164,10 +176,11 @@ COPY: dict[str, dict[str, Any]] = {
         "name": "Русский",
         "code": "RU",
         "pages": {
-            "index": ("Обзор", "Общая грамматика, принципы и слои системы."),
+            "index": ("Обзор", "Границы, принципы, владение и слои системы."),
             "foundations": ("Основы", "Темы, цвет, типографика, отступы, материалы, компоновка и состояния."),
             "components": ("Компоненты", "Элементы управления, контейнеры, навигация, оверлеи, обратная связь и прогресс."),
             "lab": ("Лаборатория компонентов", "Исполняемые примеры состояний, плотности, темы и локализационной нагрузки."),
+            "development": ("Разработка", "Цикл, код, коммиты, лицензии, релиз, эксплуатация и вывод."),
             "adoption": ("Внедрение", "Read-only manifests, исключения, doctor reports и порядок миграции продуктов."),
             "patterns": ("Сценарии", "Повторяемые потоки для рисков, разрешений, восстановления, приватности и настроек."),
             "motion": ("Анимация", "Короткое, прерываемое движение, объясняющее смену состояния."),
@@ -175,7 +188,7 @@ COPY: dict[str, dict[str, Any]] = {
             "email": ("Шаблоны писем", "Сервисные и транзакционные письма для человека с безопасным копированием."),
             "accessibility": ("Доступность", "Клавиатура, скринридеры, контраст, масштаб, движение и способы ввода."),
             "platforms": ("Платформы", "Адаптеры macOS, iOS, iPadOS, веба и браузерных расширений."),
-            "products": ("Архетипы продуктов", "Иммерсивный контент, плотные операции, временные возможности и иконки приложений."),
+            "products": ("Контексты взаимодействия", "Иммерсивный контент, плотные операции, временные возможности и иконки приложений."),
             "audit": ("Доказательства", "Межпродуктовый аудит, достоверность скриншотов и текущий дизайн-долг."),
             "governance": ("Управление", "Версионирование, исключения, AI-протокол, сопровождение и внедрение."),
             "brand": ("Бренд", "Знаки QenTerra, канон Nyx, каталог ассетов, шаблоны и проверки качества."),
@@ -186,7 +199,7 @@ COPY: dict[str, dict[str, Any]] = {
             "navigation": "Навигация по дизайн-системе",
             "reference": "Справочник",
             "nav_learn": "Изучить",
-            "nav_adopt": "Внедрить",
+            "nav_build": "Разработать",
             "nav_communicate": "Коммуникация",
             "nav_maintain": "Поддержка",
             "on_this_page": "На этой странице",
@@ -195,13 +208,13 @@ COPY: dict[str, dict[str, Any]] = {
             "system": "Система",
             "light": "Светлая",
             "dark": "Тёмная",
-            "sidebar_note": "Точные значения берутся из машиночитаемых токенов. Оболочки продуктов намеренно остаются разными.",
+            "sidebar_note": "Токены задают значения. Платформенные правила задают поведение.",
             "open_navigation": "Открыть навигацию",
             "close_navigation": "Закрыть навигацию",
             "search_label": "Поиск по дизайн-системе",
-            "search_placeholder": "Компоненты, состояния, продукты…",
+            "search_placeholder": "Компоненты, состояния или правила…",
             "search_results": "Результаты поиска",
-            "no_results": "Разделы не найдены. Попробуйте название компонента, состояния, платформы или продукта.",
+            "no_results": "Разделы не найдены. Попробуйте компонент, состояние, платформу или правило.",
             "search_count": "Результатов поиска: {count}",
             "section": "Раздел",
             "language": "Язык",
@@ -209,19 +222,17 @@ COPY: dict[str, dict[str, Any]] = {
             "english": "English",
             "russian": "Русский",
             "hero_kicker": "QenTerra · Версия {version}",
-            "hero_title": "Одна грамматика.<br>Разные продукты.",
-            "hero_summary": "Адаптивный Soft Graphite, нативное поведение, честные состояния, короткая анимация и явное восстановление для текущих и будущих продуктов.",
+            "hero_title": "Проектируйте, собирайте<br>и проверяйте.",
+            "hero_summary": "Токены, компоненты, поведение платформ, стандарты кода, release checks и правила восстановления в одной версионированной системе.",
             "explore_foundations": "Изучить основы",
             "open_master": "Открыть standalone master",
             "eyebrow": "QenTerra Design System",
-            "footer": "Сначала система · Фирменная тёмная тема · Полноценная светлая",
-            "standalone_summary": "Полный автономный справочник по семейной дизайн-системе QenTerra.",
+            "footer": "macOS-first · versioned · verified",
+            "standalone_summary": "Полный автономный справочник QenTerra Design System.",
             "gateway_title": "Выберите язык",
             "gateway_summary": "Откройте полный справочник QenTerra Design System на русском или английском.",
         },
         "appendix": {
-            "audit": "Аудит текущего состояния",
-            "instructions": "Аудит системы инструкций",
             "catalog": "Полный каталог компонентов",
         },
         "email": {
@@ -266,11 +277,14 @@ COPY: dict[str, dict[str, Any]] = {
 
 
 def icon(name: str, class_name: str = "icon") -> str:
-    """Return one decorative icon from the single site icon family."""
+    """Return one decorative SF Symbol rendered by macOS during the build."""
+    item = ICONS[name]
+    source = _ICON_DATA_URIS.get(name)
+    if source is None:
+        raise RuntimeError("SF Symbol assets must be configured before rendering pages")
     return (
-        f'<svg class="{class_name}" viewBox="0 0 16 16" aria-hidden="true" focusable="false" '
-        f'fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" '
-        f'stroke-linejoin="round">{ICONS[name]}</svg>'
+        f'<img class="{class_name} sf-symbol" src="{source}" data-sf-symbol="{item["sfSymbol"]}" '
+        'alt="" aria-hidden="true" draggable="false">'
     )
 
 
@@ -280,7 +294,7 @@ SPECIMENS: dict[str, dict[str, Any]] = {
         "color_title": "Adaptive color roles",
         "color_note": "Switch System, Light, and Dark in the sidebar.",
         "type_examples": [
-            "Family resemblance without cloned shells",
+            "System roles with platform-specific layouts",
             "Foundations and semantic roles",
             "Review before risky operations",
             "Content remains primary; chrome supports the task.",
@@ -311,7 +325,7 @@ SPECIMENS: dict[str, dict[str, Any]] = {
         "profiles": ["Immersive content", "Operational dense", "Transient capability"],
         "archetypes": ["Content library", "Operations workspace", "Transient utility"],
         "products_title": "One family, three shells",
-        "products_note": "Shared grammar does not erase product structure.",
+        "products_note": "Choose a context by task, density, and interaction cost.",
         "accessibility": ["Visible focus", "Partial results", "Copied to Clipboard"],
         "accessibility_title": "Meaning beyond color",
         "accessibility_note": "Tab through controls; status always includes words or shape.",
@@ -334,7 +348,7 @@ SPECIMENS: dict[str, dict[str, Any]] = {
         "spacing_note": "Сначала шкала основы, потом локальная компенсация.",
         "controls": ["Продолжить", "Проверить файлы", "Показать подробности", "Удалить правило", "Установлено", "Нужна проверка", "Запись"],
         "field": ["Название коллекции", "Вечернее прослушивание", "Сохранено локально на этом Mac.", "API ID", "не-число", "Введите положительный числовой API ID."],
-        "controls_title": "Элементы управления и честные состояния",
+        "controls_title": "Элементы управления и состояния",
         "controls_note": "Одно основное действие. Ошибки появляются после взаимодействия.",
         "settings": [
             "Следовать системной теме", "Использовать текущую светлую или тёмную тему macOS.",
@@ -352,7 +366,7 @@ SPECIMENS: dict[str, dict[str, Any]] = {
         "profiles": ["Иммерсивный контент", "Плотные операции", "Временная возможность"],
         "archetypes": ["Библиотека контента", "Рабочая область операций", "Временная утилита"],
         "products_title": "Одна семья, три оболочки",
-        "products_note": "Общая грамматика не стирает структуру продукта.",
+        "products_note": "Выбирайте контекст по задаче, плотности и цене взаимодействия.",
         "accessibility": ["Видимый фокус", "Частичные результаты", "Скопировано в буфер обмена"],
         "accessibility_title": "Смысл не только в цвете",
         "accessibility_note": "Перемещайтесь по Tab: статус всегда передаётся словами или формой.",

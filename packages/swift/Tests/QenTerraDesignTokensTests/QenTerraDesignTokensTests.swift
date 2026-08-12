@@ -4,12 +4,14 @@ import Testing
 @testable import QenTerraDesignTokens
 
 @Test func publicFacadeVersionAndTypesRemainAvailable() {
-    #expect(QDS.version == "1.12.0")
-    #expect(QDSIcon.success.rawValue == "success")
+    #expect(QDS.version == "2.0.0")
+    #expect(QDSIcon.success.systemName == "checkmark.circle")
 
     _ = QDSPrimaryButtonStyle(appearance: .light)
     _ = QDSGroupContainer(appearance: .light)
     _ = QDSInteractiveRowSurface(state: .init(), appearance: .light) { Text("Row") }
+    _ = Image(qds: .success)
+    #expect(NSImage.qds(.success) != nil)
 }
 
 @Test func stableAPIExposesGeneratedScales() {

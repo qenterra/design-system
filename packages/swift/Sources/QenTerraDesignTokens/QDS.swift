@@ -1,5 +1,15 @@
 import Foundation
 
+#if canImport(AppKit)
+import AppKit
+
+public extension NSImage {
+    static func qds(_ icon: QDSIcon, accessibilityDescription: String? = nil) -> NSImage? {
+        NSImage(systemSymbolName: icon.systemName, accessibilityDescription: accessibilityDescription)
+    }
+}
+#endif
+
 public enum QDSAppearance: String, CaseIterable, Sendable {
     case light
     case dark

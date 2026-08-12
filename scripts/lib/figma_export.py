@@ -71,9 +71,9 @@ def generate_figma_exports(
             "components": components["components"],
         },
         "icons.json": {
-            "format": "qds-figma-icons-v1",
+            "format": "qds-figma-sf-symbols-v2",
             "version": version,
-            "viewBox": icons["viewBox"],
+            "platform": icons["platform"],
             "icons": icons["icons"],
         },
     }

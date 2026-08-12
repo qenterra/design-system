@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/email-templates.schema.json",
-  "version": "1.12.0",
+  "version": "2.0.0",
   "capabilities": {
     "sendsEmail": false,
     "persistsInput": false,
@@ -37,12 +37,12 @@
         "en": {
           "label": "Product name",
           "help": "Product connected to this message.",
-          "example": "Atlas"
+          "example": "Workspace"
         },
         "ru": {
           "label": "Название продукта",
           "help": "Продукт, к которому относится письмо.",
-          "example": "Atlas"
+          "example": "Workspace"
         }
       }
     },

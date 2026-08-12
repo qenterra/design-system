@@ -7,7 +7,7 @@
 
 <h1 align="center">QenTerra Design System</h1>
 
-<p align="center">Shared interface grammar, implementation contracts, and brand foundations for QenTerra products.</p>
+<p align="center">Tokens, components, engineering rules, brand assets, and release evidence for Apple-platform software.</p>
 
 <p align="center">
   <a href="docs/README.md">Documentation</a> ·
@@ -16,15 +16,14 @@
   <a href="CHANGELOG.md">Changelog</a>
 </p>
 
-> **Status:** private, proprietary source of truth. Version `1.12.0` is
+> **Status:** private, proprietary source of truth. Version `2.0.0` is
 > distributed through the private SwiftPM repository
 > [`qenterra/design-system-swift`](https://github.com/qenterra/design-system-swift)
 > and the restricted GitHub package `@qenterra/design-tokens`.
 
-QDS combines adaptive Soft Graphite foundations with typed design tokens,
-accessible component contracts, product profiles, brand governance, repository
-standards, and deterministic verification. Native platform conventions remain
-authoritative; shared semantics do not require identical product shells.
+QDS defines typed tokens, accessible component contracts, SF Symbols, brand
+assets, repository standards, and deterministic verification. Platform
+conventions remain authoritative for interaction and layout.
 
 ## Interface
 
@@ -32,7 +31,7 @@ authoritative; shared semantics do not require identical product shells.
 
 The generated reference covers English and Russian, System/Light/Dark
 appearance, desktop and mobile layouts, accessibility profiles, component
-stories, brand assets, repository guidance, and human-operated email templates.
+stories, Nyx assets, development guidance, and human-operated email templates.
 
 ## Capabilities
 
@@ -41,11 +40,10 @@ stories, brand assets, repository guidance, and human-operated email templates.
 - **Components and patterns:** executable states, keyboard and assistive
   semantics, localization stress cases, recovery, permissions, destructive
   actions, progress, and responsive behavior.
-- **Platform delivery:** generated CSS/JSON assets, typed Swift tokens and
-  SwiftUI adapters, semantic icons, and opt-in recipes.
-- **Product governance:** explicit consumer profiles, narrowly scoped
-  exceptions, adoption audits, repository documentation, and code-quality
-  contracts.
+- **Platform delivery:** generated CSS/JSON assets, typed Swift tokens,
+  SwiftUI adapters, SF Symbol names, and opt-in recipes.
+- **Development:** requirements, architecture, readable code, commits,
+  licensing, review, release, operation, incidents, and retirement.
 - **Brand system:** canonical QenTerra marks and Nyx assets with manifest,
   Git LFS, processing boundaries, and focused validation.
 

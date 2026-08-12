@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 import re
 import shutil
+import subprocess
 import sys
 import tempfile
 from html import escape
@@ -20,15 +21,16 @@ from lib.pseudo_locales import pseudo_long, pseudo_rtl  # noqa: E402
 from lib.site_locales import (  # noqa: E402
     BRAND_SECTION_KEYS,
     COPY,
+    DEVELOPMENT_SECTION_KEYS,
     NAV_GROUPS,
     PAGE_GROUPS,
     REPOSITORY_SECTION_KEYS,
     SPECIMENS,
+    configure_icon_assets,
     icon,
 )
 from lib.token_tools import (  # noqa: E402
     generate_css,
-    generate_svg_sprite,
     generate_swift,
     generate_swift_icons,
     generate_token_reference,
@@ -60,9 +62,10 @@ def pages(locale: str) -> list[tuple[str, str, list[int], str]]:
 def nav_html(current: str, root: str, standalone: bool, locale: str) -> str:
     links: dict[str, str] = {}
     for slug, title, section_numbers, _ in pages(locale):
-        if slug in {"brand", "repositories", "lab", "adoption", "email"}:
-            prefix = {"brand": "brand", "repositories": "repository", "lab": "lab", "adoption": "adoption", "email": "email"}[slug]
-            href = f"#{prefix}-overview" if standalone else f"{root}pages/{slug}.html"
+        if slug in {"brand", "repositories", "lab", "development", "adoption", "email"}:
+            prefix = {"brand": "brand", "repositories": "repository", "lab": "lab", "development": "development", "adoption": "adoption", "email": "email"}[slug]
+            standalone_anchor = "development-lifecycle" if slug == "development" else f"{prefix}-overview"
+            href = f"#{standalone_anchor}" if standalone else f"{root}pages/{slug}.html"
             section_start = section_end = prefix
         elif standalone:
             href = f"#section-{section_numbers[0]}"
@@ -264,29 +267,6 @@ def render_section(section: Section, locale: str, nav_slug: str) -> str:
     )
 
 
-def render_audit_appendix(locale: str) -> str:
-    suffix = ".ru" if locale == "ru" else ""
-    appendix = COPY[locale]["appendix"]
-    sources = [
-        (f"audit-brief{suffix}.md", "A", appendix["audit"], "audit-app-"),
-        (f"obsidian-instruction-audit{suffix}.md", "B", appendix["instructions"], "audit-instructions-"),
-    ]
-    sections = []
-    for filename, marker, title, prefix in sources:
-        audit_path = ROOT / "output" / filename
-        if not audit_path.exists():
-            continue
-        sections.append(
-            f'<section class="doc-section" id="audit-appendix-{marker.lower()}"><span class="section-number">{marker}</span>'
-            f'<h2>{title}</h2><div class="prose">'
-            f'{render(audit_path.read_text(encoding="utf-8"), heading_offset=2, id_prefix=prefix)}</div></section>'
-        )
-    if not sections:
-        return ""
-    summary = "Исторический контекст аудита" if locale == "ru" else "Historical audit context"
-    return f'<details class="audit-history"><summary>{summary}</summary>{"".join(sections)}</details>'
-
-
 def render_component_catalog(locale: str) -> str:
     filename = "COMPONENT_CATALOG.ru.md" if locale == "ru" else "COMPONENT_CATALOG.md"
     path = ROOT / "docs" / filename
@@ -325,6 +305,9 @@ def render_lab_sample(component_id: str, story: dict, locale: str, unique: str) 
             f'<button class="qds-button" data-variant="{variant}" data-lab-state="{state}"'
             f' aria-label="{escape(label, quote=True)}"{disabled}{busy}>{progress}<span>{label}</span></button>'
         )
+    if component_id == "icon-button":
+        disabled = " disabled" if state == "disabled" else ""
+        return f'<button class="qds-icon-button" type="button" data-lab-state="{state}" aria-label="{"Добавить" if ru else "Add"}"{disabled}>{icon("add")}</button>'
     if component_id == "field":
         control_id = f"{unique}-control"
         field_label = lab_copy(locale, "Название коллекции" if ru else "Collection name", width)
@@ -348,6 +331,33 @@ def render_lab_sample(component_id: str, story: dict, locale: str, unique: str) 
             f'<input class="qds-field" id="{control_id}" aria-label="{escape(field_label, quote=True)}"{disabled}{described}'
             f'{valid_described}{invalid_attribute}{readonly} value="{escape(field_value, quote=True)}"></label>{error_html}{valid_html}'
         )
+    if component_id == "search":
+        value = "Правила" if ru else "Rules"
+        if state in {"empty", "disabled"}:
+            value = ""
+        status = "3 результата" if ru else "3 results"
+        if state == "noResults":
+            status = "Совпадений нет" if ru else "No matches"
+        disabled = " disabled" if state == "disabled" else ""
+        return f'<label class="lab-search"><span>{"Поиск" if ru else "Search"}</span><span class="lab-search-control">{icon("search")}<input type="search" value="{value}"{disabled}></span><small role="status">{status if state in {"results", "noResults"} else ""}</small></label>'
+    if component_id == "checkbox":
+        checked = " checked" if state in {"checked", "mixed"} else ""
+        disabled = " disabled" if state == "disabled" else ""
+        mixed = ' data-demo-mixed="true"' if state == "mixed" else ""
+        return f'<label class="lab-check"><input type="checkbox"{checked}{disabled}{mixed}> <span>{"Показывать подсказки" if ru else "Show guidance"}</span></label>'
+    if component_id == "switch":
+        checked = "true" if state == "on" else "false"
+        disabled = " disabled" if state == "disabled" else ""
+        return f'<button class="switch lab-switch" type="button" role="switch" aria-checked="{checked}" data-demo-switch data-lab-state="{state}"{disabled}><span>{"Автосохранение" if ru else "Autosave"}</span></button>'
+    if component_id in {"segmented-control", "tabs"}:
+        role = "tablist" if component_id == "tabs" else "radiogroup"
+        item_role = "tab" if component_id == "tabs" else "radio"
+        labels = ("Код", "Дизайн", "Тесты") if ru else ("Code", "Design", "Tests")
+        buttons = "".join(
+            f'<button type="button" role="{item_role}" aria-{"selected" if component_id == "tabs" else "checked"}="{"true" if index == 1 or state == "selected" and index == 0 else "false"}" data-demo-segment{(" disabled" if state == "disabled" and index == 2 else "")}>{text}</button>'
+            for index, text in enumerate(labels)
+        )
+        return f'<div class="lab-segments" role="{role}" aria-label="{"Раздел" if ru else "Section"}">{buttons}</div>'
     if component_id == "interactive-row":
         selected = ' aria-selected="true"' if state == "selected" else ' aria-selected="false"'
         unavailable = ' aria-disabled="true"' if state in {"disabled", "unavailable"} else ""
@@ -370,12 +380,36 @@ def render_lab_sample(component_id: str, story: dict, locale: str, unique: str) 
         title = lab_copy(locale, "Хранение" if ru else "Storage", width)
         disabled = " disabled" if state == "disabled" else ""
         return f'<fieldset class="qds-group"{disabled}><legend>{title}</legend><label><input type="checkbox" checked> {lab_copy(locale, "Сохранять историю локально" if ru else "Keep local history", width)}</label></fieldset>'
+    if component_id == "menu":
+        opened = " open" if state in {"open", "focused"} else ""
+        disabled = " disabled" if state == "disabled" else ""
+        return f'<details class="lab-menu"{opened}><summary{disabled}>{"Действия" if ru else "Actions"} {icon("chevron")}</summary><div role="menu"><button role="menuitem">{"Дублировать" if ru else "Duplicate"}</button><button role="menuitem">{"Архивировать" if ru else "Archive"}</button></div></details>'
+    if component_id == "popover":
+        opened = " open" if state in {"open", "focused"} else ""
+        return f'<details class="lab-popover"{opened}><summary>{"Фильтры" if ru else "Filters"}</summary><div><label><input type="checkbox" checked> {"Только готовые" if ru else "Ready only"}</label></div></details>'
     if component_id == "dialog":
         title = "Не удалось завершить" if ru and state == "error" else "Could not complete" if state == "error" else "Удалить правило?" if ru else "Delete rule?"
         busy = ' aria-busy="true"' if state == "busy" else ""
         disabled = " disabled" if state == "busy" else ""
         description = "Сохраняем изменения…" if ru and state == "busy" else "Saving changes…" if state == "busy" else "Изменение можно отменить позже." if ru else "You can recover this change later."
         return f'<div class="lab-dialog" role="dialog" aria-modal="false" aria-labelledby="{unique}-title"{busy}><strong id="{unique}-title">{title}</strong><p>{description}</p><button class="qds-button" data-variant="secondary"{disabled}>{"Отмена" if ru else "Cancel"}</button></div>'
+    if component_id == "banner":
+        if state == "dismissed":
+            return f'<button class="qds-button" data-variant="secondary" data-demo-restore-banner>{"Показать баннер" if ru else "Show banner"}</button>'
+        symbol = "warning" if state == "warning" else "error" if state == "error" else "information"
+        return f'<div class="lab-banner lab-status-{state}" role="status" data-demo-banner>{icon(symbol)}<span>{"Проверьте настройки перед продолжением." if ru else "Review settings before continuing."}</span><button type="button" data-demo-dismiss aria-label="{"Закрыть" if ru else "Dismiss"}">{icon("close")}</button></div>'
+    if component_id == "toast":
+        if state == "hidden":
+            return f'<button class="qds-button" data-variant="secondary" data-demo-show-toast>{"Показать подтверждение" if ru else "Show confirmation"}</button>'
+        action = f'<button type="button">{"Отменить" if ru else "Undo"}</button>' if state == "actionable" else ""
+        return f'<div class="lab-toast" role="status" data-demo-toast>{"Сохранено" if ru else "Saved"}{action}<button type="button" data-demo-dismiss aria-label="{"Закрыть" if ru else "Dismiss"}">{icon("close")}</button></div>'
+    if component_id == "progress":
+        value = "" if state == "indeterminate" else ' value="68" max="100"'
+        label_text = {"paused": ("Приостановлено", "Paused"), "complete": ("Готово", "Complete"), "error": ("Не удалось", "Failed")}.get(state, ("Обработка", "Processing"))[0 if ru else 1]
+        return f'<label class="lab-progress-demo"><span>{label_text}</span><progress{value}></progress><small>{"68%" if value else ""}</small></label>'
+    if component_id == "empty-state":
+        message = {"firstRun": ("Начните с первого правила", "Create your first rule"), "noResults": ("Совпадений нет", "No matches"), "unavailable": ("Данные недоступны", "Data unavailable"), "error": ("Не удалось загрузить", "Could not load")}[state][0 if ru else 1]
+        return f'<div class="lab-empty"><strong>{message}</strong><p>{"Измените условие или повторите попытку." if ru else "Change the condition or try again."}</p><button class="qds-button" data-variant="primary">{"Продолжить" if ru else "Continue"}</button></div>'
     status_label = {
         "success": ("Готово", "Complete"),
         "warning": ("Нужно проверить", "Needs review"),
@@ -419,7 +453,9 @@ def render_component_lab(locale: str) -> str:
             )
         components.append(
             f'<section class="lab-component" id="lab-{component_id}"><header><h3>{component["name"][locale]}</h3>'
-            f'<p>{component["summary"][locale]}</p></header><div class="lab-story-grid">{"".join(stories)}</div></section>'
+            f'<p>{component["summary"][locale]}</p><div class="lab-component-meta"><span>{component["status"]}</span>'
+            f'<span>{component["category"]}</span><span>{len(component["stories"])} {"примеров" if ru else "stories"}</span>'
+            f'<span>{" · ".join(component["platforms"])}</span></div></header><div class="lab-story-grid">{"".join(stories)}</div></section>'
         )
     return (
         '<section class="doc-section component-lab" id="lab-overview" data-nav-slug="lab" data-density="standard" data-width="all">'
@@ -437,6 +473,26 @@ def render_adoption(locale: str) -> str:
     return (
         '<section class="doc-section" id="adoption-overview" data-nav-slug="adoption"><span class="section-number">D</span>'
         f'<h2>{title}</h2><div class="prose">{render(body, id_prefix="adoption-")}</div></section>'
+    )
+
+
+def development_sections(locale: str) -> list[tuple[str, str, str]]:
+    suffix = ".ru.md" if locale == "ru" else ".md"
+    sections = []
+    for key, stem in zip(DEVELOPMENT_SECTION_KEYS, ("DEVELOPMENT", "CODE", "COMMITS", "LICENSES")):
+        lines = (ROOT / "docs" / f"{stem}{suffix}").read_text(encoding="utf-8").splitlines()
+        if not lines or not lines[0].startswith("# "):
+            raise ValueError(f"docs/{stem}{suffix}: expected one H1 title")
+        sections.append((key, lines[0][2:].strip(), "\n".join(lines[1:]).strip()))
+    return sections
+
+
+def render_development_module(locale: str) -> str:
+    return "".join(
+        f'<section class="doc-section" id="development-{key}" data-nav-slug="development">'
+        f'<span class="section-number">D{index}</span><h2>{title}</h2>'
+        f'<div class="prose">{render(markdown, id_prefix=f"development-{key}-")}</div></section>'
+        for index, (key, title, markdown) in enumerate(development_sections(locale))
     )
 
 
@@ -537,10 +593,22 @@ def brand_sections(locale: str) -> list[tuple[str, str, str]]:
 def render_brand_module(locale: str) -> str:
     rendered = []
     for index, (key, title, markdown) in enumerate(brand_sections(locale)):
+        gallery = ""
+        if key == "nyx":
+            items = (
+                ("portrait-soft-smile.png", "Nyx portrait with a soft smile" if locale == "en" else "Портрет Nyx с мягкой улыбкой", "Portrait" if locale == "en" else "Портрет"),
+                ("open-palm-presenting.png", "Nyx presenting an empty space with an open palm" if locale == "en" else "Nyx открытой ладонью показывает свободное место", "Full body" if locale == "en" else "Полный рост"),
+                ("hero-copy-left.png", "Nyx composition with clear copy space on the left" if locale == "en" else "Композиция Nyx со свободным местом для текста слева", "Composition" if locale == "en" else "Композиция"),
+                ("right-edge-peek.png", "Nyx peeking from the right edge" if locale == "en" else "Nyx выглядывает из правого края", "Edge composition" if locale == "en" else "Краевая композиция"),
+            )
+            gallery = '<div class="nyx-gallery">' + "".join(
+                f'<figure><div class="nyx-image-frame"><img data-nyx-src="assets/nyx/{filename}" alt="{escape(alt, quote=True)}"></div><figcaption>{label}</figcaption></figure>'
+                for filename, alt, label in items
+            ) + "</div>"
         rendered.append(
             f'<section class="doc-section" id="brand-{key}" data-nav-slug="brand">'
             f'<span class="section-number">B{index}</span><h2>{title}</h2>'
-            f'<div class="prose">{render(markdown, id_prefix=f"brand-{key}-")}</div></section>'
+            f'<div class="prose">{render(markdown, id_prefix=f"brand-{key}-")}</div>{gallery}</section>'
         )
     return "".join(rendered)
 
@@ -631,7 +699,7 @@ def shell(
         )
         styles = f"<style>{token_css}\n{recipe_css}\n{inline_css}</style>"
         scripts = f"<script>window.QDS_SEARCH_INDEX={json.dumps(search_index or [], ensure_ascii=False)};</script><script>{source_js}</script><script>{email_renderer_js}</script><script>{email_composer_js}</script>"
-        data = f'data-root="" data-site-root="" data-standalone="true" data-locale="{locale}"'
+        data = f'data-root="{asset_root}" data-site-root="" data-standalone="true" data-locale="{locale}"'
         stylesheet = ""
     else:
         styles = ""
@@ -729,7 +797,6 @@ def build() -> None:
     )
     token_reference = generate_token_reference(token_files)
     swift_icons = generate_swift_icons(icons)
-    svg_sprite = generate_svg_sprite(icons)
     figma_exports = generate_figma_exports(tokens, components, icons)
     token_snapshot = json.dumps(
         {name: data for name, data in token_files},
@@ -741,7 +808,6 @@ def build() -> None:
     atomic_write(ROOT / "generated" / "qds-tokens.css", token_css)
     atomic_write(ROOT / "generated" / "QDSGeneratedTokens.swift", swift)
     atomic_write(ROOT / "generated" / "QDSGeneratedIcons.swift", swift_icons)
-    atomic_write(ROOT / "generated" / "qds-icons.svg", svg_sprite)
     for filename, payload in figma_exports.items():
         atomic_write(
             ROOT / "generated" / "figma" / filename,
@@ -764,13 +830,28 @@ def build() -> None:
     if dist.exists():
         shutil.rmtree(dist)
     (dist / "assets").mkdir(parents=True, exist_ok=True)
+    symbol_directory = dist / "assets" / "symbols"
+    subprocess.run(
+        ["swift", str(ROOT / "scripts" / "render_sf_symbols.swift"), str(ROOT / "registry" / "icons.json"), str(symbol_directory)],
+        cwd=ROOT,
+        check=True,
+    )
+    configure_icon_assets(symbol_directory)
+    nyx_output = dist / "assets" / "nyx"
+    nyx_output.mkdir(parents=True, exist_ok=True)
+    for source, filename in (
+        (ROOT / "assets" / "brand" / "nyx" / "character-assets" / "portraits" / "Portrait Soft Smile.png", "portrait-soft-smile.png"),
+        (ROOT / "assets" / "brand" / "nyx" / "character-assets" / "full-body" / "Open Palm Presenting.png", "open-palm-presenting.png"),
+        (ROOT / "assets" / "brand" / "nyx" / "character-assets" / "compositions" / "Hero Copy Left.png", "hero-copy-left.png"),
+        (ROOT / "assets" / "brand" / "nyx" / "character-assets" / "compositions" / "Right Edge Peek.png", "right-edge-peek.png"),
+    ):
+        shutil.copyfile(source, nyx_output / filename)
     source_css = (ROOT / "src" / "assets" / "styles.css").read_text(encoding="utf-8")
     recipe_css = (ROOT / "src" / "assets" / "recipes.css").read_text(encoding="utf-8")
     source_js = (ROOT / "src" / "assets" / "app.js").read_text(encoding="utf-8")
     email_renderer_js = (ROOT / "src" / "assets" / "email-renderer.js").read_text(encoding="utf-8")
     email_composer_js = (ROOT / "src" / "assets" / "email-composer.js").read_text(encoding="utf-8")
     atomic_write(dist / "assets" / "qds-tokens.css", token_css)
-    atomic_write(dist / "assets" / "qds-icons.svg", svg_sprite)
     shutil.copyfile(ROOT / "src" / "assets" / "recipes.css", dist / "assets" / "qds-recipes.css")
     shutil.copyfile(ROOT / "src" / "assets" / "styles.css", dist / "assets" / "styles.css")
     shutil.copyfile(ROOT / "src" / "assets" / "app.js", dist / "assets" / "app.js")
@@ -828,6 +909,18 @@ def build() -> None:
                     "text": plain_text(markdown)[:1200],
                 }
             )
+        for index, (key, section_title, markdown) in enumerate(development_sections(locale)):
+            search_index.append(
+                {
+                    "section": f"D{index}",
+                    "anchor": f"development-{key}",
+                    "order": 60 + index,
+                    "title": section_title,
+                    "page": COPY[locale]["pages"]["development"][0],
+                    "path": "pages/development.html",
+                    "text": plain_text(markdown)[:1200],
+                }
+            )
         for index, component in enumerate(component_registry()["components"]):
             search_index.append(
                 {
@@ -881,6 +974,8 @@ def build() -> None:
                 sections_html = render_repository_module(locale)
             elif slug == "lab":
                 sections_html = render_component_lab(locale)
+            elif slug == "development":
+                sections_html = render_development_module(locale)
             elif slug == "adoption":
                 sections_html = render_adoption(locale)
             elif slug == "email":
@@ -889,8 +984,6 @@ def build() -> None:
                 sections_html = "\n".join(render_section(section_map[number], locale, slug) for number in numbers)
             if slug == "components":
                 sections_html += render_component_catalog(locale)
-            if slug == "audit":
-                sections_html += render_audit_appendix(locale)
             is_index = slug == "index"
             site_root = "" if is_index else "../"
             asset_root = "../" if is_index else "../../"
@@ -920,10 +1013,9 @@ def build() -> None:
             if section.number == 9:
                 standalone_sections.append(render_component_catalog(locale))
                 standalone_sections.append(render_component_lab(locale))
+                standalone_sections.append(render_development_module(locale))
                 standalone_sections.append(render_adoption(locale))
                 standalone_sections.append(render_email_composer(locale))
-            if section.number == 17:
-                standalone_sections.append(render_audit_appendix(locale))
         standalone_sections.append(render_brand_module(locale))
         standalone_sections.append(render_repository_module(locale))
         standalone = shell(
@@ -932,7 +1024,7 @@ def build() -> None:
             page_summary=COPY[locale]["ui"]["standalone_summary"],
             section_html="\n".join(standalone_sections),
             site_root="",
-            asset_root="",
+            asset_root="../",
             version=version,
             locale=locale,
             language_targets={code: f"../{code}/qenterra-design-system.html" for code in ("en", "ru")},
@@ -956,10 +1048,9 @@ def build() -> None:
         if section.number == 9:
             compatibility_sections.append(render_component_catalog("en"))
             compatibility_sections.append(render_component_lab("en"))
+            compatibility_sections.append(render_development_module("en"))
             compatibility_sections.append(render_adoption("en"))
             compatibility_sections.append(render_email_composer("en"))
-        if section.number == 17:
-            compatibility_sections.append(render_audit_appendix("en"))
     compatibility_sections.append(render_brand_module("en"))
     compatibility_sections.append(render_repository_module("en"))
     compatibility = shell(

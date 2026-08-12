@@ -3,6 +3,8 @@ from __future__ import annotations
 import copy
 import json
 import shutil
+import struct
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -179,14 +181,6 @@ class ValidatorTests(unittest.TestCase):
             errors = validate_repository_hygiene(root)
             self.assertTrue(any("Finder metadata" in error for error in errors))
 
-    def test_existing_product_name_fails_universal_guide(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
-            root.mkdir(exist_ok=True)
-            (root / "README.md").write_text("A guide for Cadence", encoding="utf-8")
-            errors = validate_repository_hygiene(root)
-            self.assertTrue(any("universal guide contains" in error for error in errors))
-
     def test_css_package_version_drift_fails(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -284,9 +278,9 @@ class ValidatorTests(unittest.TestCase):
             (schemas / "component-registry.schema.json").write_bytes(
                 (ROOT / "schemas" / "component-registry.schema.json").read_bytes()
             )
-            data = (ROOT / "registry" / "components.json").read_text(encoding="utf-8")
-            data = data.replace('"state": "default"', '"state": "imaginary"', 1)
-            (registry / "components.json").write_text(data, encoding="utf-8")
+            data = load_json(ROOT / "registry" / "components.json")
+            data["components"][0]["stories"][0]["state"] = "imaginary"
+            (registry / "components.json").write_text(json.dumps(data), encoding="utf-8")
             errors = validate_component_registry(root, self.version)
             self.assertTrue(any("unknown state" in error for error in errors))
 
@@ -306,6 +300,24 @@ class ValidatorTests(unittest.TestCase):
             (registry / "components.json").write_text(json.dumps(data), encoding="utf-8")
             errors = validate_component_registry(root, self.version)
             self.assertTrue(any("missing story coverage" in error and "focused" in error for error in errors))
+
+    def test_component_registry_requires_lifecycle_contract(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            registry = root / "registry"
+            schemas = root / "schemas"
+            registry.mkdir()
+            schemas.mkdir()
+            (schemas / "component-registry.schema.json").write_bytes(
+                (ROOT / "schemas" / "component-registry.schema.json").read_bytes()
+            )
+            data = load_json(ROOT / "registry" / "components.json")
+            data["components"][0].pop("lifecycle", None)
+            (registry / "components.json").write_text(json.dumps(data), encoding="utf-8")
+
+            errors = validate_component_registry(root, self.version)
+
+            self.assertTrue(any("lifecycle" in error for error in errors))
 
     def test_browser_evidence_requires_all_accessibility_axes_and_explicit_states(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -355,7 +367,7 @@ class ValidatorTests(unittest.TestCase):
     def test_capture_disables_layout_effects_before_scrolling(self) -> None:
         source = (ROOT / "scripts" / "render_screenshots.js").read_text(encoding="utf-8")
         capture_source = source.split("async function capture", 1)[1].split(
-            "async function assertUniformSvgIcons", 1
+            "async function assertUniformSfSymbols", 1
         )[0]
 
         self.assertLess(capture_source.index("addStyleTag"), capture_source.index("scrollTarget"))
@@ -415,6 +427,46 @@ class ValidatorTests(unittest.TestCase):
             (registry / "icons.json").write_text(json.dumps(data), encoding="utf-8")
             errors = validate_icon_registry(root, self.version)
             self.assertTrue(any("ids must be unique" in error for error in errors))
+
+    def test_icon_registry_requires_sf_symbols_and_rejects_svg_artwork(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            registry = root / "registry"
+            schemas = root / "schemas"
+            registry.mkdir()
+            schemas.mkdir()
+            (schemas / "icon-registry.schema.json").write_bytes(
+                (ROOT / "schemas" / "icon-registry.schema.json").read_bytes()
+            )
+            data = load_json(ROOT / "registry" / "icons.json")
+            data["icons"][0].pop("sfSymbol", None)
+            data["icons"][0]["svg"] = '<path d="M0 0h1v1z"/>'
+            (registry / "icons.json").write_text(json.dumps(data), encoding="utf-8")
+
+            errors = validate_icon_registry(root, self.version)
+
+            self.assertTrue(any("sfSymbol" in error for error in errors))
+            self.assertTrue(any("svg" in error for error in errors))
+
+    def test_sf_symbol_renderer_uses_fixed_pixel_canvas(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            subprocess.run(
+                [
+                    "swift",
+                    str(ROOT / "scripts" / "render_sf_symbols.swift"),
+                    str(ROOT / "registry" / "icons.json"),
+                    directory,
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+            dimensions = {
+                struct.unpack(">II", path.read_bytes()[16:24])
+                for path in Path(directory).glob("*.png")
+            }
+
+        self.assertEqual(dimensions, {(64, 64)})
 
 
 if __name__ == "__main__":

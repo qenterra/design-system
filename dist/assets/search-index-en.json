@@ -6,16 +6,16 @@
     "title": "How to use this file",
     "page": "Overview",
     "path": "index.html",
-    "text": "This document defines the shared UX/UI grammar for current and future native applications, websites, and browser extensions. Read in this order: 1. Determine the target platform and product profile. 2. Read the relevant pattern before selecting components. 3. Use semantic tokens from tokens/ .json ; never copy values from screenshots. 4. Prefer native platform behavior over decorative sameness. 5. Verify every mandatory state, accessibility mode, and content boundary. For logos, banners, mascot artwork, stickers, wallpapers, or pet animation, also read docs/brand/MASTER.md , the relevant brand profile, and assets/brand/manifest.json . Brand artwork is canonical content; it does not replace semantic interface tokens. Normative words: - must : required for compliance; - should : default; deviations need a reason; - may : optional; - must not : prohibited; - product-specific : deliberately outside the shared core. When this prose and a token file disagree, exact values come from the token file and behavioral meaning comes from this document. Fix the contradiction in the same change."
+    "text": "This document defines reusable UX/UI rules for native applications, websites, and browser extensions. Read in this order: 1. Determine the target platform and product profile. 2. Read the relevant pattern before selecting components. 3. Use semantic tokens from tokens/ .json ; never copy values from screenshots. 4. Prefer native platform behavior over decorative sameness. 5. Verify every mandatory state, accessibility mode, and content boundary. For logos, banners, mascot artwork, stickers, wallpapers, or pet animation, also read docs/brand/MASTER.md , the relevant brand profile, and assets/brand/manifest.json . Brand artwork is canonical content; it does not replace semantic interface tokens. Normative words: - must : required for compliance; - should : default; deviations need a reason; - may : optional; - must not : prohibited; - product-specific : deliberately outside the shared core. When this prose and a token file disagree, exact values come from the token file and behavioral meaning comes from this document. Fix the contradiction in the same change."
   },
   {
     "section": 1,
     "anchor": "section-1",
     "order": 1,
-    "title": "Family thesis",
+    "title": "System scope",
     "page": "Overview",
     "path": "index.html",
-    "text": "QenTerra products share one interface grammar, not one application shell. The system combines an adaptive Soft Graphite palette and content hierarchy with disciplined dense layouts, review-first flows, preflight, conflict safety, honest state language, short semantic motion, privacy copy, localization, transient surfaces, and explicit recovery. Family resemblance is visible in: - color roles; - typography roles; - spacing rhythm; - corner hierarchy; - button and row states; - icon treatment; - motion timing; - language and error recovery; - accessibility behavior; - screenshot and QA evidence. Family resemblance is not created by copying: - the same rail width; - the same Settings placement; - the same row height for every density; - the same app-icon metaphor; - media-player components into utilities; - menu-bar HUDs into document windows."
+    "text": "QDS standardizes semantics, behavior, accessibility, and evidence. It does not prescribe a single application shell. Shared rules cover: - color roles; - typography roles; - spacing rhythm; - corner hierarchy; - button and row states; - icon treatment; - motion timing; - language and error recovery; - accessibility behavior; - screenshot and QA evidence. Shared rules do not require: - the same rail width; - the same Settings placement; - the same row height for every density; - the same app-icon metaphor; - media-player components into utilities; - menu-bar HUDs into document windows."
   },
   {
     "section": 2,
@@ -24,7 +24,7 @@
     "title": "Principles",
     "page": "Overview",
     "path": "index.html",
-    "text": "2.1 Content first Chrome supports the task and does not compete with it. Original artwork and file content may keep color; surrounding UI remains predominantly graphite and monochrome. 2.2 Honest state Show what the system actually knows. Never simulate audio level, progress, completion, connectivity, selection, or persistence. 2.3 Direct manipulation with recovery Actions should operate on visible objects. Risky actions require review, confirmation, Undo, or a recoverable destination according to consequence. 2.4 Recognition before recall Important destinations and actions have visible labels until the user deliberately chooses compact mode or space makes a responsive transformation necessary. 2.5 Native before custom Use platform controls, menus, sheets, navigation, typography, accessibility, and keyboard conventions where they satisfy the contract. A custom control must match native semantics, not merely native appearance. 2.6 Calm, not inert Motion confirms input and explains change. It is brief, interruptible, and absent when it adds no information. 2.7 Accessibility is a state, not an appendix Reduced motion, reduced transparency, increased contrast, keyboard focus, screen re"
+    "text": "2.1 Content first Chrome supports the task and does not compete with it. Original artwork and file content may keep color; surrounding UI remains predominantly graphite and monochrome. 2.2 Accurate status Show what the system actually knows. Never simulate audio level, progress, completion, connectivity, selection, or persistence. 2.3 Direct manipulation with recovery Actions should operate on visible objects. Risky actions require review, confirmation, Undo, or a recoverable destination according to consequence. 2.4 Recognition before recall Important destinations and actions have visible labels until the user deliberately chooses compact mode or space makes a responsive transformation necessary. 2.5 Native before custom Use platform controls, menus, sheets, navigation, typography, accessibility, and keyboard conventions where they satisfy the contract. A custom control must match native semantics, not merely native appearance. 2.6 Calm, not inert Motion confirms input and explains change. It is brief, interruptible, and absent when it adds no information. 2.7 Accessibility is a state, not an appendix Reduced motion, reduced transparency, increased contrast, keyboard focus, screen"
   },
   {
     "section": 3,
@@ -139,7 +139,7 @@
     "anchor": "section-15",
     "order": 15,
     "title": "Product archetypes",
-    "page": "Product archetypes",
+    "page": "Interaction contexts",
     "path": "pages/products.html",
     "text": "Exact profile arrays live in tokens/products.json . Choose an archetype by interaction model, not by branding; a product may combine them when boundaries remain explicit. 15.1 Immersive content Use for libraries and browsers where persistent content hierarchy, rich media, selection, queues, and long-lived state dominate. Keep adaptive surfaces, review-first imports, persistent task controls, stable tables, and recoverable removal. Adapt density and navigation to the platform. Replace duplicate symbols, scattered visual constants, suppressed interaction states, and persistence claims that exceed reality. 15.2 Dense operations Use for file, transfer, batch, and administration workflows. Keep filename-first or object-first hierarchy, selection summaries, preflight, conflict resolution, scoped progress, operation history, and system integration. Adapt rail density, toolbar wrapping, issue placement, localization, and motion. Replace invisible overflow, pristine-field errors, unnamed toggles, silent session discard, and global untyped errors. 15.3 Transient capability Use for menu-bar utilities, HUDs, capture tools, quick history, and background capabilities surfaced briefly. Keep hones"
   },
@@ -148,7 +148,7 @@
     "anchor": "section-16",
     "order": 16,
     "title": "App icons",
-    "page": "Product archetypes",
+    "page": "Interaction contexts",
     "path": "pages/products.html",
     "text": "App icons form a family through: - shared optical weight; - controlled biomorphic or faceted construction; - restrained graphite/monochrome material; - appearance-aware foreground/background contrast; - consistent safe zones and silhouette density; - matching lighting, translucency, and depth rules; - validation at 16, 32, 64, 128, 256, 512, and 1024 pixels where supported. They must remain semantically distinct. Do not turn every icon into a letter tile or force one product's geometry onto unrelated concepts."
   },
@@ -276,7 +276,7 @@
     "title": "Code quality",
     "page": "Repositories",
     "path": "pages/repositories.html",
-    "text": "Every repository adopts the applicable QDS Code System language profile and names one canonical verification command. Code must remain understandable to a developer new to the module: its role, dependencies, effects, failures, and verification path are visible through boundaries, names, tests, or focused comments. Keep UI, domain policy, storage, network, and platform effects at explicit boundaries. Do not mix unrelated formatting churn with behavioral changes. Record a rule exception with its exact rule and path, technical reason, owner, and review date. Pull requests separate automated checks, live checks, and manual gaps; a green static check never substitutes for a real platform boundary."
+    "text": "Every repository adopts the applicable QDS Code System language profile and names one canonical verification command. Code must remain understandable to a developer new to the module: its role, dependencies, effects, failures, and verification path are visible through boundaries, names, tests, or focused comments. Keep UI, domain policy, storage, network, and platform effects at explicit boundaries. Do not mix unrelated formatting churn with behavioral changes. Follow the QDS development lifecycle from a sourced problem through operation and retirement. Use the QDS commit standard for atomic history and breaking-change notes. A repository may narrow allowed scopes, but it must not redefine commit types with conflicting meanings. Record a rule exception with its exact rule and path, technical reason, owner, and review date. Pull requests separate automated checks, live checks, and manual gaps; a green static check never substitutes for a real platform boundary."
   },
   {
     "section": "R5",
@@ -312,7 +312,7 @@
     "title": "Privacy and legal source-of-truth checks",
     "page": "Repositories",
     "path": "pages/repositories.html",
-    "text": "Before changing legal documents, inspect: - application entitlements or extension permissions; - network clients, external services, and explicit browser-opening actions; - local storage paths, retention bounds, deletion behavior, and account actions; - runtime, downloaded, bundled, and build-only dependencies; - model, media, font, and website-script licenses; - release archives, not just source manifests. Do not state that data “never leaves the device” when an operating-system sync provider or required external service can process it. Name that boundary."
+    "text": "Before changing legal documents, inspect: - application entitlements or extension permissions; - network clients, external services, and explicit browser-opening actions; - local storage paths, retention bounds, deletion behavior, and account actions; - runtime, downloaded, bundled, and build-only dependencies; - model, media, font, and website-script licenses; - release archives, not just source manifests. Apply the QDS license standard to the resolved dependency graph and the shipped artifact. Record SPDX identifiers, required notices, source offers, asset restrictions, and license compatibility. System-provided platform artwork is not a reusable project asset. Do not state that data “never leaves the device” when an operating-system sync provider or required external service can process it. Name that boundary."
   },
   {
     "section": "R9",
@@ -351,58 +351,202 @@
     "text": "The files under templates/repository/ are starting points, not blind copy targets. Select the smallest set that matches the repository type, replace every placeholder, remove irrelevant sections, and verify every claim against the current implementation before committing. Use templates/repository/readme/ for the repository class, root/ for canonical policy and legal files, docs/ for technical documentation, github/ for repository-hosting metadata, and wiki/ for optional long-form product guidance. The standard remains authoritative when a template and the rules appear to disagree."
   },
   {
+    "section": "D0",
+    "anchor": "development-lifecycle",
+    "order": 60,
+    "title": "Development lifecycle",
+    "page": "Development",
+    "path": "pages/development.html",
+    "text": "Working contract Every change has an owner, a source of truth, a risk level, and evidence. Start with the smallest user or system outcome worth shipping. Keep plans and tool output outside the repository. Store durable requirements, decisions, source, tests, and release records in their canonical locations. Use the lifecycle as a set of gates. A small copy correction may pass several gates in one review. A permission, migration, payment, security, or destructive change needs separate evidence at each relevant gate. Lifecycle map Stage Required input Output Exit evidence --- --- --- --- Discover Observed problem or opportunity Problem statement and affected users Source links, observation, or support evidence Define Problem statement Scope, acceptance criteria, risks, non-goals Reviewed requirement Design Approved scope Flow, states, content, accessibility, platform behavior Prototype or component contract Architect Design and constraints Boundaries, data flow, effects, failure and migration plan ADR when the decision is durable or breaking Implement Approved design and architecture Readable source and focused tests Format, lint, typecheck or build, unit tests Review Complete change"
+  },
+  {
+    "section": "D1",
+    "anchor": "development-code",
+    "order": 61,
+    "title": "QenTerra Code System",
+    "page": "Development",
+    "path": "pages/development.html",
+    "text": "Purpose and scope This reference defines family-wide engineering semantics for native applications, websites, browser extensions, and tooling. It complements MASTER.md ; platform conventions and product architecture remain authoritative for their own scope. Read this guide, the language profile, the product architecture, and source-of-truth configuration before implementing or reviewing code. Code quality is a product property: code that runs but cannot be safely changed by a developer new to the module has only deferred its cost. Code Core Ownership and boundaries - Each changing value has one declared source of truth; generated output is never hand-edited. - A module owns one domain responsibility and a narrow public interface. Catch-all Manager , Helpers , Common , or Utils modules need a precise domain role. - Presentation does not own persistence, network I/O, or business policy; infrastructure does not know screen rendering details. - Keep dependency direction explicit. Promote code to a shared family layer only after two genuine consumers demonstrate the same semantic need. Naming and public APIs - Types and values use precise nouns; operations use outcome-oriented verbs. Pr"
+  },
+  {
+    "section": "D2",
+    "anchor": "development-commits",
+    "order": 62,
+    "title": "Commit standard",
+    "page": "Development",
+    "path": "pages/development.html",
+    "text": "Unit of history A commit records one reviewable change. Keep implementation, regression coverage, generated counterparts, and the documentation required to understand that change together. Split unrelated formatting, dependency updates, refactors, and behavior. The repository must build or pass its documented intermediate gate at each commit unless the commit belongs to a clearly marked, private reconstruction branch. Subject Use Conventional Commits: Allowed types are feat , fix , refactor , perf , test , docs , build , ci , chore , and revert . Use a scope when it helps a reviewer locate ownership, such as icons , swift , web , brand , or release . Keep the subject specific, lower-case after the colon, and free of a trailing period. Body Add a body when the diff cannot explain the reason, constraint, data effect, or rejected alternative. Write paragraphs in active voice. Describe the current behavior and the change. Do not paste test logs, meeting notes, prompts, or a file-by-file inventory. Breaking changes Add ! after the type or scope and a BREAKING CHANGE: footer when a consumer must migrate. Name the old contract, replacement, required consumer action, and first compatible v"
+  },
+  {
+    "section": "D3",
+    "anchor": "development-licenses",
+    "order": 63,
+    "title": "License standard",
+    "page": "Development",
+    "path": "pages/development.html",
+    "text": "Scope Review licenses for source, binaries, packages, models, fonts, icons, images, audio, video, datasets, documentation, generated output, and downloaded runtime content. A package-manager manifest covers only the package fields it declares. This guide supports engineering review and does not replace legal advice. Choose the project license Select a license before public distribution. Record the exact SPDX identifier, copyright holder, year policy, patent terms, source-disclosure duties, and compatibility with bundled dependencies. UNLICENSED or a proprietary notice must state that no redistribution permission is granted. Do not copy a license from another repository because its product looks similar. Public source availability does not grant an open-source license. Dependency review For each direct runtime and build dependency, record name, pinned or resolved version, source, SPDX identifier, copyright notice, use, delivery form, and update owner. Inspect transitive dependencies when the artifact bundles them or their license imposes notice or source duties. Block packages with missing terms, incompatible copyleft obligations, non-commercial restrictions that conflict with distr"
+  },
+  {
     "section": "L0",
     "anchor": "lab-button",
     "order": 80,
     "title": "Button",
     "page": "Component Lab",
     "path": "pages/lab.html",
-    "text": "Starts one explicit action with a truthful role and state."
+    "text": "Starts one named action."
   },
   {
     "section": "L1",
-    "anchor": "lab-field",
+    "anchor": "lab-icon-button",
     "order": 81,
-    "title": "Field",
+    "title": "Icon button",
     "page": "Component Lab",
     "path": "pages/lab.html",
-    "text": "Collects one value with persistent label, help, and validation."
+    "text": "Runs a familiar action in compact chrome."
   },
   {
     "section": "L2",
-    "anchor": "lab-interactive-row",
+    "anchor": "lab-field",
     "order": 82,
-    "title": "Interactive row",
+    "title": "Field",
     "page": "Component Lab",
     "path": "pages/lab.html",
-    "text": "Presents a dominant label and one row-level action or selection."
+    "text": "Collects one value with a persistent label and local validation."
   },
   {
     "section": "L3",
-    "anchor": "lab-group",
+    "anchor": "lab-search",
     "order": 83,
-    "title": "Group",
+    "title": "Search field",
     "page": "Component Lab",
     "path": "pages/lab.html",
-    "text": "Collects related controls under one plain-language heading."
+    "text": "Filters a known collection and reports the result count."
   },
   {
     "section": "L4",
-    "anchor": "lab-dialog",
+    "anchor": "lab-checkbox",
     "order": 84,
-    "title": "Dialog",
+    "title": "Checkbox",
     "page": "Component Lab",
     "path": "pages/lab.html",
-    "text": "Interrupts only for a bounded decision that cannot stay inline."
+    "text": "Toggles an independent option."
   },
   {
     "section": "L5",
-    "anchor": "lab-status",
+    "anchor": "lab-switch",
     "order": 85,
+    "title": "Switch",
+    "page": "Component Lab",
+    "path": "pages/lab.html",
+    "text": "Changes a setting that takes effect at once."
+  },
+  {
+    "section": "L6",
+    "anchor": "lab-segmented-control",
+    "order": 86,
+    "title": "Segmented control",
+    "page": "Component Lab",
+    "path": "pages/lab.html",
+    "text": "Chooses one view or mode from a short set."
+  },
+  {
+    "section": "L7",
+    "anchor": "lab-tabs",
+    "order": 87,
+    "title": "Tabs",
+    "page": "Component Lab",
+    "path": "pages/lab.html",
+    "text": "Moves between peer sections without changing task context."
+  },
+  {
+    "section": "L8",
+    "anchor": "lab-interactive-row",
+    "order": 88,
+    "title": "Interactive row",
+    "page": "Component Lab",
+    "path": "pages/lab.html",
+    "text": "Presents one row-level action or selection."
+  },
+  {
+    "section": "L9",
+    "anchor": "lab-group",
+    "order": 89,
+    "title": "Group",
+    "page": "Component Lab",
+    "path": "pages/lab.html",
+    "text": "Collects related controls under one heading."
+  },
+  {
+    "section": "L10",
+    "anchor": "lab-menu",
+    "order": 90,
+    "title": "Menu",
+    "page": "Component Lab",
+    "path": "pages/lab.html",
+    "text": "Lists contextual actions next to their source."
+  },
+  {
+    "section": "L11",
+    "anchor": "lab-popover",
+    "order": 91,
+    "title": "Popover",
+    "page": "Component Lab",
+    "path": "pages/lab.html",
+    "text": "Shows compact supporting controls beside a trigger."
+  },
+  {
+    "section": "L12",
+    "anchor": "lab-dialog",
+    "order": 92,
+    "title": "Dialog",
+    "page": "Component Lab",
+    "path": "pages/lab.html",
+    "text": "Requests one bounded decision that cannot remain inline."
+  },
+  {
+    "section": "L13",
+    "anchor": "lab-banner",
+    "order": 93,
+    "title": "Banner",
+    "page": "Component Lab",
+    "path": "pages/lab.html",
+    "text": "Keeps an important page-level condition visible."
+  },
+  {
+    "section": "L14",
+    "anchor": "lab-toast",
+    "order": 94,
+    "title": "Toast",
+    "page": "Component Lab",
+    "path": "pages/lab.html",
+    "text": "Confirms a reversible outcome without stealing focus."
+  },
+  {
+    "section": "L15",
+    "anchor": "lab-progress",
+    "order": 95,
+    "title": "Progress",
+    "page": "Component Lab",
+    "path": "pages/lab.html",
+    "text": "Reports measured work and its current phase."
+  },
+  {
+    "section": "L16",
+    "anchor": "lab-status",
+    "order": 96,
     "title": "Status",
     "page": "Component Lab",
     "path": "pages/lab.html",
-    "text": "Communicates outcome with words and shape, never color alone."
+    "text": "Communicates an outcome with words and shape."
+  },
+  {
+    "section": "L17",
+    "anchor": "lab-empty-state",
+    "order": 97,
+    "title": "Empty state",
+    "page": "Component Lab",
+    "path": "pages/lab.html",
+    "text": "Explains why content is absent and offers one useful next action."
   },
   {
     "section": "D",

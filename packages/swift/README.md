@@ -12,7 +12,7 @@
   <a href="https://github.com/qenterra/design-system/blob/main/CHANGELOG.md">Changelog</a>
 </p>
 
-> **Status:** private, proprietary distribution mirror. Release `1.12.0` is
+> **Status:** private, proprietary distribution mirror. Release `2.0.0` is
 > generated and filtered from `packages/swift/` in the canonical private
 > `qenterra/design-system` repository. Do not edit generated token or icon files
 > in this repository.
@@ -38,7 +38,7 @@ Add the private distribution from an authorized consumer:
 ```swift
 .package(
     url: "https://github.com/qenterra/design-system-swift.git",
-    from: "1.12.0"
+    from: "2.0.0"
 )
 ```
 

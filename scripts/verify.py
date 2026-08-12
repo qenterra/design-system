@@ -17,7 +17,6 @@ GENERATED_TARGETS = [
     ROOT / "generated" / "qds-tokens.css",
     ROOT / "generated" / "QDSGeneratedTokens.swift",
     ROOT / "generated" / "QDSGeneratedIcons.swift",
-    ROOT / "generated" / "qds-icons.svg",
     ROOT / "generated" / "figma" / "variables.json",
     ROOT / "generated" / "figma" / "styles.json",
     ROOT / "generated" / "figma" / "components.json",
@@ -43,7 +42,7 @@ GENERATED_TARGETS = [
     ROOT / "dist" / "assets" / "search-index-en.json",
     ROOT / "dist" / "assets" / "search-index-ru.json",
     ROOT / "dist" / "assets" / "qds-recipes.css",
-    ROOT / "dist" / "assets" / "qds-icons.svg",
+    ROOT / "dist" / "assets" / "symbols" / "index.png",
     ROOT / "dist" / "assets" / "email-renderer.js",
     ROOT / "dist" / "assets" / "email-composer.js",
 ]
