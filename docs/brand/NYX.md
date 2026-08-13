@@ -51,7 +51,7 @@ Canonical location: `assets/brand/nyx/telegram-stickers/`.
 
 Canonical location: `assets/brand/nyx/wallpapers/`.
 
-The current selected set is source truth: two 1284×2778 iPhone exports and two 3024×1964 desktop exports. Older notes that prescribe seven differently named 5K files or a single exact `#3C3E43` background are superseded by the actual approved collection.
+The current selected set is source truth: two 1284×2778 iPhone exports and two 3024×1964 desktop exports: `Shy (MacBook).png` and `Thinking (Chrome).png`. Older notes that prescribe seven differently named 5K files or a single exact `#3C3E43` background are superseded by the actual approved collection.
 
 - Wallpapers are opaque RGBA PNG with a dark neutral graphite edge field.
 - Use a deliberate wide or vertical composition; do not mechanically crop one device export into another.

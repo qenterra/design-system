@@ -6,8 +6,6 @@ The machine-readable catalog is [`../../assets/brand/manifest.json`](../../asset
 
 | Category | Count | Canonical directory | Primary use |
 | --- | ---: | --- | --- |
-| QenTerra banner raster | 24 | `qenterra/banners/raster/` | fixed-size publication and documentation art |
-| QenTerra banner vector | 8 | `qenterra/banners/vector/` | responsive and scalable banner placement |
 | QenTerra logo raster | 7 | `qenterra/logos/raster/` | fixed-size consumers and approved Dry/Wet treatments |
 | QenTerra logo vector | 1 | `qenterra/logos/vector/` | preferred scalable mark source |
 | QenTerra platform publication assets | 3 | `qenterra/platforms/` | supplied YouTube channel/video and Buy Me a Coffee deliveries |
@@ -19,7 +17,7 @@ The machine-readable catalog is [`../../assets/brand/manifest.json`](../../asset
 | Nyx Telegram pack | 50 | `nyx/telegram-stickers/` | 49 reaction PNG plus emoji map |
 | Nyx wallpapers | 4 | `nyx/wallpapers/` | selected phone and desktop backgrounds |
 
-Total: **216 files**, **513,158,836 bytes**. PNG: **205**, tracked with Git LFS. SVG/JSON/Markdown: **11**, tracked as normal Git files.
+Total: **184 files**, **512,101,029 bytes**. PNG: **173**, tracked with Git LFS. SVG/JSON/Markdown: **11**, tracked as normal Git files.
 
 ## Selection rule
 

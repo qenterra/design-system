@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/icon-registry.schema.json",
-  "version": "3.1.0",
+  "version": "4.0.0",
   "platform": "apple",
   "icons": [
     {"id":"index","category":"navigation","meaning":"System overview","sfSymbol":"square.grid.2x2","minimumOS":"11.0"},

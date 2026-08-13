@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.0
+
+### Breaking
+
+- Retired the legacy QenTerra raster and vector banner families; their `qenterra/banners/` paths are no longer available.
+
 ## 3.1.0
 
 ### Added

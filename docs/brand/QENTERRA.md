@@ -18,12 +18,9 @@ These values describe the supplied marks. Interface surfaces still use semantic 
 - The supplied `Dry` and `Wet` 1024 pixel treatments are separate approved raster deliveries; each also has an `on Graphite` version for an opaque contrast field.
 - Do not invent `Filled`, `Outlined`, `Dark`, or `Light` variants. Select the supplied file by actual surface contrast and delivery requirement.
 
-### Banners
+### Retired legacy banners
 
-- `banners/vector/` is preferred for responsive headers, documentation, and publication artwork.
-- `banners/raster/` provides 1024, 2048, and 4096 pixel exports.
-- Standard banners are the default family signature.
-- Alternative banners are intentional variants, not automatic replacements for the standard form.
+The legacy raster and vector banner families were retired in 4.0. Do not restore or reuse their `banners/` paths. Use the supplied platform publication assets only for their named destinations; they are deliberately fixed exports, not a new universal banner family.
 
 ### Platform publication assets
 
@@ -55,9 +52,11 @@ Use SVG when the consumer supports it safely. Use PNG for fixed raster pipelines
 
 Every delivered file must already exist in [`../../assets/brand/manifest.json`](../../assets/brand/manifest.json). A derived export becomes canonical only after it is named, placed, manifested, reviewed on light and dark backgrounds, and documented here if it introduces a new role.
 
-## Migration from 2.x
+## Migrations
 
 The `Dark/Light Logo` and `Filled/Outlined` paths were retired in 3.0. Replace scalable consumers with `logos/vector/QenTerra Logo.svg`. Use the transparent raster exports only at or below their native dimensions; use an approved `on Graphite` raster when the mark needs its own opaque contrast field on a light or busy surface.
+
+The legacy `banners/` paths were retired in 4.0. Replace a named YouTube or Buy Me a Coffee placement with its documented asset under `platforms/`; otherwise use the logo family and a product-owned layout rather than reconstructing a legacy banner.
 
 ## Contact channels
 
