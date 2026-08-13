@@ -36,7 +36,7 @@ CSS_RAW_VISUAL = re.compile(r"(?<![\w-])(?:#[0-9a-fA-F]{3,8}\b|rgba?\([^)]*\))")
 TOKEN_REFERENCE = re.compile(r"^\{([^}]+)}$")
 MARKDOWN_LINK = re.compile(r"\[[^]]+]\(([^)]+)\)")
 BRAND_DOC_PAIRS = ("MASTER", "QENTERRA", "NYX", "ASSET_CATALOG")
-CODE_DOCUMENT_PAIRS = ("CODE", "DEVELOPMENT", "COMMITS", "LICENSES")
+CODE_DOCUMENT_PAIRS = ("CODE", "DEVELOPMENT", "COMMITS", "LICENSES", "RELEASES")
 BRAND_TEMPLATES = {
     "brand-asset-brief.md",
     "manifest.example.json",
@@ -463,7 +463,7 @@ def validate_localized_sources(root: Path) -> list[str]:
         russian = root / "docs" / f"{stem}.ru.md"
         for path in (english, russian):
             if not path.is_file():
-                errors.append(f"{path.relative_to(root)}: missing localized Code System reference")
+                errors.append(f"{path.relative_to(root)}: missing localized normative reference")
         if english.is_file() and russian.is_file():
             english_headings = len(re.findall(r"^#{1,3} ", english.read_text(encoding="utf-8"), re.MULTILINE))
             russian_headings = len(re.findall(r"^#{1,3} ", russian.read_text(encoding="utf-8"), re.MULTILINE))

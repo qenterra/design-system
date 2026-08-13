@@ -135,6 +135,16 @@ class ValidatorTests(unittest.TestCase):
             errors = validate_localized_sources(root)
             self.assertTrue(any("docs/CODE.md" in error for error in errors))
 
+    def test_missing_release_contract_document_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            shutil.copytree(ROOT / "docs", root / "docs")
+            (root / "docs" / "RELEASES.ru.md").unlink(missing_ok=True)
+
+            errors = validate_localized_sources(root)
+
+            self.assertTrue(any("docs/RELEASES.ru.md" in error for error in errors))
+
     def test_code_system_template_inventory_and_json_are_validated(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

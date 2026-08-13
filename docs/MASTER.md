@@ -1,6 +1,6 @@
 # QenTerra Design System
 
-Version 4.0.0 · Normative reference for humans and AI agents
+Version 4.1.0 · Normative reference for humans and AI agents
 
 ## 0. How to use this file
 

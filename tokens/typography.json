@@ -2,7 +2,7 @@
   "$schema": "../schemas/typography.schema.json",
   "meta": {
     "name": "QenTerra Typography Tokens",
-    "version": "4.0.0",
+    "version": "4.1.0",
     "type": "typography",
     "description": "Semantic system-font roles. Platform adapters may map to native text styles."
   },

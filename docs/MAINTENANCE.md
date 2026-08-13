@@ -96,6 +96,11 @@ Run focused Python and Node tests, build both locales, execute the browser compo
 
 ## Private token package releases
 
+Product release versioning and macOS installer rules are defined in
+`docs/RELEASES.md`. Products keep a root `qds-release.json` and run
+`scripts/audit_release_contract.py` before packaging or publication; QDS owns
+the schema and template, while each product owns its concrete release values.
+
 `qenterra/design-system` is the canonical source. Versioned Swift consumers use
 the private filtered repository `qenterra/design-system-swift`; web consumers
 use private GitHub package `@qenterra/design-tokens`. Local `packages/swift/`

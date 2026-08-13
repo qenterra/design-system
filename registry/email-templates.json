@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/email-templates.schema.json",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "capabilities": {
     "sendsEmail": false,
     "persistsInput": false,

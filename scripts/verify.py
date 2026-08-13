@@ -81,6 +81,7 @@ def main() -> int:
                 "scripts/lib/email_templates.py",
                 "scripts/compare_screenshots.py",
                 "scripts/audit_consumer.py",
+                "scripts/audit_release_contract.py",
                 "scripts/brand/validate_brand_assets.py",
                 "scripts/brand/validate_nyx_assets.py",
                 "scripts/brand/validate_nyx_wallpapers.py",
@@ -91,6 +92,7 @@ def main() -> int:
                 "tests/test_brand_assets.py",
                 "tests/test_validator.py",
                 "tests/test_consumer_doctor.py",
+                "tests/test_release_contract.py",
                 "tests/test_brand_browser.py",
                 "tests/test_email_templates.py",
                 "tests/test_package_release.py",
@@ -107,6 +109,7 @@ def main() -> int:
 
     run([python, "-m", "unittest", "discover", "-s", "tests", "-v"])
     run([python, "scripts/audit_consumer.py", "tests/fixtures/consumer-pass"])
+    run([python, "scripts/audit_release_contract.py", "tests/fixtures/release-contract-pass"])
     run([python, "scripts/validate.py"])
     run([python, "scripts/package_release.py", "validate"])
     run([python, "scripts/brand/validate_brand_assets.py", "--check-git-lfs"])

@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://qenterra.com/schemas/product-release.schema.json",
+  "title": "QDS product release contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "product",
+    "release",
+    "platform",
+    "distribution",
+    "installer",
+    "artifacts"
+  ],
+  "properties": {
+    "$schema": {"type": "string", "minLength": 1},
+    "schemaVersion": {"type": "integer", "enum": [1]},
+    "product": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "artifactStem", "bundleIdentifier", "humanReleaseName"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "artifactStem": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"},
+        "bundleIdentifier": {"type": "string", "pattern": "^[A-Za-z0-9-]+(?:\\.[A-Za-z0-9-]+)+$"},
+        "humanReleaseName": {"type": "string", "minLength": 1}
+      }
+    },
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["marketingVersion", "build", "channel", "version", "tag"],
+      "properties": {
+        "marketingVersion": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"},
+        "build": {"type": "integer"},
+        "channel": {"type": "string", "enum": ["stable", "alpha", "beta", "rc"]},
+        "iteration": {"type": "integer"},
+        "version": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-(?:alpha|beta|rc)\\.[1-9][0-9]*)?$"},
+        "tag": {"type": "string", "pattern": "^v(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-(?:alpha|beta|rc)\\.[1-9][0-9]*)?$"}
+      }
+    },
+    "platform": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "minimumVersion", "architecture"],
+      "properties": {
+        "name": {"type": "string", "enum": ["macOS"]},
+        "minimumVersion": {"type": "string", "pattern": "^(0|[1-9][0-9]*)(?:\\.(0|[1-9][0-9]*)){1,2}$"},
+        "architecture": {"type": "string", "enum": ["arm64", "x86_64", "universal2"]}
+      }
+    },
+    "distribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["signing", "notarized", "gatekeeperDisclosure"],
+      "properties": {
+        "signing": {"type": "string", "enum": ["ad-hoc", "developer-id", "app-store"]},
+        "notarized": {"type": "boolean"},
+        "gatekeeperDisclosure": {"type": "boolean"}
+      }
+    },
+    "installer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["format", "style", "applicationsAlias"],
+      "properties": {
+        "format": {"type": "string", "enum": ["dmg"]},
+        "style": {"type": "string", "minLength": 1},
+        "applicationsAlias": {"type": "boolean"}
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["installer", "update", "checksums"],
+      "properties": {
+        "installer": {"type": "string", "minLength": 1},
+        "update": {"type": "string", "minLength": 1},
+        "checksums": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

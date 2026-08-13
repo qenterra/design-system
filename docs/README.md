@@ -21,6 +21,7 @@ QenTerra Design System documentation is organized by audience and authority.
 - [Troubleshooting](TROUBLESHOOTING.md)
 - [Maintenance and release workflow](MAINTENANCE.md)
 - [Code system](CODE.md) and [Russian code system](CODE.ru.md)
+- [Product release versions and installers](RELEASES.md) and [Russian reference](RELEASES.ru.md)
 - [Requirements](REQUIREMENTS.md)
 - [Decision records](decisions/)
 

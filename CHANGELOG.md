@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.1.0
+
+### Added
+
+- Added one machine-readable product release contract for stable and prerelease versions, Xcode build mapping, deterministic artifact names, signing truth, and macOS DMG requirements.
+- Added a read-only release auditor, reusable manifest template, bilingual installer guidance, and fail/pass fixtures that prevent release-surface drift without mutating the product.
+
 ## 4.0.0
 
 ### Breaking
