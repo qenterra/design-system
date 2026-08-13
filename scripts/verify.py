@@ -46,6 +46,9 @@ GENERATED_TARGETS = [
     ROOT / "dist" / "assets" / "email-renderer.js",
     ROOT / "dist" / "assets" / "email-composer.js",
 ]
+TESTING_MACROS_RELATIVE_PATH = Path(
+    "Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing/libTestingMacros.dylib"
+)
 
 
 def run(command: list[str], *, env: dict[str, str] | None = None) -> None:
@@ -57,10 +60,30 @@ def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def require_swift_testing_macros(developer_dir: Path) -> None:
+    """Fail before SwiftPM work when the selected developer directory is incomplete."""
+    macro = developer_dir / TESTING_MACROS_RELATIVE_PATH
+    if not macro.is_file():
+        raise RuntimeError(
+            "Swift package tests require full Xcode with TestingMacros; "
+            "set DEVELOPER_DIR to Xcode.app/Contents/Developer "
+            f"(current: {developer_dir})"
+        )
+
+
 def main() -> int:
     python = sys.executable
     version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
     environment = os.environ.copy()
+    developer_dir = environment.get("DEVELOPER_DIR")
+    if not developer_dir:
+        developer_dir = subprocess.run(
+            ["xcode-select", "--print-path"],
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.strip()
+    require_swift_testing_macros(Path(developer_dir))
     with tempfile.TemporaryDirectory(prefix="qds-pycache-") as cache:
         environment["PYTHONPYCACHEPREFIX"] = cache
         run(
@@ -96,6 +119,7 @@ def main() -> int:
                 "tests/test_brand_browser.py",
                 "tests/test_email_templates.py",
                 "tests/test_package_release.py",
+                "tests/test_verify_toolchain.py",
             ],
             env=environment,
         )

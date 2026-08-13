@@ -27,6 +27,10 @@ CSS_ALLOWED = {
 }
 SWIFT_ALLOWED_ROOTS = {"LICENSE", "Package.swift", "README.md", "Sources", "Tests"}
 DENIED_PARTS = {".DS_Store", ".env", ".swiftpm", ".superpowers", "node_modules", "output"}
+DOCUMENTATION_VERSION_PATTERNS = {
+    "README.md": r"> \*\*Status:\*\*.*?Version `([^`]+)`",
+    "packages/swift/README.md": r"> \*\*Status:\*\*.*?Release `([^`]+)`",
+}
 
 
 def canonical_version(root: Path) -> str:
@@ -73,6 +77,17 @@ def validate_version_alignment(root: Path) -> list[str]:
             continue
         if value != version:
             errors.append(f"{relative_path} version {value} != {version}")
+
+    for relative_path, pattern in DOCUMENTATION_VERSION_PATTERNS.items():
+        path = root / relative_path
+        if not path.is_file():
+            errors.append(f"{relative_path} is missing")
+            continue
+        match = re.search(pattern, path.read_text(encoding="utf-8"), re.DOTALL)
+        if match is None:
+            errors.append(f"{relative_path} version is unreadable")
+        elif match.group(1) != version:
+            errors.append(f"{relative_path} version {match.group(1)} != {version}")
 
     tokens_path = root / "packages/css/tokens.json"
     if not tokens_path.is_file():

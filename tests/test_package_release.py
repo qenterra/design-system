@@ -22,6 +22,10 @@ class PackageReleaseContractTests(unittest.TestCase):
         self.temporary_directory = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary_directory.name)
         self._write("VERSION", "1.12.0\n")
+        self._write(
+            "README.md",
+            "> **Status:** private source of truth. Version `1.12.0` is distributed.\n",
+        )
         self._write("package.json", json.dumps({"version": "1.12.0"}))
         self._write(
             "packages/css/package.json",
@@ -46,7 +50,10 @@ class PackageReleaseContractTests(unittest.TestCase):
         self._write("packages/css/recipes.css", ".qds {}\n")
         self._write("packages/swift/LICENSE", "Internal use only.\n")
         self._write("packages/swift/Package.swift", "// swift-tools-version: 5.9\n")
-        self._write("packages/swift/README.md", "# Swift package\n")
+        self._write(
+            "packages/swift/README.md",
+            "> **Status:** private mirror. Release `1.12.0` is generated.\n",
+        )
         self._write(
             "packages/swift/Sources/QenTerraDesignTokens/QDSGeneratedTokens.swift",
             'public enum QDS { public static let version = "1.12.0" }\n',
@@ -86,6 +93,26 @@ class PackageReleaseContractTests(unittest.TestCase):
         errors = validate_version_alignment(self.root)
 
         self.assertIn("packages/css/tokens.json foundation version 1.11.0 != 1.12.0", errors)
+
+    def test_root_readme_version_drift_is_reported(self) -> None:
+        self._write(
+            "README.md",
+            "> **Status:** private source of truth. Version `1.11.0` is distributed.\n",
+        )
+
+        errors = validate_version_alignment(self.root)
+
+        self.assertIn("README.md version 1.11.0 != 1.12.0", errors)
+
+    def test_swift_readme_version_drift_is_reported(self) -> None:
+        self._write(
+            "packages/swift/README.md",
+            "> **Status:** private mirror. Release `1.11.0` is generated.\n",
+        )
+
+        errors = validate_version_alignment(self.root)
+
+        self.assertIn("packages/swift/README.md version 1.11.0 != 1.12.0", errors)
 
     def test_css_payload_rejects_unlisted_file(self) -> None:
         self._write("packages/css/internal-audit.md", "private\n")

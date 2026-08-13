@@ -43,13 +43,20 @@ python3 -m http.server 8000 --directory dist
 The canonical gate is:
 
 ```sh
-QDS_IMAGE_PYTHON=.venv/bin/python python3 scripts/verify.py
+DEVELOPER_DIR="$(xcode-select --print-path)" \
+QDS_IMAGE_PYTHON=.venv/bin/python \
+python3 scripts/verify.py
 ```
 
 The gate fails when a required browser, image, package, asset, build, test, or
 exact screenshot stage cannot run. After it passes, inspect the affected English
 and Russian pages, Light and Dark appearance, desktop and constrained layouts,
 and the relevant screenshots at full size.
+
+Swift package tests use the `TestingMacros` plugin and therefore require the
+full Xcode developer directory, not Command Line Tools alone. Confirm that
+`xcode-select --print-path` ends in `Xcode.app/Contents/Developer`; otherwise
+set `DEVELOPER_DIR` to the installed Xcode path for the command above.
 
 ## Source boundaries
 
