@@ -74,6 +74,21 @@ class ReleaseContractTests(unittest.TestCase):
 
         self.assertEqual(report["status"], "passed")
 
+    def test_dmg_image_background_requires_exact_standard_scale_pair(self) -> None:
+        fixture = ROOT / "tests" / "fixtures" / "release-contract-pass"
+        with tempfile.TemporaryDirectory() as directory:
+            product = Path(directory) / "product"
+            shutil.copytree(fixture, product)
+            manifest_path = product / "qds-release.json"
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            manifest["installer"]["background"]["scaleFactors"] = [1]
+            manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+            report = audit_release_contract(product)
+
+        self.assertEqual(report["status"], "failed")
+        self.assertIn("installer.background.scaleFactors", "\n".join(report["errors"]))
+
     def test_cli_refuses_output_inside_product(self) -> None:
         fixture = ROOT / "tests" / "fixtures" / "release-contract-pass"
         output = fixture / "forbidden-report.json"

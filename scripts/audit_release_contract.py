@@ -102,6 +102,13 @@ def semantic_errors(data: dict[str, Any]) -> list[str]:
     if installer.get("format") == "dmg" and installer.get("applicationsAlias") is not True:
         errors.append("installer.applicationsAlias must be true for DMG releases")
 
+    background = installer.get("background")
+    if isinstance(background, dict) and background.get("kind") == "image":
+        if background.get("scaleFactors") != [1, 2]:
+            errors.append(
+                "installer.background.scaleFactors must be [1, 2] for image backgrounds"
+            )
+
     if distribution.get("signing") == "ad-hoc":
         if distribution.get("notarized") is not False:
             errors.append("ad-hoc signing cannot claim notarization")

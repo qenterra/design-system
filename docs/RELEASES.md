@@ -56,6 +56,11 @@ background, but it must preserve the real app icon, obvious drag direction,
 legible labels, native keyboard and pointer behavior, and sufficient contrast.
 Decorative treatments do not replace installation instructions.
 
+When the Finder background is an image, declare `installer.background` with
+`kind: "image"` and `scaleFactors: [1, 2]`. The DMG must contain both real 72-DPI
+and 144-DPI representations rather than an upscaled single-resolution bitmap.
+Products may omit `background` when they use the native Finder canvas.
+
 Record the target architecture and minimum macOS version in the manifest. The
 DMG, update archive, and checksums file use exactly the declared names. Build
 the update archive from the same app bundle as the DMG, then verify both

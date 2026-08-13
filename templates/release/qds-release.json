@@ -28,7 +28,11 @@
   "installer": {
     "format": "dmg",
     "style": "product-defined-monochrome",
-    "applicationsAlias": true
+    "applicationsAlias": true,
+    "background": {
+      "kind": "image",
+      "scaleFactors": [1, 2]
+    }
   },
   "artifacts": {
     "installer": "ExamplePlayer-1.0.0-beta.1-arm64.dmg",

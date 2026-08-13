@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.2.0
+
+### Added
+
+- Added a schema-backed macOS installer image contract requiring real 1x and 2x Finder background representations while preserving the native-canvas option.
+
 ## 4.1.0
 
 ### Added

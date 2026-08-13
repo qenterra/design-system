@@ -68,7 +68,21 @@
       "properties": {
         "format": {"type": "string", "enum": ["dmg"]},
         "style": {"type": "string", "minLength": 1},
-        "applicationsAlias": {"type": "boolean"}
+        "applicationsAlias": {"type": "boolean"},
+        "background": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "scaleFactors"],
+          "properties": {
+            "kind": {"type": "string", "enum": ["image"]},
+            "scaleFactors": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {"type": "integer", "enum": [1, 2]}
+            }
+          }
+        }
       }
     },
     "artifacts": {

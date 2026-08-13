@@ -16,7 +16,7 @@
   <a href="CHANGELOG.md">Changelog</a>
 </p>
 
-> **Status:** private, proprietary source of truth. Version `4.1.0` is
+> **Status:** private, proprietary source of truth. Version `4.2.0` is
 > distributed through the private SwiftPM repository
 > [`qenterra/design-system-swift`](https://github.com/qenterra/design-system-swift)
 > and the restricted GitHub package `@qenterra/design-tokens`.

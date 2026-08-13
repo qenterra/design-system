@@ -4,7 +4,7 @@ import Testing
 @testable import QenTerraDesignTokens
 
 @Test func publicFacadeVersionAndTypesRemainAvailable() {
-    #expect(QDS.version == "4.1.0")
+    #expect(QDS.version == "4.2.0")
     #expect(QDSIcon.success.systemName == "checkmark.circle")
 
     _ = QDSPrimaryButtonStyle(appearance: .light)
