@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.1.0
+
+### Added
+
+- Added manifest-backed YouTube channel banner, video watermark, and Buy Me a Coffee acknowledgement banner as fixed platform publication assets.
+
 ## 3.0.0
 
 ### Changed

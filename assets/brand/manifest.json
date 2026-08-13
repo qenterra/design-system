@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "sourceLabel": "Мой брендбук",
-  "assetCount": 213,
-  "totalBytes": 512119490,
+  "assetCount": 216,
+  "totalBytes": 513158836,
   "assets": [
     {
       "sourcePath": "Маскот (Nyx)/Assets/Compositions/Bottom Left Point Center.png",
@@ -2941,6 +2941,48 @@
       "bytes": 544,
       "sha256": "0678434c824000226b8972703c4c46e56454527865b46f550851c22c6cfeb716",
       "lfs": false
+    },
+    {
+      "sourcePath": "Платформенные материалы/Buy Me a Coffee/Buy Me a Coffee Banner (1600x400px).png",
+      "canonicalPath": "assets/brand/qenterra/platforms/buy-me-a-coffee/Buy Me a Coffee Banner (1600x400px).png",
+      "category": "qenterra.platform.buy-me-a-coffee",
+      "extension": ".png",
+      "mimeType": "image/png",
+      "bytes": 38777,
+      "sha256": "e355fd644f615ff19d47fc186a95940db172da31e5a89694b2a1acb5243291be",
+      "lfs": true,
+      "width": 1600,
+      "height": 400,
+      "mode": "rgba",
+      "bitDepth": 8
+    },
+    {
+      "sourcePath": "Платформенные материалы/YouTube/YouTube Channel Banner (2560x1440px).png",
+      "canonicalPath": "assets/brand/qenterra/platforms/youtube/YouTube Channel Banner (2560x1440px).png",
+      "category": "qenterra.platform.youtube",
+      "extension": ".png",
+      "mimeType": "image/png",
+      "bytes": 990731,
+      "sha256": "e950d90fe5c43a2c52869f45062032b8263f6a0699196917fc06b3916a7ba64a",
+      "lfs": true,
+      "width": 2560,
+      "height": 1440,
+      "mode": "rgba",
+      "bitDepth": 8
+    },
+    {
+      "sourcePath": "Платформенные материалы/YouTube/YouTube Watermark (150px).png",
+      "canonicalPath": "assets/brand/qenterra/platforms/youtube/YouTube Watermark (150px).png",
+      "category": "qenterra.platform.youtube",
+      "extension": ".png",
+      "mimeType": "image/png",
+      "bytes": 9838,
+      "sha256": "cb2d4732510c69b43ccb440d84a4f4ed62fff16d28c3076a82d5e39f501a2258",
+      "lfs": true,
+      "width": 150,
+      "height": 150,
+      "mode": "rgba",
+      "bitDepth": 8
     }
   ]
 }

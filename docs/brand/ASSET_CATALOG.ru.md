@@ -10,6 +10,7 @@
 | Векторные баннеры QenTerra | 8 | `qenterra/banners/vector/` | адаптивное и масштабируемое размещение |
 | Растровые логотипы QenTerra | 7 | `qenterra/logos/raster/` | потребители с фиксированным размером и утверждённые обработки Dry/Wet |
 | Векторные логотипы QenTerra | 1 | `qenterra/logos/vector/` | предпочтительный масштабируемый мастер |
+| Платформенные публикационные материалы QenTerra | 3 | `qenterra/platforms/` | поставленные материалы YouTube и Buy Me a Coffee |
 | Композиции Nyx | 21 | `nyx/character-assets/compositions/` | текст, карточки, сравнения и UI-зоны |
 | Decorative Nyx | 10 | `nyx/character-assets/decorative/` | выразительные графические акценты |
 | Full body Nyx | 56 | `nyx/character-assets/full-body/` | действия, направления, рабочие и бытовые сцены |
@@ -18,7 +19,7 @@
 | Telegram-пак Nyx | 50 | `nyx/telegram-stickers/` | 49 PNG-реакций и карта эмодзи |
 | Обои Nyx | 4 | `nyx/wallpapers/` | отобранные телефонные и desktop-фоны |
 
-Итого: **213 файлов**, **512 119 490 байт**. PNG: **202**, хранятся через Git LFS. SVG/JSON/Markdown: **11**, обычный Git.
+Итого: **216 файлов**, **513 158 836 байт**. PNG: **205**, хранятся через Git LFS. SVG/JSON/Markdown: **11**, обычный Git.
 
 ## Правило выбора
 

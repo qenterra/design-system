@@ -25,6 +25,13 @@ These values describe the supplied marks. Interface surfaces still use semantic 
 - Standard banners are the default family signature.
 - Alternative banners are intentional variants, not automatic replacements for the standard form.
 
+### Platform publication assets
+
+- `platforms/youtube/YouTube Channel Banner (2560x1440px).png` is the fixed YouTube channel-art export; keep its native canvas and safe area intact.
+- `platforms/youtube/YouTube Watermark (150px).png` is the supplied video watermark, not a replacement for the primary logo.
+- `platforms/buy-me-a-coffee/Buy Me a Coffee Banner (1600x400px).png` is the supplied support acknowledgement banner.
+- These platform-specific deliveries do not replace the responsive banner or logo families and must not be cropped, recoloured, or repurposed for other channels.
+
 ## Placement
 
 - Preserve aspect ratio and internal geometry.

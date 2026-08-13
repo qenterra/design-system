@@ -22,7 +22,7 @@ committed to `.npmrc`:
 Then install an immutable version:
 
 ```sh
-npm install @qenterra/design-tokens@3.0.0
+npm install @qenterra/design-tokens@3.1.0
 ```
 
 Authorized GitHub Actions consumers should use a token with `packages: read`.

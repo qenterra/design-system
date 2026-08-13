@@ -24,6 +24,8 @@ MAPPINGS: tuple[tuple[tuple[str, ...], tuple[str, ...], str], ...] = (
     (("Баннеры (плоские)", "Vector"), ("qenterra", "banners", "vector"), "qenterra.banner.vector"),
     (("Логотипы (плоские)", "Raster"), ("qenterra", "logos", "raster"), "qenterra.logo.raster"),
     (("Логотипы (плоские)", "Vector"), ("qenterra", "logos", "vector"), "qenterra.logo.vector"),
+    (("Платформенные материалы", "Buy Me a Coffee"), ("qenterra", "platforms", "buy-me-a-coffee"), "qenterra.platform.buy-me-a-coffee"),
+    (("Платформенные материалы", "YouTube"), ("qenterra", "platforms", "youtube"), "qenterra.platform.youtube"),
     (("Маскот (Nyx)", "Assets", "Compositions"), ("nyx", "character-assets", "compositions"), "nyx.character.composition"),
     (("Маскот (Nyx)", "Assets", "Decorative"), ("nyx", "character-assets", "decorative"), "nyx.character.decorative"),
     (("Маскот (Nyx)", "Assets", "Full Body"), ("nyx", "character-assets", "full-body"), "nyx.character.full-body"),
