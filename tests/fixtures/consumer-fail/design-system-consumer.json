@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 2,
+  "consumer": "Faultline",
+  "platforms": ["web"],
+  "packages": [
+    {"id": "npm-design-tokens", "version": "5.0.0", "source": "release"}
+  ],
+  "adoptedCapabilities": ["tokens.css"],
+  "sourceRoots": ["src"],
+  "exceptions": "design-system-exceptions.json"
+}

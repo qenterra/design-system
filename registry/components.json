@@ -1,132 +1,1367 @@
 {
   "$schema": "../schemas/component-registry.schema.json",
-  "version": "4.2.0",
+  "version": "5.0.0",
   "components": [
     {
-      "id":"button","name":{"en":"Button","ru":"Кнопка"},"summary":{"en":"Starts one named action.","ru":"Запускает одно названное действие."},
-      "status":"stable","category":"control","platforms":["macOS","iOS","iPadOS","web"],"lifecycle":{"introduced":"1.0.0","review":"major"},
-      "anatomy":["label","optional-leading-symbol","optional-progress"],"states":["default","hover","pressed","focused","disabled","loading"],
-      "stories":[{"id":"primary","state":"default","variant":"primary"},{"id":"secondary","state":"default","variant":"secondary"},{"id":"hover","state":"hover","variant":"primary"},{"id":"pressed","state":"pressed","variant":"primary"},{"id":"focused","state":"focused","variant":"secondary"},{"id":"disabled","state":"disabled","variant":"primary"},{"id":"loading","state":"loading","variant":"primary"},{"id":"long-copy","state":"default","variant":"secondary","localeWidth":"long"}],
-      "keyboard":["Space or Return activates","focus stays on the button"],"accessibility":["native-button","visible-focus","disabled-state-announced","loading-name-stable"],"localization":["label may wrap","leading symbol mirrors only when semantic direction changes"],"evidence":["schema","unit","browser","visual"]
+      "id": "button",
+      "name": {
+        "en": "Button",
+        "ru": "Кнопка"
+      },
+      "summary": {
+        "en": "Starts one named action.",
+        "ru": "Запускает одно названное действие."
+      },
+      "status": "stable",
+      "category": "control",
+      "platforms": [
+        "macOS",
+        "iOS",
+        "iPadOS",
+        "web"
+      ],
+      "lifecycle": {
+        "introduced": "1.0.0",
+        "review": "major"
+      },
+      "anatomy": [
+        "label",
+        "optional-leading-symbol",
+        "optional-progress"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "pressed",
+        "focused",
+        "disabled",
+        "loading"
+      ],
+      "stories": [
+        {
+          "id": "primary",
+          "state": "default",
+          "variant": "primary"
+        },
+        {
+          "id": "secondary",
+          "state": "default",
+          "variant": "secondary"
+        },
+        {
+          "id": "hover",
+          "state": "hover",
+          "variant": "primary"
+        },
+        {
+          "id": "pressed",
+          "state": "pressed",
+          "variant": "primary"
+        },
+        {
+          "id": "focused",
+          "state": "focused",
+          "variant": "secondary"
+        },
+        {
+          "id": "disabled",
+          "state": "disabled",
+          "variant": "primary"
+        },
+        {
+          "id": "loading",
+          "state": "loading",
+          "variant": "primary"
+        },
+        {
+          "id": "long-copy",
+          "state": "default",
+          "variant": "secondary",
+          "localeWidth": "long"
+        }
+      ],
+      "keyboard": [
+        "Space or Return activates",
+        "focus stays on the button"
+      ],
+      "accessibility": [
+        "native-button",
+        "visible-focus",
+        "disabled-state-announced",
+        "loading-name-stable"
+      ],
+      "localization": [
+        "label may wrap",
+        "leading symbol mirrors only when semantic direction changes"
+      ],
+      "evidence": [
+        "schema",
+        "unit"
+      ],
+      "delivery": {
+        "status": "delivered",
+        "packages": [
+          "npm-design-tokens",
+          "swift-components"
+        ]
+      }
     },
     {
-      "id":"icon-button","name":{"en":"Icon button","ru":"Кнопка-иконка"},"summary":{"en":"Runs a familiar action in compact chrome.","ru":"Запускает знакомое действие в компактной панели."},
-      "status":"stable","category":"control","platforms":["macOS","iOS","iPadOS","web"],"lifecycle":{"introduced":"2.0.0","review":"major"},
-      "anatomy":["sf-symbol","accessible-name","hit-area"],"states":["default","hover","pressed","focused","disabled"],
-      "stories":[{"id":"default","state":"default"},{"id":"hover","state":"hover"},{"id":"pressed","state":"pressed"},{"id":"focused","state":"focused"},{"id":"disabled","state":"disabled"}],
-      "keyboard":["Space or Return activates"],"accessibility":["accessible-name-required","minimum-hit-area","visible-focus"],"localization":["accessible name is localized"],"evidence":["schema","browser","visual"]
+      "id": "icon-button",
+      "name": {
+        "en": "Icon button",
+        "ru": "Кнопка-иконка"
+      },
+      "summary": {
+        "en": "Runs a familiar action in compact chrome.",
+        "ru": "Запускает знакомое действие в компактной панели."
+      },
+      "status": "stable",
+      "category": "control",
+      "platforms": [
+        "macOS",
+        "iOS",
+        "iPadOS",
+        "web"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "major"
+      },
+      "anatomy": [
+        "sf-symbol",
+        "accessible-name",
+        "hit-area"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "pressed",
+        "focused",
+        "disabled"
+      ],
+      "stories": [
+        {
+          "id": "default",
+          "state": "default"
+        },
+        {
+          "id": "hover",
+          "state": "hover"
+        },
+        {
+          "id": "pressed",
+          "state": "pressed"
+        },
+        {
+          "id": "focused",
+          "state": "focused"
+        },
+        {
+          "id": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "keyboard": [
+        "Space or Return activates"
+      ],
+      "accessibility": [
+        "accessible-name-required",
+        "minimum-hit-area",
+        "visible-focus"
+      ],
+      "localization": [
+        "accessible name is localized"
+      ],
+      "evidence": [
+        "schema"
+      ],
+      "delivery": {
+        "status": "specification-only",
+        "packages": []
+      }
     },
     {
-      "id":"field","name":{"en":"Field","ru":"Поле"},"summary":{"en":"Collects one value with a persistent label and local validation.","ru":"Принимает одно значение с постоянной меткой и локальной проверкой."},
-      "status":"stable","category":"input","platforms":["macOS","iOS","iPadOS","web"],"lifecycle":{"introduced":"1.0.0","review":"major"},
-      "anatomy":["label","control","optional-help","optional-error"],"states":["pristine","editing","valid","invalid","disabled","readOnly"],
-      "stories":[{"id":"pristine","state":"pristine"},{"id":"editing","state":"editing"},{"id":"valid","state":"valid"},{"id":"invalid","state":"invalid"},{"id":"disabled","state":"disabled"},{"id":"read-only","state":"readOnly"},{"id":"rtl","state":"pristine","localeWidth":"rtl"}],
-      "keyboard":["Tab enters and leaves","platform editing shortcuts remain available"],"accessibility":["programmatic-label","described-error","error-not-color-only","autocomplete-explicit"],"localization":["label stays visible","error text may wrap"],"evidence":["schema","unit","browser","visual"]
+      "id": "field",
+      "name": {
+        "en": "Field",
+        "ru": "Поле"
+      },
+      "summary": {
+        "en": "Collects one value with a persistent label and local validation.",
+        "ru": "Принимает одно значение с постоянной меткой и локальной проверкой."
+      },
+      "status": "stable",
+      "category": "input",
+      "platforms": [
+        "macOS",
+        "iOS",
+        "iPadOS",
+        "web"
+      ],
+      "lifecycle": {
+        "introduced": "1.0.0",
+        "review": "major"
+      },
+      "anatomy": [
+        "label",
+        "control",
+        "optional-help",
+        "optional-error"
+      ],
+      "states": [
+        "pristine",
+        "editing",
+        "valid",
+        "invalid",
+        "disabled",
+        "readOnly"
+      ],
+      "stories": [
+        {
+          "id": "pristine",
+          "state": "pristine"
+        },
+        {
+          "id": "editing",
+          "state": "editing"
+        },
+        {
+          "id": "valid",
+          "state": "valid"
+        },
+        {
+          "id": "invalid",
+          "state": "invalid"
+        },
+        {
+          "id": "disabled",
+          "state": "disabled"
+        },
+        {
+          "id": "read-only",
+          "state": "readOnly"
+        },
+        {
+          "id": "rtl",
+          "state": "pristine",
+          "localeWidth": "rtl"
+        }
+      ],
+      "keyboard": [
+        "Tab enters and leaves",
+        "platform editing shortcuts remain available"
+      ],
+      "accessibility": [
+        "programmatic-label",
+        "described-error",
+        "error-not-color-only",
+        "autocomplete-explicit"
+      ],
+      "localization": [
+        "label stays visible",
+        "error text may wrap"
+      ],
+      "evidence": [
+        "schema",
+        "unit"
+      ],
+      "delivery": {
+        "status": "delivered",
+        "packages": [
+          "npm-design-tokens"
+        ]
+      }
     },
     {
-      "id":"search","name":{"en":"Search field","ru":"Поиск"},"summary":{"en":"Filters a known collection and reports the result count.","ru":"Фильтрует известную коллекцию и сообщает число результатов."},
-      "status":"stable","category":"input","platforms":["macOS","iOS","iPadOS","web"],"lifecycle":{"introduced":"2.0.0","review":"major"},
-      "anatomy":["sf-symbol","input","clear-action","result-status"],"states":["empty","query","results","noResults","disabled"],
-      "stories":[{"id":"empty","state":"empty"},{"id":"query","state":"query"},{"id":"results","state":"results"},{"id":"no-results","state":"noResults"},{"id":"disabled","state":"disabled"}],
-      "keyboard":["Escape clears or closes results","Arrow keys move through suggestions"],"accessibility":["search-role","result-count-live-region","active-descendant-when-popup-opens"],"localization":["query is never translated","result grammar handles plural forms"],"evidence":["schema","browser","visual"]
+      "id": "search",
+      "name": {
+        "en": "Search field",
+        "ru": "Поиск"
+      },
+      "summary": {
+        "en": "Filters a known collection and reports the result count.",
+        "ru": "Фильтрует известную коллекцию и сообщает число результатов."
+      },
+      "status": "stable",
+      "category": "input",
+      "platforms": [
+        "macOS",
+        "iOS",
+        "iPadOS",
+        "web"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "major"
+      },
+      "anatomy": [
+        "sf-symbol",
+        "input",
+        "clear-action",
+        "result-status"
+      ],
+      "states": [
+        "empty",
+        "query",
+        "results",
+        "noResults",
+        "disabled"
+      ],
+      "stories": [
+        {
+          "id": "empty",
+          "state": "empty"
+        },
+        {
+          "id": "query",
+          "state": "query"
+        },
+        {
+          "id": "results",
+          "state": "results"
+        },
+        {
+          "id": "no-results",
+          "state": "noResults"
+        },
+        {
+          "id": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "keyboard": [
+        "Escape clears or closes results",
+        "Arrow keys move through suggestions"
+      ],
+      "accessibility": [
+        "search-role",
+        "result-count-live-region",
+        "active-descendant-when-popup-opens"
+      ],
+      "localization": [
+        "query is never translated",
+        "result grammar handles plural forms"
+      ],
+      "evidence": [
+        "schema"
+      ],
+      "delivery": {
+        "status": "specification-only",
+        "packages": []
+      }
     },
     {
-      "id":"checkbox","name":{"en":"Checkbox","ru":"Флажок"},"summary":{"en":"Toggles an independent option.","ru":"Переключает независимый параметр."},
-      "status":"stable","category":"input","platforms":["macOS","iOS","iPadOS","web"],"lifecycle":{"introduced":"2.0.0","review":"major"},
-      "anatomy":["control","label","optional-help"],"states":["unchecked","checked","mixed","focused","disabled"],
-      "stories":[{"id":"unchecked","state":"unchecked"},{"id":"checked","state":"checked"},{"id":"mixed","state":"mixed"},{"id":"focused","state":"focused"},{"id":"disabled","state":"disabled"}],
-      "keyboard":["Space toggles"],"accessibility":["native-checkbox","label-clicks-control","mixed-state-announced"],"localization":["label may wrap without shrinking control"],"evidence":["schema","browser","visual"]
+      "id": "checkbox",
+      "name": {
+        "en": "Checkbox",
+        "ru": "Флажок"
+      },
+      "summary": {
+        "en": "Toggles an independent option.",
+        "ru": "Переключает независимый параметр."
+      },
+      "status": "stable",
+      "category": "input",
+      "platforms": [
+        "macOS",
+        "iOS",
+        "iPadOS",
+        "web"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "major"
+      },
+      "anatomy": [
+        "control",
+        "label",
+        "optional-help"
+      ],
+      "states": [
+        "unchecked",
+        "checked",
+        "mixed",
+        "focused",
+        "disabled"
+      ],
+      "stories": [
+        {
+          "id": "unchecked",
+          "state": "unchecked"
+        },
+        {
+          "id": "checked",
+          "state": "checked"
+        },
+        {
+          "id": "mixed",
+          "state": "mixed"
+        },
+        {
+          "id": "focused",
+          "state": "focused"
+        },
+        {
+          "id": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "keyboard": [
+        "Space toggles"
+      ],
+      "accessibility": [
+        "native-checkbox",
+        "label-clicks-control",
+        "mixed-state-announced"
+      ],
+      "localization": [
+        "label may wrap without shrinking control"
+      ],
+      "evidence": [
+        "schema"
+      ],
+      "delivery": {
+        "status": "specification-only",
+        "packages": []
+      }
     },
     {
-      "id":"switch","name":{"en":"Switch","ru":"Переключатель"},"summary":{"en":"Changes a setting that takes effect at once.","ru":"Меняет настройку, которая применяется сразу."},
-      "status":"stable","category":"input","platforms":["macOS","iOS","iPadOS","web"],"lifecycle":{"introduced":"2.0.0","review":"major"},
-      "anatomy":["track","thumb","label"],"states":["off","on","focused","disabled"],
-      "stories":[{"id":"off","state":"off"},{"id":"on","state":"on"},{"id":"focused","state":"focused"},{"id":"disabled","state":"disabled"}],
-      "keyboard":["Space toggles"],"accessibility":["switch-role","state-announced","label-does-not-repeat-state"],"localization":["label may wrap"],"evidence":["schema","browser","visual"]
+      "id": "switch",
+      "name": {
+        "en": "Switch",
+        "ru": "Переключатель"
+      },
+      "summary": {
+        "en": "Changes a setting that takes effect at once.",
+        "ru": "Меняет настройку, которая применяется сразу."
+      },
+      "status": "stable",
+      "category": "input",
+      "platforms": [
+        "macOS",
+        "iOS",
+        "iPadOS",
+        "web"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "major"
+      },
+      "anatomy": [
+        "track",
+        "thumb",
+        "label"
+      ],
+      "states": [
+        "off",
+        "on",
+        "focused",
+        "disabled"
+      ],
+      "stories": [
+        {
+          "id": "off",
+          "state": "off"
+        },
+        {
+          "id": "on",
+          "state": "on"
+        },
+        {
+          "id": "focused",
+          "state": "focused"
+        },
+        {
+          "id": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "keyboard": [
+        "Space toggles"
+      ],
+      "accessibility": [
+        "switch-role",
+        "state-announced",
+        "label-does-not-repeat-state"
+      ],
+      "localization": [
+        "label may wrap"
+      ],
+      "evidence": [
+        "schema"
+      ],
+      "delivery": {
+        "status": "specification-only",
+        "packages": []
+      }
     },
     {
-      "id":"segmented-control","name":{"en":"Segmented control","ru":"Сегментированный контрол"},"summary":{"en":"Chooses one view or mode from a short set.","ru":"Выбирает один вид или режим из короткого набора."},
-      "status":"stable","category":"navigation","platforms":["macOS","iOS","iPadOS","web"],"lifecycle":{"introduced":"2.0.0","review":"major"},
-      "anatomy":["group","segments","selection-indicator"],"states":["default","selected","focused","disabled"],
-      "stories":[{"id":"default","state":"default"},{"id":"selected","state":"selected"},{"id":"focused","state":"focused"},{"id":"disabled","state":"disabled"}],
-      "keyboard":["Arrow keys change selection","Home and End move to bounds"],"accessibility":["radiogroup-semantics","one-selection"],"localization":["use two to five short labels"],"evidence":["schema","browser","visual"]
+      "id": "segmented-control",
+      "name": {
+        "en": "Segmented control",
+        "ru": "Сегментированный контрол"
+      },
+      "summary": {
+        "en": "Chooses one view or mode from a short set.",
+        "ru": "Выбирает один вид или режим из короткого набора."
+      },
+      "status": "stable",
+      "category": "navigation",
+      "platforms": [
+        "macOS",
+        "iOS",
+        "iPadOS",
+        "web"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "major"
+      },
+      "anatomy": [
+        "group",
+        "segments",
+        "selection-indicator"
+      ],
+      "states": [
+        "default",
+        "selected",
+        "focused",
+        "disabled"
+      ],
+      "stories": [
+        {
+          "id": "default",
+          "state": "default"
+        },
+        {
+          "id": "selected",
+          "state": "selected"
+        },
+        {
+          "id": "focused",
+          "state": "focused"
+        },
+        {
+          "id": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "keyboard": [
+        "Arrow keys change selection",
+        "Home and End move to bounds"
+      ],
+      "accessibility": [
+        "radiogroup-semantics",
+        "one-selection"
+      ],
+      "localization": [
+        "use two to five short labels"
+      ],
+      "evidence": [
+        "schema"
+      ],
+      "delivery": {
+        "status": "specification-only",
+        "packages": []
+      }
     },
     {
-      "id":"tabs","name":{"en":"Tabs","ru":"Вкладки"},"summary":{"en":"Moves between peer sections without changing task context.","ru":"Переключает равноправные разделы без смены контекста задачи."},
-      "status":"stable","category":"navigation","platforms":["macOS","iOS","iPadOS","web"],"lifecycle":{"introduced":"2.0.0","review":"major"},
-      "anatomy":["tab-list","tab","panel"],"states":["default","selected","focused","disabled"],
-      "stories":[{"id":"default","state":"default"},{"id":"selected","state":"selected"},{"id":"focused","state":"focused"},{"id":"disabled","state":"disabled"}],
-      "keyboard":["Arrow keys move focus","Space or Return selects"],"accessibility":["tablist-semantics","tab-controls-panel","selected-tab-announced"],"localization":["labels stay short","overflow uses platform navigation"],"evidence":["schema","browser","visual"]
+      "id": "tabs",
+      "name": {
+        "en": "Tabs",
+        "ru": "Вкладки"
+      },
+      "summary": {
+        "en": "Moves between peer sections without changing task context.",
+        "ru": "Переключает равноправные разделы без смены контекста задачи."
+      },
+      "status": "stable",
+      "category": "navigation",
+      "platforms": [
+        "macOS",
+        "iOS",
+        "iPadOS",
+        "web"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "major"
+      },
+      "anatomy": [
+        "tab-list",
+        "tab",
+        "panel"
+      ],
+      "states": [
+        "default",
+        "selected",
+        "focused",
+        "disabled"
+      ],
+      "stories": [
+        {
+          "id": "default",
+          "state": "default"
+        },
+        {
+          "id": "selected",
+          "state": "selected"
+        },
+        {
+          "id": "focused",
+          "state": "focused"
+        },
+        {
+          "id": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "keyboard": [
+        "Arrow keys move focus",
+        "Space or Return selects"
+      ],
+      "accessibility": [
+        "tablist-semantics",
+        "tab-controls-panel",
+        "selected-tab-announced"
+      ],
+      "localization": [
+        "labels stay short",
+        "overflow uses platform navigation"
+      ],
+      "evidence": [
+        "schema"
+      ],
+      "delivery": {
+        "status": "specification-only",
+        "packages": []
+      }
     },
     {
-      "id":"interactive-row","name":{"en":"Interactive row","ru":"Интерактивная строка"},"summary":{"en":"Presents one row-level action or selection.","ru":"Показывает одно действие или выбор на уровне строки."},
-      "status":"stable","category":"control","platforms":["macOS","iOS","iPadOS","web"],"lifecycle":{"introduced":"1.0.0","review":"major"},
-      "anatomy":["leading-symbol","primary-label","supporting-text","trailing-control"],"states":["default","hover","focused","selected","disabled","unavailable"],
-      "stories":[{"id":"default","state":"default"},{"id":"hover","state":"hover"},{"id":"focused","state":"focused"},{"id":"selected","state":"selected"},{"id":"disabled","state":"disabled"},{"id":"unavailable","state":"unavailable"}],
-      "keyboard":["Arrow keys move in composite lists","Space selects when selection is the row action"],"accessibility":["single-focus-target","selection-announced","status-has-text"],"localization":["supporting text may wrap"],"evidence":["schema","unit","browser","visual"]
+      "id": "interactive-row",
+      "name": {
+        "en": "Interactive row",
+        "ru": "Интерактивная строка"
+      },
+      "summary": {
+        "en": "Presents one row-level action or selection.",
+        "ru": "Показывает одно действие или выбор на уровне строки."
+      },
+      "status": "stable",
+      "category": "control",
+      "platforms": [
+        "macOS",
+        "iOS",
+        "iPadOS",
+        "web"
+      ],
+      "lifecycle": {
+        "introduced": "1.0.0",
+        "review": "major"
+      },
+      "anatomy": [
+        "leading-symbol",
+        "primary-label",
+        "supporting-text",
+        "trailing-control"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focused",
+        "selected",
+        "disabled",
+        "unavailable"
+      ],
+      "stories": [
+        {
+          "id": "default",
+          "state": "default"
+        },
+        {
+          "id": "hover",
+          "state": "hover"
+        },
+        {
+          "id": "focused",
+          "state": "focused"
+        },
+        {
+          "id": "selected",
+          "state": "selected"
+        },
+        {
+          "id": "disabled",
+          "state": "disabled"
+        },
+        {
+          "id": "unavailable",
+          "state": "unavailable"
+        }
+      ],
+      "keyboard": [
+        "Arrow keys move in composite lists",
+        "Space selects when selection is the row action"
+      ],
+      "accessibility": [
+        "single-focus-target",
+        "selection-announced",
+        "status-has-text"
+      ],
+      "localization": [
+        "supporting text may wrap"
+      ],
+      "evidence": [
+        "schema",
+        "unit"
+      ],
+      "delivery": {
+        "status": "delivered",
+        "packages": [
+          "npm-design-tokens",
+          "swift-components"
+        ]
+      }
     },
     {
-      "id":"group","name":{"en":"Group","ru":"Группа"},"summary":{"en":"Collects related controls under one heading.","ru":"Объединяет связанные элементы под одним заголовком."},
-      "status":"stable","category":"layout","platforms":["macOS","iOS","iPadOS","web"],"lifecycle":{"introduced":"1.0.0","review":"major"},
-      "anatomy":["heading","optional-summary","content"],"states":["default","disabled"],
-      "stories":[{"id":"settings","state":"default"},{"id":"disabled","state":"disabled"},{"id":"long-copy","state":"default","localeWidth":"long"}],
-      "keyboard":["group adds no tab stop"],"accessibility":["fieldset-or-labelled-region","heading-order","children-remain-focusable"],"localization":["heading and summary may wrap"],"evidence":["schema","browser","visual"]
+      "id": "group",
+      "name": {
+        "en": "Group",
+        "ru": "Группа"
+      },
+      "summary": {
+        "en": "Collects related controls under one heading.",
+        "ru": "Объединяет связанные элементы под одним заголовком."
+      },
+      "status": "stable",
+      "category": "layout",
+      "platforms": [
+        "macOS",
+        "iOS",
+        "iPadOS",
+        "web"
+      ],
+      "lifecycle": {
+        "introduced": "1.0.0",
+        "review": "major"
+      },
+      "anatomy": [
+        "heading",
+        "optional-summary",
+        "content"
+      ],
+      "states": [
+        "default",
+        "disabled"
+      ],
+      "stories": [
+        {
+          "id": "settings",
+          "state": "default"
+        },
+        {
+          "id": "disabled",
+          "state": "disabled"
+        },
+        {
+          "id": "long-copy",
+          "state": "default",
+          "localeWidth": "long"
+        }
+      ],
+      "keyboard": [
+        "group adds no tab stop"
+      ],
+      "accessibility": [
+        "fieldset-or-labelled-region",
+        "heading-order",
+        "children-remain-focusable"
+      ],
+      "localization": [
+        "heading and summary may wrap"
+      ],
+      "evidence": [
+        "schema",
+        "unit"
+      ],
+      "delivery": {
+        "status": "delivered",
+        "packages": [
+          "npm-design-tokens",
+          "swift-components"
+        ]
+      }
     },
     {
-      "id":"menu","name":{"en":"Menu","ru":"Меню"},"summary":{"en":"Lists contextual actions next to their source.","ru":"Показывает контекстные действия рядом с источником."},
-      "status":"stable","category":"overlay","platforms":["macOS","iOS","iPadOS","web"],"lifecycle":{"introduced":"2.0.0","review":"major"},
-      "anatomy":["trigger","surface","items","optional-separators"],"states":["closed","open","focused","disabled"],
-      "stories":[{"id":"closed","state":"closed"},{"id":"open","state":"open"},{"id":"focused","state":"focused"},{"id":"disabled","state":"disabled"}],
-      "keyboard":["Arrow keys move","Escape closes","Return activates"],"accessibility":["menu-semantics-only-for-actions","focus-enters-first-item","focus-restored"],"localization":["item labels may grow","shortcuts stay aligned"],"evidence":["schema","browser","visual"]
+      "id": "menu",
+      "name": {
+        "en": "Menu",
+        "ru": "Меню"
+      },
+      "summary": {
+        "en": "Lists contextual actions next to their source.",
+        "ru": "Показывает контекстные действия рядом с источником."
+      },
+      "status": "stable",
+      "category": "overlay",
+      "platforms": [
+        "macOS",
+        "iOS",
+        "iPadOS",
+        "web"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "major"
+      },
+      "anatomy": [
+        "trigger",
+        "surface",
+        "items",
+        "optional-separators"
+      ],
+      "states": [
+        "closed",
+        "open",
+        "focused",
+        "disabled"
+      ],
+      "stories": [
+        {
+          "id": "closed",
+          "state": "closed"
+        },
+        {
+          "id": "open",
+          "state": "open"
+        },
+        {
+          "id": "focused",
+          "state": "focused"
+        },
+        {
+          "id": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "keyboard": [
+        "Arrow keys move",
+        "Escape closes",
+        "Return activates"
+      ],
+      "accessibility": [
+        "menu-semantics-only-for-actions",
+        "focus-enters-first-item",
+        "focus-restored"
+      ],
+      "localization": [
+        "item labels may grow",
+        "shortcuts stay aligned"
+      ],
+      "evidence": [
+        "schema"
+      ],
+      "delivery": {
+        "status": "specification-only",
+        "packages": []
+      }
     },
     {
-      "id":"popover","name":{"en":"Popover","ru":"Поповер"},"summary":{"en":"Shows compact supporting controls beside a trigger.","ru":"Показывает компактные вспомогательные элементы рядом с кнопкой."},
-      "status":"beta","category":"overlay","platforms":["macOS","iOS","iPadOS","web"],"lifecycle":{"introduced":"2.0.0","review":"minor"},
-      "anatomy":["trigger","anchored-surface","content","optional-close"],"states":["closed","open","focused"],
-      "stories":[{"id":"closed","state":"closed"},{"id":"open","state":"open"},{"id":"focused","state":"focused"}],
-      "keyboard":["Escape closes","Tab stays within modal popovers only"],"accessibility":["relationship-to-trigger","focus-restored","outside-click-does-not-trap"],"localization":["surface adapts before clipping"],"evidence":["schema","browser","visual"]
+      "id": "popover",
+      "name": {
+        "en": "Popover",
+        "ru": "Поповер"
+      },
+      "summary": {
+        "en": "Shows compact supporting controls beside a trigger.",
+        "ru": "Показывает компактные вспомогательные элементы рядом с кнопкой."
+      },
+      "status": "beta",
+      "category": "overlay",
+      "platforms": [
+        "macOS",
+        "iOS",
+        "iPadOS",
+        "web"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "minor"
+      },
+      "anatomy": [
+        "trigger",
+        "anchored-surface",
+        "content",
+        "optional-close"
+      ],
+      "states": [
+        "closed",
+        "open",
+        "focused"
+      ],
+      "stories": [
+        {
+          "id": "closed",
+          "state": "closed"
+        },
+        {
+          "id": "open",
+          "state": "open"
+        },
+        {
+          "id": "focused",
+          "state": "focused"
+        }
+      ],
+      "keyboard": [
+        "Escape closes",
+        "Tab stays within modal popovers only"
+      ],
+      "accessibility": [
+        "relationship-to-trigger",
+        "focus-restored",
+        "outside-click-does-not-trap"
+      ],
+      "localization": [
+        "surface adapts before clipping"
+      ],
+      "evidence": [
+        "schema"
+      ],
+      "delivery": {
+        "status": "specification-only",
+        "packages": []
+      }
     },
     {
-      "id":"dialog","name":{"en":"Dialog","ru":"Диалог"},"summary":{"en":"Requests one bounded decision that cannot remain inline.","ru":"Запрашивает одно ограниченное решение, которое нельзя оставить встроенным."},
-      "status":"stable","category":"overlay","platforms":["macOS","iOS","iPadOS","web"],"lifecycle":{"introduced":"1.0.0","review":"major"},
-      "anatomy":["title","consequence","content","actions","close-control"],"states":["presented","busy","error"],
-      "stories":[{"id":"confirmation","state":"presented"},{"id":"busy","state":"busy"},{"id":"error","state":"error"}],
-      "keyboard":["Escape closes when safe","Tab cycles inside modal content"],"accessibility":["dialog-role","labelled-title","focus-trap","focus-restored"],"localization":["actions may stack","title and consequence may wrap"],"evidence":["schema","unit","browser","visual","manual"]
+      "id": "dialog",
+      "name": {
+        "en": "Dialog",
+        "ru": "Диалог"
+      },
+      "summary": {
+        "en": "Requests one bounded decision that cannot remain inline.",
+        "ru": "Запрашивает одно ограниченное решение, которое нельзя оставить встроенным."
+      },
+      "status": "stable",
+      "category": "overlay",
+      "platforms": [
+        "macOS",
+        "iOS",
+        "iPadOS",
+        "web"
+      ],
+      "lifecycle": {
+        "introduced": "1.0.0",
+        "review": "major"
+      },
+      "anatomy": [
+        "title",
+        "consequence",
+        "content",
+        "actions",
+        "close-control"
+      ],
+      "states": [
+        "presented",
+        "busy",
+        "error"
+      ],
+      "stories": [
+        {
+          "id": "confirmation",
+          "state": "presented"
+        },
+        {
+          "id": "busy",
+          "state": "busy"
+        },
+        {
+          "id": "error",
+          "state": "error"
+        }
+      ],
+      "keyboard": [
+        "Escape closes when safe",
+        "Tab cycles inside modal content"
+      ],
+      "accessibility": [
+        "dialog-role",
+        "labelled-title",
+        "focus-trap",
+        "focus-restored"
+      ],
+      "localization": [
+        "actions may stack",
+        "title and consequence may wrap"
+      ],
+      "evidence": [
+        "schema"
+      ],
+      "delivery": {
+        "status": "specification-only",
+        "packages": []
+      }
     },
     {
-      "id":"banner","name":{"en":"Banner","ru":"Баннер"},"summary":{"en":"Keeps an important page-level condition visible.","ru":"Оставляет важное состояние страницы видимым."},
-      "status":"stable","category":"feedback","platforms":["macOS","iOS","iPadOS","web"],"lifecycle":{"introduced":"2.0.0","review":"major"},
-      "anatomy":["sf-symbol","message","optional-action","optional-dismiss"],"states":["informative","warning","error","dismissed"],
-      "stories":[{"id":"informative","state":"informative"},{"id":"warning","state":"warning"},{"id":"error","state":"error"},{"id":"dismissed","state":"dismissed"}],
-      "keyboard":["actions follow document order"],"accessibility":["message-is-text","live-region-only-for-new-content"],"localization":["message may wrap before actions stack"],"evidence":["schema","browser","visual"]
+      "id": "banner",
+      "name": {
+        "en": "Banner",
+        "ru": "Баннер"
+      },
+      "summary": {
+        "en": "Keeps an important page-level condition visible.",
+        "ru": "Оставляет важное состояние страницы видимым."
+      },
+      "status": "stable",
+      "category": "feedback",
+      "platforms": [
+        "macOS",
+        "iOS",
+        "iPadOS",
+        "web"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "major"
+      },
+      "anatomy": [
+        "sf-symbol",
+        "message",
+        "optional-action",
+        "optional-dismiss"
+      ],
+      "states": [
+        "informative",
+        "warning",
+        "error",
+        "dismissed"
+      ],
+      "stories": [
+        {
+          "id": "informative",
+          "state": "informative"
+        },
+        {
+          "id": "warning",
+          "state": "warning"
+        },
+        {
+          "id": "error",
+          "state": "error"
+        },
+        {
+          "id": "dismissed",
+          "state": "dismissed"
+        }
+      ],
+      "keyboard": [
+        "actions follow document order"
+      ],
+      "accessibility": [
+        "message-is-text",
+        "live-region-only-for-new-content"
+      ],
+      "localization": [
+        "message may wrap before actions stack"
+      ],
+      "evidence": [
+        "schema"
+      ],
+      "delivery": {
+        "status": "specification-only",
+        "packages": []
+      }
     },
     {
-      "id":"toast","name":{"en":"Toast","ru":"Тост"},"summary":{"en":"Confirms a reversible outcome without stealing focus.","ru":"Подтверждает обратимый результат без перехвата фокуса."},
-      "status":"beta","category":"feedback","platforms":["macOS","iOS","iPadOS","web"],"lifecycle":{"introduced":"2.0.0","review":"minor"},
-      "anatomy":["message","optional-undo","dismiss"],"states":["hidden","presented","actionable"],
-      "stories":[{"id":"hidden","state":"hidden"},{"id":"presented","state":"presented"},{"id":"actionable","state":"actionable"}],
-      "keyboard":["does not move focus","undo remains reachable in document order"],"accessibility":["polite-live-region","timeout-pauses-on-hover-or-focus"],"localization":["no fixed-width truncation"],"evidence":["schema","browser","visual"]
+      "id": "toast",
+      "name": {
+        "en": "Toast",
+        "ru": "Тост"
+      },
+      "summary": {
+        "en": "Confirms a reversible outcome without stealing focus.",
+        "ru": "Подтверждает обратимый результат без перехвата фокуса."
+      },
+      "status": "beta",
+      "category": "feedback",
+      "platforms": [
+        "macOS",
+        "iOS",
+        "iPadOS",
+        "web"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "minor"
+      },
+      "anatomy": [
+        "message",
+        "optional-undo",
+        "dismiss"
+      ],
+      "states": [
+        "hidden",
+        "presented",
+        "actionable"
+      ],
+      "stories": [
+        {
+          "id": "hidden",
+          "state": "hidden"
+        },
+        {
+          "id": "presented",
+          "state": "presented"
+        },
+        {
+          "id": "actionable",
+          "state": "actionable"
+        }
+      ],
+      "keyboard": [
+        "does not move focus",
+        "undo remains reachable in document order"
+      ],
+      "accessibility": [
+        "polite-live-region",
+        "timeout-pauses-on-hover-or-focus"
+      ],
+      "localization": [
+        "no fixed-width truncation"
+      ],
+      "evidence": [
+        "schema"
+      ],
+      "delivery": {
+        "status": "specification-only",
+        "packages": []
+      }
     },
     {
-      "id":"progress","name":{"en":"Progress","ru":"Прогресс"},"summary":{"en":"Reports measured work and its current phase.","ru":"Показывает измеренную работу и текущий этап."},
-      "status":"stable","category":"feedback","platforms":["macOS","iOS","iPadOS","web"],"lifecycle":{"introduced":"2.0.0","review":"major"},
-      "anatomy":["label","indicator","value","optional-cancel"],"states":["indeterminate","determinate","paused","complete","error"],
-      "stories":[{"id":"indeterminate","state":"indeterminate"},{"id":"determinate","state":"determinate"},{"id":"paused","state":"paused"},{"id":"complete","state":"complete"},{"id":"error","state":"error"}],
-      "keyboard":["cancel is a separate button"],"accessibility":["progress-role","value-announced","phase-text-visible"],"localization":["phase text may wrap","numbers use locale formatting"],"evidence":["schema","browser","visual"]
+      "id": "progress",
+      "name": {
+        "en": "Progress",
+        "ru": "Прогресс"
+      },
+      "summary": {
+        "en": "Reports measured work and its current phase.",
+        "ru": "Показывает измеренную работу и текущий этап."
+      },
+      "status": "stable",
+      "category": "feedback",
+      "platforms": [
+        "macOS",
+        "iOS",
+        "iPadOS",
+        "web"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "major"
+      },
+      "anatomy": [
+        "label",
+        "indicator",
+        "value",
+        "optional-cancel"
+      ],
+      "states": [
+        "indeterminate",
+        "determinate",
+        "paused",
+        "complete",
+        "error"
+      ],
+      "stories": [
+        {
+          "id": "indeterminate",
+          "state": "indeterminate"
+        },
+        {
+          "id": "determinate",
+          "state": "determinate"
+        },
+        {
+          "id": "paused",
+          "state": "paused"
+        },
+        {
+          "id": "complete",
+          "state": "complete"
+        },
+        {
+          "id": "error",
+          "state": "error"
+        }
+      ],
+      "keyboard": [
+        "cancel is a separate button"
+      ],
+      "accessibility": [
+        "progress-role",
+        "value-announced",
+        "phase-text-visible"
+      ],
+      "localization": [
+        "phase text may wrap",
+        "numbers use locale formatting"
+      ],
+      "evidence": [
+        "schema"
+      ],
+      "delivery": {
+        "status": "specification-only",
+        "packages": []
+      }
     },
     {
-      "id":"status","name":{"en":"Status","ru":"Статус"},"summary":{"en":"Communicates an outcome with words and shape.","ru":"Передаёт результат словами и формой."},
-      "status":"stable","category":"feedback","platforms":["macOS","iOS","iPadOS","web"],"lifecycle":{"introduced":"1.0.0","review":"major"},
-      "anatomy":["sf-symbol-or-shape","plain-language-label","optional-detail"],"states":["success","warning","destructive","informative","recording"],
-      "stories":[{"id":"success","state":"success"},{"id":"warning","state":"warning"},{"id":"error","state":"destructive"},{"id":"informative","state":"informative"},{"id":"recording","state":"recording"}],
-      "keyboard":["status adds no tab stop"],"accessibility":["live-region-only-when-needed","meaning-beyond-color","no-icon-only-outcome"],"localization":["label and detail may wrap"],"evidence":["schema","browser","visual"]
+      "id": "status",
+      "name": {
+        "en": "Status",
+        "ru": "Статус"
+      },
+      "summary": {
+        "en": "Communicates an outcome with words and shape.",
+        "ru": "Передаёт результат словами и формой."
+      },
+      "status": "stable",
+      "category": "feedback",
+      "platforms": [
+        "macOS",
+        "iOS",
+        "iPadOS",
+        "web"
+      ],
+      "lifecycle": {
+        "introduced": "1.0.0",
+        "review": "major"
+      },
+      "anatomy": [
+        "sf-symbol-or-shape",
+        "plain-language-label",
+        "optional-detail"
+      ],
+      "states": [
+        "success",
+        "warning",
+        "destructive",
+        "informative",
+        "recording"
+      ],
+      "stories": [
+        {
+          "id": "success",
+          "state": "success"
+        },
+        {
+          "id": "warning",
+          "state": "warning"
+        },
+        {
+          "id": "error",
+          "state": "destructive"
+        },
+        {
+          "id": "informative",
+          "state": "informative"
+        },
+        {
+          "id": "recording",
+          "state": "recording"
+        }
+      ],
+      "keyboard": [
+        "status adds no tab stop"
+      ],
+      "accessibility": [
+        "live-region-only-when-needed",
+        "meaning-beyond-color",
+        "no-icon-only-outcome"
+      ],
+      "localization": [
+        "label and detail may wrap"
+      ],
+      "evidence": [
+        "schema"
+      ],
+      "delivery": {
+        "status": "specification-only",
+        "packages": []
+      }
     },
     {
-      "id":"empty-state","name":{"en":"Empty state","ru":"Пустое состояние"},"summary":{"en":"Explains why content is absent and offers one useful next action.","ru":"Объясняет отсутствие данных и предлагает одно полезное действие."},
-      "status":"stable","category":"feedback","platforms":["macOS","iOS","iPadOS","web"],"lifecycle":{"introduced":"2.0.0","review":"major"},
-      "anatomy":["optional-nyx-image","title","explanation","primary-action"],"states":["firstRun","noResults","unavailable","error"],
-      "stories":[{"id":"first-run","state":"firstRun"},{"id":"no-results","state":"noResults"},{"id":"unavailable","state":"unavailable"},{"id":"error","state":"error"}],
-      "keyboard":["primary action follows text"],"accessibility":["image-alt-is-purposeful-or-empty","one-clear-action","heading-identifies-state"],"localization":["copy expands vertically","action label stays specific"],"evidence":["schema","browser","visual"]
+      "id": "empty-state",
+      "name": {
+        "en": "Empty state",
+        "ru": "Пустое состояние"
+      },
+      "summary": {
+        "en": "Explains why content is absent and offers one useful next action.",
+        "ru": "Объясняет отсутствие данных и предлагает одно полезное действие."
+      },
+      "status": "stable",
+      "category": "feedback",
+      "platforms": [
+        "macOS",
+        "iOS",
+        "iPadOS",
+        "web"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "major"
+      },
+      "anatomy": [
+        "optional-nyx-image",
+        "title",
+        "explanation",
+        "primary-action"
+      ],
+      "states": [
+        "firstRun",
+        "noResults",
+        "unavailable",
+        "error"
+      ],
+      "stories": [
+        {
+          "id": "first-run",
+          "state": "firstRun"
+        },
+        {
+          "id": "no-results",
+          "state": "noResults"
+        },
+        {
+          "id": "unavailable",
+          "state": "unavailable"
+        },
+        {
+          "id": "error",
+          "state": "error"
+        }
+      ],
+      "keyboard": [
+        "primary action follows text"
+      ],
+      "accessibility": [
+        "image-alt-is-purposeful-or-empty",
+        "one-clear-action",
+        "heading-identifies-state"
+      ],
+      "localization": [
+        "copy expands vertically",
+        "action label stays specific"
+      ],
+      "evidence": [
+        "schema"
+      ],
+      "delivery": {
+        "status": "specification-only",
+        "packages": []
+      }
     }
   ]
 }

@@ -1,3 +1,3 @@
 import QenTerraDesignTokens
 
-let spacing = QDS.Space.value4
+let spacing = DesignTokens.Space.value4

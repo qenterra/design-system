@@ -53,7 +53,7 @@ class ReleaseContractTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             product = Path(directory) / "product"
             shutil.copytree(fixture, product)
-            manifest_path = product / "qds-release.json"
+            manifest_path = product / "product-release.json"
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
             manifest["release"] = {
                 "marketingVersion": "1.0.0",
@@ -79,7 +79,7 @@ class ReleaseContractTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             product = Path(directory) / "product"
             shutil.copytree(fixture, product)
-            manifest_path = product / "qds-release.json"
+            manifest_path = product / "product-release.json"
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
             manifest["installer"]["background"]["scaleFactors"] = [1]
             manifest_path.write_text(json.dumps(manifest), encoding="utf-8")

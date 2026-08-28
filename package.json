@@ -1,16 +1,14 @@
 {
-  "name": "qenterra-design-system",
-  "version": "4.2.0",
+  "name": "qenterra-design-system-private",
+  "version": "5.0.0",
   "private": true,
   "workspaces": [
-    "packages/css"
+    "packages/npm/design-tokens"
   ],
   "scripts": {
-    "test:browser": "node scripts/render_screenshots.js",
-    "package:validate": "python3 scripts/package_release.py validate",
-    "package:css:pack": "npm pack --workspace @qenterra/design-tokens --pack-destination /private/tmp --cache /private/tmp/qds-npm-cache --json"
-  },
-  "devDependencies": {
-    "playwright": "1.62.1"
+    "generate": "python3 scripts/generate.py write && python3 scripts/build_public_packages.py write",
+    "verify": "python3 scripts/verify.py",
+    "package:check": "python3 scripts/verify_public_boundary.py",
+    "package:tokens:pack": "npm pack --workspace @qenterra/design-tokens --dry-run --json"
   }
 }

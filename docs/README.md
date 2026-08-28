@@ -1,37 +1,30 @@
 # Documentation
 
-QenTerra Design System documentation is organized by audience and authority.
+## Use Design System
 
-## Use the system
+- [Root skill](../SKILL.md): mandatory agent entrypoint and operating modes.
+- [Master reference](MASTER.md) and [Russian reference](MASTER.ru.md): normative design, behavior, accessibility, and governance.
+- [Component catalog](COMPONENT_CATALOG.md) and [Russian catalog](COMPONENT_CATALOG.ru.md): component contracts and delivery status.
+- [Consumer adoption](CONSUMER_ADOPTION.md) and [Russian adoption](CONSUMER_ADOPTION.ru.md): packages, manifests, exceptions, and evidence.
 
-- [Master reference](MASTER.md) and [Russian reference](MASTER.ru.md): normative
-  design, behavior, platform, accessibility, and governance rules.
-- [Component catalog](COMPONENT_CATALOG.md): component anatomy, states, and
-  executable stories.
-- [Consumer adoption](CONSUMER_ADOPTION.md): package selection, product profiles,
-  exceptions, and migration checks.
-- [Repository README](../README.md): task-led overview, status, setup, and
-  verified limitations.
+## Maintain and release
 
-## Maintain the system
-
-- [Building from source](BUILDING.md)
 - [Architecture](ARCHITECTURE.md)
+- [Building and verification](BUILDING.md)
 - [Dependencies](DEPENDENCIES.md)
+- [Maintenance](MAINTENANCE.md)
+- [Evolution](governance/EVOLUTION.md)
+- [Public delivery](governance/PUBLIC-DELIVERY.md)
 - [Troubleshooting](TROUBLESHOOTING.md)
-- [Maintenance and release workflow](MAINTENANCE.md)
-- [Code system](CODE.md) and [Russian code system](CODE.ru.md)
-- [Product release versions and installers](RELEASES.md) and [Russian reference](RELEASES.ru.md)
 - [Requirements](REQUIREMENTS.md)
+
+## Specialized contracts
+
+- [Code system](CODE.md) and [Russian code system](CODE.ru.md)
+- [Product releases](RELEASES.md) and [Russian product releases](RELEASES.ru.md)
+- [Repository standard](repository/STANDARD.md) and [Russian standard](repository/STANDARD.ru.md)
+- [Nyx and brand governance](brand/MASTER.md)
+- [Figma handoff](FIGMA.md) and [Russian handoff](FIGMA.ru.md)
 - [Decision records](decisions/)
 
-## Specialized references
-
-- [Repository documentation standard](repository/STANDARD.md)
-- [Brand governance](brand/MASTER.md)
-- [Figma handoff](FIGMA.md)
-- [Human-operated email system](EMAIL.md)
-
-Exact values live in `tokens/*.json`; machine-readable component and semantic
-contracts live in `registry/` and `schemas/`. Generated documentation and
-adapters are evidence and distribution outputs, never a competing authority.
+Exact values live in `tokens/*.json`; machine-readable truth lives in `registry/` and `schemas/`. Generated adapters and handoff files are outputs, never competing authority.

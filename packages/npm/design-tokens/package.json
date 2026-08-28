@@ -1,0 +1,31 @@
+{
+  "name": "@qenterra/design-tokens",
+  "version": "5.0.0",
+  "description": "Public CSS, JSON, icon, and component-recipe adapters from Design System.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qenterra/packages.git",
+    "directory": "npm/design-tokens"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": [
+    "./dist/tokens.css",
+    "./dist/recipes.css"
+  ],
+  "exports": {
+    ".": "./dist/tokens.css",
+    "./tokens.css": "./dist/tokens.css",
+    "./recipes.css": "./dist/recipes.css",
+    "./tokens.json": "./dist/tokens.json",
+    "./icons.json": "./dist/icons.json"
+  },
+  "files": [
+    "LICENSE",
+    "NOTICE",
+    "README.md",
+    "dist"
+  ]
+}

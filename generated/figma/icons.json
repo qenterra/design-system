@@ -1,203 +1,91 @@
 {
-  "format": "qds-figma-sf-symbols-v2",
+  "format": "design-system-figma-sf-symbols-v2",
+  "version": "5.0.0",
+  "platform": "apple",
   "icons": [
     {
-      "category": "navigation",
-      "id": "index",
-      "meaning": "System overview",
-      "minimumOS": "11.0",
-      "sfSymbol": "square.grid.2x2"
-    },
-    {
-      "category": "navigation",
-      "id": "foundations",
-      "meaning": "Foundations",
-      "minimumOS": "11.0",
-      "sfSymbol": "circle.hexagongrid"
-    },
-    {
-      "category": "navigation",
-      "id": "components",
-      "meaning": "Components",
-      "minimumOS": "11.0",
-      "sfSymbol": "square.grid.3x3.square"
-    },
-    {
-      "category": "navigation",
-      "id": "lab",
-      "meaning": "Component Lab",
-      "minimumOS": "13.0",
-      "sfSymbol": "testtube.2"
-    },
-    {
-      "category": "navigation",
-      "id": "adoption",
-      "meaning": "System adoption",
-      "minimumOS": "11.0",
-      "sfSymbol": "arrow.right.square"
-    },
-    {
-      "category": "navigation",
-      "id": "patterns",
-      "meaning": "Task patterns",
-      "minimumOS": "11.0",
-      "sfSymbol": "point.3.connected.trianglepath.dotted"
-    },
-    {
-      "category": "navigation",
-      "id": "motion",
-      "meaning": "Motion system",
-      "minimumOS": "11.0",
-      "sfSymbol": "play.circle"
-    },
-    {
-      "category": "navigation",
-      "id": "content",
-      "meaning": "Content system",
-      "minimumOS": "11.0",
-      "sfSymbol": "text.alignleft"
-    },
-    {
-      "category": "navigation",
-      "id": "email",
-      "meaning": "Email templates",
-      "minimumOS": "11.0",
-      "sfSymbol": "envelope"
-    },
-    {
-      "category": "navigation",
       "id": "accessibility",
+      "category": "status",
       "meaning": "Accessibility",
-      "minimumOS": "11.0",
-      "sfSymbol": "accessibility"
+      "sfSymbol": "accessibility",
+      "minimumOS": "11.0"
     },
     {
-      "category": "navigation",
-      "id": "platforms",
-      "meaning": "Platform adapters",
-      "minimumOS": "11.0",
-      "sfSymbol": "macbook.and.iphone"
-    },
-    {
-      "category": "navigation",
-      "id": "products",
-      "meaning": "Interaction contexts",
-      "minimumOS": "11.0",
-      "sfSymbol": "rectangle.3.group"
-    },
-    {
-      "category": "navigation",
-      "id": "audit",
-      "meaning": "Evidence audit",
-      "minimumOS": "11.0",
-      "sfSymbol": "checkmark.seal"
-    },
-    {
-      "category": "navigation",
-      "id": "governance",
-      "meaning": "Governance",
-      "minimumOS": "11.0",
-      "sfSymbol": "shield.checkered"
-    },
-    {
-      "category": "navigation",
-      "id": "brand",
-      "meaning": "Brand system",
-      "minimumOS": "11.0",
-      "sfSymbol": "diamond"
-    },
-    {
-      "category": "navigation",
-      "id": "repositories",
-      "meaning": "Repository system",
-      "minimumOS": "11.0",
-      "sfSymbol": "archivebox"
-    },
-    {
-      "category": "navigation",
-      "id": "development",
-      "meaning": "Development lifecycle",
-      "minimumOS": "11.0",
-      "sfSymbol": "hammer"
-    },
-    {
-      "category": "chrome",
       "id": "search",
+      "category": "chrome",
       "meaning": "Search",
-      "minimumOS": "11.0",
-      "sfSymbol": "magnifyingglass"
+      "sfSymbol": "magnifyingglass",
+      "minimumOS": "11.0"
     },
     {
-      "category": "chrome",
       "id": "menu",
+      "category": "chrome",
       "meaning": "Open navigation",
-      "minimumOS": "11.0",
-      "sfSymbol": "line.3.horizontal"
+      "sfSymbol": "line.3.horizontal",
+      "minimumOS": "11.0"
     },
     {
-      "category": "chrome",
       "id": "globe",
-      "meaning": "Choose language",
-      "minimumOS": "11.0",
-      "sfSymbol": "globe"
-    },
-    {
       "category": "chrome",
+      "meaning": "Choose language",
+      "sfSymbol": "globe",
+      "minimumOS": "11.0"
+    },
+    {
       "id": "chevron",
+      "category": "chrome",
       "meaning": "Disclosure",
-      "minimumOS": "11.0",
-      "sfSymbol": "chevron.down"
+      "sfSymbol": "chevron.down",
+      "minimumOS": "11.0"
     },
     {
-      "category": "action",
       "id": "add",
+      "category": "action",
       "meaning": "Add item",
-      "minimumOS": "11.0",
-      "sfSymbol": "plus"
+      "sfSymbol": "plus",
+      "minimumOS": "11.0"
     },
     {
-      "category": "action",
       "id": "close",
-      "meaning": "Close surface",
-      "minimumOS": "11.0",
-      "sfSymbol": "xmark"
-    },
-    {
       "category": "action",
+      "meaning": "Close surface",
+      "sfSymbol": "xmark",
+      "minimumOS": "11.0"
+    },
+    {
       "id": "delete",
+      "category": "action",
       "meaning": "Delete item",
-      "minimumOS": "11.0",
-      "sfSymbol": "trash"
+      "sfSymbol": "trash",
+      "minimumOS": "11.0"
     },
     {
-      "category": "status",
       "id": "success",
+      "category": "status",
       "meaning": "Successful outcome",
-      "minimumOS": "11.0",
-      "sfSymbol": "checkmark.circle"
+      "sfSymbol": "checkmark.circle",
+      "minimumOS": "11.0"
     },
     {
-      "category": "status",
       "id": "warning",
+      "category": "status",
       "meaning": "Warning state",
-      "minimumOS": "11.0",
-      "sfSymbol": "exclamationmark.triangle"
+      "sfSymbol": "exclamationmark.triangle",
+      "minimumOS": "11.0"
     },
     {
-      "category": "status",
       "id": "error",
+      "category": "status",
       "meaning": "Error state",
-      "minimumOS": "11.0",
-      "sfSymbol": "xmark.circle"
+      "sfSymbol": "xmark.circle",
+      "minimumOS": "11.0"
     },
     {
-      "category": "status",
       "id": "information",
+      "category": "status",
       "meaning": "Informative state",
-      "minimumOS": "11.0",
-      "sfSymbol": "info.circle"
+      "sfSymbol": "info.circle",
+      "minimumOS": "11.0"
     }
-  ],
-  "platform": "apple",
-  "version": "4.2.0"
+  ]
 }

@@ -11,15 +11,16 @@ const packageJson = JSON.parse(await readFile(resolve(packageRoot, "package.json
 const declaredFiles = new Set(packageJson.files ?? []);
 const requiredFiles = [
   "LICENSE",
+  "NOTICE",
   "README.md",
-  "icons.json",
-  "recipes.css",
-  "tokens.css",
-  "tokens.json",
+  "dist/icons.json",
+  "dist/recipes.css",
+  "dist/tokens.css",
+  "dist/tokens.json",
 ];
 
 for (const filename of requiredFiles) {
-  if (!declaredFiles.has(filename)) {
+  if (!declaredFiles.has(filename) && !declaredFiles.has(filename.split("/")[0])) {
     throw new Error(`Package file is not declared: ${filename}`);
   }
   await readFile(resolve(packageRoot, filename));
@@ -29,7 +30,7 @@ for (const target of Object.values(packageJson.exports ?? {})) {
   await readFile(resolve(packageRoot, target));
 }
 
-const tokens = JSON.parse(await readFile(resolve(packageRoot, "tokens.json"), "utf8"));
+const tokens = JSON.parse(await readFile(resolve(packageRoot, "dist/tokens.json"), "utf8"));
 const tokenFamilies = Object.entries(tokens);
 if (tokenFamilies.length === 0) {
   throw new Error("tokens.json has no token families");
@@ -40,7 +41,7 @@ for (const [name, family] of tokenFamilies) {
   }
 }
 
-const icons = JSON.parse(await readFile(resolve(packageRoot, "icons.json"), "utf8"));
+const icons = JSON.parse(await readFile(resolve(packageRoot, "dist/icons.json"), "utf8"));
 if (icons.version !== packageJson.version || !Array.isArray(icons.icons) || icons.icons.length === 0) {
   throw new Error("icons.json is missing matching versioned icon metadata");
 }

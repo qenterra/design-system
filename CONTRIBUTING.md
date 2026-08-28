@@ -1,6 +1,6 @@
 # Contributing
 
-QenTerra Design System accepts contributions from authorized QenTerra
+Design System accepts contributions from authorized QenTerra
 collaborators. The repository is private and proprietary.
 
 ## Before opening an issue
@@ -21,14 +21,14 @@ Follow [Building from source](docs/BUILDING.md):
 npm ci
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements-visual.txt
-QDS_IMAGE_PYTHON=.venv/bin/python python3 scripts/verify.py
+DESIGN_SYSTEM_IMAGE_PYTHON=.venv/bin/python python3 scripts/verify.py
 ```
 
 ## Source-of-truth rules
 
 - `tokens/*.json`, focused registries and schemas, and the bilingual normative
   documents define the system.
-- Generated files under `dist/`, `generated/`, and generated package adapters
+- Generated files under `generated/` and `packages/` package adapters
   are outputs; change their maintained inputs instead.
 - English and Russian normative references stay structurally aligned and
   semantically complete.
@@ -42,13 +42,13 @@ QDS_IMAGE_PYTHON=.venv/bin/python python3 scripts/verify.py
 ## Required checks
 
 ```sh
-QDS_IMAGE_PYTHON=.venv/bin/python python3 scripts/verify.py
+DESIGN_SYSTEM_IMAGE_PYTHON=.venv/bin/python python3 scripts/verify.py
 git diff --check
 ```
 
-Automated checks cover generation, schemas, unit and negative tests, package
-payloads, Swift build/tests, browser interaction, asset manifests, and exact
-screenshot comparison. Native rendering, VoiceOver, real consumer migration,
+Automated checks cover generation, schemas, unit and negative tests, public
+package boundaries, npm contents, Swift build/tests, and Nyx asset manifests.
+Native rendering, VoiceOver, real consumer migration,
 live service boundaries, and other relevant platform acceptance remain explicit
 manual gaps.
 

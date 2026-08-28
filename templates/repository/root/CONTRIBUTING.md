@@ -41,7 +41,7 @@ Automated checks cover {AUTOMATED_SCOPE}. Changes involving
 ## Code quality
 
 - Code must be understandable to a developer unfamiliar with the module: make the unit's role, dependencies, effects, failures, and verification path visible through names, boundaries, tests, or focused comments.
-- Follow the adopted QDS language profile and existing local formatter; do not combine unrelated reformatting with behavioral changes.
+- Follow the adopted Design System language profile and existing local formatter; do not combine unrelated reformatting with behavioral changes.
 - Keep UI, domain policy, storage, network, and platform effects at explicit boundaries.
 - Record an exception with its rule, path, technical reason, owner, and review date.
 
@@ -69,7 +69,7 @@ update:
 
 ## Commits
 
-- Use `type(optional-scope): imperative outcome` with a QDS commit type.
+- Use `type(optional-scope): imperative outcome` with a Design System commit type.
 - Keep one reviewable change per commit and include its tests and generated counterparts.
 - Mark consumer migrations with `!` and a `BREAKING CHANGE:` footer.
 - Inspect the staged diff and run the smallest complete gate before committing.

@@ -1,10 +1,12 @@
 {
+  "format": "design-system-figma-variables-v1",
+  "version": "5.0.0",
   "collections": [
     {
+      "name": "Design System Foundation",
       "modes": [
         "Default"
       ],
-      "name": "QDS Foundation",
       "variables": [
         {
           "name": "color/blue/dark",
@@ -214,6 +216,13 @@
           "type": "FLOAT",
           "valuesByMode": {
             "Default": 0.045
+          }
+        },
+        {
+          "name": "opacity/pressed",
+          "type": "FLOAT",
+          "valuesByMode": {
+            "Default": 0.82
           }
         },
         {
@@ -527,295 +536,293 @@
       ]
     },
     {
+      "name": "Design System Semantic",
       "modes": [
         "Light",
         "Dark"
       ],
-      "name": "QDS Semantic",
       "variables": [
         {
           "name": "action/primary",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "#FFFFFF",
-            "Light": "#1A1A1C"
+            "Light": "#1A1A1C",
+            "Dark": "#FFFFFF"
           }
         },
         {
           "name": "action/primaryContent",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "#171719",
-            "Light": "#FFFFFF"
+            "Light": "#FFFFFF",
+            "Dark": "#171719"
           }
         },
         {
           "name": "action/quietContent",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "#E8E8EC",
-            "Light": "#27272B"
+            "Light": "#27272B",
+            "Dark": "#E8E8EC"
           }
         },
         {
           "name": "action/secondary",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "#27272B",
-            "Light": "#E8E8EC"
+            "Light": "#E8E8EC",
+            "Dark": "#27272B"
           }
         },
         {
           "name": "action/secondaryContent",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "#FFFFFF",
-            "Light": "#1A1A1C"
+            "Light": "#1A1A1C",
+            "Dark": "#FFFFFF"
           }
         },
         {
           "name": "border/default",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "rgba(255, 255, 255, 0.13)",
-            "Light": "rgba(15, 15, 17, 0.12)"
+            "Light": "rgba(15, 15, 17, 0.12)",
+            "Dark": "rgba(255, 255, 255, 0.13)"
           }
         },
         {
           "name": "border/focus",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "#FFFFFF",
-            "Light": "#1A1A1C"
+            "Light": "#1A1A1C",
+            "Dark": "#FFFFFF"
           }
         },
         {
           "name": "border/strong",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "rgba(255, 255, 255, 0.24)",
-            "Light": "rgba(15, 15, 17, 0.22)"
+            "Light": "rgba(15, 15, 17, 0.22)",
+            "Dark": "rgba(255, 255, 255, 0.24)"
           }
         },
         {
           "name": "border/subtle",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "rgba(255, 255, 255, 0.07)",
-            "Light": "rgba(15, 15, 17, 0.08)"
+            "Light": "rgba(15, 15, 17, 0.08)",
+            "Dark": "rgba(255, 255, 255, 0.07)"
           }
         },
         {
           "name": "fill/disabled",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "rgba(255, 255, 255, 0.04)",
-            "Light": "rgba(15, 15, 17, 0.04)"
+            "Light": "rgba(15, 15, 17, 0.04)",
+            "Dark": "rgba(255, 255, 255, 0.04)"
           }
         },
         {
           "name": "fill/hover",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "rgba(255, 255, 255, 0.045)",
-            "Light": "rgba(15, 15, 17, 0.045)"
+            "Light": "rgba(15, 15, 17, 0.045)",
+            "Dark": "rgba(255, 255, 255, 0.045)"
           }
         },
         {
           "name": "fill/pressed",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "rgba(255, 255, 255, 0.085)",
-            "Light": "rgba(15, 15, 17, 0.085)"
+            "Light": "rgba(15, 15, 17, 0.085)",
+            "Dark": "rgba(255, 255, 255, 0.085)"
           }
         },
         {
           "name": "fill/scrim",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "rgba(0, 0, 0, 0.46)",
-            "Light": "rgba(15, 15, 17, 0.46)"
+            "Light": "rgba(15, 15, 17, 0.46)",
+            "Dark": "rgba(0, 0, 0, 0.46)"
           }
         },
         {
           "name": "fill/selected",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "rgba(255, 255, 255, 0.085)",
-            "Light": "rgba(15, 15, 17, 0.075)"
+            "Light": "rgba(15, 15, 17, 0.075)",
+            "Dark": "rgba(255, 255, 255, 0.085)"
           }
         },
         {
           "name": "fill/selectedStrong",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "rgba(255, 255, 255, 0.14)",
-            "Light": "rgba(15, 15, 17, 0.14)"
+            "Light": "rgba(15, 15, 17, 0.14)",
+            "Dark": "rgba(255, 255, 255, 0.14)"
           }
         },
         {
           "name": "shadow/floating",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "0 16px 44px rgba(0, 0, 0, 0.34)",
-            "Light": "0 16px 44px rgba(15, 15, 17, 0.18)"
+            "Light": "0 16px 44px rgba(15, 15, 17, 0.18)",
+            "Dark": "0 16px 44px rgba(0, 0, 0, 0.34)"
           }
         },
         {
           "name": "shadow/overlay",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "0 20px 60px rgba(0, 0, 0, 0.36)",
-            "Light": "0 20px 60px rgba(15, 15, 17, 0.18)"
+            "Light": "0 20px 60px rgba(15, 15, 17, 0.18)",
+            "Dark": "0 20px 60px rgba(0, 0, 0, 0.36)"
           }
         },
         {
           "name": "shadow/raised",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "0 20px 60px rgba(0, 0, 0, 0.28)",
-            "Light": "0 20px 60px rgba(15, 15, 17, 0.14)"
+            "Light": "0 20px 60px rgba(15, 15, 17, 0.14)",
+            "Dark": "0 20px 60px rgba(0, 0, 0, 0.28)"
           }
         },
         {
           "name": "state/destructive",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "#E5695E",
-            "Light": "#D84A42"
+            "Light": "#D84A42",
+            "Dark": "#E5695E"
           }
         },
         {
           "name": "state/informative",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "#68A4F1",
-            "Light": "#2468C9"
+            "Light": "#2468C9",
+            "Dark": "#68A4F1"
           }
         },
         {
           "name": "state/recording",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "#E5695E",
-            "Light": "#E5695E"
+            "Light": "#E5695E",
+            "Dark": "#E5695E"
           }
         },
         {
           "name": "state/success",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "#5EC26F",
-            "Light": "#267A3A"
+            "Light": "#267A3A",
+            "Dark": "#5EC26F"
           }
         },
         {
           "name": "state/warning",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "#F0A342",
-            "Light": "#B96200"
+            "Light": "#B96200",
+            "Dark": "#F0A342"
           }
         },
         {
           "name": "surface/chrome",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "#1A1A1C",
-            "Light": "#FAFAFB"
+            "Light": "#FAFAFB",
+            "Dark": "#1A1A1C"
           }
         },
         {
           "name": "surface/content",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "#171719",
-            "Light": "#F4F4F6"
+            "Light": "#F4F4F6",
+            "Dark": "#171719"
           }
         },
         {
           "name": "surface/inverted",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "#F4F4F6",
-            "Light": "#171719"
+            "Light": "#171719",
+            "Dark": "#F4F4F6"
           }
         },
         {
           "name": "surface/overlay",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "#27272B",
-            "Light": "#FFFFFF"
+            "Light": "#FFFFFF",
+            "Dark": "#27272B"
           }
         },
         {
           "name": "surface/raised",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "#27272B",
-            "Light": "#E0E0E6"
+            "Light": "#E0E0E6",
+            "Dark": "#27272B"
           }
         },
         {
           "name": "surface/secondary",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "#202023",
-            "Light": "#E8E8EC"
+            "Light": "#E8E8EC",
+            "Dark": "#202023"
           }
         },
         {
           "name": "text/disabled",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "#6A6A73",
-            "Light": "#94949D"
+            "Light": "#94949D",
+            "Dark": "#6A6A73"
           }
         },
         {
           "name": "text/inverted",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "#171719",
-            "Light": "#FFFFFF"
+            "Light": "#FFFFFF",
+            "Dark": "#171719"
           }
         },
         {
           "name": "text/link",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "#FFFFFF",
-            "Light": "#1A1A1C"
+            "Light": "#1A1A1C",
+            "Dark": "#FFFFFF"
           }
         },
         {
           "name": "text/primary",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "#FFFFFF",
-            "Light": "#1A1A1C"
+            "Light": "#1A1A1C",
+            "Dark": "#FFFFFF"
           }
         },
         {
           "name": "text/secondary",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "#B9B9C0",
-            "Light": "#56565E"
+            "Light": "#56565E",
+            "Dark": "#B9B9C0"
           }
         },
         {
           "name": "text/tertiary",
           "type": "COLOR",
           "valuesByMode": {
-            "Dark": "#94949D",
-            "Light": "#6A6A73"
+            "Light": "#6A6A73",
+            "Dark": "#94949D"
           }
         }
       ]
     }
-  ],
-  "format": "qds-figma-variables-v1",
-  "version": "4.2.0"
+  ]
 }

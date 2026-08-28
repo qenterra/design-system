@@ -123,12 +123,12 @@ def semantic_errors(data: dict[str, Any]) -> list[str]:
 def audit_release_contract(product_root: Path, manifest_path: Path | None = None) -> dict[str, Any]:
     product_root = product_root.resolve()
     explicit_manifest = manifest_path is not None
-    manifest_path = (manifest_path or product_root / "qds-release.json").resolve()
+    manifest_path = (manifest_path or product_root / "product-release.json").resolve()
     if not manifest_path.is_file() or (not explicit_manifest and not inside(manifest_path, product_root)):
         return {
             "status": "failed",
             "productRoot": str(product_root),
-            "errors": ["qds-release.json is missing; pass an external manifest for read-only assessment"],
+            "errors": ["product-release.json is missing; pass an external manifest for read-only assessment"],
         }
 
     data = load_json(manifest_path)
@@ -148,7 +148,7 @@ def audit_release_contract(product_root: Path, manifest_path: Path | None = None
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Read-only QDS product release contract auditor")
+    parser = argparse.ArgumentParser(description="Read-only product release contract auditor")
     parser.add_argument("product", type=Path)
     parser.add_argument("--manifest", type=Path)
     parser.add_argument("--output", type=Path)

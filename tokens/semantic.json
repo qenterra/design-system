@@ -2,7 +2,7 @@
   "$schema": "../schemas/semantic.schema.json",
   "meta": {
     "name": "QenTerra Semantic Tokens",
-    "version": "4.2.0",
+    "version": "5.0.0",
     "type": "semantic",
     "description": "Meaning-oriented colors and materials for adaptive appearances."
   },

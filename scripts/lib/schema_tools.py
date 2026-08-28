@@ -1,4 +1,4 @@
-"""Small fail-closed JSON Schema subset used by local QDS validators."""
+"""Small fail-closed JSON Schema subset used by local Design System validators."""
 
 from __future__ import annotations
 
@@ -42,7 +42,7 @@ def _load_reference(reference: str, schema_path: Path, root_schema: dict[str, An
 
 
 def validate_schema(instance: Any, schema: dict[str, Any], schema_path: Path, location: str = "") -> list[str]:
-    """Validate the subset QDS schemas use; unsupported keywords fail loudly."""
+    """Validate the subset Design System schemas use; unsupported keywords fail loudly."""
     root_schema = schema
 
     def walk(value: Any, rule: dict[str, Any], path: str, current_path: Path, current_root: dict[str, Any]) -> list[str]:
@@ -68,6 +68,17 @@ def validate_schema(instance: Any, schema: dict[str, Any], schema_path: Path, lo
         if "enum" in rule and value not in rule["enum"]:
             errors.append(f"{path or '$'}: expected one of {rule['enum']!r}, got {value!r}")
 
+        if "const" in rule and value != rule["const"]:
+            errors.append(f"{path or '$'}: expected constant {rule['const']!r}, got {value!r}")
+
+        if (
+            "minimum" in rule
+            and isinstance(value, (int, float))
+            and not isinstance(value, bool)
+            and value < rule["minimum"]
+        ):
+            errors.append(f"{path or '$'}: expected a value of at least {rule['minimum']}")
+
         if isinstance(value, str):
             if len(value) < rule.get("minLength", 0):
                 errors.append(f"{path or '$'}: string is shorter than {rule['minLength']}")
@@ -79,6 +90,13 @@ def validate_schema(instance: Any, schema: dict[str, Any], schema_path: Path, lo
                 errors.append(f"{path or '$'}: expected at least {rule['minItems']} items")
             if "maxItems" in rule and len(value) > rule["maxItems"]:
                 errors.append(f"{path or '$'}: expected at most {rule['maxItems']} items")
+            if rule.get("uniqueItems"):
+                canonical = [
+                    json.dumps(item, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+                    for item in value
+                ]
+                if len(canonical) != len(set(canonical)):
+                    errors.append(f"{path or '$'}: array items must be unique")
             item_rule = rule.get("items")
             if item_rule:
                 for index, item in enumerate(value):

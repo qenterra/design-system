@@ -1,5 +1,5 @@
 name: Bug report
-description: Report a reproducible QDS problem
+description: Report a reproducible Design System problem
 title: "[Bug]: "
 labels: ["bug"]
 body:
@@ -10,7 +10,7 @@ body:
   - type: input
     id: version
     attributes:
-      label: QDS version or commit
+      label: Design System version or commit
       placeholder: "1.12.0 or 17fe931"
     validations:
       required: true

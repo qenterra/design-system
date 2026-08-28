@@ -1,51 +1,25 @@
 # Architecture
 
-## System layers
+Design System separates canonical decisions from installable delivery.
 
-QDS separates maintained definitions from generated delivery surfaces:
+## Private canonical source
 
-1. `tokens/` stores exact foundation, semantic, component, platform, and product
-   values.
-2. `registry/` and `schemas/` define machine-readable components, icons, email
-   scenarios, and validation contracts.
-3. `docs/` holds normative human rules, maintenance guidance, and decisions.
-4. `src/` implements the local reference interface and browser interactions.
-5. `scripts/build.py` validates and generates `dist/`, `generated/`, and package
-   adapters.
-6. `scripts/verify.py` checks deterministic generation, contracts, packages,
-   assets, browser behavior, and exact visual evidence.
+1. `SKILL.md` defines the agent operating modes and routing contract.
+2. `tokens/` owns exact foundation and semantic values.
+3. `registry/` describes components, icons, packages, and truthful delivery status.
+4. `schemas/` owns machine-readable contracts.
+5. `docs/` and `templates/` own human guidance and reusable starting points.
+6. `assets/brand/nyx/` and its manifest hold the retained private asset family.
+7. `scripts/` and `tests/` generate and verify adapters, consumers, assets, and release boundaries.
 
-## Distribution boundaries
+Product-specific business logic and exceptions never enter universal foundations. Consumer repositories own `design-system-consumer.json`, `design-system-exceptions.json`, runtime code, fixtures, and acceptance evidence.
 
-The canonical repository owns all definitions and generated adapter sources.
-The private `design-system-swift` repository is a filtered `packages/swift/`
-distribution. The restricted `@qenterra/design-tokens` GitHub package is built
-from `packages/css/`. Neither distribution becomes an independent source of
-truth.
+## Public delivery
 
-Release tags are immutable. Version, payload allowlists, generated metadata,
-package manifests, and remote refs must agree before publication. Consumers use
-read-only credentials; only release automation receives narrowly scoped write
-access.
+`packages/` is the only exportable tree. `registry/packages.json` declares its packages, capabilities, paths, and tests. `packages/release-manifest.json` records the relative path, size, and SHA-256 of every public file except the manifest itself.
 
-## Browser reference
+The public repository contains a Swift package at its root and the npm workspace under `npm/design-tokens/`. It has fresh public history and cannot contain Nyx, private docs, agent instructions, consumer manifests, or private commit identifiers.
 
-The generated site is static. It loads local assets and performs no application
-backend work. Language, appearance, navigation, component stories, search, and
-email composition are implemented in the browser. Email tooling is deliberately
-unable to send messages, access accounts, persist entered values, or fetch
-remote assets.
+## Evolution
 
-## Change ownership
-
-Foundation and semantic changes begin in tokens and normative bilingual docs.
-Product exceptions stay in `tokens/products.json` and the relevant product
-profile. Brand files are accepted only under `assets/brand/`, with PNGs in Git
-LFS and every approved asset represented by `assets/brand/manifest.json`.
-
-## Verification boundary
-
-Automated repository evidence does not prove native product rendering,
-VoiceOver or other assistive output, real credentials, hardware behavior,
-production migration, or external-service acceptance. Those remain live or
-manual checks in the affected consumer.
+Reusable candidates move from consumer evidence to a product-independent contract, then to canonical tokens/source, tests, registry status, delivery mapping, version, and changelog. Specification-only components remain explicit; a catalog entry does not magically become installable by believing in itself.

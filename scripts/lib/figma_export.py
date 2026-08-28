@@ -1,4 +1,4 @@
-"""Deterministic, import-friendly Figma payloads derived from QDS sources."""
+"""Deterministic, import-friendly Figma payloads derived from Design System sources."""
 
 from __future__ import annotations
 
@@ -57,21 +57,21 @@ def generate_figma_exports(
     version = tokens["foundation"]["meta"]["version"]
     return {
         "variables.json": {
-            "format": "qds-figma-variables-v1",
+            "format": "design-system-figma-variables-v1",
             "version": version,
             "collections": [
-                {"name": "QDS Foundation", "modes": ["Default"], "variables": primitive_variables},
-                {"name": "QDS Semantic", "modes": ["Light", "Dark"], "variables": semantic_variables},
+                {"name": "Design System Foundation", "modes": ["Default"], "variables": primitive_variables},
+                {"name": "Design System Semantic", "modes": ["Light", "Dark"], "variables": semantic_variables},
             ],
         },
-        "styles.json": {"format": "qds-figma-styles-v1", "version": version, "textStyles": typography},
+        "styles.json": {"format": "design-system-figma-styles-v1", "version": version, "textStyles": typography},
         "components.json": {
-            "format": "qds-figma-components-v1",
+            "format": "design-system-figma-components-v1",
             "version": version,
             "components": components["components"],
         },
         "icons.json": {
-            "format": "qds-figma-sf-symbols-v2",
+            "format": "design-system-figma-sf-symbols-v2",
             "version": version,
             "platform": icons["platform"],
             "icons": icons["icons"],

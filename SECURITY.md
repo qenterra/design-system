@@ -47,7 +47,7 @@ generated diffs before release.
 
 ## Dependency vulnerabilities
 
-Report the QDS impact privately even when the root cause is in a platform,
+Report the Design System impact privately even when the root cause is in a platform,
 browser, package manager, or development dependency. A fix may require an
 upstream update, integration change, mitigation, or documentation change. See
 [Dependencies](docs/DEPENDENCIES.md).

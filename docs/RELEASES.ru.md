@@ -1,21 +1,21 @@
 # Версии продуктовых релизов и установщики
 
 Этот справочник задаёт общий формат версий и контракт macOS-установщика для
-продуктов QenTerra. Репозиторий продукта владеет конкретными значениями, а QDS —
+продуктов QenTerra. Репозиторий продукта владеет конкретными значениями, а Design System —
 форматом, схемой, шаблоном и read-only аудитом.
 
 ## Канонический manifest
 
-Каждый публикуемый продукт хранит один `qds-release.json` в корне репозитория.
-Начинайте с `templates/release/qds-release.json` и проверяйте его по
+Каждый публикуемый продукт хранит один `product-release.json` в корне репозитория.
+Начинайте с `templates/release/product-release.json` и проверяйте его по
 `schemas/product-release.schema.json`. Не создавайте независимо редактируемые
 копии release-значений в shell-скриптах, Xcode settings, документации и
 workflow-файлах. Эти поверхности читают manifest или сверяются с ним.
 
-Запускайте read-only аудитор из QDS:
+Запускайте read-only аудитор из Design System:
 
 ```sh
-python3 path/to/qds/scripts/audit_release_contract.py path/to/product
+python3 path/to/design-system/scripts/audit_release_contract.py path/to/product
 ```
 
 Необязательный машинный отчёт записывается только за пределами репозитория

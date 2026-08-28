@@ -12,7 +12,7 @@
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["id", "name", "summary", "status", "category", "platforms", "lifecycle", "anatomy", "states", "stories", "keyboard", "accessibility", "localization", "evidence"],
+        "required": ["id", "name", "summary", "status", "category", "platforms", "lifecycle", "anatomy", "states", "stories", "keyboard", "accessibility", "localization", "evidence", "delivery"],
         "properties": {
           "id": {"type": "string", "pattern": "^[a-z][a-z0-9-]+$"},
           "name": {"$ref": "#/$defs/localized"},
@@ -50,7 +50,16 @@
           "keyboard": {"type": "array", "minItems": 1, "items": {"type": "string"}},
           "accessibility": {"type": "array", "minItems": 1, "items": {"type": "string"}},
           "localization": {"type": "array", "minItems": 1, "items": {"type": "string"}},
-          "evidence": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["schema", "unit", "browser", "visual", "manual"]}}
+          "evidence": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["schema", "unit", "manual"]}},
+          "delivery": {
+            "type": "object",
+            "required": ["status", "packages"],
+            "properties": {
+              "status": {"enum": ["delivered", "specification-only"]},
+              "packages": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z][a-z0-9-]+$"}}
+            },
+            "additionalProperties": false
+          }
         },
         "additionalProperties": false
       }

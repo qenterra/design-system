@@ -1,56 +1,29 @@
-# QenTerra Design System — completion requirements
+# Design System completion requirements
 
-This checklist is the completion contract for the initial local release.
+## Universal source
 
-## Canonical system
+- [x] Human-facing name is Design System; machine paths use `design-system`.
+- [x] Foundations cover color, typography, spacing, sizing, radius, borders, materials, iconography, layout, density, elevation, and motion.
+- [x] Component contracts define anatomy, states, keyboard, accessibility, localization, lifecycle, evidence, and delivery status.
+- [x] Native platform conventions and accessibility requirements override decorative sameness.
+- [x] Product-specific differences stay in consumer profiles and expiring exceptions.
+- [x] Root `SKILL.md` defines `consume`, `evolve`, and `audit` modes for Noetic.
 
-- [x] The family thesis combines an adaptive visual foundation, component discipline, and state/motion/copy architecture without naming current products.
-- [x] Shared rules do not force identical product shells.
-- [x] System, Light, and Dark appearances are defined.
-- [x] Foundations cover color, typography, spacing, sizing, radius, borders, materials, iconography, imagery, layout, density, and motion.
-- [x] Components cover controls, forms, navigation, containers, data display, feedback, overlays, progress, settings, onboarding, search, tables, and product archetypes.
-- [x] Patterns cover permissions, destructive actions, imports/downloads, long operations, errors, recovery, offline behavior, selection, focus restoration, privacy, and responsive adaptation.
-- [x] Platform layers cover macOS, iOS, iPadOS, web, and browser extensions.
-- [x] Product profiles cover immersive content, dense operations, and transient capability archetypes with keep/adapt/replace decisions.
-- [x] Accessibility, localization, UX copy, screenshot QA, governance, exceptions, versioning, and maintenance are operationally defined.
+## Installable delivery
 
-## Files and site
+- [x] Public npm package exposes CSS tokens, JSON tokens, reusable icon metadata, and the four existing CSS recipes.
+- [x] Public Swift package exposes typed tokens plus the existing primary-button, group-container, and interactive-row primitives.
+- [x] Public files are restricted to `packages/` and declared by path/hash.
+- [x] Apache-2.0 and NOTICE attribution name QenTerra and Nikita Melnychenko.
+- [x] New/improved reusable work must update source, registry, tests, package mapping, release manifest, version, and changelog.
 
-- [x] `docs/MASTER.md` is the AI/developer reference.
-- [x] `tokens/*.json` are machine-readable and validated.
-- [x] Generated CSS and Swift token adapters exist.
-- [x] Generated adapters are exposed through connectable local SwiftPM and private CSS packages.
-- [x] A responsive multipage static reference is generated in `dist/`.
-- [x] A fully standalone `dist/qenterra-design-system.html` contains the complete human reference with inline CSS and JavaScript.
-- [x] The site itself uses the design system and supports System, Light, and Dark.
-- [x] The site supports keyboard navigation, visible focus, reduced motion, increased contrast, print, mobile widths, and search.
-- [x] English and Russian references contain equivalent complete content, locale-specific search indexes, and stable section anchors.
-- [x] The language menu is keyboard accessible and preserves the equivalent page and stable section fragment.
-- [x] The language menu appears in the upper-right top bar at desktop and constrained widths.
-- [x] Standalone navigation follows the visible document section and exposes it through `aria-current="location"`.
-- [x] Navigation, search, menu, and language controls use one consistent inline SVG icon family.
-- [x] Templates cover components, screens, product profiles, decisions, copy, accessibility, screenshots, motion, and migrations.
-- [x] The bilingual repository standard and categorized repository templates are part of the same source of truth.
-- [x] The bilingual Code System defines readable-by-default code, language profiles, contributor requirements, exceptions, and evidence boundaries.
-- [x] Repository contributor, architecture, pull-request, and tooling templates carry the Code System into product repositories without duplicating its canonical rules.
-- [x] The complete QenTerra mark and Nyx library is organized under `assets/brand/` and covered by a machine-readable manifest.
-- [x] All 207 brand PNG files use Git LFS; SVG, JSON, and Markdown remain normal Git files.
-- [x] English and Russian brand governance covers marks, character identity, categories, stickers, wallpapers, pet assets, generation, processing, and release QA.
-- [x] Reusable brand briefs and focused manifest, sticker, wallpaper, character, processing, and contact-sheet tools are maintained with the canon.
-- [x] Update and contribution instructions explain how to change tokens, prose, generated files, and versioning.
-- [x] A human-operated English/Russian email catalogue covers 48 general correspondence, support, account, operation, and payment scenarios.
-- [x] The local email gallery supports search, category/channel filters, required-field validation, responsive Light/Dark previews, and subject/rich/plain/source copying with a fallback.
-- [x] Email output escapes entered values, accepts only absolute HTTPS actions, contains at most one CTA, and provides semantically equivalent HTML and plain text.
-- [x] Email tooling sends nothing, stores no entered values, makes no external requests, and offers no marketing or newsletter capability.
+## Removed scope
 
-## Evidence and governance
+- [x] No static Design System viewing website or generated viewing output remains.
+- [x] No email-template registry, composer, renderer, documentation, tests, or generated evidence remains.
+- [x] Nyx is retained; every previous non-Nyx brand asset is removed.
 
-- [x] The cross-app audit and evidence confidence are preserved under `output/`.
-- [x] Current known UX blockers and major findings are not hidden by the visual system.
-- [x] Build, validation, negative tests, HTML link checks, and contrast checks pass.
-- [x] Rendered desktop and mobile screenshots are inspected.
-- [x] The repository is local-only, has no remote, and has a clean committed `main` branch.
-- [x] Relevant Obsidian app/extension instructions are audited and synchronized with the canonical repository.
-- [x] Obsidian templates, routing maps, README, changelog, and a focused validator are updated and pass their gates.
-- [x] `docs/superpowers/` is absent and AI working artifacts are excluded from repository sources.
-- [x] The previous standalone brandbook is no longer a parallel authority after hash-verified migration and recoverable retirement.
+## Evidence
+
+- [x] Generation, schemas, registries, consumer audits, public boundary, terminology, npm contents, Swift tests, and Nyx manifest/profile checks are automated.
+- [ ] Running consumer rendering, keyboard behavior, VoiceOver/screen readers, localization, and visual acceptance remain consumer-specific manual or runtime evidence.

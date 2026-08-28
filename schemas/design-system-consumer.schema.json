@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://qenterra.local/schemas/design-system-consumer.schema.json",
+  "title": "Design System consumer manifest",
+  "type": "object",
+  "required": ["schemaVersion", "consumer", "platforms", "packages", "adoptedCapabilities", "sourceRoots", "exceptions"],
+  "properties": {
+    "schemaVersion": {"type": "integer", "enum": [2]},
+    "consumer": {"type": "string", "minLength": 2},
+    "platforms": {"type": "array", "minItems": 1, "items": {"type": "string", "enum": ["macOS", "iOS", "iPadOS", "web", "browser-extension"]}},
+    "packages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "version", "source"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z][a-z0-9-]+$"},
+          "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+          "source": {"enum": ["release", "local"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "adoptedCapabilities": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+    "sourceRoots": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "exceptions": {"type": "string", "const": "design-system-exceptions.json"}
+  },
+  "additionalProperties": false
+}

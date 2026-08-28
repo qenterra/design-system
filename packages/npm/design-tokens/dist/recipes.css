@@ -1,0 +1,85 @@
+/* Design System opt-in component recipes. Import after tokens.css. */
+
+.design-system-button {
+  box-sizing: border-box;
+  display: inline-flex;
+  min-height: var(--design-system-component-button-heights-standard);
+  align-items: center;
+  justify-content: center;
+  gap: var(--design-system-component-button-icon-gap);
+  padding-inline: var(--design-system-component-button-padding-x-standard);
+  border: var(--design-system-stroke-default) solid transparent;
+  border-radius: var(--design-system-component-button-radius);
+  font: inherit;
+  font-weight: var(--design-system-type-body-emphasized-weight);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--design-system-motion-hover) var(--design-system-ease-standard),
+    color var(--design-system-motion-hover) var(--design-system-ease-standard),
+    opacity var(--design-system-motion-press) var(--design-system-ease-standard);
+}
+
+.design-system-button[data-variant="primary"] {
+  background-color: var(--design-system-action-primary);
+  color: var(--design-system-action-primary-content);
+}
+
+.design-system-button[data-variant="secondary"] {
+  border-color: var(--design-system-border-default);
+  background-color: var(--design-system-action-secondary);
+  color: var(--design-system-action-secondary-content);
+}
+
+.design-system-button:hover:not(:disabled):not([aria-disabled="true"]) {
+  background-image: linear-gradient(var(--design-system-fill-hover), var(--design-system-fill-hover));
+}
+.design-system-button:active:not(:disabled):not([aria-disabled="true"]) {
+  background-image: linear-gradient(var(--design-system-fill-pressed), var(--design-system-fill-pressed));
+}
+.design-system-button:focus-visible { outline: var(--design-system-stroke-focus) solid var(--design-system-border-focus); outline-offset: var(--design-system-stroke-focus); }
+.design-system-button:disabled, .design-system-button[aria-disabled="true"] { opacity: var(--design-system-opacity-disabled); cursor: not-allowed; }
+.design-system-button[aria-busy="true"] { cursor: progress; }
+
+.design-system-field {
+  box-sizing: border-box;
+  min-height: var(--design-system-component-field-height);
+  padding-inline: var(--design-system-component-field-padding-x);
+  border: var(--design-system-stroke-default) solid var(--design-system-border-default);
+  border-radius: var(--design-system-component-field-radius);
+  background: var(--design-system-surface-content);
+  color: var(--design-system-text-primary);
+  font: inherit;
+}
+
+.design-system-field:focus-visible { outline: var(--design-system-stroke-focus) solid var(--design-system-border-focus); outline-offset: var(--design-system-stroke-default); }
+.design-system-field[aria-invalid="true"] { border-color: var(--design-system-state-destructive); }
+.design-system-field:disabled { background: var(--design-system-fill-disabled); color: var(--design-system-text-disabled); cursor: not-allowed; }
+.design-system-field:read-only { background: var(--design-system-surface-secondary); }
+
+.design-system-group {
+  display: grid;
+  gap: var(--design-system-component-group-gap);
+  padding: var(--design-system-component-group-padding);
+  border: var(--design-system-stroke-default) solid var(--design-system-border-default);
+  border-radius: var(--design-system-component-group-radius);
+  background: var(--design-system-surface-secondary);
+}
+
+.design-system-interactive-row {
+  box-sizing: border-box;
+  display: flex;
+  min-height: var(--design-system-component-interactive-row-heights-standard);
+  align-items: center;
+  gap: var(--design-system-component-interactive-row-gap);
+  padding-inline: var(--design-system-component-interactive-row-padding-x);
+  border-radius: var(--design-system-component-interactive-row-radius);
+}
+
+.design-system-interactive-row:hover:not([aria-disabled="true"]):not([data-unavailable="true"]) { background: var(--design-system-fill-hover); }
+.design-system-interactive-row:focus-visible { outline: var(--design-system-stroke-focus) solid var(--design-system-border-focus); outline-offset: calc(-1 * var(--design-system-stroke-focus)); }
+.design-system-interactive-row[aria-selected="true"] { background: var(--design-system-fill-selected); }
+.design-system-interactive-row[aria-disabled="true"], .design-system-interactive-row[data-unavailable="true"] { opacity: var(--design-system-opacity-disabled); cursor: not-allowed; }
+
+@media (prefers-reduced-motion: reduce) {
+  .design-system-button { transition-duration: 0.01ms; }
+}

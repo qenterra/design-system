@@ -12,8 +12,8 @@
 
 ## Validation
 
-- [ ] `QDS_IMAGE_PYTHON=.venv/bin/python python3 scripts/verify.py`
-- [ ] Relevant generated HTML and screenshots inspected at full size
+- [ ] `DESIGN_SYSTEM_IMAGE_PYTHON=.venv/bin/python python3 scripts/verify.py`
+- [ ] Relevant npm and SwiftPM consumer surfaces inspected
 - [ ] Live platform, service, permission, or consumer checks completed when applicable
 - [ ] Remaining manual gaps listed below
 

@@ -2,67 +2,44 @@
 
 ## Git LFS files appear as pointer text
 
-Install Git LFS, then fetch the repository objects:
-
 ```sh
 git lfs install
 git lfs pull
 python3 scripts/brand/validate_brand_assets.py --check-git-lfs
 ```
 
-Do not replace pointer files manually or remove LFS rules to make a local check
-quiet.
+Do not replace pointers manually or weaken `.gitattributes`.
 
-## Playwright or Chromium is missing
-
-Install locked JavaScript dependencies and the required browser:
-
-```sh
-npm ci
-npx playwright install chromium
-```
-
-Then run the full verifier again. A syntax-only JavaScript pass is not browser
-evidence.
-
-## Pillow or NumPy cannot be imported
-
-Use the isolated image environment:
+## Pillow or NumPy is unavailable
 
 ```sh
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements-visual.txt
-QDS_IMAGE_PYTHON=.venv/bin/python python3 scripts/verify.py
+DESIGN_SYSTEM_IMAGE_PYTHON=.venv/bin/python python3 scripts/verify.py
 ```
 
-## Screenshot comparison differs
+## Swift testing macros are unavailable
 
-Confirm the selected renderer profile and inspect `output/tmp/` at full size.
-Do not update baselines until the source change and every changed pixel are
-understood. Platform font differences require a declared profile; silently
-falling back to another machine's baseline is prohibited.
+Select a full Xcode installation, not Command Line Tools alone:
 
-## Swift package authentication fails
-
-Confirm that the developer or CI identity has read access to the private
-`qenterra/design-system-swift` repository. Keep credentials out of
-`Package.swift`, source control, logs, and package mirrors. Test the exact tagged
-version in a clean consumer before blaming SwiftPM's mood swings.
+```sh
+DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer" python3 scripts/verify.py
+```
 
 ## Generated files drift
 
-Edit the maintained token, registry, schema, source, or documentation input,
-then run:
+Edit canonical tokens or registries, then run:
 
 ```sh
-python3 scripts/build.py
+python3 scripts/generate.py write
+python3 scripts/build_public_packages.py write
 python3 scripts/verify.py
 ```
 
-Do not patch rendered HTML or generated adapters directly.
+## Public boundary fails
 
-## Reporting a problem
+Inspect `registry/packages.json` and `packages/release-manifest.json`. Remove undeclared/private material or register a legitimate package file. Never register assets, agent instructions, consumer manifests, secrets, or private commit IDs merely to silence the gate.
 
-Follow [CONTRIBUTING.md](../CONTRIBUTING.md). Replace accounts, content,
-filenames, paths, credentials, and logs with synthetic values. Report security
-issues privately through [SECURITY.md](../SECURITY.md).
+## Package installation fails
+
+Confirm `@qenterra/design-tokens` exists at the requested npm version and `https://github.com/qenterra/packages` has the requested `v<version>` tag. Reproduce in a clean temporary consumer before changing package metadata.

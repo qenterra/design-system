@@ -1,21 +1,21 @@
 # Product release versions and installers
 
 This reference defines the shared version grammar and macOS installer contract
-for QenTerra products. Product repositories own their concrete values; QDS owns
+for QenTerra products. Product repositories own their concrete values; Design System owns
 their format, schema, template, and read-only audit.
 
 ## Canonical manifest
 
-Every published product keeps one `qds-release.json` at the repository root.
-Start from `templates/release/qds-release.json` and validate it against
+Every published product keeps one `product-release.json` at the repository root.
+Start from `templates/release/product-release.json` and validate it against
 `schemas/product-release.schema.json`. Do not duplicate independently editable
 release values in shell scripts, Xcode settings, documentation, or workflow
 files. Those surfaces consume the manifest or are checked against it.
 
-Run the read-only auditor from QDS:
+Run the read-only auditor from Design System:
 
 ```sh
-python3 path/to/qds/scripts/audit_release_contract.py path/to/product
+python3 path/to/design-system/scripts/audit_release_contract.py path/to/product
 ```
 
 Write optional machine-readable reports only outside the product repository.

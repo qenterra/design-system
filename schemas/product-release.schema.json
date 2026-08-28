@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://qenterra.com/schemas/product-release.schema.json",
-  "title": "QDS product release contract",
+  "title": "Design System product release contract",
   "type": "object",
   "additionalProperties": false,
   "required": [

@@ -1,1 +1,1 @@
-"""Build helpers for the QenTerra Design System."""
+"""Build helpers for the Design System."""

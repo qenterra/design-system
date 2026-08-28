@@ -1,118 +1,118 @@
 {
-  "format": "qds-figma-styles-v1",
+  "format": "design-system-figma-styles-v1",
+  "version": "5.0.0",
   "textStyles": [
     {
+      "name": "display",
       "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif",
       "fontSize": 40,
-      "fontWeight": 650,
-      "letterSpacing": -0.8,
       "lineHeight": 48,
-      "name": "display"
+      "fontWeight": 650,
+      "letterSpacing": -0.8
     },
     {
+      "name": "screenTitle",
       "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif",
       "fontSize": 24,
-      "fontWeight": 600,
-      "letterSpacing": -0.35,
       "lineHeight": 30,
-      "name": "screenTitle"
+      "fontWeight": 600,
+      "letterSpacing": -0.35
     },
     {
+      "name": "modalTitle",
       "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif",
       "fontSize": 20,
-      "fontWeight": 600,
-      "letterSpacing": -0.2,
       "lineHeight": 26,
-      "name": "modalTitle"
+      "fontWeight": 600,
+      "letterSpacing": -0.2
     },
     {
+      "name": "sectionTitle",
       "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif",
       "fontSize": 15,
+      "lineHeight": 20,
       "fontWeight": 600,
-      "letterSpacing": -0.08,
-      "lineHeight": 20,
-      "name": "sectionTitle"
+      "letterSpacing": -0.08
     },
     {
+      "name": "body",
       "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif",
       "fontSize": 14,
-      "fontWeight": 400,
-      "letterSpacing": 0,
       "lineHeight": 20,
-      "name": "body"
+      "fontWeight": 400,
+      "letterSpacing": 0
     },
     {
+      "name": "bodyEmphasized",
       "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif",
       "fontSize": 14,
-      "fontWeight": 550,
-      "letterSpacing": 0,
       "lineHeight": 20,
-      "name": "bodyEmphasized"
-    },
-    {
-      "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif",
-      "fontSize": 13,
-      "fontWeight": 400,
-      "letterSpacing": 0,
-      "lineHeight": 18,
-      "name": "row"
-    },
-    {
-      "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif",
-      "fontSize": 13,
       "fontWeight": 550,
-      "letterSpacing": 0,
-      "lineHeight": 18,
-      "name": "rowEmphasized"
+      "letterSpacing": 0
     },
     {
+      "name": "row",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif",
+      "fontSize": 13,
+      "lineHeight": 18,
+      "fontWeight": 400,
+      "letterSpacing": 0
+    },
+    {
+      "name": "rowEmphasized",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif",
+      "fontSize": 13,
+      "lineHeight": 18,
+      "fontWeight": 550,
+      "letterSpacing": 0
+    },
+    {
+      "name": "supporting",
       "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif",
       "fontSize": 12,
-      "fontWeight": 400,
-      "letterSpacing": 0,
       "lineHeight": 17,
-      "name": "supporting"
+      "fontWeight": 400,
+      "letterSpacing": 0
     },
     {
+      "name": "metadata",
       "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif",
       "fontSize": 11,
-      "fontWeight": 400,
-      "letterSpacing": 0.08,
       "lineHeight": 15,
-      "name": "metadata"
+      "fontWeight": 400,
+      "letterSpacing": 0.08
     },
     {
+      "name": "compactMetadata",
       "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif",
       "fontSize": 10,
-      "fontWeight": 500,
-      "letterSpacing": 0.16,
       "lineHeight": 14,
-      "name": "compactMetadata"
+      "fontWeight": 500,
+      "letterSpacing": 0.16
     },
     {
+      "name": "eyebrow",
       "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif",
       "fontSize": 11,
-      "fontWeight": 600,
-      "letterSpacing": 0.7,
       "lineHeight": 15,
-      "name": "eyebrow"
+      "fontWeight": 600,
+      "letterSpacing": 0.7
     },
     {
+      "name": "keycap",
       "fontFamily": "ui-rounded, 'SF Pro Rounded', -apple-system, sans-serif",
       "fontSize": 12,
-      "fontWeight": 500,
-      "letterSpacing": 0,
       "lineHeight": 16,
-      "name": "keycap"
+      "fontWeight": 500,
+      "letterSpacing": 0
     },
     {
+      "name": "monospacedData",
       "fontFamily": "ui-monospace, 'SF Mono', SFMono-Regular, Menlo, monospace",
       "fontSize": 12,
-      "fontWeight": 500,
-      "letterSpacing": 0,
       "lineHeight": 17,
-      "name": "monospacedData"
+      "fontWeight": 500,
+      "letterSpacing": 0
     }
-  ],
-  "version": "4.2.0"
+  ]
 }

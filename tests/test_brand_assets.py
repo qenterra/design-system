@@ -7,11 +7,12 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts" / "brand"))
 
-from validate_brand_assets import validate_brand_assets  # noqa: E402
+from validate_brand_assets import lfs_paths, validate_brand_assets  # noqa: E402
 
 
 PNG_1X1 = base64.b64decode(
@@ -105,6 +106,19 @@ class BrandAssetValidatorTests(unittest.TestCase):
             (root / "assets" / "brand" / ".DS_Store").write_bytes(b"finder")
             errors = validate_brand_assets(root)
             self.assertTrue(any("forbidden file" in error for error in errors))
+
+    def test_lfs_inventory_ignores_paths_deleted_from_the_worktree(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            existing = root / "assets/brand/nyx/Current.png"
+            existing.parent.mkdir(parents=True)
+            existing.write_bytes(PNG_1X1)
+            output = "assets/brand/nyx/Current.png\nassets/brand/qenterra/Deleted.png\n"
+            with patch("validate_brand_assets.subprocess.run") as run:
+                run.return_value.returncode = 0
+                run.return_value.stdout = output
+                run.return_value.stderr = ""
+                self.assertEqual(lfs_paths(root), {"assets/brand/nyx/Current.png"})
 
 
 if __name__ == "__main__":

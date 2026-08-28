@@ -1,0 +1,86 @@
+{
+  "$schema": "../schemas/package-registry.schema.json",
+  "version": "5.0.0",
+  "repository": "https://github.com/qenterra/packages",
+  "versionPolicy": "shared",
+  "packages": [
+    {
+      "id": "repository-metadata",
+      "ecosystem": "repository",
+      "name": "qenterra/packages",
+      "version": "5.0.0",
+      "publicPaths": [
+        "packages/.github/workflows/ci.yml",
+        "packages/.gitignore",
+        "packages/README.md",
+        "packages/LICENSE",
+        "packages/NOTICE",
+        "packages/package.json",
+        "packages/Package.swift",
+        "packages/scripts/verify_release.py"
+      ],
+      "tests": [],
+      "capabilities": []
+    },
+    {
+      "id": "npm-design-tokens",
+      "ecosystem": "npm",
+      "name": "@qenterra/design-tokens",
+      "version": "5.0.0",
+      "publicPaths": [
+        "packages/npm/design-tokens/LICENSE",
+        "packages/npm/design-tokens/NOTICE",
+        "packages/npm/design-tokens/README.md",
+        "packages/npm/design-tokens/package.json",
+        "packages/npm/design-tokens/src/index.css",
+        "packages/npm/design-tokens/src/recipes.css",
+        "packages/npm/design-tokens/dist/icons.json",
+        "packages/npm/design-tokens/dist/recipes.css",
+        "packages/npm/design-tokens/dist/tokens.css",
+        "packages/npm/design-tokens/dist/tokens.json"
+      ],
+      "tests": [
+        "tests/package-css-smoke.mjs"
+      ],
+      "capabilities": [
+        "tokens.css",
+        "tokens.json",
+        "icons.json",
+        "button.recipe",
+        "field.recipe",
+        "group.recipe",
+        "interactive-row.recipe"
+      ]
+    },
+    {
+      "id": "swift-components",
+      "ecosystem": "swiftpm",
+      "name": "QenTerraPackages",
+      "version": "5.0.0",
+      "products": [
+        "QenTerraDesignTokens",
+        "QenTerraComponents"
+      ],
+      "publicPaths": [
+        "packages/Sources/QenTerraDesignTokens/DesignTokens.swift",
+        "packages/Sources/QenTerraDesignTokens/GeneratedIcons.swift",
+        "packages/Sources/QenTerraDesignTokens/GeneratedTokens.swift",
+        "packages/Sources/QenTerraDesignTokens/SwiftUIAdapters.swift",
+        "packages/Sources/QenTerraComponents/Components.swift",
+        "packages/Tests/QenTerraDesignTokensTests/DesignTokensTests.swift",
+        "packages/Tests/QenTerraComponentsTests/ComponentTests.swift"
+      ],
+      "tests": [
+        "packages/Tests/QenTerraDesignTokensTests/DesignTokensTests.swift",
+        "packages/Tests/QenTerraComponentsTests/ComponentTests.swift"
+      ],
+      "capabilities": [
+        "typed-tokens",
+        "swiftui-token-adapters",
+        "primary-button-style",
+        "group-container",
+        "interactive-row-surface"
+      ]
+    }
+  ]
+}

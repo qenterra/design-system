@@ -131,7 +131,11 @@ def lfs_paths(root: Path) -> set[str]:
     )
     if result.returncode != 0:
         raise RuntimeError(result.stderr.strip() or "git lfs ls-files failed")
-    return {line.strip() for line in result.stdout.splitlines() if line.strip()}
+    return {
+        relative
+        for line in result.stdout.splitlines()
+        if (relative := line.strip()) and (root / relative).is_file()
+    }
 
 
 def validate_brand_assets(root: Path = ROOT, *, check_git_lfs: bool = False) -> list[str]:

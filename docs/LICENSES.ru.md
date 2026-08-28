@@ -22,7 +22,7 @@
 
 Зафиксируйте creator, source, license, modifications, attribution text, territory или platform restrictions и право распространения artifact. Отделяйте лицензию инструмента от лицензии его output.
 
-Системные SF Symbols остаются ассетами Apple. Используйте system APIs в software для платформ Apple. Не используйте SF Symbols в app icons, logos, trademarks или универсальном web icon package. Сгенерированные QDS previews относятся к локальному прототипу macOS-приложения и не являются повторно используемым source artwork.
+Системные SF Symbols остаются ассетами Apple. Используйте system APIs в software для платформ Apple. Не используйте SF Symbols в app icons, logos, trademarks или универсальном web icon package. Сгенерированные Design System previews относятся к локальному прототипу macOS-приложения и не являются повторно используемым source artwork.
 
 ## SPDX и metadata файлов
 

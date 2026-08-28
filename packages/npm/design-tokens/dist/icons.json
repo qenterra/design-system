@@ -1,0 +1,90 @@
+{
+  "version": "5.0.0",
+  "platform": "apple",
+  "icons": [
+    {
+      "id": "accessibility",
+      "category": "status",
+      "meaning": "Accessibility",
+      "sfSymbol": "accessibility",
+      "minimumOS": "11.0"
+    },
+    {
+      "id": "search",
+      "category": "chrome",
+      "meaning": "Search",
+      "sfSymbol": "magnifyingglass",
+      "minimumOS": "11.0"
+    },
+    {
+      "id": "menu",
+      "category": "chrome",
+      "meaning": "Open navigation",
+      "sfSymbol": "line.3.horizontal",
+      "minimumOS": "11.0"
+    },
+    {
+      "id": "globe",
+      "category": "chrome",
+      "meaning": "Choose language",
+      "sfSymbol": "globe",
+      "minimumOS": "11.0"
+    },
+    {
+      "id": "chevron",
+      "category": "chrome",
+      "meaning": "Disclosure",
+      "sfSymbol": "chevron.down",
+      "minimumOS": "11.0"
+    },
+    {
+      "id": "add",
+      "category": "action",
+      "meaning": "Add item",
+      "sfSymbol": "plus",
+      "minimumOS": "11.0"
+    },
+    {
+      "id": "close",
+      "category": "action",
+      "meaning": "Close surface",
+      "sfSymbol": "xmark",
+      "minimumOS": "11.0"
+    },
+    {
+      "id": "delete",
+      "category": "action",
+      "meaning": "Delete item",
+      "sfSymbol": "trash",
+      "minimumOS": "11.0"
+    },
+    {
+      "id": "success",
+      "category": "status",
+      "meaning": "Successful outcome",
+      "sfSymbol": "checkmark.circle",
+      "minimumOS": "11.0"
+    },
+    {
+      "id": "warning",
+      "category": "status",
+      "meaning": "Warning state",
+      "sfSymbol": "exclamationmark.triangle",
+      "minimumOS": "11.0"
+    },
+    {
+      "id": "error",
+      "category": "status",
+      "meaning": "Error state",
+      "sfSymbol": "xmark.circle",
+      "minimumOS": "11.0"
+    },
+    {
+      "id": "information",
+      "category": "status",
+      "meaning": "Informative state",
+      "sfSymbol": "info.circle",
+      "minimumOS": "11.0"
+    }
+  ]
+}

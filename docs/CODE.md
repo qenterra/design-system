@@ -109,7 +109,7 @@ Every repository documents one canonical verification command that covers its ad
 
 ## Repository contributor contract
 
-Each repository keeps concise product-specific guidance in `CONTRIBUTING.md`, a module/side-effect map in `docs/ARCHITECTURE.md`, and evidence prompts in its pull-request template. The QDS Code System is canonical; repositories do not copy it and let it drift.
+Each repository keeps concise product-specific guidance in `CONTRIBUTING.md`, a module/side-effect map in `docs/ARCHITECTURE.md`, and evidence prompts in its pull-request template. The Design System Code System is canonical; repositories do not copy it and let it drift.
 
 ## Exceptions
 

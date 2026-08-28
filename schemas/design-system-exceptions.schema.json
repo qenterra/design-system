@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://qenterra.local/schemas/design-system-exceptions.schema.json",
+  "title": "Design System consumer exceptions",
+  "type": "object",
+  "required": ["schemaVersion", "exceptions"],
+  "properties": {
+    "schemaVersion": {"type": "integer", "enum": [2]},
+    "exceptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "rule", "path", "reason", "owner", "reviewTrigger", "reviewBy"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+          "rule": {"type": "string", "enum": ["raw-color", "raw-duration", "raw-radius", "missing-swift-adapter", "missing-css-adapter", "local-package-source"]},
+          "path": {"type": "string"},
+          "reason": {"type": "string", "minLength": 12},
+          "owner": {"type": "string", "minLength": 3},
+          "reviewTrigger": {"type": "string", "minLength": 8},
+          "reviewBy": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

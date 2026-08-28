@@ -1,6 +1,6 @@
-# QenTerra Design System
+# Design System
 
-Version 4.2.0 · Normative reference for humans and AI agents
+Version 5.0.0 · Normative reference for humans and AI agents
 
 ## 0. How to use this file
 
@@ -14,7 +14,7 @@ Read in this order:
 4. Prefer native platform behavior over decorative sameness.
 5. Verify every mandatory state, accessibility mode, and content boundary.
 
-For logos, banners, mascot artwork, stickers, wallpapers, or pet animation, also read `docs/brand/MASTER.md`, the relevant brand profile, and `assets/brand/manifest.json`. Brand artwork is canonical content; it does not replace semantic interface tokens.
+For Nyx artwork, stickers, wallpapers, or pet animation, also read `docs/brand/MASTER.md`, the relevant Nyx profile, and `assets/brand/manifest.json`. Nyx is the only retained brand asset family; artwork does not replace semantic interface tokens.
 
 Normative words:
 
@@ -28,7 +28,7 @@ When this prose and a token file disagree, exact values come from the token file
 
 ## 1. System scope
 
-QDS standardizes semantics, behavior, accessibility, and evidence. It does not prescribe a single application shell.
+Design System standardizes semantics, behavior, accessibility, and evidence. It does not prescribe a single application shell.
 
 Shared rules cover:
 
@@ -642,20 +642,6 @@ The title asks or states the consequence. The body explains what changes and wha
 - HTML is not injected through untranslated strings.
 - Typed/generated localization keys are preferred over duplicated default values.
 
-### 12.7 Human-operated email
-
-Email templates are production writing tools for a person, not autonomous messages. `registry/email-templates.json` owns the bilingual scenarios and variable contracts; `docs/EMAIL.md` owns the complete authoring, copying, safety, and QA rules.
-
-- `contact@qenterra.com` handles general, partnership, press, and other non-product correspondence. `support@qenterra.com` handles product support, accounts, operations, security, and payments.
-- English and Russian copies have semantic parity. A locale may sound natural rather than literal, but may not add or remove a promise, warning, action, deadline, or recovery route.
-- The local composer sends nothing, stores no entered values, makes no external requests, and contains no marketing or newsletter capability.
-- Fill only verified facts. Never invent a completion result, cause, deadline, account event, payment state, or security conclusion.
-- The message language is chosen independently from the reference-site language. Changing it preserves current field values and updates template names, fields, preview, subject, and copied output together.
-- Switching templates retains only values used by both scenarios; unrelated values leave the active in-memory state. Clear fields removes every current value and preview.
-- Every output has a specific subject, hidden preheader, one clear title, a canonical greeting that does not repeat the outcome, short action-oriented paragraphs, optional structured details, at most one primary action, a plain-text equivalent, the responsible address, and a receipt explanation.
-- Action URLs must be absolute HTTPS URLs. Passwords, recovery secrets, full payment-card data, telemetry pixels, remote imagery, scripts, forms, and attachments are prohibited.
-- Copying rich content is not proof that a message was sent or rendered correctly. The human operator reviews subject, recipients, names, dates, links, amounts, claims, and the final message in the destination email client before sending.
-
 ## 13. Accessibility
 
 ### 13.1 Keyboard
@@ -825,16 +811,16 @@ Before creating a component, confirm:
 
 Deprecated tokens/components remain documented for one migration window with replacement guidance. Validators may warn first and fail after the announced major version.
 
-### 18.6 Private package distribution
+### 18.6 Public package distribution
 
-The canonical design-system repository produces two private, immutable SemVer
-distributions: the filtered `qenterra/design-system-swift` repository and
-GitHub package `@qenterra/design-tokens`. Production consumers use versioned
-remote dependencies; local package paths are limited to coordinated QDS work.
-Publishing requires aligned versions, reviewed payload allowlists, the full
-verification gate, and clean consumer resolution. Credentials are least
-privilege and never part of package contents. A package release proves adapter
-availability, not native product rendering or accessibility acceptance.
+The canonical private repository produces one allowlisted public repository at
+`qenterra/packages`. It exposes `@qenterra/design-tokens` through npm and
+the `QenTerraDesignTokens` / `QenTerraComponents` SwiftPM products. Production
+consumers pin immutable SemVer releases; local paths are limited to coordinated
+Design System work. Publication requires aligned versions, the exact release
+manifest, the full verification gate, and clean consumer resolution. A package
+release proves adapter availability, not native rendering or accessibility
+acceptance in a product.
 
 ## 19. AI implementation protocol
 
@@ -864,9 +850,9 @@ The AI must not:
 - claim a fallback outcome as the requested outcome;
 - copy a product-specific component into the family core without a second valid consumer.
 
-Focused schemas are contracts, not editor decoration. A token change must preserve reference acyclicity and type compatibility. Component metrics use foundation references unless `components.extensions.rawMetricExceptions` contains a narrow, justified exception. Consumers should prefer typed `QDS.Color`, `QDS.Typography`, `QDS.Motion`, and `QDS.Component` APIs or CSS tokens; CSS recipes remain opt-in because native and product-specific shells are allowed to differ.
+Focused schemas are contracts, not editor decoration. A token change must preserve reference acyclicity and type compatibility. Component metrics use foundation references unless `components.extensions.rawMetricExceptions` contains a narrow, justified exception. Consumers should prefer typed `DesignTokens.Color`, `DesignTokens.Typography`, `DesignTokens.Motion`, and `DesignTokens.Component` APIs or CSS tokens; CSS recipes remain opt-in because native and product-specific shells are allowed to differ.
 
-`registry/components.json` is the executable component inventory. Its stories must cover every declared state and expose stable Component Lab anchors; uncovered states fail validation. Review System/Light/Dark, compact/standard density, constrained widths, pseudo-long, and pseudo-RTL before adoption. Pseudo-locales reveal wrapping and bidirectional bugs; they are not substitutes for human localization. SwiftUI consumers may start with the provided button and group primitives, but platform behavior and product context still override decorative sameness.
+`registry/components.json` is the executable component inventory. Its stories must cover every declared state, and each entry must identify truthful delivery status; uncovered states or invented package claims fail validation. Review System/Light/Dark, compact/standard density, constrained widths, long copy, and bidirectional layouts in the consumer before adoption. SwiftUI consumers may start with the delivered button, group, and interactive-row primitives, but platform behavior and product context still override decorative sameness.
 
 ## 20. Maintenance procedure
 
@@ -874,10 +860,10 @@ To update the design system:
 
 1. Read `AGENTS.md`, this file, affected token files, and relevant product evidence.
 2. Add or update an ADR in `docs/decisions/` for a normative change.
-3. Change source tokens/docs/templates/site fragments.
-4. Run `python3 scripts/build.py`.
+3. Change canonical tokens, registries, schemas, documentation, templates, or package facades.
+4. Run `python3 scripts/generate.py write` and `python3 scripts/build_public_packages.py write` when generated/public outputs change.
 5. Run `python3 scripts/verify.py`.
-6. Render the exact `evidence/screenshots.json` matrix, compare current pixels to committed baselines, and inspect desktop and mobile captures in both appearances.
+6. Inspect the npm tarball, Swift products, and the affected consumer at the relevant appearances and constraints.
 7. Update `CHANGELOG.md` and version according to change type.
 8. Update Obsidian routing instructions only when workflow or product contract changes; do not duplicate token values.
 9. For brand changes, update the asset manifest, preserve Git LFS coverage, run focused Nyx QA, and inspect original/use-size artwork on required backgrounds.
@@ -901,6 +887,6 @@ Visual similarity alone is not adoption.
 
 Begin adoption with the consumer manifest and read-only doctor. A product declares platforms, source roots, expected local adapters, and a separate exception file. Doctor output distinguishes schema/boundary errors from actionable findings and never writes inside the consumer. Covered Swift rules detect raw numeric colors, animation durations, and corner radii in addition to CSS hex colors. Exceptions match an exact rule and path, explain the real constraint, and carry a review trigger. A passing static report is evidence for covered source rules only; it does not prove native rendering, accessibility APIs, permissions, persistence, or recovery.
 
-Interface icons come from `registry/icons.json`: one semantic ID, category, meaning, SF Symbol system name, and minimum OS. Apple-platform consumers use the system symbol directly. Generated HTML previews are evidence for the local macOS application prototype and are not redistributable source artwork. A symbol never replaces a visible label when the action or outcome is ambiguous.
+Interface icons come from `registry/icons.json`: one reusable semantic ID, category, meaning, SF Symbol system name, and minimum OS. Apple-platform consumers use the system symbol directly. A symbol never replaces a visible label when the action or outcome is ambiguous.
 
 Design-tool handoff comes only from deterministic `generated/figma/` payloads. Importers preserve collection names, modes, and types, surface unsupported fields, and start in a scratch file. Generated JSON is not proof of a published Figma library. The temporary brand browser is a search aid and is prohibited from writing into the repository.

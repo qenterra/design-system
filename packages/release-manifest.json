@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "version": "5.0.0",
+  "repository": "https://github.com/qenterra/packages",
+  "files": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "4ff09a0c59f7f3d31c14bcbe7b8b324f0be21102dd6189f1ed327850b65f03dc",
+      "bytes": 621
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "f908509ceadca10b928a27a539892d438916d64fd25070264605a1259432a83c",
+      "bytes": 48
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "41ec2b920f33c7abe6df4d4ac50bd063d28ccebbbe71ca71d165f3f5e01a943e",
+      "bytes": 10852
+    },
+    {
+      "path": "NOTICE",
+      "sha256": "4122f013f33aba8603a68f56f84ae5d352f58577088e95e260d9d7731bf2d41e",
+      "bytes": 215
+    },
+    {
+      "path": "Package.swift",
+      "sha256": "4c731bc57fe44a935d5a55bf02811c7e3200e51fe499fabe73899dbc3f4bee58",
+      "bytes": 828
+    },
+    {
+      "path": "README.md",
+      "sha256": "e66858417f2b451d4c7127c3350118132eac4254c1e712d792a0b7206022bf98",
+      "bytes": 646
+    },
+    {
+      "path": "Sources/QenTerraComponents/Components.swift",
+      "sha256": "d33658e93f1943f770f6469b27668f5e78c92603253416bfc990543a8a635f47",
+      "bytes": 4601
+    },
+    {
+      "path": "Sources/QenTerraDesignTokens/DesignTokens.swift",
+      "sha256": "8b5b2d0144d237d55969a12d59fb5988a903a63b6fcd19b12a57bd67a6b33f07",
+      "bytes": 4603
+    },
+    {
+      "path": "Sources/QenTerraDesignTokens/GeneratedIcons.swift",
+      "sha256": "357eade60a8ac0959f6dd50cfa09c5f6e26d217e1bd54e6a2225c1c4404931df",
+      "bytes": 579
+    },
+    {
+      "path": "Sources/QenTerraDesignTokens/GeneratedTokens.swift",
+      "sha256": "4fda8dfcb6637b281fb577df5a7106ee338e9f6143ebe8d9cfbe4a34358fb7df",
+      "bytes": 17204
+    },
+    {
+      "path": "Sources/QenTerraDesignTokens/SwiftUIAdapters.swift",
+      "sha256": "5ae17662a8734f1c62694066beddf410cc3ce563080d6c5d12f4c4d8336fcec0",
+      "bytes": 2310
+    },
+    {
+      "path": "Tests/QenTerraComponentsTests/ComponentTests.swift",
+      "sha256": "a84656a2513e38e67473bb9262791bf2d409d7fc850b922c0989ef6d57a62d7c",
+      "bytes": 384
+    },
+    {
+      "path": "Tests/QenTerraDesignTokensTests/DesignTokensTests.swift",
+      "sha256": "f0795c676a6d2b0970a7fe2e7d4e8d411ab495a00e8ed4e651b4d2c7b4327ebc",
+      "bytes": 941
+    },
+    {
+      "path": "npm/design-tokens/LICENSE",
+      "sha256": "41ec2b920f33c7abe6df4d4ac50bd063d28ccebbbe71ca71d165f3f5e01a943e",
+      "bytes": 10852
+    },
+    {
+      "path": "npm/design-tokens/NOTICE",
+      "sha256": "4122f013f33aba8603a68f56f84ae5d352f58577088e95e260d9d7731bf2d41e",
+      "bytes": 215
+    },
+    {
+      "path": "npm/design-tokens/README.md",
+      "sha256": "60cec4a6b4b0c7fbf9aa572906cfb600beddd50abf174ac557b14d9a36e8546e",
+      "bytes": 636
+    },
+    {
+      "path": "npm/design-tokens/dist/icons.json",
+      "sha256": "63fb67696e58cc9bc4d81539316c1a875bc2bfa4051eba5cbea70db434e2fea8",
+      "bytes": 1945
+    },
+    {
+      "path": "npm/design-tokens/dist/recipes.css",
+      "sha256": "2818a60e26755e8046b764eb7e93dd08fd3cbe60c3fc96de2b694ea5aae745b4",
+      "bytes": 4471
+    },
+    {
+      "path": "npm/design-tokens/dist/tokens.css",
+      "sha256": "8fa40f1450fd0ac001dae48d5874fce1be8f21bf4807df34940bf1663fb53c51",
+      "bytes": 14992
+    },
+    {
+      "path": "npm/design-tokens/dist/tokens.json",
+      "sha256": "66678e3c9402eec1a9b27a74236b9540dd9a4d58b3b24e29a0acda59bebed1db",
+      "bytes": 21807
+    },
+    {
+      "path": "npm/design-tokens/package.json",
+      "sha256": "31b0a3f216a6fdbe3c8a7e38bd768f348ed6ed22c5836ed696c7497e36199847",
+      "bytes": 736
+    },
+    {
+      "path": "npm/design-tokens/src/index.css",
+      "sha256": "99a46db221cb5d6a289301188a425c3b010a079e41bc6287030c766ed493af4f",
+      "bytes": 61
+    },
+    {
+      "path": "npm/design-tokens/src/recipes.css",
+      "sha256": "2818a60e26755e8046b764eb7e93dd08fd3cbe60c3fc96de2b694ea5aae745b4",
+      "bytes": 4471
+    },
+    {
+      "path": "package.json",
+      "sha256": "e3e719b5d26491b275033c9c9ed225f902caefce59df6f8b746062e718c874b9",
+      "bytes": 225
+    },
+    {
+      "path": "scripts/verify_release.py",
+      "sha256": "fe71c24cd065277b1e681fad0d466354315681377334c528388dbb3a69844f4f",
+      "bytes": 1576
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 2,
+  "consumer": "Example Workspace",
+  "platforms": ["macOS"],
+  "packages": [
+    {"id": "swift-components", "version": "5.0.0", "source": "release"}
+  ],
+  "adoptedCapabilities": ["typed-tokens"],
+  "sourceRoots": ["Sources"],
+  "exceptions": "design-system-exceptions.json"
+}

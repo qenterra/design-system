@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://qenterra.local/schemas/icon-registry.schema.json",
-  "title": "QDS semantic SF Symbols registry",
+  "title": "Design System semantic SF Symbols registry",
   "type": "object",
   "required": ["$schema", "version", "platform", "icons"],
   "properties": {

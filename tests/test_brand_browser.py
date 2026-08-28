@@ -19,7 +19,7 @@ class BrandBrowserTests(unittest.TestCase):
             text = target.read_text(encoding="utf-8")
             manifest = json.loads((ROOT / "assets" / "brand" / "manifest.json").read_text(encoding="utf-8"))
             self.assertIn(f"{manifest['assetCount']} canonical files", text)
-            self.assertIn("QenTerra Logo.svg", text)
+            self.assertIn("Home Screen (iPhone).png", text)
             self.assertIn("data-asset", text)
 
     def test_repository_output_is_rejected_before_write(self) -> None:

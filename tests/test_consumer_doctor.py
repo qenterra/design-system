@@ -51,7 +51,7 @@ class ConsumerDoctorTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             consumer = Path(directory) / "consumer"
             shutil.copytree(fixture, consumer)
-            exceptions_path = consumer / "qds-exceptions.json"
+            exceptions_path = consumer / "design-system-exceptions.json"
             exceptions = json.loads(exceptions_path.read_text(encoding="utf-8"))
             exceptions["exceptions"] = [
                 {
@@ -59,7 +59,7 @@ class ConsumerDoctorTests(unittest.TestCase):
                     "rule": "raw-color",
                     "path": "Sources/App.swift",
                     "reason": "A test-only exception verifies expiry enforcement.",
-                    "owner": "QDS tests",
+                    "owner": "Design System tests",
                     "reviewTrigger": "Review whenever the fixture changes.",
                     "reviewBy": "2000-01-01",
                 }

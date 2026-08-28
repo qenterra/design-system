@@ -22,7 +22,7 @@ Block packages with missing terms, incompatible copyleft obligations, non-commer
 
 Record creator, source, license, modifications, attribution text, territory or platform restrictions, and whether the artifact may be redistributed. Separate a tool license from the output license.
 
-System-provided SF Symbols remain Apple assets. Use system APIs in Apple-platform software. Do not use SF Symbols in app icons, logos, trademarks, or a general web icon package. Generated QDS previews belong to the local macOS application prototype and are not reusable source artwork.
+System-provided SF Symbols remain Apple assets. Use system APIs in Apple-platform software. Do not use SF Symbols in app icons, logos, trademarks, or a general web icon package. Generated Design System previews belong to the local macOS application prototype and are not reusable source artwork.
 
 ## SPDX and file metadata
 

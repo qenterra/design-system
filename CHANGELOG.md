@@ -1,5 +1,25 @@
 # Changelog
 
+## 5.0.0
+
+### Breaking
+
+- Renamed active APIs and guidance from the legacy QDS abbreviation to Design System terminology.
+- Replaced private package layouts with the audited `packages/` public export boundary.
+- Removed the static reference website and the complete email-template subsystem.
+- Removed every retained brand asset family except Nyx.
+
+### Added
+
+- Added the canonical root `SKILL.md` with `consume`, `evolve`, and `audit` operating modes for Noetic routing.
+- Added registry-driven public npm and SwiftPM delivery with Apache-2.0 licensing and required QenTerra/Nikita Melnychenko attribution.
+- Added governed promotion rules so reusable improvements update contracts, registries, tests, packages, release manifests, versions, and changelog together.
+
+### Changed
+
+- Made Design System universal across websites, native applications, and other interface-bearing projects; product exceptions stay in consumer-owned manifests.
+- Replaced website screenshot gates with package, registry, public-boundary, clean-consumer, and deterministic-release checks.
+
 ## 4.2.0
 
 ### Added
