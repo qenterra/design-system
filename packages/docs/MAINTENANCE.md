@@ -15,6 +15,6 @@ The public repository must remain human-authored and consumer-facing. Caches, bu
 
 | Date | Scope | Evidence | Result | Next review |
 | --- | --- | --- | --- | --- |
-| 2026-08-29 | Repository standard 1.2.0 adoption and public projection | Release verifier, governance audit, package tests, GitHub API read-back | Passed locally; provider-specific settings recorded in `GITHUB_SETTINGS.md` | Next release or 2026-11-29, whichever comes first |
+| 2026-08-29 | Repository standard 1.2.0 adoption, generated-output provenance, and public protection | External regeneration, mutation regression, governance audit, package tests, GitHub API and Actions read-back | Passed; exact remaining evidence limits are recorded in `GITHUB_SETTINGS.md` and `TESTING.md` | Next release or 2026-11-29, whichever comes first |
 
 If maintenance stops, update the README and repository description with status, final supported version, replacement, security boundary, and archival date. Archival, transfer, visibility change, or deletion requires explicit owner approval.

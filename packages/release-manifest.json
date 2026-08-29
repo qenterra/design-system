@@ -205,13 +205,13 @@
     },
     {
       "path": "docs/GITHUB_SETTINGS.md",
-      "sha256": "f7d1d57eeb30a9e4a711d8f6ad9eb8d4efc37042ea8ef7acce36a16368b20e3d",
-      "bytes": 1320
+      "sha256": "84339b046c943e2027abcfcc062adbf9b9a72ee3221abf10582d7bf910df38f0",
+      "bytes": 1595
     },
     {
       "path": "docs/MAINTENANCE.md",
-      "sha256": "3d692d4abf4e81bfe0eed3f876097b5308d5ac16ca12376102f2663ebc387eaf",
-      "bytes": 1574
+      "sha256": "466465ef9f88a2c1e19ebffdb66270705f608329456ad0edffeb9fa6cf8651a1",
+      "bytes": 1660
     },
     {
       "path": "docs/OWNERSHIP.md",
