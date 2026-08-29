@@ -390,8 +390,8 @@
     },
     {
       "path": "scripts/qenterra_repository_check.py",
-      "sha256": "a5875516e895a75f89b49ac7fbbecbc02441449c07f1f70f7cb4018e77609adb",
-      "bytes": 73542
+      "sha256": "7e32a00d71a7be500de02fb0e7dcd5c64dc38b01336eea66171b22cec9aba18f",
+      "bytes": 73839
     },
     {
       "path": "scripts/verify_release.py",
