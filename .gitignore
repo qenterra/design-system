@@ -1,14 +1,75 @@
 .DS_Store
+Thumbs.db
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# Logs, coverage, caches, and temporary output
+*.log
+*.tmp
+*.swp
+*.swo
+*~
 __pycache__/
-*.pyc
+*.py[cod]
+*.profraw
+*.profdata
+.cache/
+.coverage
+.coverage.*
+coverage/
+coverage.xml
+htmlcov/
+junit.xml
+.nyc_output/
+test-results/
+playwright-report/
+tmp/
+
+# Dependency and tool caches
 .venv/
+venv/
 node_modules/
+.npm/
+.pnpm-store/
+.yarn/cache/
+.gradle/
 .build/
-packages/swift/.swiftpm/
+.swiftpm/
+target/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.tox/
+.nox/
+.turbo/
+.parcel-cache/
+.sass-cache/
+.eslintcache
+.stylelintcache
+
+# Local build-system and asset-processing state
+.output/
+.next/
+.nuxt/
+.wxt/
+DerivedData/
+artifacts/qa/
 output/tmp/
 output/server.log
 output/.server.pid
 output/contact-sheets/
 output/brand-validation*.json
+
+# Private working material still belongs outside the repository
 .superpowers/
 docs/superpowers/
+
+# Keep dependency lockfiles, shared editor configuration, canonical AGENTS.md,
+# and root SKILL.md versioned. Use unique external temporary directories for
+# caches, package staging, validation reports, and generated working material.

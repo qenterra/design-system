@@ -44,7 +44,7 @@ Use issue or decision references only when they resolve to a durable record. Put
 
 ```text
 Refs: #184
-ADR: docs/decisions/ADR-004-symbol-registry.md
+ADR: docs/decisions/0004-symbol-registry.md
 Co-authored-by: Name <address>
 ```
 

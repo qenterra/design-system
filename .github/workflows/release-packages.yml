@@ -80,7 +80,7 @@ jobs:
           rsync -a --exclude .git ../snapshot/ ./
           git add --all
           version=$(python3 -c 'import json; print(json.load(open("release-manifest.json"))["version"])')
-          git -c user.name='QenTerra Release' -c user.email='release@qenterra.com' commit -m "Release $version" || true
+          git -c user.name='QenTerra Release' -c user.email='contact@qenterra.com' commit -m "chore(release): publish $version" || true
           existing=$(git rev-parse -q --verify "refs/tags/v$version" || true)
           if test -n "$existing"; then test "$existing" = "$(git rev-parse HEAD)"; else git tag -a "v$version" -m "Release $version"; fi
           git push origin HEAD:main "refs/tags/v$version"

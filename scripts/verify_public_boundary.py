@@ -13,11 +13,32 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_ROOT = ROOT / "packages"
-IGNORED_PARTS = {".build", ".git", ".swiftpm", "node_modules"}
-FORBIDDEN_PARTS = {"assets", "docs", "templates", ".agents", ".codex", "noetic"}
+IGNORED_PARTS = {".git"}
+FORBIDDEN_PARTS = {
+    ".agent",
+    ".agents",
+    "_agents",
+    ".aider",
+    ".claude",
+    ".cline",
+    ".codex",
+    ".continue",
+    ".copilot",
+    ".cursor",
+    ".gemini",
+    ".skills",
+    ".superpowers",
+    "assets",
+    "noetic",
+}
 FORBIDDEN_NAMES = {
     "AGENTS.md",
     "SKILL.md",
+    "CLAUDE.md",
+    "GEMINI.md",
+    "COPILOT.md",
+    ".mcp.json",
+    "mcp.json",
     "design-system-consumer.json",
     "design-system-exceptions.json",
 }

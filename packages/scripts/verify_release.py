@@ -5,12 +5,14 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
+import subprocess
 import sys
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-IGNORED = {".build", ".git", ".swiftpm", "node_modules"}
+IGNORED = {".git"}
 
 
 def main() -> int:
@@ -40,6 +42,24 @@ def main() -> int:
         for error in errors:
             print(error, file=sys.stderr)
         return 1
+    environment = os.environ.copy()
+    environment["PYTHONDONTWRITEBYTECODE"] = "1"
+    governance = subprocess.run(
+        [
+            sys.executable,
+            "scripts/qenterra_repository_check.py",
+            "audit",
+            "--root",
+            ".",
+            "--format",
+            "markdown",
+        ],
+        cwd=ROOT,
+        env=environment,
+        check=False,
+    )
+    if governance.returncode != 0:
+        return governance.returncode
     print(f"Verified {len(actual)} public files")
     return 0
 

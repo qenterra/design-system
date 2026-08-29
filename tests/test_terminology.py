@@ -38,7 +38,7 @@ class TerminologyTests(unittest.TestCase):
         module = load_module()
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            decision = root / "docs/decisions/ADR-001-old-name.md"
+            decision = root / "docs/decisions/0001-old-name.md"
             decision.parent.mkdir(parents=True)
             decision.write_text("Historical QDS decision.\n", encoding="utf-8")
             errors = module.validate_terminology(root)

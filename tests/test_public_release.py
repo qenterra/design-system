@@ -91,6 +91,36 @@ class PublicReleaseContractTests(unittest.TestCase):
             errors = boundary.validate_public_tree(public)
             self.assertIn("README.md: contains an absolute local path", errors)
 
+    def test_boundary_detects_ignored_cache_content(self) -> None:
+        self.assertTrue(BOUNDARY.is_file(), "public boundary verifier is missing")
+        boundary = load_module(BOUNDARY, "public_boundary_cache")
+        with tempfile.TemporaryDirectory() as directory:
+            public = Path(directory)
+            content = b"public\n"
+            (public / "README.md").write_bytes(content)
+            (public / "release-manifest.json").write_text(
+                json.dumps(
+                    {
+                        "schemaVersion": 1,
+                        "version": "5.0.0",
+                        "repository": "https://github.com/qenterra/packages",
+                        "files": [
+                            {
+                                "path": "README.md",
+                                "sha256": hashlib.sha256(content).hexdigest(),
+                                "bytes": len(content),
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            cache = public / "node_modules/example"
+            cache.mkdir(parents=True)
+            (cache / "cache.js").write_text("cache\n", encoding="utf-8")
+            errors = boundary.validate_public_tree(public)
+            self.assertIn("undeclared public file: node_modules/example/cache.js", errors)
+
 
 if __name__ == "__main__":
     unittest.main()

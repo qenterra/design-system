@@ -9,7 +9,7 @@ Nyx is the only retained brand asset family in Design System. New QenTerra logos
 3. [`../../assets/brand/manifest.json`](../../assets/brand/manifest.json) for exact paths, hashes, dimensions, formats, and LFS status.
 4. [`../../templates/brand/`](../../templates/brand/) for briefs and release checks.
 
-Russian reference: [`MASTER.ru.md`](MASTER.ru.md).
+Russian reference: [`MASTER_RU.md`](MASTER_RU.md).
 
 ## Sources of truth
 

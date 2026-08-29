@@ -1,5 +1,17 @@
 # Changelog
 
+## [Unreleased]
+
+### Changed
+
+- Adopted QenTerra repository standard 1.2.0, including enforceable governance metadata, community-health files, repository naming rules, and a portable local/CI audit.
+- Moved reusable repository templates and policy authority to Noetic; this repository now retains only its project-specific contract and documentation.
+- Expanded the public `packages/` projection with complete contribution, security, ownership, maintenance, release, and repository-hygiene documentation.
+
+### Security
+
+- Made public-package verification reject caches, AI or agent operating files, skills, MCP configuration, undeclared files, and incomplete source-to-artifact manifests.
+
 ## 5.0.0
 
 ### Breaking

@@ -19,6 +19,6 @@ jobs:
       - name: Verify release manifest
         run: python3 scripts/verify_release.py
       - name: Inspect npm package
-        run: npm pack --workspace @qenterra/design-tokens --dry-run --json
+        run: npm pack --workspace @qenterra/design-tokens --dry-run --json --cache "$RUNNER_TEMP/npm-cache"
       - name: Test Swift package
-        run: swift test --disable-sandbox
+        run: swift test --scratch-path "$RUNNER_TEMP/swift-build" --disable-sandbox

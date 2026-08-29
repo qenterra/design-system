@@ -1,8 +1,0 @@
-opt_in_rules: []
-disabled_rules: []
-force_cast: error
-force_try: error
-implicitly_unwrapped_optional: error
-line_length:
-  warning: 120
-  error: 140

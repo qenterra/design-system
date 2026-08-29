@@ -1,4 +1,4 @@
-# Design System
+# QenTerra Design System
 
 Universal foundations, reusable visual components, palettes, platform adapters, and engineering contracts for websites, native applications, and other interface-bearing projects.
 
@@ -13,6 +13,10 @@ Noetic is the mandatory router for design-related agent work. It resolves this r
 - `audit` checks compliance and evidence without changing a consumer unless fixes were requested.
 
 Humans and tools read exact values from `tokens/*.json`, then use the relevant component, icon, and package registries. Product-specific differences belong in the consumer's `design-system-exceptions.json`, not in universal foundations.
+
+## Workspace
+
+The private workspace owns canonical tokens, schemas, registries, documentation, Nyx source assets, deterministic generators, and verification. The `packages/` subtree is the complete public projection; it is rebuilt from the allowlist in `registry/packages.json` and checked against `packages/release-manifest.json`. See the [repository map](docs/REPOSITORY_STRUCTURE.md).
 
 ## Install public packages
 
@@ -52,7 +56,15 @@ The former static viewing website and the complete email-template subsystem are 
 
 Reusable work is not copied out of a consumer. First define a product-independent contract, then add canonical source, accessibility and localization behavior, tests, registry status, package delivery, version classification, and changelog entry. `registry/packages.json` controls what can become public, while `packages/release-manifest.json` locks the exact paths and hashes.
 
-See [`docs/governance/EVOLUTION.md`](docs/governance/EVOLUTION.md) and [`docs/governance/PUBLIC-DELIVERY.md`](docs/governance/PUBLIC-DELIVERY.md).
+See [`docs/governance/EVOLUTION.md`](docs/governance/EVOLUTION.md) and [`docs/governance/PUBLIC_DELIVERY.md`](docs/governance/PUBLIC_DELIVERY.md).
+
+## Ownership and boundaries
+
+Nikita Melnychenko (`@qenterra`) owns the canonical system, release decisions, and public package projection. Private assets, consumer manifests, working notes, agent instructions, caches, and private history never enter the public export. Detailed ownership is recorded in [OWNERSHIP.md](docs/OWNERSHIP.md) and enforced by [CODEOWNERS](.github/CODEOWNERS).
+
+## Version and release model
+
+`VERSION`, token metadata, registries, package manifests, generated adapters, and the public release manifest move in lockstep under Semantic Versioning. Public releases use immutable `v<version>` tags and are generated only from an exact verified private commit. See [RELEASING.md](docs/RELEASING.md) and [PACKAGE_RELEASE.md](docs/PACKAGE_RELEASE.md).
 
 ## Verify
 
@@ -70,3 +82,10 @@ The complete gate checks generated adapters, registries, public boundaries, term
 ## License
 
 The canonical repository remains private and proprietary under [`LICENSE`](LICENSE). Only the contents of `packages/` are licensed under Apache-2.0 with the bundled NOTICE requirement.
+
+## Contact
+
+- Product support, product help, and technical questions: [support@qenterra.com](mailto:support@qenterra.com).
+- Proposals, general enquiries, and commercial matters: [contact@qenterra.com](mailto:contact@qenterra.com).
+
+Use [GitHub private vulnerability reporting](https://github.com/QenTerra/design-system/security/advisories/new) for security reports; do not send vulnerability details to either public contact mailbox.

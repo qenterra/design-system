@@ -18,7 +18,7 @@ Use `evolve` when a task creates or materially improves something reusable acros
 ## Start every applicable task
 
 1. Identify the consumer, platform, interface surface, and mode.
-2. Read the relevant section of `docs/MASTER.md` or `docs/MASTER.ru.md` and the exact source token under `tokens/`.
+2. Read the relevant section of `docs/MASTER.md` or `docs/MASTER_RU.md` and the exact source token under `tokens/`.
 3. Inspect `registry/components.json`, `registry/icons.json`, and `registry/packages.json` before inventing a replacement.
 4. For `consume`, read `design-system-consumer.json` and `design-system-exceptions.json` when present. Validate them before implementation.
 5. Prefer the public package declared in the package registry. Do not paste generated values or fork a package into the consumer.
@@ -75,7 +75,7 @@ Separate automated evidence from manual evidence. Package builds and static scan
 - email tooling, static Design System viewing pages, screenshots, or generation debris;
 - undeclared files outside `packages/release-manifest.json`.
 
-Read `docs/governance/PUBLIC-DELIVERY.md` before preparing or publishing a release. External publication still requires the user's explicit authority and exact destination verification.
+Read `docs/governance/PUBLIC_DELIVERY.md` before preparing or publishing a release. External publication still requires the user's explicit authority and exact destination verification.
 
 ## Completion
 

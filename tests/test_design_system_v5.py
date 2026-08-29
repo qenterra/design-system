@@ -78,13 +78,34 @@ class DesignSystemV5ContractTests(unittest.TestCase):
     def test_public_tree_excludes_private_material(self) -> None:
         public = ROOT / "packages"
         self.assertTrue(public.is_dir(), "public export tree is missing")
-        forbidden_parts = {"assets", "docs", "templates", "noetic", ".agents"}
+        forbidden_parts = {
+            "assets",
+            "templates",
+            "noetic",
+            ".agent",
+            ".agents",
+            ".claude",
+            ".codex",
+            ".copilot",
+            ".cursor",
+            ".skills",
+            ".superpowers",
+        }
+        forbidden_names = {
+            "AGENTS.md",
+            "SKILL.md",
+            "CLAUDE.md",
+            "GEMINI.md",
+            "COPILOT.md",
+            ".mcp.json",
+            "mcp.json",
+        }
         for path in public.rglob("*"):
             if not path.is_file():
                 continue
             relative = path.relative_to(public)
             self.assertFalse(forbidden_parts.intersection(relative.parts), relative)
-            self.assertNotEqual(path.name, "SKILL.md")
+            self.assertNotIn(path.name, forbidden_names)
             self.assertNotIn("design-system-consumer", path.name)
             self.assertNotIn("design-system-exceptions", path.name)
 

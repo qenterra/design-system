@@ -4,24 +4,124 @@
   "repository": "https://github.com/qenterra/packages",
   "files": [
     {
+      "path": ".editorconfig",
+      "sha256": "0d60099ceac8991f26cad9610c12174056fcba8e4237e74a34ce994e767c77f7",
+      "bytes": 252
+    },
+    {
+      "path": ".gitattributes",
+      "sha256": "f3b1981ebb41c2797eee0f6293beea7fbbe6fafcd4a4408e72c51dbb7a492e6a",
+      "bytes": 214
+    },
+    {
+      "path": ".github/CODEOWNERS",
+      "sha256": "0c2673adbab1dfe892815f149f3051bb911f8a186cda243ec2e5877f65b7670b",
+      "bytes": 261
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/01-bug.yml",
+      "sha256": "1919d2473c391878d0a02bd0c39e2852dff7d16d7c27f01a6f7159c42f1f1181",
+      "bytes": 1740
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/02-feature.yml",
+      "sha256": "d48f037365d39432fb7bdda55745705765e431b8e4577ab2ca073c574ad3ad99",
+      "bytes": 1244
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/03-documentation.yml",
+      "sha256": "670a0b8fc9de1e2ff5ac02dd8af3c3401aa435e32a8109fcb144893b3cd29129",
+      "bytes": 859
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/config.yml",
+      "sha256": "d619946b0cab96e58e6fd21a18d97d5e9582ad802985f7249836a79c68854605",
+      "bytes": 378
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "sha256": "2bf298e6c3164e66f7b51e7b561fa13ecb64442b0f1220f98c89a56128973dec",
+      "bytes": 1135
+    },
+    {
+      "path": ".github/dependabot.yml",
+      "sha256": "8e74f0c39d7b0903f31a101e334ea52d159c7971e7e7a0211ecf10113895225d",
+      "bytes": 486
+    },
+    {
+      "path": ".github/labels.yml",
+      "sha256": "0c24b7d5472c9218341edf1f54f48b107ea8bde72fc1c3125a19f2c65a0046d3",
+      "bytes": 2172
+    },
+    {
+      "path": ".github/qenterra-repository.json",
+      "sha256": "e8f3111919518fd4f2a7c1741a51159bcb4bc1c713fbb450ae1c485cc995fb7e",
+      "bytes": 4013
+    },
+    {
+      "path": ".github/qenterra-repository.schema.json",
+      "sha256": "0de218cfa4cce5a516a2f7f6036f0be44b0281f0ad16e5daaf1cbb4dea755973",
+      "bytes": 7211
+    },
+    {
+      "path": ".github/release.yml",
+      "sha256": "8f3867f6bc8d21fc4efebb3a88b1392906a80f130ad0170b02df270c90b91add",
+      "bytes": 433
+    },
+    {
       "path": ".github/workflows/ci.yml",
-      "sha256": "4ff09a0c59f7f3d31c14bcbe7b8b324f0be21102dd6189f1ed327850b65f03dc",
-      "bytes": 621
+      "sha256": "209cb0c533b388ac9c1f71b44a548991f3b5128da240cb62f64b23c7e0c3f06d",
+      "bytes": 696
+    },
+    {
+      "path": ".github/workflows/repository-governance.yml",
+      "sha256": "bf7321f91781a816bf30608e49beb193ad290fb85cb1b65aaa67d023c3d01d3c",
+      "bytes": 2230
     },
     {
       "path": ".gitignore",
-      "sha256": "f908509ceadca10b928a27a539892d438916d64fd25070264605a1259432a83c",
-      "bytes": 48
+      "sha256": "f7e150d4569b93fc96a6a50aad0e0a33084b7de0cbcbf980b66759b8a20e0dba",
+      "bytes": 1657
+    },
+    {
+      "path": "AUTHORS.md",
+      "sha256": "94f33b4bddb082a1e87a01c69f5dda94dbbec551e6032d3fed71a0bb1417adcc",
+      "bytes": 317
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "1b3afb0ea83f092220c0fdd3235a1c1f54e174479f6eafa2a7cce7618fc3544b",
+      "bytes": 1078
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md",
+      "sha256": "a8cebfe3d241f600ce0138ac62a3b3dd5e87358c854bb277cf993dc3ca1af344",
+      "bytes": 1448
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256": "ffe8ae92e3d18a04efcce3e5985c170aad1664c79634ccbe545b104871e00641",
+      "bytes": 2388
+    },
+    {
+      "path": "GOVERNANCE.md",
+      "sha256": "1fd7ccd63882219233e23f0e0faa53949e31311c2806a0131f949f90093d6861",
+      "bytes": 1990
     },
     {
       "path": "LICENSE",
-      "sha256": "41ec2b920f33c7abe6df4d4ac50bd063d28ccebbbe71ca71d165f3f5e01a943e",
-      "bytes": 10852
+      "sha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff",
+      "bytes": 10280
+    },
+    {
+      "path": "MAINTAINERS.md",
+      "sha256": "94e7d8f7a26e096fd004826463c9b9c7e61c4718085b60cf24891b6e3586f195",
+      "bytes": 715
     },
     {
       "path": "NOTICE",
-      "sha256": "4122f013f33aba8603a68f56f84ae5d352f58577088e95e260d9d7731bf2d41e",
-      "bytes": 215
+      "sha256": "da36b4cc554b3ceb314905c4ee43703676507852ff1afec2d0b6bb67c15ecff5",
+      "bytes": 324
     },
     {
       "path": "Package.swift",
@@ -30,8 +130,18 @@
     },
     {
       "path": "README.md",
-      "sha256": "e66858417f2b451d4c7127c3350118132eac4254c1e712d792a0b7206022bf98",
-      "bytes": 646
+      "sha256": "feeff21a9b1c1f5e0ad79f355ff6b05547e0d78c480ebf1494af0aaf8b41efe0",
+      "bytes": 3711
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "1274172b133e9b64db6567f743ef1b5173abd1a917783fe29b2f9bb754155b27",
+      "bytes": 2222
+    },
+    {
+      "path": "SUPPORT.md",
+      "sha256": "bb6bdac5aacc6f84b232126d96cc1b86e9407c42f829275c0af1475fb3640d51",
+      "bytes": 1513
     },
     {
       "path": "Sources/QenTerraComponents/Components.swift",
@@ -59,6 +169,11 @@
       "bytes": 2310
     },
     {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "sha256": "3d5a113e618decf9a691c8a52e7d3ec6a5d8d1e694c835644ac57170e52b4f02",
+      "bytes": 779
+    },
+    {
       "path": "Tests/QenTerraComponentsTests/ComponentTests.swift",
       "sha256": "a84656a2513e38e67473bb9262791bf2d409d7fc850b922c0989ef6d57a62d7c",
       "bytes": 384
@@ -67,6 +182,86 @@
       "path": "Tests/QenTerraDesignTokensTests/DesignTokensTests.swift",
       "sha256": "f0795c676a6d2b0970a7fe2e7d4e8d411ab495a00e8ed4e651b4d2c7b4327ebc",
       "bytes": 941
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "sha256": "6423586f8a256b2c87198437c79676911f53fb5b5a13cf097794ba8251b6c4fb",
+      "bytes": 2203
+    },
+    {
+      "path": "docs/DEPENDENCIES.md",
+      "sha256": "ab6f8c7324a13c81235e25901171382f0bf3791b73b757d7ef0f5489a9a4590d",
+      "bytes": 1350
+    },
+    {
+      "path": "docs/DEPRECATION.md",
+      "sha256": "6d56c3e8b6a343a25ee613e24578176f0b89283731c50606c60fd485e080acf4",
+      "bytes": 594
+    },
+    {
+      "path": "docs/DEVELOPMENT.md",
+      "sha256": "73dcc95f9f5056086b0d7f7cf12d0b3ff7ac68831b3c746cbd73f1759a99e62d",
+      "bytes": 1723
+    },
+    {
+      "path": "docs/GITHUB_SETTINGS.md",
+      "sha256": "f7d1d57eeb30a9e4a711d8f6ad9eb8d4efc37042ea8ef7acce36a16368b20e3d",
+      "bytes": 1320
+    },
+    {
+      "path": "docs/MAINTENANCE.md",
+      "sha256": "3d692d4abf4e81bfe0eed3f876097b5308d5ac16ca12376102f2663ebc387eaf",
+      "bytes": 1574
+    },
+    {
+      "path": "docs/OWNERSHIP.md",
+      "sha256": "5c40bc93c531e3b5ac6099ebcff89a2b852d9cf68caf57ed6829e790f8b7c071",
+      "bytes": 922
+    },
+    {
+      "path": "docs/PACKAGE_RELEASE.md",
+      "sha256": "a88db93f05ac454b0395f1633ecda01234abae9067e75cd6de0aa9c4449f357b",
+      "bytes": 1210
+    },
+    {
+      "path": "docs/README.md",
+      "sha256": "24732b1e6fb7df21dd13903523d3457bfe697304d016df7b0b2710dc7f01d5cd",
+      "bytes": 1039
+    },
+    {
+      "path": "docs/RELEASING.md",
+      "sha256": "7aaffa0f1f3a6a67abc0afca642da0ca4685baff6620e3d14459442b6bba4132",
+      "bytes": 1448
+    },
+    {
+      "path": "docs/REPOSITORY_STRUCTURE.md",
+      "sha256": "b13323b3b9a2859887986cfcec39c2c346196223c4a4da5f0c4b4ee3246d7f33",
+      "bytes": 1419
+    },
+    {
+      "path": "docs/STYLE_GUIDE.md",
+      "sha256": "58b6c8e96f460df51b0cd25b03f1a85dba2dc5762ce59b446fe9634e0357a3d6",
+      "bytes": 1366
+    },
+    {
+      "path": "docs/TESTING.md",
+      "sha256": "a4076d549544089c6ce82d2be2e4195c6d3d7580e2b8dfa67fd649fb207e6723",
+      "bytes": 1452
+    },
+    {
+      "path": "docs/TROUBLESHOOTING.md",
+      "sha256": "cbcff569ad1cda61b4745917c42cc9a1b428df9002cbc32482c05f4a4537ac8b",
+      "bytes": 1480
+    },
+    {
+      "path": "docs/decisions/0000-template.md",
+      "sha256": "b1086d92bfbab2f32d79f9c79439edaaec18244cf77f95c2401a004f36f277a2",
+      "bytes": 550
+    },
+    {
+      "path": "docs/decisions/README.md",
+      "sha256": "f1eb1510bd11e400cc17f26db8dd3b3a025ec01453b2cb5dea4d38911536eaa9",
+      "bytes": 419
     },
     {
       "path": "npm/design-tokens/LICENSE",
@@ -124,9 +319,14 @@
       "bytes": 225
     },
     {
+      "path": "scripts/qenterra_repository_check.py",
+      "sha256": "e0497b4444e8d2bdeee2cd8370115aad772ffdf94a36b1c54512a3163cf27d9f",
+      "bytes": 71983
+    },
+    {
       "path": "scripts/verify_release.py",
-      "sha256": "fe71c24cd065277b1e681fad0d466354315681377334c528388dbb3a69844f4f",
-      "bytes": 1576
+      "sha256": "88552aa74fa722786db73be13dab9b6d87e57d42e0eb317a7fec3000a8ed7ff0",
+      "bytes": 2035
     }
   ]
 }

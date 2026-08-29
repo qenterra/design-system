@@ -3,7 +3,7 @@
 ## Sources of truth
 
 - root agent contract: `SKILL.md`;
-- bilingual rules: `docs/MASTER.md`, `docs/MASTER.ru.md`;
+- bilingual rules: `docs/MASTER.md`, `docs/MASTER_RU.md`;
 - exact values: `tokens/*.json`;
 - reusable contracts and delivery: `registry/`, `schemas/`;
 - public staging tree: `packages/`;
@@ -32,7 +32,7 @@ All token metadata, registries, package manifests, generated outputs, and releas
 
 Every component registry item declares `delivered` or `specification-only`. Delivered items reference registered packages and unit evidence. New packages require a distinct public boundary, versioned API, tests, clean-consumer proof, Apache-2.0 metadata, NOTICE, and release-manifest paths.
 
-Public releases are prepared only from the allowlisted snapshot. Existing public tags and npm versions are immutable. See `docs/governance/EVOLUTION.md` and `docs/governance/PUBLIC-DELIVERY.md`.
+Public releases are prepared only from the allowlisted snapshot. Existing public tags and npm versions are immutable. See `docs/governance/EVOLUTION.md` and `docs/governance/PUBLIC_DELIVERY.md`.
 
 ## Nyx
 

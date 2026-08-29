@@ -14,8 +14,10 @@ consumers are affected, released as a new immutable version.
 
 Do not disclose a suspected vulnerability in an issue. Use
 [GitHub private vulnerability reporting](https://github.com/qenterra/design-system/security/advisories/new).
-If that route is unavailable, email `support@qenterra.com` and state that the
-message is a private security report.
+If that route is unavailable, do not move the report to a public issue or a
+general support mailbox. Wait for the private route to recover or contact the
+maintainer through an already established private channel without including
+exploit details in the initial message.
 
 Include, when available:
 

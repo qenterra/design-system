@@ -1,6 +1,6 @@
 # Design System
 
-Read root `SKILL.md` first for any design, UI, UX, visual, component, or package work. Noetic is the router; this repository is the live domain authority. Read `docs/MASTER.md` or `docs/MASTER.ru.md` and the affected `tokens/*.json` before implementation. Generated files are outputs, never sources. The two language references must stay semantically complete and structurally aligned.
+Read root `SKILL.md` first for any design, UI, UX, visual, component, or package work. Noetic is the router; this repository is the live domain authority. Read `docs/MASTER.md` or `docs/MASTER_RU.md` and the affected `tokens/*.json` before implementation. Generated files are outputs, never sources. The two language references must stay semantically complete and structurally aligned.
 
 ## Required workflow
 
@@ -20,7 +20,7 @@ Read root `SKILL.md` first for any design, UI, UX, visual, component, or package
 - Do not claim live app, VoiceOver, native rendering, or browser acceptance from package/static checks.
 - `packages/` is the sole public export allowlist. Keep the canonical repository private.
 - Never place assets, `SKILL.md`, Noetic policy, AI instructions, private documentation, consumer manifests, or private commit identifiers in the public export.
-- Treat `docs/repository/STANDARD.md` and `templates/repository/` as the sole repository-documentation source; never recreate a parallel standard repository.
+- Noetic owns the QenTerra repository standard, renderer, and reusable repository templates. This repository owns only its adopted contract in `.github/qenterra-repository.json`, its portable checker, and project-specific documentation. Do not recreate a parallel standard here.
 - Consume released adapters through public packages. Local paths are for coordinated development only.
 - A reusable improvement must update its registry entry, implementation, tests, delivery mapping, version, and changelog. Do not copy consumer code into canonical packages automatically.
 - Create AI working specs, plans, handoffs, scratch notes, and tool artifacts only in a unique system temporary directory. Never add `.superpowers/` or `docs/superpowers/` to the repository.
