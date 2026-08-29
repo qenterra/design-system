@@ -22,6 +22,7 @@ Requirements: Swift 5.9 or later for native packages and Node.js 22 or later for
 ## Required checks
 
 ```sh
+python3 scripts/generate.py check
 python3 scripts/verify_release.py
 python3 scripts/qenterra_repository_check.py audit --root . --format markdown
 npm pack --workspace @qenterra/design-tokens --dry-run --json --cache /tmp/qenterra-packages-npm
@@ -43,7 +44,7 @@ Create every cache, build tree, report, or package-staging directory outside the
 ## Pull requests
 
 - Explain purpose, scope, verification, risk, migration, documentation, privacy/security, and release impact.
-- Add a regression test when behaviour can be checked deterministically.
+- Add a regression test when behaviour can be checked deterministically. Generated-output changes must begin in the versioned public inputs and pass external regeneration; changing an output and its manifest hash together is never sufficient.
 - Include screenshots or recordings for visible changes and identify the exact build and fixture.
 - Update public documentation and changelog when users, consumers, or operators are affected.
 - Do not add caches, build output, credentials, signing material, personal data, AI or agent operating files, skills, MCP configuration, private planning, or unreviewed artifacts anywhere in the public checkout.

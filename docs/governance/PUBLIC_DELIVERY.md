@@ -4,7 +4,7 @@ The canonical Design System repository is private. Only the deterministic conten
 
 ## Public contents
 
-The release manifest allowlists package manifests, public source, generated token outputs, public tests, README, CI, Apache-2.0 license, and NOTICE. Every file has a SHA-256 digest. A path absent from the manifest does not ship.
+The release manifest allowlists package manifests, safe public generation inputs, the portable generator, generated npm and Swift outputs, public tests, README, CI, Apache-2.0 license, and NOTICE. Every file has a SHA-256 digest. The exported verifier regenerates declared outputs outside the checkout before it checks those digests; a changed artifact and matching edited hash do not pass. A path absent from the manifest does not ship.
 
 The public tree must never contain brand assets, `SKILL.md`, Noetic files, agent instructions, private documentation, consumer manifests, secrets, absolute local paths, or private commit identifiers.
 

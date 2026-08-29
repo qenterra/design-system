@@ -68,6 +68,7 @@ def main() -> int:
     run([python, "scripts/generate.py", "check"])
     run([python, "scripts/build_public_packages.py", "check"])
     run([python, "scripts/verify_public_boundary.py"])
+    run([python, "packages/scripts/verify_release.py"])
     run([python, "scripts/qenterra_repository_check.py", "audit", "--root", ".", "--format", "markdown"])
     run(
         [

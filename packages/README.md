@@ -9,10 +9,10 @@ This repository is the complete, verified public projection of the private QenTe
 ## Workspace
 
 - `Sources/` and `Tests/` contain the Swift package and its tests.
-- `npm/design-tokens/src/` contains the maintained CSS entry points.
+- `npm/design-tokens/src/` contains the public token, icon, and CSS generation inputs.
 - `npm/design-tokens/dist/` contains the published CSS and JSON artifacts.
-- `release-manifest.json` closes the public file set with byte sizes and SHA-256 hashes.
-- `scripts/` contains the self-contained release and repository-governance checks.
+- `release-manifest.json` closes the public file set with byte sizes and SHA-256 hashes; it is not trusted as proof of generated-output freshness by itself.
+- `scripts/` contains the deterministic public generator and self-contained release and repository-governance checks.
 
 See the complete [repository structure](docs/REPOSITORY_STRUCTURE.md).
 
@@ -41,6 +41,7 @@ For Swift Package Manager, add `https://github.com/QenTerra/packages` and select
 ## Common commands
 
 ```sh
+python3 scripts/generate.py check
 python3 scripts/verify_release.py
 python3 scripts/qenterra_repository_check.py audit --root . --format markdown
 npm pack --workspace @qenterra/design-tokens --dry-run --json --cache /tmp/qenterra-packages-npm
@@ -51,7 +52,7 @@ Use a unique temporary path outside the repository for every cache, build, repor
 
 ## Ownership and boundaries
 
-Nikita Melnychenko (`@qenterra`) owns package APIs, release decisions, security coordination, and repository governance. Public source changes must remain reproducible from the canonical Design System source and keep the release manifest complete. See [Ownership](docs/OWNERSHIP.md) and [CODEOWNERS](.github/CODEOWNERS).
+Nikita Melnychenko (`@qenterra`) owns package APIs, release decisions, security coordination, and repository governance. Public source changes must regenerate every declared npm and Swift output byte-for-byte from `npm/design-tokens/src/` in an external temporary directory and keep the release manifest complete. See [Ownership](docs/OWNERSHIP.md) and [CODEOWNERS](.github/CODEOWNERS).
 
 ## Version and release model
 

@@ -16,7 +16,7 @@ Product-specific business logic and exceptions never enter universal foundations
 
 ## Public delivery
 
-`packages/` is the only exportable tree. `registry/packages.json` declares its packages, capabilities, paths, and tests. `packages/release-manifest.json` records the relative path, size, and SHA-256 of every public file except the manifest itself.
+`packages/` is the only exportable tree. `registry/packages.json` declares its packages, capabilities, paths, and tests. `packages/release-manifest.json` records the relative path, size, and SHA-256 of every public file except the manifest itself. The projection also includes public token and icon inputs plus a portable generator; its verifier rebuilds all declared npm and Swift outputs outside the checkout before accepting manifest closure.
 
 The public repository contains a Swift package at its root and the npm workspace under `npm/design-tokens/`. It has fresh public history and cannot contain Nyx, private docs, agent instructions, consumer manifests, or private commit identifiers.
 

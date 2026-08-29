@@ -16,7 +16,7 @@ Humans and tools read exact values from `tokens/*.json`, then use the relevant c
 
 ## Workspace
 
-The private workspace owns canonical tokens, schemas, registries, documentation, Nyx source assets, deterministic generators, and verification. The `packages/` subtree is the complete public projection; it is rebuilt from the allowlist in `registry/packages.json` and checked against `packages/release-manifest.json`. See the [repository map](docs/REPOSITORY_STRUCTURE.md).
+The private workspace owns canonical tokens, schemas, registries, documentation, Nyx source assets, deterministic generators, and verification. The `packages/` subtree is the complete public projection; it is rebuilt from the allowlist in `registry/packages.json`, checked against `packages/release-manifest.json`, and carries safe public inputs plus a portable generator that independently reproduces every published npm and Swift output. See the [repository map](docs/REPOSITORY_STRUCTURE.md).
 
 ## Install public packages
 

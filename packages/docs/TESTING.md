@@ -3,6 +3,7 @@
 ## Required checks
 
 ```sh
+python3 scripts/generate.py check
 python3 scripts/verify_release.py
 python3 scripts/qenterra_repository_check.py audit --root . --format markdown
 ```
@@ -18,7 +19,8 @@ swift test --scratch-path /tmp/qenterra-packages-swift --disable-sandbox
 
 | Layer | Purpose | Evidence limit |
 | --- | --- | --- |
-| Release manifest | Exact file, size, and SHA-256 closure | Does not regenerate canonical source |
+| Deterministic regeneration | Rebuilds six npm and Swift outputs in an external temporary directory and byte-compares them | Proves consistency with versioned public inputs, not private-source parity |
+| Release manifest | Exact file, size, and SHA-256 closure after regeneration | The manifest is editable metadata, not an independent source of truth |
 | Repository governance | Documentation, naming, legal identity, workflow, hygiene, and artifact provenance | Does not prove live GitHub settings |
 | Swift tests | Typed values and component behavior in the package test host | Does not prove a consuming app, VoiceOver, or rendered visual quality |
 | npm archive inspection | Exact files that npm would publish | Does not prove registry publication or browser integration |

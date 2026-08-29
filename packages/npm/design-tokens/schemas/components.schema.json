@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://qenterra.local/schemas/components.schema.json",
+  "title": "QenTerra component tokens",
+  "type": "object",
+  "required": ["$schema", "meta", "button", "interactiveRow", "group", "panel", "field", "table", "navigation", "overlay", "keycap", "status", "extensions"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "meta": {"$ref": "token-file.schema.json#/$defs/meta"},
+    "button": {"type": "object"},
+    "interactiveRow": {"type": "object"},
+    "group": {"type": "object"},
+    "panel": {"type": "object"},
+    "field": {"type": "object"},
+    "table": {"type": "object"},
+    "navigation": {"type": "object"},
+    "overlay": {"type": "object"},
+    "keycap": {"type": "object"},
+    "status": {"type": "object"},
+    "extensions": {
+      "type": "object",
+      "required": ["rawMetricExceptions"],
+      "properties": {
+        "rawMetricExceptions": {"type": "object", "additionalProperties": {"type": "string", "minLength": 12}}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

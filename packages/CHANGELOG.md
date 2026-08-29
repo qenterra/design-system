@@ -8,6 +8,11 @@ All notable public package changes are recorded here. The format follows Keep a 
 
 - Adopted QenTerra repository standard 1.2.0 with complete governance, contribution, security, ownership, release, maintenance, and support documentation.
 - Added a portable repository audit that rejects caches, AI or agent operating files, skills, MCP configuration, undeclared content, and incomplete generated-artifact provenance.
+- Added versioned public token and icon inputs plus a portable deterministic generator for npm and Swift outputs.
+
+### Security
+
+- Made release verification regenerate every declared output outside the checkout before checking the editable manifest, preventing synchronized artifact-and-hash tampering from passing CI.
 
 ## 5.0.0 - 2026-08-28
 

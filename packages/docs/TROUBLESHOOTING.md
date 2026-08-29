@@ -4,6 +4,7 @@
 | --- | --- | --- | --- |
 | `undeclared file` | Run `python3 scripts/verify_release.py` | Extra file or stale projection | Remove unintended material or regenerate the complete manifest from canonical source |
 | Hash or size mismatch | Inspect the named file and manifest record | Hand edit or stale generated output | Regenerate the public projection; never patch only the hash |
+| `generated output mismatch` | Run `python3 scripts/generate.py check` | Output was edited or not regenerated from the public inputs | Change the source under `npm/design-tokens/src/`, run `python3 scripts/generate.py write`, and rebuild the canonical projection manifest |
 | Repository-hygiene failure | Read the exact audit path and rule | Cache, build output, AI/agent file, skill, MCP config, secret, or local path | Move temporary work outside the repository and remove the residue |
 | Swift build writes `.build/` | Check the command | Missing external scratch path | Re-run with `--scratch-path` pointing to a unique temporary directory outside the checkout |
 | npm creates local state | Check npm cache and destination options | Default local package-manager behavior | Use external `--cache` and `--pack-destination` paths; remove unintended residue |

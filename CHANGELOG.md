@@ -7,10 +7,12 @@
 - Adopted QenTerra repository standard 1.2.0, including enforceable governance metadata, community-health files, repository naming rules, and a portable local/CI audit.
 - Moved reusable repository templates and policy authority to Noetic; this repository now retains only its project-specific contract and documentation.
 - Expanded the public `packages/` projection with complete contribution, security, ownership, maintenance, release, and repository-hygiene documentation.
+- Added safe public token and icon inputs plus a portable generator so exported npm and Swift outputs can be reproduced without access to the private repository.
 
 ### Security
 
 - Made public-package verification reject caches, AI or agent operating files, skills, MCP configuration, undeclared files, and incomplete source-to-artifact manifests.
+- Made the exported verifier rebuild declared artifacts in an external temporary directory and reject synchronized output-and-manifest tampering.
 
 ## 5.0.0
 

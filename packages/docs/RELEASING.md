@@ -14,7 +14,7 @@ The public tree is generated from the canonical Design System release and must n
 
 - Confirm the exact clean source commit and complete public projection.
 - Align package metadata, manifest version, changelog, support table, migrations, and deprecations.
-- Run the release verifier, governance audit, Swift tests, and npm archive inspection with all temporary state outside the checkout.
+- Regenerate every declared npm and Swift output from the public inputs, then run the release verifier, governance audit, Swift tests, and npm archive inspection with all temporary state outside the checkout.
 - Inspect license, notices, dependency inventory, workflow permissions, and generated-artifact provenance.
 
 ## Publish

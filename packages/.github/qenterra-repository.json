@@ -98,6 +98,22 @@
       "review_trigger": "Design-token inputs, generators, package metadata, or public artifact layout changes",
       "source": "npm/design-tokens/src",
       "verification_command": "python3 scripts/verify_release.py"
+    },
+    {
+      "manifest": "release-manifest.json",
+      "path": "Sources/QenTerraDesignTokens/GeneratedTokens.swift",
+      "purpose": "Typed Swift design-token constants consumed by the public Swift package",
+      "review_trigger": "Public token inputs, generator logic, Swift adapter structure, or package version changes",
+      "source": "npm/design-tokens/src",
+      "verification_command": "python3 scripts/verify_release.py"
+    },
+    {
+      "manifest": "release-manifest.json",
+      "path": "Sources/QenTerraDesignTokens/GeneratedIcons.swift",
+      "purpose": "Typed SF Symbols registry consumed by the public Swift package",
+      "review_trigger": "Public icon inputs, generator logic, Swift adapter structure, or package version changes",
+      "source": "npm/design-tokens/src",
+      "verification_command": "python3 scripts/verify_release.py"
     }
   ],
   "quick_start_command": "npm pack --workspace @qenterra/design-tokens --dry-run --json",

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://qenterra.local/schemas/token-file.schema.json",
+  "title": "Shared QenTerra token definitions",
+  "$defs": {
+    "meta": {
+      "type": "object",
+      "required": ["name", "version", "type", "description"],
+      "properties": {
+        "name": {"type": "string", "minLength": 3},
+        "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "type": {"type": "string", "minLength": 3},
+        "description": {"type": "string", "minLength": 10}
+      },
+      "additionalProperties": false
+    },
+    "numberOrReference": {
+      "type": ["number", "string"]
+    },
+    "stringArray": {
+      "type": "array",
+      "items": {"type": "string"}
+    }
+  }
+}

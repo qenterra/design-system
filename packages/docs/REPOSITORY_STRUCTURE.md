@@ -5,12 +5,14 @@
 | `Package.swift` | Swift package manifest | `@qenterra` | Two library products | Swift package tests |
 | `Sources/` | Maintained Swift source | `@qenterra` | Swift APIs | Swift package tests |
 | `Tests/` | Swift regression tests | `@qenterra` | None | Swift package tests |
-| `npm/design-tokens/src/` | Maintained npm source | `@qenterra` | CSS entry points | Release manifest and npm inspection |
-| `npm/design-tokens/dist/` | Generated npm distribution | `@qenterra` | CSS and JSON exports | Source/output hash closure and npm inspection |
+| `npm/design-tokens/src/` | Versioned public generation inputs | `@qenterra` | Token, icon, and CSS sources | Deterministic regeneration and release manifest |
+| `npm/design-tokens/schemas/` | Schemas for public token and icon inputs | `@qenterra` | Editor and maintainer validation | Release manifest |
+| `npm/design-tokens/dist/` | Generated npm distribution | `@qenterra` | CSS and JSON exports | External regeneration, byte comparison, manifest, and npm inspection |
+| `Sources/QenTerraDesignTokens/Generated*.swift` | Generated native adapters | `@qenterra` | Typed tokens and symbols | External regeneration, byte comparison, manifest, and Swift tests |
 | `docs/` | Consumer and maintainer documentation | `@qenterra` | GitHub documentation | Repository audit |
 | `scripts/` | Self-contained verification | `@qenterra` | Local and CI gates | Python execution and manifest self-check |
 | `release-manifest.json` | Release file closure | `@qenterra` | Paths, sizes, SHA-256 hashes | `python3 scripts/verify_release.py` |
 
-Swift and npm packages are peers under one version. `QenTerraComponents` may depend on `QenTerraDesignTokens`; the tokens target does not depend on the component target. Generated npm distribution depends only on its declared maintained source.
+Swift and npm packages are peers under one version. `QenTerraComponents` may depend on `QenTerraDesignTokens`; the tokens target does not depend on the component target. Generated npm and Swift outputs depend only on `npm/design-tokens/src/` and the versioned public generator. `release-manifest.json` records closure after regeneration; changing the manifest cannot make stale output valid.
 
 No cache, build, report, package-staging, or AI tooling path belongs under the repository root. Use a unique external temporary directory for each run.

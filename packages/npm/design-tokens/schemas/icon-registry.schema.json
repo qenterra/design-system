@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://qenterra.local/schemas/icon-registry.schema.json",
+  "title": "Design System semantic SF Symbols registry",
+  "type": "object",
+  "required": ["$schema", "version", "platform", "icons"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "platform": {"const": "apple"},
+    "icons": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "category", "meaning", "sfSymbol", "minimumOS"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z][a-z0-9-]+$"},
+          "category": {"type": "string", "enum": ["navigation", "action", "status", "chrome"]},
+          "meaning": {"type": "string", "minLength": 6},
+          "sfSymbol": {"type": "string", "pattern": "^[a-z0-9.]+$"},
+          "minimumOS": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+$"},
+          "restrictedUse": {"type": "boolean"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -48,6 +48,8 @@ def build_outputs(root: Path = ROOT) -> dict[str, str]:
         raise ValueError("registry version does not match VERSION")
 
     outputs: dict[str, str] = {
+        "packages/npm/design-tokens/src/tokens.json": json_text(tokens),
+        "packages/npm/design-tokens/src/icons.json": json_text(icons),
         "packages/npm/design-tokens/dist/tokens.css": generate_css(
             foundation,
             tokens["semantic"],

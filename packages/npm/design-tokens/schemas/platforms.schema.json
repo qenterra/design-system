@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://qenterra.local/schemas/platforms.schema.json",
+  "title": "QenTerra platform adapters",
+  "type": "object",
+  "required": ["$schema", "meta", "macOS", "iOS", "iPadOS", "web", "browserExtension"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "meta": {"$ref": "token-file.schema.json#/$defs/meta"},
+    "macOS": {"type": "object"},
+    "iOS": {"type": "object"},
+    "iPadOS": {"type": "object"},
+    "web": {"type": "object"},
+    "browserExtension": {"type": "object"}
+  },
+  "additionalProperties": false
+}

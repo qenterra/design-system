@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://qenterra.local/schemas/motion.schema.json",
+  "title": "QenTerra motion tokens",
+  "type": "object",
+  "required": ["$schema", "meta", "durationMs", "curve", "events", "reducedMotion", "prohibited"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "meta": {"$ref": "token-file.schema.json#/$defs/meta"},
+    "durationMs": {"type": "object", "additionalProperties": {"type": "number"}},
+    "curve": {"type": "object"},
+    "events": {"type": "object"},
+    "reducedMotion": {"type": "object"},
+    "prohibited": {"$ref": "token-file.schema.json#/$defs/stringArray"}
+  },
+  "additionalProperties": false
+}
