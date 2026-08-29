@@ -87,5 +87,4 @@ The canonical repository remains private and proprietary under [`LICENSE`](LICEN
 
 - Product support, product help, and technical questions: [support@qenterra.com](mailto:support@qenterra.com).
 - Proposals, general enquiries, and commercial matters: [contact@qenterra.com](mailto:contact@qenterra.com).
-
-Use [GitHub private vulnerability reporting](https://github.com/QenTerra/design-system/security/advisories/new) for security reports; do not send vulnerability details to either public contact mailbox.
+- Vulnerabilities: follow the private reporting process in [SECURITY.md](SECURITY.md).

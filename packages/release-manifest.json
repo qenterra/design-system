@@ -55,12 +55,12 @@
     },
     {
       "path": ".github/qenterra-repository.json",
-      "sha256": "255e9880be7afb27c18fbf010f52a0a698bfc0d6aa81cabee9b507a2efdd148f",
+      "sha256": "2b8642e4dcc78c5f80ceb23e8cc7ce1e3748be6a999e897b4ba7f4c6875a63c3",
       "bytes": 4882
     },
     {
       "path": ".github/qenterra-repository.schema.json",
-      "sha256": "0de218cfa4cce5a516a2f7f6036f0be44b0281f0ad16e5daaf1cbb4dea755973",
+      "sha256": "1c16bc7ecd898eefd6d47b022cada7f3ed399efec6e474dbc5ee8bc0c182273b",
       "bytes": 7211
     },
     {
@@ -90,8 +90,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "47354223df31af187ef17c37274fe68f3843f4f49aec1f2b9ee0d4555073023d",
-      "bytes": 1397
+      "sha256": "0e707f9eea87eee4f4c1d477dd41aced7bdb4d968efd7ad825a86aadaa09d231",
+      "bytes": 1429
     },
     {
       "path": "CODE_OF_CONDUCT.md",
@@ -130,8 +130,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "9347c6b5f8e3708ee4ca20ff3acc2e7431b02301fc044bce975a5339544dceac",
-      "bytes": 3932
+      "sha256": "bbebf908a245fd3f7ce68db681f68e2a0232a402b10fc6a9376e7db8a7d85a1f",
+      "bytes": 4019
     },
     {
       "path": "SECURITY.md",
@@ -390,8 +390,8 @@
     },
     {
       "path": "scripts/qenterra_repository_check.py",
-      "sha256": "7e32a00d71a7be500de02fb0e7dcd5c64dc38b01336eea66171b22cec9aba18f",
-      "bytes": 73839
+      "sha256": "080a18b98861c571c13afcbce7cf98966497e1bb8131fc70c8390dfeaff99568",
+      "bytes": 75734
     },
     {
       "path": "scripts/verify_release.py",

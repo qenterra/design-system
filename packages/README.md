@@ -70,6 +70,7 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing a change. Report vulner
 
 - Product support, product help, and technical questions: [support@qenterra.com](mailto:support@qenterra.com).
 - Proposals, general enquiries, and commercial matters: [contact@qenterra.com](mailto:contact@qenterra.com).
+- Vulnerabilities: follow the private reporting process in [SECURITY.md](SECURITY.md).
 
 ## License
 

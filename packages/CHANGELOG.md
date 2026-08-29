@@ -6,7 +6,7 @@ All notable public package changes are recorded here. The format follows Keep a 
 
 ### Changed
 
-- Adopted QenTerra repository standard 1.2.0 with complete governance, contribution, security, ownership, release, maintenance, and support documentation.
+- Adopted QenTerra repository standard 1.3.0 with complete governance, one exact family Contact block, contribution, security, ownership, release, maintenance, and support documentation.
 - Added a portable repository audit that rejects caches, AI or agent operating files, skills, MCP configuration, undeclared content, and incomplete generated-artifact provenance.
 - Added versioned public token and icon inputs plus a portable deterministic generator for npm and Swift outputs.
 
