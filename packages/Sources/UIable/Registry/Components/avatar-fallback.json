@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "avatar-fallback",
+  "title": "Avatar Fallback",
+  "description": "Avatar Fallback variant for component.",
+  "registryDependencies": ["@uiable/avatar"],
+  "files": [
+    {
+      "path": "src/components/uiable/avatar/avatar-fallback.tsx",
+      "content": "// shadcn\nimport { Avatar, AvatarFallback } from \"@/components/ui/avatar\"\n\n//  ------------------------------ | AVATAR - FALLBACK | ------------------------------  //\n\nexport function AvatarFallbackDemo() {\n  return (\n    <div className=\"flex flex-wrap items-center gap-2\">\n      <Avatar className=\"border-none after:border-none\">\n        <AvatarFallback className=\"bg-primary/10 font-medium text-primary\">\n          AB\n        </AvatarFallback>\n      </Avatar>\n      <Avatar className=\"border-none after:border-none\">\n        <AvatarFallback className=\"bg-green-500/10 font-medium text-green-500\">\n          JD\n        </AvatarFallback>\n      </Avatar>\n      <Avatar className=\"border-none after:border-none\">\n        <AvatarFallback className=\"bg-yellow-500/10 font-medium text-yellow-500\">\n          MK\n        </AvatarFallback>\n      </Avatar>\n      <Avatar className=\"border-none after:border-none\">\n        <AvatarFallback className=\"bg-red-500/10 font-medium text-red-500\">\n          ST\n        </AvatarFallback>\n      </Avatar>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/avatar/avatar-fallback.tsx"
+    }
+  ],
+  "categories": ["avatar"],
+  "type": "registry:ui"
+}

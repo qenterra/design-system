@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "badge-status",
+  "title": "Badge Status",
+  "description": "Badge Status variant for component.",
+  "registryDependencies": ["@uiable/badge"],
+  "files": [
+    {
+      "path": "src/components/uiable/badge/badge-status.tsx",
+      "content": "// shadcn\nimport { Badge } from \"@/components/ui/badge\"\n\n//  ------------------------------ | BADGE - WITH STATUS | ------------------------------  //\n\nexport function BadgeWithStatus() {\n  return (\n    <div className=\"flex flex-wrap items-center gap-2\">\n      <Badge variant=\"outline\" className=\"gap-1.5 px-2 py-1\">\n        <span\n          className=\"size-1.5 rounded-full bg-emerald-500\"\n          aria-hidden=\"true\"\n        />\n        Online\n      </Badge>\n      <Badge variant=\"outline\" className=\"gap-1.5 px-2 py-1\">\n        <span\n          className=\"size-1.5 rounded-full bg-amber-500\"\n          aria-hidden=\"true\"\n        />\n        Away\n      </Badge>\n      <Badge variant=\"outline\" className=\"gap-1.5 px-2 py-1\">\n        <span className=\"size-1.5 rounded-full bg-red-500\" aria-hidden=\"true\" />\n        Busy\n      </Badge>\n      <Badge variant=\"outline\" className=\"gap-1.5 px-2 py-1\">\n        <span\n          className=\"size-1.5 rounded-full bg-muted-foreground\"\n          aria-hidden=\"true\"\n        />\n        Offline\n      </Badge>\n      <Badge variant=\"secondary\" className=\"gap-1.5 px-2 py-1\">\n        <span className=\"relative flex size-2 items-center justify-center\">\n          <span className=\"absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-75\" />\n          <span className=\"relative inline-flex size-1.5 rounded-full bg-emerald-500\" />\n        </span>\n        Live Status\n      </Badge>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/badge/badge-status.tsx"
+    }
+  ],
+  "categories": ["badge"],
+  "type": "registry:ui"
+}

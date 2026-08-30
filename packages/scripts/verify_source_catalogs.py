@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify public Explore SwiftUI, Magic UI, shadcn/ui, and QenTerra catalogs."""
+"""Verify public Explore SwiftUI, Magic UI, shadcn/ui, UIable, and QenTerra catalogs."""
 
 from __future__ import annotations
 
@@ -232,6 +232,233 @@ def _validate_magic_ui(
     return errors, components
 
 
+def _validate_uiable(
+    root: Path,
+    manifest_path: Path,
+) -> tuple[list[str], dict[str, dict[str, object]]]:
+    errors: list[str] = []
+    try:
+        manifest = _load(manifest_path)
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
+        return [f"cannot verify UIable catalog: {error}"], {}
+    commit = manifest.get("upstreamCommit")
+    if (
+        not isinstance(commit, str)
+        or len(commit) != 40
+        or any(character not in "0123456789abcdef" for character in commit)
+    ):
+        errors.append("UIable source catalog upstream commit is invalid")
+
+    records = manifest.get("items")
+    if not isinstance(records, list) or not records:
+        return [*errors, f"{manifest_path}: items must be a non-empty array"], {}
+    items: dict[str, dict[str, object]] = {}
+    source_paths: set[str] = set()
+    registry_paths: set[str] = set()
+    category_counts: dict[str, int] = {}
+    component_count = 0
+    primitive_count = 0
+    for index, record in enumerate(records):
+        if not isinstance(record, dict):
+            errors.append(f"UIable catalog: invalid item at index {index}")
+            continue
+        identifier = record.get("id")
+        kind = record.get("kind")
+        if not isinstance(identifier, str) or not identifier:
+            errors.append(f"UIable catalog: invalid id at index {index}")
+            continue
+        if identifier in items:
+            errors.append(f"UIable catalog: duplicate item {identifier}")
+        items[identifier] = record
+        if kind == "component":
+            component_count += 1
+            source_prefix = "Sources/UIable/Components/"
+            registry_prefix = "Sources/UIable/Registry/Components/"
+            upstream_prefix = "src/components/uiable/"
+        elif kind == "primitive":
+            primitive_count += 1
+            source_prefix = "Sources/UIable/Primitives/"
+            registry_prefix = "Sources/UIable/Registry/Primitives/"
+            upstream_prefix = "src/components/ui/"
+        else:
+            errors.append(f"UIable item {identifier}: invalid kind")
+            continue
+
+        categories = record.get("categories")
+        if not isinstance(categories, list) or not all(
+            isinstance(category, str) for category in categories
+        ):
+            errors.append(f"UIable item {identifier}: invalid categories")
+        else:
+            for category in categories:
+                category_counts[category] = category_counts.get(category, 0) + 1
+
+        upstream_path = record.get("upstreamPath")
+        if not isinstance(upstream_path, str) or not upstream_path.startswith(
+            upstream_prefix
+        ):
+            errors.append(f"UIable item {identifier}: invalid upstream path")
+            continue
+        expected_source_url = (
+            "https://raw.githubusercontent.com/codedthemes/uiable/"
+            f"{commit}/{upstream_path}"
+        )
+        if record.get("sourceURL") != expected_source_url:
+            errors.append(f"UIable item {identifier}: unpinned source URL")
+        source_relative = record.get("sourcePath")
+        if not isinstance(source_relative, str) or not source_relative.startswith(
+            source_prefix
+        ):
+            errors.append(f"UIable item {identifier}: invalid source path")
+            continue
+        source_path = (root / source_relative).resolve()
+        allowed_source = (root / source_prefix).resolve()
+        if allowed_source not in source_path.parents:
+            errors.append(f"UIable item {identifier}: source path escapes catalog")
+            continue
+        if source_relative in source_paths:
+            errors.append(f"UIable item {identifier}: duplicate source path")
+        source_paths.add(source_relative)
+        if not source_path.is_file():
+            errors.append(f"UIable item {identifier}: source is missing")
+            continue
+        source_bytes = source_path.read_bytes()
+        if record.get("bytes") != len(source_bytes):
+            errors.append(f"UIable item {identifier}: source byte-size mismatch")
+        if record.get("sha256") != hashlib.sha256(source_bytes).hexdigest():
+            errors.append(f"UIable item {identifier}: source hash mismatch")
+
+        registry_record = record.get("registryItem")
+        if not isinstance(registry_record, dict):
+            errors.append(f"UIable item {identifier}: registry item is missing")
+            continue
+        registry_relative = registry_record.get("sourcePath")
+        if not isinstance(registry_relative, str) or not registry_relative.startswith(
+            registry_prefix
+        ):
+            errors.append(f"UIable item {identifier}: invalid registry path")
+            continue
+        registry_path = (root / registry_relative).resolve()
+        allowed_registry = (root / registry_prefix).resolve()
+        if allowed_registry not in registry_path.parents:
+            errors.append(f"UIable item {identifier}: registry path escapes catalog")
+            continue
+        if registry_relative in registry_paths:
+            errors.append(f"UIable item {identifier}: duplicate registry path")
+        registry_paths.add(registry_relative)
+        expected_registry_upstream_path = f"public/r/{identifier}.json"
+        if registry_record.get("upstreamPath") != expected_registry_upstream_path:
+            errors.append(f"UIable item {identifier}: invalid registry upstream path")
+        expected_registry_url = (
+            "https://raw.githubusercontent.com/codedthemes/uiable/"
+            f"{commit}/{expected_registry_upstream_path}"
+        )
+        if registry_record.get("sourceURL") != expected_registry_url:
+            errors.append(f"UIable item {identifier}: unpinned registry URL")
+        if not registry_path.is_file():
+            errors.append(f"UIable item {identifier}: registry item is missing")
+            continue
+        registry_bytes = registry_path.read_bytes()
+        if registry_record.get("bytes") != len(registry_bytes):
+            errors.append(f"UIable item {identifier}: registry byte-size mismatch")
+        if registry_record.get("sha256") != hashlib.sha256(registry_bytes).hexdigest():
+            errors.append(f"UIable item {identifier}: registry hash mismatch")
+        try:
+            registry_payload = json.loads(registry_bytes.decode("utf-8"))
+            files = (
+                registry_payload.get("files")
+                if isinstance(registry_payload, dict)
+                else None
+            )
+            if (
+                not isinstance(registry_payload, dict)
+                or registry_payload.get("name") != identifier
+                or registry_payload.get("type") != "registry:ui"
+                or not isinstance(files, list)
+                or len(files) != 1
+                or not isinstance(files[0], dict)
+                or files[0].get("path") != upstream_path
+                or files[0].get("content") != source_bytes.decode("utf-8")
+            ):
+                errors.append(f"UIable item {identifier}: registry content mismatch")
+        except (UnicodeError, json.JSONDecodeError):
+            errors.append(f"UIable item {identifier}: invalid registry item")
+
+    actual_source_paths = {
+        path.relative_to(root).as_posix()
+        for source_root in (
+            root / "Sources/UIable/Components",
+            root / "Sources/UIable/Primitives",
+        )
+        if source_root.is_dir()
+        for path in source_root.rglob("*.tsx")
+        if path.is_file()
+    }
+    actual_registry_paths = {
+        path.relative_to(root).as_posix()
+        for registry_root in (
+            root / "Sources/UIable/Registry/Components",
+            root / "Sources/UIable/Registry/Primitives",
+        )
+        if registry_root.is_dir()
+        for path in registry_root.rglob("*.json")
+        if path.is_file()
+    }
+    for relative in sorted(source_paths - actual_source_paths):
+        errors.append(f"UIable catalog: declared source is missing {relative}")
+    for relative in sorted(actual_source_paths - source_paths):
+        errors.append(f"UIable catalog: untracked source {relative}")
+    for relative in sorted(registry_paths - actual_registry_paths):
+        errors.append(f"UIable catalog: declared registry item is missing {relative}")
+    for relative in sorted(actual_registry_paths - registry_paths):
+        errors.append(f"UIable catalog: untracked registry item {relative}")
+
+    count = len(items)
+    if (
+        manifest.get("count") != count
+        or manifest.get("componentCount") != component_count
+        or manifest.get("primitiveCount") != primitive_count
+        or component_count + primitive_count != count
+        or manifest.get("sourceFileCount") != count
+        or manifest.get("registryItemCount") != count
+        or manifest.get("fileCount") != count * 2
+    ):
+        errors.append("UIable source catalog file counts do not match")
+    categories = manifest.get("categories")
+    declared_category_counts = {
+        str(category.get("identifier")): category.get("count")
+        for category in categories
+        if isinstance(category, dict)
+    } if isinstance(categories, list) else {}
+    if declared_category_counts != category_counts:
+        errors.append("UIable source catalog category counts do not match")
+
+    license_record = manifest.get("license")
+    if not isinstance(license_record, dict):
+        errors.append("UIable source catalog license record is missing")
+    else:
+        license_path = root / str(license_record.get("sourcePath", ""))
+        if license_record.get("spdx") != "MIT":
+            errors.append("UIable source catalog license is not MIT")
+        if license_record.get("copyright") != "Copyright (c) 2026 CodedThemes":
+            errors.append("UIable source catalog authorship is missing")
+        if license_record.get("sourceURL") != (
+            f"https://github.com/codedthemes/uiable/blob/{commit}/LICENSE"
+        ):
+            errors.append("UIable source catalog license URL is not pinned")
+        if not license_path.is_file():
+            errors.append("UIable source catalog license file is missing")
+        else:
+            payload = license_path.read_bytes()
+            if license_record.get("bytes") != len(payload):
+                errors.append("UIable source catalog license byte-size mismatch")
+            if license_record.get("sha256") != hashlib.sha256(payload).hexdigest():
+                errors.append("UIable source catalog license hash mismatch")
+            if "Copyright (c) 2026 CodedThemes" not in payload.decode("utf-8"):
+                errors.append("UIable source catalog license authorship mismatch")
+    return errors, items
+
+
 def validate_catalogs(root: Path = ROOT) -> list[str]:
     explore_manifest = root / "Sources/ExploreSwiftUI/manifest.json"
     qenterra_manifest = root / "Sources/QenTerra/manifest.json"
@@ -254,7 +481,15 @@ def validate_catalogs(root: Path = ROOT) -> list[str]:
     )
     magic_manifest = root / "Sources/MagicUI/manifest.json"
     magic_errors, magic = _validate_magic_ui(root, magic_manifest)
-    errors = [*explore_errors, *qenterra_errors, *shadcn_errors, *magic_errors]
+    uiable_manifest = root / "Sources/UIable/manifest.json"
+    uiable_errors, uiable = _validate_uiable(root, uiable_manifest)
+    errors = [
+        *explore_errors,
+        *qenterra_errors,
+        *shadcn_errors,
+        *magic_errors,
+        *uiable_errors,
+    ]
 
     try:
         shadcn_manifest_payload = _load(shadcn_manifest)
@@ -314,11 +549,13 @@ def validate_catalogs(root: Path = ROOT) -> list[str]:
         qenterra_version = _load(qenterra_manifest).get("version")
         shadcn_version = _load(shadcn_manifest).get("version")
         magic_version = _load(magic_manifest).get("version")
+        uiable_version = _load(uiable_manifest).get("version")
         if (
             explore_version != package_version
             or qenterra_version != package_version
             or shadcn_version != package_version
             or magic_version != package_version
+            or uiable_version != package_version
         ):
             errors.append("source catalog versions do not match the package version")
     except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
@@ -350,10 +587,12 @@ def main() -> int:
     qenterra = _load(ROOT / "Sources/QenTerra/manifest.json")
     shadcn = _load(ROOT / "Sources/ShadcnUI/manifest.json")
     magic = _load(ROOT / "Sources/MagicUI/manifest.json")
+    uiable = _load(ROOT / "Sources/UIable/manifest.json")
     print(
         f"Verified {len(explore['components'])} Explore SwiftUI originals and "
         f"{len(magic['components'])} Magic UI originals and "
         f"{len(shadcn['components'])} shadcn/ui originals and "
+        f"{len(uiable['items'])} UIable originals and "
         f"{len(qenterra['components'])} QenTerra components"
     )
     return 0

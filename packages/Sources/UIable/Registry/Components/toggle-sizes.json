@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toggle-sizes",
+  "title": "Toggle Sizes",
+  "description": "Toggle Sizes variant for component.",
+  "registryDependencies": ["@uiable/toggle"],
+  "files": [
+    {
+      "path": "src/components/uiable/toggle/toggle-sizes.tsx",
+      "content": "// shadcn\nimport { Toggle } from \"@/components/ui/toggle\"\n\n//  ------------------------------ | TOGGLE - SIZES | ------------------------------  //\n\nexport function ToggleSizes() {\n  return (\n    <div className=\"flex flex-wrap items-center gap-2\">\n      <Toggle variant=\"outline\" aria-label=\"Toggle small\" size=\"sm\">\n        Small\n      </Toggle>\n      <Toggle variant=\"outline\" aria-label=\"Toggle default\" size=\"default\">\n        Default\n      </Toggle>\n      <Toggle variant=\"outline\" aria-label=\"Toggle large\" size=\"lg\">\n        Large\n      </Toggle>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/toggle/toggle-sizes.tsx"
+    }
+  ],
+  "categories": ["toggle"],
+  "type": "registry:ui"
+}

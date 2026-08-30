@@ -37,6 +37,7 @@ class RegistryContractTests(unittest.TestCase):
             "registry/packages.json",
             "registry/qenterra-components.json",
             "registry/shadcn-ui.json",
+            "registry/uiable.json",
         ):
             with self.subTest(relative=relative):
                 self.assertEqual(load(relative)["version"], VERSION)
@@ -105,6 +106,10 @@ class RegistryContractTests(unittest.TestCase):
             (
                 "registry/shadcn-ui.json",
                 "schemas/shadcn-ui-registry.schema.json",
+            ),
+            (
+                "registry/uiable.json",
+                "schemas/uiable-registry.schema.json",
             ),
         ):
             with self.subTest(registry=registry_relative):

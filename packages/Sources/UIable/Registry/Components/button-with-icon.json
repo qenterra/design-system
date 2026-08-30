@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-with-icon",
+  "title": "Button With Icon",
+  "description": "Button With Icon variant for component.",
+  "dependencies": ["@tabler/icons-react"],
+  "registryDependencies": ["@uiable/button"],
+  "files": [
+    {
+      "path": "src/components/uiable/button/button-with-icon.tsx",
+      "content": "// shadcn\nimport { Button } from \"@/components/ui/button\"\n\n// assets\nimport { IconGitBranch, IconGitFork } from \"@tabler/icons-react\"\n\n//  ------------------------------ | BUTTON WITH ICON | ------------------------------  //\n\nexport default function ButtonWithIcon() {\n  return (\n    <div className=\"flex flex-wrap justify-center gap-2\">\n      <Button className=\"gap-1\">\n        <IconGitBranch /> New Branch\n      </Button>\n      <Button className=\"gap-1\" variant=\"secondary\">\n        Fork\n        <IconGitFork />\n      </Button>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/button/button-with-icon.tsx"
+    }
+  ],
+  "categories": ["button"],
+  "type": "registry:ui"
+}

@@ -13,6 +13,7 @@ class SwiftPackageLayoutTests(unittest.TestCase):
         self.assertNotIn("ExploreSwiftUI", manifest)
         self.assertNotIn("MagicUI", manifest)
         self.assertNotIn("ShadcnUI", manifest)
+        self.assertNotIn("UIable", manifest)
 
     def test_products_use_explicit_qenterra_source_paths(self) -> None:
         manifest = (ROOT / "packages/Package.swift").read_text(encoding="utf-8")

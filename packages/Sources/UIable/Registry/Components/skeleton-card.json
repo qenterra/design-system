@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton-card",
+  "title": "Skeleton Card",
+  "description": "Skeleton Card variant for component.",
+  "registryDependencies": ["@uiable/card", "@uiable/skeleton"],
+  "files": [
+    {
+      "path": "src/components/uiable/skeleton/skeleton-card.tsx",
+      "content": "// shadcn\nimport { Card, CardContent, CardHeader } from \"@/components/ui/card\"\nimport { Skeleton } from \"@/components/ui/skeleton\"\n\n//  ------------------------------ | SKELETON - CARD | ------------------------------  //\n\nexport function SkeletonCard() {\n  return (\n    <Card className=\"w-full max-w-xs\">\n      <CardHeader>\n        <div className=\"flex w-full flex-col gap-2\">\n          <Skeleton className=\"h-4 w-2/3\" />\n          <Skeleton className=\"h-4 w-1/2\" />\n        </div>\n      </CardHeader>\n      <CardContent>\n        <Skeleton className=\"aspect-video w-full\" />\n      </CardContent>\n    </Card>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/skeleton/skeleton-card.tsx"
+    }
+  ],
+  "categories": ["skeleton"],
+  "type": "registry:ui"
+}

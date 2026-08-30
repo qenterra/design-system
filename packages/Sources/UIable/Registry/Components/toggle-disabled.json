@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toggle-disabled",
+  "title": "Toggle Disabled",
+  "description": "Toggle Disabled variant for component.",
+  "registryDependencies": ["@uiable/toggle"],
+  "files": [
+    {
+      "path": "src/components/uiable/toggle/toggle-disabled.tsx",
+      "content": "// shadcn\nimport { Toggle } from \"@/components/ui/toggle\"\n\n//  ------------------------------ | TOGGLE - DISABLED | ------------------------------  //\n\nexport function ToggleDisabled() {\n  return (\n    <div className=\"flex flex-wrap items-center gap-2\">\n      <Toggle aria-label=\"Toggle disabled\" disabled>\n        Disabled\n      </Toggle>\n      <Toggle variant=\"outline\" aria-label=\"Toggle disabled outline\" disabled>\n        Disabled\n      </Toggle>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/toggle/toggle-disabled.tsx"
+    }
+  ],
+  "categories": ["toggle"],
+  "type": "registry:ui"
+}

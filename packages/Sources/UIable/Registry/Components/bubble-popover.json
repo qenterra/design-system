@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "bubble-popover",
+  "title": "Bubble Popover",
+  "description": "Bubble Popover variant for component.",
+  "dependencies": ["lucide-react"],
+  "registryDependencies": ["@uiable/bubble", "@uiable/button", "@uiable/popover"],
+  "files": [
+    {
+      "path": "src/components/uiable/bubble/bubble-popover.tsx",
+      "content": "// shadcn\nimport { Bubble, BubbleContent, BubbleReactions } from \"@/components/ui/bubble\"\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Popover,\n  PopoverContent,\n  PopoverDescription,\n  PopoverHeader,\n  PopoverTitle,\n  PopoverTrigger,\n} from \"@/components/ui/popover\"\n\n// assets\nimport { InfoIcon } from \"lucide-react\"\n\n//  ------------------------------ | BUBBLE - POPOVER | ------------------------------  //\n\nexport function BubblePopover() {\n  return (\n    <div className=\"flex w-full max-w-sm flex-col gap-4\">\n      <Bubble align=\"end\">\n        <BubbleContent className=\"dark:text-white\">\n          Run the build script.\n        </BubbleContent>\n      </Bubble>\n      <Bubble variant=\"destructive\">\n        <BubbleContent>Failed to run the command.</BubbleContent>\n        <BubbleReactions>\n          <Popover>\n            <PopoverTrigger\n              render={\n                <Button\n                  variant=\"ghost\"\n                  size=\"icon-xs\"\n                  aria-label=\"Show error details\"\n                  className=\"aria-expanded:text-destructive\"\n                >\n                  <InfoIcon />\n                </Button>\n              }\n            />\n            <PopoverContent>\n              <PopoverHeader>\n                <PopoverTitle className=\"text-sm\">\n                  Command failed with exit code 1\n                </PopoverTitle>\n                <PopoverDescription className=\"text-sm\">\n                  ENOENT: no such file or directory, open pnpm-lock.yaml\n                </PopoverDescription>\n              </PopoverHeader>\n            </PopoverContent>\n          </Popover>\n        </BubbleReactions>\n      </Bubble>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/bubble/bubble-popover.tsx"
+    }
+  ],
+  "categories": ["bubble"],
+  "type": "registry:ui"
+}

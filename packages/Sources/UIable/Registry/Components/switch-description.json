@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "switch-description",
+  "title": "Switch Description",
+  "description": "Switch Description variant for component.",
+  "registryDependencies": ["@uiable/field", "@uiable/switch"],
+  "files": [
+    {
+      "path": "src/components/uiable/switch/switch-description.tsx",
+      "content": "// shadcn\nimport {\n  Field,\n  FieldContent,\n  FieldDescription,\n  FieldLabel,\n} from \"@/components/ui/field\"\nimport { Switch } from \"@/components/ui/switch\"\n\n//  ------------------------------ | SWITCH - DESCRIPTION | ------------------------------  //\n\nexport function SwitchDescription() {\n  return (\n    <Field orientation=\"horizontal\" className=\"max-w-sm\">\n      <FieldContent>\n        <FieldLabel htmlFor=\"switch-focus-mode\">\n          Share across devices\n        </FieldLabel>\n        <FieldDescription>\n          Focus is shared across devices, and turns off when you leave the app.\n        </FieldDescription>\n      </FieldContent>\n      <Switch id=\"switch-focus-mode\" />\n    </Field>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/switch/switch-description.tsx"
+    }
+  ],
+  "categories": ["switch"],
+  "type": "registry:ui"
+}

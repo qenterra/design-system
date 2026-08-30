@@ -5,7 +5,7 @@
 - Release owner: Nikita Melnychenko (QenTerra)
 - Version scheme: semver
 - Version source: `VERSION`
-- Current version: `5.3.0`
+- Current version: `5.4.0`
 
 A local commit, tag, GitHub Release, package publication, deployment, store submission, and update-feed change are separate authorised actions.
 

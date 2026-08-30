@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pagination-simple",
+  "title": "Pagination Simple",
+  "description": "Pagination Simple variant for component.",
+  "registryDependencies": ["@uiable/pagination"],
+  "files": [
+    {
+      "path": "src/components/uiable/pagination/pagination-simple.tsx",
+      "content": "// shadcn\nimport {\n  Pagination,\n  PaginationContent,\n  PaginationItem,\n  PaginationLink,\n} from \"@/components/ui/pagination\"\n\n//  ------------------------------ | PAGINATION - SIMPLE | ------------------------------  //\n\nexport function PaginationSimple() {\n  return (\n    <Pagination>\n      <PaginationContent>\n        <PaginationItem>\n          <PaginationLink href=\"#\">1</PaginationLink>\n        </PaginationItem>\n        <PaginationItem>\n          <PaginationLink href=\"#\" isActive>\n            2\n          </PaginationLink>\n        </PaginationItem>\n        <PaginationItem>\n          <PaginationLink href=\"#\">3</PaginationLink>\n        </PaginationItem>\n        <PaginationItem>\n          <PaginationLink href=\"#\">4</PaginationLink>\n        </PaginationItem>\n        <PaginationItem>\n          <PaginationLink href=\"#\">5</PaginationLink>\n        </PaginationItem>\n      </PaginationContent>\n    </Pagination>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/pagination/pagination-simple.tsx"
+    }
+  ],
+  "categories": ["pagination"],
+  "type": "registry:ui"
+}

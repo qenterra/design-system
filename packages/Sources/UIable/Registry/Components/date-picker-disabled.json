@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "date-picker-disabled",
+  "title": "Date Picker Disabled",
+  "description": "Date Picker Disabled variant for component.",
+  "dependencies": ["lucide-react"],
+  "registryDependencies": ["@uiable/button", "@uiable/calendar", "@uiable/field", "@uiable/popover"],
+  "files": [
+    {
+      "path": "src/components/uiable/date-picker/date-picker-disabled.tsx",
+      "content": "\"use client\"\n\nimport { useState } from \"react\"\n\n// shadcn\nimport { Button } from \"@/components/ui/button\"\nimport { Calendar } from \"@/components/ui/calendar\"\nimport { Field, FieldLabel } from \"@/components/ui/field\"\nimport {\n  Popover,\n  PopoverContent,\n  PopoverTrigger,\n} from \"@/components/ui/popover\"\n\n// assets\nimport { CalendarIcon } from \"lucide-react\"\n\n//  ------------------------------ | DATE PICKER - DISABLED | ------------------------------  //\n\nexport function DatePickerDisabled() {\n  const [date] = useState<Date | undefined>(undefined)\n\n  return (\n    <Field className=\"mx-auto w-52\">\n      <FieldLabel htmlFor=\"date-picker-disabled\" className=\"opacity-50\">\n        Date (Disabled)\n      </FieldLabel>\n      <Popover>\n        <PopoverTrigger\n          disabled\n          render={\n            <Button\n              id=\"date-picker-disabled\"\n              variant=\"outline\"\n              disabled\n              className=\"flex w-full justify-between font-normal disabled:cursor-not-allowed disabled:opacity-50\"\n            />\n          }\n        >\n          <span className=\"flex items-center gap-2\">\n            <CalendarIcon className=\"size-4 opacity-50\" />\n            Pick a date\n          </span>\n        </PopoverTrigger>\n        <PopoverContent className=\"w-auto p-0\" align=\"start\">\n          <Calendar mode=\"single\" selected={date} disabled />\n        </PopoverContent>\n      </Popover>\n    </Field>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/date-picker/date-picker-disabled.tsx"
+    }
+  ],
+  "categories": ["date-picker"],
+  "type": "registry:ui"
+}

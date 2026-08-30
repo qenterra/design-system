@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "alert-dialog-media",
+  "title": "Alert Dialog Media",
+  "description": "Alert Dialog Media variant for component.",
+  "dependencies": ["iconsax-reactjs"],
+  "registryDependencies": ["@uiable/alert-dialog", "@uiable/button"],
+  "files": [
+    {
+      "path": "src/components/uiable/alert-dialog/alert-dialog-media.tsx",
+      "content": "// shadcn\nimport {\n  AlertDialog,\n  AlertDialogAction,\n  AlertDialogCancel,\n  AlertDialogContent,\n  AlertDialogDescription,\n  AlertDialogFooter,\n  AlertDialogHeader,\n  AlertDialogMedia,\n  AlertDialogTitle,\n  AlertDialogTrigger,\n} from \"@/components/ui/alert-dialog\"\nimport { Button } from \"@/components/ui/button\"\n\n// third-party\nimport { Share } from \"iconsax-reactjs\"\n\n//  ------------------------------ | ALERT DIALOG - MEDIA | ------------------------------  //\n\nexport function AlertDialogWithMedia() {\n  return (\n    <AlertDialog>\n      <AlertDialogTrigger render={<Button>Share Project</Button>} />\n      <AlertDialogContent>\n        <AlertDialogHeader>\n          <AlertDialogMedia className=\"bg-primary/10 text-primary\">\n            <Share />\n          </AlertDialogMedia>\n          <AlertDialogTitle>Share this project?</AlertDialogTitle>\n          <AlertDialogDescription>\n            Anyone with the link will be able to view and edit this project.\n          </AlertDialogDescription>\n        </AlertDialogHeader>\n        <AlertDialogFooter>\n          <AlertDialogCancel>Cancel</AlertDialogCancel>\n          <AlertDialogAction>Share</AlertDialogAction>\n        </AlertDialogFooter>\n      </AlertDialogContent>\n    </AlertDialog>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/alert-dialog/alert-dialog-media.tsx"
+    }
+  ],
+  "categories": ["alert-dialog"],
+  "type": "registry:ui"
+}

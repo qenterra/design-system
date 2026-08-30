@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input-group-chat-message",
+  "title": "Input Group Chat Message",
+  "description": "Input Group Chat Message variant for component.",
+  "dependencies": ["lucide-react"],
+  "registryDependencies": ["@uiable/input-group"],
+  "files": [
+    {
+      "path": "src/components/uiable/input-group/input-group-chat-message.tsx",
+      "content": "\"use client\"\n\nimport { useState } from \"react\"\n\n// shadcn\nimport {\n  InputGroup,\n  InputGroupAddon,\n  InputGroupButton,\n  InputGroupText,\n  InputGroupTextarea,\n} from \"@/components/ui/input-group\"\n\n// assets\nimport { PaperclipIcon, SendIcon, SmileIcon } from \"lucide-react\"\n\n//  ------------------------------ | INPUT GROUP - CHAT MESSAGE | ------------------------------  //\n\nexport default function InputGroupChatMessage() {\n  const [value, setValue] = useState(\"\")\n  const maxLength = 2000\n\n  return (\n    <div className=\"grid w-full max-w-md gap-4\">\n      <InputGroup>\n        <InputGroupTextarea\n          id=\"chat-message-input\"\n          placeholder=\"Type a message...\"\n          className=\"min-h-[80px]\"\n          value={value}\n          onChange={(e) => setValue(e.target.value.slice(0, maxLength))}\n        />\n        <InputGroupAddon align=\"block-end\" className=\"border-t border-border\">\n          <InputGroupButton aria-label=\"Attach file\" variant=\"ghost\">\n            <PaperclipIcon />\n          </InputGroupButton>\n          <InputGroupButton aria-label=\"Add emoji\" variant=\"ghost\">\n            <SmileIcon />\n          </InputGroupButton>\n          <InputGroupText className=\"ml-auto text-xs\">\n            {value.length}/{maxLength}\n          </InputGroupText>\n          <InputGroupButton\n            type=\"submit\"\n            variant=\"default\"\n            size=\"sm\"\n            className=\"ml-2\"\n          >\n            Send\n            <SendIcon />\n          </InputGroupButton>\n        </InputGroupAddon>\n      </InputGroup>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/input-group/input-group-chat-message.tsx"
+    }
+  ],
+  "categories": ["input-group"],
+  "type": "registry:ui"
+}

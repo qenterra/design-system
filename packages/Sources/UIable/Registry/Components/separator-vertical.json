@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "separator-vertical",
+  "title": "Separator Vertical",
+  "description": "Separator Vertical variant for component.",
+  "registryDependencies": ["@uiable/separator"],
+  "files": [
+    {
+      "path": "src/components/uiable/separator/separator-vertical.tsx",
+      "content": "// shadcn\nimport { Separator } from \"@/components/ui/separator\"\n\n//  ------------------------------ | SEPARATOR - VERTICAL | ------------------------------  //\n\nexport function SeparatorVertical() {\n  return (\n    <div className=\"flex h-5 items-center gap-4\">\n      <div>Blog</div>\n      <Separator orientation=\"vertical\" />\n      <div>Docs</div>\n      <Separator orientation=\"vertical\" />\n      <div>Source</div>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/separator/separator-vertical.tsx"
+    }
+  ],
+  "categories": ["separator"],
+  "type": "registry:ui"
+}

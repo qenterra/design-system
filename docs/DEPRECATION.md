@@ -8,6 +8,6 @@ Every deprecation identifies the affected public surface, replacement, warning m
 
 | Surface | Deprecated in | Replacement | Removal no earlier than | Migration |
 | --- | --- | --- | --- | --- |
-| None | — | — | — | No active deprecations in version 5.3.0 |
+| None | — | — | — | No active deprecations in version 5.4.0 |
 
 Security or legal emergencies may shorten a window only through a recorded exception and explicit release communication.

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "badge-sizes",
+  "title": "Badge Sizes",
+  "description": "Badge Sizes variant for component.",
+  "registryDependencies": ["@uiable/badge"],
+  "files": [
+    {
+      "path": "src/components/uiable/badge/badge-sizes.tsx",
+      "content": "// shadcn\nimport { Badge } from \"@/components/ui/badge\"\n\n//  ------------------------------ | BADGE - SIZES | ------------------------------  //\n\nexport function BadgeSizes() {\n  return (\n    <div className=\"flex flex-wrap items-center gap-2\">\n      <Badge className=\"px-1.5 py-0.5 text-[10px]\">Small</Badge>\n      <Badge>Default</Badge>\n      <Badge className=\"px-3 py-1 text-xs\">Large</Badge>\n      <Badge className=\"px-3.5 py-1.5 text-sm\">Extra Large</Badge>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/badge/badge-sizes.tsx"
+    }
+  ],
+  "categories": ["badge"],
+  "type": "registry:ui"
+}

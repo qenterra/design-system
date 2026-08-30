@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "select-with-icons",
+  "title": "Select With Icons",
+  "description": "Select With Icons variant for component.",
+  "dependencies": ["lucide-react"],
+  "registryDependencies": ["@uiable/select"],
+  "files": [
+    {
+      "path": "src/components/uiable/select/select-with-icons.tsx",
+      "content": "\"use client\"\n\nimport { useState } from \"react\"\n\n// shadcn\nimport {\n  Select,\n  SelectContent,\n  SelectGroup,\n  SelectItem,\n  SelectTrigger,\n  SelectValue,\n} from \"@/components/ui/select\"\n\n// assets\nimport { Building2, Coins, CreditCard, Smartphone, Wallet } from \"lucide-react\"\n\nconst paymentMethods = [\n  {\n    label: \"Credit Card\",\n    value: \"card\",\n    icon: CreditCard,\n    description: \"Visa, Mastercard, Amex\",\n  },\n  {\n    label: \"PayPal\",\n    value: \"paypal\",\n    icon: Wallet,\n    description: \"Fast & secure checkout\",\n  },\n  {\n    label: \"Bank Transfer\",\n    value: \"bank\",\n    icon: Building2,\n    description: \"Direct account transfer\",\n  },\n  {\n    label: \"Apple Pay\",\n    value: \"apple\",\n    icon: Smartphone,\n    description: \"One-touch mobile payment\",\n  },\n  {\n    label: \"Cryptocurrency\",\n    value: \"crypto\",\n    icon: Coins,\n    description: \"BTC, ETH, USDC\",\n  },\n]\n\n//  ------------------------------ | SELECT - WITH ICONS | ------------------------------  //\n\nexport function SelectWithIcons() {\n  const [value, setValue] = useState(\"card\")\n  const selectedMethod = paymentMethods.find((item) => item.value === value)\n\n  return (\n    <Select\n      items={paymentMethods}\n      value={value}\n      onValueChange={(val) => val && setValue(val)}\n    >\n      <SelectTrigger className=\"w-full max-w-64\">\n        <SelectValue>\n          {selectedMethod && (\n            <span className=\"flex items-center gap-2.5\">\n              <selectedMethod.icon className=\"size-4 text-muted-foreground\" />\n              <span>{selectedMethod.label}</span>\n            </span>\n          )}\n        </SelectValue>\n      </SelectTrigger>\n      <SelectContent>\n        <SelectGroup>\n          {paymentMethods.map((item) => {\n            const Icon = item.icon\n            return (\n              <SelectItem key={item.value} value={item.value}>\n                <span className=\"flex items-center gap-2.5\">\n                  <Icon className=\"size-4 text-muted-foreground\" />\n                  <span>{item.label}</span>\n                </span>\n              </SelectItem>\n            )\n          })}\n        </SelectGroup>\n      </SelectContent>\n    </Select>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/select/select-with-icons.tsx"
+    }
+  ],
+  "categories": ["select"],
+  "type": "registry:ui"
+}

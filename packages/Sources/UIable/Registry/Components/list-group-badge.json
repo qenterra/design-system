@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "list-group-badge",
+  "title": "List Group Badge",
+  "description": "List Group Badge variant for component.",
+  "dependencies": ["lucide-react"],
+  "registryDependencies": ["@uiable/badge"],
+  "files": [
+    {
+      "path": "src/components/uiable/list-group/list-group-badge.tsx",
+      "content": "// shadcn\nimport { Badge } from \"@/components/ui/badge\"\n\n// assets\nimport {\n  ArchiveIcon,\n  InboxIcon,\n  SendIcon,\n  StarIcon,\n  TrashIcon,\n} from \"lucide-react\"\n\n//  ------------------------------ | LIST GROUP - BADGE | ------------------------------  //\n\nexport default function ListGroupBadge() {\n  return (\n    <ul className=\"divide-border-border divide-y overflow-hidden rounded-lg border border-border\">\n      <li>\n        <a\n          href=\"#!\"\n          className=\"flex items-center justify-between gap-4 px-6.25 py-4 transition-colors hover:bg-muted/50\"\n        >\n          <div className=\"flex items-center gap-3\">\n            <InboxIcon className=\"size-5 text-primary\" />\n            <h6 className=\"text-base font-medium\">Inbox</h6>\n          </div>\n          <Badge\n            variant=\"default\"\n            className=\"rounded-lg px-2.5 py-0.5 text-xs font-medium\"\n          >\n            14\n          </Badge>\n        </a>\n      </li>\n      <li>\n        <a\n          href=\"#!\"\n          className=\"flex items-center justify-between gap-4 px-6.25 py-4 transition-colors hover:bg-muted/50\"\n        >\n          <div className=\"flex items-center gap-3\">\n            <StarIcon className=\"size-5 fill-amber-500/20 text-amber-500\" />\n            <h6 className=\"text-base font-medium\">Starred</h6>\n          </div>\n          <Badge\n            variant=\"secondary\"\n            className=\"rounded-lg px-2.5 py-0.5 text-xs font-medium\"\n          >\n            3\n          </Badge>\n        </a>\n      </li>\n      <li>\n        <a\n          href=\"#!\"\n          className=\"flex items-center justify-between gap-4 px-6.25 py-4 transition-colors hover:bg-muted/50\"\n        >\n          <div className=\"flex items-center gap-3\">\n            <SendIcon className=\"size-5 text-muted-foreground\" />\n            <h6 className=\"text-base font-medium\">Sent Messages</h6>\n          </div>\n        </a>\n      </li>\n      <li>\n        <a\n          href=\"#!\"\n          className=\"flex items-center justify-between gap-4 px-6.25 py-4 transition-colors hover:bg-muted/50\"\n        >\n          <div className=\"flex items-center gap-3\">\n            <ArchiveIcon className=\"size-5 text-muted-foreground\" />\n            <h6 className=\"text-base font-medium\">Archive</h6>\n          </div>\n          <Badge\n            variant=\"outline\"\n            className=\"rounded-lg px-2.5 py-0.5 text-xs font-medium\"\n          >\n            99+\n          </Badge>\n        </a>\n      </li>\n      <li>\n        <a\n          href=\"#!\"\n          className=\"flex items-center justify-between gap-4 px-6.25 py-4 transition-colors hover:bg-muted/50\"\n        >\n          <div className=\"flex items-center gap-3\">\n            <TrashIcon className=\"size-5 text-destructive\" />\n            <h6 className=\"text-base font-medium\">Trash</h6>\n          </div>\n        </a>\n      </li>\n    </ul>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/list-group/list-group-badge.tsx"
+    }
+  ],
+  "categories": ["list-group"],
+  "type": "registry:ui"
+}

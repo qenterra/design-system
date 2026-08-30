@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "uiable",
+  "homepage": "https://uiable.com",
+  "items": [
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Button component.",
+      "files": [
+        {
+          "path": "button.tsx",
+          "type": "registry:component",
+          "target": "@components/ui/button.tsx"
+        }
+      ],
+      "categories": ["button"],
+      "dependencies": ["@base-ui/react"]
+    }
+  ]
+}

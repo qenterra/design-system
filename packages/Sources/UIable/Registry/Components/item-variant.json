@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "item-variant",
+  "title": "Item Variant",
+  "description": "Item Variant variant for component.",
+  "dependencies": ["iconsax-reactjs"],
+  "registryDependencies": ["@uiable/item"],
+  "files": [
+    {
+      "path": "src/components/uiable/item/item-variant.tsx",
+      "content": "// shadcn\nimport {\n  Item,\n  ItemContent,\n  ItemDescription,\n  ItemMedia,\n  ItemTitle,\n} from \"@/components/ui/item\"\n\n// third-party\nimport { Cup, FingerScan, MicrophoneSlash1 } from \"iconsax-reactjs\"\n\n//  ------------------------------ | ITEM - VARIANT | ------------------------------  //\n\nexport function ItemVariant() {\n  return (\n    <div className=\"flex w-full max-w-md flex-col gap-6\">\n      <Item>\n        <ItemMedia variant=\"icon\">\n          <Cup className=\"size-8 text-primary\" />\n        </ItemMedia>\n        <ItemContent>\n          <ItemTitle>Default Variant</ItemTitle>\n          <ItemDescription>\n            Transparent background with no border.\n          </ItemDescription>\n        </ItemContent>\n      </Item>\n      <Item variant=\"outline\">\n        <ItemMedia variant=\"icon\">\n          <FingerScan className=\"size-8 text-primary\" />\n        </ItemMedia>\n        <ItemContent>\n          <ItemTitle>Outline Variant</ItemTitle>\n          <ItemDescription>\n            Outlined style with a visible border.\n          </ItemDescription>\n        </ItemContent>\n      </Item>\n      <Item variant=\"muted\">\n        <ItemMedia variant=\"icon\">\n          <MicrophoneSlash1 className=\"size-8 text-primary\" />\n        </ItemMedia>\n        <ItemContent>\n          <ItemTitle>Muted Variant</ItemTitle>\n          <ItemDescription>\n            Muted background for secondary content.\n          </ItemDescription>\n        </ItemContent>\n      </Item>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/item/item-variant.tsx"
+    }
+  ],
+  "categories": ["item"],
+  "type": "registry:ui"
+}

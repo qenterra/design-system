@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-solid-info",
+  "title": "Button Solid Info",
+  "description": "Button Solid Info variant for component.",
+  "registryDependencies": ["@uiable/button"],
+  "files": [
+    {
+      "path": "src/components/uiable/button/button-solid-info.tsx",
+      "content": "// shadcn\nimport { Button } from \"@/components/ui/button\"\n\n//  ------------------------------ | BUTTON SOLID INFO | ------------------------------  //\n\nexport default function ButtonSolidInfo() {\n  return (\n    <Button className=\"bg-cyan-500 text-white hover:bg-cyan-600\">Info</Button>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/button/button-solid-info.tsx"
+    }
+  ],
+  "categories": ["button"],
+  "type": "registry:ui"
+}

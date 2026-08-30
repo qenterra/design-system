@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty-background",
+  "title": "Empty Background",
+  "description": "Empty Background variant for component.",
+  "dependencies": ["iconsax-reactjs"],
+  "registryDependencies": ["@uiable/button", "@uiable/empty"],
+  "files": [
+    {
+      "path": "src/components/uiable/empty/empty-background.tsx",
+      "content": "// shadcn\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Empty,\n  EmptyContent,\n  EmptyDescription,\n  EmptyHeader,\n  EmptyMedia,\n  EmptyTitle,\n} from \"@/components/ui/empty\"\n\n// third-party\nimport { NotificationBing, Refresh } from \"iconsax-reactjs\"\n\n//  ------------------------------ | EMPTY - MUTED | ------------------------------  //\n\nexport function EmptyMuted() {\n  return (\n    <Empty className=\"h-full rounded-lg bg-background\">\n      <EmptyHeader>\n        <EmptyMedia variant=\"icon\">\n          <NotificationBing />\n        </EmptyMedia>\n        <EmptyTitle>No Notifications</EmptyTitle>\n        <EmptyDescription className=\"max-w-xs text-pretty\">\n          You're all caught up. New notifications will appear here.\n        </EmptyDescription>\n      </EmptyHeader>\n      <EmptyContent>\n        <Button className=\"gap-1\">\n          <Refresh />\n          Refresh\n        </Button>\n      </EmptyContent>\n    </Empty>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/empty/empty-background.tsx"
+    }
+  ],
+  "categories": ["empty"],
+  "type": "registry:ui"
+}

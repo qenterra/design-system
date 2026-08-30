@@ -1,6 +1,6 @@
 # Design System
 
-Version 5.3.0 · Normative reference for humans and AI agents
+Version 5.4.0 · Normative reference for humans and AI agents
 
 ## 0. How to use this file
 
@@ -822,7 +822,7 @@ manifest, the full verification gate, and clean consumer resolution. A package
 release proves adapter availability, not native rendering or accessibility
 acceptance in a product.
 
-The public source tree has four deliberately separate zones. `Sources/QenTerra/`
+The public source tree has five deliberately separate zones. `Sources/QenTerra/`
 contains the installable, tokenized `QenTerraDesignTokens` and
 `QenTerraComponents` targets. `Sources/ExploreSwiftUI/` contains exact attributed
 source from every Explore SwiftUI sitemap detail page and is not a SwiftPM target.
@@ -855,6 +855,19 @@ site internals, and registry sources absent from the public page are excluded.
 `scripts/magic_ui.py sync --write` may replace originals only from the official
 repository. Any QenTerra token adaptation is a separate maintained component;
 neither the vendored source nor its registry item is edited in place.
+
+`Sources/UIable/` is a fourth immutable reference catalog, also excluded from
+package targets. Its boundary is the exact union of every `registry:ui` item in
+the official showcase-component and primitive registries, cross-checked against
+the public aggregate registry at one pinned upstream commit. Showcase sources
+stay under `Components/`; their required UI primitives stay under `Primitives/`;
+each is paired with its exact public install payload under `Registry/`. The
+manifest locks all original paths and URLs, byte counts, SHA-256 values, the exact
+MIT license, and `Copyright (c) 2026 CodedThemes`. All `registry:block` entries,
+the website, documentation application, previews, media, and build tooling are
+excluded. `scripts/uiable.py sync --write` may replace originals only from the
+official repository. Any tokenized or otherwise modified implementation becomes
+a separate maintained QenTerra component; no UIable original is edited in place.
 
 ## 19. AI implementation protocol
 
@@ -895,7 +908,7 @@ To update the design system:
 1. Read `AGENTS.md`, this file, affected token files, and relevant product evidence.
 2. Add or update an ADR in `docs/decisions/` for a normative change.
 3. Change canonical tokens, registries, schemas, documentation, templates, or package facades.
-4. For Explore SwiftUI changes run `python3 scripts/explore_swiftui.py sync --write`; for Magic UI changes run `python3 scripts/magic_ui.py sync --write`; for shadcn/ui changes run `python3 scripts/shadcn_ui.py sync --write`; then run `python3 scripts/generate.py write` and `python3 scripts/build_public_packages.py write` when generated/public outputs change.
+4. For Explore SwiftUI changes run `python3 scripts/explore_swiftui.py sync --write`; for Magic UI changes run `python3 scripts/magic_ui.py sync --write`; for shadcn/ui changes run `python3 scripts/shadcn_ui.py sync --write`; for UIable changes run `python3 scripts/uiable.py sync --write`; then run `python3 scripts/generate.py write` and `python3 scripts/build_public_packages.py write` when generated/public outputs change.
 5. Run `python3 scripts/verify.py`.
 6. Inspect the npm tarball, Swift products, and the affected consumer at the relevant appearances and constraints.
 7. Update `CHANGELOG.md` and version according to change type.

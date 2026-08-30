@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "typography-h2",
+  "title": "Typography H2",
+  "description": "Typography H2 variant for component.",
+  "files": [
+    {
+      "path": "src/components/uiable/typography/typography-h2.tsx",
+      "content": "//  ------------------------------ | TYPOGRAPHY - H2 | ------------------------------  //\n\nexport function TypographyH2() {\n  return (\n    <h2 className=\"scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0\">\n      The People of the Kingdom\n    </h2>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/typography/typography-h2.tsx"
+    }
+  ],
+  "categories": ["typography"],
+  "type": "registry:ui"
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tabs-line",
+  "title": "Tabs Line",
+  "description": "Tabs Line variant for component.",
+  "registryDependencies": ["@uiable/tabs"],
+  "files": [
+    {
+      "path": "src/components/uiable/tabs/tabs-line.tsx",
+      "content": "// shadcn\nimport { Tabs, TabsList, TabsTrigger } from \"@/components/ui/tabs\"\n\n//  ------------------------------ | TABS - LINE | ------------------------------  //\n\nexport function TabsLine() {\n  return (\n    <Tabs defaultValue=\"overview\">\n      <TabsList variant=\"line\">\n        <TabsTrigger value=\"overview\">Overview</TabsTrigger>\n        <TabsTrigger value=\"analytics\">Analytics</TabsTrigger>\n        <TabsTrigger value=\"reports\">Reports</TabsTrigger>\n      </TabsList>\n    </Tabs>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/tabs/tabs-line.tsx"
+    }
+  ],
+  "categories": ["tabs"],
+  "type": "registry:ui"
+}

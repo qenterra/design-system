@@ -69,6 +69,7 @@ def main() -> int:
     run([python, "scripts/explore_swiftui.py", "verify"])
     run([python, "scripts/magic_ui.py", "verify"])
     run([python, "scripts/shadcn_ui.py", "verify"])
+    run([python, "scripts/uiable.py", "verify"])
     run([python, "scripts/build_public_packages.py", "check"])
     run([python, "scripts/verify_public_boundary.py"])
     run([python, "packages/scripts/verify_release.py"])

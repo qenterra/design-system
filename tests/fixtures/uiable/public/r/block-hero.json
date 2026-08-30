@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "block-hero",
+  "title": "Hero Block",
+  "files": [
+    {
+      "path": "src/components/uiable/blocks/hero/block-hero.tsx",
+      "content": "export default function HeroBlock() {\n  return <section>Hero</section>\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/blocks/hero/block-hero.tsx"
+    }
+  ],
+  "categories": ["hero"],
+  "type": "registry:block"
+}

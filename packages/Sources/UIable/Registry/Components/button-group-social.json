@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-group-social",
+  "title": "Button Group Social",
+  "description": "Button Group Social variant for component.",
+  "dependencies": ["framer-motion", "lucide-react"],
+  "registryDependencies": ["@uiable/button", "@uiable/button-group", "@uiable/separator"],
+  "files": [
+    {
+      "path": "src/components/uiable/button-group/button-group-social.tsx",
+      "content": "\"use client\"\n\nimport { useState } from \"react\"\n\n// shadcn\nimport { Button } from \"@/components/ui/button\"\nimport { ButtonGroup } from \"@/components/ui/button-group\"\nimport { Separator } from \"@/components/ui/separator\"\n\n// third-party\nimport { motion } from \"framer-motion\"\n\n// assets\nimport { Heart, MessageCircle } from \"lucide-react\"\n\n//  ------------------------------ | BUTTON GROUP - SOCIAL | ------------------------------  //\n\nexport default function ButtonGroupSocial() {\n  const [liked, setLiked] = useState(true)\n\n  return (\n    <ButtonGroup>\n      <Button\n        variant=\"link\"\n        className=\"text-dark no-underline hover:no-underline\"\n        onClick={() => setLiked(!liked)}\n      >\n        <motion.span\n          animate={{\n            scale: liked ? [1, 0.7, 1.35, 0.9, 1] : 1,\n            rotate: liked ? [0, -10, 10, -5, 5, 0] : 0,\n          }}\n          transition={{ duration: 0.45, ease: \"easeInOut\" }}\n          className=\"me-1 inline-flex items-center justify-center\"\n        >\n          <Heart\n            className={liked ? \"fill-red-500 text-red-500\" : \"text-dark\"}\n          />\n        </motion.span>\n        1.5k Likes\n      </Button>\n      <Separator orientation=\"vertical\" className=\"my-1.5\" />\n      <Button\n        variant=\"link\"\n        className=\"text-dark no-underline hover:no-underline\"\n      >\n        <MessageCircle className=\"me-1\" />\n        25 Comments\n      </Button>\n    </ButtonGroup>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/button-group/button-group-social.tsx"
+    }
+  ],
+  "categories": ["button-group"],
+  "type": "registry:ui"
+}

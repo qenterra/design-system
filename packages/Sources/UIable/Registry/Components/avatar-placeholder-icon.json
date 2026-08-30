@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "avatar-placeholder-icon",
+  "title": "Avatar Placeholder Icon",
+  "description": "Avatar Placeholder Icon variant for component.",
+  "dependencies": ["lucide-react"],
+  "registryDependencies": ["@uiable/avatar"],
+  "files": [
+    {
+      "path": "src/components/uiable/avatar/avatar-placeholder-icon.tsx",
+      "content": "// shadcn\nimport { Avatar, AvatarFallback } from \"@/components/ui/avatar\"\n\n// assets\nimport { BotIcon, BuildingIcon, SparklesIcon, UserIcon } from \"lucide-react\"\n\n//  ------------------------------ | AVATAR - PLACEHOLDER ICON | ------------------------------  //\n\nexport function AvatarPlaceholderIcon() {\n  return (\n    <div className=\"flex flex-wrap items-center gap-2\">\n      <Avatar className=\"border-none after:border-none\">\n        <AvatarFallback className=\"bg-primary/10 text-primary\">\n          <UserIcon className=\"size-4\" />\n        </AvatarFallback>\n      </Avatar>\n      <Avatar className=\"border-none after:border-none\">\n        <AvatarFallback className=\"bg-green-500/10 text-green-500\">\n          <BuildingIcon className=\"size-4\" />\n        </AvatarFallback>\n      </Avatar>\n      <Avatar className=\"border-none after:border-none\">\n        <AvatarFallback className=\"bg-yellow-500/10 text-yellow-500\">\n          <BotIcon className=\"size-4\" />\n        </AvatarFallback>\n      </Avatar>\n      <Avatar className=\"border-none after:border-none\">\n        <AvatarFallback className=\"bg-red-500/10 text-red-500\">\n          <SparklesIcon className=\"size-4\" />\n        </AvatarFallback>\n      </Avatar>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/avatar/avatar-placeholder-icon.tsx"
+    }
+  ],
+  "categories": ["avatar"],
+  "type": "registry:ui"
+}

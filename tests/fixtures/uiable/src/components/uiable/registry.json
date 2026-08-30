@@ -1,0 +1,37 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "uiable",
+  "homepage": "https://uiable.com",
+  "items": [
+    {
+      "name": "button-default",
+      "type": "registry:ui",
+      "title": "Button Default",
+      "description": "Button Default variant for component.",
+      "files": [
+        {
+          "path": "button/button-default.tsx",
+          "type": "registry:component",
+          "target": "@components/uiable/button/button-default.tsx"
+        }
+      ],
+      "categories": ["button"],
+      "registryDependencies": ["@uiable/button"]
+    },
+    {
+      "name": "button-outline",
+      "type": "registry:ui",
+      "title": "Button Outline",
+      "description": "Button Outline variant for component.",
+      "files": [
+        {
+          "path": "button/button-outline.tsx",
+          "type": "registry:component",
+          "target": "@components/uiable/button/button-outline.tsx"
+        }
+      ],
+      "categories": ["button"],
+      "registryDependencies": ["@uiable/button"]
+    }
+  ]
+}

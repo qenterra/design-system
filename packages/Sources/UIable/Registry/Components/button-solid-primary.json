@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-solid-primary",
+  "title": "Button Solid Primary",
+  "description": "Button Solid Primary variant for component.",
+  "registryDependencies": ["@uiable/button"],
+  "files": [
+    {
+      "path": "src/components/uiable/button/button-solid-primary.tsx",
+      "content": "// shadcn\nimport { Button } from \"@/components/ui/button\"\n\n//  ------------------------------ | BUTTON SOLID PRIMARY | ------------------------------  //\n\nexport default function ButtonSolidPrimary() {\n  return (\n    <Button className=\"hover:bg-primary-600 bg-primary text-white\">\n      Primary\n    </Button>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/button/button-solid-primary.tsx"
+    }
+  ],
+  "categories": ["button"],
+  "type": "registry:ui"
+}

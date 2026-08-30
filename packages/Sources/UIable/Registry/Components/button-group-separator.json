@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-group-separator",
+  "title": "Button Group Separator",
+  "description": "Button Group Separator variant for component.",
+  "registryDependencies": ["@uiable/button", "@uiable/button-group"],
+  "files": [
+    {
+      "path": "src/components/uiable/button-group/button-group-separator.tsx",
+      "content": "// shadcn\nimport { Button } from \"@/components/ui/button\"\nimport { ButtonGroup, ButtonGroupSeparator } from \"@/components/ui/button-group\"\n\n//  ------------------------------ | BUTTON GROUP - SEPARATOR | ------------------------------  //\n\nexport default function ButtonGroupSeparatorDemo() {\n  return (\n    <ButtonGroup>\n      <Button>Copy</Button>\n      <ButtonGroupSeparator />\n      <Button>Paste</Button>\n    </ButtonGroup>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/button-group/button-group-separator.tsx"
+    }
+  ],
+  "categories": ["button-group"],
+  "type": "registry:ui"
+}

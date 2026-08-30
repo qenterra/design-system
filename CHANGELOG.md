@@ -1,5 +1,26 @@
 # Changelog
 
+## 5.4.0
+
+### Added
+
+- Added the complete official UIable `registry:ui` catalog at pinned upstream commit `155aea5012cbb4f84e314ea51fe03db311dd7768`: 684 showcase components, 61 required UI primitives, and 745 matching exact public install payloads.
+- Added a private schema and manifest, an exact MIT license copy with `Copyright (c) 2026 CodedThemes`, public third-party attribution, an architecture decision, and source/install documentation.
+- Added fixture-driven importer tests, private verification, exported offline verification, and scheduled live currentness checks.
+
+### Changed
+
+- Bumped the unified Design System version to 5.4.0 for the additive public source catalog.
+- Extended the public allowlist and release manifest while keeping UIable outside npm and SwiftPM targets.
+
+### Fixed
+
+- Enforced exact source-to-registry content equality, closed file coverage, pinned provenance, and an explicit block exclusion so UIable site or `registry:block` code cannot leak into the Components catalog.
+
+### Security
+
+- UIable originals remain byte-identical and separately licensed. Any modified version must become a new QenTerra component with provenance, token integration, tests, delivery mapping, versioning, and changelog coverage.
+
 ## [Unreleased]
 
 ### Changed

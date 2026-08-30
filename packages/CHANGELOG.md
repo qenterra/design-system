@@ -1,5 +1,25 @@
 # Changelog
 
+## 5.4.0 - 2026-08-30
+
+### Added
+
+- Published all 745 official UIable `registry:ui` sources: 684 showcase components and 61 required UI primitives.
+- Published the matching 745 exact public install-registry payloads, a pinned upstream commit, source and registry paths and URLs, byte counts, SHA-256 hashes, 69 category counts, and the exact upstream MIT license with CodedThemes authorship.
+- Added independent exported catalog verification and public documentation for selection and installation.
+
+### Changed
+
+- Advanced the unified public package version to 5.4.0 and expanded the release allowlist for the UIable catalog.
+
+### Fixed
+
+- Reject missing, extra, resized, hash-modified, unpinned, category-drifted, license-drifted, source/registry-mismatched, or block-leaked UIable files.
+
+### Security
+
+- UIable remains a non-target reference catalog. Its originals are not tokenized, rewritten, or relicensed as QenTerra work.
+
 All notable public package changes are recorded here. The format follows Keep a Changelog and versions follow Semantic Versioning.
 
 ## [Unreleased]

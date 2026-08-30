@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton",
+  "title": "Skeleton",
+  "description": "Skeleton component.",
+  "files": [
+    {
+      "path": "src/components/ui/skeleton.tsx",
+      "content": "import { ComponentProps } from \"react\"\n\n// project-imports\nimport { cn } from \"@/lib/utils\"\n\nfunction Skeleton({ className, ...props }: ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"skeleton\"\n      className={cn(\"animate-pulse rounded-lg bg-background\", className)}\n      {...props}\n    />\n  )\n}\n\nexport { Skeleton }\n",
+      "type": "registry:component",
+      "target": "@components/ui/skeleton.tsx"
+    }
+  ],
+  "categories": ["skeleton"],
+  "type": "registry:ui"
+}

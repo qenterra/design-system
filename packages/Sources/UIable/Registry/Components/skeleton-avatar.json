@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton-avatar",
+  "title": "Skeleton Avatar",
+  "description": "Skeleton Avatar variant for component.",
+  "registryDependencies": ["@uiable/skeleton"],
+  "files": [
+    {
+      "path": "src/components/uiable/skeleton/skeleton-avatar.tsx",
+      "content": "// shadcn\nimport { Skeleton } from \"@/components/ui/skeleton\"\n\n//  ------------------------------ | SKELETON - AVATAR | ------------------------------  //\n\nexport function SkeletonAvatar() {\n  return (\n    <div className=\"flex w-fit items-center gap-4\">\n      <Skeleton className=\"size-10 shrink-0 rounded-full\" />\n      <div className=\"grid gap-2\">\n        <Skeleton className=\"h-4 w-[150px]\" />\n        <Skeleton className=\"h-4 w-[100px]\" />\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/skeleton/skeleton-avatar.tsx"
+    }
+  ],
+  "categories": ["skeleton"],
+  "type": "registry:ui"
+}

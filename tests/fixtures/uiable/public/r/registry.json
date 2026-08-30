@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "uiable",
+  "homepage": "https://uiable.com",
+  "items": [
+    {
+      "name": "button-default",
+      "type": "registry:ui",
+      "title": "Button Default",
+      "description": "Button Default variant for component.",
+      "files": [{"path": "src/components/uiable/button/button-default.tsx", "type": "registry:component", "target": "@components/uiable/button/button-default.tsx"}],
+      "categories": ["button"],
+      "registryDependencies": ["@uiable/button"]
+    },
+    {
+      "name": "button-outline",
+      "type": "registry:ui",
+      "title": "Button Outline",
+      "description": "Button Outline variant for component.",
+      "files": [{"path": "src/components/uiable/button/button-outline.tsx", "type": "registry:component", "target": "@components/uiable/button/button-outline.tsx"}],
+      "categories": ["button"],
+      "registryDependencies": ["@uiable/button"]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Button component.",
+      "files": [{"path": "src/components/ui/button.tsx", "type": "registry:component", "target": "@components/ui/button.tsx"}],
+      "categories": ["button"],
+      "dependencies": ["@base-ui/react"]
+    },
+    {
+      "name": "block-hero",
+      "type": "registry:block",
+      "title": "Hero Block",
+      "files": [{"path": "src/components/uiable/blocks/hero/block-hero.tsx", "type": "registry:component", "target": "@components/uiable/blocks/hero/block-hero.tsx"}],
+      "categories": ["hero"]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "outline-item-group",
+  "title": "Outline Item Group",
+  "description": "Item Outline Item Group variant for component.",
+  "dependencies": ["iconsax-reactjs"],
+  "registryDependencies": ["@uiable/item"],
+  "files": [
+    {
+      "path": "src/components/uiable/item/outline-item-group.tsx",
+      "content": "// shadcn\nimport {\n  Item,\n  ItemContent,\n  ItemDescription,\n  ItemGroup,\n  ItemMedia,\n  ItemTitle,\n} from \"@/components/ui/item\"\n\n// third-party\nimport { Gps } from \"iconsax-reactjs\"\n\n//  ------------------------------ | ITEM - OUTLINE GROUP | ------------------------------  //\n\nexport function OutlineItemGroup() {\n  return (\n    <ItemGroup>\n      <Item variant=\"outline\">\n        <ItemMedia variant=\"icon\">\n          <Gps className=\"size-6 text-green-500\" />\n        </ItemMedia>\n        <ItemContent>\n          <ItemTitle>Item 1</ItemTitle>\n          <ItemDescription>First item with icon.</ItemDescription>\n        </ItemContent>\n      </Item>\n      <Item variant=\"outline\">\n        <ItemMedia variant=\"icon\">\n          <Gps className=\"size-6 text-green-500\" />\n        </ItemMedia>\n        <ItemContent>\n          <ItemTitle>Item 2</ItemTitle>\n          <ItemDescription>Second item with icon.</ItemDescription>\n        </ItemContent>\n      </Item>\n      <Item variant=\"outline\">\n        <ItemMedia variant=\"icon\">\n          <Gps className=\"size-6 text-green-500\" />\n        </ItemMedia>\n        <ItemContent>\n          <ItemTitle>Item 3</ItemTitle>\n          <ItemDescription>Third item with icon.</ItemDescription>\n        </ItemContent>\n      </Item>\n    </ItemGroup>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/item/outline-item-group.tsx"
+    }
+  ],
+  "categories": ["item"],
+  "type": "registry:ui"
+}

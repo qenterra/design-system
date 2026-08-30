@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://qenterra.local/schemas/uiable-registry.schema.json",
+  "title": "UIable exact-source registry",
+  "type": "object",
+  "required": ["$schema", "version", "source", "upstreamRepository", "upstreamRef", "upstreamCommit", "scope", "count", "componentCount", "primitiveCount", "sourceFileCount", "registryItemCount", "fileCount", "categories", "license", "items"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "source": {"const": "https://uiable.com/components"},
+    "upstreamRepository": {"const": "https://github.com/codedthemes/uiable"},
+    "upstreamRef": {"const": "refs/heads/master"},
+    "upstreamCommit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "scope": {"const": "every registry:ui item in the official component and primitive registries; registry:block items are excluded"},
+    "count": {"type": "integer", "minimum": 1},
+    "componentCount": {"type": "integer", "minimum": 1},
+    "primitiveCount": {"type": "integer", "minimum": 1},
+    "sourceFileCount": {"type": "integer", "minimum": 1},
+    "registryItemCount": {"type": "integer", "minimum": 1},
+    "fileCount": {"type": "integer", "minimum": 2},
+    "categories": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["identifier", "count"],
+        "properties": {
+          "identifier": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+          "count": {"type": "integer", "minimum": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "license": {
+      "type": "object",
+      "required": ["spdx", "copyright", "upstreamPath", "sourceURL", "sourcePath", "sha256", "bytes"],
+      "properties": {
+        "spdx": {"const": "MIT"},
+        "copyright": {"const": "Copyright (c) 2026 CodedThemes"},
+        "upstreamPath": {"const": "LICENSE"},
+        "sourceURL": {"type": "string", "pattern": "^https://github\\.com/codedthemes/uiable/blob/[0-9a-f]{40}/LICENSE$"},
+        "sourcePath": {"const": "Sources/UIable/LICENSE.md"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "bytes": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "kind", "title", "description", "categories", "language", "documentationURL", "upstreamPath", "sourceURL", "sourcePath", "sha256", "bytes", "dependencies", "registryDependencies", "registryItem"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+          "name": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+          "kind": {"enum": ["component", "primitive"]},
+          "title": {"type": "string", "minLength": 1},
+          "description": {"type": "string"},
+          "categories": {
+            "type": "array",
+            "items": {"type": "string", "pattern": "^[a-z0-9-]+$"}
+          },
+          "language": {"const": "TypeScript TSX"},
+          "documentationURL": {"const": "https://uiable.com/components"},
+          "upstreamPath": {"type": "string", "pattern": "^src/components/(uiable/.+|ui/[^/]+)\\.tsx$"},
+          "sourceURL": {"type": "string", "pattern": "^https://raw\\.githubusercontent\\.com/codedthemes/uiable/[0-9a-f]{40}/src/components/(uiable/.+|ui/[^/]+)\\.tsx$"},
+          "sourcePath": {"type": "string", "pattern": "^Sources/UIable/(Components/.+|Primitives/[^/]+)\\.tsx$"},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "bytes": {"type": "integer", "minimum": 1},
+          "dependencies": {
+            "type": "array",
+            "items": {"type": "string", "minLength": 1}
+          },
+          "registryDependencies": {
+            "type": "array",
+            "items": {"type": "string", "minLength": 1}
+          },
+          "registryItem": {
+            "type": "object",
+            "required": ["upstreamPath", "sourceURL", "sourcePath", "sha256", "bytes"],
+            "properties": {
+              "upstreamPath": {"type": "string", "pattern": "^public/r/[a-z0-9-]+\\.json$"},
+              "sourceURL": {"type": "string", "pattern": "^https://raw\\.githubusercontent\\.com/codedthemes/uiable/[0-9a-f]{40}/public/r/[a-z0-9-]+\\.json$"},
+              "sourcePath": {"type": "string", "pattern": "^Sources/UIable/Registry/(Components|Primitives)/[a-z0-9-]+\\.json$"},
+              "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+              "bytes": {"type": "integer", "minimum": 1}
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

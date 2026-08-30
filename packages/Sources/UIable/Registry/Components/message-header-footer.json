@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "message-header-footer",
+  "title": "Message Header Footer",
+  "description": "Message Header Footer variant for component.",
+  "registryDependencies": ["@uiable/bubble", "@uiable/message"],
+  "files": [
+    {
+      "path": "src/components/uiable/message/message-header-footer.tsx",
+      "content": "// shadcn\nimport { Bubble, BubbleContent } from \"@/components/ui/bubble\"\nimport {\n  Message,\n  MessageContent,\n  MessageFooter,\n  MessageHeader,\n} from \"@/components/ui/message\"\n\n//  ------------------------------ | MESSAGE - HEADER AND FOOTER | ------------------------------  //\n\nexport function MessageHeaderFooter() {\n  return (\n    <div className=\"flex w-full max-w-sm flex-col gap-8\">\n      <Message>\n        <MessageContent>\n          <MessageHeader>Olivia</MessageHeader>\n          <Bubble variant=\"muted\">\n            <BubbleContent>I already checked the logs.</BubbleContent>\n          </Bubble>\n        </MessageContent>\n      </Message>\n      <Message align=\"end\">\n        <MessageContent>\n          <Bubble>\n            <BubbleContent className=\"dark:text-white\">\n              Send the report to the team. Ping @shadcn if you need help.\n            </BubbleContent>\n          </Bubble>\n          <MessageFooter>\n            <div>\n              Read <span className=\"font-normal\">Yesterday</span>\n            </div>\n          </MessageFooter>\n        </MessageContent>\n      </Message>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/message/message-header-footer.tsx"
+    }
+  ],
+  "categories": ["message"],
+  "type": "registry:ui"
+}

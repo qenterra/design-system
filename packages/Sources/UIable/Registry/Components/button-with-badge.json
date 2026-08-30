@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-with-badge",
+  "title": "Button With Badge",
+  "description": "Button With Badge variant for component.",
+  "dependencies": ["lucide-react"],
+  "registryDependencies": ["@uiable/button"],
+  "files": [
+    {
+      "path": "src/components/uiable/button/button-with-badge.tsx",
+      "content": "// shadcn\nimport { Button } from \"@/components/ui/button\"\n\n// assets\nimport { Bell } from \"lucide-react\"\n\n//  ------------------------------ | BUTTON WITH BADGE | ------------------------------  //\n\nexport default function ButtonWithBadge() {\n  return (\n    <Button\n      variant=\"outline\"\n      size=\"icon\"\n      className=\"relative dark:border-border\"\n    >\n      <Bell />\n      <span className=\"absolute -top-1 -right-0.5 size-2 animate-ping rounded-full bg-red-400 opacity-75\"></span>\n      <span className=\"absolute -top-1 -right-0.5 size-2 rounded-full bg-red-500\"></span>\n    </Button>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/button/button-with-badge.tsx"
+    }
+  ],
+  "categories": ["button"],
+  "type": "registry:ui"
+}

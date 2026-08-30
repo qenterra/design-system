@@ -25,6 +25,8 @@ jobs:
         run: python3 scripts/magic_ui.py sync --check
       - name: Compare the stored catalog with shadcn/ui
         run: python3 scripts/shadcn_ui.py sync --check
+      - name: Compare the stored catalog with UIable
+        run: python3 scripts/uiable.py sync --check
 
   verify:
     runs-on: macos-15

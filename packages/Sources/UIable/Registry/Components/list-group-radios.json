@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "list-group-radios",
+  "title": "List Group Radios",
+  "description": "List Group Radios variant for component.",
+  "registryDependencies": ["@uiable/label", "@uiable/radio-group"],
+  "files": [
+    {
+      "path": "src/components/uiable/list-group/list-group-radios.tsx",
+      "content": "// shadcn\nimport { Label } from \"@/components/ui/label\"\nimport { RadioGroup, RadioGroupItem } from \"@/components/ui/radio-group\"\n\n//  ------------------------------ | LIST GROUP - RADIOS | ------------------------------  //\n\nexport default function ListGroupRadios() {\n  return (\n    <RadioGroup\n      defaultValue=\"radio1\"\n      className=\"divide-border-border space-y-0 divide-y overflow-hidden rounded-lg border border-border bg-card\"\n    >\n      <div className=\"flex items-center space-x-3 px-6.25 py-4\">\n        <RadioGroupItem value=\"radio1\" id=\"radio1\" />\n        <Label\n          htmlFor=\"radio1\"\n          className=\"flex-1 cursor-pointer text-base font-normal\"\n        >\n          Cras justo odio\n        </Label>\n      </div>\n      <div className=\"flex items-center space-x-3 px-6.25 py-4\">\n        <RadioGroupItem value=\"radio2\" id=\"radio2\" />\n        <Label\n          htmlFor=\"radio2\"\n          className=\"flex-1 cursor-pointer text-base font-normal\"\n        >\n          Dapibus ac facilisis in\n        </Label>\n      </div>\n      <div className=\"flex items-center space-x-3 px-6.25 py-4\">\n        <RadioGroupItem value=\"radio3\" id=\"radio3\" />\n        <Label\n          htmlFor=\"radio3\"\n          className=\"flex-1 cursor-pointer text-base font-normal\"\n        >\n          Morbi leo risus\n        </Label>\n      </div>\n      <div className=\"flex items-center space-x-3 px-6.25 py-4\">\n        <RadioGroupItem value=\"radio4\" id=\"radio4\" />\n        <Label\n          htmlFor=\"radio4\"\n          className=\"flex-1 cursor-pointer text-base font-normal\"\n        >\n          Porta ac consectetur ac\n        </Label>\n      </div>\n      <div className=\"flex items-center space-x-3 px-6.25 py-4\">\n        <RadioGroupItem value=\"radio5\" id=\"radio5\" />\n        <Label\n          htmlFor=\"radio5\"\n          className=\"flex-1 cursor-pointer text-base font-normal\"\n        >\n          Vestibulum at eros\n        </Label>\n      </div>\n    </RadioGroup>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/list-group/list-group-radios.tsx"
+    }
+  ],
+  "categories": ["list-group"],
+  "type": "registry:ui"
+}

@@ -37,6 +37,17 @@ class SourceCatalogVerifierTests(unittest.TestCase):
         self.assertIn("Sources/MagicUI/Components/", content)
         self.assertIn("Sources/MagicUI/Registry/", content)
 
+    def test_uiable_catalog_is_part_of_the_public_verifier(self) -> None:
+        self.assertTrue(
+            (ROOT / "packages/Sources/UIable/manifest.json").is_file(),
+            "the exact UIable catalog is missing",
+        )
+        content = VERIFIER.read_text(encoding="utf-8")
+        self.assertIn("Sources/UIable/manifest.json", content)
+        self.assertIn("Sources/UIable/Components/", content)
+        self.assertIn("Sources/UIable/Primitives/", content)
+        self.assertIn("Sources/UIable/Registry/", content)
+
 
 if __name__ == "__main__":
     unittest.main()

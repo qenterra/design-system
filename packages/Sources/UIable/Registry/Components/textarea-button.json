@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "textarea-button",
+  "title": "Textarea Button",
+  "description": "Textarea Button variant for component.",
+  "registryDependencies": ["@uiable/button", "@uiable/textarea"],
+  "files": [
+    {
+      "path": "src/components/uiable/textarea/textarea-button.tsx",
+      "content": "// shadcn\nimport { Button } from \"@/components/ui/button\"\nimport { Textarea } from \"@/components/ui/textarea\"\n\n//  ------------------------------ | TEXTAREA - BUTTON | ------------------------------  //\n\nexport function TextareaButton() {\n  return (\n    <div className=\"grid w-full gap-2\">\n      <Textarea placeholder=\"Type your message here.\" />\n      <Button>Send message</Button>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/textarea/textarea-button.tsx"
+    }
+  ],
+  "categories": ["textarea"],
+  "type": "registry:ui"
+}

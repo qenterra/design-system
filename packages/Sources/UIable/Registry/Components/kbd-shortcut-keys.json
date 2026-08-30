@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "kbd-shortcut-keys",
+  "title": "Kbd Shortcut Keys",
+  "description": "Kbd Shortcut Keys variant for component.",
+  "registryDependencies": ["@uiable/kbd"],
+  "files": [
+    {
+      "path": "src/components/uiable/kbd/kbd-shortcut-keys.tsx",
+      "content": "// shadcn\nimport { Kbd, KbdGroup } from \"@/components/ui/kbd\"\n\n//  ------------------------------ | KBD - SHORTCUT KEYS | ------------------------------  //\n\nexport default function KbdShortcutKeys() {\n  return (\n    <div className=\"flex flex-col items-center gap-4\">\n      <div className=\"flex items-center gap-2 text-sm\">\n        <span className=\"text-muted-foreground\">Copy</span>\n        <KbdGroup>\n          <Kbd>⌘</Kbd>\n          <Kbd>C</Kbd>\n        </KbdGroup>\n      </div>\n      <div className=\"flex items-center gap-2 text-sm\">\n        <span className=\"text-muted-foreground\">Paste</span>\n        <KbdGroup>\n          <Kbd>⌘</Kbd>\n          <Kbd>V</Kbd>\n        </KbdGroup>\n      </div>\n      <div className=\"flex items-center gap-2 text-sm\">\n        <span className=\"text-muted-foreground\">Search</span>\n        <KbdGroup>\n          <Kbd>⌘</Kbd>\n          <Kbd>Shift</Kbd>\n          <Kbd>F</Kbd>\n        </KbdGroup>\n      </div>\n      <div className=\"flex flex-wrap items-center justify-center gap-1 text-sm text-muted-foreground\">\n        Press{\" \"}\n        <KbdGroup>\n          <Kbd>Ctrl</Kbd>\n          <Kbd>Alt</Kbd>\n          <Kbd>Del</Kbd>\n        </KbdGroup>{\" \"}\n        to open task manager\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/kbd/kbd-shortcut-keys.tsx"
+    }
+  ],
+  "categories": ["kbd"],
+  "type": "registry:ui"
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "textarea-helper-text",
+  "title": "Textarea Helper Text",
+  "description": "Textarea Helper Text variant for component.",
+  "registryDependencies": ["@uiable/field", "@uiable/textarea"],
+  "files": [
+    {
+      "path": "src/components/uiable/textarea/textarea-helper-text.tsx",
+      "content": "// shadcn\nimport { Field, FieldDescription, FieldLabel } from \"@/components/ui/field\"\nimport { Textarea } from \"@/components/ui/textarea\"\n\n//  ------------------------------ | TEXTAREA - HELPER TEXT | ------------------------------  //\n\nexport function TextareaHelperText() {\n  return (\n    <Field>\n      <FieldLabel htmlFor=\"textarea-helper-text\">\n        Project Description\n      </FieldLabel>\n      <Textarea\n        id=\"textarea-helper-text\"\n        placeholder=\"Type your message here.\"\n      />\n      <FieldDescription>\n        Markdown formatting is supported. Your description will be visible to\n        your team members.\n      </FieldDescription>\n    </Field>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/textarea/textarea-helper-text.tsx"
+    }
+  ],
+  "categories": ["textarea"],
+  "type": "registry:ui"
+}

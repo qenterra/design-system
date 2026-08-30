@@ -26,6 +26,8 @@ class DocumentationAlignmentTests(unittest.TestCase):
                 self.assertIn("QenTerraComponents", text)
                 self.assertIn("Sources/ShadcnUI/", text)
                 self.assertIn("scripts/shadcn_ui.py", text)
+                self.assertIn("Sources/UIable/", text)
+                self.assertIn("scripts/uiable.py", text)
 
 
 if __name__ == "__main__":

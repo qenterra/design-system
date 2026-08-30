@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "textarea-field",
+  "title": "Textarea Field",
+  "description": "Textarea Field variant for component.",
+  "registryDependencies": ["@uiable/field", "@uiable/textarea"],
+  "files": [
+    {
+      "path": "src/components/uiable/textarea/textarea-field.tsx",
+      "content": "// shadcn\nimport { Field, FieldDescription, FieldLabel } from \"@/components/ui/field\"\nimport { Textarea } from \"@/components/ui/textarea\"\n\n//  ------------------------------ | TEXTAREA - FIELD | ------------------------------  //\n\nexport function TextareaField() {\n  return (\n    <Field>\n      <FieldLabel htmlFor=\"textarea-message\">Message</FieldLabel>\n      <FieldDescription>Enter your message below.</FieldDescription>\n      <Textarea id=\"textarea-message\" placeholder=\"Type your message here.\" />\n    </Field>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/textarea/textarea-field.tsx"
+    }
+  ],
+  "categories": ["textarea"],
+  "type": "registry:ui"
+}

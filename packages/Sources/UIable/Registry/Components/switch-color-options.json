@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "switch-color-options",
+  "title": "Switch Color Options",
+  "description": "Switch Color Options variant for component.",
+  "registryDependencies": ["@uiable/field", "@uiable/switch"],
+  "files": [
+    {
+      "path": "src/components/uiable/switch/switch-color-options.tsx",
+      "content": "\"use client\"\n\nimport { useState } from \"react\"\n\n// shadcn\nimport {\n  Field,\n  FieldContent,\n  FieldGroup,\n  FieldLabel,\n} from \"@/components/ui/field\"\nimport { Switch } from \"@/components/ui/switch\"\n\n//  ------------------------------ | SWITCH - COLOR OPTIONS | ------------------------------  //\n\nexport function SwitchColorOptions() {\n  const [states, setStates] = useState({\n    success: true,\n    info: true,\n    warning: true,\n    danger: true,\n  })\n\n  return (\n    <FieldGroup className=\"w-full max-w-xs\">\n      {/* Success */}\n      <Field orientation=\"horizontal\">\n        <FieldContent>\n          <FieldLabel htmlFor=\"switch-color-success\">Success</FieldLabel>\n        </FieldContent>\n        <Switch\n          id=\"switch-color-success\"\n          checked={states.success}\n          onCheckedChange={(checked) =>\n            setStates((prev) => ({ ...prev, success: checked }))\n          }\n          className=\"focus-visible:ring-green-500/50 data-checked:bg-green-500 data-checked:ring-green-500\"\n        />\n      </Field>\n\n      {/* Info */}\n      <Field orientation=\"horizontal\">\n        <FieldContent>\n          <FieldLabel htmlFor=\"switch-color-info\">Info</FieldLabel>\n        </FieldContent>\n        <Switch\n          id=\"switch-color-info\"\n          checked={states.info}\n          onCheckedChange={(checked) =>\n            setStates((prev) => ({ ...prev, info: checked }))\n          }\n          className=\"focus-visible:ring-cyan-500/50 data-checked:bg-cyan-500 data-checked:ring-cyan-500\"\n        />\n      </Field>\n\n      {/* Warning */}\n      <Field orientation=\"horizontal\">\n        <FieldContent>\n          <FieldLabel htmlFor=\"switch-color-warning\">Warning</FieldLabel>\n        </FieldContent>\n        <Switch\n          id=\"switch-color-warning\"\n          checked={states.warning}\n          onCheckedChange={(checked) =>\n            setStates((prev) => ({ ...prev, warning: checked }))\n          }\n          className=\"focus-visible:ring-yellow-500/50 data-checked:bg-yellow-500 data-checked:ring-yellow-500\"\n        />\n      </Field>\n\n      {/* Danger */}\n      <Field orientation=\"horizontal\">\n        <FieldContent>\n          <FieldLabel htmlFor=\"switch-color-danger\">Danger</FieldLabel>\n        </FieldContent>\n        <Switch\n          id=\"switch-color-danger\"\n          checked={states.danger}\n          onCheckedChange={(checked) =>\n            setStates((prev) => ({ ...prev, danger: checked }))\n          }\n          className=\"focus-visible:ring-red-500/50 data-checked:bg-red-500 data-checked:ring-red-500\"\n        />\n      </Field>\n    </FieldGroup>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/switch/switch-color-options.tsx"
+    }
+  ],
+  "categories": ["switch"],
+  "type": "registry:ui"
+}

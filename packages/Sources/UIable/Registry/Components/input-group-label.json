@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input-group-label",
+  "title": "Input Group Label",
+  "description": "Input Group Label variant for component.",
+  "dependencies": ["lucide-react"],
+  "registryDependencies": ["@uiable/input-group", "@uiable/label", "@uiable/tooltip"],
+  "files": [
+    {
+      "path": "src/components/uiable/input-group/input-group-label.tsx",
+      "content": "// shadcn\nimport {\n  InputGroup,\n  InputGroupAddon,\n  InputGroupButton,\n  InputGroupInput,\n} from \"@/components/ui/input-group\"\nimport { Label } from \"@/components/ui/label\"\nimport {\n  Tooltip,\n  TooltipContent,\n  TooltipTrigger,\n} from \"@/components/ui/tooltip\"\n\n// assets\nimport { InfoIcon } from \"lucide-react\"\n\n//  ------------------------------ | INPUT GROUP - LABEL | ------------------------------  //\n\nexport default function InputGroupLabel() {\n  return (\n    <div className=\"grid w-full max-w-sm gap-4\">\n      <InputGroup>\n        <InputGroupInput id=\"email\" placeholder=\"shadcn\" />\n        <InputGroupAddon>\n          <Label htmlFor=\"email\">@</Label>\n        </InputGroupAddon>\n      </InputGroup>\n      <InputGroup>\n        <InputGroupInput id=\"email-2\" placeholder=\"shadcn@vercel.com\" />\n        <InputGroupAddon align=\"block-start\">\n          <Label htmlFor=\"email-2\" className=\"text-foreground\">\n            Email\n          </Label>\n          <Tooltip>\n            <TooltipTrigger\n              render={\n                <InputGroupButton\n                  variant=\"ghost\"\n                  aria-label=\"Help\"\n                  className=\"ml-auto rounded-full\"\n                  size=\"icon-xs\"\n                />\n              }\n            >\n              <InfoIcon />\n            </TooltipTrigger>\n            <TooltipContent>\n              <p>We'll use this to send you notifications</p>\n            </TooltipContent>\n          </Tooltip>\n        </InputGroupAddon>\n      </InputGroup>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/input-group/input-group-label.tsx"
+    }
+  ],
+  "categories": ["input-group"],
+  "type": "registry:ui"
+}

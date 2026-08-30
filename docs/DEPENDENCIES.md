@@ -16,4 +16,6 @@ The shadcn/ui catalog is vendored reference source, not an installed runtime dep
 
 The Magic UI catalog is also vendored reference source rather than a runtime dependency. Its manifest pairs every public-page `.tsx` component with the exact official registry payload that declares dependencies, registry dependencies, CSS variables, and keyframes. Consumers install only selected components through the official Magic UI/shadcn workflow and remain responsible for React, Tailwind CSS, Motion, aliases, and framework integration.
 
+The UIable catalog is vendored reference source rather than a runtime dependency. It preserves the complete official `registry:ui` union from UIable's showcase-component and primitive registries, together with the exact public install payload for every item. Consumers select only the sources they need and remain responsible for React, Tailwind CSS, aliases, registry dependencies, and application integration. The catalog deliberately excludes `registry:block` entries and does not convert upstream code to QenTerra tokens in place.
+
 Lockfiles prove resolution metadata, not license compatibility, runtime quality, or consumer acceptance. Review dependency changes explicitly and keep credentials outside manifests, logs, and source control.

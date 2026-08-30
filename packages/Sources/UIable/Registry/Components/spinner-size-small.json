@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "spinner-size-small",
+  "title": "Spinner Size Small",
+  "description": "Spinner Size Small variant for component.",
+  "files": [
+    {
+      "path": "src/components/uiable/spinner/spinner-size-small.tsx",
+      "content": "//  ------------------------------ | SPINNER - SIZE SMALL | ------------------------------  //\n\nexport default function SpinnerSizeSmall() {\n  return (\n    <div className=\"flex flex-wrap items-center gap-4\">\n      <div\n        className=\"inline-block size-4 animate-spin rounded-full border-[2px] border-slate-800 border-l-transparent dark:border-white/50 dark:border-l-transparent\"\n        role=\"status\"\n      >\n        <span className=\"sr-only\">Loading...</span>\n      </div>\n      <div\n        className=\"inline-flex size-2 animate-ping rounded-full bg-slate-800 opacity-75 dark:bg-white/50\"\n        role=\"status\"\n      >\n        <span className=\"sr-only\">Loading...</span>\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/spinner/spinner-size-small.tsx"
+    }
+  ],
+  "categories": ["spinner"],
+  "type": "registry:ui"
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input-disabled",
+  "title": "Input Disabled",
+  "description": "Input Disabled variant for component.",
+  "registryDependencies": ["@uiable/field", "@uiable/input"],
+  "files": [
+    {
+      "path": "src/components/uiable/input/input-disabled.tsx",
+      "content": "// shadcn\nimport { Field, FieldDescription, FieldLabel } from \"@/components/ui/field\"\nimport { Input } from \"@/components/ui/input\"\n\n//  ------------------------------ | INPUT - DISABLED | ------------------------------  //\n\nexport function InputDisabled() {\n  return (\n    <Field data-disabled>\n      <FieldLabel htmlFor=\"input-demo-disabled\">Email</FieldLabel>\n      <Input\n        id=\"input-demo-disabled\"\n        type=\"email\"\n        placeholder=\"Email\"\n        disabled\n      />\n      <FieldDescription>This field is currently disabled.</FieldDescription>\n    </Field>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/input/input-disabled.tsx"
+    }
+  ],
+  "categories": ["input"],
+  "type": "registry:ui"
+}

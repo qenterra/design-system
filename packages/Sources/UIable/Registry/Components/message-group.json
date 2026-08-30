@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "message-group",
+  "title": "Message Group",
+  "description": "Message Group variant for component.",
+  "registryDependencies": ["@uiable/avatar", "@uiable/bubble", "@uiable/message"],
+  "files": [
+    {
+      "path": "src/components/uiable/message/message-group.tsx",
+      "content": "// shadcn\nimport { Avatar, AvatarFallback, AvatarImage } from \"@/components/ui/avatar\"\nimport { Bubble, BubbleContent } from \"@/components/ui/bubble\"\nimport {\n  Message,\n  MessageAvatar,\n  MessageContent,\n  MessageGroup,\n} from \"@/components/ui/message\"\n\n//  ------------------------------ | MESSAGE - GROUP | ------------------------------  //\n\nexport function MessageGroups() {\n  return (\n    <div className=\"flex w-full max-w-sm flex-col gap-6\">\n      <MessageGroup>\n        <Message>\n          <MessageAvatar />\n          <MessageContent>\n            <Bubble variant=\"muted\">\n              <BubbleContent>I checked the registry addresses.</BubbleContent>\n            </Bubble>\n          </MessageContent>\n        </Message>\n        <Message>\n          <MessageAvatar>\n            <Avatar>\n              <AvatarImage\n                src=\"https://cdn.uiable.com/user/avatar-2.jpg\"\n                alt=\"@avatar\"\n              />\n              <AvatarFallback>CN</AvatarFallback>\n            </Avatar>\n          </MessageAvatar>\n          <MessageContent>\n            <Bubble variant=\"muted\">\n              <BubbleContent>\n                The component and example JSON now live under the UI registry.\n              </BubbleContent>\n            </Bubble>\n          </MessageContent>\n        </Message>\n      </MessageGroup>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/message/message-group.tsx"
+    }
+  ],
+  "categories": ["message"],
+  "type": "registry:ui"
+}

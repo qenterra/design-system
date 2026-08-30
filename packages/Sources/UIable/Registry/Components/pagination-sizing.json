@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pagination-sizing",
+  "title": "Pagination Sizing",
+  "description": "Pagination Sizing variant for component.",
+  "registryDependencies": ["@uiable/pagination"],
+  "files": [
+    {
+      "path": "src/components/uiable/pagination/pagination-sizing.tsx",
+      "content": "// shadcn\nimport {\n  PaginationContent,\n  PaginationItem,\n  PaginationLink,\n} from \"@/components/ui/pagination\"\n\n//  ------------------------------ | PAGINATION - SIZING | ------------------------------  //\n\nexport default function PaginationSizing() {\n  return (\n    <div className=\"flex flex-col gap-8\">\n      <div>\n        <h6 className=\"mb-3 text-sm font-medium tracking-wider text-muted-foreground uppercase\">\n          Large Pagination\n        </h6>\n        <PaginationContent className=\"justify-start\">\n          <PaginationItem>\n            <PaginationLink href=\"#\" size=\"lg\">\n              1\n            </PaginationLink>\n          </PaginationItem>\n          <PaginationItem>\n            <PaginationLink href=\"#\" size=\"lg\" isActive>\n              2\n            </PaginationLink>\n          </PaginationItem>\n          <PaginationItem>\n            <PaginationLink href=\"#\" size=\"lg\">\n              3\n            </PaginationLink>\n          </PaginationItem>\n        </PaginationContent>\n      </div>\n\n      <div>\n        <h6 className=\"mb-3 text-sm font-medium tracking-wider text-muted-foreground uppercase\">\n          Small Pagination\n        </h6>\n        <PaginationContent className=\"justify-start\">\n          <PaginationItem>\n            <PaginationLink href=\"#\" size=\"sm\">\n              1\n            </PaginationLink>\n          </PaginationItem>\n          <PaginationItem>\n            <PaginationLink href=\"#\" size=\"sm\" isActive>\n              2\n            </PaginationLink>\n          </PaginationItem>\n          <PaginationItem>\n            <PaginationLink href=\"#\" size=\"sm\">\n              3\n            </PaginationLink>\n          </PaginationItem>\n        </PaginationContent>\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/pagination/pagination-sizing.tsx"
+    }
+  ],
+  "categories": ["pagination"],
+  "type": "registry:ui"
+}

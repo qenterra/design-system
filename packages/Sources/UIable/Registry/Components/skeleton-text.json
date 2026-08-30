@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton-text",
+  "title": "Skeleton Text",
+  "description": "Skeleton Text variant for component.",
+  "registryDependencies": ["@uiable/skeleton"],
+  "files": [
+    {
+      "path": "src/components/uiable/skeleton/skeleton-text.tsx",
+      "content": "// shadcn\nimport { Skeleton } from \"@/components/ui/skeleton\"\n\n//  ------------------------------ | SKELETON - TEXT | ------------------------------  //\n\nexport function SkeletonText() {\n  return (\n    <div className=\"flex w-full max-w-xs flex-col gap-2\">\n      <Skeleton className=\"h-4 w-full\" />\n      <Skeleton className=\"h-4 w-full\" />\n      <Skeleton className=\"h-4 w-3/4\" />\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/skeleton/skeleton-text.tsx"
+    }
+  ],
+  "categories": ["skeleton"],
+  "type": "registry:ui"
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toggle-icon",
+  "title": "Toggle Icon",
+  "description": "Toggle Icon variant for component.",
+  "dependencies": ["lucide-react"],
+  "registryDependencies": ["@uiable/toggle"],
+  "files": [
+    {
+      "path": "src/components/uiable/toggle/toggle-icon.tsx",
+      "content": "\"use client\"\n\nimport { useState } from \"react\"\n\n// shadcn\nimport { Toggle } from \"@/components/ui/toggle\"\n\n// assets\nimport {\n  EyeIcon,\n  EyeOffIcon,\n  LockIcon,\n  MicIcon,\n  MicOffIcon,\n  PauseIcon,\n  PlayIcon,\n  UnlockIcon,\n  Volume2Icon,\n  VolumeXIcon,\n} from \"lucide-react\"\n\n//  ------------------------------ | TOGGLE - ICON | ------------------------------  //\n\nexport function ToggleIcon() {\n  const [isPlaying, setIsPlaying] = useState(false)\n  const [isMuted, setIsMuted] = useState(false)\n  const [isMicMuted, setIsMicMuted] = useState(false)\n  const [isHidden, setIsHidden] = useState(false)\n  const [isLocked, setIsLocked] = useState(false)\n\n  return (\n    <div className=\"flex flex-wrap items-center gap-2\">\n      {/* Play / Pause Toggle */}\n      <Toggle\n        variant=\"outline\"\n        aria-label=\"Toggle playback\"\n        pressed={isPlaying}\n        onPressedChange={setIsPlaying}\n      >\n        {isPlaying ? <PauseIcon /> : <PlayIcon />}\n      </Toggle>\n\n      {/* Volume / Mute Toggle */}\n      <Toggle\n        variant=\"outline\"\n        aria-label=\"Toggle audio mute\"\n        pressed={isMuted}\n        onPressedChange={setIsMuted}\n      >\n        {isMuted ? <VolumeXIcon /> : <Volume2Icon />}\n      </Toggle>\n\n      {/* Mic / Mic Off Toggle */}\n      <Toggle\n        variant=\"outline\"\n        aria-label=\"Toggle microphone\"\n        pressed={isMicMuted}\n        onPressedChange={setIsMicMuted}\n      >\n        {isMicMuted ? <MicOffIcon /> : <MicIcon />}\n      </Toggle>\n\n      {/* Eye / Eye Off Toggle */}\n      <Toggle\n        aria-label=\"Toggle visibility\"\n        pressed={isHidden}\n        onPressedChange={setIsHidden}\n      >\n        {isHidden ? <EyeOffIcon /> : <EyeIcon />}\n      </Toggle>\n\n      {/* Lock / Unlock Toggle */}\n      <Toggle\n        aria-label=\"Toggle lock\"\n        pressed={isLocked}\n        onPressedChange={setIsLocked}\n      >\n        {isLocked ? <UnlockIcon /> : <LockIcon />}\n      </Toggle>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/toggle/toggle-icon.tsx"
+    }
+  ],
+  "categories": ["toggle"],
+  "type": "registry:ui"
+}

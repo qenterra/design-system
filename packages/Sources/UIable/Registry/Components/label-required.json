@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "label-required",
+  "title": "Label Required",
+  "description": "Label Required variant for component.",
+  "dependencies": ["lucide-react"],
+  "registryDependencies": ["@uiable/input", "@uiable/label", "@uiable/tooltip"],
+  "files": [
+    {
+      "path": "src/components/uiable/label/label-required.tsx",
+      "content": "// shadcn\nimport { Input } from \"@/components/ui/input\"\nimport { Label } from \"@/components/ui/label\"\nimport {\n  Tooltip,\n  TooltipContent,\n  TooltipTrigger,\n} from \"@/components/ui/tooltip\"\n\n// assets\nimport { InfoIcon } from \"lucide-react\"\n\n//  ------------------------------ | LABEL - REQUIRED | ------------------------------  //\n\nexport default function LabelRequired() {\n  return (\n    <div className=\"p-sm-8 flex w-full max-w-sm flex-col gap-2 rounded-lg border border-border bg-card p-5\">\n      <div className=\"flex items-center justify-between\">\n        <Label\n          htmlFor=\"email-required\"\n          className=\"cursor-pointer text-base font-medium\"\n        >\n          Email address{\" \"}\n          <span className=\"font-semibold text-destructive\">*</span>\n        </Label>\n        <Tooltip>\n          <TooltipTrigger\n            render={\n              <button\n                type=\"button\"\n                aria-label=\"Help\"\n                className=\"inline-flex size-4 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground focus:outline-none\"\n              />\n            }\n          >\n            <InfoIcon className=\"size-4\" />\n          </TooltipTrigger>\n          <TooltipContent side=\"top\">\n            <p>We will use this email for important security notifications.</p>\n          </TooltipContent>\n        </Tooltip>\n      </div>\n      <Input\n        id=\"email-required\"\n        type=\"email\"\n        placeholder=\"alex.smith@company.com\"\n        required\n      />\n      <p className=\"text-xs text-muted-foreground\">\n        Must be a valid corporate or personal email address.\n      </p>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/label/label-required.tsx"
+    }
+  ],
+  "categories": ["label"],
+  "type": "registry:ui"
+}

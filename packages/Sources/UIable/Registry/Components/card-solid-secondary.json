@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "card-solid-secondary",
+  "title": "Card Solid Secondary",
+  "description": "Card Solid Secondary variant for component.",
+  "registryDependencies": ["@uiable/card"],
+  "files": [
+    {
+      "path": "src/components/uiable/card/card-solid-secondary.tsx",
+      "content": "// shadcn\nimport { Card, CardContent, CardHeader, CardTitle } from \"@/components/ui/card\"\n\n//  ------------------------------ | CARD - SOLID SECONDARY | ------------------------------  //\n\nexport default function CardSolidSecondary() {\n  return (\n    <Card className=\"ring-secondary-500/20 overflow-hidden rounded-xl border-none bg-secondary text-white shadow-none ring-1\">\n      <CardHeader className=\"border-b border-white/10 p-4\">\n        <CardTitle className=\"text-base font-bold text-secondary-foreground\">\n          Header\n        </CardTitle>\n      </CardHeader>\n      <CardContent className=\"p-5\">\n        <CardTitle className=\"mb-2 text-lg font-bold text-secondary-foreground\">\n          Secondary card title\n        </CardTitle>\n        <p className=\"text-sm leading-relaxed text-secondary-foreground opacity-90\">\n          Some quick example text to build on the card title and make up the\n          bulk of the card's content.\n        </p>\n      </CardContent>\n    </Card>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/card/card-solid-secondary.tsx"
+    }
+  ],
+  "categories": ["card"],
+  "type": "registry:ui"
+}

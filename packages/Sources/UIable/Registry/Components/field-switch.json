@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "field-switch",
+  "title": "Field Switch",
+  "description": "Field Switch variant for component.",
+  "registryDependencies": ["@uiable/field", "@uiable/switch"],
+  "files": [
+    {
+      "path": "src/components/uiable/field/field-switch.tsx",
+      "content": "// shadcn\nimport { Field, FieldLabel } from \"@/components/ui/field\"\nimport { Switch } from \"@/components/ui/switch\"\n\n//  ------------------------------ | FIELD - SWITCH | ------------------------------  //\n\nexport default function FieldSwitch() {\n  return (\n    <Field orientation=\"horizontal\" className=\"w-fit\">\n      <FieldLabel htmlFor=\"2fa\">Multi-factor authentication</FieldLabel>\n      <Switch id=\"2fa\" />\n    </Field>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/field/field-switch.tsx"
+    }
+  ],
+  "categories": ["field"],
+  "type": "registry:ui"
+}

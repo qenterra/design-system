@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "popover-alignments",
+  "title": "Popover Alignments",
+  "description": "Popover Alignments variant for component.",
+  "registryDependencies": ["@uiable/button", "@uiable/popover"],
+  "files": [
+    {
+      "path": "src/components/uiable/popover/popover-alignments.tsx",
+      "content": "// shadcn\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Popover,\n  PopoverContent,\n  PopoverTrigger,\n} from \"@/components/ui/popover\"\n\n//  ------------------------------ | POPOVER - ALIGNMENTS | ------------------------------  //\n\nexport function PopoverAlignments() {\n  return (\n    <>\n      <div className=\"flex flex-wrap gap-6\">\n        <Popover>\n          <PopoverTrigger render={<Button size=\"sm\" />}>Start</PopoverTrigger>\n          <PopoverContent align=\"start\" className=\"w-28\">\n            Aligned to start\n          </PopoverContent>\n        </Popover>\n        <Popover>\n          <PopoverTrigger render={<Button size=\"sm\" />}>Center</PopoverTrigger>\n          <PopoverContent align=\"center\" className=\"w-30\">\n            Aligned to center\n          </PopoverContent>\n        </Popover>\n        <Popover>\n          <PopoverTrigger render={<Button size=\"sm\" />}>End</PopoverTrigger>\n          <PopoverContent align=\"end\" className=\"w-28\">\n            Aligned to end\n          </PopoverContent>\n        </Popover>\n      </div>\n    </>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/popover/popover-alignments.tsx"
+    }
+  ],
+  "categories": ["popover"],
+  "type": "registry:ui"
+}

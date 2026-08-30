@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "label-disabled",
+  "title": "Label Disabled",
+  "description": "Label Disabled variant for component.",
+  "registryDependencies": ["@uiable/badge", "@uiable/input", "@uiable/label"],
+  "files": [
+    {
+      "path": "src/components/uiable/label/label-disabled.tsx",
+      "content": "// shadcn\nimport { Badge } from \"@/components/ui/badge\"\nimport { Input } from \"@/components/ui/input\"\nimport { Label } from \"@/components/ui/label\"\n\n//  ------------------------------ | LABEL - DISABLED | ------------------------------  //\n\nexport default function LabelDisabled() {\n  return (\n    <div className=\"p-sm-8 flex w-full max-w-sm flex-col gap-6 rounded-lg border border-border p-5\">\n      <div className=\"flex flex-col gap-2\">\n        <Label\n          htmlFor=\"username-active\"\n          className=\"cursor-pointer text-base font-medium\"\n        >\n          Username\n        </Label>\n        <Input\n          id=\"username-active\"\n          type=\"text\"\n          placeholder=\"Enter your username\"\n          defaultValue=\"johndoe\"\n        />\n        <p className=\"text-xs text-muted-foreground\">\n          Your public display name on the platform.\n        </p>\n      </div>\n      <div className=\"group flex flex-col gap-2\" data-disabled=\"true\">\n        <div className=\"flex items-center justify-between\">\n          <Label\n            htmlFor=\"username-disabled\"\n            className=\"cursor-pointer text-base font-medium group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50\"\n          >\n            Organization ID\n          </Label>\n          <Badge variant=\"secondary\">Locked</Badge>\n        </div>\n        <Input\n          id=\"username-disabled\"\n          type=\"text\"\n          defaultValue=\"ORG-84920-X\"\n          disabled\n          className=\"peer\"\n        />\n        <p className=\"text-xs text-muted-foreground\">\n          Contact your workspace administrator to modify this field.\n        </p>\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/label/label-disabled.tsx"
+    }
+  ],
+  "categories": ["label"],
+  "type": "registry:ui"
+}

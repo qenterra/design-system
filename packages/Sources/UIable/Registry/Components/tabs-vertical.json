@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tabs-vertical",
+  "title": "Tabs Vertical",
+  "description": "Tabs Vertical variant for component.",
+  "registryDependencies": ["@uiable/tabs"],
+  "files": [
+    {
+      "path": "src/components/uiable/tabs/tabs-vertical.tsx",
+      "content": "// shadcn\nimport { Tabs, TabsList, TabsTrigger } from \"@/components/ui/tabs\"\n\n//  ------------------------------ | TABS - VERTICAL | ------------------------------  //\n\nexport function TabsVertical() {\n  return (\n    <Tabs defaultValue=\"account\" orientation=\"vertical\">\n      <TabsList>\n        <TabsTrigger value=\"account\">Account</TabsTrigger>\n        <TabsTrigger value=\"password\">Password</TabsTrigger>\n        <TabsTrigger value=\"notifications\">Notifications</TabsTrigger>\n      </TabsList>\n    </Tabs>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/tabs/tabs-vertical.tsx"
+    }
+  ],
+  "categories": ["tabs"],
+  "type": "registry:ui"
+}

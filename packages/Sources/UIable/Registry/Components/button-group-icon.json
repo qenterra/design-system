@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-group-icon",
+  "title": "Button Group Icon",
+  "description": "Button Group Icon variant for component.",
+  "dependencies": ["lucide-react"],
+  "registryDependencies": ["@uiable/button", "@uiable/button-group"],
+  "files": [
+    {
+      "path": "src/components/uiable/button-group/button-group-icon.tsx",
+      "content": "\"use client\"\n\nimport { useState } from \"react\"\n\n// shadcn\nimport { Button } from \"@/components/ui/button\"\nimport { ButtonGroup } from \"@/components/ui/button-group\"\n\n// assets\nimport { Grid, Grid2X2, Menu } from \"lucide-react\"\n\n//  ------------------------------ | BUTTON GROUP - ICON | ------------------------------  //\n\nexport default function ButtonGroupIcon() {\n  const [active, setActive] = useState<\"grid\" | \"menu\" | \"grid2x2\">(\"grid\")\n\n  return (\n    <ButtonGroup className=\"rounded-lg border border-border/50 p-0.5\">\n      <Button\n        variant=\"ghost\"\n        size=\"icon-lg\"\n        className={\n          active === \"grid\"\n            ? \"bg-primary/10 text-primary hover:bg-primary/15 hover:text-primary\"\n            : \"\"\n        }\n        onClick={() => setActive(\"grid\")}\n      >\n        <Grid />\n      </Button>\n      <Button\n        variant=\"ghost\"\n        size=\"icon-lg\"\n        className={\n          active === \"menu\"\n            ? \"bg-primary/10 text-primary hover:bg-primary/15 hover:text-primary\"\n            : \"\"\n        }\n        onClick={() => setActive(\"menu\")}\n      >\n        <Menu />\n      </Button>\n      <Button\n        variant=\"ghost\"\n        size=\"icon-lg\"\n        className={\n          active === \"grid2x2\"\n            ? \"bg-primary/10 text-primary hover:bg-primary/15 hover:text-primary\"\n            : \"\"\n        }\n        onClick={() => setActive(\"grid2x2\")}\n      >\n        <Grid2X2 />\n      </Button>\n    </ButtonGroup>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/button-group/button-group-icon.tsx"
+    }
+  ],
+  "categories": ["button-group"],
+  "type": "registry:ui"
+}

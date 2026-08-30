@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "list-group-flush",
+  "title": "List Group Flush",
+  "description": "List Group Flush variant for component.",
+  "files": [
+    {
+      "path": "src/components/uiable/list-group/list-group-flush.tsx",
+      "content": "//  ------------------------------ | LIST GROUP - FLUSH | ------------------------------  //\n\nexport default function ListGroupFlush() {\n  return (\n    <ul className=\"divide-border-border divide-y\">\n      <li className=\"px-6.25 py-4\">Cras justo odio</li>\n      <li className=\"px-6.25 py-4\">Dapibus ac facilisis in</li>\n      <li className=\"px-6.25 py-4\">Morbi leo risus</li>\n      <li className=\"px-6.25 py-4\">Porta ac consectetur ac</li>\n      <li className=\"px-6.25 py-4\">Vestibulum at eros</li>\n    </ul>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/list-group/list-group-flush.tsx"
+    }
+  ],
+  "categories": ["list-group"],
+  "type": "registry:ui"
+}

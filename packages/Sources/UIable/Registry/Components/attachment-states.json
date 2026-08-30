@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "attachment-states",
+  "title": "Attachment States",
+  "description": "Attachment States variant for component.",
+  "dependencies": ["lucide-react"],
+  "registryDependencies": ["@uiable/attachment"],
+  "files": [
+    {
+      "path": "src/components/uiable/attachment/attachment-states.tsx",
+      "content": "\"use client\"\n\n// shadcn\nimport {\n  Attachment,\n  AttachmentAction,\n  AttachmentActions,\n  AttachmentContent,\n  AttachmentDescription,\n  AttachmentMedia,\n  AttachmentTitle,\n} from \"@/components/ui/attachment\"\n\n// assets\nimport {\n  Check,\n  Clock,\n  FileText,\n  FileWarning,\n  LoaderCircle,\n  RefreshCw,\n  X,\n} from \"lucide-react\"\n\n//  ------------------------------ | ATTACHMENT - STATES | ------------------------------  //\n\nexport default function AttachmentStates() {\n  const staticItems = [\n    {\n      id: \"state-idle\",\n      name: \"selected-file.pdf\",\n      state: \"idle\" as const,\n      description: \"Ready to upload\",\n      icon: Clock,\n    },\n    {\n      id: \"state-uploading\",\n      name: \"design-system.zip\",\n      state: \"uploading\" as const,\n      description: \"Uploading · 64%\",\n      icon: LoaderCircle,\n    },\n    {\n      id: \"state-processing\",\n      name: \"market-research.pdf\",\n      state: \"processing\" as const,\n      description: \"Processing document\",\n      icon: FileText,\n    },\n    {\n      id: \"state-error\",\n      name: \"financial-model.xlsx\",\n      state: \"error\" as const,\n      description: \"Upload failed. Try again.\",\n      icon: FileWarning,\n    },\n    {\n      id: \"state-done\",\n      name: \"uploaded-report.pdf\",\n      state: \"done\" as const,\n      description: \"Uploaded · 1.8 MB\",\n      icon: Check,\n    },\n  ]\n\n  return (\n    <div className=\"mx-auto w-full max-w-sm py-12\">\n      <div className=\"flex w-full flex-col gap-2\">\n        {staticItems.map((item) => {\n          const Icon = item.icon\n          return (\n            <Attachment key={item.id} state={item.state} className=\"w-full\">\n              <AttachmentMedia>\n                {item.state === \"uploading\" ? (\n                  <Icon className=\"size-4 animate-spin\" />\n                ) : (\n                  <Icon className=\"size-4\" />\n                )}\n              </AttachmentMedia>\n              <AttachmentContent>\n                <AttachmentTitle>{item.name}</AttachmentTitle>\n                <AttachmentDescription>\n                  {item.description}\n                </AttachmentDescription>\n              </AttachmentContent>\n              <AttachmentActions>\n                {item.state === \"error\" && (\n                  <AttachmentAction aria-label=\"Retry upload\">\n                    <RefreshCw className=\"size-3 text-destructive\" />\n                  </AttachmentAction>\n                )}\n                <AttachmentAction aria-label=\"Remove attachment\">\n                  <X className=\"size-4\" />\n                </AttachmentAction>\n              </AttachmentActions>\n            </Attachment>\n          )\n        })}\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/attachment/attachment-states.tsx"
+    }
+  ],
+  "categories": ["attachment"],
+  "type": "registry:ui"
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input-fieldgroup",
+  "title": "Input Fieldgroup",
+  "description": "Input Fieldgroup variant for component.",
+  "registryDependencies": ["@uiable/button", "@uiable/field", "@uiable/input"],
+  "files": [
+    {
+      "path": "src/components/uiable/input/input-fieldgroup.tsx",
+      "content": "// shadcn\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Field,\n  FieldDescription,\n  FieldGroup,\n  FieldLabel,\n} from \"@/components/ui/field\"\nimport { Input } from \"@/components/ui/input\"\n\n//  ------------------------------ | INPUT - FIELDGROUP | ------------------------------  //\n\nexport function InputFieldgroup() {\n  return (\n    <FieldGroup>\n      <Field>\n        <FieldLabel htmlFor=\"fieldgroup-name\">Name</FieldLabel>\n        <Input id=\"fieldgroup-name\" placeholder=\"Jordan Lee\" />\n      </Field>\n      <Field>\n        <FieldLabel htmlFor=\"fieldgroup-email\">Email</FieldLabel>\n        <Input\n          id=\"fieldgroup-email\"\n          type=\"email\"\n          placeholder=\"name@example.com\"\n        />\n        <FieldDescription>We'll send updates to this address.</FieldDescription>\n      </Field>\n      <Field orientation=\"horizontal\">\n        <Button type=\"reset\" variant=\"outline\">\n          Reset\n        </Button>\n        <Button type=\"submit\">Submit</Button>\n      </Field>\n    </FieldGroup>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/input/input-fieldgroup.tsx"
+    }
+  ],
+  "categories": ["input"],
+  "type": "registry:ui"
+}

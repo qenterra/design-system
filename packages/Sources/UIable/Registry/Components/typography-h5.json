@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "typography-h5",
+  "title": "Typography H5",
+  "description": "Typography H5 variant for component.",
+  "files": [
+    {
+      "path": "src/components/uiable/typography/typography-h5.tsx",
+      "content": "//  ------------------------------ | TYPOGRAPHY - H5 | ------------------------------  //\n\nexport function TypographyH5() {\n  return (\n    <h5 className=\"scroll-m-20 text-lg font-semibold tracking-tight\">\n      Joke Tax Compliance\n    </h5>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/typography/typography-h5.tsx"
+    }
+  ],
+  "categories": ["typography"],
+  "type": "registry:ui"
+}

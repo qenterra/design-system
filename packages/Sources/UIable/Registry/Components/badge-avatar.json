@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "badge-avatar",
+  "title": "Badge Avatar",
+  "description": "Badge Avatar variant for component.",
+  "registryDependencies": ["@uiable/avatar", "@uiable/badge"],
+  "files": [
+    {
+      "path": "src/components/uiable/badge/badge-avatar.tsx",
+      "content": "// shadcn\nimport { Avatar, AvatarFallback, AvatarImage } from \"@/components/ui/avatar\"\nimport { Badge } from \"@/components/ui/badge\"\n\n//  ------------------------------ | BADGE - WITH AVATAR | ------------------------------  //\n\nexport function BadgeWithAvatar() {\n  return (\n    <div className=\"flex flex-wrap items-center gap-2\">\n      <Badge variant=\"secondary\" className=\"gap-1.5 py-0.5 pr-2.5 pl-1\">\n        <Avatar className=\"size-4\">\n          <AvatarImage\n            src=\"https://cdn.uiable.com/user/avatar-3.jpg\"\n            alt=\"Olivia Martin\"\n          />\n          <AvatarFallback className=\"text-[9px]\">OM</AvatarFallback>\n        </Avatar>\n        Olivia Martin\n      </Badge>\n      <Badge variant=\"outline\" className=\"gap-1.5 py-0.5 pr-2.5 pl-1\">\n        <Avatar className=\"size-4\">\n          <AvatarImage\n            src=\"https://cdn.uiable.com/user/avatar-5.jpg\"\n            alt=\"Alex Rivera\"\n          />\n          <AvatarFallback className=\"text-[9px]\">AR</AvatarFallback>\n        </Avatar>\n        Alex Rivera\n      </Badge>\n      <Badge variant=\"default\" className=\"gap-1.5 py-0.5 pr-2.5 pl-1\">\n        <Avatar className=\"size-4\">\n          <AvatarFallback className=\"bg-primary-foreground/20 text-[9px] text-white\">\n            JD\n          </AvatarFallback>\n        </Avatar>\n        John Doe\n      </Badge>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/badge/badge-avatar.tsx"
+    }
+  ],
+  "categories": ["badge"],
+  "type": "registry:ui"
+}

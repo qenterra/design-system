@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input-otp-filled",
+  "title": "Input Otp Filled",
+  "description": "Input Otp Filled variant for component.",
+  "registryDependencies": ["@uiable/input-otp"],
+  "files": [
+    {
+      "path": "src/components/uiable/input-otp/input-otp-filled.tsx",
+      "content": "\"use client\"\n\nimport { useState } from \"react\"\n\n// shadcn\nimport {\n  InputOTP,\n  InputOTPGroup,\n  InputOTPSlot,\n} from \"@/components/ui/input-otp\"\n\n//  ------------------------------ | INPUT OTP - FILLED | ------------------------------  //\n\nexport function InputOTPFilled() {\n  const [value, setValue] = useState(\"\")\n\n  return (\n    <div className=\"flex flex-col items-center gap-4\">\n      <InputOTP maxLength={6} value={value} onChange={(val) => setValue(val)}>\n        <InputOTPGroup className=\"gap-2\">\n          {[0, 1, 2, 3, 4, 5].map((i) => (\n            <InputOTPSlot\n              key={i}\n              index={i}\n              className=\"rounded-md !border-0 bg-muted shadow-none focus-within:ring-2 focus-within:ring-primary/60 data-[active=true]:ring-2 data-[active=true]:ring-primary dark:bg-background\"\n            />\n          ))}\n        </InputOTPGroup>\n      </InputOTP>\n\n      <p className=\"text-sm text-muted-foreground\">\n        {value.length === 6 ? \"✓ Code complete\" : \"Enter your 6-digit code\"}\n      </p>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/input-otp/input-otp-filled.tsx"
+    }
+  ],
+  "categories": ["input-otp"],
+  "type": "registry:ui"
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "popover-basic",
+  "title": "Popover Basic",
+  "description": "Popover Basic variant for component.",
+  "registryDependencies": ["@uiable/button", "@uiable/popover"],
+  "files": [
+    {
+      "path": "src/components/uiable/popover/popover-basic.tsx",
+      "content": "// shadcn\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Popover,\n  PopoverContent,\n  PopoverDescription,\n  PopoverHeader,\n  PopoverTitle,\n  PopoverTrigger,\n} from \"@/components/ui/popover\"\n\n//  ------------------------------ | POPOVER - BASIC | ------------------------------  //\n\nexport function PopoverBasic() {\n  return (\n    <>\n      <Popover>\n        <PopoverTrigger render={<Button className=\"w-fit\" />}>\n          Open Popover\n        </PopoverTrigger>\n        <PopoverContent align=\"start\">\n          <PopoverHeader>\n            <PopoverTitle className=\"h5\">Dimensions</PopoverTitle>\n            <PopoverDescription>\n              Set the dimensions for the layer.\n            </PopoverDescription>\n          </PopoverHeader>\n        </PopoverContent>\n      </Popover>\n    </>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/popover/popover-basic.tsx"
+    }
+  ],
+  "categories": ["popover"],
+  "type": "registry:ui"
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "date-picker-dob",
+  "title": "Date Picker Dob",
+  "description": "Date Picker Dob variant for component.",
+  "registryDependencies": ["@uiable/button", "@uiable/calendar", "@uiable/field", "@uiable/popover"],
+  "files": [
+    {
+      "path": "src/components/uiable/date-picker/date-picker-dob.tsx",
+      "content": "\"use client\"\n\nimport { useState } from \"react\"\n\n// shadcn\nimport { Button } from \"@/components/ui/button\"\nimport { Calendar } from \"@/components/ui/calendar\"\nimport { Field, FieldLabel } from \"@/components/ui/field\"\nimport {\n  Popover,\n  PopoverContent,\n  PopoverTrigger,\n} from \"@/components/ui/popover\"\n\n//  ------------------------------ | DATE PICKER - DOB | ------------------------------  //\n\nexport function DatePickerSimple() {\n  const [open, setOpen] = useState(false)\n  const [date, setDate] = useState<Date | undefined>(undefined)\n\n  return (\n    <Field className=\"mx-auto w-44\">\n      <FieldLabel htmlFor=\"date\">Date of birth</FieldLabel>\n      <Popover open={open} onOpenChange={setOpen}>\n        <PopoverTrigger\n          render={\n            <Button id=\"date\" className=\"block justify-start font-normal\" />\n          }\n        >\n          {date ? date.toLocaleDateString() : \"Select date\"}\n        </PopoverTrigger>\n        <PopoverContent className=\"w-auto overflow-hidden p-0\" align=\"start\">\n          <Calendar\n            mode=\"single\"\n            selected={date}\n            defaultMonth={date}\n            captionLayout=\"dropdown\"\n            onSelect={(date) => {\n              setDate(date)\n              setOpen(false)\n            }}\n          />\n        </PopoverContent>\n      </Popover>\n    </Field>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/uiable/date-picker/date-picker-dob.tsx"
+    }
+  ],
+  "categories": ["date-picker"],
+  "type": "registry:ui"
+}
