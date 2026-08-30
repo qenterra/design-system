@@ -18,6 +18,25 @@ class SourceCatalogVerifierTests(unittest.TestCase):
         spec.loader.exec_module(module)
         self.assertEqual(module.validate_catalogs(ROOT / "packages"), [])
 
+    def test_shadcn_ui_catalog_is_part_of_the_public_verifier(self) -> None:
+        self.assertTrue(
+            (ROOT / "packages/Sources/ShadcnUI/manifest.json").is_file(),
+            "the exact shadcn/ui catalog is missing",
+        )
+        content = VERIFIER.read_text(encoding="utf-8")
+        self.assertIn("Sources/ShadcnUI/manifest.json", content)
+        self.assertIn("Sources/ShadcnUI/Components/", content)
+
+    def test_magic_ui_catalog_is_part_of_the_public_verifier(self) -> None:
+        self.assertTrue(
+            (ROOT / "packages/Sources/MagicUI/manifest.json").is_file(),
+            "the exact Magic UI catalog is missing",
+        )
+        content = VERIFIER.read_text(encoding="utf-8")
+        self.assertIn("Sources/MagicUI/manifest.json", content)
+        self.assertIn("Sources/MagicUI/Components/", content)
+        self.assertIn("Sources/MagicUI/Registry/", content)
+
 
 if __name__ == "__main__":
     unittest.main()

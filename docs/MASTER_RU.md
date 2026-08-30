@@ -1,6 +1,6 @@
 # Design System
 
-Версия 5.1.0 · Нормативный справочник для людей и AI-агентов
+Версия 5.3.0 · Нормативный справочник для людей и AI-агентов
 
 ## 0. Как пользоваться этим файлом
 
@@ -485,7 +485,7 @@ SwiftPM — продукты `QenTerraDesignTokens` и `QenTerraComponents`. Pro
 точного release manifest, полного gate и разрешения чистыми consumer-проектами.
 Релиз адаптеров не доказывает нативную отрисовку или приёмку доступности продукта.
 
-Нативное публичное дерево намеренно разделено на две зоны. `Sources/QenTerra/`
+Публичное дерево исходников намеренно разделено на четыре зоны. `Sources/QenTerra/`
 содержит устанавливаемые токенизированные targets `QenTerraDesignTokens` и
 `QenTerraComponents`. `Sources/ExploreSwiftUI/` хранит точный атрибутированный
 исходный код каждой detail page из sitemap Explore SwiftUI и не является SwiftPM-target.
@@ -496,6 +496,31 @@ SwiftPM — продукты `QenTerraDesignTokens` и `QenTerraComponents`. Pro
 оригинала и до stable-статуса обязана получить семантические токены, тесты,
 статус доставки, версию и changelog. `sync --check` доказывает актуальность относительно
 живого сайта; offline gate доказывает только целостность сохранённого snapshot.
+
+`Sources/ShadcnUI/` — второй неизменяемый справочный каталог, также
+исключённый из package targets. Он хранит каждый исходный файл,
+объявленный как `registry:ui` во всех официальных upstream-базах, с
+разделением на React Aria, Base UI и Radix UI. Manifest фиксирует public upstream
+commit, оригинальные path и URL, byte count, SHA-256, точную MIT-лицензию и
+copyright shadcn. Код сайта, CLI, тесты, examples, blocks, generated styles и
+внутренние файлы приложения не входят в границу. `scripts/shadcn_ui.py sync
+--write` может заменять оригиналы только из официального репозитория.
+Любая токенизированная адаптация QenTerra становится новым сопровождаемым
+компонентом; vendored-оригинал никогда не редактируется на месте.
+
+`Sources/MagicUI/` — третий неизменяемый референсный каталог,
+также исключённый из package targets. Его граница — каждая запись
+официальной публичной страницы Components и docs navigation на одном
+зафиксированном upstream commit. Каждый точный `.tsx`-исходник хранится
+вместе с точным shadcn-compatible registry JSON, потому что dependencies,
+CSS variables и keyframes могут быть только в этом install payload. Manifest
+фиксирует оба файла, их оригинальные path и URL, byte count, SHA-256,
+точную MIT-лицензию и `Copyright (c) Magic UI`. Templates, demos, текст docs,
+внутренний код сайта и registry sources, которых нет на публичной странице,
+исключены. `scripts/magic_ui.py sync --write` может заменять оригиналы
+только из официального репозитория. Любая QenTerra-адаптация становится
+отдельным сопровождаемым компонентом; vendored source и registry item
+никогда не редактируются на месте.
 
 ## 19. Протокол AI-реализации
 
@@ -527,7 +552,7 @@ AI запрещено восстанавливать текущий интерф
 1. Прочитайте `AGENTS.md`, этот файл, затронутые токены и доказательства продукта.
 2. Добавьте или обновите ADR для нормативного изменения.
 3. Меняйте канонические токены, реестры, схемы, документацию, шаблоны или фасады пакетов.
-4. Для изменений Explore SwiftUI запустите `python3 scripts/explore_swiftui.py sync --write`; затем при изменении generated/public outputs запустите `python3 scripts/generate.py write` и `python3 scripts/build_public_packages.py write`.
+4. Для изменений Explore SwiftUI запустите `python3 scripts/explore_swiftui.py sync --write`; для Magic UI — `python3 scripts/magic_ui.py sync --write`; для shadcn/ui — `python3 scripts/shadcn_ui.py sync --write`; затем при изменении generated/public outputs запустите `python3 scripts/generate.py write` и `python3 scripts/build_public_packages.py write`.
 5. Запустите `python3 scripts/verify.py`.
 6. Проверьте npm-архив, Swift-продукты и затронутый consumer в нужных темах и ограничениях.
 7. Обновите changelog и версию.

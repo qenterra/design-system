@@ -33,8 +33,10 @@ class RegistryContractTests(unittest.TestCase):
             "registry/components.json",
             "registry/icons.json",
             "registry/native-patterns.json",
+            "registry/magic-ui.json",
             "registry/packages.json",
             "registry/qenterra-components.json",
+            "registry/shadcn-ui.json",
         ):
             with self.subTest(relative=relative):
                 self.assertEqual(load(relative)["version"], VERSION)
@@ -95,6 +97,14 @@ class RegistryContractTests(unittest.TestCase):
             (
                 "registry/qenterra-components.json",
                 "schemas/qenterra-component-registry.schema.json",
+            ),
+            (
+                "registry/magic-ui.json",
+                "schemas/magic-ui-registry.schema.json",
+            ),
+            (
+                "registry/shadcn-ui.json",
+                "schemas/shadcn-ui-registry.schema.json",
             ),
         ):
             with self.subTest(registry=registry_relative):

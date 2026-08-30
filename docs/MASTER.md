@@ -1,6 +1,6 @@
 # Design System
 
-Version 5.1.0 · Normative reference for humans and AI agents
+Version 5.3.0 · Normative reference for humans and AI agents
 
 ## 0. How to use this file
 
@@ -822,7 +822,7 @@ manifest, the full verification gate, and clean consumer resolution. A package
 release proves adapter availability, not native rendering or accessibility
 acceptance in a product.
 
-The native public tree has two deliberately separate zones. `Sources/QenTerra/`
+The public source tree has four deliberately separate zones. `Sources/QenTerra/`
 contains the installable, tokenized `QenTerraDesignTokens` and
 `QenTerraComponents` targets. `Sources/ExploreSwiftUI/` contains exact attributed
 source from every Explore SwiftUI sitemap detail page and is not a SwiftPM target.
@@ -833,6 +833,28 @@ manifest and checks every byte and hash. An adaptation starts through
 original ID and hash, and must adopt semantic tokens, tests, delivery status,
 versioning, and changelog coverage before it becomes stable. `sync --check` is
 live-currentness evidence; the offline gate proves only the stored snapshot.
+
+`Sources/ShadcnUI/` is a second immutable reference catalog, also excluded from
+package targets. It preserves every source file declared as `registry:ui` by every
+official upstream base, grouped by React Aria, Base UI, and Radix UI. The pinned
+public upstream commit, original path and URL, byte count, SHA-256, exact MIT
+license, and shadcn copyright notice are manifest-locked. Site code, CLI code,
+tests, examples, blocks, generated styles, and internal application files are out
+of scope. `scripts/shadcn_ui.py sync --write` may replace originals only from the
+official repository. Any QenTerra token adaptation is a new maintained component;
+the vendored original is never edited in place.
+
+`Sources/MagicUI/` is a third immutable reference catalog, also excluded from
+package targets. Its boundary is every entry listed by the official public
+Components page and docs navigation at one pinned upstream commit. Each exact
+`.tsx` source is paired with its exact shadcn-compatible registry JSON because
+dependencies, CSS variables, and keyframes may exist only in that install payload.
+The manifest locks both files, original paths and URLs, byte counts, SHA-256,
+the exact MIT license, and `Copyright (c) Magic UI`. Templates, demos, docs prose,
+site internals, and registry sources absent from the public page are excluded.
+`scripts/magic_ui.py sync --write` may replace originals only from the official
+repository. Any QenTerra token adaptation is a separate maintained component;
+neither the vendored source nor its registry item is edited in place.
 
 ## 19. AI implementation protocol
 
@@ -873,7 +895,7 @@ To update the design system:
 1. Read `AGENTS.md`, this file, affected token files, and relevant product evidence.
 2. Add or update an ADR in `docs/decisions/` for a normative change.
 3. Change canonical tokens, registries, schemas, documentation, templates, or package facades.
-4. For Explore SwiftUI changes run `python3 scripts/explore_swiftui.py sync --write`; then run `python3 scripts/generate.py write` and `python3 scripts/build_public_packages.py write` when generated/public outputs change.
+4. For Explore SwiftUI changes run `python3 scripts/explore_swiftui.py sync --write`; for Magic UI changes run `python3 scripts/magic_ui.py sync --write`; for shadcn/ui changes run `python3 scripts/shadcn_ui.py sync --write`; then run `python3 scripts/generate.py write` and `python3 scripts/build_public_packages.py write` when generated/public outputs change.
 5. Run `python3 scripts/verify.py`.
 6. Inspect the npm tarball, Swift products, and the affected consumer at the relevant appearances and constraints.
 7. Update `CHANGELOG.md` and version according to change type.

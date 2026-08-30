@@ -1,0 +1,11 @@
+{
+  "name": "sparkles-text",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "registry/magicui/sparkles-text.tsx",
+      "type": "registry:ui",
+      "content": "export function SparklesText() {\n  return <span>sparkles</span>\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+export const ui = [
+  {
+    name: "button",
+    type: "registry:ui",
+    files: [{ path: "ui/button.tsx", type: "registry:ui" }],
+  },
+]

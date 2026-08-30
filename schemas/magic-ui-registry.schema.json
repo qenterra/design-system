@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://qenterra.local/schemas/magic-ui-registry.schema.json",
+  "title": "Magic UI exact-source registry",
+  "type": "object",
+  "required": ["$schema", "version", "source", "upstreamRepository", "upstreamRef", "upstreamCommit", "scope", "count", "sourceFileCount", "registryItemCount", "fileCount", "categories", "license", "components"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "source": {"const": "https://magicui.design/docs/components"},
+    "upstreamRepository": {"const": "https://github.com/magicuidesign/magicui"},
+    "upstreamRef": {"const": "refs/heads/main"},
+    "upstreamCommit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "scope": {"const": "every component listed on the official public Components page"},
+    "count": {"type": "integer", "minimum": 1},
+    "sourceFileCount": {"type": "integer", "minimum": 1},
+    "registryItemCount": {"type": "integer", "minimum": 1},
+    "fileCount": {"type": "integer", "minimum": 2},
+    "categories": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["identifier", "title", "count"],
+        "properties": {
+          "identifier": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+          "title": {"type": "string", "minLength": 1},
+          "count": {"type": "integer", "minimum": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "license": {
+      "type": "object",
+      "required": ["spdx", "copyright", "upstreamPath", "sourceURL", "sourcePath", "sha256", "bytes"],
+      "properties": {
+        "spdx": {"const": "MIT"},
+        "copyright": {"const": "Copyright (c) Magic UI"},
+        "upstreamPath": {"const": "LICENSE.md"},
+        "sourceURL": {"type": "string", "pattern": "^https://github\\.com/magicuidesign/magicui/blob/[0-9a-f]{40}/LICENSE\\.md$"},
+        "sourcePath": {"const": "Sources/MagicUI/LICENSE.md"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "bytes": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "components": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "title", "category", "categoryTitle", "language", "documentationURL", "upstreamPath", "sourceURL", "sourcePath", "sha256", "bytes", "dependencies", "registryDependencies", "registryItem"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+          "name": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+          "title": {"type": "string", "minLength": 1},
+          "category": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+          "categoryTitle": {"type": "string", "minLength": 1},
+          "language": {"const": "TypeScript TSX"},
+          "documentationURL": {"type": "string", "pattern": "^https://magicui\\.design/docs/components/[a-z0-9-]+$"},
+          "upstreamPath": {"type": "string", "pattern": "^apps/www/registry/magicui/[a-z0-9-]+\\.tsx$"},
+          "sourceURL": {"type": "string", "pattern": "^https://raw\\.githubusercontent\\.com/magicuidesign/magicui/[0-9a-f]{40}/apps/www/registry/magicui/[a-z0-9-]+\\.tsx$"},
+          "sourcePath": {"type": "string", "pattern": "^Sources/MagicUI/Components/[a-z0-9-]+\\.tsx$"},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "bytes": {"type": "integer", "minimum": 1},
+          "dependencies": {
+            "type": "array",
+            "items": {"type": "string", "minLength": 1}
+          },
+          "registryDependencies": {
+            "type": "array",
+            "items": {"type": "string", "minLength": 1}
+          },
+          "registryItem": {
+            "type": "object",
+            "required": ["upstreamPath", "sourceURL", "sourcePath", "sha256", "bytes"],
+            "properties": {
+              "upstreamPath": {"type": "string", "pattern": "^apps/www/public/r/[a-z0-9-]+\\.json$"},
+              "sourceURL": {"type": "string", "pattern": "^https://raw\\.githubusercontent\\.com/magicuidesign/magicui/[0-9a-f]{40}/apps/www/public/r/[a-z0-9-]+\\.json$"},
+              "sourcePath": {"type": "string", "pattern": "^Sources/MagicUI/Registry/[a-z0-9-]+\\.json$"},
+              "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+              "bytes": {"type": "integer", "minimum": 1}
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

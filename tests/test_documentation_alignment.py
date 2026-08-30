@@ -24,6 +24,8 @@ class DocumentationAlignmentTests(unittest.TestCase):
                 self.assertIn("@qenterra/design-tokens", text)
                 self.assertIn("QenTerraDesignTokens", text)
                 self.assertIn("QenTerraComponents", text)
+                self.assertIn("Sources/ShadcnUI/", text)
+                self.assertIn("scripts/shadcn_ui.py", text)
 
 
 if __name__ == "__main__":

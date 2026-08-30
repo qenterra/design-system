@@ -18,6 +18,39 @@
 - Made public-package verification reject caches, AI or agent operating files, skills, MCP configuration, undeclared files, and incomplete source-to-artifact manifests.
 - Made the exported verifier rebuild declared artifacts in an external temporary directory and reject synchronized output-and-manifest tampering.
 
+## 5.3.0
+
+### Added
+
+- Added all 76 components on the official Magic UI Components page as exact immutable TypeScript source files.
+- Preserved each component's exact official shadcn-compatible registry payload so dependencies, CSS variables, and keyframes remain available alongside the source.
+- Added pinned upstream paths and URLs, byte counts, SHA-256 hashes, eight public categories, deterministic live synchronization, a private schema and registry, scheduled currentness checks, and closed public release coverage.
+- Bundled the exact upstream MIT license with `Copyright (c) Magic UI` and recorded authorship in public third-party notices.
+
+### Changed
+
+- Kept Magic UI originals outside npm and SwiftPM targets. Tokenized or otherwise modified implementations must be separate maintained QenTerra components; source and registry originals remain unchanged.
+
+### Security
+
+- Made private and exported verification reject missing, undeclared, resized, hash-modified, unpinned, category-drifted, license-drifted, or source/registry-mismatched Magic UI files.
+
+## 5.2.0
+
+### Added
+
+- Added all 182 official shadcn/ui `registry:ui` source files across the React Aria, Base UI, and Radix UI bases as a separate immutable reference catalog.
+- Added deterministic upstream synchronization, a private schema and registry, a public manifest, pinned upstream paths and URLs, byte counts, SHA-256 hashes, and scheduled currentness checks.
+- Bundled the exact upstream MIT license with `Copyright (c) 2023 shadcn` and documented authorship in the public third-party notices.
+
+### Changed
+
+- Kept shadcn/ui originals outside npm and SwiftPM targets. Tokenized or otherwise modified implementations must be separate maintained QenTerra components; originals remain unchanged.
+
+### Security
+
+- Made private and exported verification reject missing, undeclared, resized, hash-modified, or license-drifted shadcn/ui catalog files.
+
 ## 5.1.0
 
 ### Added

@@ -1,0 +1,1899 @@
+{
+  "$schema": "../schemas/magic-ui-registry.schema.json",
+  "version": "5.3.0",
+  "source": "https://magicui.design/docs/components",
+  "upstreamRepository": "https://github.com/magicuidesign/magicui",
+  "upstreamRef": "refs/heads/main",
+  "upstreamCommit": "2d671cc6c0e0f40e28682c9cbddd16694dcfe627",
+  "scope": "every component listed on the official public Components page",
+  "count": 76,
+  "sourceFileCount": 76,
+  "registryItemCount": 76,
+  "fileCount": 152,
+  "categories": [
+    {
+      "identifier": "components",
+      "title": "Components",
+      "count": 16
+    },
+    {
+      "identifier": "special-effects",
+      "title": "Special Effects",
+      "count": 9
+    },
+    {
+      "identifier": "animations",
+      "title": "Animations",
+      "count": 1
+    },
+    {
+      "identifier": "text-animations",
+      "title": "Text Animations",
+      "count": 18
+    },
+    {
+      "identifier": "device-mocks",
+      "title": "Device Mocks",
+      "count": 3
+    },
+    {
+      "identifier": "buttons",
+      "title": "Buttons",
+      "count": 3
+    },
+    {
+      "identifier": "backgrounds",
+      "title": "Backgrounds",
+      "count": 11
+    },
+    {
+      "identifier": "community",
+      "title": "Community",
+      "count": 15
+    }
+  ],
+  "license": {
+    "spdx": "MIT",
+    "copyright": "Copyright (c) Magic UI",
+    "upstreamPath": "LICENSE.md",
+    "sourceURL": "https://github.com/magicuidesign/magicui/blob/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/LICENSE.md",
+    "sourcePath": "Sources/MagicUI/LICENSE.md",
+    "sha256": "0147b84235ed916b8b4e89c1f80655351c5afe7d211b629be61f553a227b34ba",
+    "bytes": 1060
+  },
+  "components": [
+    {
+      "id": "android",
+      "name": "android",
+      "title": "Android",
+      "category": "device-mocks",
+      "categoryTitle": "Device Mocks",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/android",
+      "upstreamPath": "apps/www/registry/magicui/android.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/android.tsx",
+      "sourcePath": "Sources/MagicUI/Components/android.tsx",
+      "sha256": "9235d2e9204078c65ff8077bf8adc6b3ed4b12c55a8354345faa8f8abbddb5cf",
+      "bytes": 2860,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/android.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/android.json",
+        "sourcePath": "Sources/MagicUI/Registry/android.json",
+        "sha256": "8740bfc1757a42d7ed9fa89e9ae1b85faeb9bf95081dd45ebd63a7f8eb441b7f",
+        "bytes": 3350
+      }
+    },
+    {
+      "id": "animated-beam",
+      "name": "animated-beam",
+      "title": "Animated Beam",
+      "category": "special-effects",
+      "categoryTitle": "Special Effects",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/animated-beam",
+      "upstreamPath": "apps/www/registry/magicui/animated-beam.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/animated-beam.tsx",
+      "sourcePath": "Sources/MagicUI/Components/animated-beam.tsx",
+      "sha256": "6afa2ee1d01694a428eb8517d48deebe5c6b532dc0ee871800bb9d92aae43e79",
+      "bytes": 4986,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/animated-beam.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/animated-beam.json",
+        "sourcePath": "Sources/MagicUI/Registry/animated-beam.json",
+        "sha256": "4b68e61eb2cfa71bbf4bff6ea50665be6e04dd9168f40b86de13a406eb49fcef",
+        "bytes": 5705
+      }
+    },
+    {
+      "id": "animated-circular-progress-bar",
+      "name": "animated-circular-progress-bar",
+      "title": "Animated Circular Progress Bar",
+      "category": "community",
+      "categoryTitle": "Community",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/animated-circular-progress-bar",
+      "upstreamPath": "apps/www/registry/magicui/animated-circular-progress-bar.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/animated-circular-progress-bar.tsx",
+      "sourcePath": "Sources/MagicUI/Components/animated-circular-progress-bar.tsx",
+      "sha256": "c7f974283804607484afba34a5886af027cb58528a1987f392c35a577a77a782",
+      "bytes": 3524,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/animated-circular-progress-bar.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/animated-circular-progress-bar.json",
+        "sourcePath": "Sources/MagicUI/Registry/animated-circular-progress-bar.json",
+        "sha256": "604443ef02973dfc2ab2838a065ffa532e5b26b9827a816b1370bdfe2203c33d",
+        "bytes": 4188
+      }
+    },
+    {
+      "id": "animated-gradient-text",
+      "name": "animated-gradient-text",
+      "title": "Animated Gradient Text",
+      "category": "text-animations",
+      "categoryTitle": "Text Animations",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/animated-gradient-text",
+      "upstreamPath": "apps/www/registry/magicui/animated-gradient-text.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/animated-gradient-text.tsx",
+      "sourcePath": "Sources/MagicUI/Components/animated-gradient-text.tsx",
+      "sha256": "e5f0b81be1a9dc707199c2fd10c588bde872c72a02e2eb6d195d080112a34692",
+      "bytes": 871,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/animated-gradient-text.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/animated-gradient-text.json",
+        "sourcePath": "Sources/MagicUI/Registry/animated-gradient-text.json",
+        "sha256": "7ad5ffebc064485fdfec12b2fc365cfc30fce09518e52301090475c899c4b0e1",
+        "bytes": 1549
+      }
+    },
+    {
+      "id": "animated-grid-pattern",
+      "name": "animated-grid-pattern",
+      "title": "Animated Grid Pattern",
+      "category": "backgrounds",
+      "categoryTitle": "Backgrounds",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/animated-grid-pattern",
+      "upstreamPath": "apps/www/registry/magicui/animated-grid-pattern.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/animated-grid-pattern.tsx",
+      "sourcePath": "Sources/MagicUI/Components/animated-grid-pattern.tsx",
+      "sha256": "fda051f51f5b805983beb855633e05bfcbf17a4b94a2459e5352d8bd624f618a",
+      "bytes": 4410,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/animated-grid-pattern.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/animated-grid-pattern.json",
+        "sourcePath": "Sources/MagicUI/Registry/animated-grid-pattern.json",
+        "sha256": "c5d5798b1fee16a64ceb3c9756a47bb5ddb9948e3d89fd4868b11b02d1fea410",
+        "bytes": 5066
+      }
+    },
+    {
+      "id": "animated-list",
+      "name": "animated-list",
+      "title": "Animated List",
+      "category": "components",
+      "categoryTitle": "Components",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/animated-list",
+      "upstreamPath": "apps/www/registry/magicui/animated-list.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/animated-list.tsx",
+      "sourcePath": "Sources/MagicUI/Components/animated-list.tsx",
+      "sha256": "9363c5afa61d7aab1919b4500f7325cc8871b35103d5dd60a2a1625fe5e7dc58",
+      "bytes": 2036,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/animated-list.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/animated-list.json",
+        "sourcePath": "Sources/MagicUI/Registry/animated-list.json",
+        "sha256": "a95ae266e0eda12b8230724c690818a434d22bad0a2093a8197417cc997d298b",
+        "bytes": 2586
+      }
+    },
+    {
+      "id": "animated-shiny-text",
+      "name": "animated-shiny-text",
+      "title": "Animated Shiny Text",
+      "category": "text-animations",
+      "categoryTitle": "Text Animations",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/animated-shiny-text",
+      "upstreamPath": "apps/www/registry/magicui/animated-shiny-text.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/animated-shiny-text.tsx",
+      "sourcePath": "Sources/MagicUI/Components/animated-shiny-text.tsx",
+      "sha256": "3743a0a0b4894840a96bacd839e493872bac484a940684f91fd23a1784c00fbb",
+      "bytes": 999,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/animated-shiny-text.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/animated-shiny-text.json",
+        "sourcePath": "Sources/MagicUI/Registry/animated-shiny-text.json",
+        "sha256": "f8f3bf18fc6a4e18dd28c301e9706a2791407f4ae7e236ea53aa9852aa635e91",
+        "bytes": 1799
+      }
+    },
+    {
+      "id": "animated-theme-toggler",
+      "name": "animated-theme-toggler",
+      "title": "Animated Theme Toggler",
+      "category": "special-effects",
+      "categoryTitle": "Special Effects",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/animated-theme-toggler",
+      "upstreamPath": "apps/www/registry/magicui/animated-theme-toggler.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/animated-theme-toggler.tsx",
+      "sourcePath": "Sources/MagicUI/Components/animated-theme-toggler.tsx",
+      "sha256": "5d09afdb5968e9f7f3967943c27103d727f264fdd51fa14b10a4b3130a1970a8",
+      "bytes": 10208,
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/animated-theme-toggler.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/animated-theme-toggler.json",
+        "sourcePath": "Sources/MagicUI/Registry/animated-theme-toggler.json",
+        "sha256": "aa4d81aaec9c7c6c1a5644647bb6cfbb9de697597e0c9082c305b26f18a79973",
+        "bytes": 11290
+      }
+    },
+    {
+      "id": "aurora-text",
+      "name": "aurora-text",
+      "title": "Aurora Text",
+      "category": "text-animations",
+      "categoryTitle": "Text Animations",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/aurora-text",
+      "upstreamPath": "apps/www/registry/magicui/aurora-text.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/aurora-text.tsx",
+      "sourcePath": "Sources/MagicUI/Components/aurora-text.tsx",
+      "sha256": "c7bd0b72a093084a881416975249c507ddd715249ac5832a9161538eeef29927",
+      "bytes": 1008,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/aurora-text.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/aurora-text.json",
+        "sourcePath": "Sources/MagicUI/Registry/aurora-text.json",
+        "sha256": "22a3f272cb03dfa7803edc726cdd6a90ad51aa848e0d79b806bc6d5a341dae0b",
+        "bytes": 2126
+      }
+    },
+    {
+      "id": "avatar-circles",
+      "name": "avatar-circles",
+      "title": "Avatar Circles",
+      "category": "components",
+      "categoryTitle": "Components",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/avatar-circles",
+      "upstreamPath": "apps/www/registry/magicui/avatar-circles.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/avatar-circles.tsx",
+      "sourcePath": "Sources/MagicUI/Components/avatar-circles.tsx",
+      "sha256": "e0900fa87df8042ad4f98d1ec8168b1504b207eb0211ed19b1ba079d1f9741dd",
+      "bytes": 1214,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/avatar-circles.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/avatar-circles.json",
+        "sourcePath": "Sources/MagicUI/Registry/avatar-circles.json",
+        "sha256": "806888af495955061c6389046a4aedb2d14405116b2441ff2c03a4e4fb50c304",
+        "bytes": 1611
+      }
+    },
+    {
+      "id": "backlight",
+      "name": "backlight",
+      "title": "Backlight",
+      "category": "community",
+      "categoryTitle": "Community",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/backlight",
+      "upstreamPath": "apps/www/registry/magicui/backlight.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/backlight.tsx",
+      "sourcePath": "Sources/MagicUI/Components/backlight.tsx",
+      "sha256": "d302fbcbfa80f42cf59f3ffbf4451627f6a79d9206d6e3bc1fb3f65511515108",
+      "bytes": 867,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/backlight.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/backlight.json",
+        "sourcePath": "Sources/MagicUI/Registry/backlight.json",
+        "sha256": "e2e48a5ee95aa73a8216e23d9a7fba9aa2df7eb07029512832450df834f98aa0",
+        "bytes": 1291
+      }
+    },
+    {
+      "id": "bento-grid",
+      "name": "bento-grid",
+      "title": "Bento Grid",
+      "category": "components",
+      "categoryTitle": "Components",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/bento-grid",
+      "upstreamPath": "apps/www/registry/magicui/bento-grid.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/bento-grid.tsx",
+      "sourcePath": "Sources/MagicUI/Components/bento-grid.tsx",
+      "sha256": "9c2abcb2a4e51519e56d510299771a2d0e170ab9927a9a792a58614b1837ed47",
+      "bytes": 3206,
+      "dependencies": [
+        "@radix-ui/react-icons"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/bento-grid.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/bento-grid.json",
+        "sourcePath": "Sources/MagicUI/Registry/bento-grid.json",
+        "sha256": "f43018c50fbc37f00856e3d2b5934af9bb56276d841151987a376b8caaf8c9ea",
+        "bytes": 3849
+      }
+    },
+    {
+      "id": "blur-fade",
+      "name": "blur-fade",
+      "title": "Blur Fade",
+      "category": "animations",
+      "categoryTitle": "Animations",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/blur-fade",
+      "upstreamPath": "apps/www/registry/magicui/blur-fade.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/blur-fade.tsx",
+      "sourcePath": "Sources/MagicUI/Components/blur-fade.tsx",
+      "sha256": "99a8e83aa8817f48e26d921e959ff9abefb5c2f1f0b72b166ed95e88e015949f",
+      "bytes": 2220,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/blur-fade.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/blur-fade.json",
+        "sourcePath": "Sources/MagicUI/Registry/blur-fade.json",
+        "sha256": "5161e38f05b5898ee42892daa9c133688f528b20817bb4c62ae79f68967a88ba",
+        "bytes": 2765
+      }
+    },
+    {
+      "id": "border-beam",
+      "name": "border-beam",
+      "title": "Border Beam",
+      "category": "special-effects",
+      "categoryTitle": "Special Effects",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/border-beam",
+      "upstreamPath": "apps/www/registry/magicui/border-beam.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/border-beam.tsx",
+      "sourcePath": "Sources/MagicUI/Components/border-beam.tsx",
+      "sha256": "ccdfb52cb8f2089e7823a9edfe9c3a52e52ab6759ed5b91d184b1e2bb80cf414",
+      "bytes": 2462,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/border-beam.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/border-beam.json",
+        "sourcePath": "Sources/MagicUI/Registry/border-beam.json",
+        "sha256": "5ed4f31cf1aa2cf44b03d57058b6bc46ae2b100fef426c9bf7f5ee9663ecf66a",
+        "bytes": 2997
+      }
+    },
+    {
+      "id": "code-comparison",
+      "name": "code-comparison",
+      "title": "Code Comparison",
+      "category": "community",
+      "categoryTitle": "Community",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/code-comparison",
+      "upstreamPath": "apps/www/registry/magicui/code-comparison.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/code-comparison.tsx",
+      "sourcePath": "Sources/MagicUI/Components/code-comparison.tsx",
+      "sha256": "a06698296a219ac0d7ffa098f6d5d2bbf38c3f825af5a8b01786fddf16b969ac",
+      "bytes": 6248,
+      "dependencies": [
+        "shiki",
+        "next-themes"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/code-comparison.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/code-comparison.json",
+        "sourcePath": "Sources/MagicUI/Registry/code-comparison.json",
+        "sha256": "9fcda01fe0775681d5fde5fbe1c1317d02704ddab70db975eebb50d6e7246791",
+        "bytes": 6909
+      }
+    },
+    {
+      "id": "comic-text",
+      "name": "comic-text",
+      "title": "Comic Text",
+      "category": "community",
+      "categoryTitle": "Community",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/comic-text",
+      "upstreamPath": "apps/www/registry/magicui/comic-text.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/comic-text.tsx",
+      "sourcePath": "Sources/MagicUI/Components/comic-text.tsx",
+      "sha256": "d259aa2d9ef9fadcfd565a9bf29557660c511a08e3c18b675dd4b3d731417113",
+      "bytes": 1593,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/comic-text.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/comic-text.json",
+        "sourcePath": "Sources/MagicUI/Registry/comic-text.json",
+        "sha256": "8a880e1fe4cf04dd5c917c7b0d73e27225658d1caf1cb078464bd2a07c9bcff7",
+        "bytes": 2037
+      }
+    },
+    {
+      "id": "confetti",
+      "name": "confetti",
+      "title": "Confetti",
+      "category": "special-effects",
+      "categoryTitle": "Special Effects",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/confetti",
+      "upstreamPath": "apps/www/registry/magicui/confetti.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/confetti.tsx",
+      "sourcePath": "Sources/MagicUI/Components/confetti.tsx",
+      "sha256": "c2a713b9a768d0f62f2c67837c441586de02a744b528c91548d043d8cb3fc8a6",
+      "bytes": 3576,
+      "dependencies": [
+        "canvas-confetti",
+        "@types/canvas-confetti"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/confetti.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/confetti.json",
+        "sourcePath": "Sources/MagicUI/Registry/confetti.json",
+        "sha256": "b81107ad0c151a947fdad2fe2c6441433d50e9aaccd9cbc1712a30bee2fd1231",
+        "bytes": 4244
+      }
+    },
+    {
+      "id": "cool-mode",
+      "name": "cool-mode",
+      "title": "Cool Mode",
+      "category": "community",
+      "categoryTitle": "Community",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/cool-mode",
+      "upstreamPath": "apps/www/registry/magicui/cool-mode.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/cool-mode.tsx",
+      "sourcePath": "Sources/MagicUI/Components/cool-mode.tsx",
+      "sha256": "9eba11d050264db27329fe0321c0a41305440244fddcc3c640ee92ff31033fd3",
+      "bytes": 7676,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/cool-mode.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/cool-mode.json",
+        "sourcePath": "Sources/MagicUI/Registry/cool-mode.json",
+        "sha256": "ec49e6707fc9b00f4dfc8fa8ebdb74c1dca170b7be65992d02be5f4f23f66a05",
+        "bytes": 8400
+      }
+    },
+    {
+      "id": "dia-text-reveal",
+      "name": "dia-text-reveal",
+      "title": "Dia Text Reveal",
+      "category": "text-animations",
+      "categoryTitle": "Text Animations",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/dia-text-reveal",
+      "upstreamPath": "apps/www/registry/magicui/dia-text-reveal.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/dia-text-reveal.tsx",
+      "sourcePath": "Sources/MagicUI/Components/dia-text-reveal.tsx",
+      "sha256": "239650378a2165db192ebfa8961f9e683e35edd290d83a17339798f8924cbe4f",
+      "bytes": 6911,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/dia-text-reveal.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/dia-text-reveal.json",
+        "sourcePath": "Sources/MagicUI/Registry/dia-text-reveal.json",
+        "sha256": "6870c1f3731e9d72b801caba5cf6f53f1ff31e19eb8da968c20ce69dac8b26e8",
+        "bytes": 7692
+      }
+    },
+    {
+      "id": "dock",
+      "name": "dock",
+      "title": "Dock",
+      "category": "components",
+      "categoryTitle": "Components",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/dock",
+      "upstreamPath": "apps/www/registry/magicui/dock.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/dock.tsx",
+      "sourcePath": "Sources/MagicUI/Components/dock.tsx",
+      "sha256": "c12d578d4a273036fa435b67d8374d6fe9c7bcb962665cefc7b851aa86d12441",
+      "bytes": 3972,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/dock.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/dock.json",
+        "sourcePath": "Sources/MagicUI/Registry/dock.json",
+        "sha256": "f7e92adb3389cc4f62a2a36a1b9b3dd0b904432d5c6833a735691ad574dc5636",
+        "bytes": 4550
+      }
+    },
+    {
+      "id": "dot-pattern",
+      "name": "dot-pattern",
+      "title": "Dot Pattern",
+      "category": "backgrounds",
+      "categoryTitle": "Backgrounds",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/dot-pattern",
+      "upstreamPath": "apps/www/registry/magicui/dot-pattern.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/dot-pattern.tsx",
+      "sourcePath": "Sources/MagicUI/Components/dot-pattern.tsx",
+      "sha256": "f198ffad23f2404f7f8d0d562e1eec5d5d43e61635994bf74a214af9fa553bcb",
+      "bytes": 4251,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/dot-pattern.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/dot-pattern.json",
+        "sourcePath": "Sources/MagicUI/Registry/dot-pattern.json",
+        "sha256": "ff4f9d159cc8e681b74c94f2a673c47faa411e59c7e9424e4987ba08f61e9757",
+        "bytes": 4818
+      }
+    },
+    {
+      "id": "dotted-map",
+      "name": "dotted-map",
+      "title": "Dotted Map",
+      "category": "components",
+      "categoryTitle": "Components",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/dotted-map",
+      "upstreamPath": "apps/www/registry/magicui/dotted-map.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/dotted-map.tsx",
+      "sourcePath": "Sources/MagicUI/Components/dotted-map.tsx",
+      "sha256": "9cf9a7edbed239b6e8cfdad588a97400d059ccf8f391d94f3cf033261a5ef7d9",
+      "bytes": 4972,
+      "dependencies": [
+        "svg-dotted-map"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/dotted-map.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/dotted-map.json",
+        "sourcePath": "Sources/MagicUI/Registry/dotted-map.json",
+        "sha256": "7affe4eac50541f73239ec35886cd0418b1bb61b77566aa25c04a0358dfe5ce4",
+        "bytes": 5583
+      }
+    },
+    {
+      "id": "file-tree",
+      "name": "file-tree",
+      "title": "File Tree",
+      "category": "community",
+      "categoryTitle": "Community",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/file-tree",
+      "upstreamPath": "apps/www/registry/magicui/file-tree.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/file-tree.tsx",
+      "sourcePath": "Sources/MagicUI/Components/file-tree.tsx",
+      "sha256": "ffc123a907fa76f9bcc4a2bc42fab53473021343399f91e9954e3923b0f07416",
+      "bytes": 12571,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/file-tree.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/file-tree.json",
+        "sourcePath": "Sources/MagicUI/Registry/file-tree.json",
+        "sha256": "ee903f1fd3449f1db00ff04bafefd1ff2eab885daba6864e9f8059d1d8b9aec6",
+        "bytes": 13556
+      }
+    },
+    {
+      "id": "flickering-grid",
+      "name": "flickering-grid",
+      "title": "Flickering Grid",
+      "category": "backgrounds",
+      "categoryTitle": "Backgrounds",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/flickering-grid",
+      "upstreamPath": "apps/www/registry/magicui/flickering-grid.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/flickering-grid.tsx",
+      "sourcePath": "Sources/MagicUI/Components/flickering-grid.tsx",
+      "sha256": "16e5ee59fda4298a8e2210b38ad260b9c278ab8cf4a0817ed410d9e78edbdc3b",
+      "bytes": 5463,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/flickering-grid.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/flickering-grid.json",
+        "sourcePath": "Sources/MagicUI/Registry/flickering-grid.json",
+        "sha256": "f79b5e0da3e8c48c2a9ca427823f724c449be3508618868960fead7c7f4dc19c",
+        "bytes": 6070
+      }
+    },
+    {
+      "id": "glare-hover",
+      "name": "glare-hover",
+      "title": "Glare Hover",
+      "category": "special-effects",
+      "categoryTitle": "Special Effects",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/glare-hover",
+      "upstreamPath": "apps/www/registry/magicui/glare-hover.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/glare-hover.tsx",
+      "sourcePath": "Sources/MagicUI/Components/glare-hover.tsx",
+      "sha256": "db8084ae31fb41978ce5c2fc164e7d2c63cf414e3817fe444dca4ed177c9986f",
+      "bytes": 4174,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/glare-hover.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/glare-hover.json",
+        "sourcePath": "Sources/MagicUI/Registry/glare-hover.json",
+        "sha256": "8cfdcea8ec3a60a3e089b347161f8350ea7e1b8f0405fa01288fb3d46511e4a8",
+        "bytes": 4778
+      }
+    },
+    {
+      "id": "globe",
+      "name": "globe",
+      "title": "Globe",
+      "category": "components",
+      "categoryTitle": "Components",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/globe",
+      "upstreamPath": "apps/www/registry/magicui/globe.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/globe.tsx",
+      "sourcePath": "Sources/MagicUI/Components/globe.tsx",
+      "sha256": "76422bf378c6503883706fe7af90132f7716dbe383fab7728a95c95e4d16cfd0",
+      "bytes": 3506,
+      "dependencies": [
+        "cobe@^0.6.4",
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/globe.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/globe.json",
+        "sourcePath": "Sources/MagicUI/Registry/globe.json",
+        "sha256": "24095b50f517fbf4f9e466b6dc2a5200c7d2d22f3068b15d9a5281a4b6899891",
+        "bytes": 4064
+      }
+    },
+    {
+      "id": "glyph-matrix",
+      "name": "glyph-matrix",
+      "title": "Glyph Matrix",
+      "category": "community",
+      "categoryTitle": "Community",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/glyph-matrix",
+      "upstreamPath": "apps/www/registry/magicui/glyph-matrix.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/glyph-matrix.tsx",
+      "sourcePath": "Sources/MagicUI/Components/glyph-matrix.tsx",
+      "sha256": "0c4c11f8a81dab493b0adbf9ed3dd7342c64fd8957926a4e39b31294b1853633",
+      "bytes": 4529,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/glyph-matrix.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/glyph-matrix.json",
+        "sourcePath": "Sources/MagicUI/Registry/glyph-matrix.json",
+        "sha256": "c138d8e50f5c8151d3fe1192f1cf9d051b28d4d4f7a974f81b5a0690f3e1aaef",
+        "bytes": 5095
+      }
+    },
+    {
+      "id": "grid-pattern",
+      "name": "grid-pattern",
+      "title": "Grid Pattern",
+      "category": "backgrounds",
+      "categoryTitle": "Backgrounds",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/grid-pattern",
+      "upstreamPath": "apps/www/registry/magicui/grid-pattern.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/grid-pattern.tsx",
+      "sourcePath": "Sources/MagicUI/Components/grid-pattern.tsx",
+      "sha256": "1d1caaf01de0a1ebfdffea1163535f8fbfdfbee33cd0a640e09388815d1823df",
+      "bytes": 1537,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/grid-pattern.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/grid-pattern.json",
+        "sourcePath": "Sources/MagicUI/Registry/grid-pattern.json",
+        "sha256": "87b67223033ca97ee464f34cf4bafe12ee699ec583616b42f9249de1d8b7b0aa",
+        "bytes": 2004
+      }
+    },
+    {
+      "id": "hero-video-dialog",
+      "name": "hero-video-dialog",
+      "title": "Hero Video Dialog",
+      "category": "components",
+      "categoryTitle": "Components",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/hero-video-dialog",
+      "upstreamPath": "apps/www/registry/magicui/hero-video-dialog.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/hero-video-dialog.tsx",
+      "sourcePath": "Sources/MagicUI/Components/hero-video-dialog.tsx",
+      "sha256": "8a7a25227054b5b747e77efe12aacf3e4fff4410a55e4bcd8fda6c5bcf71b670",
+      "bytes": 4967,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/hero-video-dialog.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/hero-video-dialog.json",
+        "sourcePath": "Sources/MagicUI/Registry/hero-video-dialog.json",
+        "sha256": "1e47b6dd98bbadd8ee4035c594266315a57b7dbc22e1df6bfbd78a47e04cb2e3",
+        "bytes": 5607
+      }
+    },
+    {
+      "id": "hexagon-pattern",
+      "name": "hexagon-pattern",
+      "title": "Hexagon Pattern",
+      "category": "backgrounds",
+      "categoryTitle": "Backgrounds",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/hexagon-pattern",
+      "upstreamPath": "apps/www/registry/magicui/hexagon-pattern.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/hexagon-pattern.tsx",
+      "sourcePath": "Sources/MagicUI/Components/hexagon-pattern.tsx",
+      "sha256": "466ed6cafc0de757a37ced4b3659e6713d98dd6f97325982813f5f390d97ad68",
+      "bytes": 8403,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/hexagon-pattern.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/hexagon-pattern.json",
+        "sourcePath": "Sources/MagicUI/Registry/hexagon-pattern.json",
+        "sha256": "642e07cc3c12e8b167fcf7bd468b0b3b235b103bc3612578cd34e386a94d1333",
+        "bytes": 9174
+      }
+    },
+    {
+      "id": "highlighter",
+      "name": "highlighter",
+      "title": "Text Highlighter",
+      "category": "text-animations",
+      "categoryTitle": "Text Animations",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/highlighter",
+      "upstreamPath": "apps/www/registry/magicui/highlighter.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/highlighter.tsx",
+      "sourcePath": "Sources/MagicUI/Components/highlighter.tsx",
+      "sha256": "521c876ac04938ae747126a5277c14c6eb19114a9a09c3567249a7d2ee2af5b2",
+      "bytes": 2214,
+      "dependencies": [
+        "motion",
+        "rough-notation"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/highlighter.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/highlighter.json",
+        "sourcePath": "Sources/MagicUI/Registry/highlighter.json",
+        "sha256": "3d9344cc4450c3fdde2044b70be19ac238128f44215259027811185659544a15",
+        "bytes": 2775
+      }
+    },
+    {
+      "id": "hyper-text",
+      "name": "hyper-text",
+      "title": "Hyper Text",
+      "category": "text-animations",
+      "categoryTitle": "Text Animations",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/hyper-text",
+      "upstreamPath": "apps/www/registry/magicui/hyper-text.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/hyper-text.tsx",
+      "sourcePath": "Sources/MagicUI/Components/hyper-text.tsx",
+      "sha256": "12a2f5aa5d53e20ccbe611bde8057083451bda69a31318db166f758289cb93e8",
+      "bytes": 4715,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/hyper-text.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/hyper-text.json",
+        "sourcePath": "Sources/MagicUI/Registry/hyper-text.json",
+        "sha256": "154f3afd5e33135d3cf61f5fd618ec0b0109db98492e4e9c046832d65fc3e82a",
+        "bytes": 5335
+      }
+    },
+    {
+      "id": "icon-cloud",
+      "name": "icon-cloud",
+      "title": "Icon Cloud",
+      "category": "components",
+      "categoryTitle": "Components",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/icon-cloud",
+      "upstreamPath": "apps/www/registry/magicui/icon-cloud.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/icon-cloud.tsx",
+      "sourcePath": "Sources/MagicUI/Components/icon-cloud.tsx",
+      "sha256": "243e182efdb70940b01452135160747011b01ba6766a8d5e47ba93b526ae105f",
+      "bytes": 11046,
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/icon-cloud.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/icon-cloud.json",
+        "sourcePath": "Sources/MagicUI/Registry/icon-cloud.json",
+        "sha256": "c2922f2473ac064d68400983fc9397107f6cc12007870712d34ed4fa07ce93cf",
+        "bytes": 11895
+      }
+    },
+    {
+      "id": "interactive-grid-pattern",
+      "name": "interactive-grid-pattern",
+      "title": "Interactive Grid Pattern",
+      "category": "backgrounds",
+      "categoryTitle": "Backgrounds",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/interactive-grid-pattern",
+      "upstreamPath": "apps/www/registry/magicui/interactive-grid-pattern.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/interactive-grid-pattern.tsx",
+      "sourcePath": "Sources/MagicUI/Components/interactive-grid-pattern.tsx",
+      "sha256": "953385a7fae475dac73f5a88de878cfd8dab1ea5b83a95638ef06bbb10f0a6e2",
+      "bytes": 2184,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/interactive-grid-pattern.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/interactive-grid-pattern.json",
+        "sourcePath": "Sources/MagicUI/Registry/interactive-grid-pattern.json",
+        "sha256": "160c6432c904e4d1f4213781ff4b152b7a9658408853366f9e81514300239a9c",
+        "bytes": 2694
+      }
+    },
+    {
+      "id": "interactive-hover-button",
+      "name": "interactive-hover-button",
+      "title": "Interactive Hover Button",
+      "category": "community",
+      "categoryTitle": "Community",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/interactive-hover-button",
+      "upstreamPath": "apps/www/registry/magicui/interactive-hover-button.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/interactive-hover-button.tsx",
+      "sourcePath": "Sources/MagicUI/Components/interactive-hover-button.tsx",
+      "sha256": "ab16b3a2efea7fcc84a0eddeb7dad5304b403f89d22e056427fd3f905baaa0de",
+      "bytes": 1094,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/interactive-hover-button.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/interactive-hover-button.json",
+        "sourcePath": "Sources/MagicUI/Registry/interactive-hover-button.json",
+        "sha256": "97cae7d013db9d179f2d3b6f47c4785be913d42368a995ae2e0573335fc11260",
+        "bytes": 1409
+      }
+    },
+    {
+      "id": "iphone",
+      "name": "iphone",
+      "title": "iPhone",
+      "category": "device-mocks",
+      "categoryTitle": "Device Mocks",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/iphone",
+      "upstreamPath": "apps/www/registry/magicui/iphone.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/iphone.tsx",
+      "sourcePath": "Sources/MagicUI/Components/iphone.tsx",
+      "sha256": "64aa5f8f05c2444d2f0f791328a6bc5c0cc73624eb53dde2c5d29cd710c20124",
+      "bytes": 5882,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/iphone.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/iphone.json",
+        "sourcePath": "Sources/MagicUI/Registry/iphone.json",
+        "sha256": "a17629aaf59e2a9ae61a19eb534d086c61318ac193d6a5eec72ffcc780cba8cc",
+        "bytes": 6442
+      }
+    },
+    {
+      "id": "kinetic-text",
+      "name": "kinetic-text",
+      "title": "Kinetic Text",
+      "category": "community",
+      "categoryTitle": "Community",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/kinetic-text",
+      "upstreamPath": "apps/www/registry/magicui/kinetic-text.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/kinetic-text.tsx",
+      "sourcePath": "Sources/MagicUI/Components/kinetic-text.tsx",
+      "sha256": "a02ab6c77ae376778fec3c27b0b1c9d0d7ec0f7e0ac9434d0716eb217556c355",
+      "bytes": 1552,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/kinetic-text.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/kinetic-text.json",
+        "sourcePath": "Sources/MagicUI/Registry/kinetic-text.json",
+        "sha256": "122915cf9e5c6c2bf9504ddc61eb8cc3fb507e4fce96d0f1dcca1c0639e38195",
+        "bytes": 2025
+      }
+    },
+    {
+      "id": "lens",
+      "name": "lens",
+      "title": "Lens",
+      "category": "components",
+      "categoryTitle": "Components",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/lens",
+      "upstreamPath": "apps/www/registry/magicui/lens.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/lens.tsx",
+      "sourcePath": "Sources/MagicUI/Components/lens.tsx",
+      "sha256": "85e2ae91387ee22d1492224e5767788653b5954a2d65ec0fd59ca023dae6f0e3",
+      "bytes": 3555,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/lens.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/lens.json",
+        "sourcePath": "Sources/MagicUI/Registry/lens.json",
+        "sha256": "c74b03b6602beeefb130200d862fb15023fd688849587d9dbbbd864deefa3ab5",
+        "bytes": 4106
+      }
+    },
+    {
+      "id": "light-rays",
+      "name": "light-rays",
+      "title": "Light Rays",
+      "category": "backgrounds",
+      "categoryTitle": "Backgrounds",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/light-rays",
+      "upstreamPath": "apps/www/registry/magicui/light-rays.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/light-rays.tsx",
+      "sourcePath": "Sources/MagicUI/Components/light-rays.tsx",
+      "sha256": "e0b8d42d19a7b05b80f69bf023dadc24143d6b7b75da113bd158eddbf36d46bf",
+      "bytes": 3682,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/light-rays.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/light-rays.json",
+        "sourcePath": "Sources/MagicUI/Registry/light-rays.json",
+        "sha256": "ea7c8fd7de5333bd6edc6804230fa906a220314d8b10e4d489bf9316b0633d7e",
+        "bytes": 4261
+      }
+    },
+    {
+      "id": "line-shadow-text",
+      "name": "line-shadow-text",
+      "title": "Line Shadow Text",
+      "category": "text-animations",
+      "categoryTitle": "Text Animations",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/line-shadow-text",
+      "upstreamPath": "apps/www/registry/magicui/line-shadow-text.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/line-shadow-text.tsx",
+      "sourcePath": "Sources/MagicUI/Components/line-shadow-text.tsx",
+      "sha256": "5103c5e2c2d30325d8581c1d172837b0040810f7361080208ecba1556bd52afa",
+      "bytes": 1569,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/line-shadow-text.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/line-shadow-text.json",
+        "sourcePath": "Sources/MagicUI/Registry/line-shadow-text.json",
+        "sha256": "9d63df614105966d827e90f72ca1262708a965124091384790fe5b998259eef6",
+        "bytes": 2332
+      }
+    },
+    {
+      "id": "magic-card",
+      "name": "magic-card",
+      "title": "Magic Card",
+      "category": "special-effects",
+      "categoryTitle": "Special Effects",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/magic-card",
+      "upstreamPath": "apps/www/registry/magicui/magic-card.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/magic-card.tsx",
+      "sourcePath": "Sources/MagicUI/Components/magic-card.tsx",
+      "sha256": "6139e78ed228ebca18ed144f4a2714a89214c2ef604f1f82bc2f61204c3f3fa3",
+      "bytes": 6314,
+      "dependencies": [
+        "motion",
+        "next-themes"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/magic-card.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/magic-card.json",
+        "sourcePath": "Sources/MagicUI/Registry/magic-card.json",
+        "sha256": "d487ae39795640bd3fbb467a5a98285a4c803036d71e5b1a9a06cb7d26c2a755",
+        "bytes": 7066
+      }
+    },
+    {
+      "id": "marquee",
+      "name": "marquee",
+      "title": "Marquee",
+      "category": "components",
+      "categoryTitle": "Components",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/marquee",
+      "upstreamPath": "apps/www/registry/magicui/marquee.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/marquee.tsx",
+      "sourcePath": "Sources/MagicUI/Components/marquee.tsx",
+      "sha256": "779f360a107409bfa35cda13bcef7d54cd620a15ab4a0ee50412442a4dd6b9c7",
+      "bytes": 1658,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/marquee.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/marquee.json",
+        "sourcePath": "Sources/MagicUI/Registry/marquee.json",
+        "sha256": "6378d12f6ac7b383bcbe25cbfcd21ad567d4726ff9979bf07991598a7bdef1ce",
+        "bytes": 2694
+      }
+    },
+    {
+      "id": "meteors",
+      "name": "meteors",
+      "title": "Meteors",
+      "category": "special-effects",
+      "categoryTitle": "Special Effects",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/meteors",
+      "upstreamPath": "apps/www/registry/magicui/meteors.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/meteors.tsx",
+      "sourcePath": "Sources/MagicUI/Components/meteors.tsx",
+      "sha256": "0730d0d6449fb3fb098a5e9edc80d066bdf06ebbb1d1e598b8fb6a10ff4a5ff9",
+      "bytes": 1610,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/meteors.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/meteors.json",
+        "sourcePath": "Sources/MagicUI/Registry/meteors.json",
+        "sha256": "541a4a88f9a9a77ed5dd3b33d14967daec15528e4be067b806ce77b793983027",
+        "bytes": 2399
+      }
+    },
+    {
+      "id": "morphing-text",
+      "name": "morphing-text",
+      "title": "Morphing Text",
+      "category": "text-animations",
+      "categoryTitle": "Text Animations",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/morphing-text",
+      "upstreamPath": "apps/www/registry/magicui/morphing-text.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/morphing-text.tsx",
+      "sourcePath": "Sources/MagicUI/Components/morphing-text.tsx",
+      "sha256": "8475ec9beae637a2af6183ed1f91227d0e048f93051352faa0e8d921b2c53d62",
+      "bytes": 3628,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/morphing-text.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/morphing-text.json",
+        "sourcePath": "Sources/MagicUI/Registry/morphing-text.json",
+        "sha256": "b40a923f926d720ef048836a2717c37bf3bad07d4eb1ccf75784a1a578ee0b12",
+        "bytes": 4158
+      }
+    },
+    {
+      "id": "neon-gradient-card",
+      "name": "neon-gradient-card",
+      "title": "Neon Gradient Card",
+      "category": "community",
+      "categoryTitle": "Community",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/neon-gradient-card",
+      "upstreamPath": "apps/www/registry/magicui/neon-gradient-card.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/neon-gradient-card.tsx",
+      "sourcePath": "Sources/MagicUI/Components/neon-gradient-card.tsx",
+      "sha256": "bd96e18be176f3f2365cf27d686bf31d6f062c0abb707ca21e88079ab28f76ed",
+      "bytes": 4220,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/neon-gradient-card.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/neon-gradient-card.json",
+        "sourcePath": "Sources/MagicUI/Registry/neon-gradient-card.json",
+        "sha256": "ff973c54e621241bcd44a3d49f0e63a8fb3d3f661b566574a163e046bb85fc98",
+        "bytes": 5116
+      }
+    },
+    {
+      "id": "noise-texture",
+      "name": "noise-texture",
+      "title": "Noise Texture",
+      "category": "backgrounds",
+      "categoryTitle": "Backgrounds",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/noise-texture",
+      "upstreamPath": "apps/www/registry/magicui/noise-texture.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/noise-texture.tsx",
+      "sourcePath": "Sources/MagicUI/Components/noise-texture.tsx",
+      "sha256": "90cad110cf368c95bd40edcdfe64d52c6aacb0656996e20867562787f4ca4c1c",
+      "bytes": 1785,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/noise-texture.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/noise-texture.json",
+        "sourcePath": "Sources/MagicUI/Registry/noise-texture.json",
+        "sha256": "b9e1ddc65cfbacd822c2c8855a43a5fac902b335b2818212769cb5f01a0b7952",
+        "bytes": 2297
+      }
+    },
+    {
+      "id": "number-ticker",
+      "name": "number-ticker",
+      "title": "Number Ticker",
+      "category": "text-animations",
+      "categoryTitle": "Text Animations",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/number-ticker",
+      "upstreamPath": "apps/www/registry/magicui/number-ticker.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/number-ticker.tsx",
+      "sourcePath": "Sources/MagicUI/Components/number-ticker.tsx",
+      "sha256": "0f7dcbc6a1962615a877590304e846f33d390002a51f2226f544938577c220f4",
+      "bytes": 1799,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/number-ticker.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/number-ticker.json",
+        "sourcePath": "Sources/MagicUI/Registry/number-ticker.json",
+        "sha256": "c4808c7218100b218df9ada8e5d1ff21ce99045b41468131534b3d8db61122a7",
+        "bytes": 2291
+      }
+    },
+    {
+      "id": "orbiting-circles",
+      "name": "orbiting-circles",
+      "title": "Orbiting Circles",
+      "category": "components",
+      "categoryTitle": "Components",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/orbiting-circles",
+      "upstreamPath": "apps/www/registry/magicui/orbiting-circles.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/orbiting-circles.tsx",
+      "sourcePath": "Sources/MagicUI/Components/orbiting-circles.tsx",
+      "sha256": "859b88b6c22144e5cd4bf04ab49d339090eea13b422d3085a80584e6b9d4da68",
+      "bytes": 1735,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/orbiting-circles.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/orbiting-circles.json",
+        "sourcePath": "Sources/MagicUI/Registry/orbiting-circles.json",
+        "sha256": "96aaf67d75288ebd52009ffca1a2b5112ccab0b34f3457ab061781e9e8b3940a",
+        "bytes": 2694
+      }
+    },
+    {
+      "id": "particles",
+      "name": "particles",
+      "title": "Particles",
+      "category": "special-effects",
+      "categoryTitle": "Special Effects",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/particles",
+      "upstreamPath": "apps/www/registry/magicui/particles.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/particles.tsx",
+      "sourcePath": "Sources/MagicUI/Components/particles.tsx",
+      "sha256": "f768e19deca7c0ba9c424b4683b62cae3eedd11ef3dac8b0363e65c2773f236e",
+      "bytes": 8543,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/particles.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/particles.json",
+        "sourcePath": "Sources/MagicUI/Registry/particles.json",
+        "sha256": "e7d4b820112bafc230a7ef428133b1cbd2f6866cbaf7215d8abbebd855b90e98",
+        "bytes": 9329
+      }
+    },
+    {
+      "id": "pixel-image",
+      "name": "pixel-image",
+      "title": "Pixel Image",
+      "category": "community",
+      "categoryTitle": "Community",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/pixel-image",
+      "upstreamPath": "apps/www/registry/magicui/pixel-image.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/pixel-image.tsx",
+      "sourcePath": "Sources/MagicUI/Components/pixel-image.tsx",
+      "sha256": "88240ed4cfcf58eb1c77ab79b524ee5721135dc0a243d892d0ac3420708626c2",
+      "bytes": 3314,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/pixel-image.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/pixel-image.json",
+        "sourcePath": "Sources/MagicUI/Registry/pixel-image.json",
+        "sha256": "83b28c0049c65f51ca6f43a1461cda860d5e8cb8f36e698c543e3b140b4b7e6c",
+        "bytes": 3853
+      }
+    },
+    {
+      "id": "pointer",
+      "name": "pointer",
+      "title": "Pointer",
+      "category": "components",
+      "categoryTitle": "Components",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/pointer",
+      "upstreamPath": "apps/www/registry/magicui/pointer.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/pointer.tsx",
+      "sourcePath": "Sources/MagicUI/Components/pointer.tsx",
+      "sha256": "f46b0109767ca079e5bc87ccbaac0091216ad84c3da09b15b7c176664aff9e6f",
+      "bytes": 3215,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/pointer.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/pointer.json",
+        "sourcePath": "Sources/MagicUI/Registry/pointer.json",
+        "sha256": "52c41c5372afb81c8ba3049711e4fafaf9954a0d8d38135478c6fa66faf6bc13",
+        "bytes": 3767
+      }
+    },
+    {
+      "id": "progressive-blur",
+      "name": "progressive-blur",
+      "title": "Progressive Blur",
+      "category": "components",
+      "categoryTitle": "Components",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/progressive-blur",
+      "upstreamPath": "apps/www/registry/magicui/progressive-blur.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/progressive-blur.tsx",
+      "sourcePath": "Sources/MagicUI/Components/progressive-blur.tsx",
+      "sha256": "2d1a95b26a66b707cd786c626e3fe7819330d7ec585618afb301e6cd776d811b",
+      "bytes": 4423,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/progressive-blur.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/progressive-blur.json",
+        "sourcePath": "Sources/MagicUI/Registry/progressive-blur.json",
+        "sha256": "419301fc871365f0f113a8b58cca6b22ea956d8c385b1808a23c57050f581696",
+        "bytes": 5029
+      }
+    },
+    {
+      "id": "pulsating-button",
+      "name": "pulsating-button",
+      "title": "Pulsating Button",
+      "category": "community",
+      "categoryTitle": "Community",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/pulsating-button",
+      "upstreamPath": "apps/www/registry/magicui/pulsating-button.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/pulsating-button.tsx",
+      "sourcePath": "Sources/MagicUI/Components/pulsating-button.tsx",
+      "sha256": "f73dd2d7da811ea0202b5bab7d441562f48772a55459b26316c8dc836ee852ca",
+      "bytes": 3132,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/pulsating-button.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/pulsating-button.json",
+        "sourcePath": "Sources/MagicUI/Registry/pulsating-button.json",
+        "sha256": "1fdd8843b574b3a0ad7685d4a6b52322b5d32aa7cc7a7868848a24100f1907e8",
+        "bytes": 4447
+      }
+    },
+    {
+      "id": "rainbow-button",
+      "name": "rainbow-button",
+      "title": "Rainbow Button",
+      "category": "buttons",
+      "categoryTitle": "Buttons",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/rainbow-button",
+      "upstreamPath": "apps/www/registry/magicui/rainbow-button.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/rainbow-button.tsx",
+      "sourcePath": "Sources/MagicUI/Components/rainbow-button.tsx",
+      "sha256": "cda40de677181acd8690cd24bad7f734753fec3b2d921206e733f7d6a4e36ea0",
+      "bytes": 3404,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/rainbow-button.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/rainbow-button.json",
+        "sourcePath": "Sources/MagicUI/Registry/rainbow-button.json",
+        "sha256": "1af54e0e9aef154d8c9a842988ae5b299ca5938a05dbfda3d0f4989a2b0b3ca6",
+        "bytes": 4600
+      }
+    },
+    {
+      "id": "retro-grid",
+      "name": "retro-grid",
+      "title": "Retro Grid",
+      "category": "backgrounds",
+      "categoryTitle": "Backgrounds",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/retro-grid",
+      "upstreamPath": "apps/www/registry/magicui/retro-grid.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/retro-grid.tsx",
+      "sourcePath": "Sources/MagicUI/Components/retro-grid.tsx",
+      "sha256": "7434890f7345291453245866ae78f3f8d622a75a4e3b806729ca33c995ef6142",
+      "bytes": 23431,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/retro-grid.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/retro-grid.json",
+        "sourcePath": "Sources/MagicUI/Registry/retro-grid.json",
+        "sha256": "e05da0e4b2036036db5724bd151e0d7bc21339ed9acc7a48695505e28f10737b",
+        "bytes": 24733
+      }
+    },
+    {
+      "id": "ripple",
+      "name": "ripple",
+      "title": "Ripple",
+      "category": "backgrounds",
+      "categoryTitle": "Backgrounds",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/ripple",
+      "upstreamPath": "apps/www/registry/magicui/ripple.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/ripple.tsx",
+      "sourcePath": "Sources/MagicUI/Components/ripple.tsx",
+      "sha256": "1ac207017c0f4e993f83a1ead8b8a1b4a92286ef1595a297aba79782b2616eaf",
+      "bytes": 1564,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/ripple.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/ripple.json",
+        "sourcePath": "Sources/MagicUI/Registry/ripple.json",
+        "sha256": "df558d5a129f231de4b0bb577fd49509dd04b9ded1c53640893b88121eeadfd6",
+        "bytes": 2336
+      }
+    },
+    {
+      "id": "ripple-button",
+      "name": "ripple-button",
+      "title": "Ripple Button",
+      "category": "buttons",
+      "categoryTitle": "Buttons",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/ripple-button",
+      "upstreamPath": "apps/www/registry/magicui/ripple-button.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/ripple-button.tsx",
+      "sourcePath": "Sources/MagicUI/Components/ripple-button.tsx",
+      "sha256": "828d7883953843761cb80fd6f59b6115e72d8db6bc83471e7ee8abf049ab6863",
+      "bytes": 2863,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/ripple-button.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/ripple-button.json",
+        "sourcePath": "Sources/MagicUI/Registry/ripple-button.json",
+        "sha256": "207d44c2a370f8b767f9699c9f45ec0511552100faf36d7379e25f910c5f1741",
+        "bytes": 3622
+      }
+    },
+    {
+      "id": "safari",
+      "name": "safari",
+      "title": "Safari",
+      "category": "device-mocks",
+      "categoryTitle": "Device Mocks",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/safari",
+      "upstreamPath": "apps/www/registry/magicui/safari.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/safari.tsx",
+      "sourcePath": "Sources/MagicUI/Components/safari.tsx",
+      "sha256": "2cb6ce69def86020f6860a3dd8696f0998dac340db932a3eee05e990b2e29f3e",
+      "bytes": 13124,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/safari.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/safari.json",
+        "sourcePath": "Sources/MagicUI/Registry/safari.json",
+        "sha256": "8e50e929a19b82cc70930b1572d37179ffc2516174892e12b56bc39b15d801aa",
+        "bytes": 13864
+      }
+    },
+    {
+      "id": "scroll-based-velocity",
+      "name": "scroll-based-velocity",
+      "title": "Scroll Based Velocity",
+      "category": "text-animations",
+      "categoryTitle": "Text Animations",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/scroll-based-velocity",
+      "upstreamPath": "apps/www/registry/magicui/scroll-based-velocity.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/scroll-based-velocity.tsx",
+      "sourcePath": "Sources/MagicUI/Components/scroll-based-velocity.tsx",
+      "sha256": "17cebe769a2337587bcb0e8e5d3ebd71f5b7ffc27ad1f6f59a8971f5d277b844",
+      "bytes": 6198,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/scroll-based-velocity.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/scroll-based-velocity.json",
+        "sourcePath": "Sources/MagicUI/Registry/scroll-based-velocity.json",
+        "sha256": "d1a60823ab754f04401d62a806189f806e5422c75e634ee87e8dff51da3e2d48",
+        "bytes": 6864
+      }
+    },
+    {
+      "id": "scroll-progress",
+      "name": "scroll-progress",
+      "title": "Scroll Progress",
+      "category": "community",
+      "categoryTitle": "Community",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/scroll-progress",
+      "upstreamPath": "apps/www/registry/magicui/scroll-progress.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/scroll-progress.tsx",
+      "sourcePath": "Sources/MagicUI/Components/scroll-progress.tsx",
+      "sha256": "4d79d33956520a69ff3c74509deaee7be6036125b0e0fb54078eba7eeefe894a",
+      "bytes": 681,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/scroll-progress.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/scroll-progress.json",
+        "sourcePath": "Sources/MagicUI/Registry/scroll-progress.json",
+        "sha256": "8e3ac726dfae3fea1befffeb8de816d386a14f591529e400cafe29a1244bbf9c",
+        "bytes": 1104
+      }
+    },
+    {
+      "id": "shimmer-button",
+      "name": "shimmer-button",
+      "title": "Shimmer Button",
+      "category": "buttons",
+      "categoryTitle": "Buttons",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/shimmer-button",
+      "upstreamPath": "apps/www/registry/magicui/shimmer-button.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/shimmer-button.tsx",
+      "sourcePath": "Sources/MagicUI/Components/shimmer-button.tsx",
+      "sha256": "c85ffda63ba086d2078a8dacffdfc25f0b106e1566362fa251888a214ee3c010",
+      "bytes": 2846,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/shimmer-button.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/shimmer-button.json",
+        "sourcePath": "Sources/MagicUI/Registry/shimmer-button.json",
+        "sha256": "b545d291f05a00b4cffe8672f2c09d48d310876d626a3f5782085e5a727923ff",
+        "bytes": 4063
+      }
+    },
+    {
+      "id": "shine-border",
+      "name": "shine-border",
+      "title": "Shine Border",
+      "category": "special-effects",
+      "categoryTitle": "Special Effects",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/shine-border",
+      "upstreamPath": "apps/www/registry/magicui/shine-border.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/shine-border.tsx",
+      "sourcePath": "Sources/MagicUI/Components/shine-border.tsx",
+      "sha256": "c9344b563c2427f26393f6f5e2fe5c72d6a3fcb4b90b8f073ebad515e963c46c",
+      "bytes": 1649,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/shine-border.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/shine-border.json",
+        "sourcePath": "Sources/MagicUI/Registry/shine-border.json",
+        "sha256": "56329b539c8b1ddcf54566315674ceba1bfb06e8f5994cf9b6af0fd529e00ce6",
+        "bytes": 2428
+      }
+    },
+    {
+      "id": "shiny-button",
+      "name": "shiny-button",
+      "title": "Shiny Button",
+      "category": "community",
+      "categoryTitle": "Community",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/shiny-button",
+      "upstreamPath": "apps/www/registry/magicui/shiny-button.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/shiny-button.tsx",
+      "sourcePath": "Sources/MagicUI/Components/shiny-button.tsx",
+      "sha256": "916c8b8ffe1a018b560dff80aed78cdfaeded889bcbec70e3fe34618d5073abf",
+      "bytes": 2285,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/shiny-button.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/shiny-button.json",
+        "sourcePath": "Sources/MagicUI/Registry/shiny-button.json",
+        "sha256": "b378d37c3c762caae89b5f43fde7f9bc7f1ecfce0b5e59c07fcde6351fded76d",
+        "bytes": 2806
+      }
+    },
+    {
+      "id": "smooth-cursor",
+      "name": "smooth-cursor",
+      "title": "Smooth Cursor",
+      "category": "components",
+      "categoryTitle": "Components",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/smooth-cursor",
+      "upstreamPath": "apps/www/registry/magicui/smooth-cursor.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/smooth-cursor.tsx",
+      "sourcePath": "Sources/MagicUI/Components/smooth-cursor.tsx",
+      "sha256": "bbcb3812f29fe0c128066bb83f810849a6eeb951569109d5b46bcd0f16a83c0c",
+      "bytes": 6759,
+      "dependencies": [
+        "framer-motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/smooth-cursor.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/smooth-cursor.json",
+        "sourcePath": "Sources/MagicUI/Registry/smooth-cursor.json",
+        "sha256": "f58fce4505007e0c4494e350b336f1ce0934ead7701bf1dd068aec545c6ff89a",
+        "bytes": 7526
+      }
+    },
+    {
+      "id": "sparkles-text",
+      "name": "sparkles-text",
+      "title": "Sparkles Text",
+      "category": "text-animations",
+      "categoryTitle": "Text Animations",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/sparkles-text",
+      "upstreamPath": "apps/www/registry/magicui/sparkles-text.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/sparkles-text.tsx",
+      "sourcePath": "Sources/MagicUI/Components/sparkles-text.tsx",
+      "sha256": "bab902a2260bcf17ae0065d13e0a231ddc0ec3a9ab74da164998ed1d4a330697",
+      "bytes": 4108,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/sparkles-text.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/sparkles-text.json",
+        "sourcePath": "Sources/MagicUI/Registry/sparkles-text.json",
+        "sha256": "5938c35ca4bbb20b9b63a43e232d2df82bf2d71d88fcf3c25a4476dbfaee7f26",
+        "bytes": 4758
+      }
+    },
+    {
+      "id": "spinning-text",
+      "name": "spinning-text",
+      "title": "Spinning Text",
+      "category": "text-animations",
+      "categoryTitle": "Text Animations",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/spinning-text",
+      "upstreamPath": "apps/www/registry/magicui/spinning-text.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/spinning-text.tsx",
+      "sourcePath": "Sources/MagicUI/Components/spinning-text.tsx",
+      "sha256": "55726f972d09705b0cd10e8739e74afe8d11b7164537554f99905267e456dafa",
+      "bytes": 2651,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/spinning-text.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/spinning-text.json",
+        "sourcePath": "Sources/MagicUI/Registry/spinning-text.json",
+        "sha256": "82c45576c0209d9a97abce243ed6bba02c4baf37613b48b6c29ef669185a6ba9",
+        "bytes": 3300
+      }
+    },
+    {
+      "id": "striped-pattern",
+      "name": "striped-pattern",
+      "title": "Striped Pattern",
+      "category": "backgrounds",
+      "categoryTitle": "Backgrounds",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/striped-pattern",
+      "upstreamPath": "apps/www/registry/magicui/striped-pattern.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/striped-pattern.tsx",
+      "sourcePath": "Sources/MagicUI/Components/striped-pattern.tsx",
+      "sha256": "e7616db6087216fc5e8ad0e0aa3fada349ea238a651d85ef4986c88f1f070966",
+      "bytes": 1400,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/striped-pattern.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/striped-pattern.json",
+        "sourcePath": "Sources/MagicUI/Registry/striped-pattern.json",
+        "sha256": "e28ad3543fef53dde91e68be992d4b93d13cbea83623e4be3cce706fecde4bde",
+        "bytes": 1951
+      }
+    },
+    {
+      "id": "terminal",
+      "name": "terminal",
+      "title": "Terminal",
+      "category": "components",
+      "categoryTitle": "Components",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/terminal",
+      "upstreamPath": "apps/www/registry/magicui/terminal.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/terminal.tsx",
+      "sourcePath": "Sources/MagicUI/Components/terminal.tsx",
+      "sha256": "a0ece03773e1a17862e049f11f72647b5db44dc1400473bdecd3c0e81f43f2d7",
+      "bytes": 7716,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/terminal.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/terminal.json",
+        "sourcePath": "Sources/MagicUI/Registry/terminal.json",
+        "sha256": "05f5c6ae595956464eee5b60e40f25dd2824413ca10bbb5ee0dcaf027758299d",
+        "bytes": 8363
+      }
+    },
+    {
+      "id": "text-3d-flip",
+      "name": "text-3d-flip",
+      "title": "Text 3D Flip",
+      "category": "text-animations",
+      "categoryTitle": "Text Animations",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/text-3d-flip",
+      "upstreamPath": "apps/www/registry/magicui/text-3d-flip.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/text-3d-flip.tsx",
+      "sourcePath": "Sources/MagicUI/Components/text-3d-flip.tsx",
+      "sha256": "d0ec56314f80b3e1ca9a56bc2b690ab379dcda2306562849fd137ab59ea14615",
+      "bytes": 7071,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/text-3d-flip.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/text-3d-flip.json",
+        "sourcePath": "Sources/MagicUI/Registry/text-3d-flip.json",
+        "sha256": "3001fd9a871cf30f90422a7b621ae3774bf4c7596e857c55b7606db6c710b31c",
+        "bytes": 7878
+      }
+    },
+    {
+      "id": "text-animate",
+      "name": "text-animate",
+      "title": "Text Animate",
+      "category": "text-animations",
+      "categoryTitle": "Text Animations",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/text-animate",
+      "upstreamPath": "apps/www/registry/magicui/text-animate.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/text-animate.tsx",
+      "sourcePath": "Sources/MagicUI/Components/text-animate.tsx",
+      "sha256": "0ebece79c412661f57bc0489416b55a376e9f006e0f558162bb6e91f814a99a6",
+      "bytes": 9476,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/text-animate.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/text-animate.json",
+        "sourcePath": "Sources/MagicUI/Registry/text-animate.json",
+        "sha256": "47876244e2036c60ea0c17f756a65f9fdf8488c12b3b51c7b4917f03567adafb",
+        "bytes": 10448
+      }
+    },
+    {
+      "id": "text-reveal",
+      "name": "text-reveal",
+      "title": "Text Reveal",
+      "category": "text-animations",
+      "categoryTitle": "Text Animations",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/text-reveal",
+      "upstreamPath": "apps/www/registry/magicui/text-reveal.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/text-reveal.tsx",
+      "sourcePath": "Sources/MagicUI/Components/text-reveal.tsx",
+      "sha256": "af69b435aa66a762af04d7d85b8578627ad9fb6541d01170135756e647d36240",
+      "bytes": 1965,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/text-reveal.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/text-reveal.json",
+        "sourcePath": "Sources/MagicUI/Registry/text-reveal.json",
+        "sha256": "5fbc83e19ee405d2b3fde4d5d6edd49593946754be2a6265e4c1cdbbea3e4ed1",
+        "bytes": 2439
+      }
+    },
+    {
+      "id": "tweet-card",
+      "name": "tweet-card",
+      "title": "Tweet Card",
+      "category": "components",
+      "categoryTitle": "Components",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/tweet-card",
+      "upstreamPath": "apps/www/registry/magicui/tweet-card.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/tweet-card.tsx",
+      "sourcePath": "Sources/MagicUI/Components/tweet-card.tsx",
+      "sha256": "6d3c76c487e091b0da0327f17df7bd358286a86214a526316050a9fbccf3143e",
+      "bytes": 9430,
+      "dependencies": [
+        "react-tweet"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/tweet-card.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/tweet-card.json",
+        "sourcePath": "Sources/MagicUI/Registry/tweet-card.json",
+        "sha256": "db365975665d3ad04bf9dbee427f8feaf97f91c458cf39a148e5c9bf0a647bff",
+        "bytes": 10282
+      }
+    },
+    {
+      "id": "typing-animation",
+      "name": "typing-animation",
+      "title": "Typing Animation",
+      "category": "text-animations",
+      "categoryTitle": "Text Animations",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/typing-animation",
+      "upstreamPath": "apps/www/registry/magicui/typing-animation.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/typing-animation.tsx",
+      "sourcePath": "Sources/MagicUI/Components/typing-animation.tsx",
+      "sha256": "70ce53aff9dd61cba9d5c8999e8a05120839d4d8e0396a5e0a1579f155d18e4b",
+      "bytes": 5671,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/typing-animation.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/typing-animation.json",
+        "sourcePath": "Sources/MagicUI/Registry/typing-animation.json",
+        "sha256": "490cfa9ef93c4b85a026eac64c15149d619ce72c86641189e9fdc9e36fc10300",
+        "bytes": 6651
+      }
+    },
+    {
+      "id": "video-text",
+      "name": "video-text",
+      "title": "Video Text",
+      "category": "text-animations",
+      "categoryTitle": "Text Animations",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/video-text",
+      "upstreamPath": "apps/www/registry/magicui/video-text.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/video-text.tsx",
+      "sourcePath": "Sources/MagicUI/Components/video-text.tsx",
+      "sha256": "93fdb8caeb85d84700b78a14cfccc471d1b364b4c23bab702eb0ef832683e0dd",
+      "bytes": 3503,
+      "dependencies": [],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/video-text.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/video-text.json",
+        "sourcePath": "Sources/MagicUI/Registry/video-text.json",
+        "sha256": "0cbbb45b9a09a5f942f9cafe8de9fb7187543adabe9fc7ad048e2a74a94aa33f",
+        "bytes": 4069
+      }
+    },
+    {
+      "id": "warp-background",
+      "name": "warp-background",
+      "title": "Warp Background",
+      "category": "community",
+      "categoryTitle": "Community",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/warp-background",
+      "upstreamPath": "apps/www/registry/magicui/warp-background.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/warp-background.tsx",
+      "sourcePath": "Sources/MagicUI/Components/warp-background.tsx",
+      "sha256": "ca2d664c7ca43fcf9d59a20a484be9945a1ffc4a835f8a9e6bbb039c93249a39",
+      "bytes": 5869,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/warp-background.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/warp-background.json",
+        "sourcePath": "Sources/MagicUI/Registry/warp-background.json",
+        "sha256": "4470c3766084ad58d78b1fbdba82a889499be3cec451bcef5e3511afaf01677c",
+        "bytes": 6456
+      }
+    },
+    {
+      "id": "word-rotate",
+      "name": "word-rotate",
+      "title": "Word Rotate",
+      "category": "text-animations",
+      "categoryTitle": "Text Animations",
+      "language": "TypeScript TSX",
+      "documentationURL": "https://magicui.design/docs/components/word-rotate",
+      "upstreamPath": "apps/www/registry/magicui/word-rotate.tsx",
+      "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/registry/magicui/word-rotate.tsx",
+      "sourcePath": "Sources/MagicUI/Components/word-rotate.tsx",
+      "sha256": "201852c2ddd0c63f1cefa730c50f97d88c1d4ee4b7158ca35032b8efc91d2293",
+      "bytes": 1140,
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [],
+      "registryItem": {
+        "upstreamPath": "apps/www/public/r/word-rotate.json",
+        "sourceURL": "https://raw.githubusercontent.com/magicuidesign/magicui/2d671cc6c0e0f40e28682c9cbddd16694dcfe627/apps/www/public/r/word-rotate.json",
+        "sourcePath": "Sources/MagicUI/Registry/word-rotate.json",
+        "sha256": "d90065bc6e4f7b741da710f7b14dc9ac8e25af9ca635cc963304b6b7769b56ec",
+        "bytes": 1562
+      }
+    }
+  ]
+}

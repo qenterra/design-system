@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "5.1.0",
+  "version": "5.3.0",
   "repository": "https://github.com/qenterra/packages",
   "files": [
     {
@@ -90,8 +90,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "fc8fae95a807a88070128123a8038b124993ca6d6731bd208ac288004a9d7e81",
-      "bytes": 2290
+      "sha256": "535c9659180b3e79229c9e96a5301b97dd5670c96b5ca16f85acfa7c2bda5941",
+      "bytes": 3885
     },
     {
       "path": "CODE_OF_CONDUCT.md",
@@ -130,8 +130,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "adc7cffc2e8013cc186df9c6a46335b3eb4df788a24cf2ceaba1cccf7ba24ffa",
-      "bytes": 4414
+      "sha256": "d8f2e892eebead0cd67d6314b4960e0c8a6b0732d6099b33bf1d0bccd391021d",
+      "bytes": 4754
     },
     {
       "path": "SECURITY.md",
@@ -1255,8 +1255,783 @@
     },
     {
       "path": "Sources/ExploreSwiftUI/manifest.json",
-      "sha256": "6c8af88830860ed6465b3c82482e78acd352c0c36adb44870e15050df70633f1",
+      "sha256": "990c814a71fe6798dcf742d97970fe0e58e19a20e0a6d8880a4dc94a43cfa316",
       "bytes": 248777
+    },
+    {
+      "path": "Sources/MagicUI/Components/android.tsx",
+      "sha256": "9235d2e9204078c65ff8077bf8adc6b3ed4b12c55a8354345faa8f8abbddb5cf",
+      "bytes": 2860
+    },
+    {
+      "path": "Sources/MagicUI/Components/animated-beam.tsx",
+      "sha256": "6afa2ee1d01694a428eb8517d48deebe5c6b532dc0ee871800bb9d92aae43e79",
+      "bytes": 4986
+    },
+    {
+      "path": "Sources/MagicUI/Components/animated-circular-progress-bar.tsx",
+      "sha256": "c7f974283804607484afba34a5886af027cb58528a1987f392c35a577a77a782",
+      "bytes": 3524
+    },
+    {
+      "path": "Sources/MagicUI/Components/animated-gradient-text.tsx",
+      "sha256": "e5f0b81be1a9dc707199c2fd10c588bde872c72a02e2eb6d195d080112a34692",
+      "bytes": 871
+    },
+    {
+      "path": "Sources/MagicUI/Components/animated-grid-pattern.tsx",
+      "sha256": "fda051f51f5b805983beb855633e05bfcbf17a4b94a2459e5352d8bd624f618a",
+      "bytes": 4410
+    },
+    {
+      "path": "Sources/MagicUI/Components/animated-list.tsx",
+      "sha256": "9363c5afa61d7aab1919b4500f7325cc8871b35103d5dd60a2a1625fe5e7dc58",
+      "bytes": 2036
+    },
+    {
+      "path": "Sources/MagicUI/Components/animated-shiny-text.tsx",
+      "sha256": "3743a0a0b4894840a96bacd839e493872bac484a940684f91fd23a1784c00fbb",
+      "bytes": 999
+    },
+    {
+      "path": "Sources/MagicUI/Components/animated-theme-toggler.tsx",
+      "sha256": "5d09afdb5968e9f7f3967943c27103d727f264fdd51fa14b10a4b3130a1970a8",
+      "bytes": 10208
+    },
+    {
+      "path": "Sources/MagicUI/Components/aurora-text.tsx",
+      "sha256": "c7bd0b72a093084a881416975249c507ddd715249ac5832a9161538eeef29927",
+      "bytes": 1008
+    },
+    {
+      "path": "Sources/MagicUI/Components/avatar-circles.tsx",
+      "sha256": "e0900fa87df8042ad4f98d1ec8168b1504b207eb0211ed19b1ba079d1f9741dd",
+      "bytes": 1214
+    },
+    {
+      "path": "Sources/MagicUI/Components/backlight.tsx",
+      "sha256": "d302fbcbfa80f42cf59f3ffbf4451627f6a79d9206d6e3bc1fb3f65511515108",
+      "bytes": 867
+    },
+    {
+      "path": "Sources/MagicUI/Components/bento-grid.tsx",
+      "sha256": "9c2abcb2a4e51519e56d510299771a2d0e170ab9927a9a792a58614b1837ed47",
+      "bytes": 3206
+    },
+    {
+      "path": "Sources/MagicUI/Components/blur-fade.tsx",
+      "sha256": "99a8e83aa8817f48e26d921e959ff9abefb5c2f1f0b72b166ed95e88e015949f",
+      "bytes": 2220
+    },
+    {
+      "path": "Sources/MagicUI/Components/border-beam.tsx",
+      "sha256": "ccdfb52cb8f2089e7823a9edfe9c3a52e52ab6759ed5b91d184b1e2bb80cf414",
+      "bytes": 2462
+    },
+    {
+      "path": "Sources/MagicUI/Components/code-comparison.tsx",
+      "sha256": "a06698296a219ac0d7ffa098f6d5d2bbf38c3f825af5a8b01786fddf16b969ac",
+      "bytes": 6248
+    },
+    {
+      "path": "Sources/MagicUI/Components/comic-text.tsx",
+      "sha256": "d259aa2d9ef9fadcfd565a9bf29557660c511a08e3c18b675dd4b3d731417113",
+      "bytes": 1593
+    },
+    {
+      "path": "Sources/MagicUI/Components/confetti.tsx",
+      "sha256": "c2a713b9a768d0f62f2c67837c441586de02a744b528c91548d043d8cb3fc8a6",
+      "bytes": 3576
+    },
+    {
+      "path": "Sources/MagicUI/Components/cool-mode.tsx",
+      "sha256": "9eba11d050264db27329fe0321c0a41305440244fddcc3c640ee92ff31033fd3",
+      "bytes": 7676
+    },
+    {
+      "path": "Sources/MagicUI/Components/dia-text-reveal.tsx",
+      "sha256": "239650378a2165db192ebfa8961f9e683e35edd290d83a17339798f8924cbe4f",
+      "bytes": 6911
+    },
+    {
+      "path": "Sources/MagicUI/Components/dock.tsx",
+      "sha256": "c12d578d4a273036fa435b67d8374d6fe9c7bcb962665cefc7b851aa86d12441",
+      "bytes": 3972
+    },
+    {
+      "path": "Sources/MagicUI/Components/dot-pattern.tsx",
+      "sha256": "f198ffad23f2404f7f8d0d562e1eec5d5d43e61635994bf74a214af9fa553bcb",
+      "bytes": 4251
+    },
+    {
+      "path": "Sources/MagicUI/Components/dotted-map.tsx",
+      "sha256": "9cf9a7edbed239b6e8cfdad588a97400d059ccf8f391d94f3cf033261a5ef7d9",
+      "bytes": 4972
+    },
+    {
+      "path": "Sources/MagicUI/Components/file-tree.tsx",
+      "sha256": "ffc123a907fa76f9bcc4a2bc42fab53473021343399f91e9954e3923b0f07416",
+      "bytes": 12571
+    },
+    {
+      "path": "Sources/MagicUI/Components/flickering-grid.tsx",
+      "sha256": "16e5ee59fda4298a8e2210b38ad260b9c278ab8cf4a0817ed410d9e78edbdc3b",
+      "bytes": 5463
+    },
+    {
+      "path": "Sources/MagicUI/Components/glare-hover.tsx",
+      "sha256": "db8084ae31fb41978ce5c2fc164e7d2c63cf414e3817fe444dca4ed177c9986f",
+      "bytes": 4174
+    },
+    {
+      "path": "Sources/MagicUI/Components/globe.tsx",
+      "sha256": "76422bf378c6503883706fe7af90132f7716dbe383fab7728a95c95e4d16cfd0",
+      "bytes": 3506
+    },
+    {
+      "path": "Sources/MagicUI/Components/glyph-matrix.tsx",
+      "sha256": "0c4c11f8a81dab493b0adbf9ed3dd7342c64fd8957926a4e39b31294b1853633",
+      "bytes": 4529
+    },
+    {
+      "path": "Sources/MagicUI/Components/grid-pattern.tsx",
+      "sha256": "1d1caaf01de0a1ebfdffea1163535f8fbfdfbee33cd0a640e09388815d1823df",
+      "bytes": 1537
+    },
+    {
+      "path": "Sources/MagicUI/Components/hero-video-dialog.tsx",
+      "sha256": "8a7a25227054b5b747e77efe12aacf3e4fff4410a55e4bcd8fda6c5bcf71b670",
+      "bytes": 4967
+    },
+    {
+      "path": "Sources/MagicUI/Components/hexagon-pattern.tsx",
+      "sha256": "466ed6cafc0de757a37ced4b3659e6713d98dd6f97325982813f5f390d97ad68",
+      "bytes": 8403
+    },
+    {
+      "path": "Sources/MagicUI/Components/highlighter.tsx",
+      "sha256": "521c876ac04938ae747126a5277c14c6eb19114a9a09c3567249a7d2ee2af5b2",
+      "bytes": 2214
+    },
+    {
+      "path": "Sources/MagicUI/Components/hyper-text.tsx",
+      "sha256": "12a2f5aa5d53e20ccbe611bde8057083451bda69a31318db166f758289cb93e8",
+      "bytes": 4715
+    },
+    {
+      "path": "Sources/MagicUI/Components/icon-cloud.tsx",
+      "sha256": "243e182efdb70940b01452135160747011b01ba6766a8d5e47ba93b526ae105f",
+      "bytes": 11046
+    },
+    {
+      "path": "Sources/MagicUI/Components/interactive-grid-pattern.tsx",
+      "sha256": "953385a7fae475dac73f5a88de878cfd8dab1ea5b83a95638ef06bbb10f0a6e2",
+      "bytes": 2184
+    },
+    {
+      "path": "Sources/MagicUI/Components/interactive-hover-button.tsx",
+      "sha256": "ab16b3a2efea7fcc84a0eddeb7dad5304b403f89d22e056427fd3f905baaa0de",
+      "bytes": 1094
+    },
+    {
+      "path": "Sources/MagicUI/Components/iphone.tsx",
+      "sha256": "64aa5f8f05c2444d2f0f791328a6bc5c0cc73624eb53dde2c5d29cd710c20124",
+      "bytes": 5882
+    },
+    {
+      "path": "Sources/MagicUI/Components/kinetic-text.tsx",
+      "sha256": "a02ab6c77ae376778fec3c27b0b1c9d0d7ec0f7e0ac9434d0716eb217556c355",
+      "bytes": 1552
+    },
+    {
+      "path": "Sources/MagicUI/Components/lens.tsx",
+      "sha256": "85e2ae91387ee22d1492224e5767788653b5954a2d65ec0fd59ca023dae6f0e3",
+      "bytes": 3555
+    },
+    {
+      "path": "Sources/MagicUI/Components/light-rays.tsx",
+      "sha256": "e0b8d42d19a7b05b80f69bf023dadc24143d6b7b75da113bd158eddbf36d46bf",
+      "bytes": 3682
+    },
+    {
+      "path": "Sources/MagicUI/Components/line-shadow-text.tsx",
+      "sha256": "5103c5e2c2d30325d8581c1d172837b0040810f7361080208ecba1556bd52afa",
+      "bytes": 1569
+    },
+    {
+      "path": "Sources/MagicUI/Components/magic-card.tsx",
+      "sha256": "6139e78ed228ebca18ed144f4a2714a89214c2ef604f1f82bc2f61204c3f3fa3",
+      "bytes": 6314
+    },
+    {
+      "path": "Sources/MagicUI/Components/marquee.tsx",
+      "sha256": "779f360a107409bfa35cda13bcef7d54cd620a15ab4a0ee50412442a4dd6b9c7",
+      "bytes": 1658
+    },
+    {
+      "path": "Sources/MagicUI/Components/meteors.tsx",
+      "sha256": "0730d0d6449fb3fb098a5e9edc80d066bdf06ebbb1d1e598b8fb6a10ff4a5ff9",
+      "bytes": 1610
+    },
+    {
+      "path": "Sources/MagicUI/Components/morphing-text.tsx",
+      "sha256": "8475ec9beae637a2af6183ed1f91227d0e048f93051352faa0e8d921b2c53d62",
+      "bytes": 3628
+    },
+    {
+      "path": "Sources/MagicUI/Components/neon-gradient-card.tsx",
+      "sha256": "bd96e18be176f3f2365cf27d686bf31d6f062c0abb707ca21e88079ab28f76ed",
+      "bytes": 4220
+    },
+    {
+      "path": "Sources/MagicUI/Components/noise-texture.tsx",
+      "sha256": "90cad110cf368c95bd40edcdfe64d52c6aacb0656996e20867562787f4ca4c1c",
+      "bytes": 1785
+    },
+    {
+      "path": "Sources/MagicUI/Components/number-ticker.tsx",
+      "sha256": "0f7dcbc6a1962615a877590304e846f33d390002a51f2226f544938577c220f4",
+      "bytes": 1799
+    },
+    {
+      "path": "Sources/MagicUI/Components/orbiting-circles.tsx",
+      "sha256": "859b88b6c22144e5cd4bf04ab49d339090eea13b422d3085a80584e6b9d4da68",
+      "bytes": 1735
+    },
+    {
+      "path": "Sources/MagicUI/Components/particles.tsx",
+      "sha256": "f768e19deca7c0ba9c424b4683b62cae3eedd11ef3dac8b0363e65c2773f236e",
+      "bytes": 8543
+    },
+    {
+      "path": "Sources/MagicUI/Components/pixel-image.tsx",
+      "sha256": "88240ed4cfcf58eb1c77ab79b524ee5721135dc0a243d892d0ac3420708626c2",
+      "bytes": 3314
+    },
+    {
+      "path": "Sources/MagicUI/Components/pointer.tsx",
+      "sha256": "f46b0109767ca079e5bc87ccbaac0091216ad84c3da09b15b7c176664aff9e6f",
+      "bytes": 3215
+    },
+    {
+      "path": "Sources/MagicUI/Components/progressive-blur.tsx",
+      "sha256": "2d1a95b26a66b707cd786c626e3fe7819330d7ec585618afb301e6cd776d811b",
+      "bytes": 4423
+    },
+    {
+      "path": "Sources/MagicUI/Components/pulsating-button.tsx",
+      "sha256": "f73dd2d7da811ea0202b5bab7d441562f48772a55459b26316c8dc836ee852ca",
+      "bytes": 3132
+    },
+    {
+      "path": "Sources/MagicUI/Components/rainbow-button.tsx",
+      "sha256": "cda40de677181acd8690cd24bad7f734753fec3b2d921206e733f7d6a4e36ea0",
+      "bytes": 3404
+    },
+    {
+      "path": "Sources/MagicUI/Components/retro-grid.tsx",
+      "sha256": "7434890f7345291453245866ae78f3f8d622a75a4e3b806729ca33c995ef6142",
+      "bytes": 23431
+    },
+    {
+      "path": "Sources/MagicUI/Components/ripple-button.tsx",
+      "sha256": "828d7883953843761cb80fd6f59b6115e72d8db6bc83471e7ee8abf049ab6863",
+      "bytes": 2863
+    },
+    {
+      "path": "Sources/MagicUI/Components/ripple.tsx",
+      "sha256": "1ac207017c0f4e993f83a1ead8b8a1b4a92286ef1595a297aba79782b2616eaf",
+      "bytes": 1564
+    },
+    {
+      "path": "Sources/MagicUI/Components/safari.tsx",
+      "sha256": "2cb6ce69def86020f6860a3dd8696f0998dac340db932a3eee05e990b2e29f3e",
+      "bytes": 13124
+    },
+    {
+      "path": "Sources/MagicUI/Components/scroll-based-velocity.tsx",
+      "sha256": "17cebe769a2337587bcb0e8e5d3ebd71f5b7ffc27ad1f6f59a8971f5d277b844",
+      "bytes": 6198
+    },
+    {
+      "path": "Sources/MagicUI/Components/scroll-progress.tsx",
+      "sha256": "4d79d33956520a69ff3c74509deaee7be6036125b0e0fb54078eba7eeefe894a",
+      "bytes": 681
+    },
+    {
+      "path": "Sources/MagicUI/Components/shimmer-button.tsx",
+      "sha256": "c85ffda63ba086d2078a8dacffdfc25f0b106e1566362fa251888a214ee3c010",
+      "bytes": 2846
+    },
+    {
+      "path": "Sources/MagicUI/Components/shine-border.tsx",
+      "sha256": "c9344b563c2427f26393f6f5e2fe5c72d6a3fcb4b90b8f073ebad515e963c46c",
+      "bytes": 1649
+    },
+    {
+      "path": "Sources/MagicUI/Components/shiny-button.tsx",
+      "sha256": "916c8b8ffe1a018b560dff80aed78cdfaeded889bcbec70e3fe34618d5073abf",
+      "bytes": 2285
+    },
+    {
+      "path": "Sources/MagicUI/Components/smooth-cursor.tsx",
+      "sha256": "bbcb3812f29fe0c128066bb83f810849a6eeb951569109d5b46bcd0f16a83c0c",
+      "bytes": 6759
+    },
+    {
+      "path": "Sources/MagicUI/Components/sparkles-text.tsx",
+      "sha256": "bab902a2260bcf17ae0065d13e0a231ddc0ec3a9ab74da164998ed1d4a330697",
+      "bytes": 4108
+    },
+    {
+      "path": "Sources/MagicUI/Components/spinning-text.tsx",
+      "sha256": "55726f972d09705b0cd10e8739e74afe8d11b7164537554f99905267e456dafa",
+      "bytes": 2651
+    },
+    {
+      "path": "Sources/MagicUI/Components/striped-pattern.tsx",
+      "sha256": "e7616db6087216fc5e8ad0e0aa3fada349ea238a651d85ef4986c88f1f070966",
+      "bytes": 1400
+    },
+    {
+      "path": "Sources/MagicUI/Components/terminal.tsx",
+      "sha256": "a0ece03773e1a17862e049f11f72647b5db44dc1400473bdecd3c0e81f43f2d7",
+      "bytes": 7716
+    },
+    {
+      "path": "Sources/MagicUI/Components/text-3d-flip.tsx",
+      "sha256": "d0ec56314f80b3e1ca9a56bc2b690ab379dcda2306562849fd137ab59ea14615",
+      "bytes": 7071
+    },
+    {
+      "path": "Sources/MagicUI/Components/text-animate.tsx",
+      "sha256": "0ebece79c412661f57bc0489416b55a376e9f006e0f558162bb6e91f814a99a6",
+      "bytes": 9476
+    },
+    {
+      "path": "Sources/MagicUI/Components/text-reveal.tsx",
+      "sha256": "af69b435aa66a762af04d7d85b8578627ad9fb6541d01170135756e647d36240",
+      "bytes": 1965
+    },
+    {
+      "path": "Sources/MagicUI/Components/tweet-card.tsx",
+      "sha256": "6d3c76c487e091b0da0327f17df7bd358286a86214a526316050a9fbccf3143e",
+      "bytes": 9430
+    },
+    {
+      "path": "Sources/MagicUI/Components/typing-animation.tsx",
+      "sha256": "70ce53aff9dd61cba9d5c8999e8a05120839d4d8e0396a5e0a1579f155d18e4b",
+      "bytes": 5671
+    },
+    {
+      "path": "Sources/MagicUI/Components/video-text.tsx",
+      "sha256": "93fdb8caeb85d84700b78a14cfccc471d1b364b4c23bab702eb0ef832683e0dd",
+      "bytes": 3503
+    },
+    {
+      "path": "Sources/MagicUI/Components/warp-background.tsx",
+      "sha256": "ca2d664c7ca43fcf9d59a20a484be9945a1ffc4a835f8a9e6bbb039c93249a39",
+      "bytes": 5869
+    },
+    {
+      "path": "Sources/MagicUI/Components/word-rotate.tsx",
+      "sha256": "201852c2ddd0c63f1cefa730c50f97d88c1d4ee4b7158ca35032b8efc91d2293",
+      "bytes": 1140
+    },
+    {
+      "path": "Sources/MagicUI/LICENSE.md",
+      "sha256": "0147b84235ed916b8b4e89c1f80655351c5afe7d211b629be61f553a227b34ba",
+      "bytes": 1060
+    },
+    {
+      "path": "Sources/MagicUI/README.md",
+      "sha256": "b290349051629b65fa83b7543764defe7d0887e09347789eb16df1fbdbd1a442",
+      "bytes": 2468
+    },
+    {
+      "path": "Sources/MagicUI/Registry/android.json",
+      "sha256": "8740bfc1757a42d7ed9fa89e9ae1b85faeb9bf95081dd45ebd63a7f8eb441b7f",
+      "bytes": 3350
+    },
+    {
+      "path": "Sources/MagicUI/Registry/animated-beam.json",
+      "sha256": "4b68e61eb2cfa71bbf4bff6ea50665be6e04dd9168f40b86de13a406eb49fcef",
+      "bytes": 5705
+    },
+    {
+      "path": "Sources/MagicUI/Registry/animated-circular-progress-bar.json",
+      "sha256": "604443ef02973dfc2ab2838a065ffa532e5b26b9827a816b1370bdfe2203c33d",
+      "bytes": 4188
+    },
+    {
+      "path": "Sources/MagicUI/Registry/animated-gradient-text.json",
+      "sha256": "7ad5ffebc064485fdfec12b2fc365cfc30fce09518e52301090475c899c4b0e1",
+      "bytes": 1549
+    },
+    {
+      "path": "Sources/MagicUI/Registry/animated-grid-pattern.json",
+      "sha256": "c5d5798b1fee16a64ceb3c9756a47bb5ddb9948e3d89fd4868b11b02d1fea410",
+      "bytes": 5066
+    },
+    {
+      "path": "Sources/MagicUI/Registry/animated-list.json",
+      "sha256": "a95ae266e0eda12b8230724c690818a434d22bad0a2093a8197417cc997d298b",
+      "bytes": 2586
+    },
+    {
+      "path": "Sources/MagicUI/Registry/animated-shiny-text.json",
+      "sha256": "f8f3bf18fc6a4e18dd28c301e9706a2791407f4ae7e236ea53aa9852aa635e91",
+      "bytes": 1799
+    },
+    {
+      "path": "Sources/MagicUI/Registry/animated-theme-toggler.json",
+      "sha256": "aa4d81aaec9c7c6c1a5644647bb6cfbb9de697597e0c9082c305b26f18a79973",
+      "bytes": 11290
+    },
+    {
+      "path": "Sources/MagicUI/Registry/aurora-text.json",
+      "sha256": "22a3f272cb03dfa7803edc726cdd6a90ad51aa848e0d79b806bc6d5a341dae0b",
+      "bytes": 2126
+    },
+    {
+      "path": "Sources/MagicUI/Registry/avatar-circles.json",
+      "sha256": "806888af495955061c6389046a4aedb2d14405116b2441ff2c03a4e4fb50c304",
+      "bytes": 1611
+    },
+    {
+      "path": "Sources/MagicUI/Registry/backlight.json",
+      "sha256": "e2e48a5ee95aa73a8216e23d9a7fba9aa2df7eb07029512832450df834f98aa0",
+      "bytes": 1291
+    },
+    {
+      "path": "Sources/MagicUI/Registry/bento-grid.json",
+      "sha256": "f43018c50fbc37f00856e3d2b5934af9bb56276d841151987a376b8caaf8c9ea",
+      "bytes": 3849
+    },
+    {
+      "path": "Sources/MagicUI/Registry/blur-fade.json",
+      "sha256": "5161e38f05b5898ee42892daa9c133688f528b20817bb4c62ae79f68967a88ba",
+      "bytes": 2765
+    },
+    {
+      "path": "Sources/MagicUI/Registry/border-beam.json",
+      "sha256": "5ed4f31cf1aa2cf44b03d57058b6bc46ae2b100fef426c9bf7f5ee9663ecf66a",
+      "bytes": 2997
+    },
+    {
+      "path": "Sources/MagicUI/Registry/code-comparison.json",
+      "sha256": "9fcda01fe0775681d5fde5fbe1c1317d02704ddab70db975eebb50d6e7246791",
+      "bytes": 6909
+    },
+    {
+      "path": "Sources/MagicUI/Registry/comic-text.json",
+      "sha256": "8a880e1fe4cf04dd5c917c7b0d73e27225658d1caf1cb078464bd2a07c9bcff7",
+      "bytes": 2037
+    },
+    {
+      "path": "Sources/MagicUI/Registry/confetti.json",
+      "sha256": "b81107ad0c151a947fdad2fe2c6441433d50e9aaccd9cbc1712a30bee2fd1231",
+      "bytes": 4244
+    },
+    {
+      "path": "Sources/MagicUI/Registry/cool-mode.json",
+      "sha256": "ec49e6707fc9b00f4dfc8fa8ebdb74c1dca170b7be65992d02be5f4f23f66a05",
+      "bytes": 8400
+    },
+    {
+      "path": "Sources/MagicUI/Registry/dia-text-reveal.json",
+      "sha256": "6870c1f3731e9d72b801caba5cf6f53f1ff31e19eb8da968c20ce69dac8b26e8",
+      "bytes": 7692
+    },
+    {
+      "path": "Sources/MagicUI/Registry/dock.json",
+      "sha256": "f7e92adb3389cc4f62a2a36a1b9b3dd0b904432d5c6833a735691ad574dc5636",
+      "bytes": 4550
+    },
+    {
+      "path": "Sources/MagicUI/Registry/dot-pattern.json",
+      "sha256": "ff4f9d159cc8e681b74c94f2a673c47faa411e59c7e9424e4987ba08f61e9757",
+      "bytes": 4818
+    },
+    {
+      "path": "Sources/MagicUI/Registry/dotted-map.json",
+      "sha256": "7affe4eac50541f73239ec35886cd0418b1bb61b77566aa25c04a0358dfe5ce4",
+      "bytes": 5583
+    },
+    {
+      "path": "Sources/MagicUI/Registry/file-tree.json",
+      "sha256": "ee903f1fd3449f1db00ff04bafefd1ff2eab885daba6864e9f8059d1d8b9aec6",
+      "bytes": 13556
+    },
+    {
+      "path": "Sources/MagicUI/Registry/flickering-grid.json",
+      "sha256": "f79b5e0da3e8c48c2a9ca427823f724c449be3508618868960fead7c7f4dc19c",
+      "bytes": 6070
+    },
+    {
+      "path": "Sources/MagicUI/Registry/glare-hover.json",
+      "sha256": "8cfdcea8ec3a60a3e089b347161f8350ea7e1b8f0405fa01288fb3d46511e4a8",
+      "bytes": 4778
+    },
+    {
+      "path": "Sources/MagicUI/Registry/globe.json",
+      "sha256": "24095b50f517fbf4f9e466b6dc2a5200c7d2d22f3068b15d9a5281a4b6899891",
+      "bytes": 4064
+    },
+    {
+      "path": "Sources/MagicUI/Registry/glyph-matrix.json",
+      "sha256": "c138d8e50f5c8151d3fe1192f1cf9d051b28d4d4f7a974f81b5a0690f3e1aaef",
+      "bytes": 5095
+    },
+    {
+      "path": "Sources/MagicUI/Registry/grid-pattern.json",
+      "sha256": "87b67223033ca97ee464f34cf4bafe12ee699ec583616b42f9249de1d8b7b0aa",
+      "bytes": 2004
+    },
+    {
+      "path": "Sources/MagicUI/Registry/hero-video-dialog.json",
+      "sha256": "1e47b6dd98bbadd8ee4035c594266315a57b7dbc22e1df6bfbd78a47e04cb2e3",
+      "bytes": 5607
+    },
+    {
+      "path": "Sources/MagicUI/Registry/hexagon-pattern.json",
+      "sha256": "642e07cc3c12e8b167fcf7bd468b0b3b235b103bc3612578cd34e386a94d1333",
+      "bytes": 9174
+    },
+    {
+      "path": "Sources/MagicUI/Registry/highlighter.json",
+      "sha256": "3d9344cc4450c3fdde2044b70be19ac238128f44215259027811185659544a15",
+      "bytes": 2775
+    },
+    {
+      "path": "Sources/MagicUI/Registry/hyper-text.json",
+      "sha256": "154f3afd5e33135d3cf61f5fd618ec0b0109db98492e4e9c046832d65fc3e82a",
+      "bytes": 5335
+    },
+    {
+      "path": "Sources/MagicUI/Registry/icon-cloud.json",
+      "sha256": "c2922f2473ac064d68400983fc9397107f6cc12007870712d34ed4fa07ce93cf",
+      "bytes": 11895
+    },
+    {
+      "path": "Sources/MagicUI/Registry/interactive-grid-pattern.json",
+      "sha256": "160c6432c904e4d1f4213781ff4b152b7a9658408853366f9e81514300239a9c",
+      "bytes": 2694
+    },
+    {
+      "path": "Sources/MagicUI/Registry/interactive-hover-button.json",
+      "sha256": "97cae7d013db9d179f2d3b6f47c4785be913d42368a995ae2e0573335fc11260",
+      "bytes": 1409
+    },
+    {
+      "path": "Sources/MagicUI/Registry/iphone.json",
+      "sha256": "a17629aaf59e2a9ae61a19eb534d086c61318ac193d6a5eec72ffcc780cba8cc",
+      "bytes": 6442
+    },
+    {
+      "path": "Sources/MagicUI/Registry/kinetic-text.json",
+      "sha256": "122915cf9e5c6c2bf9504ddc61eb8cc3fb507e4fce96d0f1dcca1c0639e38195",
+      "bytes": 2025
+    },
+    {
+      "path": "Sources/MagicUI/Registry/lens.json",
+      "sha256": "c74b03b6602beeefb130200d862fb15023fd688849587d9dbbbd864deefa3ab5",
+      "bytes": 4106
+    },
+    {
+      "path": "Sources/MagicUI/Registry/light-rays.json",
+      "sha256": "ea7c8fd7de5333bd6edc6804230fa906a220314d8b10e4d489bf9316b0633d7e",
+      "bytes": 4261
+    },
+    {
+      "path": "Sources/MagicUI/Registry/line-shadow-text.json",
+      "sha256": "9d63df614105966d827e90f72ca1262708a965124091384790fe5b998259eef6",
+      "bytes": 2332
+    },
+    {
+      "path": "Sources/MagicUI/Registry/magic-card.json",
+      "sha256": "d487ae39795640bd3fbb467a5a98285a4c803036d71e5b1a9a06cb7d26c2a755",
+      "bytes": 7066
+    },
+    {
+      "path": "Sources/MagicUI/Registry/marquee.json",
+      "sha256": "6378d12f6ac7b383bcbe25cbfcd21ad567d4726ff9979bf07991598a7bdef1ce",
+      "bytes": 2694
+    },
+    {
+      "path": "Sources/MagicUI/Registry/meteors.json",
+      "sha256": "541a4a88f9a9a77ed5dd3b33d14967daec15528e4be067b806ce77b793983027",
+      "bytes": 2399
+    },
+    {
+      "path": "Sources/MagicUI/Registry/morphing-text.json",
+      "sha256": "b40a923f926d720ef048836a2717c37bf3bad07d4eb1ccf75784a1a578ee0b12",
+      "bytes": 4158
+    },
+    {
+      "path": "Sources/MagicUI/Registry/neon-gradient-card.json",
+      "sha256": "ff973c54e621241bcd44a3d49f0e63a8fb3d3f661b566574a163e046bb85fc98",
+      "bytes": 5116
+    },
+    {
+      "path": "Sources/MagicUI/Registry/noise-texture.json",
+      "sha256": "b9e1ddc65cfbacd822c2c8855a43a5fac902b335b2818212769cb5f01a0b7952",
+      "bytes": 2297
+    },
+    {
+      "path": "Sources/MagicUI/Registry/number-ticker.json",
+      "sha256": "c4808c7218100b218df9ada8e5d1ff21ce99045b41468131534b3d8db61122a7",
+      "bytes": 2291
+    },
+    {
+      "path": "Sources/MagicUI/Registry/orbiting-circles.json",
+      "sha256": "96aaf67d75288ebd52009ffca1a2b5112ccab0b34f3457ab061781e9e8b3940a",
+      "bytes": 2694
+    },
+    {
+      "path": "Sources/MagicUI/Registry/particles.json",
+      "sha256": "e7d4b820112bafc230a7ef428133b1cbd2f6866cbaf7215d8abbebd855b90e98",
+      "bytes": 9329
+    },
+    {
+      "path": "Sources/MagicUI/Registry/pixel-image.json",
+      "sha256": "83b28c0049c65f51ca6f43a1461cda860d5e8cb8f36e698c543e3b140b4b7e6c",
+      "bytes": 3853
+    },
+    {
+      "path": "Sources/MagicUI/Registry/pointer.json",
+      "sha256": "52c41c5372afb81c8ba3049711e4fafaf9954a0d8d38135478c6fa66faf6bc13",
+      "bytes": 3767
+    },
+    {
+      "path": "Sources/MagicUI/Registry/progressive-blur.json",
+      "sha256": "419301fc871365f0f113a8b58cca6b22ea956d8c385b1808a23c57050f581696",
+      "bytes": 5029
+    },
+    {
+      "path": "Sources/MagicUI/Registry/pulsating-button.json",
+      "sha256": "1fdd8843b574b3a0ad7685d4a6b52322b5d32aa7cc7a7868848a24100f1907e8",
+      "bytes": 4447
+    },
+    {
+      "path": "Sources/MagicUI/Registry/rainbow-button.json",
+      "sha256": "1af54e0e9aef154d8c9a842988ae5b299ca5938a05dbfda3d0f4989a2b0b3ca6",
+      "bytes": 4600
+    },
+    {
+      "path": "Sources/MagicUI/Registry/retro-grid.json",
+      "sha256": "e05da0e4b2036036db5724bd151e0d7bc21339ed9acc7a48695505e28f10737b",
+      "bytes": 24733
+    },
+    {
+      "path": "Sources/MagicUI/Registry/ripple-button.json",
+      "sha256": "207d44c2a370f8b767f9699c9f45ec0511552100faf36d7379e25f910c5f1741",
+      "bytes": 3622
+    },
+    {
+      "path": "Sources/MagicUI/Registry/ripple.json",
+      "sha256": "df558d5a129f231de4b0bb577fd49509dd04b9ded1c53640893b88121eeadfd6",
+      "bytes": 2336
+    },
+    {
+      "path": "Sources/MagicUI/Registry/safari.json",
+      "sha256": "8e50e929a19b82cc70930b1572d37179ffc2516174892e12b56bc39b15d801aa",
+      "bytes": 13864
+    },
+    {
+      "path": "Sources/MagicUI/Registry/scroll-based-velocity.json",
+      "sha256": "d1a60823ab754f04401d62a806189f806e5422c75e634ee87e8dff51da3e2d48",
+      "bytes": 6864
+    },
+    {
+      "path": "Sources/MagicUI/Registry/scroll-progress.json",
+      "sha256": "8e3ac726dfae3fea1befffeb8de816d386a14f591529e400cafe29a1244bbf9c",
+      "bytes": 1104
+    },
+    {
+      "path": "Sources/MagicUI/Registry/shimmer-button.json",
+      "sha256": "b545d291f05a00b4cffe8672f2c09d48d310876d626a3f5782085e5a727923ff",
+      "bytes": 4063
+    },
+    {
+      "path": "Sources/MagicUI/Registry/shine-border.json",
+      "sha256": "56329b539c8b1ddcf54566315674ceba1bfb06e8f5994cf9b6af0fd529e00ce6",
+      "bytes": 2428
+    },
+    {
+      "path": "Sources/MagicUI/Registry/shiny-button.json",
+      "sha256": "b378d37c3c762caae89b5f43fde7f9bc7f1ecfce0b5e59c07fcde6351fded76d",
+      "bytes": 2806
+    },
+    {
+      "path": "Sources/MagicUI/Registry/smooth-cursor.json",
+      "sha256": "f58fce4505007e0c4494e350b336f1ce0934ead7701bf1dd068aec545c6ff89a",
+      "bytes": 7526
+    },
+    {
+      "path": "Sources/MagicUI/Registry/sparkles-text.json",
+      "sha256": "5938c35ca4bbb20b9b63a43e232d2df82bf2d71d88fcf3c25a4476dbfaee7f26",
+      "bytes": 4758
+    },
+    {
+      "path": "Sources/MagicUI/Registry/spinning-text.json",
+      "sha256": "82c45576c0209d9a97abce243ed6bba02c4baf37613b48b6c29ef669185a6ba9",
+      "bytes": 3300
+    },
+    {
+      "path": "Sources/MagicUI/Registry/striped-pattern.json",
+      "sha256": "e28ad3543fef53dde91e68be992d4b93d13cbea83623e4be3cce706fecde4bde",
+      "bytes": 1951
+    },
+    {
+      "path": "Sources/MagicUI/Registry/terminal.json",
+      "sha256": "05f5c6ae595956464eee5b60e40f25dd2824413ca10bbb5ee0dcaf027758299d",
+      "bytes": 8363
+    },
+    {
+      "path": "Sources/MagicUI/Registry/text-3d-flip.json",
+      "sha256": "3001fd9a871cf30f90422a7b621ae3774bf4c7596e857c55b7606db6c710b31c",
+      "bytes": 7878
+    },
+    {
+      "path": "Sources/MagicUI/Registry/text-animate.json",
+      "sha256": "47876244e2036c60ea0c17f756a65f9fdf8488c12b3b51c7b4917f03567adafb",
+      "bytes": 10448
+    },
+    {
+      "path": "Sources/MagicUI/Registry/text-reveal.json",
+      "sha256": "5fbc83e19ee405d2b3fde4d5d6edd49593946754be2a6265e4c1cdbbea3e4ed1",
+      "bytes": 2439
+    },
+    {
+      "path": "Sources/MagicUI/Registry/tweet-card.json",
+      "sha256": "db365975665d3ad04bf9dbee427f8feaf97f91c458cf39a148e5c9bf0a647bff",
+      "bytes": 10282
+    },
+    {
+      "path": "Sources/MagicUI/Registry/typing-animation.json",
+      "sha256": "490cfa9ef93c4b85a026eac64c15149d619ce72c86641189e9fdc9e36fc10300",
+      "bytes": 6651
+    },
+    {
+      "path": "Sources/MagicUI/Registry/video-text.json",
+      "sha256": "0cbbb45b9a09a5f942f9cafe8de9fb7187543adabe9fc7ad048e2a74a94aa33f",
+      "bytes": 4069
+    },
+    {
+      "path": "Sources/MagicUI/Registry/warp-background.json",
+      "sha256": "4470c3766084ad58d78b1fbdba82a889499be3cec451bcef5e3511afaf01677c",
+      "bytes": 6456
+    },
+    {
+      "path": "Sources/MagicUI/Registry/word-rotate.json",
+      "sha256": "d90065bc6e4f7b741da710f7b14dc9ac8e25af9ca635cc963304b6b7769b56ec",
+      "bytes": 1562
+    },
+    {
+      "path": "Sources/MagicUI/manifest.json",
+      "sha256": "f643e01037ed4b8a76633d2b346a8637445f9a26e72891da4eda4a429324f4bd",
+      "bytes": 92963
     },
     {
       "path": "Sources/QenTerra/Components/GroupContainer.swift",
@@ -1280,12 +2055,12 @@
     },
     {
       "path": "Sources/QenTerra/DesignTokens/GeneratedIcons.swift",
-      "sha256": "5557e4d44e8234d400c266281cea1a3733f04c6a4d152f2d6d4ee48dde436b11",
+      "sha256": "61d22a7150bc2686f8bb35de4379d70eb003b03eed1a38cd12450ada9f72700d",
       "bytes": 579
     },
     {
       "path": "Sources/QenTerra/DesignTokens/GeneratedTokens.swift",
-      "sha256": "be7162393428e464725bd3c498614917ad0ca8bed58a3cabd1317574ce04eaf6",
+      "sha256": "b0733e032d5ca124b4fcd2488fb2d64bdf6627a7ba1651bfc8fe15993e91b0d7",
       "bytes": 17204
     },
     {
@@ -1300,13 +2075,938 @@
     },
     {
       "path": "Sources/QenTerra/manifest.json",
-      "sha256": "c7a774f3b797b13b9562b94c288a47d202f11ea95ea1f63b1070a92b5214dd3b",
+      "sha256": "17bcdcd5055ee0161b4db47e2abb36ed840c17d8d14b2cdb8e67ac1a5c8e09b6",
       "bytes": 1380
     },
     {
+      "path": "Sources/ShadcnUI/Components/Aria/accordion.tsx",
+      "sha256": "ddb6963d91acd29e35b938b8808654146e7fd002e12c556dc852e14c06067820",
+      "bytes": 3065
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/alert-dialog.tsx",
+      "sha256": "e6969f85248c52a7fe18542ccf1da28d7c39927eac5c80d39d2effb6e7c08640",
+      "bytes": 4634
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/alert.tsx",
+      "sha256": "76ad2c55ed42db2713fd05d3c1eec6e2d51b9d266553a44ed7949258f762e302",
+      "bytes": 1578
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/aspect-ratio.tsx",
+      "sha256": "bebf893f8ba48911c76b40ee8bd66422fd9c57158c5d969c86d86935a9b07cd5",
+      "bytes": 423
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/attachment.tsx",
+      "sha256": "958b3862e5b14e07ac8a14c6a0734df5c90b96c24408c092983dd5c358b52866",
+      "bytes": 5322
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/avatar.tsx",
+      "sha256": "a612d0dca85b9726b3d6d97a82ffa3588b720c99c40a49b3e537a6e0e746f52f",
+      "bytes": 2933
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/badge.tsx",
+      "sha256": "89f2b2adb3385b14a76b5b2e6c0ad14808ecb9922307921a20d9a1388766c0f8",
+      "bytes": 1508
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/breadcrumb.tsx",
+      "sha256": "0934abccf39998c20e606d086bf896bcd7e3e276b2bf96ec8927c1a969590e6c",
+      "bytes": 3271
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/bubble.tsx",
+      "sha256": "ef370d5d83794bb98b0532067fcae42a565dd0375827f349da9b77db7361a922",
+      "bytes": 3025
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/button-group.tsx",
+      "sha256": "4b9b7373abae4efe9ba8f70f7ce3decd0a9b4756a9b99fae988d790a016267c7",
+      "bytes": 2423
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/button.tsx",
+      "sha256": "829985d7141e69589ca7c68f84fe2585658888fe02edd64f86b55bd8c452687a",
+      "bytes": 2267
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/calendar.tsx",
+      "sha256": "52ad93f73c7f29081fba9285c496ff488b555e47a589073e9a511db1214ec7f5",
+      "bytes": 10177
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/card.tsx",
+      "sha256": "828ac968787e65d003c7b63b9157c4a4120aec69c1f888bd123f189e8ac3d60b",
+      "bytes": 2061
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/carousel.tsx",
+      "sha256": "d0b515a433dfac69dffd211b4798de71bee9719be4bd4bb02e4ee6e6b59ce7d3",
+      "bytes": 6092
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/chart.tsx",
+      "sha256": "1e52c40165e5153b0cae96d65b13143ecba83b7002691b560242994e43be3021",
+      "bytes": 10447
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/checkbox.tsx",
+      "sha256": "5acc7923d363d7afd231f2ae3b4056fe95e0b462d30f1120c1b108f45b74a4cb",
+      "bytes": 1392
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/collapsible.tsx",
+      "sha256": "45c7e65d7960b07e99cbacec399945ad2f8a1f484096e7b80c0199a776c699a1",
+      "bytes": 800
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/combobox.tsx",
+      "sha256": "664c33351ecfc21a87040ad1593411e174ab23cfeca06c70e4deb46b61440ee8",
+      "bytes": 10045
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/command.tsx",
+      "sha256": "d56262be1cf6bd624e16d3b2af55c077c55853118300a591a8b77c26de6c8590",
+      "bytes": 5794
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/context-menu.tsx",
+      "sha256": "3be1e24021799b36674291d98ed89180ca6c0f98edc45d47ae6bd1f2b291fe23",
+      "bytes": 6826
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/dialog.tsx",
+      "sha256": "f1ac021090113a662574180f14e414cabe92bb4d3c746bfa5063b67d0bba48c5",
+      "bytes": 4261
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/direction.tsx",
+      "sha256": "47b9219078865931ccf75c27bffd2ee6daaf13b177dd600ac73e2e1599aa0dc0",
+      "bytes": 874
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/drawer.tsx",
+      "sha256": "4bd36e5309f31788e88eb0334b5efb32094e9dc7d2286210549cd878ac26cd64",
+      "bytes": 10232
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/dropdown-menu.tsx",
+      "sha256": "4bd7debc7d3458c963ba26b527e2432a4d0d3aa732ee33e9aa3363f1fd6b19c6",
+      "bytes": 6810
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/empty.tsx",
+      "sha256": "b5f2b53b0626102ff83180d1c4c62a8708ef98d4780c9c62a9414d0429973f92",
+      "bytes": 2306
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/field.tsx",
+      "sha256": "23b773f4bb69f6c9268023705bfc7bde13dc68a3e13ceb7423e4cd75e05bec53",
+      "bytes": 5387
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/hover-card.tsx",
+      "sha256": "fde14ec17c3e73ad64d7812308fd398e6502ae4f2a96aef5cf9e17c12ebb7b19",
+      "bytes": 1006
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/input-group.tsx",
+      "sha256": "78d41ec9ddf0d1e58870e8c3fc5509dbc04d7a7ef65daba0d79a5141833f56b7",
+      "bytes": 3611
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/input-otp.tsx",
+      "sha256": "fde1843495f820c9b63ea8106721658adf82e3162406823d74267bd3ad36f5b4",
+      "bytes": 2215
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/input.tsx",
+      "sha256": "12557b3879027fff46b097d3a64f345d54868984d0c1d5682c5075a5ca2f9fa7",
+      "bytes": 755
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/item.tsx",
+      "sha256": "7f3cf42f8a818cee183cda0eace4fda0c41506ea5feb0c7362538515b2ad53c2",
+      "bytes": 4443
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/kbd.tsx",
+      "sha256": "6381b4d8741fc88937db9451f396be20473be2f6f0345990b3e9367e7adb5893",
+      "bytes": 683
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/label.tsx",
+      "sha256": "98a880a6ef8b86852f0e418b54d0760ac80bd0284fb7d5f9f330e97aed8b356f",
+      "bytes": 754
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/marker.tsx",
+      "sha256": "aab3970128d1dbb4f6e903d081b50ff68b466301556947ec3b7af2410269715a",
+      "bytes": 1663
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/message-scroller.tsx",
+      "sha256": "48790b381d1bdd4d7fc6a6ab72a781a44d306f9ee06a70ae1653a1ba2b8521e7",
+      "bytes": 4459
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/message.tsx",
+      "sha256": "1376f1e4d3ebefae672ea9547a025fd05cc37ef241657878af2384f5d7f3f1bd",
+      "bytes": 2023
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/native-select.tsx",
+      "sha256": "485b21dcafacbe6d00e30952171bc9fe61baf35018152dc1510751d573a4337c",
+      "bytes": 1746
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/pagination.tsx",
+      "sha256": "1908e8ef42882a2bdd8d5cd119ba609c20d8a7d2346d3bbd9ddf615506c3f195",
+      "bytes": 3539
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/popover.tsx",
+      "sha256": "306c429470f4e50eb98096473e66cd0eb5475689ab9ee0bea13fa7bda29ae5cc",
+      "bytes": 1727
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/progress.tsx",
+      "sha256": "e70478208e26b106648bb68dbb0668ea6ed4adad0e529846af4677efd54c165b",
+      "bytes": 3175
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/questionnaire.tsx",
+      "sha256": "1f9f93a396977777ca369a73dadd44a2e4107a133855cfc0c146484fbeb9987e",
+      "bytes": 9511
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/radio-group.tsx",
+      "sha256": "eb9db94d23143189865328beedbeb78ab017f959298324ba7685f5b7c9e97b68",
+      "bytes": 1322
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/resizable.tsx",
+      "sha256": "c376de1ae0a79bd5c8abfa3407b4cd0abc780222fa97c98ca1c3675be038d9ef",
+      "bytes": 1732
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/scroll-area.tsx",
+      "sha256": "5b51d83fe69061f97211c0f9643030495479fc915cbcbf3740c5381ea9f8ba1b",
+      "bytes": 661
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/select.tsx",
+      "sha256": "0794a2b76900c0bf903002ab20413c017e6d0e67d5f43fd074af4ec19389fe65",
+      "bytes": 7232
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/separator.tsx",
+      "sha256": "b4eb21b947077b2614ca41baf2ff281195a895d46777be64dc9547b06231189e",
+      "bytes": 688
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/sheet.tsx",
+      "sha256": "f55ad826213faf5d364fac62621f3bfd94093fe0bd55b6e1e79a0e7a7caaddba",
+      "bytes": 4918
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/sidebar.tsx",
+      "sha256": "369569b54a08ef21b94063e17a4893581cd6c20c8f765059f288bfabb10d260f",
+      "bytes": 19657
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/skeleton.tsx",
+      "sha256": "d3f2581a5a2c22fb46d1afa717b2a013a27b2c367ddb93a90969297bd1740f9d",
+      "bytes": 287
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/slider.tsx",
+      "sha256": "19b765d4574b0fe05f453b32c318ff2cfcdf87384169f915511faedcd6f6abe2",
+      "bytes": 1703
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/sonner.tsx",
+      "sha256": "d5178ce4c7834d3f46d261698395b498b8f45fef29975585df7e26cb43aa3cc7",
+      "bytes": 2282
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/spinner.tsx",
+      "sha256": "7d2694d2b6a6db013f4d9f7edb9b65bbf612be4ad05b7f1bed3989d2394f6e2f",
+      "bytes": 559
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/switch.tsx",
+      "sha256": "6f60249136739cc1abf3ef84b129b4100af38f91f08fe0bee000b2661258f29c",
+      "bytes": 1114
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/table.tsx",
+      "sha256": "f5315df59fac5137886c8f9f089aca180113b20ce9b0fe6804a878062dfe3a36",
+      "bytes": 2560
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/tabs.tsx",
+      "sha256": "09291eca4d3a7b677ddc8ddd8ce7dab9b511ad1bc03d2267e2542d1e22e4b031",
+      "bytes": 3413
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/textarea.tsx",
+      "sha256": "b5657031c059c1b744a24b535ea7771474d0c6f8b06fad61c46eeefa3b52fd10",
+      "bytes": 679
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/toggle-group.tsx",
+      "sha256": "c25ccd2acdad665e5f41d69e3934d1a884ef357ba01c5ce8f2ccbee3d1ba47f4",
+      "bytes": 2769
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/toggle.tsx",
+      "sha256": "ba5cb2c41b0116e4d0373f67d66335e28f3ca266acbedeff059e1c32f71824fc",
+      "bytes": 1211
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Aria/tooltip.tsx",
+      "sha256": "6b6507d0e4dced59c6ad31b2b07acacc03e3137ed25a3c8065743fcbd9145617",
+      "bytes": 2033
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/accordion.tsx",
+      "sha256": "3fbd0fd128f90598e5387f55646f66fff0775ba95bc152a7252ddb24a601be5c",
+      "bytes": 2772
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/alert-dialog.tsx",
+      "sha256": "48e4538e028be8b5aa1fe040de0f7ea7a6491e4f31bade2a9622a74500d2b1b3",
+      "bytes": 4061
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/alert.tsx",
+      "sha256": "b28974495ba119b6c5bbbdff1bdec6e998537be20fc70f45d899814e4680c408",
+      "bytes": 1578
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/aspect-ratio.tsx",
+      "sha256": "6037c112b43482d06a7f102f715c8af03833073f0db69399a21df92050fcdae6",
+      "bytes": 423
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/attachment.tsx",
+      "sha256": "80ef939d186b330bb53282cab240f469c47ef19686d4396ce7470c1eaf3ef5e0",
+      "bytes": 5105
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/avatar.tsx",
+      "sha256": "b159c0a5b7e9ba8a2462c6dddd11c6ab63bd44925203486551eae93250e474bb",
+      "bytes": 2706
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/badge.tsx",
+      "sha256": "ba9be2fcd4eac13c482f77663f4cca797553e53d2efb9c6dc52eb1e3af9a0d2f",
+      "bytes": 1406
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/breadcrumb.tsx",
+      "sha256": "06ee78c43f8e36fa32cb470c5e8bef969981c27aa25e9e4e4f7ec571b7fe0d6b",
+      "bytes": 3002
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/bubble.tsx",
+      "sha256": "517a773cbfd441159439ee5019cb913b0b8aa0750a11ccbafba488cc5c5fac21",
+      "bytes": 2793
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/button-group.tsx",
+      "sha256": "477d5a41df71387495797b0a643adf77e678df6dc410e90d6b7446ade9566b92",
+      "bytes": 2297
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/button.tsx",
+      "sha256": "97bfee456444f0495deee6a321933c24267477645b0bf4bfea67c3c62d425a12",
+      "bytes": 1538
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/calendar.tsx",
+      "sha256": "c88319b932b378349d643ef2c452f6095d5681998acc0c1e3c2a1682500c5bc9",
+      "bytes": 9115
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/card.tsx",
+      "sha256": "8b3ba229472f266d3c2e49e0feff6c59fb1842282d0842aae470675b0e926665",
+      "bytes": 2061
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/carousel.tsx",
+      "sha256": "f96cbdfe39d65ccb9052507598b421eba6625c0677cc25d771b7953e2f3e9385",
+      "bytes": 6088
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/chart.tsx",
+      "sha256": "f0ffc739a4fbb40af1a9e7cfc08d0d8d27e1b79b2c6697506655fd5deb07bd52",
+      "bytes": 10434
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/checkbox.tsx",
+      "sha256": "2e9c7159b275f0fc4906147b155a48640a072b84c32980c63fd4e7a1c3213ed0",
+      "bytes": 1051
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/collapsible.tsx",
+      "sha256": "ead4349ff7b01d696ef89294a81d18ee1d3f732321398896462c834ab9b9e065",
+      "bytes": 658
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/combobox.tsx",
+      "sha256": "a3c833eb2216ca31f2ae306396d2d9a724adaa0047009d202867fafe453b1d9c",
+      "bytes": 8206
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/command.tsx",
+      "sha256": "3ad88a370242987b0981342fc7e87a7aa7908f3e81282b5a6e69b0c9505abdf0",
+      "bytes": 4738
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/context-menu.tsx",
+      "sha256": "4acff009fe0663979cdab0cc44ef20215347d54f505642afe3f60ac7d38b8204",
+      "bytes": 7388
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/dialog.tsx",
+      "sha256": "85f9a33d1a8c495b0faecd066dae1581b8feb5d27f912ecf65f814386f6da3a9",
+      "bytes": 3730
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/direction.tsx",
+      "sha256": "661ff5b9c0dc26edde1226bfedc0ab50976d84f8bae42ca83a38dc3b478fd4d4",
+      "bytes": 103
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/drawer.tsx",
+      "sha256": "c3b8efa83260e1622d88b216bb794dbe46b803ced695040e7750f172d91bec79",
+      "bytes": 10232
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/dropdown-menu.tsx",
+      "sha256": "dce5089f19f0bcdbb8bd137ccc8167eb51197f9c4f626e3b3c1ec9d31cb0d686",
+      "bytes": 7490
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/empty.tsx",
+      "sha256": "f022b2014448c212e3545d12e09a0fbe038ceebdb4dca848e9c3c9b1e1c640aa",
+      "bytes": 2306
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/field.tsx",
+      "sha256": "b965ae608453b047c11c71154df817764dbe5c5e38b5c6bb1a2c6a07c38edd68",
+      "bytes": 5367
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/hover-card.tsx",
+      "sha256": "9f7cdb887a627a38ea84023410ae7af83cb911552bd8f9b9680fb1bb825ccf7f",
+      "bytes": 1433
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/input-group.tsx",
+      "sha256": "2ee53fb8792b8022ab433ed6d455dc790ed8a5be59fb99d923303665ce3a6dbb",
+      "bytes": 3582
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/input-otp.tsx",
+      "sha256": "65e000e7b46d4b5a5c27f28d2468b763482dc8d1a1ae2ce5566ca5e82c65c8f6",
+      "bytes": 2215
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/input.tsx",
+      "sha256": "8e6368337d35d3f2dcf54696d37ece8375d3065f9dc1ee80dc9e33fb1164f95f",
+      "bytes": 628
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/item.tsx",
+      "sha256": "901a5260fa629bdb88bb2b56b7addd3188ca24220c78028c97f6364e8272bd58",
+      "bytes": 4450
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/kbd.tsx",
+      "sha256": "297f142ed4e6d0e61362b2ce3a5cd3aa455ac008593006bbe4f06214801a9644",
+      "bytes": 585
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/label.tsx",
+      "sha256": "80581ffa241ed57c9b976ebca5bc44c7e98d287c629717fda2dd3135c96ebbc1",
+      "bytes": 445
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/marker.tsx",
+      "sha256": "5d39ae04df6ae4d3ea694eac782c66375f38d9968e398ad67020b7ab1a9ce5c2",
+      "bytes": 1503
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/menubar.tsx",
+      "sha256": "a407a77ebee8636f3dccf62a0cd95899a61f84d172517fa2191cd8374698cef3",
+      "bytes": 6696
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/message-scroller.tsx",
+      "sha256": "0cf9e45fc178dcae7d6ef5f60804534d4abbfa73711d8455e44b62782729b533",
+      "bytes": 4459
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/message.tsx",
+      "sha256": "197803d433247e93f9b457f66e2c2e94c3bd30280e3079ff342753bba430edc8",
+      "bytes": 2023
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/native-select.tsx",
+      "sha256": "6150b0918261c617cfe2c6186bcf7fff3954b0225187b46bdc0204cfa164347a",
+      "bytes": 1746
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/navigation-menu.tsx",
+      "sha256": "40629a60998e13c173c141a604dd47ee3766f1fee580cceb92c4ba0f5af3a6f5",
+      "bytes": 5419
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/pagination.tsx",
+      "sha256": "7c1c3be5f743e8651300fa4f3d18201d298dde3ab5e28a3aebd688f2d48b86d3",
+      "bytes": 3642
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/popover.tsx",
+      "sha256": "27b854b12d7c7c0d531d2ee928b0d2b882bbb2081938c510d237c22cb819d25f",
+      "bytes": 2123
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/progress.tsx",
+      "sha256": "01ce565018075d8aca92cbf6bc768b9dbc43b5e9ec1159a5491abe3f0cda0470",
+      "bytes": 1721
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/questionnaire.tsx",
+      "sha256": "248cea65a49d2aa108ea945b1bd2e8a180053ce47aa264db66570d657d6acfc1",
+      "bytes": 9511
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/radio-group.tsx",
+      "sha256": "0023e241c867f90fbd5ebe7e7c6aa9e5be3485557c3ccb396cba207a0ad7337a",
+      "bytes": 1159
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/resizable.tsx",
+      "sha256": "ce02b1176c769c44b21e267492fae1cba081a7917ee9f9d5b6c1749a90e4be0d",
+      "bytes": 1732
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/scroll-area.tsx",
+      "sha256": "6fb66a11b278222b7f59b3674b1931daecdefbe5df78e41953c7e7a800fb3e49",
+      "bytes": 1508
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/select.tsx",
+      "sha256": "2dadd3212c5d3c83d083c81dbca4184d45640086381c7ec4899b8e3996a7716f",
+      "bytes": 5933
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/separator.tsx",
+      "sha256": "a434c0686f283f6c6abd38e33b9b636bf4ee70de211c006cf3fa1b4ab401d157",
+      "bytes": 565
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/sheet.tsx",
+      "sha256": "ce6edeeee08e0002be607f0014013063290fca2ccddace9c6457c5a8fec8c0eb",
+      "bytes": 3951
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/sidebar.tsx",
+      "sha256": "c64077d7b51830fe7d4fc4697eb1396d4e1d16c62c1a0c857fa56dfc7d2928f3",
+      "bytes": 19493
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/skeleton.tsx",
+      "sha256": "f813fbd2ec0eab4eee518fff9847943929ab3ef2de0aa1330913647311bfb095",
+      "bytes": 287
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/slider.tsx",
+      "sha256": "144f4992fbc25de172fc3089101af955e971529f06a5c02ea8a53c5a6479d541",
+      "bytes": 1607
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/sonner.tsx",
+      "sha256": "d5178ce4c7834d3f46d261698395b498b8f45fef29975585df7e26cb43aa3cc7",
+      "bytes": 2282
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/spinner.tsx",
+      "sha256": "2200e06760fe9f9eb78bcc57f38ed1d4fdf7eb9e8228b33ec0abaf5e55170742",
+      "bytes": 559
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/switch.tsx",
+      "sha256": "5bc5e6917b328921a87ee0c25224ed7c19184f2158b1558679a259ab1d0ad938",
+      "bytes": 840
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/table.tsx",
+      "sha256": "4e90502c6dd7478e2baa19a4010e52718c2fd958ead136d31b18eacd5b3cd1fb",
+      "bytes": 1995
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/tabs.tsx",
+      "sha256": "4a8243afd661180ac9b0a2f60a4e10c54ae856443876f40070605453a98ba862",
+      "bytes": 3225
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/textarea.tsx",
+      "sha256": "b6948bf2916d1cf5487c24f3755cd3f90981680c06f51481545634276317c691",
+      "bytes": 476
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/toast.tsx",
+      "sha256": "96ed24154a44297366cbb42104c1dcb18aa2f48d49e6c3829682e23436dce0e9",
+      "bytes": 8518
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/toggle-group.tsx",
+      "sha256": "806a823d1ec998652e6db0d1a6498016276825ae0edbc8c59cd20164815123f0",
+      "bytes": 2676
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/toggle.tsx",
+      "sha256": "3ebc898aff16f6c119158abaae18fd749789ccded65c678fdc15994fd403b006",
+      "bytes": 1165
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Base/tooltip.tsx",
+      "sha256": "75e66453d7a6301281a0ecd7840d268a90a6972b252b018d2ac2bc34a979968b",
+      "bytes": 1989
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/accordion.tsx",
+      "sha256": "7a23a91ca2aee6d5e27de850352e62d07cdabad85128454738a4420700121a28",
+      "bytes": 2860
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/alert-dialog.tsx",
+      "sha256": "b1f08c2826d4bdb83164576c13986aea711e43ac4d23f73e4b03c38f1ab6d9e4",
+      "bytes": 4405
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/alert.tsx",
+      "sha256": "3a13793a1493725223551c7cee691ee7f211562cc95c9c4e2ff3d8c5ea57041c",
+      "bytes": 1579
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/aspect-ratio.tsx",
+      "sha256": "b1c157886236782cb92d8fbcd4749532aaf6d8aabefd6e157ca40358f902f407",
+      "bytes": 274
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/attachment.tsx",
+      "sha256": "e8f020688be685695b5579c2924ff8d1f1342393ff50d0ceb0911b56b5cc5f16",
+      "bytes": 4998
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/avatar.tsx",
+      "sha256": "4a82dfbfd0ebd931235340ddc8e8530f30c5d79abddb6669182fab25c8e2a399",
+      "bytes": 2767
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/badge.tsx",
+      "sha256": "cb6d441ddb43771dda8a0858fd678a7b5ba3313be9316bec04ecb71fd525606b",
+      "bytes": 1347
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/breadcrumb.tsx",
+      "sha256": "b501fa7c710146fca1bb2ba3f46842a93b842acf54c51471a249341c721cb7d3",
+      "bytes": 2893
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/bubble.tsx",
+      "sha256": "7abc98a7a018a691f3225bae4290f4858d57e6a1d453c7c1637e9510d95894a5",
+      "bytes": 2684
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/button-group.tsx",
+      "sha256": "15e5ec3e2f525b1983ebb46e1d810f9570b014368470bd907ddd11baf527e386",
+      "bytes": 2178
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/button.tsx",
+      "sha256": "b4cd7047c67ea976a6aa3ffc7741f246dd131bc15287ba0d75d9a6d66f7807c5",
+      "bytes": 1684
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/calendar.tsx",
+      "sha256": "cf0057e6d964d13a99d8addf9db0e6cdede6d50bec75a3c3c14ddc188de2b2c5",
+      "bytes": 9133
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/card.tsx",
+      "sha256": "f1d43a32fd28a23f187fd867d00d3117ccaf4ed5c7784a6c0030cb227789308f",
+      "bytes": 2062
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/carousel.tsx",
+      "sha256": "ff9e2fae0c57cc3fa6626b709698c36a415546256354dc381c4ee09c64f87ad0",
+      "bytes": 6090
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/chart.tsx",
+      "sha256": "d8d89c2b96902a52e32f40d8f66b7542745522dfed2278cf19c8ce6e6aebea13",
+      "bytes": 10435
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/checkbox.tsx",
+      "sha256": "e4ca0aad7ccc067a91952e93e788314af3c47bf010596580cb2d8095631fe2e8",
+      "bytes": 1095
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/collapsible.tsx",
+      "sha256": "c6598e5584f4258b5d9fefadbc5ad6a66888ad58729f4b634a0bb2d9c513188b",
+      "bytes": 795
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/combobox.tsx",
+      "sha256": "131f1bd7a06f96d181bf792e0decdc9b3490db7d51ab3334f39e797634bb5587",
+      "bytes": 8249
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/command.tsx",
+      "sha256": "fd969673d20f3e3401448627e359a21794fd27dd5922c6a65de71296f68e990a",
+      "bytes": 4695
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/context-menu.tsx",
+      "sha256": "a366da145aa930454a578ce7983bab1a54477ae8182e665e3c455e897dfe251a",
+      "bytes": 7364
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/dialog.tsx",
+      "sha256": "405b3f34f7b246755f346a85d2a3b652173e640cdc87240cb338e7ff0caba5c2",
+      "bytes": 3846
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/direction.tsx",
+      "sha256": "84ae2ad658207f0e0f367978e5508cd8027cd00c29c41d3d13db21a708c3d1e6",
+      "bytes": 506
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/drawer.tsx",
+      "sha256": "669116217569e93bd5d79ace78607ff75d7dbbc2ea133419a24db22219f6fcdf",
+      "bytes": 3870
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/dropdown-menu.tsx",
+      "sha256": "94ad1090f2a378391284ba3601eebaf2dc306eba910a445ccda9fbfc94b3de9e",
+      "bytes": 7638
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/empty.tsx",
+      "sha256": "88279763bcb80e47f913606302fa1049652b750eb6e26509c2814d9e65eff24c",
+      "bytes": 2307
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/field.tsx",
+      "sha256": "d29fd658bed37e06d0cdc461dcbb1fc9855241b4695d82d1ee91f863c22dd617",
+      "bytes": 5370
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/hover-card.tsx",
+      "sha256": "fc94db44fb4564fdb439dd91deed2931cf75b71b03342b43b06eeee13a5a9e8e",
+      "bytes": 1160
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/input-group.tsx",
+      "sha256": "0bb153e57ffc1a297e1e0448e52368f2c474b88585fed97e92b14e5e63809afd",
+      "bytes": 3528
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/input-otp.tsx",
+      "sha256": "bb319b87768ea46f21ca42e6d52cfc5d2f41b7b53446dceef5fd9e5c5cb5fcce",
+      "bytes": 2216
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/input.tsx",
+      "sha256": "1003f14ed890da7fcca423016d005fb7ccb52fd03a014b2135ad23cac827eb14",
+      "bytes": 557
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/item.tsx",
+      "sha256": "027729e7dfc29f1b19fde6766f992241575d956ef96e2890888bee1c62f17823",
+      "bytes": 4372
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/kbd.tsx",
+      "sha256": "2211552f9bce434a4d47ec84580f9914e001a73a351b75616afe98cd299b0119",
+      "bytes": 586
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/label.tsx",
+      "sha256": "eb2e44a21f005dcf068647c163ce2785c2d7e469f7791bc78e4b6245b57c03c3",
+      "bytes": 534
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/marker.tsx",
+      "sha256": "e78d4abadebecb3cf139217158ea86466f3c274fe3b650a4b393a21cedf50f72",
+      "bytes": 1420
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/menubar.tsx",
+      "sha256": "14f1c476d34497c520f53e7a2f4018b2f1eaa3b508b4d7dd1ddf0e3068784769",
+      "bytes": 7252
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/message-scroller.tsx",
+      "sha256": "b249d8b6a693548a6c7d98984e487b1b50daa82ec0d6d26375e5d43543332c1a",
+      "bytes": 4461
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/message.tsx",
+      "sha256": "c879862227f62712052c3c3474462670a0b08768e409cd8ea8b8264a97ff9cbd",
+      "bytes": 2024
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/native-select.tsx",
+      "sha256": "64f305c60e9f40480075173ff8610020838abb265b9283864b660e966c6a0954",
+      "bytes": 1747
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/navigation-menu.tsx",
+      "sha256": "01a85ca9d994751c4904d0efbcccd6a4a1be8dbbb52df3b0bd809a02d47f0bb2",
+      "bytes": 4755
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/pagination.tsx",
+      "sha256": "243609b38bfec9ee10decf4e875d30223699887d85c43f8f21969041ad7d9894",
+      "bytes": 3609
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/popover.tsx",
+      "sha256": "3b017fc4e2b83c8d6f06eb2d3d2a61f579237ab5c776119a16f38e72c7b3bb94",
+      "bytes": 1989
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/progress.tsx",
+      "sha256": "5c5037a0187f7e7ef80ad7ed9c6d34d78c476d5e26f719256317352cc908abc7",
+      "bytes": 764
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/questionnaire.tsx",
+      "sha256": "a2dce4d410ac49f431179d3089afa0e9f132a846970ce79a715d4d91469884a4",
+      "bytes": 9513
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/radio-group.tsx",
+      "sha256": "d4a8d3839db5d59fea2d5b121952e59c47044d445bbb6eb756dd658f9788db21",
+      "bytes": 1199
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/resizable.tsx",
+      "sha256": "b733b0c6a4f02a84d51bfc336937a946e1036b3641c86d3f00958a65bbb9c8b7",
+      "bytes": 1733
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/scroll-area.tsx",
+      "sha256": "b85b41c51496e49b1e8ea5a47d0dab11aff1840595447c686ea782f3bcd9b392",
+      "bytes": 1577
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/select.tsx",
+      "sha256": "5cb49aca6c6cdce00f5abd73eb23bb80e64a11eb007e9ca48b503720339cf460",
+      "bytes": 6085
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/separator.tsx",
+      "sha256": "9374f76e0caeaa88e1842c6bba5cbd4794a5c3af2bcb41dc600d447b27eb9ee2",
+      "bytes": 665
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/sheet.tsx",
+      "sha256": "a49f48bc2cb74757e61c3365c67217249b94c3aa5343e4fd981268d6bd343a4d",
+      "bytes": 4045
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/sidebar.tsx",
+      "sha256": "4503359f19b4d6937b2dbe7d82f67dadcc9e935d9fa60dca2048cacd677c403a",
+      "bytes": 19095
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/skeleton.tsx",
+      "sha256": "afcc340ab7047243b7ffa83fa4df0c4008c2dd98ca6d9f055e8c8eb0d0dd3d09",
+      "bytes": 288
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/slider.tsx",
+      "sha256": "f8dce9321581a47277691b8cfd639d6c5a969a5298fe72bdb75843331658f613",
+      "bytes": 1631
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/sonner.tsx",
+      "sha256": "d5178ce4c7834d3f46d261698395b498b8f45fef29975585df7e26cb43aa3cc7",
+      "bytes": 2282
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/spinner.tsx",
+      "sha256": "824e3b90c4aaf5fb036a42752c84c48529646da2b137d7d30b7075aa6a797a13",
+      "bytes": 560
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/switch.tsx",
+      "sha256": "0b5a47ed8854e7ceebdd953dfcd8139e087739473965c62295bfab4151fd74e5",
+      "bytes": 882
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/table.tsx",
+      "sha256": "caecfbcd58658cd5e66e839c7a111fd83f9f7e215408ded63e7f1004f26e429e",
+      "bytes": 1996
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/tabs.tsx",
+      "sha256": "743ef64bf35afeace65cd445e206986c08788f24980c2273f377cb47474c7d2a",
+      "bytes": 3301
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/textarea.tsx",
+      "sha256": "b1a2ffd5205a8b991a47648c1fad506064f0db28a031cd28e4c51777d1c56aba",
+      "bytes": 477
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/toggle-group.tsx",
+      "sha256": "e99f81afc6854084e067abdc8bc0566ab044be786076da1acc0af9f862fc34ff",
+      "bytes": 2686
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/toggle.tsx",
+      "sha256": "3baf18afd5fdb34ff36e729490137f5354fbbd1be77a2e4e5ed00ea9ec5ba753",
+      "bytes": 1219
+    },
+    {
+      "path": "Sources/ShadcnUI/Components/Radix/tooltip.tsx",
+      "sha256": "c57cef1493d49b3d8219a00c86b9966bee44165d02b84dae38475ba17f340ed3",
+      "bytes": 1536
+    },
+    {
+      "path": "Sources/ShadcnUI/LICENSE.md",
+      "sha256": "1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f",
+      "bytes": 1063
+    },
+    {
+      "path": "Sources/ShadcnUI/README.md",
+      "sha256": "e9619badfe384ac69e3ee45fc3b9b89ce4303d2f0d9c89865983654a5b318a50",
+      "bytes": 1957
+    },
+    {
+      "path": "Sources/ShadcnUI/manifest.json",
+      "sha256": "0c787eb1ff3a22a7a7cad09f3ff55393a445cd2b9b0ffb1638eb9af98855dddb",
+      "bytes": 103050
+    },
+    {
       "path": "THIRD_PARTY_NOTICES.md",
-      "sha256": "db33b48a5ac212c44045d61cf674166e8be984b424146351703145871bfca284",
-      "bytes": 1344
+      "sha256": "0378dacf3d7ded1e9ba760b34f033944465d5e3caa4fb075952a0319443f2262",
+      "bytes": 2462
     },
     {
       "path": "Tests/QenTerraComponentsTests/ComponentTests.swift",
@@ -1315,7 +3015,7 @@
     },
     {
       "path": "Tests/QenTerraDesignTokensTests/DesignTokensTests.swift",
-      "sha256": "0ef8b670c8379d4669b52c331e2f2e020bc4cb550871f4665a6548bbdab45357",
+      "sha256": "b05bd7966f36243b511743b38c52b2154675bf365d2140efbd05f9638bc78899",
       "bytes": 941
     },
     {
@@ -1325,12 +3025,12 @@
     },
     {
       "path": "docs/DEPENDENCIES.md",
-      "sha256": "7a6c7274b1d5602fc4e6f729c55328300ace4045eecb4dec753529ba733eded3",
-      "bytes": 1605
+      "sha256": "1e2c065941630b835768f95da3904652e735f5771618c29a71d72f4259169193",
+      "bytes": 2775
     },
     {
       "path": "docs/DEPRECATION.md",
-      "sha256": "04b780d6b5982dd8da38aeb0248e8970067e6b56ca492a4304d528703559d96c",
+      "sha256": "58fb59bd99ee0028ce61a70ad0f9549c36442b6f939a35e65adf788253660e31",
       "bytes": 594
     },
     {
@@ -1365,13 +3065,13 @@
     },
     {
       "path": "docs/RELEASING.md",
-      "sha256": "f7e45b75b27fbdc9a2b5ef9bb82aa04254df25a9c788f652ea613e5b89033f51",
+      "sha256": "301981714791e9267a58a46adde95638cd9aff07628b1187326cbea0d457f7ec",
       "bytes": 1524
     },
     {
       "path": "docs/REPOSITORY_STRUCTURE.md",
-      "sha256": "1f80b528d2fdae00864e057e9b26c3adff7d45ecc990dd13b97cef3e3563e42b",
-      "bytes": 2432
+      "sha256": "f0856a4740fa42ab933475d63c50f709219117c10ddb6a3242ded35ef2ff3867",
+      "bytes": 2900
     },
     {
       "path": "docs/STYLE_GUIDE.md",
@@ -1415,7 +3115,7 @@
     },
     {
       "path": "npm/design-tokens/dist/icons.json",
-      "sha256": "7724754adec33ae0e152778ee8b42d47a55ad00886f813f0720a87077e5fc8e4",
+      "sha256": "a27d69a747dcd1830b59125f56485048d9b3186e817b3f8658f6daabebdcb446",
       "bytes": 1945
     },
     {
@@ -1425,17 +3125,17 @@
     },
     {
       "path": "npm/design-tokens/dist/tokens.css",
-      "sha256": "cdaf8bdcaf9b4400fbc59236e24c2c74cf23d25d44d4f0d619d85df8cb85928e",
+      "sha256": "d8cb1d9270ef4439e592bff7d7cae29370b9ea87fbb56d1893da50c1692f568e",
       "bytes": 14992
     },
     {
       "path": "npm/design-tokens/dist/tokens.json",
-      "sha256": "3b6962d06571e1606277c2d5dd8bd61b05478303e6123923dbfbfc7a188f1bce",
+      "sha256": "3c5ad6319af7b9e19eab73feb1834a7d1df4aca6fe5d696487f3e478a6de22b7",
       "bytes": 21807
     },
     {
       "path": "npm/design-tokens/package.json",
-      "sha256": "040b30f78b82efa0e11c0fbc14225c8e1d30d314fe940ab9349d7fe2b6e38cd0",
+      "sha256": "d23ea480860c673d90432e2914acddf22d085c363e4cfd921af6f322de17361a",
       "bytes": 736
     },
     {
@@ -1485,7 +3185,7 @@
     },
     {
       "path": "npm/design-tokens/src/icons.json",
-      "sha256": "25a843dfb9f50adc32cca16b133ed7058553df5c3e154546c366dd42b1d08267",
+      "sha256": "b4b66c128d8c62c749196b74f32699a524089912d9ec672637c409a0535663b7",
       "bytes": 1998
     },
     {
@@ -1500,12 +3200,12 @@
     },
     {
       "path": "npm/design-tokens/src/tokens.json",
-      "sha256": "3b6962d06571e1606277c2d5dd8bd61b05478303e6123923dbfbfc7a188f1bce",
+      "sha256": "3c5ad6319af7b9e19eab73feb1834a7d1df4aca6fe5d696487f3e478a6de22b7",
       "bytes": 21807
     },
     {
       "path": "package.json",
-      "sha256": "78476e3255bee2f10862e1e9896c614e2043340aea899b4d0400817f103442df",
+      "sha256": "c2d6a79a57eaa775904ad911f8ee23de11be8245fea1c9eb134347956917a574",
       "bytes": 225
     },
     {
@@ -1535,8 +3235,8 @@
     },
     {
       "path": "scripts/verify_source_catalogs.py",
-      "sha256": "512c01c7e27e099cd5b99d1229ddb3624dee4311b92b5ee0820bf07dcc6e8ac0",
-      "bytes": 5660
+      "sha256": "5ac237b868726aff0a3e33d578a2c80fe88f9a4be990ed43e38a043e9e014e45",
+      "bytes": 16722
     }
   ]
 }

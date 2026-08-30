@@ -8,6 +8,12 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class SwiftPackageLayoutTests(unittest.TestCase):
+    def test_reference_catalogs_are_not_swiftpm_targets(self) -> None:
+        manifest = (ROOT / "packages/Package.swift").read_text(encoding="utf-8")
+        self.assertNotIn("ExploreSwiftUI", manifest)
+        self.assertNotIn("MagicUI", manifest)
+        self.assertNotIn("ShadcnUI", manifest)
+
     def test_products_use_explicit_qenterra_source_paths(self) -> None:
         manifest = (ROOT / "packages/Package.swift").read_text(encoding="utf-8")
         self.assertIn('path: "Sources/QenTerra/DesignTokens"', manifest)

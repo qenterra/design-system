@@ -26,7 +26,7 @@ class DesignSystemV5ContractTests(unittest.TestCase):
 
     def test_major_release_and_public_packages_are_aligned(self) -> None:
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual(version, "5.1.0")
+        self.assertEqual(version, "5.3.0")
         npm = json.loads(
             (ROOT / "packages/npm/design-tokens/package.json").read_text(
                 encoding="utf-8"

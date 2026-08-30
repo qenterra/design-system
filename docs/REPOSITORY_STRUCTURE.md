@@ -8,6 +8,8 @@
 | `schemas/` | Machine-readable contracts | `@qenterra` | None directly | `python3 scripts/verify.py` |
 | `registry/` | Components, icons, packages, and delivery allowlist | `@qenterra` | `packages/release-manifest.json` | `python3 scripts/build_public_packages.py check` |
 | `packages/` | Sole public repository projection | `@qenterra` | `qenterra/packages` and `@qenterra/design-tokens` | `python3 scripts/verify_public_boundary.py` |
+| `packages/Sources/MagicUI/` | Exact MIT-licensed public-page components and registry payloads | Magic UI; catalog maintained by `@qenterra` | Non-target source catalog | `python3 scripts/magic_ui.py verify` |
+| `packages/Sources/ShadcnUI/` | Exact MIT-licensed web component references | shadcn; catalog maintained by `@qenterra` | Non-target source catalog | `python3 scripts/shadcn_ui.py verify` |
 | `assets/brand/nyx/` | Private canonical Nyx assets | `@qenterra` | None | `python3 scripts/brand/validate_brand_assets.py --check-git-lfs` |
 | `docs/` | Human references and project governance | `@qenterra` | Selected package docs only | `python3 scripts/verify.py` |
 | `scripts/`, `tests/` | Deterministic generation and verification | `@qenterra` | Public verifier only | `python3 scripts/verify.py` |

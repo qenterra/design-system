@@ -12,7 +12,7 @@ permissions:
   contents: read
 
 jobs:
-  explore-swiftui-currentness:
+  upstream-source-currentness:
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
@@ -21,6 +21,10 @@ jobs:
           persist-credentials: false
       - name: Compare the stored catalog with Explore SwiftUI
         run: python3 scripts/explore_swiftui.py sync --check
+      - name: Compare the stored catalog with Magic UI
+        run: python3 scripts/magic_ui.py sync --check
+      - name: Compare the stored catalog with shadcn/ui
+        run: python3 scripts/shadcn_ui.py sync --check
 
   verify:
     runs-on: macos-15

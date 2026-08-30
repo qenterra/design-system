@@ -5,6 +5,8 @@
 | `Package.swift` | Swift package manifest | `@qenterra` | Two library products | Swift package tests |
 | `Sources/QenTerra/` | Maintained Swift source | `@qenterra` | Swift APIs and component manifest | Swift package tests and source-catalog verification |
 | `Sources/ExploreSwiftUI/` | Exact attributed reference source | Explore SwiftUI; published by permission | No SwiftPM product or target | Sitemap synchronization, closed manifest, byte count, and SHA-256 |
+| `Sources/MagicUI/` | Exact MIT-licensed component and install-registry source | Magic UI | No npm or SwiftPM product or target | Public docs closure, pinned commit, registry content, license, byte count, and SHA-256 |
+| `Sources/ShadcnUI/` | Exact MIT-licensed component reference source | shadcn | No npm or SwiftPM product or target | Pinned upstream commit, registry closure, license, byte count, and SHA-256 |
 | `Tests/` | Swift regression tests | `@qenterra` | None | Swift package tests |
 | `npm/design-tokens/src/` | Versioned public generation inputs | `@qenterra` | Token, icon, and CSS sources | Deterministic regeneration and release manifest |
 | `npm/design-tokens/schemas/` | Schemas for public token and icon inputs | `@qenterra` | Editor and maintainer validation | Release manifest |
@@ -14,6 +16,6 @@
 | `scripts/` | Self-contained verification | `@qenterra` | Local and CI gates | Python execution and manifest self-check |
 | `release-manifest.json` | Release file closure | `@qenterra` | Paths, sizes, SHA-256 hashes | `python3 scripts/verify_release.py` |
 
-Swift and npm packages are peers under one version. `QenTerraComponents` may depend on `QenTerraDesignTokens`; the tokens target does not depend on the component target. `Sources/ExploreSwiftUI/` is intentionally outside both target paths, so reference snippets do not become a build dependency. Generated npm and Swift outputs depend only on `npm/design-tokens/src/` and the versioned public generator. Both source catalogs verify their own closure and hashes before `release-manifest.json` records the complete public closure; changing one editable manifest cannot make stale output valid.
+Swift and npm packages are peers under one version. `QenTerraComponents` may depend on `QenTerraDesignTokens`; the tokens target does not depend on the component target. `Sources/ExploreSwiftUI/`, `Sources/MagicUI/`, and `Sources/ShadcnUI/` are intentionally outside package target paths, so reference sources do not become build dependencies. Generated npm and Swift outputs depend only on `npm/design-tokens/src/` and the versioned public generator. All four source catalogs verify their own closure and hashes before `release-manifest.json` records the complete public closure; changing one editable manifest cannot make stale output valid.
 
 No cache, build, report, package-staging, or AI tooling path belongs under the repository root. Use a unique external temporary directory for each run.

@@ -1,0 +1,11 @@
+{
+  "name": "magic-card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "registry/magicui/magic-card.tsx",
+      "type": "registry:ui",
+      "content": "export function MagicCard() {\n  return <div data-magic-card />\n}\n"
+    }
+  ]
+}

@@ -1,2 +1,5 @@
 assets/brand/**/*.png filter=lfs diff=lfs merge=lfs -text
 packages/Sources/ExploreSwiftUI/Components/**/*.swift -whitespace
+packages/Sources/ShadcnUI/Components/**/* -whitespace
+packages/Sources/MagicUI/Components/**/* -whitespace
+packages/Sources/MagicUI/Registry/**/* -whitespace

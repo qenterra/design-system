@@ -4,9 +4,13 @@ The canonical Design System repository is private. Only the deterministic conten
 
 ## Public contents
 
-The release manifest allowlists package manifests, safe public generation inputs, the portable generator, generated npm and Swift outputs, the exact Explore SwiftUI reference catalog, public tests, README, CI, license, and notices. Every file has a SHA-256 digest. The exported verifier regenerates declared outputs outside the checkout and independently closes both Swift source catalogs before it checks release digests; a changed artifact and matching edited hash do not pass. A path absent from the manifest does not ship.
+The release manifest allowlists package manifests, safe public generation inputs, the portable generator, generated npm and Swift outputs, the exact Explore SwiftUI, shadcn/ui, and Magic UI reference catalogs, public tests, README, CI, license, and notices. Every file has a SHA-256 digest. The exported verifier regenerates declared outputs outside the checkout and independently closes all source catalogs before it checks release digests; a changed artifact and matching edited hash do not pass. A path absent from the manifest does not ship.
 
 Explore SwiftUI originals are published under direct permission, stored byte-for-byte from the detail-page source field, and excluded from SwiftPM targets. They are never tokenized or edited in place. An adaptation is a new QenTerra component file with derivation provenance, semantic tokens, tests, delivery registration, versioning, and changelog coverage.
+
+shadcn/ui originals are stored byte-for-byte from every official upstream `registry:ui` base at one pinned public commit, retain the exact upstream MIT license and shadcn copyright notice, and are excluded from package targets. They are never tokenized or edited in place. The catalog intentionally excludes the upstream site, CLI, tests, examples, blocks, generated styles, and internal application code.
+
+Magic UI originals are stored byte-for-byte for every entry on the official public Components page at one pinned public commit. Each `.tsx` source is paired with its exact shadcn-compatible registry payload so required dependencies, CSS variables, and keyframes are not silently lost. The catalog retains the exact upstream MIT license and `Copyright (c) Magic UI`, remains outside package targets, and excludes templates, demos, documentation prose, site internals, and registry sources not listed on the public page.
 
 The public tree must never contain brand assets, `SKILL.md`, Noetic files, agent instructions, private documentation, consumer manifests, secrets, absolute local paths, or private commit identifiers.
 
