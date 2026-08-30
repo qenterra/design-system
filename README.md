@@ -2,7 +2,7 @@
 
 Universal foundations, reusable visual components, palettes, platform adapters, and engineering contracts for websites, native applications, and other interface-bearing projects.
 
-> **Status:** private canonical source, version `5.4.0`. Installable public outputs are released separately through [`qenterra/packages`](https://github.com/qenterra/packages).
+> **Status:** private canonical source, version `5.5.0`. Installable public outputs are released separately through [`qenterra/packages`](https://github.com/qenterra/packages).
 
 ## Use it
 
@@ -32,9 +32,9 @@ Swift projects add:
 https://github.com/qenterra/packages
 ```
 
-Available Swift products are `QenTerraDesignTokens` and `QenTerraComponents`. The latter contains the primary-button style, group container, and interactive-row surface, each in its own source file. The public tree also includes four non-target reference catalogs: all 221 current Explore SwiftUI detail-page sources across 34 categories; all 182 official shadcn/ui `registry:ui` source files across React Aria, Base UI, and Radix UI; all 76 components on the official Magic UI Components page with their 76 exact install-registry payloads; and all 745 official UIable `registry:ui` items, split into 684 showcase components and 61 required UI primitives, with 745 exact install payloads. Every catalog retains exact bytes and manifest-backed provenance; shadcn/ui, Magic UI, and UIable additionally carry their exact upstream MIT licenses and copyright notices.
+Available Swift products are `QenTerraDesignTokens` and `QenTerraComponents`. The latter contains the primary-button style, group container, and interactive-row surface, each in its own source file. The public tree also includes five non-target reference catalogs: all 221 current Explore SwiftUI detail-page sources across 34 categories; all 182 official shadcn/ui `registry:ui` source files across React Aria, Base UI, and Radix UI; all 76 components on the official Magic UI Components page with their 76 exact install-registry payloads; all 745 official UIable `registry:ui` items, split into 684 showcase components and 61 required UI primitives; and the complete free ReUI registry for Base UI Nova and Radix UI Nova, containing 2,202 examples, 150 primitives, eight hooks, and 2,360 exact install payloads. Every catalog retains exact bytes and manifest-backed provenance; shadcn/ui, Magic UI, UIable, and ReUI additionally carry their exact upstream MIT licenses and copyright notices.
 
-Public files are staged only under `packages/`. QenTerra-authored code there has Apache-2.0 licensing and a required NOTICE attribution to QenTerra and Nikita Melnychenko. Explore SwiftUI examples retain their original ownership and direct-publication permission; shadcn/ui, Magic UI, and UIable sources retain their upstream MIT licenses and authorship. Private docs, Nyx, agent instructions, consumer manifests, and private history never enter the public tree.
+Public files are staged only under `packages/`. QenTerra-authored code there has Apache-2.0 licensing and a required NOTICE attribution to QenTerra and Nikita Melnychenko. Explore SwiftUI examples retain their original ownership and direct-publication permission; shadcn/ui, Magic UI, UIable, and ReUI sources retain their upstream MIT licenses and authorship. Private docs, Nyx, agent instructions, consumer manifests, and private history never enter the public tree.
 
 ## Canonical structure
 
@@ -81,7 +81,7 @@ The complete gate checks generated adapters, registries, public boundaries, term
 
 ## License
 
-The canonical repository remains private and proprietary under [`LICENSE`](LICENSE). QenTerra-authored contents of `packages/` are licensed under Apache-2.0 with the bundled NOTICE requirement; preserved Explore SwiftUI, shadcn/ui, Magic UI, and UIable sources retain their separate ownership and terms and are not relicensed as QenTerra work.
+The canonical repository remains private and proprietary under [`LICENSE`](LICENSE). QenTerra-authored contents of `packages/` are licensed under Apache-2.0 with the bundled NOTICE requirement; preserved Explore SwiftUI, shadcn/ui, Magic UI, UIable, and ReUI sources retain their separate ownership and terms and are not relicensed as QenTerra work.
 
 ## Contact
 

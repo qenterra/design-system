@@ -1,0 +1,10 @@
+{
+  "name": "reui",
+  "homepage": "https://reui.io",
+  "items": [
+    {"name": "c-button-1", "type": "registry:block", "categories": ["button"]},
+    {"name": "paid-dashboard", "type": "registry:block"},
+    {"name": "alert", "type": "registry:ui"},
+    {"name": "use-copy-to-clipboard", "type": "registry:hook"}
+  ]
+}

@@ -4,6 +4,7 @@
 
 ```sh
 python3 scripts/generate.py check
+python3 scripts/verify_source_catalogs.py
 python3 scripts/verify_release.py
 python3 scripts/qenterra_repository_check.py audit --root . --format markdown
 ```

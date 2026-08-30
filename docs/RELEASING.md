@@ -5,7 +5,7 @@
 - Release owner: Nikita Melnychenko (QenTerra)
 - Version scheme: semver
 - Version source: `VERSION`
-- Current version: `5.4.0`
+- Current version: `5.5.0`
 
 A local commit, tag, GitHub Release, package publication, deployment, store submission, and update-feed change are separate authorised actions.
 
@@ -16,6 +16,7 @@ A local commit, tag, GitHub Release, package publication, deployment, store subm
 - [ ] Move user- and operator-visible `Unreleased` entries into a dated version section.
 - [ ] Document migrations, deprecations, known issues, support status, and rollback.
 - [ ] Review dependencies, licenses, notices, vulnerabilities, secrets, and generated artifacts.
+- [ ] Run live currentness checks for every reference catalog, including `python3 scripts/reui.py sync --check`.
 - [ ] Run `python3 scripts/verify.py` on the intended release tree.
 - [ ] Run repository governance and release-contract checks.
 

@@ -15,7 +15,7 @@
   "conduct_contact": "https://github.com/QenTerra/packages/security/advisories/new",
   "copyright_holder": "Nikita Melnychenko (QenTerra)",
   "copyright_year_range": "2026",
-  "current_version": "5.1.0",
+  "current_version": "5.5.0",
   "default_branch": "main",
   "dependabot_ecosystem": "npm",
   "description": "Public Swift and npm packages for QenTerra design tokens and reusable components.",
@@ -114,6 +114,14 @@
       "review_trigger": "Public icon inputs, generator logic, Swift adapter structure, or package version changes",
       "source": "npm/design-tokens/src",
       "verification_command": "python3 scripts/verify_release.py"
+    },
+    {
+      "manifest": "release-manifest.json",
+      "path": "Sources/ReUI/Registry",
+      "purpose": "Exact install-ready ReUI registry payloads for source-copy consumers",
+      "review_trigger": "ReUI repository commit, live deployment, registry indexes, importer, or public catalog layout changes",
+      "source": "Sources/ReUI/Base",
+      "verification_command": "python3 scripts/verify_source_catalogs.py"
     }
   ],
   "quick_start_command": "npm pack --workspace @qenterra/design-tokens --dry-run --json",

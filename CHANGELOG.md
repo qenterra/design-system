@@ -1,5 +1,22 @@
 # Changelog
 
+## 5.5.0
+
+### Added
+
+- Added the complete free ReUI registry for Base UI Nova and Radix UI Nova: 2,202 `c-*` examples, 150 public primitives, eight hooks, 2,360 exact install payloads, and 2,377 unique immutable source files.
+- Added manifest-backed provenance for the official repository commit, immutable live deployment, both live registry indexes, item origin, paths, URLs, dependencies, byte counts, and SHA-256 hashes.
+- Bundled the exact upstream MIT license with `Copyright (c) 2025 Keenthemes Inc`, public third-party attribution, architecture guidance, importer tests, offline verification, and scheduled live currentness checks.
+
+### Changed
+
+- Bumped the unified Design System version to 5.5.0 and extended the public allowlist while keeping ReUI outside npm and SwiftPM targets.
+- Use the pinned official repository for unchanged published payloads and the matching immutable live deployment for 64 additions or changes not represented by that commit.
+
+### Security
+
+- Exclude all 520 ReUI Pro blocks, paid icons, templates, site code, docs application, media, and build tooling. ReUI originals remain byte-identical and separately licensed; adaptations must become new maintained QenTerra components.
+
 ## 5.4.0
 
 ### Added

@@ -48,6 +48,17 @@ class SourceCatalogVerifierTests(unittest.TestCase):
         self.assertIn("Sources/UIable/Primitives/", content)
         self.assertIn("Sources/UIable/Registry/", content)
 
+    def test_reui_catalog_is_part_of_the_public_verifier(self) -> None:
+        self.assertTrue(
+            (ROOT / "packages/Sources/ReUI/manifest.json").is_file(),
+            "the exact ReUI catalog is missing",
+        )
+        content = VERIFIER.read_text(encoding="utf-8")
+        self.assertIn("Sources/ReUI/manifest.json", content)
+        self.assertIn("Sources/ReUI/Base/", content)
+        self.assertIn("Sources/ReUI/Radix/", content)
+        self.assertIn("Sources/ReUI/Registry/", content)
+
 
 if __name__ == "__main__":
     unittest.main()

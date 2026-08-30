@@ -1,6 +1,6 @@
 # Design System
 
-Версия 5.4.0 · Нормативный справочник для людей и AI-агентов
+Версия 5.5.0 · Нормативный справочник для людей и AI-агентов
 
 ## 0. Как пользоваться этим файлом
 
@@ -485,7 +485,7 @@ SwiftPM — продукты `QenTerraDesignTokens` и `QenTerraComponents`. Pro
 точного release manifest, полного gate и разрешения чистыми consumer-проектами.
 Релиз адаптеров не доказывает нативную отрисовку или приёмку доступности продукта.
 
-Публичное дерево исходников намеренно разделено на пять зон. `Sources/QenTerra/`
+Публичное дерево исходников намеренно разделено на шесть зон. `Sources/QenTerra/`
 содержит устанавливаемые токенизированные targets `QenTerraDesignTokens` и
 `QenTerraComponents`. `Sources/ExploreSwiftUI/` хранит точный атрибутированный
 исходный код каждой detail page из sitemap Explore SwiftUI и не является SwiftPM-target.
@@ -537,6 +537,24 @@ build tooling исключены. `scripts/uiable.py sync --write` может з
 или иначе изменённая реализация становится отдельным сопровождаемым
 компонентом QenTerra; оригинал UIable никогда не редактируется на месте.
 
+`Sources/ReUI/` — пятый неизменяемый референсный каталог,
+исключённый из npm- и SwiftPM-targets. Его живая граница — каждый
+бесплатный `c-*` block, публичный `registry:ui` primitive и
+`registry:hook`, объявленные индексами Base UI Nova и Radix UI Nova.
+Опубликованные в репозитории payloads зафиксированы на одном полном
+официальном Git commit; добавления или изменённые payloads, которых там
+ещё нет, зафиксированы на неизменяемом live Vercel deployment, общем
+для обоих индексов. Manifest хранит hashes обоих индексов, каждый
+origin URL, byte count, SHA-256, dependencies, target path и точную
+MIT-лицензию с `Copyright (c) 2025 Keenthemes Inc`. ReUI Pro blocks,
+платные icons, templates, сайт, docs application, media и build tooling
+исключены. `scripts/reui.py sync --write` обновляет каталог только
+из этих официальных источников, а `sync --check` сначала сравнивает
+сохранённые deployment/index identity и только потом скачивает
+изменившиеся payloads. Адаптированная или токенизированная
+копия становится отдельным сопровождаемым компонентом QenTerra;
+ни один оригинал ReUI или install payload не редактируется на месте.
+
 ## 19. Протокол AI-реализации
 
 ### 19.1 Кодовая система
@@ -567,7 +585,7 @@ AI запрещено восстанавливать текущий интерф
 1. Прочитайте `AGENTS.md`, этот файл, затронутые токены и доказательства продукта.
 2. Добавьте или обновите ADR для нормативного изменения.
 3. Меняйте канонические токены, реестры, схемы, документацию, шаблоны или фасады пакетов.
-4. Для изменений Explore SwiftUI запустите `python3 scripts/explore_swiftui.py sync --write`; для Magic UI — `python3 scripts/magic_ui.py sync --write`; для shadcn/ui — `python3 scripts/shadcn_ui.py sync --write`; для UIable — `python3 scripts/uiable.py sync --write`; затем при изменении generated/public outputs запустите `python3 scripts/generate.py write` и `python3 scripts/build_public_packages.py write`.
+4. Для изменений Explore SwiftUI запустите `python3 scripts/explore_swiftui.py sync --write`; для Magic UI — `python3 scripts/magic_ui.py sync --write`; для shadcn/ui — `python3 scripts/shadcn_ui.py sync --write`; для UIable — `python3 scripts/uiable.py sync --write`; для ReUI — `python3 scripts/reui.py sync --write`; затем при изменении generated/public outputs запустите `python3 scripts/generate.py write` и `python3 scripts/build_public_packages.py write`.
 5. Запустите `python3 scripts/verify.py`.
 6. Проверьте npm-архив, Swift-продукты и затронутый consumer в нужных темах и ограничениях.
 7. Обновите changelog и версию.

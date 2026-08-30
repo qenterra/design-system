@@ -4,3 +4,4 @@ packages/Sources/ShadcnUI/Components/**/* -whitespace
 packages/Sources/MagicUI/Components/**/* -whitespace
 packages/Sources/MagicUI/Registry/**/* -whitespace
 packages/Sources/UIable/**/* -text -whitespace
+packages/Sources/ReUI/**/* -text -whitespace

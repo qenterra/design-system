@@ -28,6 +28,8 @@ class DocumentationAlignmentTests(unittest.TestCase):
                 self.assertIn("scripts/shadcn_ui.py", text)
                 self.assertIn("Sources/UIable/", text)
                 self.assertIn("scripts/uiable.py", text)
+                self.assertIn("Sources/ReUI/", text)
+                self.assertIn("scripts/reui.py", text)
 
 
 if __name__ == "__main__":

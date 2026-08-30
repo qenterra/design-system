@@ -1,6 +1,6 @@
 # Design System
 
-Version 5.4.0 · Normative reference for humans and AI agents
+Version 5.5.0 · Normative reference for humans and AI agents
 
 ## 0. How to use this file
 
@@ -822,7 +822,7 @@ manifest, the full verification gate, and clean consumer resolution. A package
 release proves adapter availability, not native rendering or accessibility
 acceptance in a product.
 
-The public source tree has five deliberately separate zones. `Sources/QenTerra/`
+The public source tree has six deliberately separate zones. `Sources/QenTerra/`
 contains the installable, tokenized `QenTerraDesignTokens` and
 `QenTerraComponents` targets. `Sources/ExploreSwiftUI/` contains exact attributed
 source from every Explore SwiftUI sitemap detail page and is not a SwiftPM target.
@@ -869,6 +869,21 @@ excluded. `scripts/uiable.py sync --write` may replace originals only from the
 official repository. Any tokenized or otherwise modified implementation becomes
 a separate maintained QenTerra component; no UIable original is edited in place.
 
+`Sources/ReUI/` is a fifth immutable reference catalog, excluded from npm and
+SwiftPM targets. Its live boundary is every free `c-*` block, public
+`registry:ui` primitive, and `registry:hook` declared by both the Base UI Nova
+and Radix UI Nova indexes. Repository-published payloads are pinned to one full
+official Git commit; additions or changed payloads not yet present there are
+pinned to the immutable live Vercel deployment shared by both indexes. The
+manifest records both index hashes, every origin URL, byte count, SHA-256,
+dependency list, target path, and exact MIT license with `Copyright (c) 2025
+Keenthemes Inc`. ReUI Pro blocks, paid icons, templates, the website, docs
+application, media, and build tooling are excluded. `scripts/reui.py sync
+--write` refreshes only from those official sources and `sync --check` compares
+the saved deployment/index identity before downloading changed payloads. An
+adapted or tokenized copy becomes a separate maintained QenTerra component; no
+ReUI original or install payload is edited in place.
+
 ## 19. AI implementation protocol
 
 ### 19.1 Code System
@@ -908,7 +923,7 @@ To update the design system:
 1. Read `AGENTS.md`, this file, affected token files, and relevant product evidence.
 2. Add or update an ADR in `docs/decisions/` for a normative change.
 3. Change canonical tokens, registries, schemas, documentation, templates, or package facades.
-4. For Explore SwiftUI changes run `python3 scripts/explore_swiftui.py sync --write`; for Magic UI changes run `python3 scripts/magic_ui.py sync --write`; for shadcn/ui changes run `python3 scripts/shadcn_ui.py sync --write`; for UIable changes run `python3 scripts/uiable.py sync --write`; then run `python3 scripts/generate.py write` and `python3 scripts/build_public_packages.py write` when generated/public outputs change.
+4. For Explore SwiftUI changes run `python3 scripts/explore_swiftui.py sync --write`; for Magic UI changes run `python3 scripts/magic_ui.py sync --write`; for shadcn/ui changes run `python3 scripts/shadcn_ui.py sync --write`; for UIable changes run `python3 scripts/uiable.py sync --write`; for ReUI changes run `python3 scripts/reui.py sync --write`; then run `python3 scripts/generate.py write` and `python3 scripts/build_public_packages.py write` when generated/public outputs change.
 5. Run `python3 scripts/verify.py`.
 6. Inspect the npm tarball, Swift products, and the affected consumer at the relevant appearances and constraints.
 7. Update `CHANGELOG.md` and version according to change type.

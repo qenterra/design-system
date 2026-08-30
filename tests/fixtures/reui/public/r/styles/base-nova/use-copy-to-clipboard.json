@@ -1,0 +1,1 @@
+{"$schema":"https://ui.shadcn.com/schema/registry-item.json","name":"use-copy-to-clipboard","type":"registry:hook","title":"Copy hook","dependencies":[],"registryDependencies":[],"files":[{"path":"use-copy-to-clipboard.ts","target":"hooks/use-copy-to-clipboard.ts","type":"registry:hook","content":"export const useCopyToClipboard = () => \"base\"\n"}]}

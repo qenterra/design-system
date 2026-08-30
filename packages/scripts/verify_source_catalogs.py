@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify public Explore SwiftUI, Magic UI, shadcn/ui, UIable, and QenTerra catalogs."""
+"""Verify public Explore SwiftUI, Magic UI, shadcn/ui, UIable, ReUI, and QenTerra catalogs."""
 
 from __future__ import annotations
 
@@ -459,6 +459,269 @@ def _validate_uiable(
     return errors, items
 
 
+def _validate_reui(
+    root: Path,
+    manifest_path: Path,
+) -> tuple[list[str], dict[str, dict[str, object]]]:
+    errors: list[str] = []
+    try:
+        manifest = _load(manifest_path)
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
+        return [f"cannot verify ReUI catalog: {error}"], {}
+    commit = manifest.get("upstreamCommit")
+    if (
+        not isinstance(commit, str)
+        or len(commit) != 40
+        or any(character not in "0123456789abcdef" for character in commit)
+    ):
+        errors.append("ReUI source catalog upstream commit is invalid")
+    registry_revision = manifest.get("registryRevision")
+    if (
+        not isinstance(registry_revision, str)
+        or not registry_revision.startswith("dpl_")
+    ):
+        errors.append("ReUI source catalog registry revision is invalid")
+    if manifest.get("registryOrigin") != "https://reui.io/r/styles":
+        errors.append("ReUI source catalog registry origin is invalid")
+    indexes = manifest.get("registryIndexes")
+    if not isinstance(indexes, list) or len(indexes) != 2:
+        errors.append("ReUI source catalog registry indexes are missing")
+    else:
+        expected_bases = (("base", "base-nova"), ("radix", "radix-nova"))
+        for record, (base, style) in zip(indexes, expected_bases):
+            expected_url = (
+                f"https://reui.io/r/styles/{style}/registry.json"
+                f"?v={registry_revision}"
+            )
+            if (
+                not isinstance(record, dict)
+                or record.get("base") != base
+                or record.get("style") != style
+                or record.get("upstreamPath")
+                != f"public/r/styles/{style}/registry.json"
+                or record.get("sourceURL") != expected_url
+                or not isinstance(record.get("sha256"), str)
+                or len(str(record.get("sha256"))) != 64
+                or not isinstance(record.get("bytes"), int)
+                or int(record.get("bytes", 0)) < 1
+            ):
+                errors.append(f"ReUI source catalog {base} registry index is invalid")
+
+    source_records = manifest.get("sources")
+    if not isinstance(source_records, list) or not source_records:
+        return [*errors, "ReUI source catalog sources must be non-empty"], {}
+    source_paths: set[str] = set()
+    sources: dict[str, dict[str, object]] = {}
+    source_payloads: dict[str, bytes] = {}
+    allowed_source_root = (root / "Sources/ReUI").resolve()
+    for index, record in enumerate(source_records):
+        if not isinstance(record, dict):
+            errors.append(f"ReUI source catalog: invalid source at index {index}")
+            continue
+        relative = record.get("sourcePath")
+        upstream = record.get("upstreamPath")
+        if (
+            not isinstance(relative, str)
+            or not relative.startswith(
+                ("Sources/ReUI/Base/", "Sources/ReUI/Radix/", "Sources/ReUI/Shared/")
+            )
+        ):
+            errors.append(f"ReUI source catalog: invalid source path at index {index}")
+            continue
+        path = (root / relative).resolve()
+        if allowed_source_root not in path.parents:
+            errors.append(f"ReUI source catalog: source path escapes catalog {relative}")
+            continue
+        if relative in source_paths:
+            errors.append(f"ReUI source catalog: duplicate source path {relative}")
+        source_paths.add(relative)
+        sources[relative] = record
+        if not path.is_file():
+            errors.append(f"ReUI source catalog: missing source {relative}")
+            continue
+        payload = path.read_bytes()
+        source_payloads[relative] = payload
+        if record.get("bytes") != len(payload):
+            errors.append(f"ReUI source catalog: byte-size mismatch {relative}")
+        if record.get("sha256") != hashlib.sha256(payload).hexdigest():
+            errors.append(f"ReUI source catalog: hash mismatch {relative}")
+        origin = record.get("origin")
+        registry_path = upstream.split("#", 1)[0] if isinstance(upstream, str) else ""
+        if origin == "repository":
+            expected_url = (
+                "https://raw.githubusercontent.com/keenthemes/reui/"
+                f"{commit}/{registry_path}"
+            )
+        elif origin == "live-registry":
+            expected_url = (
+                f"https://reui.io/{registry_path.removeprefix('public/')}"
+                f"?v={registry_revision}"
+            )
+        else:
+            expected_url = ""
+        if not registry_path or record.get("sourceURL") != expected_url:
+            errors.append(f"ReUI source catalog: invalid source origin {relative}")
+
+    item_records = manifest.get("items")
+    if not isinstance(item_records, list) or not item_records:
+        return [*errors, "ReUI source catalog items must be non-empty"], sources
+    item_ids: set[str] = set()
+    registry_paths: set[str] = set()
+    counts = {"example": 0, "primitive": 0, "hook": 0}
+    origin_counts = {"repository": 0, "live-registry": 0}
+    expected_types = {
+        "example": "registry:block",
+        "primitive": "registry:ui",
+        "hook": "registry:hook",
+    }
+    for index, item in enumerate(item_records):
+        if not isinstance(item, dict):
+            errors.append(f"ReUI source catalog: invalid item at index {index}")
+            continue
+        identifier = item.get("id")
+        kind = item.get("kind")
+        base = item.get("base")
+        name = item.get("name")
+        if not isinstance(identifier, str) or identifier in item_ids:
+            errors.append("ReUI source catalog: invalid or duplicate item id")
+            continue
+        item_ids.add(identifier)
+        if kind not in counts or base not in {"base", "radix"}:
+            errors.append(f"ReUI source catalog: invalid item kind/base {identifier}")
+            continue
+        counts[str(kind)] += 1
+        references = item.get("sourcePaths")
+        if not isinstance(references, list) or not references or not all(
+            isinstance(reference, str) and reference in source_paths
+            for reference in references
+        ):
+            errors.append(f"ReUI source catalog: invalid source references {identifier}")
+
+        registry = item.get("registryItem")
+        if not isinstance(registry, dict):
+            errors.append(f"ReUI source catalog: missing registry item {identifier}")
+            continue
+        relative = registry.get("sourcePath")
+        upstream = registry.get("upstreamPath")
+        expected_prefix = f"Sources/ReUI/Registry/{str(base).title()}Nova/"
+        if not isinstance(relative, str) or not relative.startswith(expected_prefix):
+            errors.append(f"ReUI source catalog: invalid registry path {identifier}")
+            continue
+        if relative in registry_paths:
+            errors.append(f"ReUI source catalog: duplicate registry path {relative}")
+        registry_paths.add(relative)
+        path = (root / relative).resolve()
+        if allowed_source_root not in path.parents or not path.is_file():
+            errors.append(f"ReUI source catalog: missing registry item {relative}")
+            continue
+        payload_bytes = path.read_bytes()
+        if registry.get("bytes") != len(payload_bytes):
+            errors.append(f"ReUI source catalog: registry byte-size mismatch {relative}")
+        if registry.get("sha256") != hashlib.sha256(payload_bytes).hexdigest():
+            errors.append(f"ReUI source catalog: registry hash mismatch {relative}")
+        origin = registry.get("origin")
+        if origin in origin_counts:
+            origin_counts[str(origin)] += 1
+        if origin == "repository":
+            expected_url = (
+                "https://raw.githubusercontent.com/keenthemes/reui/"
+                f"{commit}/{upstream}"
+            )
+        elif origin == "live-registry":
+            expected_url = (
+                f"https://reui.io/{str(upstream).removeprefix('public/')}"
+                f"?v={registry_revision}"
+            )
+        else:
+            expected_url = ""
+        if not isinstance(upstream, str) or registry.get("sourceURL") != expected_url:
+            errors.append(f"ReUI source catalog: invalid registry origin {identifier}")
+        try:
+            payload = json.loads(payload_bytes.decode("utf-8"))
+            if (
+                not isinstance(payload, dict)
+                or payload.get("name") != name
+                or payload.get("type") != expected_types[str(kind)]
+            ):
+                errors.append(f"ReUI source catalog: registry identity mismatch {identifier}")
+            files = payload.get("files") if isinstance(payload, dict) else None
+            if not isinstance(files, list) or not all(
+                isinstance(file, dict) and isinstance(file.get("content"), str)
+                for file in files
+            ):
+                errors.append(f"ReUI source catalog: invalid registry files {identifier}")
+            else:
+                registry_hashes = sorted(
+                    hashlib.sha256(str(file["content"]).encode("utf-8")).hexdigest()
+                    for file in files
+                    if isinstance(file, dict)
+                )
+                source_hashes = sorted(
+                    hashlib.sha256(source_payloads[str(reference)]).hexdigest()
+                    for reference in references
+                    if str(reference) in source_payloads
+                )
+                if registry_hashes != source_hashes:
+                    errors.append(
+                        f"ReUI source catalog: registry content mismatch {identifier}"
+                    )
+        except (UnicodeError, json.JSONDecodeError):
+            errors.append(f"ReUI source catalog: invalid registry JSON {identifier}")
+
+    actual_sources = {
+        path.relative_to(root).as_posix()
+        for directory in ("Base", "Radix", "Shared")
+        for path in (root / f"Sources/ReUI/{directory}").rglob("*")
+        if path.is_file()
+    }
+    actual_registry = {
+        path.relative_to(root).as_posix()
+        for path in (root / "Sources/ReUI/Registry").rglob("*")
+        if path.is_file()
+    }
+    if source_paths != actual_sources:
+        errors.append("ReUI source catalog is not closed")
+    if registry_paths != actual_registry:
+        errors.append("ReUI registry catalog is not closed")
+    if (
+        manifest.get("count") != len(item_records)
+        or manifest.get("exampleCount") != counts["example"]
+        or manifest.get("primitiveCount") != counts["primitive"]
+        or manifest.get("hookCount") != counts["hook"]
+        or manifest.get("repositoryItemCount") != origin_counts["repository"]
+        or manifest.get("liveRegistryItemCount") != origin_counts["live-registry"]
+        or manifest.get("sourceFileCount") != len(source_records)
+        or manifest.get("registryItemCount") != len(item_records)
+        or manifest.get("fileCount") != len(source_records) + len(item_records)
+    ):
+        errors.append("ReUI source catalog file counts do not match")
+
+    license_record = manifest.get("license")
+    if not isinstance(license_record, dict):
+        errors.append("ReUI source catalog license record is missing")
+    else:
+        license_path = root / str(license_record.get("sourcePath", ""))
+        if license_record.get("spdx") != "MIT":
+            errors.append("ReUI source catalog license is not MIT")
+        if license_record.get("copyright") != "Copyright (c) 2025 Keenthemes Inc":
+            errors.append("ReUI source catalog authorship is missing")
+        if license_record.get("sourceURL") != (
+            f"https://github.com/keenthemes/reui/blob/{commit}/LICENSE.md"
+        ):
+            errors.append("ReUI source catalog license URL is not pinned")
+        if not license_path.is_file():
+            errors.append("ReUI source catalog license file is missing")
+        else:
+            payload = license_path.read_bytes()
+            if license_record.get("bytes") != len(payload):
+                errors.append("ReUI source catalog license byte-size mismatch")
+            if license_record.get("sha256") != hashlib.sha256(payload).hexdigest():
+                errors.append("ReUI source catalog license hash mismatch")
+            if "Copyright (c) 2025 Keenthemes Inc" not in payload.decode("utf-8"):
+                errors.append("ReUI source catalog license authorship mismatch")
+    return errors, sources
+
+
 def validate_catalogs(root: Path = ROOT) -> list[str]:
     explore_manifest = root / "Sources/ExploreSwiftUI/manifest.json"
     qenterra_manifest = root / "Sources/QenTerra/manifest.json"
@@ -483,12 +746,15 @@ def validate_catalogs(root: Path = ROOT) -> list[str]:
     magic_errors, magic = _validate_magic_ui(root, magic_manifest)
     uiable_manifest = root / "Sources/UIable/manifest.json"
     uiable_errors, uiable = _validate_uiable(root, uiable_manifest)
+    reui_manifest = root / "Sources/ReUI/manifest.json"
+    reui_errors, reui = _validate_reui(root, reui_manifest)
     errors = [
         *explore_errors,
         *qenterra_errors,
         *shadcn_errors,
         *magic_errors,
         *uiable_errors,
+        *reui_errors,
     ]
 
     try:
@@ -550,12 +816,14 @@ def validate_catalogs(root: Path = ROOT) -> list[str]:
         shadcn_version = _load(shadcn_manifest).get("version")
         magic_version = _load(magic_manifest).get("version")
         uiable_version = _load(uiable_manifest).get("version")
+        reui_version = _load(reui_manifest).get("version")
         if (
             explore_version != package_version
             or qenterra_version != package_version
             or shadcn_version != package_version
             or magic_version != package_version
             or uiable_version != package_version
+            or reui_version != package_version
         ):
             errors.append("source catalog versions do not match the package version")
     except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
@@ -588,11 +856,13 @@ def main() -> int:
     shadcn = _load(ROOT / "Sources/ShadcnUI/manifest.json")
     magic = _load(ROOT / "Sources/MagicUI/manifest.json")
     uiable = _load(ROOT / "Sources/UIable/manifest.json")
+    reui = _load(ROOT / "Sources/ReUI/manifest.json")
     print(
         f"Verified {len(explore['components'])} Explore SwiftUI originals and "
         f"{len(magic['components'])} Magic UI originals and "
         f"{len(shadcn['components'])} shadcn/ui originals and "
         f"{len(uiable['items'])} UIable originals and "
+        f"{len(reui['sources'])} ReUI originals and "
         f"{len(qenterra['components'])} QenTerra components"
     )
     return 0

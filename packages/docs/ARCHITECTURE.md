@@ -10,14 +10,14 @@ QenTerra Packages serves web and Apple-platform consumers that need stable desig
 flowchart LR
     Canonical[Canonical Design System sources] --> Projection[Reviewed public source projection]
     Projection --> NpmSource[Versioned token, icon, and CSS inputs]
-    Projection --> Explore[Exact Explore SwiftUI reference catalog]
+    Projection --> Catalogs[Exact reference source catalogs]
     NpmSource --> Generator[Portable deterministic generator]
     Generator --> Swift[Generated Swift adapters]
     Generator --> NpmDist[npm generated distribution]
     Swift --> Manifest[Release manifest]
     NpmSource --> Manifest
     NpmDist --> Manifest
-    Explore --> Manifest
+    Catalogs --> Manifest
     Manifest --> Consumers[Verified public consumers]
 ```
 
@@ -28,7 +28,7 @@ flowchart LR
 | `QenTerraDesignTokens` | Typed foundations and SwiftUI adapters | Swift public API | `@qenterra` |
 | `QenTerraComponents` | Maintained reusable SwiftUI primitives | Swift public API built on design tokens | `@qenterra` |
 | `@qenterra/design-tokens` | CSS variables, recipes, tokens, and icon metadata | Versioned `src/` inputs; generated `dist/` | `@qenterra` |
-| Explore SwiftUI catalog | Immutable attributed native examples, not an installable target | One exact source file and provenance record per sitemap detail page | Explore SwiftUI; published by permission |
+| Reference catalogs | Immutable Explore SwiftUI, shadcn/ui, Magic UI, UIable, and ReUI originals; not installable targets | Exact source, provenance manifests, and registry payloads where supplied upstream | Original authors; catalog maintained by `@qenterra` |
 | Public generator | Rebuild npm distribution and generated Swift adapters without private source | `npm/design-tokens/src/` to six declared outputs | `@qenterra` |
 | `release-manifest.json` | Exact public-file closure | Relative paths, byte sizes, SHA-256 hashes | `@qenterra` |
 | Verification scripts | Reject drift and repository contamination | Human-readable pass/fail reports | `@qenterra` |
@@ -39,7 +39,7 @@ flowchart LR
 - Every declared npm and Swift generated file remains byte-reproducible from the versioned public source.
 - Release verification regenerates outputs in an external temporary directory before trusting manifest sizes or hashes.
 - Every public file except the manifest itself appears exactly once in the manifest.
-- Every Explore SwiftUI detail page has one exact source file and one provenance record; direct source edits fail hash verification.
+- Every reference source and install payload has one provenance record; direct edits, missing files, undeclared files, and hash drift fail catalog verification.
 - QenTerra adaptations live in a separate target path and record their original component ID and hash without modifying the reference.
 - Public source never depends on private assets, private paths, agent instructions, skills, caches, or internal repository history.
 - Package APIs preserve platform accessibility and native behavior described by their tests and public documentation.

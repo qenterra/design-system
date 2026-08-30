@@ -36,6 +36,7 @@ class RegistryContractTests(unittest.TestCase):
             "registry/magic-ui.json",
             "registry/packages.json",
             "registry/qenterra-components.json",
+            "registry/reui.json",
             "registry/shadcn-ui.json",
             "registry/uiable.json",
         ):
@@ -110,6 +111,10 @@ class RegistryContractTests(unittest.TestCase):
             (
                 "registry/uiable.json",
                 "schemas/uiable-registry.schema.json",
+            ),
+            (
+                "registry/reui.json",
+                "schemas/reui-registry.schema.json",
             ),
         ):
             with self.subTest(registry=registry_relative):

@@ -10,6 +10,7 @@
 | Magic UI reference catalog | `Sources/MagicUI/manifest.json` | None; not a package target | Copyable web component source and install registry | Upstream MIT license and Magic UI copyright; not Apache-2.0 relicensing | Magic UI / `@qenterra` |
 | shadcn/ui reference catalog | `Sources/ShadcnUI/manifest.json` | None; not a package target | Copyable web component source reference | Upstream MIT license and shadcn copyright; not Apache-2.0 relicensing | shadcn / `@qenterra` |
 | UIable reference catalog | `Sources/UIable/manifest.json` | None; not a package target | Copyable web component, primitive, and install-registry source | Upstream MIT license and CodedThemes copyright; not Apache-2.0 relicensing | CodedThemes / `@qenterra` |
+| ReUI reference catalog | `Sources/ReUI/manifest.json` | None; not a package target | Copyable Base UI Nova and Radix UI Nova examples, primitives, hooks, and install payloads | Upstream MIT license and Keenthemes copyright; not Apache-2.0 relicensing | Keenthemes / `@qenterra` |
 
 SwiftUI and the Swift standard library are supplied by the consumer's Apple toolchain and are not redistributed by this repository.
 
@@ -18,6 +19,8 @@ Individual shadcn/ui component sources can declare React ecosystem dependencies 
 Individual Magic UI registry payloads preserve the dependencies, registry dependencies, CSS variables, and keyframes required by each copied source. Use the official Magic UI/shadcn installation command for the selected component; the catalog itself does not install React, Tailwind CSS, Motion, or framework integration.
 
 UIable registry payloads preserve the dependency and installation contract for each selected showcase component or primitive. The catalog excludes `registry:block` items and does not install or configure React, Tailwind CSS, aliases, or framework integration.
+
+ReUI registry payloads preserve the dependencies, registry dependencies, CSS variables, target paths, and source required by each selected item. The catalog includes only free `c-*` examples, public primitives, and hooks; ReUI Pro blocks, icons, and templates are excluded. Copying an item does not install or configure React, Tailwind CSS, aliases, Base UI, Radix UI, or its other declared consumer dependencies.
 
 ## Development tools
 

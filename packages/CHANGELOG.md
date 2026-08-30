@@ -1,5 +1,21 @@
 # Changelog
 
+## 5.5.0 - 2026-08-30
+
+### Added
+
+- Published the complete free dual-base ReUI catalog: 2,202 `c-*` examples, 150 public primitives, eight hooks, 2,360 exact install payloads, and 2,377 immutable source files.
+- Published pinned repository and live-deployment provenance, both live registry-index hashes, per-item origins, dependencies, paths, URLs, byte counts, SHA-256 hashes, and the exact MIT license with Keenthemes authorship.
+- Added independent exported verification and consumer documentation for selecting and copying ReUI items.
+
+### Changed
+
+- Advanced the unified public package version to 5.5.0 and expanded the release allowlist while keeping ReUI outside npm and SwiftPM targets.
+
+### Security
+
+- Excluded all 520 ReUI Pro blocks, paid icons, templates, site code, docs application, media, and build tooling. Modified implementations remain separate QenTerra-owned components.
+
 ## 5.4.0 - 2026-08-30
 
 ### Added

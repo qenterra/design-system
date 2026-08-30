@@ -1,0 +1,1 @@
+{"$schema":"https://ui.shadcn.com/schema/registry-item.json","name":"alert","type":"registry:ui","title":"Alert","dependencies":[],"registryDependencies":[],"files":[{"path":"alert.tsx","target":"components/reui/alert.tsx","type":"registry:ui","content":"export const BaseAlert = () => <aside>Base alert</aside>\n"}]}

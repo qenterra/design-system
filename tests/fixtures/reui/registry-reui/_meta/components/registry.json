@@ -1,0 +1,11 @@
+{
+  "categories": [
+    {
+      "name": "button",
+      "label": "Button",
+      "description": "Button examples",
+      "count": 1
+    }
+  ],
+  "totalComponents": 1
+}
