@@ -18,6 +18,24 @@
 - Made public-package verification reject caches, AI or agent operating files, skills, MCP configuration, undeclared files, and incomplete source-to-artifact manifests.
 - Made the exported verifier rebuild declared artifacts in an external temporary directory and reject synchronized output-and-manifest tampering.
 
+## 5.1.0
+
+### Added
+
+- Added the complete current Explore SwiftUI catalog: 221 exact Swift source examples across 34 categories, with one file per detail page and manifest-backed page, Apple documentation, date, tag, platform, size, and SHA-256 provenance.
+- Added deterministic live synchronization, immutable-original verification, and a `derive` workflow that creates and registers a separate QenTerra draft without changing the original.
+- Added private schemas and registries plus public Explore SwiftUI and QenTerra manifests that close both native source sets.
+
+### Changed
+
+- Reorganized installable Swift sources under `packages/Sources/QenTerra/Components` and `packages/Sources/QenTerra/DesignTokens` while preserving the existing SwiftPM product and module names.
+- Split the three maintained QenTerra SwiftUI primitives into individual source files.
+- Kept Explore SwiftUI examples outside SwiftPM targets because the catalog contains reference snippets with platform and surrounding-context requirements.
+
+### Security
+
+- Made private and exported verification reject missing, untracked, resized, or hash-modified native source files and invalid derivation provenance.
+
 ## 5.0.0
 
 ### Breaking

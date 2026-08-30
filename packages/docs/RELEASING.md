@@ -5,7 +5,7 @@
 - Release owner: Nikita Melnychenko (QenTerra)
 - Version scheme: Semantic Versioning
 - Version source: `release-manifest.json`
-- Current version: `5.0.0`
+- Current version: `5.1.0`
 - Tag format: `v<version>`
 
 The public tree is generated from the canonical Design System release and must not be assembled by copying an arbitrary working directory.

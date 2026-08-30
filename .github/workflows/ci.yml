@@ -4,11 +4,24 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 5 * * 1"
 
 permissions:
   contents: read
 
 jobs:
+  explore-swiftui-currentness:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Compare the stored catalog with Explore SwiftUI
+        run: python3 scripts/explore_swiftui.py sync --check
+
   verify:
     runs-on: macos-15
     steps:

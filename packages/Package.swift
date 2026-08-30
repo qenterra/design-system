@@ -12,10 +12,14 @@ let package = Package(
         .library(name: "QenTerraComponents", targets: ["QenTerraComponents"]),
     ],
     targets: [
-        .target(name: "QenTerraDesignTokens"),
+        .target(
+            name: "QenTerraDesignTokens",
+            path: "Sources/QenTerra/DesignTokens"
+        ),
         .target(
             name: "QenTerraComponents",
-            dependencies: ["QenTerraDesignTokens"]
+            dependencies: ["QenTerraDesignTokens"],
+            path: "Sources/QenTerra/Components"
         ),
         .testTarget(
             name: "QenTerraDesignTokensTests",

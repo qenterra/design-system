@@ -1,5 +1,8 @@
 * text=auto eol=lf
 
+# Preserve exact third-party source snapshots, including upstream whitespace.
+Sources/ExploreSwiftUI/Components/**/*.swift -whitespace
+
 *.png binary
 *.jpg binary
 *.jpeg binary

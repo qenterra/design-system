@@ -15,7 +15,7 @@
   "conduct_contact": "https://github.com/QenTerra/packages/security/advisories/new",
   "copyright_holder": "Nikita Melnychenko (QenTerra)",
   "copyright_year_range": "2026",
-  "current_version": "5.0.0",
+  "current_version": "5.1.0",
   "default_branch": "main",
   "dependabot_ecosystem": "npm",
   "description": "Public Swift and npm packages for QenTerra design tokens and reusable components.",
@@ -101,7 +101,7 @@
     },
     {
       "manifest": "release-manifest.json",
-      "path": "Sources/QenTerraDesignTokens/GeneratedTokens.swift",
+      "path": "Sources/QenTerra/DesignTokens/GeneratedTokens.swift",
       "purpose": "Typed Swift design-token constants consumed by the public Swift package",
       "review_trigger": "Public token inputs, generator logic, Swift adapter structure, or package version changes",
       "source": "npm/design-tokens/src",
@@ -109,7 +109,7 @@
     },
     {
       "manifest": "release-manifest.json",
-      "path": "Sources/QenTerraDesignTokens/GeneratedIcons.swift",
+      "path": "Sources/QenTerra/DesignTokens/GeneratedIcons.swift",
       "purpose": "Typed SF Symbols registry consumed by the public Swift package",
       "review_trigger": "Public icon inputs, generator logic, Swift adapter structure, or package version changes",
       "source": "npm/design-tokens/src",

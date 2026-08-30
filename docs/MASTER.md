@@ -1,6 +1,6 @@
 # Design System
 
-Version 5.0.0 · Normative reference for humans and AI agents
+Version 5.1.0 · Normative reference for humans and AI agents
 
 ## 0. How to use this file
 
@@ -822,6 +822,18 @@ manifest, the full verification gate, and clean consumer resolution. A package
 release proves adapter availability, not native rendering or accessibility
 acceptance in a product.
 
+The native public tree has two deliberately separate zones. `Sources/QenTerra/`
+contains the installable, tokenized `QenTerraDesignTokens` and
+`QenTerraComponents` targets. `Sources/ExploreSwiftUI/` contains exact attributed
+source from every Explore SwiftUI sitemap detail page and is not a SwiftPM target.
+Its component files are immutable: synchronization may replace them only with the
+current source field from the same page, while offline verification closes the
+manifest and checks every byte and hash. An adaptation starts through
+`scripts/explore_swiftui.py derive`, becomes a separate QenTerra file, records the
+original ID and hash, and must adopt semantic tokens, tests, delivery status,
+versioning, and changelog coverage before it becomes stable. `sync --check` is
+live-currentness evidence; the offline gate proves only the stored snapshot.
+
 ## 19. AI implementation protocol
 
 ### 19.1 Code System
@@ -861,7 +873,7 @@ To update the design system:
 1. Read `AGENTS.md`, this file, affected token files, and relevant product evidence.
 2. Add or update an ADR in `docs/decisions/` for a normative change.
 3. Change canonical tokens, registries, schemas, documentation, templates, or package facades.
-4. Run `python3 scripts/generate.py write` and `python3 scripts/build_public_packages.py write` when generated/public outputs change.
+4. For Explore SwiftUI changes run `python3 scripts/explore_swiftui.py sync --write`; then run `python3 scripts/generate.py write` and `python3 scripts/build_public_packages.py write` when generated/public outputs change.
 5. Run `python3 scripts/verify.py`.
 6. Inspect the npm tarball, Swift products, and the affected consumer at the relevant appearances and constraints.
 7. Update `CHANGELOG.md` and version according to change type.

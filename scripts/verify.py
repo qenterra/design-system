@@ -66,6 +66,7 @@ def main() -> int:
         run([python, "-m", "py_compile", *python_sources()], env=environment)
 
     run([python, "scripts/generate.py", "check"])
+    run([python, "scripts/explore_swiftui.py", "verify"])
     run([python, "scripts/build_public_packages.py", "check"])
     run([python, "scripts/verify_public_boundary.py"])
     run([python, "packages/scripts/verify_release.py"])

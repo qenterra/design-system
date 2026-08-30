@@ -1,6 +1,6 @@
 {
   "name": "qenterra-design-system-private",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "private": true,
   "workspaces": [
     "packages/npm/design-tokens"

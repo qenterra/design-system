@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "5.0.0",
+  "version": "5.1.0",
   "repository": "https://github.com/qenterra/packages",
   "files": [
     {
@@ -10,8 +10,8 @@
     },
     {
       "path": ".gitattributes",
-      "sha256": "f3b1981ebb41c2797eee0f6293beea7fbbe6fafcd4a4408e72c51dbb7a492e6a",
-      "bytes": 214
+      "sha256": "7683eff6460241cb371fe3d71a44d905e0265f4b3a5ffd800937ee392ce09c00",
+      "bytes": 350
     },
     {
       "path": ".github/CODEOWNERS",
@@ -55,8 +55,8 @@
     },
     {
       "path": ".github/qenterra-repository.json",
-      "sha256": "2b8642e4dcc78c5f80ceb23e8cc7ce1e3748be6a999e897b4ba7f4c6875a63c3",
-      "bytes": 4882
+      "sha256": "4db4aea21ea1fbae25ccbe056660e29d0998e4fe53cece4490efdea5542fae8d",
+      "bytes": 4884
     },
     {
       "path": ".github/qenterra-repository.schema.json",
@@ -90,8 +90,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "0e707f9eea87eee4f4c1d477dd41aced7bdb4d968efd7ad825a86aadaa09d231",
-      "bytes": 1429
+      "sha256": "fc8fae95a807a88070128123a8038b124993ca6d6731bd208ac288004a9d7e81",
+      "bytes": 2290
     },
     {
       "path": "CODE_OF_CONDUCT.md",
@@ -125,13 +125,13 @@
     },
     {
       "path": "Package.swift",
-      "sha256": "4c731bc57fe44a935d5a55bf02811c7e3200e51fe499fabe73899dbc3f4bee58",
-      "bytes": 828
+      "sha256": "6973ce2256ac32967f1b7f1c328a03c990a8e0c73a647f4e98d22e156ad948f5",
+      "bytes": 950
     },
     {
       "path": "README.md",
-      "sha256": "bbebf908a245fd3f7ce68db681f68e2a0232a402b10fc6a9376e7db8a7d85a1f",
-      "bytes": 4019
+      "sha256": "adc7cffc2e8013cc186df9c6a46335b3eb4df788a24cf2ceaba1cccf7ba24ffa",
+      "bytes": 4414
     },
     {
       "path": "SECURITY.md",
@@ -144,34 +144,1169 @@
       "bytes": 1513
     },
     {
-      "path": "Sources/QenTerraComponents/Components.swift",
-      "sha256": "d33658e93f1943f770f6469b27668f5e78c92603253416bfc990543a8a635f47",
-      "bytes": 4601
+      "path": "Sources/ExploreSwiftUI/Components/Alert/ErrorAlertSwiftUIExample.swift",
+      "sha256": "7d7f8f08e3435255fea9f947b7673f03aac4949ae3e02e5510a62318fa82f101",
+      "bytes": 391
     },
     {
-      "path": "Sources/QenTerraDesignTokens/DesignTokens.swift",
+      "path": "Sources/ExploreSwiftUI/Components/Alert/ItemAlertSwiftUIExample.swift",
+      "sha256": "8afd0b343c8be2ec9e924f6ae5b9439c60ee4fa52ade9ca0ddce561edbbe2517",
+      "bytes": 229
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Alert/MessageErrorAlertSwiftUIExample.swift",
+      "sha256": "eb6624bcedb848f3a690f1c3516e9d39338d9e131a7fb892ff22a771c470a8d9",
+      "bytes": 627
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Alert/MessageItemAlertSwiftUIExample.swift",
+      "sha256": "48c68c64cf7eee4fb4426f540c34d873aeab1cd4d491cd62d25ec447b277e1ee",
+      "bytes": 338
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/AsyncImage/AsyncURLImageSwiftUIExample.swift",
+      "sha256": "6b793ff6b891ae75fb1e09fdbbc2add9514fa70a9e7230fe7eda9f9207ab4fc7",
+      "bytes": 149
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/AsyncImage/CustomPhasesAsyncURLImageSwiftUIExample.swift",
+      "sha256": "956b663cdc21af426fe0c2d1d917ee3216bc50a6d3dbbec7da843ec932df8fd3",
+      "bytes": 880
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/AsyncImage/CustomPlaceholderAsyncURLImageSwiftUIExample.swift",
+      "sha256": "31bccf85dadb6c089507bedd7fcbfe69cda6d03d38e386cffab31325addad08a",
+      "bytes": 580
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/AsyncImage/CustomSessionAsyncURLImageSwiftUIExample.swift",
+      "sha256": "7c4d80dabe33e95d902efa7a7b4b24d31135b042a48857640d8ccfb3ad2b890d",
+      "bytes": 501
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Button/ButtonBorderShapeSwiftUIExample.swift",
+      "sha256": "83b87b396a198aabbe271ba8730e21e65ee9b2fb99241684f83f2d86eac94e48",
+      "bytes": 518
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Button/ButtonRolesSwiftUIExample.swift",
+      "sha256": "fbf6d89d467513624f7f235451c2430e8da3ea62c602a0c993b5c8c7dfbdd3e6",
+      "bytes": 821
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Button/ButtonSizingSwiftUIExample.swift",
+      "sha256": "1cb71138a46c3c010a65025a69267ee837fdaef1de57b8628256a2963e3545df",
+      "bytes": 230
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Button/ButtonStylesSwiftUIExample.swift",
+      "sha256": "5558e9239afb12d428c5f4b0ab301c4c9d509f0b57c96fdea95e21c75ca3172b",
+      "bytes": 294
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Button/ButtonSwiftUIExample.swift",
+      "sha256": "7fd0e45a5af2a8ceb222a609f1c16383fe8cf698dac0a6bcf5aa3461f3345752",
+      "bytes": 235
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Button/ButtonTintSwiftUIExample.swift",
+      "sha256": "833792a93f75a75b241a98e8115d0be27e75760fca6c315d5dc15424de406635",
+      "bytes": 1066
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Button/EditButtonSwiftUIExample.swift",
+      "sha256": "c3fc516e93a1c635c679b6649fd9b96c0359a7d90d7a8b84b70897a433499876",
+      "bytes": 289
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Button/GlassButtonStylesSwiftUIExample.swift",
+      "sha256": "9c84744228ecb45a28394f03437d321f711a8c286d48a297f7cf801588e84284",
+      "bytes": 357
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Button/PasteButtonSwiftUIExample.swift",
+      "sha256": "6311bd36bf714b8a294af720a8d2e1858e3cb9ef6b882c82f378b63c3f30c4d1",
+      "bytes": 160
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Button/RenameButtonSwiftUIExample.swift",
+      "sha256": "150e76de564fc0661307e11de2dcdc7e0523d7148ffe69fbe5f283004c00de25",
+      "bytes": 228
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Button/RoleButtonWithDefaultLabelSwiftUIExample.swift",
+      "sha256": "50360a893e2a0c915df52c480c02642c4841fc5d3d8b87c3b186bba6b80a0e5f",
+      "bytes": 454
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Color/ColorGradientSwiftUIExample.swift",
+      "sha256": "60dc4be8da82203362ae8515414d054d82687dbff6164aeebfd173cb35c2c508",
+      "bytes": 974
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Color/ColorOpacitySwiftUIExample.swift",
+      "sha256": "3032f9a0adf7c32a9d9888c8cf8b466a62dcffa2576f334e1ad3e1d6f218b195",
+      "bytes": 273
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Color/ColorVariantsSwiftUIExample.swift",
+      "sha256": "02115598ea9ec0bd900403b46d94d9db01de9d981e59e2275fc5d7a85a43d36a",
+      "bytes": 843
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Color/SemanticColorsSwiftUIExample.swift",
+      "sha256": "759dda8f6ccd10da6c8f330bbc12f2ae016926f9cf19d2c1d49097adad506bc4",
+      "bytes": 115
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Color/StandardColorsSwiftUIExample.swift",
+      "sha256": "b77907875e9a351aa552dcff10093027ff3f944443ae2dc6f745cfaa6ee6c0ce",
+      "bytes": 786
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Color/UIKitContentBackgroundColorsSwiftUIExample.swift",
+      "sha256": "5b45cdc593138e24a994b29258f87fd91dc3229a5f0df7170ddadd9c025719f4",
+      "bytes": 780
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Color/UIKitFillColorsSwiftUIExample.swift",
+      "sha256": "f3b4b5feabe09bcb41dff37f5b943424287e087370c5b6ebd7dae1866d0bcdb3",
+      "bytes": 249
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Color/UIKitLabelColorsSwiftUIExample.swift",
+      "sha256": "82331e8ce630ee2be25f50bc371abed1046a2c1dfa558b7f0df9a63a24b9d248",
+      "bytes": 321
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Color/UIKitSeparatorColorsSwiftUIExample.swift",
+      "sha256": "b3cea9266a6fa2d2a7d4e6ce234fbae427f7d96659a03c928cc9ef707e87627d",
+      "bytes": 371
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Color/UIKitTextColorsSwiftUIExample.swift",
+      "sha256": "2ab909c15ff41c07211dd3e6e5704f8f6ea7d7101b098106b83d79ab00ef1372",
+      "bytes": 109
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/ConcentricRectangle/ConcentricRectangleSwiftUIExample.swift",
+      "sha256": "2916ce3e0b269942c102aa8589c3e4271b1893600f7f0842fa11c20869857cba",
+      "bytes": 862
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/ConcentricRectangle/UniformConcentricRectangleSwiftUIExample.swift",
+      "sha256": "77d653d89485fd1f7cc3b4f655aa9f11c8aeda40c78d6ab70d4363489cdbd871",
+      "bytes": 781
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/ContentUnavailableView/ContentUnavailableSearchSwiftUIExample.swift",
+      "sha256": "630f9950fd8afae768ac75e0eedf13fe4c43078c3a87f34719c2f36f8e06fa0b",
+      "bytes": 29
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/ContentUnavailableView/ContentUnavailableSearchTextSwiftUIExample.swift",
+      "sha256": "4a0dced025c5b29b671fc06b07df1c847f7072915202072965b4ba8ec74a7e03",
+      "bytes": 43
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/ContentUnavailableView/ContentUnavailableSwiftUIExample.swift",
+      "sha256": "b4ebcaa54f11c23a611fa06bacaccfe7a7b6af84e3b59d27dddd830797645903",
+      "bytes": 229
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/ControlGroup/CompactMenuControlGroupStyleSwiftUIExample.swift",
+      "sha256": "50d21f45e9dc8efa6e3819e625652b6635b077b2cfc70d734953944a91c40d9e",
+      "bytes": 579
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/ControlGroup/ControlGroupSwiftUIExample.swift",
+      "sha256": "08890627b11305cc64351c2ebeb0fce5149dc6818d67098d474674839cbacf5d",
+      "bytes": 94
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/ControlGroup/MenuControlGroupStyleSwiftUIExample.swift",
+      "sha256": "55850edff83ccf01ff49e43bb9372264fa4ff481799c1db05a1945f123d47d94",
+      "bytes": 572
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/ControlGroup/NavigationControlGroupStyleSwiftUIExample.swift",
+      "sha256": "c185275fae15b5ea949be9444b82f2718d7991f26e8626f5fa73206d02f179c2",
+      "bytes": 578
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/ControlGroup/PaletteControlGroupStyleSwiftUIExample.swift",
+      "sha256": "3664f4472f41142826c393c2a5e339fbf027cdc1dc496254ed59f35bc0ba0ede",
+      "bytes": 575
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/DatePicker/DatePickerColorsSwiftUIExample.swift",
+      "sha256": "2432f402b1a0c59d0f83ce721fa35eb15f887c86957d7eabcddbf8efcfabce3f",
+      "bytes": 117
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/DatePicker/DatePickerComponentsSwiftUIExample.swift",
+      "sha256": "fd4efbf8547d04877596dcdd5f2d9528270a08dc67fa74f70df61619fadf6d0a",
+      "bytes": 237
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/DatePicker/DatePickerSwiftUIExample.swift",
+      "sha256": "1cb560233985427ac482ab0529a743190717768543c10595cb7f865ab4d04458",
+      "bytes": 97
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/DatePicker/FieldDatePickerStyleSwiftUIExample.swift",
+      "sha256": "ce3f0ef838d17d45c357ff0709c3303458edb7edfd065ecf57114b8315e88279",
+      "bytes": 143
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/DatePicker/FutureDatePickerSwiftUIExample.swift",
+      "sha256": "39a016fceaac0d82a528124f6827fccaf024831f78242c9653da44720f3a782c",
+      "bytes": 150
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/DatePicker/GraphicalDatePickerStyleSwiftUIExample.swift",
+      "sha256": "6fcc50872d585d287e7e5958005d314ebb16c43baeb36b69e7cd995312cd5850",
+      "bytes": 162
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/DatePicker/HourMinuteSecondsDatePickerSwiftUIExample.swift",
+      "sha256": "285241ab9063fd1d5c224c00ec7184563e824fd13afb498082033b1736988102",
+      "bytes": 146
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/DatePicker/MultiDatePickerSwiftUIExample.swift",
+      "sha256": "782dc44be84a7e27da7daebd4b17383e9cc2a47b3c4765e3e0d70fc4bed9c3c9",
+      "bytes": 133
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/DatePicker/StepperFieldDatePickerStyleSwiftUIExample.swift",
+      "sha256": "e111c3eac5a9be0d0f8c1618f46d6dc603e3194446f63632fd2dd9b8c066a8bc",
+      "bytes": 131
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/DatePicker/WheelDatePickerStyleSwiftUIExample.swift",
+      "sha256": "885e7529cdc3840007d41257c1afd6dccb40aeb0feac780c53b944b328bd8873",
+      "bytes": 131
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Divider/DividerColorSwiftUIExample.swift",
+      "sha256": "3caafafd3e4dc721a7e8d0c5d16c898b1765733dfd57e2b044d30146e379be4e",
+      "bytes": 29
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Divider/DividerHeightSwiftUIExample.swift",
+      "sha256": "897cc4b260a60e0e3561cb448855d67fe843820501bfcc57dc70afc37cec4e62",
+      "bytes": 49
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Divider/DividerSwiftUIExample.swift",
+      "sha256": "a973b578e975acf023ac3e13b31953e2100746e81b3ab1995c691a7e832f32ef",
+      "bytes": 9
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Divider/VerticalDividerSwiftUIExample.swift",
+      "sha256": "1ce12798f4383777cf0365befa1e686ab9fda1a25ccaa0597a744b55cd57fdd1",
+      "bytes": 24
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Gauge/AccessoryCircularCapacityGaugeStyleSwiftUIExample.swift",
+      "sha256": "3172f16010f65a622095a48f68cff7b4c7fed1f1ca6be6fa25fe202fade0102b",
+      "bytes": 600
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Gauge/AccessoryCircularGaugeStyleSwiftUIExample.swift",
+      "sha256": "9c3da7411e4f4241ff175c4048faada9b8931907d65923265c9f3e994eb71854",
+      "bytes": 593
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Gauge/AccessoryLinearCapacityGaugeStyleSwiftUIExample.swift",
+      "sha256": "347ed213552783cb3503dc34a091e1970dabf7f9ae10972f6bde0d7ca80d63cb",
+      "bytes": 596
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Gauge/AccessoryLinearGaugeStyleSwiftUIExample.swift",
+      "sha256": "854ec138eebd457c64408f7b0615a635b81302c3c14bdbb3c73c0408a702ca4a",
+      "bytes": 588
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Gauge/CircularGaugeStyleSwiftUIExample.swift",
+      "sha256": "afd53479d4750fdb266370384617e9b72996d7dd032a0e172aa854048d26da88",
+      "bytes": 483
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Gauge/CurrentValueGaugeSwiftUIExample.swift",
+      "sha256": "204054e1926177b47becff5dc4c40e29300b0a5da31c280c076105db82ab17ca",
+      "bytes": 89
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Gauge/GaugeColorsSwiftUIExample.swift",
+      "sha256": "a8ef9170cd93da79a605ae173e6d2daad0dd3ee5b50e4ee654e28b00ea79a01a",
+      "bytes": 1785
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Gauge/GaugeSwiftUIExample.swift",
+      "sha256": "9c7a6dad5a2570118cdcff857e7decfdacdc54d5cdc749c11b1a249e334f3706",
+      "bytes": 38
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Gauge/LinearCapacityGaugeStyleSwiftUIExample.swift",
+      "sha256": "f717b744915b2cd860b8e20e932dd4622e9ef45127fe9e15a5eaa434c971d579",
+      "bytes": 587
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Gauge/LinearGaugeStyleSwiftUIExample.swift",
+      "sha256": "54cdec3bbed011f33588142b70065e0c9b49e0f7a6d482c9fb27000b64fd63e1",
+      "bytes": 479
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Gauge/MinMaxCurrentValueGaugeSwiftUIExample.swift",
+      "sha256": "c98fd604b28386eea3b2d53ce7173014ee6ba994654b3483cba40566ed9c58fb",
+      "bytes": 152
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/GlassEffectContainer/GlassEffectContainerSwiftUIExample.swift",
+      "sha256": "a7ef653f596be83aa0b58e748522a3908978b7159f34ae0fbb53c8ef46c84c18",
+      "bytes": 772
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/GroupBox/GroupBoxBackgroundSwiftUIExample.swift",
+      "sha256": "ac12e6c85879e0e6561a3dc1f249d3c249f2f8b7fcb9fcdbc78c8d843d7b5acb",
+      "bytes": 66
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/GroupBox/GroupBoxSwiftUIExample.swift",
+      "sha256": "9f84f17c111beb4e0c5ab92dbbb9414615f2b6394947d1d065e0c7c6f749dc20",
+      "bytes": 33
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/GroupBox/GroupBoxWithLabelSwiftUIExample.swift",
+      "sha256": "54ea427fd079c0e6275d85f0986aca91b04ab6591983517b305a496400b2ff90",
+      "bytes": 91
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Label/CustomLabelSwiftUIExample.swift",
+      "sha256": "b8cdae4dae7cbedba59bdd71661d178f2b177099ec23030a1797224a5c6055ad",
+      "bytes": 119
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Label/ImageLabelSwiftUIExample.swift",
+      "sha256": "a60cf6ecd5aafc4912100f1237a823d6f8d49db819a5d9396d2fe9ba37c69552",
+      "bytes": 27
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Label/LabelStylesSwiftUIExample.swift",
+      "sha256": "5b61cbc5411659819ed908e909847c8524373c6e2ed585ef10cefc0e6b14897f",
+      "bytes": 243
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Label/SystemImageLabelSwiftUIExample.swift",
+      "sha256": "7fb09c49c8661fe24c1787004c9b2420a2f6adb50b79d3c6082724047c4ec156",
+      "bytes": 41
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/LabeledContent/CustomLabeledContentSwiftUIExample.swift",
+      "sha256": "47b7a9331dde2dc737063af24effd0590221db5977777c7ee1e373e8b5580b30",
+      "bytes": 150
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/LabeledContent/FormattedLabeledContentSwiftUIExample.swift",
+      "sha256": "4dff34ed393c199f7088ce02b27b4c1bf788887c77de200d32b64415e9a40229",
+      "bytes": 80
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/LabeledContent/LabeledContentSwiftUIExample.swift",
+      "sha256": "c5e3a371a65a679d0b1aee8f59b071a10cfd8c6fb5fd67ba8839f769054b472e",
+      "bytes": 48
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Link/CustomPreviewItemShareLinkSwiftUIExample.swift",
+      "sha256": "09d3679d6dd6971db9af2276e0d34145f2dc71de2b2c9f3927ca2474f059152b",
+      "bytes": 206
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Link/HelpLinkSwiftUIExample.swift",
+      "sha256": "fb31df91952780444b8fede7b949b599a50bc9828d88d5ceb048026ddca220d1",
+      "bytes": 42
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Link/LinkSwiftUIExample.swift",
+      "sha256": "7f9c01d5aa467f52602a54cccd6e4881ac7e0f327b7ea56a4dc30293fba4aefc",
+      "bytes": 191
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Link/ShareLinkSwiftUIExample.swift",
+      "sha256": "b56dad85162ffc4feec0a176a61d6b530ec6c4c5b79737714092c5b70210cc29",
+      "bytes": 309
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Link/TextFieldLinkSwiftUIExample.swift",
+      "sha256": "012e348e4848f8cc68b89dcab7b12a834685a8b257de726f9b96a904f0a1a3f5",
+      "bytes": 102
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/BorderedListStyleSwiftUIExample.swift",
+      "sha256": "1f713ba686c8c0e9644a2514b34968bd06d4766257a0adf9ac28c068739b2432",
+      "bytes": 391
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/CarouselListStyleSwiftUIExample.swift",
+      "sha256": "3dd213cac099c6360f51ae9d529b27547ab345d5b2f416334d41ffc73943cb0b",
+      "bytes": 391
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/CompactListSectionSpacingSwiftUIExample.swift",
+      "sha256": "fa04beb60955e5fb13ac02b573094b7e5c6386490d95a4893b627e9594ce2da1",
+      "bytes": 165
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/CustomListSectionSpacingSwiftUIExample.swift",
+      "sha256": "d13faf4e2f048f025176d5f44da05817e163efd3b6ac414d0aa84d4d9507f9ad",
+      "bytes": 160
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/DefaultMinListHeaderHeightSwiftUIExample.swift",
+      "sha256": "01ae4e86b755e3bc9a6d40ba30c5ce8b63f98899cb40ae347a488a83392b56dc",
+      "bytes": 170
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/DefaultMinListRowHeightSwiftUIExample.swift",
+      "sha256": "bfc688a3cce7ef8bf9fdc2328837169e8b3f1ff46a58195c313219435c25767e",
+      "bytes": 167
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/DeleteDisabledSwiftUIExample.swift",
+      "sha256": "f3a8356c13a33e06d14dbe47494948f02b5eb472d948938020ae1d2e3ca6cab9",
+      "bytes": 271
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/DisclosureGroupSwiftUIExample.swift",
+      "sha256": "83582e83a72b244b5ca14071ca56a53e25444b0508f8ec61e33947e78c6d694f",
+      "bytes": 75
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/EditButtonSwiftUIExample.swift",
+      "sha256": "c1a1e45c805d4bc8a6ed88055816ce76d906154b4aa31986d563faa76dba9a8a",
+      "bytes": 259
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/EllipticalListStyleSwiftUIExample.swift",
+      "sha256": "95a8f1287529aece6b2f9b004698b55fe89356e75a26641ae806e96a6038a485",
+      "bytes": 393
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/HiddenListRowSeparatorSwiftUIExample.swift",
+      "sha256": "e1575f0f6ad3bd44bd7df7898048e867b29edf5148989cdbb2af48890d9f385e",
+      "bytes": 99
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/HiddenListSectionSeparatorSwiftUIExample.swift",
+      "sha256": "9ecbcd35cc406b1dcda9f0d3ddd28c647bad286f4355055c45fafe30ddd4a1ac",
+      "bytes": 147
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/IncreasedHeaderProminenceSwiftUIExample.swift",
+      "sha256": "3f71b6473a1eda2a92a276d66c758301b77274fafcc68fe82d9a8ac897d349e0",
+      "bytes": 285
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/InsetGroupedListStyleSwiftUIExample.swift",
+      "sha256": "bb49eed65c71ebbc2059e40523f6a5e2b083d6c5648c215c0f6e23cd43886e6d",
+      "bytes": 388
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/InsetListStyleSwiftUIExample.swift",
+      "sha256": "ae0299cd9fa7abcdc7ee95e78b17d9a477b06fbdc4233a689e0c2807a70f15f4",
+      "bytes": 388
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/ListBackgroundProminenceSwiftUIExample.swift",
+      "sha256": "6f9646f71197f7c3bb82b2eaee4d3f96f881c55bbf73581a1e4bb6860dce38d1",
+      "bytes": 724
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/ListBadgeProminenceSwiftUIExample.swift",
+      "sha256": "627df40e1e97279c39365ff629707aac6b004a71a7e5dabad751e9e417ea8939",
+      "bytes": 253
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/ListBadgeSwiftUIExample.swift",
+      "sha256": "c364d0c3ffe17a79cf161117f503bb128b1671a37d0f5c4203525d4ce481b37c",
+      "bytes": 100
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/ListItemTintSwiftUIExample.swift",
+      "sha256": "2a7b327fc7ddb78bc31808f7672663a2efd2b90de910a942982ee38fcf069bb3",
+      "bytes": 150
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/ListRowBackgroundSwiftUIExample.swift",
+      "sha256": "4267c109c1418b35abfe0782f0a2e2c95ff93b889d3c918e20b291bc86f7d4e3",
+      "bytes": 110
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/ListRowInsetsSwiftUIExample.swift",
+      "sha256": "aeb9459597b895375c77588823d7334808dd00eb880c6f8cd94487587f3d6ba7",
+      "bytes": 270
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/ListRowSeparatorTintSwiftUIExample.swift",
+      "sha256": "8816501a8f464b7315b5b601a23f5ec6ae509b99a96a46e538333aeb534c11a1",
+      "bytes": 104
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/ListRowSpacingSwiftUIExample.swift",
+      "sha256": "60710d7a0076cf04e965b4b869e0903f6f2edd4c19d7bed9c14bff48ced950a9",
+      "bytes": 109
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/ListSectionMarginsSwiftUIExample.swift",
+      "sha256": "8465fe18f181926454bb226024a29b301c2738016d79ee702ecf66fdf0091d3a",
+      "bytes": 154
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/ListSectionSeparatorTintSwiftUIExample.swift",
+      "sha256": "554f6a5207b2392bd2ce7e3d9fcd32203632f30f5cb31ef5100ceef2d38574ba",
+      "bytes": 156
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/MoveDisabledSwiftUIExample.swift",
+      "sha256": "515ec7ce02ac168ff89b9e5020e4224a77c67dd3a6771661b585f1bcb432aff2",
+      "bytes": 210
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/OutlineGroupSwiftUIExample.swift",
+      "sha256": "a16864ba7d6215715dda5b226a13cff6d031602c0117bde2f1cf7843a270747c",
+      "bytes": 509
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/RefreshableListSwiftUIExample.swift",
+      "sha256": "d6a2cd4b5819358afbcf2fc6e8e4b238dc5c5c2401150676d47ddcf3fc977e78",
+      "bytes": 95
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/SectionIndexLabelAndVisibilitySwiftUIExample.swift",
+      "sha256": "ace3655e80f137814b984487751724458d7c47ae10c32266ebedf2d04da98989",
+      "bytes": 248
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/SidebarListStyleSwiftUIExample.swift",
+      "sha256": "292f2b3446e1b0547c01ec00862703a19bba968a8da3eeaab8bb61e3caa38301",
+      "bytes": 390
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/List/SwipeActionSwiftUIExample.swift",
+      "sha256": "bf45c93c3c8d0e63a9655d36cf485f96f1d8bf16db5542abadeedc48bb158bb7",
+      "bytes": 222
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Material/MaterialsSwiftUIExample.swift",
+      "sha256": "4e43a7efd376e5cc529b3a3131541fc13e62bdeb7d89429601c77c6249606ff9",
+      "bytes": 915
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Menu/ContextMenuPreviewSwiftUIExample.swift",
+      "sha256": "4e60c0b2cfead5d11dc6dbf6886f7dd64252a577cd470277103f8d2c8cf58401",
+      "bytes": 346
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Menu/ContextMenuSwiftUIExample.swift",
+      "sha256": "d49da9e5b5c47a6c73eacd4af5923516484b3bd49e6a24ed6cb8c8a883e99001",
+      "bytes": 275
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Menu/MenuActionButtonSwiftUIExample.swift",
+      "sha256": "8a32f1b46041646581a016f27025f0a9d0ff3a9a9b0e04b02b362c6802b1dcfa",
+      "bytes": 299
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Menu/MenuDividerSwiftUIExample.swift",
+      "sha256": "6f27348dde7da29520169563c37dbd5af24b20076fa7083a931c9013dd171bd3",
+      "bytes": 264
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Menu/MenuFixedOrderSwiftUIExample.swift",
+      "sha256": "950212feae1e1b710fdf7b2b964522a6a2d44c28de33ccc4b66711046b778e8b",
+      "bytes": 269
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Menu/MenuSectionSwiftUIExample.swift",
+      "sha256": "38453b9b253560d4c412f50af8500c43bc2da1208e6a52162bbae1dea6e4dafd",
+      "bytes": 297
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Menu/MenuSwiftUIExample.swift",
+      "sha256": "abb5d080e53e2fcd764b93050e9ab1c6b3ce6f5520ef3d4188bc406d742dbfec",
+      "bytes": 250
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Menu/NestedMenuSwiftUIExample.swift",
+      "sha256": "f0933b8d4a862e1eb9967ec021123d87b05294f47c2c2227f698895319b82072",
+      "bytes": 296
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Navigation/NavigationSubtitleSwiftUIExample.swift",
+      "sha256": "d9d3ce259c3d192a036461be2b1dd934e9a09eb2b622977d336a84ec9c36b9ca",
+      "bytes": 149
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Picker/CustomValueLabelPickerSwiftUIExample.swift",
+      "sha256": "aae05ed8740f6665deb2894bb5b9ceebed3911c094465c343bf6c91137b066a2",
+      "bytes": 336
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Picker/HorizontalRadioGroupLayoutSwiftUIExample.swift",
+      "sha256": "7cc544ebb354aea9f9c9538bbbf500f2216223bcd8394ce5d44f2589fd3b5fbc",
+      "bytes": 406
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Picker/InlinePickerStyleSwiftUIExample.swift",
+      "sha256": "e5c835232c57749f8644394aedf91526a26e7790c017fead98a9861da5ae255c",
+      "bytes": 413
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Picker/MenuPickerStyleSwiftUIExample.swift",
+      "sha256": "a1406036cc1961a9569e52a6bb85f21ec1404516eb1426ae6f591e2b9194520d",
+      "bytes": 410
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Picker/MultipleSourcesPickerSwiftUIExample.swift",
+      "sha256": "f0861c4e1a0143e33b88f57a371fcd2e193c55a61a1542a002c6d99311de4cd1",
+      "bytes": 673
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Picker/NavigationLinkPickerStyleSwiftUIExample.swift",
+      "sha256": "ce3a27f73d0c265ee5ba7a73a134df87b62f407c2649337810eb981d565fce49",
+      "bytes": 513
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Picker/PalettePickerStyleSwiftUIExample.swift",
+      "sha256": "bf5ed122a8559f9a492230261f7f0effdcd6bf892f1f552970de23db207d822d",
+      "bytes": 680
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Picker/PickerDividerSwiftUIExample.swift",
+      "sha256": "20c9fa56a2b7651dfc0582ca6b297c6217d3ffeb40769dacb4a6baced81bf022",
+      "bytes": 197
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Picker/PickerSectionSwiftUIExample.swift",
+      "sha256": "656bd237e77b34f9c25323eb33e1bf65f09e7ed4cb1fa2401b1de1667da1615b",
+      "bytes": 221
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Picker/PickerSwiftUIExample.swift",
+      "sha256": "8eebf126566ab5fc914aab26db0240f2cb26f00a758417b3f6fbefc608381335",
+      "bytes": 866
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Picker/RadioGroupPickerStyleSwiftUIExample.swift",
+      "sha256": "206f1aece057db4c6e0c7cf5ff9eae8bd8d3a57a4e7dc7534c99b4cc5838d229",
+      "bytes": 344
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Picker/SegmentedPickerStyleSwiftUIExample.swift",
+      "sha256": "55eb14495f7e28b53455f73b6295e0fc60fe146a4c9b91f4f369af1f797c6ce8",
+      "bytes": 415
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Picker/TabsPickerStyleSwiftUIExample.swift",
+      "sha256": "de119adbcd23b567a6afec5d52fecdcd40625ffda275f4dfa4873c1dce45966a",
+      "bytes": 192
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Picker/WheelPickerItemHeightSwiftUIExample.swift",
+      "sha256": "0a409f00b17d10919ed378adc9aa6f85463d1ddeca33e4a8966c171a02c29e3a",
+      "bytes": 351
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Picker/WheelPickerStyleSwiftUIExample.swift",
+      "sha256": "34489bf4955bef2ddd3c1a9ee7928b9df1682e7f1a351781c9ecd7ee746e509b",
+      "bytes": 411
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/ProductView/CompactProductViewStyleSwiftUIExample.swift",
+      "sha256": "924c6d8f761040181299b6fb3181be6c4f80caab0f7150afad474d71a9f71aa8",
+      "bytes": 110
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/ProductView/CustomIconProductViewSwiftUIExample.swift",
+      "sha256": "af69f0f8fb341c9a1c75698ecb6fd65d6ae22779f8ffa505c2b7f58bcbc5acb6",
+      "bytes": 82
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/ProductView/LargeProductViewStyleSwiftUIExample.swift",
+      "sha256": "ca1d3c6ef4d09fe336acc5840352c2ebf9c804a5ec253d30ed5dc0788168c1de",
+      "bytes": 108
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/ProductView/PlaceholderIconProductViewSwiftUIExample.swift",
+      "sha256": "5d786416f8c0273d26538758df7fa544f01cb93f3f6d9778fc4e65c977e386ea",
+      "bytes": 92
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/ProductView/ProductViewSwiftUIExample.swift",
+      "sha256": "a4c930659e6efd21814e83fb5567048692bae664bd360619945bd5d2054d72aa",
+      "bytes": 127
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/ProductView/RegularProductViewStyleSwiftUIExample.swift",
+      "sha256": "aa927fb1d6989e4c4174986077748a09d5b30a03aeab0bdfbb44e44f0dcd3d39",
+      "bytes": 110
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/ProgressView/CircularProgressViewStyleSwiftUIExample.swift",
+      "sha256": "4e5466c15ec5c7392e601990177eb3e6944c249ea45988cfb49443155d9311d4",
+      "bytes": 169
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/ProgressView/LinearProgressViewStyleSwiftUIExample.swift",
+      "sha256": "e585b1ca327f3038805f19ecbd366ef743b54c7ae5fd8b1bb4e8db9b477c1e50",
+      "bytes": 167
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/ProgressView/ProgressViewColorsSwiftUIExample.swift",
+      "sha256": "bc7c3c0178a8a4abbb5c67150da4ec125c62d2393eb46ea504e310c6b1281a89",
+      "bytes": 180
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/ProgressView/ProgressViewSwiftUIExample.swift",
+      "sha256": "d4f6df00aead868b3828c0e7a93059672688a7992ff5faca3b207c7a3c72a26f",
+      "bytes": 604
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/ScrollView/HardScrollEdgeEffectSwiftUIExample.swift",
+      "sha256": "bb795d62b38b1235288ec6bd4e4c399342d7fad92b0c4a1a820faaa598169d8a",
+      "bytes": 194
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Shapes/ContainerRelativeShapeSwiftUIExample.swift",
+      "sha256": "a282ca059cae4b510cf1d417a948d404f5d790dee6182c634f33196706bfbca7",
+      "bytes": 328
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Sheet/BooleanSheetSwiftUIExample.swift",
+      "sha256": "c3ca7ffc39d38b7f5b77ae6d97fefb350fb4b3dc46e25a0b25ebc33efb17e4f3",
+      "bytes": 145
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Sheet/DisableSheetDismissSwipeSwiftUIExample.swift",
+      "sha256": "6e279e441e02134fa2e59531b70098de96b295b5a96faf27c0949b5d1f7c4ff6",
+      "bytes": 191
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Sheet/FittedSheetSizingSwiftUIExample.swift",
+      "sha256": "e53bbb6f78892425465b1124abc0a1d9b841bf387c33d7a2b60803c3b8c5ff5d",
+      "bytes": 190
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Sheet/ItemSheetSwiftUIExample.swift",
+      "sha256": "7a54ab30d165aa89622302cc74ff6e8fa9252870db4abf2672082c08e9d53c19",
+      "bytes": 224
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Sheet/PageScreenSheetSizeSwiftUIExample.swift",
+      "sha256": "74f155f264f4a837765ce7a4795868c29a8d06aac28a77edc9c1c73a20ab5755",
+      "bytes": 188
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Sheet/PrioritizeSheetContentScrollingSwiftUIExample.swift",
+      "sha256": "157b30a040948c07597afdfaf3c1be66dc59f4db302ca71b0e79bd0f41e263e2",
+      "bytes": 361
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Sheet/SheetBackgroundInteractionSwiftUIExample.swift",
+      "sha256": "b7d4116cd8b286885b3ff1885d0a94d9e3abd01ccf23012e4b20e6cc1c3519fd",
+      "bytes": 338
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Sheet/SheetBackgroundSwiftUIExample.swift",
+      "sha256": "3ad56b9d747b8f619b2b3377797791f304fff84de13511860246bee3471d30a7",
+      "bytes": 192
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Sheet/SheetCornerRadiusSwiftUIExample.swift",
+      "sha256": "6c926a21edf2f9e654ab90ce55ee5c7be6dc6c5633e1d03b07de609fa32692c0",
+      "bytes": 191
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Sheet/SheetDragIndicatorVisibilitySwiftUIExample.swift",
+      "sha256": "f4d6418fb8deec4f924100b168b9b3c0e360b628d064b41d6d3f81e998cbc3e3",
+      "bytes": 198
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Sheet/SheetPlacementSwiftUIExample.swift",
+      "sha256": "a202823313bcf0e8a09cd24cc678d071d134b797b52e394162472802e81e198a",
+      "bytes": 198
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Sheet/SheetSizeSwiftUIExample.swift",
+      "sha256": "2bd54dc8c80b91100781655d1e5df3d33f26db3a3ec8195addc560c2b49ff430",
+      "bytes": 223
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Slider/CustomSliderTicksSwiftUIExample.swift",
+      "sha256": "0850ca28a8be9c58074a35af5d6b6312bf21397ccbc6c38370533150b8cda729",
+      "bytes": 233
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Slider/SliderColorSwiftUIExample.swift",
+      "sha256": "39f7fe0caa23b25899b549a962847d12c773aa09c8988b374c32f6a99e84621c",
+      "bytes": 621
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Slider/SliderSwiftUIExample.swift",
+      "sha256": "595a864fba35d1f950de24f88959ace699b089661223a92b08a93c1e1931a910",
+      "bytes": 80
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Slider/SliderTickContentForEachSwiftUIExample.swift",
+      "sha256": "709cbe3e6bc6172e3623858f001d2dd2ea89fa6cc8227b29d4b8a7d422c54936",
+      "bytes": 463
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Slider/SteppedMinMaxLabelSliderSwiftUIExample.swift",
+      "sha256": "4e9aed4e56b8f7465532a131be78e074080e4730e091a8b18d8800b394b53925",
+      "bytes": 419
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Slider/SteppedSliderSwiftUIExample.swift",
+      "sha256": "7dfbd7b06040f40acbe6b3e2afc244255d614e8914724b4293f98e3b061de35e",
+      "bytes": 276
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/StoreView/CustomIconStoreViewSwiftUIExample.swift",
+      "sha256": "dd9e09b5c2a578e3a903dcef0de9b76cc5bc6e2a39ac4d99995f7ba771e7fcd0",
+      "bytes": 235
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/StoreView/IconPhaseStoreViewSwiftUIExample.swift",
+      "sha256": "ba867dd8cc2e581b06544ebce6a9f471a9a44d7cedbd0f6037de5e22f55f179e",
+      "bytes": 588
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/StoreView/PlaceholderIconStoreViewSwiftUIExample.swift",
+      "sha256": "330c7c83479d008a6e69a0c61e9b975f263d21bcb1a40e8d577a0602afed1676",
+      "bytes": 275
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/StoreView/RestorePurchasesButtonSwiftUIExample.swift",
+      "sha256": "2757df9d7e65ec705a9faa2b0bfaafaad98891a4a0fea8888a13d01f8bb5e275",
+      "bytes": 120
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/StoreView/StoreCancellationButtonSwiftUIExample.swift",
+      "sha256": "a832b5f396f6fdb851107bda90a2d3f0e1d32eab605a0a901042600f79b1e77b",
+      "bytes": 193
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/StoreView/StoreViewSwiftUIExample.swift",
+      "sha256": "6b1cb502f77f68347901e6bfa8abfa1d96e537ed933304e52805ac9386b6f1f0",
+      "bytes": 188
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/SubscriptionStoreView/CustomGroupSubscriptionStoreViewSwiftUIExample.swift",
+      "sha256": "0d682d9d9e098212ec4eb464cada420f78b588050cc6f70aafa923397629d05e",
+      "bytes": 289
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/SubscriptionStoreView/CustomHeaderSubscriptionStoreViewSwiftUIExample.swift",
+      "sha256": "7c92b548a549de041054171eaabdb2323334b2feae6411286dbd2ade168cb1b8",
+      "bytes": 63
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/SubscriptionStoreView/GroupSubscriptionStoreViewSwiftUIExample.swift",
+      "sha256": "bafe563b3947dd6b04a5f0129cfe2f30b32cd5b79155e4ad2eaf005fab55e3ad",
+      "bytes": 43
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/SubscriptionStoreView/SingleSubscriptionStoreViewSwiftUIExample.swift",
+      "sha256": "60800301a672b425b2f770953986afaccabd2373daa6dc915fc3176e08613443",
+      "bytes": 69
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/SubscriptionStoreView/SubscriptionStoreViewSwiftUIExample.swift",
+      "sha256": "a4a51ec3ec08c19c5357887e7f38d72e7484a55cf50094093ffa1c93e667a605",
+      "bytes": 134
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/SubscriptionStoreView/UpgradeOnlySubscriptionStoreViewSwiftUIExample.swift",
+      "sha256": "179b664dd47119dbe5e948c4e570854df87d7aa4b45a7dcacdf2354d2ac7e1cd",
+      "bytes": 74
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/TabView/BottomAccessorySwiftUIExample.swift",
+      "sha256": "050c191db6d17dfd7cc120b99a8214033f15b065086f495b2dd9d95ad3b3b9df",
+      "bytes": 230
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/TabView/DefaultAdaptableTabBarPlacementSwiftUIExample.swift",
+      "sha256": "fc41c15266ac5a09daf78c8171ea01433f1621bbefa69ad57ebd43e29212ceaa",
+      "bytes": 339
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/TabView/DefaultCollapsedTabSectionSwiftUIExample.swift",
+      "sha256": "e3c1a7a0b7400defb7e470771776270d825684f5ec24258d64c220cbd750ee48",
+      "bytes": 441
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/TabView/GroupedTabViewStyleSwiftUIExample.swift",
+      "sha256": "44b4c8aabf91802fab4db1796a2d52513ce4825796690f7570bb967385440acf",
+      "bytes": 290
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/TabView/HiddenIndexPageTabViewStyleSwiftUIExample.swift",
+      "sha256": "47ca743e2fbb955a9b5551a3db1b75f0f93cd499f2d28bf9bedb622d49b4ac93",
+      "bytes": 311
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/TabView/HideTabBarOnScrollDownSwiftUIExample.swift",
+      "sha256": "6f2e18d3bb84eac2c8c321b79d78aaaef4c1699d97fb5981491818e072b378f9",
+      "bytes": 349
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/TabView/PageTabViewStyleSwiftUIExample.swift",
+      "sha256": "0ffbf3286e7b5d19796ba24efd41c05662107efe2321edd4425e9cefbcfc6145",
+      "bytes": 285
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/TabView/SearchTabRoleSwiftUIExample.swift",
+      "sha256": "d7c1def8961cc72dd9a0d018ec48507ebdd408c0186d8f046b83e311f9f2eb2d",
+      "bytes": 285
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/TabView/SidebarAdaptableTabViewStyleSwiftUIExample.swift",
+      "sha256": "dac96945a1bf110d172c5072096d0f392e1ce42c2e755c6c3c3613a828fed63d",
+      "bytes": 297
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/TabView/TabBadgeSwiftUIExample.swift",
+      "sha256": "f1fe092845579eee2d208ad937c92af26727e2b78d029072c68c515b2f7773ff",
+      "bytes": 348
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/TabView/TabBarOnlyTabViewStyleSwiftUIExample.swift",
+      "sha256": "2d861c3c8c177b4df53c0c23e54cd7adf02823394f22b5287e63de909e7f407d",
+      "bytes": 291
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/TabView/TabBarSectionActionsSwiftUIExample.swift",
+      "sha256": "b1b91838b41b7736a6b08ba5dc087844743f0a1b0a0b970a6c265dfe1a714e54",
+      "bytes": 426
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/TabView/TabSectionSwiftUIExample.swift",
+      "sha256": "c8428ade105b78cb7784cf9232a58c02d44662792b0b5bd7c017b85c95834740",
+      "bytes": 339
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/TabView/TabViewBottomAccessoryPlacementSwiftUIExample.swift",
+      "sha256": "fc63d4f78d854c41666bc91996cba178e24d16dfdc0973478246a1ec955657e1",
+      "bytes": 894
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/TabView/TabViewCustomizationBehaviorSwiftUIExample.swift",
+      "sha256": "710501fac8646d3b12971038123baf4d52da6f0336c6885c6eeeba86861c5bc3",
+      "bytes": 739
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/TabView/TabViewCustomizationSwiftUIExample.swift",
+      "sha256": "7c1eedd9c7f8b390a7f4c77288f3f2480bbcb932d53d15ad2607ebd16bdc2ef4",
+      "bytes": 672
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/TabView/TabViewSideBarBottomBarSwiftUIExample.swift",
+      "sha256": "f15ade507e1f71457df3ac1a30b281fcb3575565be44036b015b605ae0897151",
+      "bytes": 368
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/TabView/TabViewSideBarFooterSwiftUIExample.swift",
+      "sha256": "3be5979cff4f529654c99bcf92fd64514fcbfc5245c1acb4d47a2adb53984c94",
+      "bytes": 365
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/TabView/TabViewSideBarHeaderSwiftUIExample.swift",
+      "sha256": "2d5ecd7a8211a84eb61e04df47128132ffb36e7e03020d9e6830e8c2c922d457",
+      "bytes": 373
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/TabView/TabViewSwiftUIExample.swift",
+      "sha256": "984a79e352968d2f60b4f864be5368b6d028b71a167a975754bb88746b26a99c",
+      "bytes": 264
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/TabView/ValueTabViewSwiftUIExample.swift",
+      "sha256": "57361dec55e839e2a154578f77040c16eec901e84b5a72bc330332d5faf16f1e",
+      "bytes": 546
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/TabView/VerticalPageTabViewStyleSwiftUIExample.swift",
+      "sha256": "647b8e901e6c0dd845da8e9683b57aa1a8466ae51bfda941733f88c09272ac0e",
+      "bytes": 293
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Text/TextFormatSwiftUIExample.swift",
+      "sha256": "e9b2a235fd84094cea00a1f123904188329c534f02813942ca506d479e8b0aff",
+      "bytes": 1025
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Toggle/ButtonToggleStyleSwiftUIExample.swift",
+      "sha256": "27d5809e0bbad7677cffa619face86195bb466590bf7d792249dbab267f56c45",
+      "bytes": 396
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Toggle/CheckboxToggleStyleSwiftUIExample.swift",
+      "sha256": "a43a72dbfade31ae153b9b8efbc99b1575ead8bfee18ab35ab5eb409cf1f66d0",
+      "bytes": 398
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Toggle/MultipleSourcesToggleSwiftUIExample.swift",
+      "sha256": "1520da28d450d01da94997bc3d2d04334d9ad9687df5b7dc962cfc5523d89640",
+      "bytes": 417
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Toggle/SwitchToggleStyleSwiftUIExample.swift",
+      "sha256": "f28f378148e6bc68f42802a6e64db3f2140b35f691ee87a9aa41c13cbfed667d",
+      "bytes": 396
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Toggle/ToggleSwiftUIExample.swift",
+      "sha256": "d13cf1b5c9cbbd4622d50535eeced4a7cbe92dfcc20953e4f97a005acc71cdf9",
+      "bytes": 370
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Toolbars/TitleToolbarItemPlacementSwiftUIExample.swift",
+      "sha256": "208b3e55cb560e26eb0f3143a1cf9c57d6468bf4e0085eabbdcce4e99d08e6df",
+      "bytes": 304
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Toolbars/ToolbarItemSharedBackgroundVisibilitySwiftUIExample.swift",
+      "sha256": "9e1fe7db49db0bdea78b1d7caac7388a77cf324f4909df5caf503487bb2a772b",
+      "bytes": 281
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/Toolbars/ToolbarSpacerSwiftUIExample.swift",
+      "sha256": "b4d88a5c2881bd02614eb513146b06a899a0182233b38efabd5847c3b217030b",
+      "bytes": 360
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/View/AppStoreOverlaySwiftUIExample.swift",
+      "sha256": "c8b25f586e468a6849679dc200600affd0d15418c40acd541c5a51fd6c02fcf1",
+      "bytes": 288
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/View/BackgroundExtensionEffectSwiftUIExample.swift",
+      "sha256": "98db8bd98196c1adef26f2db888eeec89db0288ce2b2e0dd4e908537b38b86f6",
+      "bytes": 621
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/View/ControlSizeSwiftUIExample.swift",
+      "sha256": "43d7bf084a4fd506d1afa36411c14cf57ad5745c40673206ff8e79467adf482d",
+      "bytes": 595
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/View/GlassEffectSwiftUIExample.swift",
+      "sha256": "b6e3bcf9b95a3fceefc5234d16d42424378119f031af23a39dc1591404187033",
+      "bytes": 270
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/View/ManageSubscriptionsSheetSwiftUIExample.swift",
+      "sha256": "59e92d6f3aab0967c5f8b57d8870fd55591f2e81933fffd5a222c58b6b692e5c",
+      "bytes": 243
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/View/MusicPickerSwiftUIExample.swift",
+      "sha256": "16817ef00b1108e13cf38af3e43ac3b00eb3e1d7a3c9ef7848748436b4b5dfcd",
+      "bytes": 297
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/View/NavigationContainerBackgroundSwiftUIExample.swift",
+      "sha256": "fb22048b34bb198b594a9e68303122e891d6d9232c4ef2f446aeb35911c3c706",
+      "bytes": 122
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/View/NavigationSplitViewContainerBackgroundSwiftUIExample.swift",
+      "sha256": "1bc34925b4576a2d68e7d125ca112537e15f468477a84b0638ba372a8eb87036",
+      "bytes": 268
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/View/SwipeActionSwiftUIExample.swift",
+      "sha256": "dd994fc5c906b4335fc90a5e4e16e5a6b65f700f7acbc14fc68d1a487ae67582",
+      "bytes": 644
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/View/SwipeContainerSwiftUIExample.swift",
+      "sha256": "45b56a75b012a2609bc580c9ee44694a8e08f8b58c8e17ac9b5eafea0c39d439",
+      "bytes": 653
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/ViewThatFits/ViewThatFitsSwiftUIExample.swift",
+      "sha256": "eaba1861f4e63b625718f698a30345adbd4e59ea51a9eddd01c7225acfd7c20e",
+      "bytes": 804
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/Components/ViewThatFits/ViewThatFitsVerticalSwiftUIExample.swift",
+      "sha256": "b97c35a6a5ed8b3cab21bc0b0ff5d3dc7a86eda4a18ca687daa93014e80d1128",
+      "bytes": 638
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/README.md",
+      "sha256": "a1ecfeb66e4a46326433656b58064f8095dbc57b5c064ec830881020a0b1cefd",
+      "bytes": 1355
+    },
+    {
+      "path": "Sources/ExploreSwiftUI/manifest.json",
+      "sha256": "6c8af88830860ed6465b3c82482e78acd352c0c36adb44870e15050df70633f1",
+      "bytes": 248777
+    },
+    {
+      "path": "Sources/QenTerra/Components/GroupContainer.swift",
+      "sha256": "0cbcb0c2eccacf98d3cc6252e2ad5ed8737c9d0d0fd50e386743fb4cc451eaa2",
+      "bytes": 890
+    },
+    {
+      "path": "Sources/QenTerra/Components/InteractiveRowSurface.swift",
+      "sha256": "4fd0c527a963b14c802a21742bd9710e9a00f68efaa7b924cfc85223aeb4dc2a",
+      "bytes": 1745
+    },
+    {
+      "path": "Sources/QenTerra/Components/PrimaryButtonStyle.swift",
+      "sha256": "d868a09ca4bcbd0607bc322a4e725cc4e94fb86a7bdcc71957853ed497bc9e3d",
+      "bytes": 2112
+    },
+    {
+      "path": "Sources/QenTerra/DesignTokens/DesignTokens.swift",
       "sha256": "8b5b2d0144d237d55969a12d59fb5988a903a63b6fcd19b12a57bd67a6b33f07",
       "bytes": 4603
     },
     {
-      "path": "Sources/QenTerraDesignTokens/GeneratedIcons.swift",
-      "sha256": "357eade60a8ac0959f6dd50cfa09c5f6e26d217e1bd54e6a2225c1c4404931df",
+      "path": "Sources/QenTerra/DesignTokens/GeneratedIcons.swift",
+      "sha256": "5557e4d44e8234d400c266281cea1a3733f04c6a4d152f2d6d4ee48dde436b11",
       "bytes": 579
     },
     {
-      "path": "Sources/QenTerraDesignTokens/GeneratedTokens.swift",
-      "sha256": "4fda8dfcb6637b281fb577df5a7106ee338e9f6143ebe8d9cfbe4a34358fb7df",
+      "path": "Sources/QenTerra/DesignTokens/GeneratedTokens.swift",
+      "sha256": "be7162393428e464725bd3c498614917ad0ca8bed58a3cabd1317574ce04eaf6",
       "bytes": 17204
     },
     {
-      "path": "Sources/QenTerraDesignTokens/SwiftUIAdapters.swift",
+      "path": "Sources/QenTerra/DesignTokens/SwiftUIAdapters.swift",
       "sha256": "5ae17662a8734f1c62694066beddf410cc3ce563080d6c5d12f4c4d8336fcec0",
       "bytes": 2310
     },
     {
+      "path": "Sources/QenTerra/README.md",
+      "sha256": "d0a2557fd6feb0bde9c5765749ddc5f6ce44469e8d833d66560d75ea12caab88",
+      "bytes": 932
+    },
+    {
+      "path": "Sources/QenTerra/manifest.json",
+      "sha256": "c7a774f3b797b13b9562b94c288a47d202f11ea95ea1f63b1070a92b5214dd3b",
+      "bytes": 1380
+    },
+    {
       "path": "THIRD_PARTY_NOTICES.md",
-      "sha256": "3d5a113e618decf9a691c8a52e7d3ec6a5d8d1e694c835644ac57170e52b4f02",
-      "bytes": 779
+      "sha256": "db33b48a5ac212c44045d61cf674166e8be984b424146351703145871bfca284",
+      "bytes": 1344
     },
     {
       "path": "Tests/QenTerraComponentsTests/ComponentTests.swift",
@@ -180,22 +1315,22 @@
     },
     {
       "path": "Tests/QenTerraDesignTokensTests/DesignTokensTests.swift",
-      "sha256": "f0795c676a6d2b0970a7fe2e7d4e8d411ab495a00e8ed4e651b4d2c7b4327ebc",
+      "sha256": "0ef8b670c8379d4669b52c331e2f2e020bc4cb550871f4665a6548bbdab45357",
       "bytes": 941
     },
     {
       "path": "docs/ARCHITECTURE.md",
-      "sha256": "8d9a9b1cb956c64676047798aca9e5f91c240ba23fdc438ad00adc6f405977bc",
-      "bytes": 2648
+      "sha256": "b55b31c60845640def5a3481e9707c2b981fe66885425a95468f7958be94baac",
+      "bytes": 3216
     },
     {
       "path": "docs/DEPENDENCIES.md",
-      "sha256": "ab6f8c7324a13c81235e25901171382f0bf3791b73b757d7ef0f5489a9a4590d",
-      "bytes": 1350
+      "sha256": "7a6c7274b1d5602fc4e6f729c55328300ace4045eecb4dec753529ba733eded3",
+      "bytes": 1605
     },
     {
       "path": "docs/DEPRECATION.md",
-      "sha256": "6d56c3e8b6a343a25ee613e24578176f0b89283731c50606c60fd485e080acf4",
+      "sha256": "04b780d6b5982dd8da38aeb0248e8970067e6b56ca492a4304d528703559d96c",
       "bytes": 594
     },
     {
@@ -230,13 +1365,13 @@
     },
     {
       "path": "docs/RELEASING.md",
-      "sha256": "9c79165ffd9d8a102a9e08fe1a45e819d397bec14a0bdb6fac8a62fc7d1d64b2",
+      "sha256": "f7e45b75b27fbdc9a2b5ef9bb82aa04254df25a9c788f652ea613e5b89033f51",
       "bytes": 1524
     },
     {
       "path": "docs/REPOSITORY_STRUCTURE.md",
-      "sha256": "556beb7409cbea3da186692d094159958bfc06f3a6f154a8f55f3c42618aecb0",
-      "bytes": 1959
+      "sha256": "1f80b528d2fdae00864e057e9b26c3adff7d45ecc990dd13b97cef3e3563e42b",
+      "bytes": 2432
     },
     {
       "path": "docs/STYLE_GUIDE.md",
@@ -280,7 +1415,7 @@
     },
     {
       "path": "npm/design-tokens/dist/icons.json",
-      "sha256": "63fb67696e58cc9bc4d81539316c1a875bc2bfa4051eba5cbea70db434e2fea8",
+      "sha256": "7724754adec33ae0e152778ee8b42d47a55ad00886f813f0720a87077e5fc8e4",
       "bytes": 1945
     },
     {
@@ -290,17 +1425,17 @@
     },
     {
       "path": "npm/design-tokens/dist/tokens.css",
-      "sha256": "8fa40f1450fd0ac001dae48d5874fce1be8f21bf4807df34940bf1663fb53c51",
+      "sha256": "cdaf8bdcaf9b4400fbc59236e24c2c74cf23d25d44d4f0d619d85df8cb85928e",
       "bytes": 14992
     },
     {
       "path": "npm/design-tokens/dist/tokens.json",
-      "sha256": "66678e3c9402eec1a9b27a74236b9540dd9a4d58b3b24e29a0acda59bebed1db",
+      "sha256": "3b6962d06571e1606277c2d5dd8bd61b05478303e6123923dbfbfc7a188f1bce",
       "bytes": 21807
     },
     {
       "path": "npm/design-tokens/package.json",
-      "sha256": "31b0a3f216a6fdbe3c8a7e38bd768f348ed6ed22c5836ed696c7497e36199847",
+      "sha256": "040b30f78b82efa0e11c0fbc14225c8e1d30d314fe940ab9349d7fe2b6e38cd0",
       "bytes": 736
     },
     {
@@ -350,7 +1485,7 @@
     },
     {
       "path": "npm/design-tokens/src/icons.json",
-      "sha256": "a9968b521d413656047df4296b401cbc4aef5fa63874ce6b57f28f7d356e05e3",
+      "sha256": "25a843dfb9f50adc32cca16b133ed7058553df5c3e154546c366dd42b1d08267",
       "bytes": 1998
     },
     {
@@ -365,18 +1500,18 @@
     },
     {
       "path": "npm/design-tokens/src/tokens.json",
-      "sha256": "66678e3c9402eec1a9b27a74236b9540dd9a4d58b3b24e29a0acda59bebed1db",
+      "sha256": "3b6962d06571e1606277c2d5dd8bd61b05478303e6123923dbfbfc7a188f1bce",
       "bytes": 21807
     },
     {
       "path": "package.json",
-      "sha256": "e3e719b5d26491b275033c9c9ed225f902caefce59df6f8b746062e718c874b9",
+      "sha256": "78476e3255bee2f10862e1e9896c614e2043340aea899b4d0400817f103442df",
       "bytes": 225
     },
     {
       "path": "scripts/generate.py",
-      "sha256": "ce31fee404cfc1d0434440c3b2b5f894d037428bf4f6b7a023c60f8f209629de",
-      "bytes": 5859
+      "sha256": "66a697648d35679e988803967e4bb352ba28b9d3a58f33e3738df07783200d25",
+      "bytes": 5861
     },
     {
       "path": "scripts/lib/__init__.py",
@@ -395,8 +1530,13 @@
     },
     {
       "path": "scripts/verify_release.py",
-      "sha256": "d2fa3130b28c825b4c04787d0a12f40c851966d4f1a48de33297d936a350a65b",
-      "bytes": 5281
+      "sha256": "fdd836d83e35deccde0c67888fc396a43ed3535c0ce1092ade8ef75207634431",
+      "bytes": 5391
+    },
+    {
+      "path": "scripts/verify_source_catalogs.py",
+      "sha256": "512c01c7e27e099cd5b99d1229ddb3624dee4311b92b5ee0820bf07dcc6e8ac0",
+      "bytes": 5660
     }
   ]
 }

@@ -1,0 +1,1 @@
+Label("Foo", image: .cats)

@@ -1,0 +1,1 @@
+SubscriptionStoreView(productIDs: ["auto_renewable_subscription_1", "auto_renewable_subscription_2", "auto_renewable_subscription_3"])
