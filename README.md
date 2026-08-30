@@ -2,7 +2,7 @@
 
 Universal foundations, reusable visual components, palettes, platform adapters, and engineering contracts for websites, native applications, and other interface-bearing projects.
 
-> **Status:** private canonical source, version `5.0.0`. Installable public outputs are released separately through [`qenterra/packages`](https://github.com/qenterra/packages).
+> **Status:** private canonical source, version `5.1.0`. Installable public outputs are released separately through [`qenterra/packages`](https://github.com/qenterra/packages).
 
 ## Use it
 
@@ -32,9 +32,9 @@ Swift projects add:
 https://github.com/qenterra/packages
 ```
 
-Available Swift products are `QenTerraDesignTokens` and `QenTerraComponents`. The latter contains the existing primary-button style, group container, and interactive-row surface. No new visual components were added in version 5.0.0.
+Available Swift products are `QenTerraDesignTokens` and `QenTerraComponents`. The latter contains the primary-button style, group container, and interactive-row surface, each in its own source file. The public tree also includes a non-target reference catalog containing the exact source from all 221 current Explore SwiftUI detail pages, organized into 34 categories with page, platform, date, tag, size, and hash metadata.
 
-Public files are staged only under `packages/`. That tree has Apache-2.0 licensing and a required NOTICE attribution to QenTerra and Nikita Melnychenko. Private docs, Nyx, agent instructions, consumer manifests, and private history never enter it.
+Public files are staged only under `packages/`. QenTerra-authored code there has Apache-2.0 licensing and a required NOTICE attribution to QenTerra and Nikita Melnychenko. Explore SwiftUI examples retain their original ownership and are redistributed under direct publication permission recorded in their README and third-party notice. Private docs, Nyx, agent instructions, consumer manifests, and private history never enter the public tree.
 
 ## Canonical structure
 
@@ -81,7 +81,7 @@ The complete gate checks generated adapters, registries, public boundaries, term
 
 ## License
 
-The canonical repository remains private and proprietary under [`LICENSE`](LICENSE). Only the contents of `packages/` are licensed under Apache-2.0 with the bundled NOTICE requirement.
+The canonical repository remains private and proprietary under [`LICENSE`](LICENSE). QenTerra-authored contents of `packages/` are licensed under Apache-2.0 with the bundled NOTICE requirement; the preserved Explore SwiftUI examples are separately attributed and are not relicensed as QenTerra work.
 
 ## Contact
 

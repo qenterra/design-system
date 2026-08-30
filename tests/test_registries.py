@@ -1,11 +1,17 @@
 from __future__ import annotations
 
 import json
+import sys
 import unittest
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+
+from lib.schema_tools import validate_schema  # noqa: E402
+
+
 VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
 
@@ -26,7 +32,9 @@ class RegistryContractTests(unittest.TestCase):
         for relative in (
             "registry/components.json",
             "registry/icons.json",
+            "registry/native-patterns.json",
             "registry/packages.json",
+            "registry/qenterra-components.json",
         ):
             with self.subTest(relative=relative):
                 self.assertEqual(load(relative)["version"], VERSION)
@@ -62,6 +70,39 @@ class RegistryContractTests(unittest.TestCase):
             for relative in package["tests"]:
                 self.assertTrue((ROOT / relative).is_file(), relative)
         self.assertEqual(len(paths), len(set(paths)))
+
+    def test_qenterra_implementation_registry_has_one_file_per_component(self) -> None:
+        registry = load("registry/qenterra-components.json")
+        paths = [item["sourcePath"] for item in registry["components"]]
+        self.assertEqual(len(paths), len(set(paths)))
+        self.assertEqual(
+            set(paths),
+            {
+                "packages/Sources/QenTerra/Components/GroupContainer.swift",
+                "packages/Sources/QenTerra/Components/InteractiveRowSurface.swift",
+                "packages/Sources/QenTerra/Components/PrimaryButtonStyle.swift",
+            },
+        )
+        for relative in paths:
+            self.assertTrue((ROOT / relative).is_file(), relative)
+
+    def test_source_catalog_registries_match_their_schemas(self) -> None:
+        for registry_relative, schema_relative in (
+            (
+                "registry/native-patterns.json",
+                "schemas/native-pattern-registry.schema.json",
+            ),
+            (
+                "registry/qenterra-components.json",
+                "schemas/qenterra-component-registry.schema.json",
+            ),
+        ):
+            with self.subTest(registry=registry_relative):
+                schema_path = ROOT / schema_relative
+                self.assertEqual(
+                    validate_schema(load(registry_relative), load(schema_relative), schema_path),
+                    [],
+                )
 
     def test_icon_registry_contains_only_reusable_interface_roles(self) -> None:
         icons = load("registry/icons.json")["icons"]

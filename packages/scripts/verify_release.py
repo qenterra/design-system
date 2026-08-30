@@ -18,6 +18,7 @@ IGNORED = {".git"}
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import generate as public_generator  # noqa: E402
+import verify_source_catalogs  # noqa: E402
 
 
 def generated_output_errors() -> list[str]:
@@ -88,6 +89,7 @@ def main() -> int:
         errors = generated_output_errors()
     except (OSError, ValueError, json.JSONDecodeError, KeyError) as error:
         errors = [f"generated output verification failed: {error}"]
+    errors.extend(verify_source_catalogs.validate_catalogs(ROOT))
     manifest_path = ROOT / "release-manifest.json"
     declared, manifest_errors = declared_files(manifest_path)
     errors.extend(manifest_errors)

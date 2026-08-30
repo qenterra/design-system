@@ -1,0 +1,46 @@
+{
+  "version": "5.1.0",
+  "sourceRegistry": "registry/qenterra-components.json",
+  "components": [
+    {
+      "id": "group-container",
+      "name": "GroupContainer",
+      "category": "layout",
+      "status": "stable",
+      "publicSymbols": [
+        "GroupContainer",
+        "View.designGroupContainer(appearance:)"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/GroupContainer.swift",
+      "sha256": "0cbcb0c2eccacf98d3cc6252e2ad5ed8737c9d0d0fd50e386743fb4cc451eaa2",
+      "bytes": 890
+    },
+    {
+      "id": "interactive-row-surface",
+      "name": "InteractiveRowSurface",
+      "category": "control",
+      "status": "stable",
+      "publicSymbols": [
+        "InteractiveRowSurface"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/InteractiveRowSurface.swift",
+      "sha256": "4fd0c527a963b14c802a21742bd9710e9a00f68efaa7b924cfc85223aeb4dc2a",
+      "bytes": 1745
+    },
+    {
+      "id": "primary-button-style",
+      "name": "PrimaryButtonStyle",
+      "category": "control",
+      "status": "stable",
+      "publicSymbols": [
+        "PrimaryButtonStyle"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/PrimaryButtonStyle.swift",
+      "sha256": "d868a09ca4bcbd0607bc322a4e725cc4e94fb86a7bdcc71957853ed497bc9e3d",
+      "bytes": 2112
+    }
+  ]
+}

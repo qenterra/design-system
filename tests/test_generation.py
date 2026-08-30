@@ -36,10 +36,10 @@ class GenerationContractTests(unittest.TestCase):
         outputs = generator.build_outputs(ROOT)
         css = outputs["packages/npm/design-tokens/dist/tokens.css"]
         swift = outputs[
-            "packages/Sources/QenTerraDesignTokens/GeneratedTokens.swift"
+            "packages/Sources/QenTerra/DesignTokens/GeneratedTokens.swift"
         ]
         icons = outputs[
-            "packages/Sources/QenTerraDesignTokens/GeneratedIcons.swift"
+            "packages/Sources/QenTerra/DesignTokens/GeneratedIcons.swift"
         ]
         self.assertIn("--design-system-action-primary", css)
         self.assertIn("public enum GeneratedTokens", swift)
@@ -49,6 +49,17 @@ class GenerationContractTests(unittest.TestCase):
         self.assertIn("public enum DesignIcon", icons)
         for legacy in ("QDS", "qds-", "DesignSystem"):
             self.assertNotIn(legacy, css + swift + icons)
+
+    def test_qenterra_component_manifest_is_generated_from_private_registry(self) -> None:
+        generator = load_generator()
+        outputs = generator.build_outputs(ROOT)
+        manifest = outputs["packages/Sources/QenTerra/manifest.json"]
+        self.assertIn('"sourceRegistry": "registry/qenterra-components.json"', manifest)
+        self.assertIn(
+            '"sourcePath": "Sources/QenTerra/Components/PrimaryButtonStyle.swift"',
+            manifest,
+        )
+        self.assertIn('"sha256"', manifest)
 
     def test_css_recipes_are_generated_from_the_public_source(self) -> None:
         generator = load_generator()

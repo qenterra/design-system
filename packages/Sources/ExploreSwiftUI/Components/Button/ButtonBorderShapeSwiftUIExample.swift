@@ -1,0 +1,15 @@
+HStack {
+    Button("Tap Me", action: action)
+        .buttonStyle(.borderedProminent)
+        .buttonBorderShape(.roundedRectangle)
+    Button("Tap Me", action: action)
+        .buttonStyle(.borderedProminent)
+        .buttonBorderShape(.capsule)
+    Button("Tap Me", action: action)
+        .buttonStyle(.borderedProminent)
+        .padding()
+        .buttonBorderShape(.circle)
+    Button("Tap Me", action: action)
+        .buttonStyle(.borderedProminent)
+        .buttonBorderShape(.roundedRectangle(radius: 12))
+}

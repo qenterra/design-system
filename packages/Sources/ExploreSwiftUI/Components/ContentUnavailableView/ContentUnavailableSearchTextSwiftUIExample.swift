@@ -1,0 +1,1 @@
+ContentUnavailableView.search(text: "foo")

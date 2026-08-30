@@ -6,6 +6,7 @@
 | --- | --- | --- | --- | --- | --- |
 | Swift packages | `Package.swift` | None declared | Typed tokens and SwiftUI components | Repository Apache-2.0 only | `@qenterra` |
 | npm package | `npm/design-tokens/package.json` | None declared | CSS and JSON design-token delivery | Repository Apache-2.0 only | `@qenterra` |
+| Explore SwiftUI reference catalog | `Sources/ExploreSwiftUI/manifest.json` | None; not a package target | Copyable native source reference | Original ownership; direct publication permission, not Apache-2.0 relicensing | Explore SwiftUI / `@qenterra` |
 
 SwiftUI and the Swift standard library are supplied by the consumer's Apple toolchain and are not redistributed by this repository.
 

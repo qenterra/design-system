@@ -1,6 +1,6 @@
 # Design System
 
-Версия 5.0.0 · Нормативный справочник для людей и AI-агентов
+Версия 5.1.0 · Нормативный справочник для людей и AI-агентов
 
 ## 0. Как пользоваться этим файлом
 
@@ -485,6 +485,18 @@ SwiftPM — продукты `QenTerraDesignTokens` и `QenTerraComponents`. Pro
 точного release manifest, полного gate и разрешения чистыми consumer-проектами.
 Релиз адаптеров не доказывает нативную отрисовку или приёмку доступности продукта.
 
+Нативное публичное дерево намеренно разделено на две зоны. `Sources/QenTerra/`
+содержит устанавливаемые токенизированные targets `QenTerraDesignTokens` и
+`QenTerraComponents`. `Sources/ExploreSwiftUI/` хранит точный атрибутированный
+исходный код каждой detail page из sitemap Explore SwiftUI и не является SwiftPM-target.
+Файлы оригиналов неизменяемы: синхронизация может заменить их только
+текущим source field с той же страницы, а offline-проверка замыкает manifest и
+проверяет каждый байт и hash. Адаптация начинается командой
+`scripts/explore_swiftui.py derive`, становится отдельным QenTerra-файлом, хранит ID и hash
+оригинала и до stable-статуса обязана получить семантические токены, тесты,
+статус доставки, версию и changelog. `sync --check` доказывает актуальность относительно
+живого сайта; offline gate доказывает только целостность сохранённого snapshot.
+
 ## 19. Протокол AI-реализации
 
 ### 19.1 Кодовая система
@@ -515,7 +527,7 @@ AI запрещено восстанавливать текущий интерф
 1. Прочитайте `AGENTS.md`, этот файл, затронутые токены и доказательства продукта.
 2. Добавьте или обновите ADR для нормативного изменения.
 3. Меняйте канонические токены, реестры, схемы, документацию, шаблоны или фасады пакетов.
-4. При изменении generated/public outputs запустите `python3 scripts/generate.py write` и `python3 scripts/build_public_packages.py write`.
+4. Для изменений Explore SwiftUI запустите `python3 scripts/explore_swiftui.py sync --write`; затем при изменении generated/public outputs запустите `python3 scripts/generate.py write` и `python3 scripts/build_public_packages.py write`.
 5. Запустите `python3 scripts/verify.py`.
 6. Проверьте npm-архив, Swift-продукты и затронутый consumer в нужных темах и ограничениях.
 7. Обновите changelog и версию.

@@ -80,14 +80,14 @@ def build_outputs(root: Path = ROOT) -> dict[str, str]:
         "npm/design-tokens/dist/recipes.css": (
             root / "npm/design-tokens/src/recipes.css"
         ).read_text(encoding="utf-8"),
-        "Sources/QenTerraDesignTokens/GeneratedTokens.swift": generate_swift(
+        "Sources/QenTerra/DesignTokens/GeneratedTokens.swift": generate_swift(
             foundation,
             tokens["semantic"],
             tokens["typography"],
             tokens["motion"],
             tokens["components"],
         ),
-        "Sources/QenTerraDesignTokens/GeneratedIcons.swift": generate_swift_icons(icons),
+        "Sources/QenTerra/DesignTokens/GeneratedIcons.swift": generate_swift_icons(icons),
     }
 
 

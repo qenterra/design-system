@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -37,6 +38,35 @@ def load_sources(root: Path) -> tuple[dict[str, dict[str, Any]], dict[str, Any],
     return tokens, components, icons
 
 
+def build_qenterra_component_manifest(root: Path, version: str) -> dict[str, Any]:
+    registry = load_json(root / "registry/qenterra-components.json")
+    if registry.get("version") != version:
+        raise ValueError("registry/qenterra-components.json version does not match VERSION")
+    records: list[dict[str, Any]] = []
+    for component in registry.get("components", []):
+        source_path = component.get("sourcePath")
+        if not isinstance(source_path, str):
+            raise ValueError("QenTerra component sourcePath must be a string")
+        source = root / source_path
+        if not source.is_file():
+            raise ValueError(f"QenTerra component source is missing: {source_path}")
+        payload = source.read_bytes()
+        public_record = {
+            key: value
+            for key, value in component.items()
+            if key != "sourcePath"
+        }
+        public_record["sourcePath"] = source.relative_to(root / "packages").as_posix()
+        public_record["sha256"] = hashlib.sha256(payload).hexdigest()
+        public_record["bytes"] = len(payload)
+        records.append(public_record)
+    return {
+        "version": version,
+        "sourceRegistry": "registry/qenterra-components.json",
+        "components": records,
+    }
+
+
 def build_outputs(root: Path = ROOT) -> dict[str, str]:
     tokens, components, icons = load_sources(root)
     foundation = tokens["foundation"]
@@ -68,14 +98,17 @@ def build_outputs(root: Path = ROOT) -> dict[str, str]:
         "packages/npm/design-tokens/dist/recipes.css": (
             root / "packages/npm/design-tokens/src/recipes.css"
         ).read_text(encoding="utf-8"),
-        "packages/Sources/QenTerraDesignTokens/GeneratedTokens.swift": generate_swift(
+        "packages/Sources/QenTerra/DesignTokens/GeneratedTokens.swift": generate_swift(
             foundation,
             tokens["semantic"],
             tokens["typography"],
             tokens["motion"],
             tokens["components"],
         ),
-        "packages/Sources/QenTerraDesignTokens/GeneratedIcons.swift": generate_swift_icons(icons),
+        "packages/Sources/QenTerra/DesignTokens/GeneratedIcons.swift": generate_swift_icons(icons),
+        "packages/Sources/QenTerra/manifest.json": json_text(
+            build_qenterra_component_manifest(root, version)
+        ),
         "generated/TOKEN_REFERENCE.md": generate_token_reference(
             [(f"{name}.json", tokens[name]) for name in TOKEN_NAMES]
         ),

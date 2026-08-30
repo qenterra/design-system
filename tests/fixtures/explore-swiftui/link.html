@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {"position": 1, "name": "Library"},
+          {"position": 2, "name": "TabView"},
+          {"position": 3, "name": "Link"}
+        ]
+      },
+      {
+        "@type": "WebPage",
+        "name": "Link",
+        "datePublished": "2025-01-02",
+        "dateModified": "2025-03-04"
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "Link",
+        "description": "Presents a destination using a native link.",
+        "programmingLanguage": "Swift",
+        "runtimePlatform": "SwiftUI",
+        "codeRepository": "https://developer.apple.com/documentation/swiftui/link",
+        "about": ["Navigation", "Link"],
+        "text": "import SwiftUI\n\nstruct LinkExample: View {\n    var body: some View {\n        Link(\"Open\", destination: URL(string: \"https://example.com\")!)\n    }\n}"
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <h2>Platform Compatibility</h2>
+  <p>iOS 14.0+</p><p>iPadOS 14.0+</p><p>macOS 11.0+</p><p>watchOS 7.0+</p><p>tvOS 14.0+</p><p>visionOS 1.0+</p>
+</body>
+</html>
