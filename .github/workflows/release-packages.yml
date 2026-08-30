@@ -27,7 +27,7 @@ jobs:
         with:
           lfs: true
           persist-credentials: false
-      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version-file: .nvmrc
       - name: Require tag and version alignment
@@ -83,7 +83,7 @@ jobs:
           existing=$(git rev-parse -q --verify "refs/tags/v$version" || true)
           if test -n "$existing"; then test "$existing" = "$(git rev-parse HEAD)"; else git tag -a "v$version" -m "Release $version"; fi
           git push origin HEAD:main "refs/tags/v$version"
-      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: "22"
           registry-url: https://registry.npmjs.org
