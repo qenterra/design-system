@@ -24,7 +24,9 @@ def run(
     cwd: Path = ROOT,
 ) -> None:
     print("+", " ".join(command))
-    subprocess.run(command, cwd=cwd, env=env, check=True)
+    child_environment = os.environ.copy() if env is None else env.copy()
+    child_environment["PYTHONDONTWRITEBYTECODE"] = "1"
+    subprocess.run(command, cwd=cwd, env=child_environment, check=True)
 
 
 def require_swift_testing_macros(developer_dir: Path) -> None:
