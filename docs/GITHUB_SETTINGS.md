@@ -25,6 +25,6 @@ Review dependency graph, Dependabot alerts and updates, secret scanning, push pr
 
 | Checked at | Exact repository | Evidence source | Reviewer | Result | Unverified or exception |
 | --- | --- | --- | --- | --- | --- |
-| 2026-08-31 | https://github.com/QenTerra/design-system | GitHub REST API read-back before public migration | Nikita Melnychenko (`@qenterra`) | Partial | Merge settings and repository features match the declared contract. Visibility is still private and branch rules are unavailable on the current plan; recheck after the public cutover. |
+| 2026-08-31T21:00:23Z | https://github.com/QenTerra/design-system | GitHub REST API plus unauthenticated Git read-back | Nikita Melnychenko (`@qenterra`) | Passed | Public visibility, Apache-2.0 license detection, metadata, repository features, merge settings, read-only workflow permissions, security features, private vulnerability reporting, `main` protection, release-tag immutability, and anonymous access verified. Code scanning and registry publication remain release-specific checks. |
 
 Never copy a prior repository’s result forward. Provider features, plan availability, and settings can change without a source diff.
