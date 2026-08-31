@@ -1,8 +1,8 @@
-# QenTerra Packages
+# QenTerra Design System packages
 
 Public Swift and npm packages for QenTerra design tokens and reusable interface components.
 
-This repository is the complete, verified public projection of the private QenTerra Design System. It contains installable source, generated distribution files, tests, release metadata, and human documentation—no private assets, agent instructions, skills, caches, or internal work records.
+This directory is the verified package-delivery boundary of the public QenTerra Design System repository. It contains installable source, generated distribution files, tests, release metadata, and human documentation without brand assets, caches, or internal work records.
 
 [Architecture](docs/ARCHITECTURE.md) · [Development](docs/DEVELOPMENT.md) · [Testing](docs/TESTING.md) · [Releasing](docs/RELEASING.md)
 
@@ -38,7 +38,7 @@ For web projects:
 npm install @qenterra/design-tokens
 ```
 
-For Swift Package Manager, add `https://github.com/QenTerra/packages` and select one or both products:
+For Swift Package Manager, add `https://github.com/QenTerra/design-system` and select one or both products:
 
 - `QenTerraDesignTokens` for typed foundations and SwiftUI adapters;
 - `QenTerraComponents` for the maintained primary-button, group-container, and interactive-row primitives.
@@ -61,15 +61,15 @@ Nikita Melnychenko (`@qenterra`) owns package APIs, release decisions, security 
 
 ## Version and release model
 
-All packages use one Semantic Versioning value. The current release is `5.5.0`; npm metadata, Swift source compatibility, source catalogs, release tags, changelog, and `release-manifest.json` move together. Tags use `v<version>` and published versions are immutable.
+All packages use one Semantic Versioning value. The current release is `5.5.1`; npm metadata, Swift source compatibility, source catalogs, release tags, changelog, and `release-manifest.json` move together. Tags use `v<version>` and published versions are immutable.
 
 ## Documentation
 
-The [documentation index](docs/README.md) covers architecture, development, dependencies, testing, maintenance, deprecation, support, and releases. Public bugs and feature requests belong in [GitHub Issues](https://github.com/QenTerra/packages/issues).
+The [documentation index](docs/README.md) covers architecture, development, dependencies, testing, maintenance, deprecation, support, and releases. Public bugs and feature requests belong in [GitHub Issues](https://github.com/QenTerra/design-system/issues).
 
 ## Contributing and security
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing a change. Report vulnerabilities only through [GitHub private vulnerability reporting](https://github.com/QenTerra/packages/security/advisories/new); never include exploit details in a public issue.
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing a change. Report vulnerabilities only through [GitHub private vulnerability reporting](https://github.com/QenTerra/design-system/security/advisories/new); never include exploit details in a public issue.
 
 ## Contact
 
@@ -79,4 +79,4 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing a change. Report vulner
 
 ## License
 
-Copyright 2026 Nikita Melnychenko (QenTerra). QenTerra-authored material is licensed under [Apache-2.0](LICENSE); preserve [NOTICE](NOTICE) when redistribution requires it. Explore SwiftUI examples retain their original ownership and separate permission terms. Magic UI, shadcn/ui, UIable, and ReUI sources retain their separate upstream MIT licenses and copyright notices. See [third-party notices](THIRD_PARTY_NOTICES.md).
+Copyright 2026 Nikita Melnychenko (QenTerra). QenTerra-authored material is licensed under the [Apache License 2.0](LICENSE) with attribution in [NOTICE](NOTICE). Explore SwiftUI examples retain their original ownership and separate permission terms. Magic UI, shadcn/ui, UIable, and ReUI sources retain their separate upstream MIT licenses and copyright notices. See [third-party notices](THIRD_PARTY_NOTICES.md).

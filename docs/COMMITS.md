@@ -48,7 +48,7 @@ ADR: docs/decisions/0004-symbol-registry.md
 Co-authored-by: Name <address>
 ```
 
-Never invent an author, reviewer, issue, or verification claim. Do not add AI attribution unless repository policy requires it.
+Never invent an author, reviewer, issue, or verification claim.
 
 ## Generated files and assets
 

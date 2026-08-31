@@ -35,4 +35,4 @@ Russian reference: [`MASTER_RU.md`](MASTER_RU.md).
 
 Identity, palette, format, category, path, or naming changes are normative. Removal, rename, or visual replacement is breaking and requires explicit approval, versioning, changelog, and migration guidance.
 
-Raw generations, prompt experiments, backups, image intermediates, contact sheets, and QA reports stay in a system temporary directory. The temporary asset browser may also write only outside the repository.
+Raw generations, creative experiments, backups, image intermediates, contact sheets, and QA reports stay in a system temporary directory. The temporary asset browser may also write only outside the repository.

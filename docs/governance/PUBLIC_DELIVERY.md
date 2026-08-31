@@ -1,8 +1,8 @@
-# Public dependency delivery
+# Package delivery
 
-The canonical Design System repository is private. Only the deterministic contents of `packages/` may be released to `https://github.com/qenterra/packages`.
+The canonical Design System repository is public at `https://github.com/qenterra/design-system`. SwiftPM resolves the root `Package.swift`; npm publishes `@qenterra/design-tokens` from `packages/npm/design-tokens/`. The deterministic `packages/` snapshot remains a release boundary, not a second source repository.
 
-## Public contents
+## Package contents
 
 The release manifest allowlists package manifests, safe public generation inputs, the portable generator, generated npm and Swift outputs, the exact Explore SwiftUI, shadcn/ui, Magic UI, UIable, and ReUI reference catalogs, public tests, README, CI, license, and notices. Every file has a SHA-256 digest. The exported verifier regenerates declared outputs outside the checkout and independently closes all source catalogs before it checks release digests; a changed artifact and matching edited hash do not pass. A path absent from the manifest does not ship.
 
@@ -16,16 +16,16 @@ UIable originals are stored byte-for-byte for the complete official `registry:ui
 
 ReUI originals are stored byte-for-byte for the complete free union declared by the Base UI Nova and Radix UI Nova live indexes: every `c-*` example, public primitive, and hook. Unchanged published payloads use one pinned official Git commit; newer or changed payloads use the immutable live deployment shared by the index hashes. The catalog retains the exact upstream MIT license and `Copyright (c) 2025 Keenthemes Inc`, remains outside package targets, and excludes every ReUI Pro block, paid icon, template, website or docs implementation file, media asset, and build tool.
 
-The public tree must never contain brand assets, `SKILL.md`, Noetic files, agent instructions, private documentation, consumer manifests, secrets, absolute local paths, or private commit identifiers.
+The package snapshot must never contain brand assets, repository-internal documentation, consumer manifests, secrets, absolute local paths, or unrelated commit identifiers.
 
 ## Release sequence
 
 1. Align `VERSION`, package versions, registry data, and `CHANGELOG.md`.
 2. Generate public outputs from canonical tokens.
-3. Run the full private verifier and clean npm/SwiftPM consumer tests.
-4. Rebuild a clean public snapshot only from the release manifest.
+3. Run the full repository verifier and clean npm/SwiftPM consumer tests.
+4. Rebuild a clean package snapshot only from the release manifest.
 5. Inspect the filesystem and `git ls-files` boundary.
-6. Verify the exact GitHub owner, repository visibility, tag, and npm identity.
+6. Verify the exact public GitHub owner, repository visibility, tag, root Swift package, and npm identity.
 7. Publish explicitly; read back repository visibility, CI, tag target, npm metadata, and installation.
 
 Published Git and npm history is immutable. A bad release is superseded or deprecated; it is not rewritten to make the evidence prettier.

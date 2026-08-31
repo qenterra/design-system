@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/shadcn-ui-registry.schema.json",
-  "version": "5.5.0",
+  "version": "5.5.1",
   "source": "https://ui.shadcn.com/",
   "upstreamRepository": "https://github.com/shadcn-ui/ui",
   "upstreamRef": "refs/heads/main",

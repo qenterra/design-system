@@ -38,8 +38,8 @@ python3 scripts/verify.py
 
 ## Public boundary fails
 
-Inspect `registry/packages.json` and `packages/release-manifest.json`. Remove undeclared/private material or register a legitimate package file. Never register assets, agent instructions, consumer manifests, secrets, or private commit IDs merely to silence the gate.
+Inspect `registry/packages.json` and `packages/release-manifest.json`. Remove undeclared or repository-only material, or register a legitimate package file. Never register brand assets, consumer manifests, secrets, or unrelated commit IDs merely to silence the gate.
 
 ## Package installation fails
 
-Confirm `@qenterra/design-tokens` exists at the requested npm version and `https://github.com/qenterra/packages` has the requested `v<version>` tag. Reproduce in a clean temporary consumer before changing package metadata.
+Confirm `@qenterra/design-tokens` exists at the requested npm version and `https://github.com/qenterra/design-system` has the requested `v<version>` tag. Reproduce in a clean temporary consumer before changing package metadata.

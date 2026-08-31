@@ -1,7 +1,7 @@
 {
   "$schema": "./qenterra-repository.schema.json",
+  "agent_control_plane": false,
   "allowed_root_paths": [
-    "NOTICE",
     "Package.swift",
     "Sources",
     "Tests",
@@ -12,10 +12,10 @@
   "branch_prefix": "qenterra/",
   "code_owner": "@qenterra",
   "collaboration_model": "solo",
-  "conduct_contact": "https://github.com/QenTerra/packages/security/advisories/new",
+  "conduct_contact": "https://github.com/QenTerra/design-system/security/advisories/new",
   "copyright_holder": "Nikita Melnychenko (QenTerra)",
   "copyright_year_range": "2026",
-  "current_version": "5.5.0",
+  "current_version": "5.5.1",
   "default_branch": "main",
   "dependabot_ecosystem": "npm",
   "description": "Public Swift and npm packages for QenTerra design tokens and reusable components.",
@@ -77,9 +77,9 @@
       "LICENSE",
       "NOTICE"
     ],
-    "standard_version": "1.3.0"
+    "standard_version": "2.0.0"
   },
-  "homepage_url": "https://github.com/QenTerra/packages",
+  "homepage_url": "https://github.com/QenTerra/design-system",
   "install_command": "npm install @qenterra/design-tokens",
   "license": "Apache-2.0",
   "merge_strategy": "squash",
@@ -89,7 +89,7 @@
   ],
   "primary_language": "English",
   "profile": "monorepo",
-  "project_name": "QenTerra Packages",
+  "project_name": "QenTerra Design System packages",
   "published_artifacts": [
     {
       "manifest": "release-manifest.json",
@@ -126,11 +126,11 @@
   ],
   "quick_start_command": "npm pack --workspace @qenterra/design-tokens --dry-run --json",
   "release_mode": "package-registry",
-  "repository_name": "packages",
-  "repository_url": "https://github.com/QenTerra/packages",
-  "security_url": "https://github.com/QenTerra/packages/security/advisories/new",
-  "standard_version": "1.3.0",
-  "support_url": "https://github.com/QenTerra/packages/issues",
+  "repository_name": "design-system",
+  "repository_url": "https://github.com/QenTerra/design-system",
+  "security_url": "https://github.com/QenTerra/design-system/security/advisories/new",
+  "standard_version": "2.0.0",
+  "support_url": "https://github.com/QenTerra/design-system/issues",
   "topics": [
     "qenterra",
     "design-system",

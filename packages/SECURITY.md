@@ -11,7 +11,7 @@ Only the latest patch release in a supported line receives fixes unless a securi
 
 ## Report a vulnerability
 
-Report vulnerabilities through [GitHub private vulnerability reporting](https://github.com/QenTerra/packages/security/advisories/new). Do not open a public issue with exploit details, secrets, personal data, signing material, private source, or vulnerable production information.
+Report vulnerabilities through [GitHub private vulnerability reporting](https://github.com/QenTerra/design-system/security/advisories/new). Do not open a public issue with exploit details, secrets, personal data, signing material, private source, or vulnerable production information.
 
 Include the affected version or commit, environment, expected impact, reproduction steps, and the smallest safe proof of concept. Redact credentials, personal paths, user content, and unrelated logs.
 
@@ -29,7 +29,7 @@ These are good-faith operational targets, not a bounty, warranty, or disclosure 
 
 - The public tree is closed by `release-manifest.json`; undeclared files fail verification.
 - Published distribution artifacts and generated Swift adapters have complete maintained-source and output hashes and must byte-match regeneration in an external temporary directory.
-- Caches, build trees, credentials, personal data, AI or agent files, skills, MCP configuration, and private repository material are forbidden.
+- Caches, build trees, credentials, personal data, and repository-internal operational material are forbidden.
 - GitHub Actions run with read-only default permissions and pinned action commits.
 - Published versions and tags are immutable; repairs use a new version.
 

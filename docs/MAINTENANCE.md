@@ -2,12 +2,12 @@
 
 ## Sources of truth
 
-- root agent contract: `SKILL.md`;
+- normative product references: `docs/MASTER.md`, `docs/MASTER_RU.md`;
 - bilingual rules: `docs/MASTER.md`, `docs/MASTER_RU.md`;
 - exact values: `tokens/*.json`;
 - reusable contracts and delivery: `registry/`, `schemas/`;
 - public staging tree: `packages/`;
-- retained private brand assets: `assets/brand/nyx/`, `assets/brand/manifest.json`;
+- retained brand assets: `assets/brand/nyx/`, `assets/brand/manifest.json`;
 - deterministic generators and gates: `scripts/`, `tests/`.
 
 ## Change workflow
@@ -30,7 +30,7 @@ All token metadata, registries, package manifests, generated outputs, and releas
 
 ## Components and packages
 
-Every component registry item declares `delivered` or `specification-only`. Delivered items reference registered packages and unit evidence. New QenTerra packages require a distinct public boundary, versioned API, tests, clean-consumer proof, Apache-2.0 metadata, NOTICE, and release-manifest paths. Third-party reference source requires verified ownership or permission, precise attribution, a separate manifest, immutable originals, and explicit exclusion from the QenTerra license and installable targets unless its terms permit otherwise.
+Every component registry item declares `delivered` or `specification-only`. Delivered items reference registered packages and unit evidence. New QenTerra packages require a distinct release boundary, versioned API, tests, clean-consumer proof, Apache-2.0 metadata, applicable notices, and release-manifest paths. Third-party reference source requires verified ownership or permission, precise attribution, a separate manifest, immutable originals, and explicit exclusion from the QenTerra license and installable targets unless its terms permit otherwise.
 
 Public releases are prepared only from the allowlisted snapshot. Existing public tags and npm versions are immutable. See `docs/governance/EVOLUTION.md` and `docs/governance/PUBLIC_DELIVERY.md`.
 

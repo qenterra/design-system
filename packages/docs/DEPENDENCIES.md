@@ -6,11 +6,11 @@
 | --- | --- | --- | --- | --- | --- |
 | Swift packages | `Package.swift` | None declared | Typed tokens and SwiftUI components | Repository Apache-2.0 only | `@qenterra` |
 | npm package | `npm/design-tokens/package.json` | None declared | CSS and JSON design-token delivery | Repository Apache-2.0 only | `@qenterra` |
-| Explore SwiftUI reference catalog | `Sources/ExploreSwiftUI/manifest.json` | None; not a package target | Copyable native source reference | Original ownership; direct publication permission, not Apache-2.0 relicensing | Explore SwiftUI / `@qenterra` |
-| Magic UI reference catalog | `Sources/MagicUI/manifest.json` | None; not a package target | Copyable web component source and install registry | Upstream MIT license and Magic UI copyright; not Apache-2.0 relicensing | Magic UI / `@qenterra` |
-| shadcn/ui reference catalog | `Sources/ShadcnUI/manifest.json` | None; not a package target | Copyable web component source reference | Upstream MIT license and shadcn copyright; not Apache-2.0 relicensing | shadcn / `@qenterra` |
-| UIable reference catalog | `Sources/UIable/manifest.json` | None; not a package target | Copyable web component, primitive, and install-registry source | Upstream MIT license and CodedThemes copyright; not Apache-2.0 relicensing | CodedThemes / `@qenterra` |
-| ReUI reference catalog | `Sources/ReUI/manifest.json` | None; not a package target | Copyable Base UI Nova and Radix UI Nova examples, primitives, hooks, and install payloads | Upstream MIT license and Keenthemes copyright; not Apache-2.0 relicensing | Keenthemes / `@qenterra` |
+| Explore SwiftUI reference catalog | `Sources/ExploreSwiftUI/manifest.json` | None; not a package target | Copyable native source reference | Original ownership and direct publication permission | Explore SwiftUI / `@qenterra` |
+| Magic UI reference catalog | `Sources/MagicUI/manifest.json` | None; not a package target | Copyable web component source and install registry | Upstream MIT license and Magic UI copyright | Magic UI / `@qenterra` |
+| shadcn/ui reference catalog | `Sources/ShadcnUI/manifest.json` | None; not a package target | Copyable web component source reference | Upstream MIT license and shadcn copyright | shadcn / `@qenterra` |
+| UIable reference catalog | `Sources/UIable/manifest.json` | None; not a package target | Copyable web component, primitive, and install-registry source | Upstream MIT license and CodedThemes copyright | CodedThemes / `@qenterra` |
+| ReUI reference catalog | `Sources/ReUI/manifest.json` | None; not a package target | Copyable Base UI Nova and Radix UI Nova examples, primitives, hooks, and install payloads | Upstream MIT license and Keenthemes copyright | Keenthemes / `@qenterra` |
 
 SwiftUI and the Swift standard library are supplied by the consumer's Apple toolchain and are not redistributed by this repository.
 

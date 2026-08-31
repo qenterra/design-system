@@ -26,7 +26,7 @@ The report validates declared released packages and capabilities, source-root bo
 ## Package source and authentication
 
 Production consumers pin an immutable SemVer release from
-`https://github.com/qenterra/packages` or npm package
+`https://github.com/qenterra/design-system` or npm package
 `@qenterra/design-tokens`. Both are public and require no read credential.
 Local paths are for coordinated Design System work, not a silent production
 dependency. A clean package install proves dependency and API availability

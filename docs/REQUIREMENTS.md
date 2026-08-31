@@ -7,14 +7,14 @@
 - [x] Component contracts define anatomy, states, keyboard, accessibility, localization, lifecycle, evidence, and delivery status.
 - [x] Native platform conventions and accessibility requirements override decorative sameness.
 - [x] Product-specific differences stay in consumer profiles and expiring exceptions.
-- [x] Root `SKILL.md` defines `consume`, `evolve`, and `audit` modes for Noetic.
+- [x] Human product authority is complete in the bilingual master references and machine-readable sources.
 
 ## Installable delivery
 
 - [x] Public npm package exposes CSS tokens, JSON tokens, reusable icon metadata, and the four existing CSS recipes.
 - [x] Public Swift package exposes typed tokens plus the existing primary-button, group-container, and interactive-row primitives.
 - [x] Public files are restricted to `packages/` and declared by path/hash.
-- [x] Apache-2.0 and NOTICE attribution name QenTerra and Nikita Melnychenko.
+- [x] Apache-2.0 attribution names QenTerra and Nikita Melnychenko; third-party notices remain separate.
 - [x] New/improved reusable work must update source, registry, tests, package mapping, release manifest, version, and changelog.
 
 ## Removed scope

@@ -2,13 +2,13 @@
 
 ## Context
 
-QenTerra Packages serves web and Apple-platform consumers that need stable design tokens and a small set of reusable interface primitives without access to the private canonical Design System repository.
+The package boundary serves web and Apple-platform consumers that need stable design tokens and a small set of reusable interface primitives from the public canonical Design System repository.
 
 ## System model
 
 ```mermaid
 flowchart LR
-    Canonical[Canonical Design System sources] --> Projection[Reviewed public source projection]
+    Canonical[Canonical Design System sources] --> Projection[Reviewed package snapshot]
     Projection --> NpmSource[Versioned token, icon, and CSS inputs]
     Projection --> Catalogs[Exact reference source catalogs]
     NpmSource --> Generator[Portable deterministic generator]
@@ -29,7 +29,7 @@ flowchart LR
 | `QenTerraComponents` | Maintained reusable SwiftUI primitives | Swift public API built on design tokens | `@qenterra` |
 | `@qenterra/design-tokens` | CSS variables, recipes, tokens, and icon metadata | Versioned `src/` inputs; generated `dist/` | `@qenterra` |
 | Reference catalogs | Immutable Explore SwiftUI, shadcn/ui, Magic UI, UIable, and ReUI originals; not installable targets | Exact source, provenance manifests, and registry payloads where supplied upstream | Original authors; catalog maintained by `@qenterra` |
-| Public generator | Rebuild npm distribution and generated Swift adapters without private source | `npm/design-tokens/src/` to six declared outputs | `@qenterra` |
+| Package generator | Rebuild npm distribution and generated Swift adapters from versioned package inputs | `npm/design-tokens/src/` to six declared outputs | `@qenterra` |
 | `release-manifest.json` | Exact public-file closure | Relative paths, byte sizes, SHA-256 hashes | `@qenterra` |
 | Verification scripts | Reject drift and repository contamination | Human-readable pass/fail reports | `@qenterra` |
 
@@ -41,7 +41,7 @@ flowchart LR
 - Every public file except the manifest itself appears exactly once in the manifest.
 - Every reference source and install payload has one provenance record; direct edits, missing files, undeclared files, and hash drift fail catalog verification.
 - QenTerra adaptations live in a separate target path and record their original component ID and hash without modifying the reference.
-- Public source never depends on private assets, private paths, agent instructions, skills, caches, or internal repository history.
+- Package source never depends on brand assets, machine-local paths, caches, or repository-only history.
 - Package APIs preserve platform accessibility and native behavior described by their tests and public documentation.
 
 ## Failure and recovery

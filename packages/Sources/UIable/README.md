@@ -10,4 +10,4 @@ The originals under `Components/`, `Primitives/`, and `Registry/` are immutable 
 
 This catalog is reference source, not an npm or SwiftPM target. UIable components are source-distributed React components and may require the dependencies, aliases, CSS variables, Tailwind configuration, and framework setup declared by their official registry items.
 
-The bundled [`LICENSE.md`](LICENSE.md) is the exact upstream MIT license and identifies the original copyright holder as `Copyright (c) 2026 CodedThemes`. QenTerra does not claim authorship of these files and does not relicense them under the Apache-2.0 terms that apply to QenTerra-authored public package material.
+The bundled [`LICENSE.md`](LICENSE.md) is the exact upstream MIT license and identifies the original copyright holder as `Copyright (c) 2026 CodedThemes`. QenTerra does not claim authorship of these files or relicense them as QenTerra-authored material.

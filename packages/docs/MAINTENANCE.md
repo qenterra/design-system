@@ -9,7 +9,7 @@
 
 ## Repository hygiene
 
-The public repository must remain human-authored and consumer-facing. Caches, build trees, coverage, reports, personal paths, AI or agent operating files, skills, MCP configuration, generated working plans, and tool state belong in unique temporary directories outside the checkout. The audit scans tracked, untracked, and ignored files; `.gitignore` is not a hiding place.
+The public repository must remain consumer-facing. Caches, build trees, coverage, reports, personal paths, private operational records, and transient tool state belong in unique temporary directories outside the checkout. The audit scans tracked, untracked, and ignored files; `.gitignore` is not a hiding place.
 
 ## Current record
 

@@ -3,7 +3,7 @@
 ## Registry contract
 
 - npm registry: `@qenterra/design-tokens`, Node.js 22 for verification, metadata in `packages/npm/design-tokens/package.json`.
-- Swift Package Manager: repository `https://github.com/QenTerra/packages`, products `QenTerraDesignTokens` and `QenTerraComponents`, Swift tools 5.9, macOS 13+, and iOS 16+.
+- Swift Package Manager: repository `https://github.com/QenTerra/design-system`, products `QenTerraDesignTokens` and `QenTerraComponents`, Swift tools 5.9, macOS 13+, and iOS 16+.
 - Owner: Nikita Melnychenko (`@qenterra`). Publication credentials exist only in the protected release workflow and are never stored in source.
 - Provenance: `registry/packages.json` is the export allowlist; safe public token and icon inputs plus `packages/scripts/generate.py` reproduce all declared outputs; `packages/release-manifest.json` then records every public file, byte size, and SHA-256 digest.
 

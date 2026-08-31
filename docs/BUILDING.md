@@ -31,4 +31,4 @@ DESIGN_SYSTEM_IMAGE_PYTHON=.venv/bin/python \
 python3 scripts/verify.py
 ```
 
-Generated public adapters and private Figma handoff files are outputs. Edit their canonical token/registry inputs, then regenerate. The verifier does not create a viewing website or screenshot baseline.
+Generated package adapters and Figma handoff files are outputs. Edit their canonical token/registry inputs, then regenerate. The verifier does not create a viewing website or screenshot baseline.

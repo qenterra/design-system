@@ -48,7 +48,7 @@ ADR: docs/decisions/0004-symbol-registry.md
 Co-authored-by: Name <address>
 ```
 
-Не выдумывайте автора, ревьюера, issue или verification claim. Не добавляйте AI attribution без требования политики репозитория.
+Не выдумывайте автора, ревьюера, issue или verification claim.
 
 ## Generated files и assets
 

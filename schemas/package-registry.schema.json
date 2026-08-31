@@ -7,7 +7,7 @@
   "properties": {
     "$schema": {"type": "string"},
     "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
-    "repository": {"type": "string", "const": "https://github.com/qenterra/packages"},
+    "repository": {"type": "string", "const": "https://github.com/qenterra/design-system"},
     "versionPolicy": {"enum": ["shared"]},
     "packages": {
       "type": "array",

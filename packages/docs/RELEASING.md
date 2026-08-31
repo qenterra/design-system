@@ -5,14 +5,14 @@
 - Release owner: Nikita Melnychenko (QenTerra)
 - Version scheme: Semantic Versioning
 - Version source: `release-manifest.json`
-- Current version: `5.5.0`
+- Current version: `5.5.1`
 - Tag format: `v<version>`
 
 The public tree is generated from the canonical Design System release and must not be assembled by copying an arbitrary working directory.
 
 ## Prepare
 
-- Confirm the exact clean source commit and complete public projection.
+- Confirm the exact clean source commit and complete package snapshot.
 - Align package metadata, manifest version, changelog, support table, migrations, and deprecations.
 - Regenerate every declared npm and Swift output from the public inputs, then run the release verifier, governance audit, Swift tests, and npm archive inspection with all temporary state outside the checkout.
 - Inspect license, notices, dependency inventory, workflow permissions, and generated-artifact provenance.

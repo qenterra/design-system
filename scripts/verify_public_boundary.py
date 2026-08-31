@@ -79,7 +79,7 @@ def validate_public_tree(public_root: Path = PUBLIC_ROOT) -> list[str]:
 
     if manifest.get("schemaVersion") != 1:
         errors.append("release-manifest.json: schemaVersion must be 1")
-    if manifest.get("repository") != "https://github.com/qenterra/packages":
+    if manifest.get("repository") != "https://github.com/qenterra/design-system":
         errors.append("release-manifest.json: unexpected repository")
     if any(key.lower() in {"sourcesha", "commit", "commitsha"} for key in manifest):
         errors.append("release-manifest.json: private commit identifiers are forbidden")

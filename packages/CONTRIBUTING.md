@@ -12,9 +12,9 @@ Focused bug fixes, tests, documentation corrections, and well-scoped improvement
 ## Development setup
 
 ```sh
-git clone https://github.com/QenTerra/packages.git
-cd packages
-python3 scripts/verify_release.py
+git clone https://github.com/QenTerra/design-system.git
+cd design-system
+python3 packages/scripts/verify_release.py
 ```
 
 Requirements: Swift 5.9 or later for native packages and Node.js 22 or later for npm package verification.
@@ -22,8 +22,8 @@ Requirements: Swift 5.9 or later for native packages and Node.js 22 or later for
 ## Required checks
 
 ```sh
-python3 scripts/generate.py check
-python3 scripts/verify_release.py
+python3 packages/scripts/generate.py check
+python3 packages/scripts/verify_release.py
 python3 scripts/qenterra_repository_check.py audit --root . --format markdown
 npm pack --workspace @qenterra/design-tokens --dry-run --json --cache /tmp/qenterra-packages-npm
 swift test --scratch-path /tmp/qenterra-packages-swift --disable-sandbox
@@ -47,6 +47,6 @@ Create every cache, build tree, report, or package-staging directory outside the
 - Add a regression test when behaviour can be checked deterministically. Generated-output changes must begin in the versioned public inputs and pass external regeneration; changing an output and its manifest hash together is never sufficient.
 - Include screenshots or recordings for visible changes and identify the exact build and fixture.
 - Update public documentation and changelog when users, consumers, or operators are affected.
-- Do not add caches, build output, credentials, signing material, personal data, AI or agent operating files, skills, MCP configuration, private planning, or unreviewed artifacts anywhere in the public checkout.
+- Do not add caches, build output, credentials, signing material, personal data, private operational records, or unreviewed artifacts anywhere in the public checkout.
 
-By contributing, you agree that your contribution is licensed under the repository’s declared Apache-2.0 terms.
+By contributing, you agree that your contribution is licensed under the repository's declared Apache-2.0 terms.

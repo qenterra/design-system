@@ -12,4 +12,4 @@ The originals under this directory are immutable and are not adapted to QenTerra
 
 This catalog is reference source, not an npm or SwiftPM target. ReUI follows the copy-and-own shadcn model rather than publishing an npm component package. Install a selected registry item with the compatible shadcn workflow after reviewing its dependencies and target paths.
 
-The bundled [`LICENSE.md`](LICENSE.md) is the exact upstream MIT license and identifies the original copyright holder as `Copyright (c) 2025 Keenthemes Inc`. QenTerra does not claim authorship of these files and does not relicense them under the Apache-2.0 terms that apply to QenTerra-authored public package material.
+The bundled [`LICENSE.md`](LICENSE.md) is the exact upstream MIT license and identifies the original copyright holder as `Copyright (c) 2025 Keenthemes Inc`. QenTerra does not claim authorship of these files or relicense them as QenTerra-authored material.

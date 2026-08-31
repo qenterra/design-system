@@ -1,6 +1,6 @@
 # Design System
 
-Version 5.5.0 · Normative reference for humans and AI agents
+Version 5.5.1 · Normative reference for people
 
 ## 0. How to use this file
 
@@ -811,18 +811,18 @@ Before creating a component, confirm:
 
 Deprecated tokens/components remain documented for one migration window with replacement guidance. Validators may warn first and fail after the announced major version.
 
-### 18.6 Public package distribution
+### 18.6 Package distribution
 
-The canonical private repository produces one allowlisted public repository at
-`qenterra/packages`. It exposes `@qenterra/design-tokens` through npm and
-the `QenTerraDesignTokens` / `QenTerraComponents` SwiftPM products. Production
+The canonical public repository is `qenterra/design-system`. It exposes
+`@qenterra/design-tokens` through npm and the `QenTerraDesignTokens` /
+`QenTerraComponents` SwiftPM products from the same versioned source. Production
 consumers pin immutable SemVer releases; local paths are limited to coordinated
 Design System work. Publication requires aligned versions, the exact release
 manifest, the full verification gate, and clean consumer resolution. A package
 release proves adapter availability, not native rendering or accessibility
 acceptance in a product.
 
-The public source tree has six deliberately separate zones. `Sources/QenTerra/`
+The package source tree has six deliberately separate zones. `Sources/QenTerra/`
 contains the installable, tokenized `QenTerraDesignTokens` and
 `QenTerraComponents` targets. `Sources/ExploreSwiftUI/` contains exact attributed
 source from every Explore SwiftUI sitemap detail page and is not a SwiftPM target.
@@ -884,54 +884,22 @@ the saved deployment/index identity before downloading changed payloads. An
 adapted or tokenized copy becomes a separate maintained QenTerra component; no
 ReUI original or install payload is edited in place.
 
-## 19. AI implementation protocol
-
-### 19.1 Code System
-
-When implementing or reviewing product code, read `docs/CODE.md`, the relevant language profile, the product architecture contract, and its source-of-truth configuration. The Code System requires human-readable module boundaries, explicit state and effects, native platform conventions, and separate automated, live, and manual evidence. It never permits AI working artifacts inside a repository.
-
-When an AI builds or reviews UI:
-
-1. Read this file, the platform layer, and product profile.
-2. Identify the primary user task and consequence of failure.
-3. Choose a pattern before choosing components.
-4. Resolve exact tokens from JSON or generated adapters.
-5. Enumerate states and accessibility behavior before code.
-6. Use realistic localized content, not lorem ipsum.
-7. Implement the smallest coherent component set.
-8. Run project-specific verification.
-9. Render all required appearances and constrained sizes.
-10. Report automated, visual, live, and unverified evidence separately.
-
-The AI must not:
-
-- infer current UI from stale screenshots;
-- introduce a new raw color, duration, radius, or string source casually;
-- call static compilation visual QA;
-- call screenshots accessibility QA;
-- claim a fallback outcome as the requested outcome;
-- copy a product-specific component into the family core without a second valid consumer.
-
-Focused schemas are contracts, not editor decoration. A token change must preserve reference acyclicity and type compatibility. Component metrics use foundation references unless `components.extensions.rawMetricExceptions` contains a narrow, justified exception. Consumers should prefer typed `DesignTokens.Color`, `DesignTokens.Typography`, `DesignTokens.Motion`, and `DesignTokens.Component` APIs or CSS tokens; CSS recipes remain opt-in because native and product-specific shells are allowed to differ.
-
-`registry/components.json` is the executable component inventory. Its stories must cover every declared state, and each entry must identify truthful delivery status; uncovered states or invented package claims fail validation. Review System/Light/Dark, compact/standard density, constrained widths, long copy, and bidirectional layouts in the consumer before adoption. SwiftUI consumers may start with the delivered button, group, and interactive-row primitives, but platform behavior and product context still override decorative sameness.
-
-## 20. Maintenance procedure
+## 19. Maintenance procedure
 
 To update the design system:
 
-1. Read `AGENTS.md`, this file, affected token files, and relevant product evidence.
+1. Read this file, affected token files, and relevant product evidence.
 2. Add or update an ADR in `docs/decisions/` for a normative change.
 3. Change canonical tokens, registries, schemas, documentation, templates, or package facades.
 4. For Explore SwiftUI changes run `python3 scripts/explore_swiftui.py sync --write`; for Magic UI changes run `python3 scripts/magic_ui.py sync --write`; for shadcn/ui changes run `python3 scripts/shadcn_ui.py sync --write`; for UIable changes run `python3 scripts/uiable.py sync --write`; for ReUI changes run `python3 scripts/reui.py sync --write`; then run `python3 scripts/generate.py write` and `python3 scripts/build_public_packages.py write` when generated/public outputs change.
 5. Run `python3 scripts/verify.py`.
 6. Inspect the npm tarball, Swift products, and the affected consumer at the relevant appearances and constraints.
 7. Update `CHANGELOG.md` and version according to change type.
-8. Update Obsidian routing instructions only when workflow or product contract changes; do not duplicate token values.
+8. Keep operational coordination outside the product repository; do not duplicate token values.
 9. For brand changes, update the asset manifest, preserve Git LFS coverage, run focused Nyx QA, and inspect original/use-size artwork on required backgrounds.
 10. Commit source and generated artifacts together after verification.
 
-## 21. Definition of done for product adoption
+## 20. Definition of done for product adoption
 
 A product is compliant only when:
 

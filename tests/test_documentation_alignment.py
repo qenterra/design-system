@@ -13,14 +13,14 @@ class DocumentationAlignmentTests(unittest.TestCase):
         english = (ROOT / "docs/MASTER.md").read_text(encoding="utf-8")
         russian = (ROOT / "docs/MASTER_RU.md").read_text(encoding="utf-8")
         section = re.compile(r"^## (\d+)\. ", flags=re.MULTILINE)
-        self.assertEqual(section.findall(english), [str(index) for index in range(22)])
-        self.assertEqual(section.findall(russian), [str(index) for index in range(22)])
+        self.assertEqual(section.findall(english), [str(index) for index in range(21)])
+        self.assertEqual(section.findall(russian), [str(index) for index in range(21)])
 
     def test_both_master_references_cover_public_package_delivery(self) -> None:
         for relative in ("docs/MASTER.md", "docs/MASTER_RU.md"):
             text = (ROOT / relative).read_text(encoding="utf-8")
             with self.subTest(relative=relative):
-                self.assertIn("qenterra/packages", text)
+                self.assertIn("qenterra/design-system", text)
                 self.assertIn("@qenterra/design-tokens", text)
                 self.assertIn("QenTerraDesignTokens", text)
                 self.assertIn("QenTerraComponents", text)

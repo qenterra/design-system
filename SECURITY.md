@@ -36,7 +36,7 @@ bounty program.
 
 The repository treats these as explicit security boundaries:
 
-- private canonical and package-repository access;
+- repository and package-publication access;
 - least-privilege release and consumer credentials;
 - immutable version tags and fail-closed package payload allowlists;
 - generated-output provenance and deterministic source generation;

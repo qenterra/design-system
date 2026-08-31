@@ -12,7 +12,7 @@ This standard applies in repository issues, pull requests, discussions, Wiki con
 
 ## Reporting and enforcement
 
-Report conduct concerns privately to https://github.com/QenTerra/packages/security/advisories/new. Maintainers will limit access to the report, assess context, choose a proportionate response, document the decision privately, and protect reporters from retaliation where possible.
+Report conduct concerns privately to https://github.com/QenTerra/design-system/security/advisories/new. Maintainers will limit access to the report, assess context, choose a proportionate response, document the decision privately, and protect reporters from retaliation where possible.
 
 Possible responses include a private correction, warning, temporary restriction, removal from project spaces, or permanent exclusion. A maintainer involved in a report must not be its sole decision-maker.
 

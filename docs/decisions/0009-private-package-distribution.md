@@ -1,6 +1,6 @@
 # 0009: Private package distribution
 
-Status: accepted
+Status: superseded by [0014](0014-public-canonical-repository.md)
 
 Date: 2026-08-11
 

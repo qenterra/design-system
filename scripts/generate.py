@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate public adapters and private handoff data from canonical sources."""
+"""Generate package adapters and design-tool handoff data from canonical sources."""
 
 from __future__ import annotations
 
@@ -25,6 +25,13 @@ from lib.token_tools import (  # noqa: E402
 
 
 TOKEN_NAMES = ("foundation", "semantic", "typography", "motion", "components", "platforms", "products")
+PUBLISHED_SOURCE_PATHS = (
+    "tokens",
+    "registry/icons.json",
+    "packages/npm/design-tokens/src",
+    "packages/Sources/ReUI/Base",
+)
+PUBLISHED_ARTIFACT_PATHS = ("packages/Sources/ReUI/Registry",)
 
 
 def json_text(value: Any) -> str:
@@ -36,6 +43,58 @@ def load_sources(root: Path) -> tuple[dict[str, dict[str, Any]], dict[str, Any],
     components = load_json(root / "registry/components.json")
     icons = load_json(root / "registry/icons.json")
     return tokens, components, icons
+
+
+def published_artifact_manifest(root: Path, outputs: dict[str, str], version: str) -> dict[str, Any]:
+    paths: set[str] = set()
+    for relative in PUBLISHED_SOURCE_PATHS:
+        candidate = root / relative
+        if candidate.is_file():
+            paths.add(relative)
+        else:
+            paths.update(
+                path.relative_to(root).as_posix()
+                for path in candidate.rglob("*")
+                if path.is_file()
+            )
+    paths.update(relative for relative in outputs if relative.startswith("generated/"))
+    for relative in PUBLISHED_ARTIFACT_PATHS:
+        paths.update(
+            path.relative_to(root).as_posix()
+            for path in (root / relative).rglob("*")
+            if path.is_file()
+        )
+    paths.update(
+        relative
+        for relative in outputs
+        if relative.startswith("packages/npm/design-tokens/dist/")
+        or relative
+        in {
+            "packages/Sources/QenTerra/DesignTokens/GeneratedIcons.swift",
+            "packages/Sources/QenTerra/DesignTokens/GeneratedTokens.swift",
+        }
+    )
+
+    records: list[dict[str, Any]] = []
+    for relative in sorted(paths):
+        payload = (
+            outputs[relative].encode("utf-8")
+            if relative in outputs
+            else (root / relative).read_bytes()
+        )
+        records.append(
+            {
+                "path": relative,
+                "sha256": hashlib.sha256(payload).hexdigest(),
+                "bytes": len(payload),
+            }
+        )
+    return {
+        "schemaVersion": 1,
+        "version": version,
+        "repository": "https://github.com/qenterra/design-system",
+        "files": records,
+    }
 
 
 def build_qenterra_component_manifest(root: Path, version: str) -> dict[str, Any]:
@@ -115,6 +174,9 @@ def build_outputs(root: Path = ROOT) -> dict[str, str]:
     }
     for filename, payload in generate_figma_exports(tokens, components, icons).items():
         outputs[f"generated/figma/{filename}"] = json_text(payload)
+    outputs["registry/published-artifacts.json"] = json_text(
+        published_artifact_manifest(root, outputs, version)
+    )
     return outputs
 
 

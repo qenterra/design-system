@@ -61,7 +61,7 @@ venv/
 DerivedData/
 artifacts/qa/
 
-# Agent and AI-tool operating state belongs outside public repositories
+# Private operational state belongs outside product repositories
 .agent/
 .agents/
 _agents/
@@ -114,5 +114,5 @@ mcp.json
 
 # Add ecosystem-specific generated paths below this line. Do not ignore
 # dependency lockfiles, shared editor configuration, or declared public
-# distribution artifacts. Generate agent working files in a temporary directory
+# distribution artifacts. Generate transient working files in a temporary directory
 # outside the repository instead of teaching Git to hide them locally.

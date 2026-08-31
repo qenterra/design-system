@@ -9,24 +9,17 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class DesignSystemV5ContractTests(unittest.TestCase):
-    def test_root_skill_is_the_agent_entrypoint(self) -> None:
-        skill = ROOT / "SKILL.md"
-        self.assertTrue(skill.is_file(), "SKILL.md must exist at the repository root")
-        content = skill.read_text(encoding="utf-8")
-        for required in (
-            "# Design System",
-            "consume",
-            "evolve",
-            "audit",
-            "Noetic",
-            "design-system-consumer.json",
-            "design-system-exceptions.json",
-        ):
-            self.assertIn(required, content)
+    def test_repository_contains_no_agent_entrypoint(self) -> None:
+        self.assertFalse((ROOT / "SKILL.md").exists())
+        self.assertFalse((ROOT / "AGENTS.md").exists())
+        contract = json.loads(
+            (ROOT / ".github/qenterra-repository.json").read_text(encoding="utf-8")
+        )
+        self.assertFalse(contract["agent_control_plane"])
 
     def test_major_release_and_public_packages_are_aligned(self) -> None:
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual(version, "5.5.0")
+        self.assertEqual(version, "5.5.1")
         npm = json.loads(
             (ROOT / "packages/npm/design-tokens/package.json").read_text(
                 encoding="utf-8"
@@ -35,16 +28,27 @@ class DesignSystemV5ContractTests(unittest.TestCase):
         self.assertEqual(npm["name"], "@qenterra/design-tokens")
         self.assertEqual(npm["version"], version)
         self.assertEqual(npm["license"], "Apache-2.0")
+        self.assertEqual(
+            npm["repository"],
+            {
+                "type": "git",
+                "url": "git+https://github.com/qenterra/design-system.git",
+                "directory": "packages/npm/design-tokens",
+            },
+        )
         self.assertEqual(npm["publishConfig"], {"access": "public"})
         self.assertFalse(npm.get("private", False))
+        self.assertTrue((ROOT / "Package.swift").is_file())
 
-    def test_public_notice_requires_qenterra_attribution(self) -> None:
-        notice_path = ROOT / "packages/NOTICE"
-        self.assertTrue(notice_path.is_file(), "public NOTICE is missing")
-        notice = notice_path.read_text(encoding="utf-8")
-        self.assertIn("Design System", notice)
-        self.assertIn("Copyright © 2026 Nikita Melnychenko", notice)
-        self.assertIn("QenTerra", notice)
+    def test_first_party_material_uses_apache_with_notice(self) -> None:
+        root_license = (ROOT / "LICENSE").read_text(encoding="utf-8")
+        package_license = (ROOT / "packages/LICENSE").read_text(encoding="utf-8")
+        self.assertIn("Apache License", root_license)
+        self.assertEqual(root_license, package_license)
+        for relative in ("NOTICE", "packages/NOTICE", "packages/npm/design-tokens/NOTICE"):
+            notice = (ROOT / relative).read_text(encoding="utf-8")
+            self.assertIn("Copyright", notice)
+            self.assertIn("Apache-2.0", notice)
 
     def test_removed_subsystems_are_absent(self) -> None:
         for relative in ("src", "dist", "output"):

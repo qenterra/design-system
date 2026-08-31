@@ -17,7 +17,7 @@ Python follows the repository's explicit, typed helper style and is syntax-check
 
 ## Documentation
 
-Use descriptive headings, portable Markdown, runnable examples, meaningful link text, image alternative text, and one source of truth per durable subject. Do not publish placeholders or internal agent prose.
+Use descriptive headings, portable Markdown, runnable examples, meaningful link text, image alternative text, and one source of truth per durable subject. Do not publish placeholders or internal operational prose.
 
 ## Accessibility and inclusive language
 

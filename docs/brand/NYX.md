@@ -56,7 +56,7 @@ The current selected set is source truth: two 1284×2778 iPhone exports and two 
 - Wallpapers are opaque RGBA PNG with a dark neutral graphite edge field.
 - Use a deliberate wide or vertical composition; do not mechanically crop one device export into another.
 - Preserve useful negative space and keep hair, hands, knees, and footwear away from accidental cuts.
-- Backgrounds stay dark and subordinate. A quiet neutral field is the default; restrained monochrome structural texture is allowed when it has a deliberate device/profile relationship and preserves clear hierarchy. `Shy (MacBook).png` is the approved reference for this exception. Avoid random AI scenery, text, logos, decorative gradients, or irrelevant objects.
+- Backgrounds stay dark and subordinate. A quiet neutral field is the default; restrained monochrome structural texture is allowed when it has a deliberate device/profile relationship and preserves clear hierarchy. `Shy (MacBook).png` is the approved reference for this exception. Avoid random synthetic scenery, text, logos, decorative gradients, or irrelevant objects.
 - Upscaling cannot repair broken anatomy or invented hair detail. Correct the source first, then restore detail without global oversharpening or colored fringe.
 
 ## ChatGPT pet

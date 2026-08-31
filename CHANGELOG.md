@@ -1,5 +1,14 @@
 # Changelog
 
+## 5.5.1
+
+### Changed
+
+- Opened the canonical Design System repository under Apache-2.0 while preserving every third-party source license and attribution.
+- Removed project-local agent entrypoints and agent-facing prose; the repository now contains product sources and human documentation only.
+- Adopted QenTerra repository standard 2.0.0 with an explicit non-control-plane contract and fail-closed agent-artifact checks.
+- Consolidated SwiftPM, npm package source, issues, security reporting, and release automation under `QenTerra/design-system`; the separate `QenTerra/packages` mirror is retired after replacement verification.
+
 ## 5.5.0
 
 ### Added

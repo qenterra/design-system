@@ -1,7 +1,6 @@
 # Contributing
 
-Design System accepts contributions from authorized QenTerra
-collaborators. The repository is private and proprietary.
+Design System accepts contributions from authorized QenTerra collaborators.
 
 ## Before opening an issue
 
@@ -34,8 +33,8 @@ DESIGN_SYSTEM_IMAGE_PYTHON=.venv/bin/python python3 scripts/verify.py
   semantically complete.
 - Product-specific exceptions belong in product profiles, not foundation
   tokens.
-- AI plans, handoffs, scratch notes, reports, and intermediates belong in a
-  unique system temporary directory, never in the repository.
+- Private operational planning, scratch notes, reports, and intermediates belong
+  outside the repository.
 - Repository-authored code, UI copy, documentation, tests, and commits are
   English.
 
@@ -63,4 +62,4 @@ manual gaps.
 - Keep unrelated formatting and generated churn out of the patch.
 
 By contributing, you agree that your contribution may be used under this
-repository's [proprietary license](LICENSE).
+repository's [Apache License 2.0](LICENSE).

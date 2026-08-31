@@ -20,8 +20,8 @@ from typing import Any, Iterable
 from urllib.parse import unquote
 
 
-TOOL_VERSION = "1.3.0"
-STANDARD_VERSION = "1.3.0"
+TOOL_VERSION = "2.0.0"
+STANDARD_VERSION = "2.0.0"
 CONFIG_PATH = Path(".github/qenterra-repository.json")
 COPYRIGHT_HOLDER = "Nikita Melnychenko (QenTerra)"
 GITHUB_OWNER = "QenTerra"
@@ -40,6 +40,7 @@ REQUIRED_CONFIG_KEYS = frozenset(
         "overlays",
         "visibility",
         "license",
+        "agent_control_plane",
         "version_scheme",
         "collaboration_model",
         "ecosystem",
@@ -582,6 +583,11 @@ def validate_contract(config: dict[str, Any], findings: list[Finding]) -> bool:
         findings.append(finding("REPOSITORY_NAME_INVALID", "error", "repository_name must use lowercase ASCII kebab-case and be at most 100 characters."))
     elif config.get("repository_url") != f"https://github.com/{GITHUB_OWNER}/{repository_name}":
         findings.append(finding("REPOSITORY_URL_INVALID", "error", "repository_url does not match the canonical owner and slug."))
+    agent_control_plane = config.get("agent_control_plane")
+    if not isinstance(agent_control_plane, bool):
+        findings.append(finding("AGENT_CONTROL_PLANE_INVALID", "error", "agent_control_plane must be a boolean."))
+    elif agent_control_plane != (repository_name == "noetic"):
+        findings.append(finding("AGENT_CONTROL_PLANE_EXCLUSIVE", "error", "Only the noetic repository may enable agent_control_plane, and noetic must enable it."))
     description = config.get("description")
     if not isinstance(description, str) or not description.strip() or len(description) > 350 or "\n" in description:
         findings.append(finding("DESCRIPTION_INVALID", "error", "description must be one non-empty line of at most 350 characters."))
@@ -933,10 +939,9 @@ def audit_portability(root: Path, config: dict[str, Any], expected: set[str], fi
                 findings.append(finding("ROOT_NAME_INVALID", "error", "General-purpose top-level directories use lowercase kebab-case.", path=name))
 
 
-def audit_public_human_only_boundary(root: Path, config: dict[str, Any], findings: list[Finding]) -> None:
-    if config.get("visibility") != "public":
-        return
-
+def audit_repository_artifact_boundary(root: Path, config: dict[str, Any], findings: list[Finding]) -> None:
+    is_public = config.get("visibility") == "public"
+    allows_agent_artifacts = config.get("agent_control_plane") is True
     agent_paths: set[str] = set()
     cache_paths: set[str] = set()
     undeclared_generated_paths: set[str] = set()
@@ -953,35 +958,37 @@ def audit_public_human_only_boundary(root: Path, config: dict[str, Any], finding
         parts = path.relative_to(root).parts
         folded = tuple(part.casefold() for part in parts)
 
-        for index, part in enumerate(folded):
-            if part in PUBLIC_AGENT_DIRECTORY_NAMES:
-                agent_paths.add("/".join(parts[: index + 1]))
-                break
+        if not allows_agent_artifacts:
+            for index, part in enumerate(folded):
+                if part in PUBLIC_AGENT_DIRECTORY_NAMES:
+                    agent_paths.add("/".join(parts[: index + 1]))
+                    break
         wrapped = "/" + folded_relative + "/"
-        if any(
+        if not allows_agent_artifacts and any(
             folded_relative == prefix
             or folded_relative.startswith(prefix + "/")
             or ("/" + prefix + "/") in wrapped
             for prefix in PUBLIC_AGENT_PATH_PREFIXES
         ):
             agent_paths.add(relative)
-        if folded and (
+        if not allows_agent_artifacts and folded and (
             folded[-1] in PUBLIC_AGENT_FILE_NAMES
             or any(fnmatch.fnmatchcase(folded[-1], pattern) for pattern in PUBLIC_AGENT_FILE_PATTERNS)
         ):
             agent_paths.add(relative)
 
-        for index, part in enumerate(folded):
-            if part in PUBLIC_CACHE_DIRECTORY_NAMES:
-                cache_paths.add("/".join(parts[: index + 1]))
-                break
-        for prefix in PUBLIC_CACHE_PATH_PREFIXES:
+        if is_public:
+            for index, part in enumerate(folded):
+                if part in PUBLIC_CACHE_DIRECTORY_NAMES:
+                    cache_paths.add("/".join(parts[: index + 1]))
+                    break
+        for prefix in PUBLIC_CACHE_PATH_PREFIXES if is_public else ():
             marker = "/" + prefix + "/"
             if folded_relative == prefix or folded_relative.startswith(prefix + "/") or marker in wrapped:
                 start = folded_relative.find(prefix)
                 cache_paths.add(relative[: start + len(prefix)])
                 break
-        if folded:
+        if is_public and folded:
             filename = folded[-1]
             if (
                 filename in PUBLIC_CACHE_FILE_NAMES
@@ -989,7 +996,7 @@ def audit_public_human_only_boundary(root: Path, config: dict[str, Any], finding
             ):
                 cache_paths.add(relative)
 
-        if path.is_file():
+        if is_public and path.is_file():
             declared = any(
                 relative == declared_root or relative.startswith(declared_root + "/")
                 for declared_root in declared_roots
@@ -1009,11 +1016,11 @@ def audit_public_human_only_boundary(root: Path, config: dict[str, Any], finding
 
     for relative in sorted(agent_paths):
         findings.append(finding(
-            "PUBLIC_AGENT_ARTIFACT_PROHIBITED",
+            "AGENT_ARTIFACT_PROHIBITED",
             "error",
-            "Public repositories must not contain agent instructions, AI-tool state, prompts, transcripts, or skill bundles.",
+            "Repositories other than Noetic must not contain agent instructions, AI-tool state, prompts, transcripts, or skill bundles.",
             path=relative,
-            remediation="Remove the artifact and keep agent work in a temporary directory outside the repository. This rule cannot be waived by contract exceptions.",
+            remediation="Move durable agent material into Noetic and keep transient agent work outside product repositories. This rule cannot be waived by contract exceptions.",
         ))
     for relative in sorted(cache_paths):
         findings.append(finding(
@@ -1467,7 +1474,7 @@ def audit_repository(root: Path) -> dict[str, Any]:
         audit_content(root, config, expected, findings)
         audit_obsolete_funding_surfaces(root, findings)
         audit_portability(root, config, expected, findings)
-        audit_public_human_only_boundary(root, config, findings)
+        audit_repository_artifact_boundary(root, config, findings)
         audit_documentation_names(root, findings)
         audit_wiki(root, config, findings)
         audit_local_markdown_links(root, expected, findings)

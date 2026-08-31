@@ -2,21 +2,15 @@
 
 Universal foundations, reusable visual components, palettes, platform adapters, and engineering contracts for websites, native applications, and other interface-bearing projects.
 
-> **Status:** private canonical source, version `5.5.0`. Installable public outputs are released separately through [`qenterra/packages`](https://github.com/qenterra/packages).
+> **Status:** public canonical source, version `5.5.1`, licensed under Apache-2.0.
 
 ## Use it
 
-Noetic is the mandatory router for design-related agent work. It resolves this repository and reads root [`SKILL.md`](SKILL.md), which selects one mode:
-
-- `consume` applies existing packages and contracts in a project;
-- `evolve` promotes a genuinely reusable improvement into canonical sources and delivery;
-- `audit` checks compliance and evidence without changing a consumer unless fixes were requested.
-
-Humans and tools read exact values from `tokens/*.json`, then use the relevant component, icon, and package registries. Product-specific differences belong in the consumer's `design-system-exceptions.json`, not in universal foundations.
+Exact values come from `tokens/*.json`, together with the relevant component, icon, and package registries. Product-specific differences belong in the consumer's `design-system-exceptions.json`, not in universal foundations.
 
 ## Workspace
 
-The private workspace owns canonical tokens, schemas, registries, documentation, Nyx source assets, deterministic generators, and verification. The `packages/` subtree is the complete public projection; it is rebuilt from the allowlist in `registry/packages.json`, checked against `packages/release-manifest.json`, and carries safe public inputs plus a portable generator that independently reproduces every published npm and Swift output. See the [repository map](docs/REPOSITORY_STRUCTURE.md).
+This repository owns the canonical tokens, schemas, registries, documentation, Nyx source assets, deterministic generators, and package sources. The `packages/` subtree is the package-delivery boundary; `registry/packages.json` declares its contents and `packages/release-manifest.json` records the exact paths and hashes. See the [repository map](docs/REPOSITORY_STRUCTURE.md).
 
 ## Install public packages
 
@@ -29,12 +23,12 @@ npm install @qenterra/design-tokens
 Swift projects add:
 
 ```text
-https://github.com/qenterra/packages
+https://github.com/qenterra/design-system
 ```
 
 Available Swift products are `QenTerraDesignTokens` and `QenTerraComponents`. The latter contains the primary-button style, group container, and interactive-row surface, each in its own source file. The public tree also includes five non-target reference catalogs: all 221 current Explore SwiftUI detail-page sources across 34 categories; all 182 official shadcn/ui `registry:ui` source files across React Aria, Base UI, and Radix UI; all 76 components on the official Magic UI Components page with their 76 exact install-registry payloads; all 745 official UIable `registry:ui` items, split into 684 showcase components and 61 required UI primitives; and the complete free ReUI registry for Base UI Nova and Radix UI Nova, containing 2,202 examples, 150 primitives, eight hooks, and 2,360 exact install payloads. Every catalog retains exact bytes and manifest-backed provenance; shadcn/ui, Magic UI, UIable, and ReUI additionally carry their exact upstream MIT licenses and copyright notices.
 
-Public files are staged only under `packages/`. QenTerra-authored code there has Apache-2.0 licensing and a required NOTICE attribution to QenTerra and Nikita Melnychenko. Explore SwiftUI examples retain their original ownership and direct-publication permission; shadcn/ui, Magic UI, UIable, and ReUI sources retain their upstream MIT licenses and authorship. Private docs, Nyx, agent instructions, consumer manifests, and private history never enter the public tree.
+QenTerra-authored material uses Apache-2.0. Explore SwiftUI examples retain their original ownership and direct-publication permission; shadcn/ui, Magic UI, UIable, and ReUI sources retain their upstream MIT licenses and authorship. The reference catalogs are not SwiftPM or npm targets.
 
 ## Canonical structure
 
@@ -42,8 +36,8 @@ Public files are staged only under `packages/`. QenTerra-authored code there has
 tokens/                 exact foundation and semantic values
 registry/               components, icons, packages, delivery status
 schemas/                machine-readable contracts
-packages/           sole public export allowlist
-assets/brand/nyx/       retained private Nyx assets
+packages/               package sources and release boundary
+assets/brand/nyx/       canonical Nyx assets
 docs/                   bilingual guidance and governance
 templates/              consumer and repository templates
 scripts/                deterministic generation, audits, validation
@@ -54,17 +48,17 @@ The former static viewing website and the complete email-template subsystem are 
 
 ## Evolve it
 
-Reusable work is not copied out of a consumer. First define a product-independent contract, then add canonical source, accessibility and localization behavior, tests, registry status, package delivery, version classification, and changelog entry. `registry/packages.json` controls what can become public, while `packages/release-manifest.json` locks the exact paths and hashes.
+Reusable work is not copied out of a consumer. First define a product-independent contract, then add canonical source, accessibility and localization behavior, tests, registry status, package delivery, version classification, and changelog entry. `registry/packages.json` controls the package snapshot, while `packages/release-manifest.json` locks its exact paths and hashes.
 
 See [`docs/governance/EVOLUTION.md`](docs/governance/EVOLUTION.md) and [`docs/governance/PUBLIC_DELIVERY.md`](docs/governance/PUBLIC_DELIVERY.md).
 
 ## Ownership and boundaries
 
-Nikita Melnychenko (`@qenterra`) owns the canonical system, release decisions, and public package projection. Private assets, consumer manifests, working notes, agent instructions, caches, and private history never enter the public export. Detailed ownership is recorded in [OWNERSHIP.md](docs/OWNERSHIP.md) and enforced by [CODEOWNERS](.github/CODEOWNERS).
+Nikita Melnychenko (`@qenterra`) owns the canonical system and release decisions. Working notes, transient reports, caches, credentials, and machine-local artifacts stay outside the repository. Detailed ownership is recorded in [OWNERSHIP.md](docs/OWNERSHIP.md) and enforced by [CODEOWNERS](.github/CODEOWNERS).
 
 ## Version and release model
 
-`VERSION`, token metadata, registries, package manifests, generated adapters, and the public release manifest move in lockstep under Semantic Versioning. Public releases use immutable `v<version>` tags and are generated only from an exact verified private commit. See [RELEASING.md](docs/RELEASING.md) and [PACKAGE_RELEASE.md](docs/PACKAGE_RELEASE.md).
+`VERSION`, token metadata, registries, package manifests, generated adapters, and the release manifest move in lockstep under Semantic Versioning. Releases use immutable `v<version>` tags from a verified commit on this repository. See [RELEASING.md](docs/RELEASING.md) and [PACKAGE_RELEASE.md](docs/PACKAGE_RELEASE.md).
 
 ## Verify
 
@@ -81,7 +75,7 @@ The complete gate checks generated adapters, registries, public boundaries, term
 
 ## License
 
-The canonical repository remains private and proprietary under [`LICENSE`](LICENSE). QenTerra-authored contents of `packages/` are licensed under Apache-2.0 with the bundled NOTICE requirement; preserved Explore SwiftUI, shadcn/ui, Magic UI, UIable, and ReUI sources retain their separate ownership and terms and are not relicensed as QenTerra work.
+QenTerra-authored contents are licensed under the [Apache License 2.0](LICENSE); required attribution is in [NOTICE](NOTICE). Preserved Explore SwiftUI, shadcn/ui, Magic UI, UIable, and ReUI sources retain their separate ownership and terms and are not relicensed as QenTerra work. Apache-2.0 does not grant rights to QenTerra names, marks, or product identities.
 
 ## Contact
 

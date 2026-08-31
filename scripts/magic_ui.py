@@ -405,7 +405,7 @@ The originals under `Components/` and `Registry/` are immutable and are not adap
 
 This catalog is reference source, not an npm or SwiftPM target. Magic UI components are source-distributed React components and can require the dependencies, aliases, CSS variables, Tailwind configuration, and framework setup declared by their official registry items. Install a selected item through the official Magic UI/shadcn workflow or copy it into a compatible web project after reviewing its manifest record.
 
-The bundled [`LICENSE.md`](LICENSE.md) is the exact upstream MIT license and identifies the original copyright holder as `{snapshot.license_copyright}`. QenTerra does not claim authorship of these files and does not relicense them under the Apache-2.0 terms that apply to QenTerra-authored public package material.
+The bundled [`LICENSE.md`](LICENSE.md) is the exact upstream MIT license and identifies the original copyright holder as `{snapshot.license_copyright}`. QenTerra does not claim authorship of these files or relicense them as QenTerra-owned package material.
 """.encode("utf-8")
 
 

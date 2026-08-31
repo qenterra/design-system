@@ -47,7 +47,7 @@ def declared_files(manifest_path: Path) -> tuple[dict[str, dict[str, object]], l
         return {}, [f"invalid release metadata: {error}"]
     if not isinstance(manifest, dict) or manifest.get("schemaVersion") != 1:
         return {}, ["release-manifest.json must use schemaVersion 1"]
-    if manifest.get("repository") != "https://github.com/qenterra/packages":
+    if manifest.get("repository") != "https://github.com/qenterra/design-system":
         errors.append("release-manifest.json has an unexpected repository")
     if manifest.get("version") != package.get("version"):
         errors.append("release-manifest.json version does not match the npm package")

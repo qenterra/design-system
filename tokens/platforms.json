@@ -2,7 +2,7 @@
   "$schema": "../schemas/platforms.schema.json",
   "meta": {
     "name": "QenTerra Platform Adapters",
-    "version": "5.5.0",
+    "version": "5.5.1",
     "type": "platforms",
     "description": "Platform-specific constraints over the shared semantic core."
   },

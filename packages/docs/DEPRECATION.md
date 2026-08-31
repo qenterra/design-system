@@ -6,6 +6,6 @@ Every deprecation identifies the affected API or artifact, replacement, first de
 
 | Surface | Deprecated in | Replacement | Removal no earlier than | Migration |
 | --- | --- | --- | --- | --- |
-| None | — | — | — | No active deprecations in version 5.5.0 |
+| None | — | — | — | No active deprecations in version 5.5.1 |
 
 Compatible deprecations remain available for at least one minor release. Breaking removal occurs only in a major release unless a documented security or legal emergency requires a shorter window.

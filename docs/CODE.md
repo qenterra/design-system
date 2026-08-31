@@ -38,12 +38,12 @@ Code quality is a product property: code that runs but cannot be safely changed 
 - Comments explain intent, constraints, trade-offs, or external contracts, never obvious statements or obsolete history.
 - Extract repetition only after it has a real shared concept.
 
-### Verification, privacy, and AI-assisted changes
+### Verification and privacy
 
 - A behavior change adds credible regression coverage or explicitly reports required live/manual acceptance.
 - Tests describe behavior and outcome, not a private implementation sequence.
 - Changes to permissions, storage, network, retention, dependencies, generated sources, public APIs, or destructive behavior update relevant documentation and evidence.
-- AI-assisted code has no lower standard: its author understands the behavior and boundaries, removes dead branches and unused dependencies, and supplies ordinary verification evidence.
+- Every author understands the behavior and boundaries, removes dead branches and unused dependencies, and supplies ordinary verification evidence.
 
 ## Human-readable code
 

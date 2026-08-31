@@ -1,6 +1,6 @@
 # Dependencies
 
-The private repository keeps its dependency surface intentionally small.
+The repository keeps its dependency surface intentionally small.
 
 | Dependency | Purpose | Authority |
 | --- | --- | --- |

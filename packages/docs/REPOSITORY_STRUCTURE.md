@@ -20,4 +20,4 @@
 
 Swift and npm packages are peers under one version. `QenTerraComponents` may depend on `QenTerraDesignTokens`; the tokens target does not depend on the component target. `Sources/ExploreSwiftUI/`, `Sources/MagicUI/`, `Sources/ShadcnUI/`, `Sources/UIable/`, and `Sources/ReUI/` are intentionally outside package target paths, so reference sources do not become build dependencies. Generated npm and Swift outputs depend only on `npm/design-tokens/src/` and the versioned public generator. All six source catalogs, including the maintained QenTerra catalog, verify their own closure and hashes before `release-manifest.json` records the complete public closure; changing one editable manifest cannot make stale output valid.
 
-No cache, build, report, package-staging, or AI tooling path belongs under the repository root. Use a unique external temporary directory for each run.
+No cache, build, report, or package-staging path belongs under the repository root. Use a unique external temporary directory for each run.

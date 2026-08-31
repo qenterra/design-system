@@ -2,7 +2,6 @@
 
 ## Use Design System
 
-- [Root skill](../SKILL.md): mandatory agent entrypoint and operating modes.
 - [Master reference](MASTER.md) and [Russian reference](MASTER_RU.md): normative design, behavior, accessibility, and governance.
 - [Component catalog](COMPONENT_CATALOG.md) and [Russian catalog](COMPONENT_CATALOG_RU.md): component contracts and delivery status.
 - [Consumer adoption](CONSUMER_ADOPTION.md) and [Russian adoption](CONSUMER_ADOPTION_RU.md): packages, manifests, exceptions, and evidence.

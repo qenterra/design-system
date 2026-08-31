@@ -28,7 +28,7 @@ Originals are immutable. A modified or tokenized implementation becomes a separa
 
 - The public catalog contains 2,360 install items and 2,377 unique sources across both bases.
 - Offline checks prove stored-byte integrity and catalog closure; live checks prove the registry indexes and deployment are still current.
-- ReUI code is not presented as QenTerra-authored or relicensed under Apache-2.0.
+- ReUI code is not presented as QenTerra-authored or relicensed as QenTerra-owned code; its exact upstream MIT license and attribution remain authoritative.
 - Consumers copy selected items and satisfy their declared dependencies; the catalog itself adds no runtime package dependency.
 
 ## Verification

@@ -1,10 +1,10 @@
 {
   "$schema": "./qenterra-repository.schema.json",
+  "agent_control_plane": false,
   "allowed_root_paths": [
     ".npmrc",
     ".nvmrc",
-    "AGENTS.md",
-    "SKILL.md",
+    "Package.swift",
     "VERSION",
     "assets",
     "generated",
@@ -25,10 +25,10 @@
   "conduct_contact": "https://github.com/QenTerra/design-system/security/advisories/new",
   "copyright_holder": "Nikita Melnychenko (QenTerra)",
   "copyright_year_range": "2026",
-  "current_version": "5.1.0",
+  "current_version": "5.5.1",
   "default_branch": "main",
   "dependabot_ecosystem": "npm",
-  "description": "Private canonical design system for QenTerra foundations, components, assets, and public package delivery.",
+  "description": "Public canonical design system for QenTerra foundations, components, assets, and package delivery.",
   "documentation_root": "docs",
   "ecosystem": "python-node-swift",
   "exceptions": [],
@@ -84,13 +84,14 @@
       "docs/OWNERSHIP.md",
       "docs/DEPRECATION.md",
       "docs/PACKAGE_RELEASE.md",
-      "LICENSE"
+      "LICENSE",
+      "NOTICE"
     ],
-    "standard_version": "1.3.0"
+    "standard_version": "2.0.0"
   },
   "homepage_url": "https://github.com/QenTerra/design-system",
   "install_command": "npm ci --ignore-scripts",
-  "license": "Proprietary",
+  "license": "Apache-2.0",
   "merge_strategy": "squash",
   "minimum_requirements": "Python 3.11 or later, Node.js 22 or later, Swift 5.9 or later, and full Xcode for package tests.",
   "overlays": [
@@ -99,13 +100,54 @@
   "primary_language": "English",
   "profile": "monorepo",
   "project_name": "QenTerra Design System",
-  "published_artifacts": [],
+  "published_artifacts": [
+    {
+      "manifest": "registry/published-artifacts.json",
+      "path": "packages/npm/design-tokens/dist",
+      "purpose": "Installable CSS and JSON design-token distribution for npm consumers",
+      "review_trigger": "Design-token inputs, generators, package metadata, or public artifact layout changes",
+      "source": "packages/npm/design-tokens/src",
+      "verification_command": "python3 scripts/verify.py"
+    },
+    {
+      "manifest": "registry/published-artifacts.json",
+      "path": "packages/Sources/QenTerra/DesignTokens/GeneratedTokens.swift",
+      "purpose": "Typed Swift design-token constants consumed by the public Swift package",
+      "review_trigger": "Public token inputs, generator logic, Swift adapter structure, or package version changes",
+      "source": "packages/npm/design-tokens/src",
+      "verification_command": "python3 scripts/verify.py"
+    },
+    {
+      "manifest": "registry/published-artifacts.json",
+      "path": "packages/Sources/QenTerra/DesignTokens/GeneratedIcons.swift",
+      "purpose": "Typed SF Symbols registry consumed by the public Swift package",
+      "review_trigger": "Public icon inputs, generator logic, Swift adapter structure, or package version changes",
+      "source": "packages/npm/design-tokens/src",
+      "verification_command": "python3 scripts/verify.py"
+    },
+    {
+      "manifest": "registry/published-artifacts.json",
+      "path": "generated",
+      "purpose": "Generated token reference and design-tool handoff data for Design System consumers",
+      "review_trigger": "Token, icon registry, component registry, or handoff generator changes",
+      "source": "tokens",
+      "verification_command": "python3 scripts/verify.py"
+    },
+    {
+      "manifest": "registry/published-artifacts.json",
+      "path": "packages/Sources/ReUI/Registry",
+      "purpose": "Exact install-ready ReUI registry payloads for source-copy consumers",
+      "review_trigger": "ReUI repository commit, live deployment, registry indexes, importer, or package catalog changes",
+      "source": "packages/Sources/ReUI/Base",
+      "verification_command": "python3 scripts/verify.py"
+    }
+  ],
   "quick_start_command": "python3 scripts/generate.py check",
-  "release_mode": "none",
+  "release_mode": "package-registry",
   "repository_name": "design-system",
   "repository_url": "https://github.com/QenTerra/design-system",
   "security_url": "https://github.com/QenTerra/design-system/security/advisories/new",
-  "standard_version": "1.3.0",
+  "standard_version": "2.0.0",
   "support_url": "https://github.com/QenTerra/design-system/issues",
   "topics": [
     "qenterra",
@@ -119,6 +161,6 @@
   "version_scheme": "semver",
   "version_source": "VERSION",
   "version_tag_prefix": "v",
-  "visibility": "private",
+  "visibility": "public",
   "wiki_source": "disabled"
 }

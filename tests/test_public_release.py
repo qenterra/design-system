@@ -55,7 +55,7 @@ class PublicReleaseContractTests(unittest.TestCase):
             manifest = {
                 "schemaVersion": 1,
                 "version": "5.0.0",
-                "repository": "https://github.com/qenterra/packages",
+                "repository": "https://github.com/qenterra/design-system",
                 "files": [
                     {
                         "path": "README.md",
@@ -83,7 +83,7 @@ class PublicReleaseContractTests(unittest.TestCase):
                     {
                         "schemaVersion": 1,
                         "version": "5.0.0",
-                        "repository": "https://github.com/qenterra/packages",
+                        "repository": "https://github.com/qenterra/design-system",
                         "files": [
                             {
                                 "path": "README.md",
@@ -110,7 +110,7 @@ class PublicReleaseContractTests(unittest.TestCase):
                     {
                         "schemaVersion": 1,
                         "version": "5.0.0",
-                        "repository": "https://github.com/qenterra/packages",
+                        "repository": "https://github.com/qenterra/design-system",
                         "files": [
                             {
                                 "path": "README.md",

@@ -2,23 +2,22 @@
 
 Design System separates canonical decisions from installable delivery.
 
-## Private canonical source
+## Canonical source
 
-1. `SKILL.md` defines the agent operating modes and routing contract.
-2. `tokens/` owns exact foundation and semantic values.
-3. `registry/` describes components, icons, packages, and truthful delivery status.
-4. `schemas/` owns machine-readable contracts.
-5. `docs/` and `templates/` own human guidance and reusable starting points.
-6. `assets/brand/nyx/` and its manifest hold the retained private asset family.
-7. `scripts/` and `tests/` generate and verify adapters, consumers, assets, and release boundaries.
+1. `tokens/` owns exact foundation and semantic values.
+2. `registry/` describes components, icons, packages, and truthful delivery status.
+3. `schemas/` owns machine-readable contracts.
+4. `docs/` and `templates/` own human guidance and reusable starting points.
+5. `assets/brand/nyx/` and its manifest hold the retained Nyx asset family.
+6. `scripts/` and `tests/` generate and verify adapters, consumers, assets, and release boundaries.
 
 Product-specific business logic and exceptions never enter universal foundations. Consumer repositories own `design-system-consumer.json`, `design-system-exceptions.json`, runtime code, fixtures, and acceptance evidence.
 
-## Public delivery
+## Package delivery
 
-`packages/` is the only exportable tree. `registry/packages.json` declares its packages, capabilities, paths, and tests. `packages/release-manifest.json` records the relative path, size, and SHA-256 of every public file except the manifest itself. The projection also includes public token and icon inputs plus a portable generator; its verifier rebuilds all declared npm and Swift outputs outside the checkout before accepting manifest closure.
+`packages/` is the package-delivery boundary. `registry/packages.json` declares its packages, capabilities, paths, and tests. `packages/release-manifest.json` records the relative path, size, and SHA-256 of every package-snapshot file except the manifest itself. The boundary also includes versioned token and icon inputs plus a portable generator; its verifier rebuilds all declared npm and Swift outputs outside the checkout before accepting manifest closure.
 
-The public repository contains a Swift package at its root and the npm workspace under `npm/design-tokens/`. It has fresh public history and cannot contain Nyx, private docs, agent instructions, consumer manifests, or private commit identifiers.
+The public repository exposes SwiftPM from its root `Package.swift` and the npm workspace under `packages/npm/design-tokens/`. The package snapshot excludes Nyx, repository-only documentation, consumer manifests, and unrelated history.
 
 ## Evolution
 

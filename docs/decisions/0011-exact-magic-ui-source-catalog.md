@@ -12,7 +12,7 @@ Several Magic UI components also require dependencies, CSS variables, or keyfram
 
 ## Decision
 
-Use the official Components docs navigation and its matching docs files as the completeness boundary at one pinned public upstream commit. Preserve exactly one `.tsx` source and one official `public/r/<component>.json` registry payload for every listed component under `packages/Sources/MagicUI/Components/` and `packages/Sources/MagicUI/Registry/`. Verify that the registry payload embeds the exact same source bytes and record both upstream paths, pinned URLs, byte counts, and SHA-256 digests in private and public manifests.
+Use the official Components docs navigation and its matching docs files as the completeness boundary at one pinned public upstream commit. Preserve exactly one `.tsx` source and one official `public/r/<component>.json` registry payload for every listed component under `packages/Sources/MagicUI/Components/` and `packages/Sources/MagicUI/Registry/`. Verify that the registry payload embeds the exact same source bytes and record both upstream paths, pinned URLs, byte counts, and SHA-256 digests in the canonical and package manifests.
 
 Bundle the exact upstream MIT `LICENSE.md` with `Copyright (c) Magic UI`. Keep the catalog outside npm and SwiftPM targets. Exclude templates, demos, examples, documentation prose, website application code, and registry sources not listed by the public Components page.
 

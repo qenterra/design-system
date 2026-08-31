@@ -13,7 +13,7 @@ Copying only the showcase files would produce attractive examples that are missi
 
 Preserve the exact union of every `registry:ui` entry from `src/components/uiable/registry.json` and `src/components/ui/registry.json` at one full public upstream commit. Cross-check that union against the `registry:ui` entries in `public/r/registry.json`.
 
-Store showcase sources under `packages/Sources/UIable/Components/`, primitives under `packages/Sources/UIable/Primitives/`, and the matching exact public registry payloads under `packages/Sources/UIable/Registry/Components/` and `Registry/Primitives/`. Record pinned paths, URLs, byte counts, SHA-256 hashes, item kind, categories, dependencies, and registry dependencies in private and public manifests.
+Store showcase sources under `packages/Sources/UIable/Components/`, primitives under `packages/Sources/UIable/Primitives/`, and the matching exact public registry payloads under `packages/Sources/UIable/Registry/Components/` and `Registry/Primitives/`. Record pinned paths, URLs, byte counts, SHA-256 hashes, item kind, categories, dependencies, and registry dependencies in the canonical and package manifests.
 
 Bundle the exact upstream MIT `LICENSE` as `LICENSE.md`, preserving `Copyright (c) 2026 CodedThemes`. Keep the catalog outside npm and SwiftPM targets. Exclude every `registry:block` entry, the website application, documentation prose, previews, media, examples outside the registries, and build tooling.
 
@@ -24,5 +24,5 @@ Originals are immutable. A tokenized or otherwise changed version becomes a sepa
 - The public catalog contains 745 exact source files and 745 exact install payloads.
 - Consumers can distinguish showcase implementations from the primitives they require.
 - Offline checks prove stored-byte integrity and catalog closure; scheduled live checks prove currentness against the official repository.
-- UIable code is not presented as QenTerra-authored and is not relicensed under QenTerra's Apache-2.0 terms.
+- UIable code is not presented as QenTerra-authored or relicensed as QenTerra-owned code; its exact upstream MIT license and attribution remain authoritative.
 - Blocks require a separate explicit decision if they are ever requested.

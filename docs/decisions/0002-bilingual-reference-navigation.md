@@ -19,4 +19,4 @@ The reference site needs complete Russian and English content, not a translated 
 
 ## Consequences
 
-Every normative prose change must be applied to both master documents. Build and validation fail when locale structure diverges. Product application names and audit evidence remain valid source material; this decision does not rewrite or remove them. AI working directories are outside the repository boundary and are not design documentation.
+Every normative prose change must be applied to both master documents. Build and validation fail when locale structure diverges. Product application names and audit evidence remain valid source material; this decision does not rewrite or remove them. Private operational directories are outside the repository boundary and are not design documentation.

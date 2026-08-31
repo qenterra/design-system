@@ -18,6 +18,6 @@ Opt into existing component recipes separately:
 @import "@qenterra/design-tokens/recipes.css";
 ```
 
-JSON consumers can import `@qenterra/design-tokens/tokens.json` and `@qenterra/design-tokens/icons.json`. Package files are generated; propose canonical changes in the private Design System repository.
+JSON consumers can import `@qenterra/design-tokens/tokens.json` and `@qenterra/design-tokens/icons.json`. Package files are generated; propose canonical changes in the public Design System repository.
 
-Licensed under Apache-2.0. Preserve the bundled `NOTICE` when redistributing the package.
+Licensed under the Apache License 2.0. See `NOTICE` for attribution.

@@ -40,11 +40,11 @@ jobs:
         run: |
           python3 -m venv "$RUNNER_TEMP/design-system-images"
           "$RUNNER_TEMP/design-system-images/bin/python" -m pip install -r requirements-visual.txt
-      - name: Verify private source and public boundary
+      - name: Verify source and package boundary
         env:
           DESIGN_SYSTEM_IMAGE_PYTHON: ${{ runner.temp }}/design-system-images/bin/python
         run: python3 scripts/verify.py
-      - name: Export allowlisted public snapshot
+      - name: Export allowlisted package snapshot
         run: python3 scripts/build_public_packages.py export --destination "$RUNNER_TEMP/public-packages"
       - name: Verify exported snapshot
         run: python3 "$RUNNER_TEMP/public-packages/scripts/verify_release.py"
@@ -64,32 +64,13 @@ jobs:
         with:
           name: public-packages-${{ github.run_id }}
           path: snapshot
-      - name: Check out public repository
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          repository: qenterra/packages
-          token: ${{ secrets.PACKAGES_REPO_TOKEN }}
-          path: public-repository
-          fetch-depth: 0
-      - name: Update public repository from snapshot only
-        shell: bash
-        working-directory: public-repository
-        run: |
-          git rm -r --ignore-unmatch .
-          rsync -a --exclude .git ../snapshot/ ./
-          git add --all
-          version=$(python3 -c 'import json; print(json.load(open("release-manifest.json"))["version"])')
-          git -c user.name='QenTerra Release' -c user.email='contact@qenterra.com' commit -m "chore(release): publish $version" || true
-          existing=$(git rev-parse -q --verify "refs/tags/v$version" || true)
-          if test -n "$existing"; then test "$existing" = "$(git rev-parse HEAD)"; else git tag -a "v$version" -m "Release $version"; fi
-          git push origin HEAD:main "refs/tags/v$version"
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: "22"
           registry-url: https://registry.npmjs.org
           scope: "@qenterra"
       - name: Publish or verify npm package
-        working-directory: public-repository
+        working-directory: snapshot
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         shell: bash

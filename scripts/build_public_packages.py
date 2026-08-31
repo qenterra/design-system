@@ -67,7 +67,7 @@ def build_manifest(root: Path = ROOT) -> dict[str, object]:
     return {
         "schemaVersion": 1,
         "version": version,
-        "repository": "https://github.com/qenterra/packages",
+        "repository": "https://github.com/qenterra/design-system",
         "files": files,
     }
 
@@ -98,7 +98,7 @@ def export_public_tree(destination: Path, root: Path = ROOT) -> None:
     destination = destination.resolve()
     repository = root.resolve()
     if destination == repository or repository in destination.parents:
-        raise ValueError("public export destination must be outside the private repository")
+        raise ValueError("package export destination must be outside the repository")
     if destination.exists() and any(destination.iterdir()):
         raise ValueError("public export destination must be empty")
     destination.mkdir(parents=True, exist_ok=True)

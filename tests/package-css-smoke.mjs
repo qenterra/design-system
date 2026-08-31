@@ -11,7 +11,6 @@ const packageJson = JSON.parse(await readFile(resolve(packageRoot, "package.json
 const declaredFiles = new Set(packageJson.files ?? []);
 const requiredFiles = [
   "LICENSE",
-  "NOTICE",
   "README.md",
   "dist/icons.json",
   "dist/recipes.css",

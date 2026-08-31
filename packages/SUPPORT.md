@@ -9,7 +9,7 @@ These mailboxes are not vulnerability or conduct-reporting routes. Follow `SECUR
 
 ## Usage questions
 
-Read the [documentation](https://github.com/QenTerra/packages/tree/main/docs) and existing issues first. Use [support@qenterra.com](mailto:support@qenterra.com) for direct product help or technical questions. Use https://github.com/QenTerra/packages/issues for reproducible public questions that contain no sensitive data.
+Read the [documentation](https://github.com/QenTerra/design-system/tree/main/docs) and existing issues first. Use [support@qenterra.com](mailto:support@qenterra.com) for direct product help or technical questions. Use https://github.com/QenTerra/design-system/issues for reproducible public questions that contain no sensitive data.
 
 ## Proposals and commercial enquiries
 
@@ -21,7 +21,7 @@ Use the structured issue forms. Include the affected version, environment, exact
 
 ## Security
 
-Follow `SECURITY.md` and use https://github.com/QenTerra/packages/security/advisories/new. Do not disclose vulnerabilities publicly before coordinated disclosure.
+Follow `SECURITY.md` and use https://github.com/QenTerra/design-system/security/advisories/new. Do not disclose vulnerabilities publicly before coordinated disclosure.
 
 ## Scope
 

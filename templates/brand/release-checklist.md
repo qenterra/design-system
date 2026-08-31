@@ -10,7 +10,7 @@
 ## Asset checks
 
 - [ ] Category, filename, format, dimensions, mode, alpha/opacity, and visual role are correct.
-- [ ] No `.DS_Store`, cache, source backup, AI plan, raw generation, prompt output, report, or contact sheet entered the repository.
+- [ ] No `.DS_Store`, cache, source backup, raw generation, private operational record, or contact sheet entered the repository.
 - [ ] `assets/brand/manifest.json` covers every canonical file exactly once and hashes match.
 - [ ] Every PNG is a Git LFS object; no SVG, JSON, or Markdown file is in LFS.
 - [ ] Representative files were inspected at original and use size on required backgrounds.

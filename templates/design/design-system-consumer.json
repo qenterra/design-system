@@ -3,7 +3,7 @@
   "consumer": "{CONSUMER_NAME}",
   "platforms": ["{macOS|iOS|iPadOS|web|browser-extension}"],
   "packages": [
-    {"id": "{npm-design-tokens|swift-components}", "version": "5.5.0", "source": "release"}
+    {"id": "{npm-design-tokens|swift-components}", "version": "5.5.1", "source": "release"}
   ],
   "adoptedCapabilities": ["{registered-capability}"],
   "sourceRoots": ["{SOURCE_ROOT}"],

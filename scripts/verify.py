@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the complete private Design System verification gate."""
+"""Run the complete Design System verification gate."""
 
 from __future__ import annotations
 
@@ -106,9 +106,21 @@ def main() -> int:
                 "swift",
                 "test",
                 "--package-path",
+                ".",
+                "--scratch-path",
+                str(Path(swift_cache) / "root-build"),
+                "--disable-sandbox",
+            ],
+            env=swift_environment,
+        )
+        run(
+            [
+                "swift",
+                "test",
+                "--package-path",
                 "packages",
                 "--scratch-path",
-                str(Path(swift_cache) / "build"),
+                str(Path(swift_cache) / "snapshot-build"),
                 "--disable-sandbox",
             ],
             env=swift_environment,

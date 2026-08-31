@@ -1,8 +1,8 @@
 # Third-party notices
 
-QenTerra Packages 5.5.0 declares no third-party runtime dependencies. It bundles exact source-reference catalogs from [Explore SwiftUI](https://exploreswiftui.com/), [Magic UI](https://magicui.design/docs/components), [shadcn/ui](https://github.com/shadcn-ui/ui), [UIable](https://uiable.com/components), and [ReUI](https://reui.io/components).
+QenTerra Packages 5.5.1 declares no third-party runtime dependencies. It bundles exact source-reference catalogs from [Explore SwiftUI](https://exploreswiftui.com/), [Magic UI](https://magicui.design/docs/components), [shadcn/ui](https://github.com/shadcn-ui/ui), [UIable](https://uiable.com/components), and [ReUI](https://reui.io/components).
 
-- The preserved examples remain attributed to Explore SwiftUI and are not presented as QenTerra-authored or relicensed under Apache-2.0.
+- The preserved examples remain attributed to Explore SwiftUI and are not presented as QenTerra-authored or relicensed as QenTerra work.
 - `Sources/ExploreSwiftUI/manifest.json` records the originating page, Apple documentation link, dates, tags, platforms, byte count, and SHA-256 hash for every example.
 - The reference catalog is not a SwiftPM product or target. It adds no runtime dependency to either QenTerra Swift product.
 

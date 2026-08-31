@@ -70,6 +70,6 @@ output/brand-validation*.json
 .superpowers/
 docs/superpowers/
 
-# Keep dependency lockfiles, shared editor configuration, canonical AGENTS.md,
-# and root SKILL.md versioned. Use unique external temporary directories for
-# caches, package staging, validation reports, and generated working material.
+# Keep dependency lockfiles and shared editor configuration versioned. Use
+# unique external temporary directories for caches, package staging, validation
+# reports, and generated working material.

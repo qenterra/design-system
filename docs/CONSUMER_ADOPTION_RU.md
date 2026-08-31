@@ -26,7 +26,7 @@ python3 /path/to/design-system/scripts/audit_consumer.py /path/to/product --outp
 ## Источник пакета и аутентификация
 
 Production-потребители фиксируют неизменяемый SemVer-релиз из
-`https://github.com/qenterra/packages` или npm-пакета
+`https://github.com/qenterra/design-system` или npm-пакета
 `@qenterra/design-tokens`. Оба источника публичны и не требуют read credentials.
 Локальные пути нужны для согласованной работы над самой Design System, а не как
 скрытая production-зависимость. Чистая установка пакета доказывает только

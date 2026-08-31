@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.5.1 - 2026-08-31
+
+### Changed
+
+- Licensed QenTerra-authored package material under Apache-2.0 and retained the required NOTICE files.
+- Adopted QenTerra repository standard 2.0.0 and its product-repository artifact boundary.
+- Moved the canonical Git and SwiftPM endpoint to `QenTerra/design-system`; npm continues as `@qenterra/design-tokens`.
+
 ## 5.5.0 - 2026-08-30
 
 ### Added
