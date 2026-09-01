@@ -34,6 +34,30 @@ ReUI source catalog:
 - `Sources/ReUI/manifest.json` pins the official repository commit, immutable live deployment, both live registry-index hashes, origin URL, byte count, and SHA-256 hash for every source and install payload.
 - The catalog covers 1,101 free `c-*` examples, 75 public primitives, and four hooks in each of Base UI Nova and Radix UI Nova. The resulting 2,360 install items are reference source, not package targets. ReUI Pro blocks, paid icons, templates, the website, docs application, media, and build tooling are excluded.
 
+Tabler Icons source catalog:
+
+- Copyright (c) 2020-2026 Paweł Kuna.
+- Licensed under the MIT License. The exact upstream text is bundled at [`Sources/TablerIcons/LICENSE`](Sources/TablerIcons/LICENSE).
+- `Sources/TablerIcons/manifest.json` pins upstream commit `5a0fe38e97784d94279ce4eb1bf85f9a91bf027e` and records the original path, URL, byte count, style, and SHA-256 hash for all 6,184 SVG originals.
+
+Phosphor Icons source catalog:
+
+- Copyright (c) 2023 Phosphor Icons.
+- Licensed under the MIT License. The exact upstream text is bundled at [`Sources/PhosphorIcons/LICENSE`](Sources/PhosphorIcons/LICENSE).
+- `Sources/PhosphorIcons/manifest.json` pins upstream commit `2b75f3ad12b420c9504ef05df8d2564a28f8500e` and records the original path, URL, byte count, weight, and SHA-256 hash for all 9,072 SVG originals.
+
+Iconoir source catalog:
+
+- Copyright (c) 2021 Luca Burgio.
+- Licensed under the MIT License. The exact upstream text is bundled at [`Sources/Iconoir/LICENSE`](Sources/Iconoir/LICENSE).
+- `Sources/Iconoir/manifest.json` pins upstream commit `d7dfa4d0341df0670bfed9fc24221c9d7ef2112e` and records the original path, URL, byte count, style, and SHA-256 hash for all 1,671 SVG originals.
+
+Bootstrap Icons source catalog:
+
+- Copyright (c) 2019-2024 The Bootstrap Authors.
+- Licensed under the MIT License. The exact upstream text is bundled at [`Sources/BootstrapIcons/LICENSE`](Sources/BootstrapIcons/LICENSE).
+- `Sources/BootstrapIcons/manifest.json` pins upstream commit `6945b7006285d444cc17ff2e22c7691719229526` and records the original path, URL, byte count, and SHA-256 hash for all 2,078 SVG originals.
+
 - The Swift products use the Swift standard library and SwiftUI supplied by the consumer's Apple platform toolchain; those platform components are not redistributed here.
 - The npm package ships only QenTerra-authored CSS and JSON and has no npm dependencies.
 - Python, Node.js, npm, Swift, Xcode, and GitHub Actions are development or distribution tools obtained separately; they are not part of the package payload.

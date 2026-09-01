@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://qenterra.dev/design-system/schemas/icon-source-registry.schema.json",
+  "title": "Design System icon source registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "version", "selectionPolicy", "catalogs"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "selectionPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["projectFamilyLimit", "searchBeforeCreate"],
+      "properties": {
+        "projectFamilyLimit": { "const": 1 },
+        "searchBeforeCreate": { "const": true }
+      }
+    },
+    "catalogs": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "source",
+          "upstreamRepository",
+          "upstreamCommit",
+          "upstreamPackageVersion",
+          "publicRoot",
+          "manifest",
+          "fileCount",
+          "license"
+        ],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "name": { "type": "string", "minLength": 1 },
+          "source": { "type": "string", "format": "uri" },
+          "upstreamRepository": { "type": "string", "format": "uri" },
+          "upstreamCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+          "upstreamPackageVersion": { "type": "string", "minLength": 1 },
+          "publicRoot": { "type": "string", "pattern": "^packages/Sources/[^/]+$" },
+          "manifest": { "type": "string", "pattern": "^packages/Sources/[^/]+/manifest\\.json$" },
+          "fileCount": { "type": "integer", "minimum": 1 },
+          "license": { "const": "MIT" }
+        }
+      }
+    }
+  }
+}

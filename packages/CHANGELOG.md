@@ -14,6 +14,7 @@ No package changes have been classified after the new baseline yet.
 - Added `QenTerraDesignTokens` and `QenTerraComponents` through Swift Package Manager.
 - Added complete release-manifest coverage, deterministic regeneration, exported verification, clean-consumer checks, and npm archive inspection.
 - Added attributed reference catalogs for Explore SwiftUI, Magic UI, shadcn/ui, UIable, and ReUI without treating upstream originals as maintained package APIs.
+- Added non-target source catalogs containing 19,005 exact SVG originals from Tabler Icons, Phosphor Icons, Iconoir, and Bootstrap Icons with closed manifests and exact upstream MIT licenses.
 
 ### Changed
 

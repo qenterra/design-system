@@ -1,0 +1,58 @@
+{
+  "$schema": "../schemas/icon-source-registry.schema.json",
+  "version": "1.0.0",
+  "selectionPolicy": {
+    "projectFamilyLimit": 1,
+    "searchBeforeCreate": true
+  },
+  "catalogs": [
+    {
+      "id": "bootstrap-icons",
+      "name": "Bootstrap Icons",
+      "source": "https://icons.getbootstrap.com/",
+      "upstreamRepository": "https://github.com/twbs/icons",
+      "upstreamCommit": "6945b7006285d444cc17ff2e22c7691719229526",
+      "upstreamPackageVersion": "1.13.1",
+      "publicRoot": "packages/Sources/BootstrapIcons",
+      "manifest": "packages/Sources/BootstrapIcons/manifest.json",
+      "fileCount": 2078,
+      "license": "MIT"
+    },
+    {
+      "id": "iconoir",
+      "name": "Iconoir",
+      "source": "https://iconoir.com/",
+      "upstreamRepository": "https://github.com/iconoir-icons/iconoir",
+      "upstreamCommit": "d7dfa4d0341df0670bfed9fc24221c9d7ef2112e",
+      "upstreamPackageVersion": "7.12.1",
+      "publicRoot": "packages/Sources/Iconoir",
+      "manifest": "packages/Sources/Iconoir/manifest.json",
+      "fileCount": 1671,
+      "license": "MIT"
+    },
+    {
+      "id": "phosphor-icons",
+      "name": "Phosphor Icons",
+      "source": "https://phosphoricons.com/",
+      "upstreamRepository": "https://github.com/phosphor-icons/core",
+      "upstreamCommit": "2b75f3ad12b420c9504ef05df8d2564a28f8500e",
+      "upstreamPackageVersion": "2.1.1",
+      "publicRoot": "packages/Sources/PhosphorIcons",
+      "manifest": "packages/Sources/PhosphorIcons/manifest.json",
+      "fileCount": 9072,
+      "license": "MIT"
+    },
+    {
+      "id": "tabler-icons",
+      "name": "Tabler Icons",
+      "source": "https://tabler.io/icons",
+      "upstreamRepository": "https://github.com/tabler/tabler-icons",
+      "upstreamCommit": "5a0fe38e97784d94279ce4eb1bf85f9a91bf027e",
+      "upstreamPackageVersion": "3.46.0",
+      "publicRoot": "packages/Sources/TablerIcons",
+      "manifest": "packages/Sources/TablerIcons/manifest.json",
+      "fileCount": 6184,
+      "license": "MIT"
+    }
+  ]
+}

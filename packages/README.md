@@ -14,6 +14,7 @@ This directory is the verified package-delivery boundary of the public QenTerra 
 - `Sources/ShadcnUI/` contains exact, manifest-locked React Aria, Base UI, and Radix UI component sources and is deliberately not a package target.
 - `Sources/UIable/` contains all 745 official UIable `registry:ui` sources and exact install payloads, split into showcase components and required primitives, and is deliberately not a package target.
 - `Sources/ReUI/` contains the complete free ReUI registry for Base UI Nova and Radix UI Nova: 2,360 exact install payloads and 2,377 immutable source files. It is deliberately not a package target.
+- `Sources/{TablerIcons,PhosphorIcons,Iconoir,BootstrapIcons}/` contains 19,005 exact SVG originals with pinned provenance and exact upstream MIT licenses. These directories are deliberately not package targets.
 - `npm/design-tokens/src/` contains the public token, icon, and CSS generation inputs.
 - `npm/design-tokens/dist/` contains the published CSS and JSON artifacts.
 - `release-manifest.json` closes the public file set with byte sizes and SHA-256 hashes; it is not trusted as proof of generated-output freshness by itself.
@@ -81,4 +82,4 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing a change. Report vulner
 
 ## License
 
-Copyright 2026 Nikita Melnychenko (QenTerra). QenTerra-authored material is licensed under the [Apache License 2.0](LICENSE) with attribution in [NOTICE](NOTICE). Explore SwiftUI examples retain their original ownership and separate permission terms. Magic UI, shadcn/ui, UIable, and ReUI sources retain their separate upstream MIT licenses and copyright notices. See [third-party notices](THIRD_PARTY_NOTICES.md).
+Copyright 2026 Nikita Melnychenko (QenTerra). QenTerra-authored material is licensed under the [Apache License 2.0](LICENSE) with attribution in [NOTICE](NOTICE). Explore SwiftUI examples retain their original ownership and separate permission terms. Magic UI, shadcn/ui, UIable, ReUI, Tabler Icons, Phosphor Icons, Iconoir, and Bootstrap Icons retain their separate upstream MIT licenses and copyright notices. See [third-party notices](THIRD_PARTY_NOTICES.md).

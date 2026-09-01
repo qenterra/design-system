@@ -14,6 +14,7 @@ No changes have been classified after the new baseline yet.
 - Added deterministic CSS, JSON, Swift, and Figma-oriented generated outputs from canonical token and registry sources.
 - Added the public `@qenterra/design-tokens`, `QenTerraDesignTokens`, and `QenTerraComponents` package surfaces with a manifest-closed delivery boundary.
 - Added complete attributed reference catalogs for Explore SwiftUI, Magic UI, shadcn/ui, UIable, and ReUI while keeping upstream originals immutable and outside maintained package targets where required.
+- Added 19,005 exact SVG originals from Tabler Icons, Phosphor Icons, Iconoir, and Bootstrap Icons with pinned commits, byte hashes, complete manifests, and exact upstream MIT licenses.
 - Added the Nyx brand asset family with manifest, Git LFS, license, provenance, and validation coverage.
 - Added repository governance, contribution, security, maintenance, deprecation, release, consumer-adoption, and clean-consumer verification contracts.
 

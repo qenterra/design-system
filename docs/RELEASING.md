@@ -18,7 +18,7 @@ A local commit, tag, GitHub Release, package publication, deployment, store subm
 - [ ] Move user- and operator-visible `Unreleased` entries into a dated version section.
 - [ ] Document migrations, deprecations, known issues, support status, and rollback.
 - [ ] Review dependencies, licenses, notices, vulnerabilities, secrets, and generated artifacts.
-- [ ] Run live currentness checks for every reference catalog, including `python3 scripts/reui.py sync --check`.
+- [ ] Run live currentness checks for every reference catalog, including `python3 scripts/reui.py sync --check` and `python3 scripts/icon_catalogs.py sync --check`.
 - [ ] Run `python3 scripts/verify.py` on the intended release tree.
 - [ ] Run repository governance and release-contract checks.
 

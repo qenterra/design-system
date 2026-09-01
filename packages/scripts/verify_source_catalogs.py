@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify public Explore SwiftUI, Magic UI, shadcn/ui, UIable, ReUI, and QenTerra catalogs."""
+"""Verify public component, icon, and QenTerra source catalogs."""
 
 from __future__ import annotations
 
@@ -10,6 +10,43 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+ICON_CATALOGS = (
+    (
+        "TablerIcons",
+        "Sources/TablerIcons/manifest.json",
+        "Sources/TablerIcons/Icons/",
+        "Copyright (c) 2020-2026 Paweł Kuna",
+        "https://github.com/tabler/tabler-icons",
+        (("outline", "icons/outline"), ("filled", "icons/filled")),
+    ),
+    (
+        "PhosphorIcons",
+        "Sources/PhosphorIcons/manifest.json",
+        "Sources/PhosphorIcons/Icons/",
+        "Copyright (c) 2023 Phosphor Icons",
+        "https://github.com/phosphor-icons/core",
+        tuple(
+            (style, f"assets/{style}")
+            for style in ("regular", "bold", "duotone", "fill", "light", "thin")
+        ),
+    ),
+    (
+        "Iconoir",
+        "Sources/Iconoir/manifest.json",
+        "Sources/Iconoir/Icons/",
+        "Copyright (c) 2021 Luca Burgio",
+        "https://github.com/iconoir-icons/iconoir",
+        (("regular", "icons/regular"), ("solid", "icons/solid")),
+    ),
+    (
+        "BootstrapIcons",
+        "Sources/BootstrapIcons/manifest.json",
+        "Sources/BootstrapIcons/Icons/",
+        "Copyright (c) 2019-2024 The Bootstrap Authors",
+        "https://github.com/twbs/icons",
+        (("default", "icons"),),
+    ),
+)
 
 
 def _load(path: Path) -> dict[str, object]:
@@ -722,6 +759,132 @@ def _validate_reui(
     return errors, sources
 
 
+def _validate_icon_catalog(
+    root: Path,
+    directory: str,
+    manifest_relative: str,
+    prefix: str,
+    copyright_notice: str,
+    repository: str,
+    styles: tuple[tuple[str, str], ...],
+) -> list[str]:
+    manifest_path = root / manifest_relative
+    errors: list[str] = []
+    try:
+        manifest = _load(manifest_path)
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
+        return [f"cannot verify {directory} icon catalog: {error}"]
+    records = manifest.get("icons")
+    if not isinstance(records, list) or not records:
+        return [f"{directory} icon catalog must contain icons"]
+    commit = manifest.get("upstreamCommit")
+    if (
+        not isinstance(commit, str)
+        or len(commit) != 40
+        or any(character not in "0123456789abcdef" for character in commit)
+    ):
+        errors.append(f"{directory} icon catalog upstream commit is invalid")
+    style_counts = {
+        style: sum(
+            isinstance(record, dict) and record.get("style") == style
+            for record in records
+        )
+        for style, _ in styles
+    }
+    expected_styles = [
+        {"id": style, "upstreamRoot": upstream_root, "count": style_counts[style]}
+        for style, upstream_root in styles
+    ]
+    if manifest.get("styles") != expected_styles:
+        errors.append(f"{directory} icon catalog style metadata mismatch")
+    if manifest.get("upstreamRepository") != repository:
+        errors.append(f"{directory} icon catalog repository mismatch")
+
+    expected: set[str] = set()
+    identifiers: list[str] = []
+    for index, record in enumerate(records):
+        if not isinstance(record, dict):
+            errors.append(f"{directory} icon catalog record {index} is invalid")
+            continue
+        identifier = record.get("id")
+        relative = record.get("sourcePath")
+        if not isinstance(identifier, str) or not identifier:
+            errors.append(f"{directory} icon catalog record {index} has no id")
+            continue
+        identifiers.append(identifier)
+        style = record.get("style")
+        upstream_root = dict(styles).get(str(style))
+        upstream_path = record.get("upstreamPath")
+        if (
+            upstream_root is None
+            or not isinstance(upstream_path, str)
+            or not upstream_path.startswith(f"{upstream_root}/")
+        ):
+            errors.append(f"{directory} icon {identifier}: upstream path or style mismatch")
+            continue
+        upstream_relative = upstream_path.removeprefix(f"{upstream_root}/")
+        if not upstream_relative.endswith(".svg") or ".." in Path(upstream_relative).parts:
+            errors.append(f"{directory} icon {identifier}: invalid upstream path")
+            continue
+        multiple_styles = len(styles) > 1
+        stem = upstream_relative[:-4]
+        expected_id = f"{style}/{stem}" if multiple_styles else stem
+        if identifier != expected_id:
+            errors.append(f"{directory} icon {identifier}: identifier mismatch")
+        if record.get("sourceUrl") != f"{repository}/raw/{commit}/{upstream_path}":
+            errors.append(f"{directory} icon {identifier}: source URL mismatch")
+        if not isinstance(relative, str) or not relative.startswith(prefix):
+            errors.append(f"{directory} icon {identifier}: invalid source path")
+            continue
+        if relative in expected:
+            errors.append(f"{directory} icon {identifier}: duplicate source path")
+        expected.add(relative)
+        path = (root / relative).resolve()
+        allowed = (root / prefix).resolve()
+        if allowed not in path.parents:
+            errors.append(f"{directory} icon {identifier}: source path escapes catalog")
+            continue
+        if not path.is_file() or path.is_symlink():
+            errors.append(f"{directory} icon {identifier}: source is missing or unsafe")
+            continue
+        payload = path.read_bytes()
+        if record.get("bytes") != len(payload):
+            errors.append(f"{directory} icon {identifier}: byte-size mismatch")
+        if record.get("sha256") != hashlib.sha256(payload).hexdigest():
+            errors.append(f"{directory} icon {identifier}: hash mismatch")
+    if identifiers != sorted(identifiers) or len(identifiers) != len(set(identifiers)):
+        errors.append(f"{directory} icon identifiers are not sorted and unique")
+    actual = {
+        path.relative_to(root).as_posix()
+        for path in (root / prefix).rglob("*.svg")
+        if path.is_file()
+    }
+    for relative in sorted(expected - actual):
+        errors.append(f"{directory} icon catalog: declared source is missing {relative}")
+    for relative in sorted(actual - expected):
+        errors.append(f"{directory} icon catalog: untracked source {relative}")
+    if manifest.get("fileCount") != len(records):
+        errors.append(f"{directory} icon catalog file count does not match")
+    license_record = manifest.get("license")
+    if not isinstance(license_record, dict):
+        errors.append(f"{directory} icon catalog license record is missing")
+    else:
+        license_path = manifest_path.parent / str(license_record.get("path", ""))
+        if license_record.get("name") != "MIT":
+            errors.append(f"{directory} icon catalog license is not MIT")
+        if license_record.get("copyright") != copyright_notice:
+            errors.append(f"{directory} icon catalog authorship is invalid")
+        if not license_path.is_file():
+            errors.append(f"{directory} icon catalog license is missing")
+        else:
+            license_bytes = license_path.read_bytes()
+            if hashlib.sha256(license_bytes).hexdigest() != license_record.get("sha256"):
+                errors.append(f"{directory} icon catalog license hash mismatch")
+            if copyright_notice.encode("utf-8") not in license_bytes:
+                errors.append(f"{directory} icon catalog license omits authorship")
+    return errors
+
+
 def validate_catalogs(root: Path = ROOT) -> list[str]:
     explore_manifest = root / "Sources/ExploreSwiftUI/manifest.json"
     qenterra_manifest = root / "Sources/QenTerra/manifest.json"
@@ -748,6 +911,19 @@ def validate_catalogs(root: Path = ROOT) -> list[str]:
     uiable_errors, uiable = _validate_uiable(root, uiable_manifest)
     reui_manifest = root / "Sources/ReUI/manifest.json"
     reui_errors, reui = _validate_reui(root, reui_manifest)
+    icon_errors = [
+        error
+        for directory, manifest_relative, prefix, copyright_notice, repository, styles in ICON_CATALOGS
+        for error in _validate_icon_catalog(
+            root,
+            directory,
+            manifest_relative,
+            prefix,
+            copyright_notice,
+            repository,
+            styles,
+        )
+    ]
     errors = [
         *explore_errors,
         *qenterra_errors,
@@ -755,6 +931,7 @@ def validate_catalogs(root: Path = ROOT) -> list[str]:
         *magic_errors,
         *uiable_errors,
         *reui_errors,
+        *icon_errors,
     ]
 
     try:
@@ -817,6 +994,10 @@ def validate_catalogs(root: Path = ROOT) -> list[str]:
         magic_version = _load(magic_manifest).get("version")
         uiable_version = _load(uiable_manifest).get("version")
         reui_version = _load(reui_manifest).get("version")
+        icon_versions = [
+            _load(root / manifest_relative).get("version")
+            for _, manifest_relative, _, _, _, _ in ICON_CATALOGS
+        ]
         if (
             explore_version != package_version
             or qenterra_version != package_version
@@ -824,6 +1005,7 @@ def validate_catalogs(root: Path = ROOT) -> list[str]:
             or magic_version != package_version
             or uiable_version != package_version
             or reui_version != package_version
+            or any(version != package_version for version in icon_versions)
         ):
             errors.append("source catalog versions do not match the package version")
     except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
@@ -857,12 +1039,17 @@ def main() -> int:
     magic = _load(ROOT / "Sources/MagicUI/manifest.json")
     uiable = _load(ROOT / "Sources/UIable/manifest.json")
     reui = _load(ROOT / "Sources/ReUI/manifest.json")
+    icon_count = sum(
+        int(_load(ROOT / manifest_relative)["fileCount"])
+        for _, manifest_relative, _, _, _, _ in ICON_CATALOGS
+    )
     print(
         f"Verified {len(explore['components'])} Explore SwiftUI originals and "
         f"{len(magic['components'])} Magic UI originals and "
         f"{len(shadcn['components'])} shadcn/ui originals and "
         f"{len(uiable['items'])} UIable originals and "
         f"{len(reui['sources'])} ReUI originals and "
+        f"{icon_count} icon originals and "
         f"{len(qenterra['components'])} QenTerra components"
     )
     return 0

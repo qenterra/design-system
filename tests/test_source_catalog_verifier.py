@@ -59,6 +59,22 @@ class SourceCatalogVerifierTests(unittest.TestCase):
         self.assertIn("Sources/ReUI/Radix/", content)
         self.assertIn("Sources/ReUI/Registry/", content)
 
+    def test_icon_catalogs_are_part_of_the_public_verifier(self) -> None:
+        content = VERIFIER.read_text(encoding="utf-8")
+        for directory in (
+            "TablerIcons",
+            "PhosphorIcons",
+            "Iconoir",
+            "BootstrapIcons",
+        ):
+            with self.subTest(directory=directory):
+                self.assertTrue(
+                    (ROOT / f"packages/Sources/{directory}/manifest.json").is_file(),
+                    f"the exact {directory} icon catalog is missing",
+                )
+                self.assertIn(f"Sources/{directory}/manifest.json", content)
+                self.assertIn(f"Sources/{directory}/Icons/", content)
+
 
 if __name__ == "__main__":
     unittest.main()

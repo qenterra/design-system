@@ -32,6 +32,7 @@ class RegistryContractTests(unittest.TestCase):
         for relative in (
             "registry/components.json",
             "registry/icons.json",
+            "registry/icon-sources.json",
             "registry/native-patterns.json",
             "registry/magic-ui.json",
             "registry/packages.json",
@@ -93,6 +94,10 @@ class RegistryContractTests(unittest.TestCase):
     def test_source_catalog_registries_match_their_schemas(self) -> None:
         for registry_relative, schema_relative in (
             (
+                "registry/icon-sources.json",
+                "schemas/icon-source-registry.schema.json",
+            ),
+            (
                 "registry/native-patterns.json",
                 "schemas/native-pattern-registry.schema.json",
             ),
@@ -123,6 +128,15 @@ class RegistryContractTests(unittest.TestCase):
                     validate_schema(load(registry_relative), load(schema_relative), schema_path),
                     [],
                 )
+
+    def test_icon_source_registry_requires_one_family_per_project(self) -> None:
+        registry = load("registry/icon-sources.json")
+        self.assertEqual(
+            [catalog["id"] for catalog in registry["catalogs"]],
+            ["bootstrap-icons", "iconoir", "phosphor-icons", "tabler-icons"],
+        )
+        self.assertEqual(registry["selectionPolicy"]["projectFamilyLimit"], 1)
+        self.assertTrue(registry["selectionPolicy"]["searchBeforeCreate"])
 
     def test_icon_registry_contains_only_reusable_interface_roles(self) -> None:
         icons = load("registry/icons.json")["icons"]

@@ -30,6 +30,11 @@ class DocumentationAlignmentTests(unittest.TestCase):
                 self.assertIn("scripts/uiable.py", text)
                 self.assertIn("Sources/ReUI/", text)
                 self.assertIn("scripts/reui.py", text)
+                self.assertIn("Sources/TablerIcons/", text)
+                self.assertIn("Sources/PhosphorIcons/", text)
+                self.assertIn("Sources/Iconoir/", text)
+                self.assertIn("Sources/BootstrapIcons/", text)
+                self.assertIn("scripts/icon_catalogs.py", text)
 
 
 if __name__ == "__main__":

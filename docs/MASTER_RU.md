@@ -555,12 +555,26 @@ MIT-лицензию с `Copyright (c) 2025 Keenthemes Inc`. ReUI Pro blocks,
 копия становится отдельным сопровождаемым компонентом QenTerra;
 ни один оригинал ReUI или install payload не редактируется на месте.
 
+`Sources/TablerIcons/`, `Sources/PhosphorIcons/`, `Sources/Iconoir/` и
+`Sources/BootstrapIcons/` — неизменяемые справочные SVG-каталоги вне npm- и
+SwiftPM-targets. `scripts/icon_catalogs.py` импортирует только официальные
+опубликованные SVG-корни, побайтно сохраняет каждый исходник и точную
+MIT-лицензию, а также фиксирует commit, оригинальные path и URL, byte count,
+SHA-256, стиль, copyright notice и полное замыкание каталога. До рисования
+нового glyph потребители проверяют `registry/icons.json`, нативные системные
+символы и `registry/icon-sources.json`. Apple-native интерфейсы по умолчанию
+используют системные символы; web- и cross-platform-проекты выбирают одно
+внешнее семейство иконок и сохраняют его во всём проекте. Смешивание допустимо
+только для brand marks, platform-native symbols или документированного
+отсутствующего glyph. Изменённые иконки становятся отдельными QenTerra-активами;
+upstream-оригиналы никогда не редактируются на месте.
+
 ## 19. Сопровождение
 
 1. Прочитайте этот файл, затронутые токены и доказательства продукта.
 2. Добавьте или обновите ADR для нормативного изменения.
 3. Меняйте канонические токены, реестры, схемы, документацию, шаблоны или фасады пакетов.
-4. Для изменений Explore SwiftUI запустите `python3 scripts/explore_swiftui.py sync --write`; для Magic UI — `python3 scripts/magic_ui.py sync --write`; для shadcn/ui — `python3 scripts/shadcn_ui.py sync --write`; для UIable — `python3 scripts/uiable.py sync --write`; для ReUI — `python3 scripts/reui.py sync --write`; затем при изменении generated/public outputs запустите `python3 scripts/generate.py write` и `python3 scripts/build_public_packages.py write`.
+4. Для изменений Explore SwiftUI запустите `python3 scripts/explore_swiftui.py sync --write`; для Magic UI — `python3 scripts/magic_ui.py sync --write`; для shadcn/ui — `python3 scripts/shadcn_ui.py sync --write`; для UIable — `python3 scripts/uiable.py sync --write`; для ReUI — `python3 scripts/reui.py sync --write`; для внешних каталогов иконок — `python3 scripts/icon_catalogs.py sync --write`; затем при изменении generated/public outputs запустите `python3 scripts/generate.py write` и `python3 scripts/build_public_packages.py write`.
 5. Запустите `python3 scripts/verify.py`.
 6. Проверьте npm-архив, Swift-продукты и затронутый consumer в нужных темах и ограничениях.
 7. Обновите changelog и версию.
