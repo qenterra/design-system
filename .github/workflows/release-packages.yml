@@ -1,13 +1,7 @@
 name: Release public packages
 
 on:
-  workflow_dispatch:
-    inputs:
-      publish:
-        description: Publish the verified snapshot
-        required: true
-        default: false
-        type: boolean
+  workflow_dispatch: {}
   push:
     tags:
       - "v*.*.*"
@@ -57,7 +51,10 @@ jobs:
 
   publish:
     needs: snapshot
-    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.publish)
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    permissions:
+      contents: read
+      id-token: write
     runs-on: macos-15
     steps:
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
@@ -66,13 +63,17 @@ jobs:
           path: snapshot
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: "22"
+          node-version: "22.14.0"
           registry-url: https://registry.npmjs.org
           scope: "@qenterra"
+      - name: Pin trusted-publishing toolchain
+        shell: bash
+        run: |
+          npm install --global npm@11.5.1
+          test "$(node --version)" = "v22.14.0"
+          test "$(npm --version)" = "11.5.1"
       - name: Publish or verify npm package
         working-directory: snapshot
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         shell: bash
         run: |
           version=$(python3 -c 'import json; print(json.load(open("npm/design-tokens/package.json"))["version"])')

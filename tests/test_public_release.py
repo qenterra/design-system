@@ -37,6 +37,50 @@ def nested_keys(value: object) -> set[str]:
 
 
 class PublicReleaseContractTests(unittest.TestCase):
+    def test_npm_publish_job_requires_a_push_event_and_version_aligned_tag(self) -> None:
+        workflow = (ROOT / ".github/workflows/release-packages.yml").read_text(
+            encoding="utf-8"
+        )
+        _, jobs = workflow.split("\njobs:\n", maxsplit=1)
+        snapshot, publish = jobs.split("\n  publish:\n", maxsplit=1)
+        publish_condition = next(
+            (
+                line.strip()
+                for line in publish.splitlines()
+                if line.startswith("    if: ")
+            ),
+            None,
+        )
+
+        self.assertEqual(
+            publish_condition,
+            "if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')",
+        )
+        self.assertIn("  workflow_dispatch: {}", workflow)
+        self.assertNotIn("inputs.publish", workflow)
+        self.assertIn("    needs: snapshot", publish)
+        self.assertIn("if: startsWith(github.ref, 'refs/tags/')", snapshot)
+        self.assertIn('test "$GITHUB_REF_NAME" = "v$version"', snapshot)
+
+    def test_npm_publish_job_uses_trusted_publishing_with_pinned_tooling(self) -> None:
+        workflow = (ROOT / ".github/workflows/release-packages.yml").read_text(
+            encoding="utf-8"
+        )
+        _, publish = workflow.split("\n  publish:\n", maxsplit=1)
+
+        self.assertRegex(workflow, r"(?m)^permissions:\n  contents: read$")
+        self.assertRegex(
+            publish,
+            r"(?m)^    permissions:\n      contents: read\n      id-token: write$",
+        )
+        self.assertRegex(publish, r'(?m)^    runs-on: (?:ubuntu|macos|windows)-[^\s]+$')
+        self.assertIn('node-version: "22.14.0"', publish)
+        self.assertIn("npm install --global npm@11.5.1", publish)
+        self.assertIn('test "$(node --version)" = "v22.14.0"', publish)
+        self.assertIn('test "$(npm --version)" = "11.5.1"', publish)
+        self.assertNotIn("NPM_TOKEN", publish)
+        self.assertNotIn("NODE_AUTH_TOKEN", publish)
+
     def test_release_tools_exist(self) -> None:
         self.assertTrue(BUILDER.is_file(), "public release builder is missing")
         self.assertTrue(BOUNDARY.is_file(), "public boundary verifier is missing")
