@@ -37,7 +37,7 @@ def nested_keys(value: object) -> set[str]:
 
 
 class PublicReleaseContractTests(unittest.TestCase):
-    def test_npm_publish_job_requires_a_push_event_and_version_aligned_tag(self) -> None:
+    def test_npm_publish_job_requires_a_version_aligned_release_tag(self) -> None:
         workflow = (ROOT / ".github/workflows/release-packages.yml").read_text(
             encoding="utf-8"
         )
@@ -54,13 +54,22 @@ class PublicReleaseContractTests(unittest.TestCase):
 
         self.assertEqual(
             publish_condition,
-            "if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')",
+            "if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v'))",
         )
-        self.assertIn("  workflow_dispatch: {}", workflow)
+        self.assertIn("  workflow_dispatch:", workflow)
+        self.assertIn("      release_tag:", workflow)
+        self.assertIn("        required: true", workflow)
         self.assertNotIn("inputs.publish", workflow)
         self.assertIn("    needs: snapshot", publish)
-        self.assertIn("if: startsWith(github.ref, 'refs/tags/')", snapshot)
-        self.assertIn('test "$GITHUB_REF_NAME" = "v$version"', snapshot)
+        self.assertIn(
+            "ref: ${{ github.event_name == 'workflow_dispatch' && inputs.release_tag || github.ref }}",
+            snapshot,
+        )
+        self.assertIn(
+            "RELEASE_TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.release_tag || github.ref_name }}",
+            snapshot,
+        )
+        self.assertIn('test "$RELEASE_TAG" = "v$version"', snapshot)
 
     def test_npm_publish_job_uses_trusted_publishing_with_pinned_tooling(self) -> None:
         workflow = (ROOT / ".github/workflows/release-packages.yml").read_text(
@@ -80,6 +89,10 @@ class PublicReleaseContractTests(unittest.TestCase):
         self.assertIn('test "$(npm --version)" = "11.5.1"', publish)
         self.assertNotIn("NPM_TOKEN", publish)
         self.assertNotIn("NODE_AUTH_TOKEN", publish)
+        self.assertIn(
+            "npm publish --workspace @qenterra/design-tokens --access public --tag latest",
+            publish,
+        )
 
     def test_release_tools_exist(self) -> None:
         self.assertTrue(BUILDER.is_file(), "public release builder is missing")
