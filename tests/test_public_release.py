@@ -37,7 +37,7 @@ def nested_keys(value: object) -> set[str]:
 
 
 class PublicReleaseContractTests(unittest.TestCase):
-    def test_npm_publish_job_requires_a_version_aligned_release_tag(self) -> None:
+    def test_npm_publish_job_requires_a_push_event_and_version_aligned_tag(self) -> None:
         workflow = (ROOT / ".github/workflows/release-packages.yml").read_text(
             encoding="utf-8"
         )
@@ -54,11 +54,10 @@ class PublicReleaseContractTests(unittest.TestCase):
 
         self.assertEqual(
             publish_condition,
-            "if: startsWith(github.ref, 'refs/tags/v')",
+            "if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')",
         )
         self.assertIn("  workflow_dispatch: {}", workflow)
         self.assertNotIn("inputs.publish", workflow)
-        self.assertNotIn("github.event_name", publish)
         self.assertIn("    needs: snapshot", publish)
         self.assertIn("if: startsWith(github.ref, 'refs/tags/')", snapshot)
         self.assertIn('test "$GITHUB_REF_NAME" = "v$version"', snapshot)
