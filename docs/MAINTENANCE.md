@@ -31,7 +31,7 @@ All token metadata, registries, package manifests, generated outputs, and releas
 
 ## Components and packages
 
-Every component registry item declares `delivered` or `specification-only`. Delivered items reference registered packages and unit evidence. New QenTerra packages require a distinct release boundary, versioned API, tests, clean-consumer proof, Apache-2.0 metadata, applicable notices, and release-manifest paths. Third-party reference source requires verified ownership or permission, precise attribution, a separate manifest, immutable originals, and explicit exclusion from the QenTerra license and installable targets unless its terms permit otherwise.
+Every component registry item declares `delivered` or `specification-only`. Delivered items reference registered packages and unit evidence. New QenTerra packages require a distinct release boundary, versioned API, tests, clean-consumer proof, MIT metadata, and release-manifest paths. Third-party reference source requires precise provenance and attribution, a separate manifest, immutable originals, and explicit exclusion from the QenTerra license and installable targets unless its terms permit otherwise.
 
 Public releases are prepared only from the allowlisted snapshot. Existing public tags and npm versions are immutable. See `docs/governance/EVOLUTION.md` and `docs/governance/PUBLIC_DELIVERY.md`.
 

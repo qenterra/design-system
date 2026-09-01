@@ -49,4 +49,4 @@ Create every cache, build tree, report, or package-staging directory outside the
 - Update public documentation and changelog when users, consumers, or operators are affected.
 - Do not add caches, build output, credentials, signing material, personal data, private operational records, or unreviewed artifacts anywhere in the public checkout.
 
-By contributing, you agree that your contribution is licensed under the repository's declared Apache-2.0 terms.
+By contributing, you agree that your contribution is licensed under the repository's declared MIT terms.

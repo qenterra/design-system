@@ -2,7 +2,7 @@
 
 Universal foundations, reusable visual components, palettes, platform adapters, and engineering contracts for websites, native applications, and other interface-bearing projects.
 
-> **Status:** public canonical source, version `1.0.0`, licensed under Apache-2.0.
+> **Status:** public canonical source, version `1.0.1`, licensed under MIT.
 
 ## Use it
 
@@ -28,7 +28,7 @@ https://github.com/qenterra/design-system
 
 Available Swift products are `QenTerraDesignTokens` and `QenTerraComponents`. The latter contains the primary-button style, group container, and interactive-row surface, each in its own source file. The public tree also includes non-target reference catalogs for Explore SwiftUI, shadcn/ui, Magic UI, UIable, ReUI, Tabler Icons, Phosphor Icons, Iconoir, and Bootstrap Icons. The four icon catalogs preserve 19,005 exact SVG originals: 6,184 Tabler, 9,072 Phosphor, 1,671 Iconoir, and 2,078 Bootstrap files. Every catalog retains manifest-backed provenance and exact source bytes; the MIT-licensed catalogs also carry their exact upstream license and copyright notice.
 
-QenTerra-authored material uses Apache-2.0. Explore SwiftUI examples retain their original ownership and direct-publication permission; shadcn/ui, Magic UI, UIable, ReUI, Tabler Icons, Phosphor Icons, Iconoir, and Bootstrap Icons retain their upstream MIT licenses and authorship. The reference catalogs are not SwiftPM or npm targets.
+QenTerra-authored material uses the MIT License. Explore SwiftUI examples retain their original authorship and terms and are not relicensed as QenTerra work; shadcn/ui, Magic UI, UIable, ReUI, Tabler Icons, Phosphor Icons, Iconoir, and Bootstrap Icons retain their upstream MIT licenses and authorship. The reference catalogs are not SwiftPM or npm targets.
 
 ## Canonical structure
 
@@ -77,7 +77,7 @@ The complete gate checks generated adapters, registries, public boundaries, term
 
 ## License
 
-QenTerra-authored contents are licensed under the [Apache License 2.0](LICENSE); required attribution is in [NOTICE](NOTICE). Preserved Explore SwiftUI, shadcn/ui, Magic UI, UIable, ReUI, Tabler Icons, Phosphor Icons, Iconoir, and Bootstrap Icons retain their separate ownership and terms and are not relicensed as QenTerra work. Apache-2.0 does not grant rights to QenTerra names, marks, or product identities.
+QenTerra-authored contents are licensed under the [MIT License](LICENSE). Preserved Explore SwiftUI, shadcn/ui, Magic UI, UIable, ReUI, Tabler Icons, Phosphor Icons, Iconoir, and Bootstrap Icons retain their separate ownership and terms and are not relicensed as QenTerra work. The MIT License does not grant rights to QenTerra names, marks, or product identities.
 
 ## Contact
 

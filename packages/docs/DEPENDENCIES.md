@@ -4,9 +4,9 @@
 
 | Surface | Dependency source | Runtime dependency | Purpose | License effect | Owner |
 | --- | --- | --- | --- | --- | --- |
-| Swift packages | `Package.swift` | None declared | Typed tokens and SwiftUI components | Repository Apache-2.0 only | `@qenterra` |
-| npm package | `npm/design-tokens/package.json` | None declared | CSS and JSON design-token delivery | Repository Apache-2.0 only | `@qenterra` |
-| Explore SwiftUI reference catalog | `Sources/ExploreSwiftUI/manifest.json` | None; not a package target | Copyable native source reference | Original ownership and direct publication permission | Explore SwiftUI / `@qenterra` |
+| Swift packages | `Package.swift` | None declared | Typed tokens and SwiftUI components | Repository MIT only | `@qenterra` |
+| npm package | `npm/design-tokens/package.json` | None declared | CSS and JSON design-token delivery | Repository MIT only | `@qenterra` |
+| Explore SwiftUI reference catalog | `Sources/ExploreSwiftUI/manifest.json` | None; not a package target | Copyable native source reference | Original authorship and terms; excluded from the QenTerra license | Explore SwiftUI / `@qenterra` |
 | Magic UI reference catalog | `Sources/MagicUI/manifest.json` | None; not a package target | Copyable web component source and install registry | Upstream MIT license and Magic UI copyright | Magic UI / `@qenterra` |
 | shadcn/ui reference catalog | `Sources/ShadcnUI/manifest.json` | None; not a package target | Copyable web component source reference | Upstream MIT license and shadcn copyright | shadcn / `@qenterra` |
 | UIable reference catalog | `Sources/UIable/manifest.json` | None; not a package target | Copyable web component, primitive, and install-registry source | Upstream MIT license and CodedThemes copyright | CodedThemes / `@qenterra` |

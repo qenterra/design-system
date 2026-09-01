@@ -62,9 +62,9 @@ Nikita Melnychenko (`@qenterra`) owns package APIs, release decisions, security 
 
 ## Version and release model
 
-All packages use one Semantic Versioning value. The current canonical baseline is `1.0.0`; npm metadata, Swift source compatibility, source catalogs, release tags, changelog, and `release-manifest.json` move together. Tags use `v<version>` and published versions are immutable.
+All packages use one Semantic Versioning value. The maintained line began at `1.0.0` and the current version is `1.0.1`; npm metadata, Swift source compatibility, source catalogs, release tags, changelog, and `release-manifest.json` move together. Tags use `v<version>` and published versions are immutable.
 
-The first canonical `1.0.0` publication from this repository is still pending. npmjs retains immutable historical version `5.0.0` from the retired Packages repository; it remains registry history rather than part of the maintained `1.x` line.
+The canonical `1.0.0` release remains immutable. npmjs also retains historical version `5.0.0` from the retired Packages repository; it remains registry history rather than part of the maintained `1.x` line.
 
 ## Documentation
 
@@ -82,4 +82,4 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing a change. Report vulner
 
 ## License
 
-Copyright 2026 Nikita Melnychenko (QenTerra). QenTerra-authored material is licensed under the [Apache License 2.0](LICENSE) with attribution in [NOTICE](NOTICE). Explore SwiftUI examples retain their original ownership and separate permission terms. Magic UI, shadcn/ui, UIable, ReUI, Tabler Icons, Phosphor Icons, Iconoir, and Bootstrap Icons retain their separate upstream MIT licenses and copyright notices. See [third-party notices](THIRD_PARTY_NOTICES.md).
+Copyright 2026 Nikita Melnychenko (QenTerra). QenTerra-authored material is licensed under the [MIT License](LICENSE). Explore SwiftUI examples retain their original authorship and terms and are not relicensed as QenTerra work. Magic UI, shadcn/ui, UIable, ReUI, Tabler Icons, Phosphor Icons, Iconoir, and Bootstrap Icons retain their separate upstream MIT licenses and copyright notices. See [third-party notices](THIRD_PARTY_NOTICES.md).

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": "https://github.com/qenterra/design-system",
   "files": [
     {
@@ -10,32 +10,32 @@
     },
     {
       "path": "generated/figma/components.json",
-      "sha256": "17a11811e5bb7b6c5a26332bcb28730d681346ee831312db2317815b301431b0",
+      "sha256": "c344a7f3df28ebb4a24aaf4f46529c9765f05f776d5123f5e5fcd5f0594cec79",
       "bytes": 29557
     },
     {
       "path": "generated/figma/icons.json",
-      "sha256": "a67040fe6655ed59e37e3440e634003e41091a32b7e5237b6a3a6f725c5131bd",
+      "sha256": "44c85e9acc134c4cf1fccb50921565ee35e9f304d03373706ace760ab99b0fc9",
       "bytes": 1994
     },
     {
       "path": "generated/figma/styles.json",
-      "sha256": "de6923d24d4668a9f32faede5ca0ee65739a8660bd4208835378fec560fab43f",
+      "sha256": "3ed6d42a3e2913b9e38f727ddcad39f0d720e7f58b2611f1db783cdea6b494f3",
       "bytes": 3338
     },
     {
       "path": "generated/figma/variables.json",
-      "sha256": "97ac9ef16ffeb5f204b63643ddfb598e1588b8bb05ecb003ccfb5abb61dc14d5",
+      "sha256": "f9bc9e608ede26964195d0db9abc6d650866bcafba77325d6a0ed131b683149d",
       "bytes": 18829
     },
     {
       "path": "packages/Sources/QenTerra/DesignTokens/GeneratedIcons.swift",
-      "sha256": "b140305ba4d41d975c83980e39dc287ca466198a5b83f705b86fd06f5ebf7c76",
+      "sha256": "5ac459e16bdcbb3fed4078c92608d55ce05f2598d099ae1470ac8ee86ba0041c",
       "bytes": 579
     },
     {
       "path": "packages/Sources/QenTerra/DesignTokens/GeneratedTokens.swift",
-      "sha256": "1e10380344fff35c66e31e61b886cb4d799f78994e03874ce40aace90f1497b1",
+      "sha256": "db4c078ae3ac7c57b8f8364f690749d6a55c97df71755d880a72f0b00fec2b8a",
       "bytes": 17204
     },
     {
@@ -17740,7 +17740,7 @@
     },
     {
       "path": "packages/npm/design-tokens/dist/icons.json",
-      "sha256": "8301e324536fd7512f0fe2031b91b4c0f363c7fe89b30b5085b2dad25e1c41cf",
+      "sha256": "a13303112962d47eb511a1207f404a9889b0bc727e8f07fb5f46fda84d2c9b41",
       "bytes": 1945
     },
     {
@@ -17750,17 +17750,17 @@
     },
     {
       "path": "packages/npm/design-tokens/dist/tokens.css",
-      "sha256": "696670ab8c4964ec3c8f6d6af4edd667ad9797ec47914f99277d1e854946c729",
+      "sha256": "f8f1a399e555e5fd12e8bb44de384f545a30dddc796e35dbb6a59889740b20e4",
       "bytes": 14992
     },
     {
       "path": "packages/npm/design-tokens/dist/tokens.json",
-      "sha256": "21c9108055c7f628d493036e7d623cc3b1da18c2b53e6ebd8569079b2c98d283",
+      "sha256": "94bc8fff6163178f41d48ac4969c35e3abf8f65d63e1d4e9e1099b3150046d85",
       "bytes": 21807
     },
     {
       "path": "packages/npm/design-tokens/src/icons.json",
-      "sha256": "5a62d92bcf1b034efd282152b7cfd097a7a7aab8eb7d6cb9d54c96144e6aa75e",
+      "sha256": "7fb088f82f35fc61ba021d7f272e0885b204478e7aa0484c8d1beb1808ec59c7",
       "bytes": 1998
     },
     {
@@ -17775,47 +17775,47 @@
     },
     {
       "path": "packages/npm/design-tokens/src/tokens.json",
-      "sha256": "21c9108055c7f628d493036e7d623cc3b1da18c2b53e6ebd8569079b2c98d283",
+      "sha256": "94bc8fff6163178f41d48ac4969c35e3abf8f65d63e1d4e9e1099b3150046d85",
       "bytes": 21807
     },
     {
       "path": "registry/icons.json",
-      "sha256": "129d841a467163907a6eaa5e65fb977dcf90450ea35c7c8133bf3c33b5c78ce6",
+      "sha256": "1326544519be1c71b518116d7c3122f95cb3c356f6676065f33ca26cbfdea261",
       "bytes": 1458
     },
     {
       "path": "tokens/components.json",
-      "sha256": "981c7d6ac6b7a1b892428a6982c49dc4891a280a9e50a34c561ae142cd9d6f24",
+      "sha256": "e8938e650edb5094227412647056d29c0764866570ceb9b557a319f757203cb7",
       "bytes": 3552
     },
     {
       "path": "tokens/foundation.json",
-      "sha256": "c4ef54f52106a37f1171c6ba137372c7a37cb05700791cb926347792fa0b7dc1",
+      "sha256": "e2ab4b3dd9946b440dc22b9c86021667e2ed5e0dc1350913b1554a2083f59bcc",
       "bytes": 2163
     },
     {
       "path": "tokens/motion.json",
-      "sha256": "06332753297ebd53d82c54b8d016c75871ec2210526b726469fb4044ed469058",
+      "sha256": "1fd54887020ec2694bc324b3368d01acc68cbf1b759f6f50e9f79f17303a2408",
       "bytes": 1924
     },
     {
       "path": "tokens/platforms.json",
-      "sha256": "4972d8ce64ee70920fad03134903d92bd9d449aa633d410d801cdabcffdec5c8",
+      "sha256": "68230777b98ba2edaf57fe12fb2a6134a59eb3a42cb4c8361fc38479f496b35a",
       "bytes": 1906
     },
     {
       "path": "tokens/products.json",
-      "sha256": "bd19b6c987ce5c76dd9425807b1ec63ea58782d40fad38cc4ceb637474324e5e",
+      "sha256": "7bc39415db42fcc7940cc684830c4562fc6d1e933d1671e2b809a142f8ba0dc7",
       "bytes": 2099
     },
     {
       "path": "tokens/semantic.json",
-      "sha256": "add948eb1a6c35f40dada55b824a1487c7b33451d440654ef3e18d8c701eddf9",
+      "sha256": "b98fd6f67599cacf68474d2fe80439b96267ffa486cbcbbedae113d2d04d2441",
       "bytes": 4302
     },
     {
       "path": "tokens/typography.json",
-      "sha256": "e423c0c024fa5c3702e682a52620a34cc608ada586df6d32db4bf177a80cc53d",
+      "sha256": "b16d61042fc0273c6fb9be922890076ef89b35431d421902b6d06bec0d58ccbb",
       "bytes": 1962
     }
   ]

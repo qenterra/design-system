@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/reui-registry.schema.json",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "source": "https://reui.io/components",
   "upstreamRepository": "https://github.com/keenthemes/reui",
   "upstreamRef": "refs/heads/main",

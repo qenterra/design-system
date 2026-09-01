@@ -13,10 +13,11 @@ class DocumentationAlignmentTests(unittest.TestCase):
         for relative in ("CHANGELOG.md", "packages/CHANGELOG.md"):
             text = (ROOT / relative).read_text(encoding="utf-8")
             with self.subTest(relative=relative):
+                self.assertIn("## [1.0.1] - 2026-09-02", text)
                 self.assertIn("## [1.0.0] - 2026-09-01", text)
                 self.assertNotIn("## [1.0.0] - Pending release", text)
                 self.assertIn(
-                    "[Unreleased]: https://github.com/QenTerra/design-system/compare/v1.0.0...HEAD",
+                    "[Unreleased]: https://github.com/QenTerra/design-system/compare/v1.0.1...HEAD",
                     text,
                 )
                 self.assertIn(

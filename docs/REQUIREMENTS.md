@@ -14,7 +14,7 @@
 - [x] Public npm package exposes CSS tokens, JSON tokens, reusable icon metadata, and the four existing CSS recipes.
 - [x] Public Swift package exposes typed tokens plus the existing primary-button, group-container, and interactive-row primitives.
 - [x] Public files are restricted to `packages/` and declared by path/hash.
-- [x] Apache-2.0 attribution names QenTerra and Nikita Melnychenko; third-party notices remain separate.
+- [x] The MIT license names QenTerra and Nikita Melnychenko; third-party notices remain separate.
 - [x] New/improved reusable work must update source, registry, tests, package mapping, release manifest, version, and changelog.
 
 ## Removed scope

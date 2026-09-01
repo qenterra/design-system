@@ -18,7 +18,8 @@ Architecture decision records preserve consequential choices, alternatives, evid
 | `0011` | [Exact Magic UI source catalog](0011-exact-magic-ui-source-catalog.md) | accepted | — |
 | `0012` | [Exact UIable source catalog](0012-exact-uiable-source-catalog.md) | accepted | — |
 | `0013` | [Exact ReUI source catalog](0013-exact-reui-source-catalog.md) | accepted | — |
-| `0014` | [Public canonical repository](0014-public-canonical-repository.md) | accepted | — |
+| `0014` | [Public canonical repository](0014-public-canonical-repository.md) | accepted; license clause superseded | `0016` |
 | `0015` | [Exact external icon source catalogs](0015-exact-icon-source-catalogs.md) | accepted | — |
+| `0016` | [MIT license for QenTerra material](0016-mit-license-for-qenterra-material.md) | accepted | — |
 
 Use the next four-digit ID. Do not renumber or delete accepted records; mark a replaced decision as superseded and link its replacement.

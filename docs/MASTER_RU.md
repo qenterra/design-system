@@ -1,6 +1,6 @@
 # Design System
 
-Версия 1.0.0 · Нормативный справочник для людей
+Версия 1.0.1 · Нормативный справочник для людей
 
 ## 0. Как пользоваться этим файлом
 
@@ -88,7 +88,9 @@ Reduced Motion, Reduced Transparency, Increased Contrast, keyboard focus, скр
 
 ### 3.3 Типографика
 
-Используйте системный шрифт. Роли заданы в `tokens/typography.json`: `display`, `screenTitle`, `modalTitle`, `sectionTitle`, `body`, `bodyEmphasized`, `row`, `rowEmphasized`, `supporting`, `metadata`, `compactMetadata`, `eyebrow`, `keycap`, `monospacedData`.
+Для общего продуктового UI используйте системный шрифт. Роли заданы в `tokens/typography.json`: `display`, `screenTitle`, `modalTitle`, `sectionTitle`, `body`, `bodyEmphasized`, `row`, `rowEmphasized`, `supporting`, `metadata`, `compactMetadata`, `eyebrow`, `keycap`, `monospacedData`.
+
+В брендовых, редакционных и портфолио-поверхностях QenTerra используется отдельная пара Tektur + Onest из `docs/TYPOGRAPHY.md`. Эти ассеты не заменяют системные шрифты в Cadence и других продуктовых интерфейсах и не меняют универсальные типографические токены.
 
 Правила:
 

@@ -1,6 +1,6 @@
 {
   "format": "design-system-figma-components-v1",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "components": [
     {
       "id": "button",
@@ -21,7 +21,7 @@
         "web"
       ],
       "lifecycle": {
-        "introduced": "1.0.0",
+        "introduced": "1.0.1",
         "review": "major"
       },
       "anatomy": [
@@ -200,7 +200,7 @@
         "web"
       ],
       "lifecycle": {
-        "introduced": "1.0.0",
+        "introduced": "1.0.1",
         "review": "major"
       },
       "anatomy": [
@@ -657,7 +657,7 @@
         "web"
       ],
       "lifecycle": {
-        "introduced": "1.0.0",
+        "introduced": "1.0.1",
         "review": "major"
       },
       "anatomy": [
@@ -743,7 +743,7 @@
         "web"
       ],
       "lifecycle": {
-        "introduced": "1.0.0",
+        "introduced": "1.0.1",
         "review": "major"
       },
       "anatomy": [
@@ -953,7 +953,7 @@
         "web"
       ],
       "lifecycle": {
-        "introduced": "1.0.0",
+        "introduced": "1.0.1",
         "review": "major"
       },
       "anatomy": [
@@ -1235,7 +1235,7 @@
         "web"
       ],
       "lifecycle": {
-        "introduced": "1.0.0",
+        "introduced": "1.0.1",
         "review": "major"
       },
       "anatomy": [

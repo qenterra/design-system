@@ -1,8 +1,8 @@
 {
   "name": "@qenterra/design-tokens",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Public CSS, JSON, icon, and component-recipe adapters from Design System.",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/qenterra/design-system.git",
@@ -24,7 +24,6 @@
   },
   "files": [
     "LICENSE",
-    "NOTICE",
     "README.md",
     "dist"
   ]
