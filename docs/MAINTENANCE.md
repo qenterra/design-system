@@ -16,9 +16,10 @@
 2. Read the relevant master section, source token, and registry entry.
 3. For reusable work, define a universal contract before copying no consumer implementation at all.
 4. Change canonical sources and add a negative test first for new behavior.
-5. Run `python3 scripts/generate.py write` and `python3 scripts/build_public_packages.py write` when public outputs change.
-6. Update English/Russian normative guidance, `VERSION`, and `CHANGELOG.md` for normative work.
-7. Run `python3 scripts/verify.py` and inspect npm/Swift package contents.
+5. Synchronize changed source catalogs with their dedicated importer; use `python3 scripts/icon_catalogs.py sync --write` for the four external icon families.
+6. Run `python3 scripts/generate.py write` and `python3 scripts/build_public_packages.py write` when public outputs change.
+7. Update English/Russian normative guidance, `VERSION`, and `CHANGELOG.md` for normative work.
+8. Run `python3 scripts/verify.py` and inspect npm/Swift package contents.
 
 ## Versioning
 

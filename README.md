@@ -26,9 +26,9 @@ Swift projects add:
 https://github.com/qenterra/design-system
 ```
 
-Available Swift products are `QenTerraDesignTokens` and `QenTerraComponents`. The latter contains the primary-button style, group container, and interactive-row surface, each in its own source file. The public tree also includes five non-target reference catalogs: all 221 current Explore SwiftUI detail-page sources across 34 categories; all 182 official shadcn/ui `registry:ui` source files across React Aria, Base UI, and Radix UI; all 76 components on the official Magic UI Components page with their 76 exact install-registry payloads; all 745 official UIable `registry:ui` items, split into 684 showcase components and 61 required UI primitives; and the complete free ReUI registry for Base UI Nova and Radix UI Nova, containing 2,202 examples, 150 primitives, eight hooks, and 2,360 exact install payloads. Every catalog retains exact bytes and manifest-backed provenance; shadcn/ui, Magic UI, UIable, and ReUI additionally carry their exact upstream MIT licenses and copyright notices.
+Available Swift products are `QenTerraDesignTokens` and `QenTerraComponents`. The latter contains the primary-button style, group container, and interactive-row surface, each in its own source file. The public tree also includes non-target reference catalogs for Explore SwiftUI, shadcn/ui, Magic UI, UIable, ReUI, Tabler Icons, Phosphor Icons, Iconoir, and Bootstrap Icons. The four icon catalogs preserve 19,005 exact SVG originals: 6,184 Tabler, 9,072 Phosphor, 1,671 Iconoir, and 2,078 Bootstrap files. Every catalog retains manifest-backed provenance and exact source bytes; the MIT-licensed catalogs also carry their exact upstream license and copyright notice.
 
-QenTerra-authored material uses Apache-2.0. Explore SwiftUI examples retain their original ownership and direct-publication permission; shadcn/ui, Magic UI, UIable, and ReUI sources retain their upstream MIT licenses and authorship. The reference catalogs are not SwiftPM or npm targets.
+QenTerra-authored material uses Apache-2.0. Explore SwiftUI examples retain their original ownership and direct-publication permission; shadcn/ui, Magic UI, UIable, ReUI, Tabler Icons, Phosphor Icons, Iconoir, and Bootstrap Icons retain their upstream MIT licenses and authorship. The reference catalogs are not SwiftPM or npm targets.
 
 ## Canonical structure
 
@@ -77,7 +77,7 @@ The complete gate checks generated adapters, registries, public boundaries, term
 
 ## License
 
-QenTerra-authored contents are licensed under the [Apache License 2.0](LICENSE); required attribution is in [NOTICE](NOTICE). Preserved Explore SwiftUI, shadcn/ui, Magic UI, UIable, and ReUI sources retain their separate ownership and terms and are not relicensed as QenTerra work. Apache-2.0 does not grant rights to QenTerra names, marks, or product identities.
+QenTerra-authored contents are licensed under the [Apache License 2.0](LICENSE); required attribution is in [NOTICE](NOTICE). Preserved Explore SwiftUI, shadcn/ui, Magic UI, UIable, ReUI, Tabler Icons, Phosphor Icons, Iconoir, and Bootstrap Icons retain their separate ownership and terms and are not relicensed as QenTerra work. Apache-2.0 does not grant rights to QenTerra names, marks, or product identities.
 
 ## Contact
 

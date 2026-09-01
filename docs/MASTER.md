@@ -884,6 +884,19 @@ the saved deployment/index identity before downloading changed payloads. An
 adapted or tokenized copy becomes a separate maintained QenTerra component; no
 ReUI original or install payload is edited in place.
 
+`Sources/TablerIcons/`, `Sources/PhosphorIcons/`, `Sources/Iconoir/`, and
+`Sources/BootstrapIcons/` are immutable SVG reference catalogs outside npm and
+SwiftPM targets. `scripts/icon_catalogs.py` imports only the official published
+SVG roots, preserves every source byte and exact MIT license, and records the
+pinned commit, original path and URL, byte count, SHA-256, style, copyright
+notice, and complete catalog closure. Consumers check `registry/icons.json`,
+native system symbols, and `registry/icon-sources.json` before drawing a glyph.
+Apple-native surfaces default to platform symbols; web and cross-platform
+projects select one external icon family and keep it throughout the project.
+Brand marks, platform-native symbols, and a documented missing-glyph case are
+the only mixing exceptions. Modified icons are separate QenTerra-owned assets;
+upstream originals are never edited in place.
+
 ## 19. Maintenance procedure
 
 To update the design system:
@@ -891,7 +904,7 @@ To update the design system:
 1. Read this file, affected token files, and relevant product evidence.
 2. Add or update an ADR in `docs/decisions/` for a normative change.
 3. Change canonical tokens, registries, schemas, documentation, templates, or package facades.
-4. For Explore SwiftUI changes run `python3 scripts/explore_swiftui.py sync --write`; for Magic UI changes run `python3 scripts/magic_ui.py sync --write`; for shadcn/ui changes run `python3 scripts/shadcn_ui.py sync --write`; for UIable changes run `python3 scripts/uiable.py sync --write`; for ReUI changes run `python3 scripts/reui.py sync --write`; then run `python3 scripts/generate.py write` and `python3 scripts/build_public_packages.py write` when generated/public outputs change.
+4. For Explore SwiftUI changes run `python3 scripts/explore_swiftui.py sync --write`; for Magic UI changes run `python3 scripts/magic_ui.py sync --write`; for shadcn/ui changes run `python3 scripts/shadcn_ui.py sync --write`; for UIable changes run `python3 scripts/uiable.py sync --write`; for ReUI changes run `python3 scripts/reui.py sync --write`; for external icon catalogs run `python3 scripts/icon_catalogs.py sync --write`; then run `python3 scripts/generate.py write` and `python3 scripts/build_public_packages.py write` when generated/public outputs change.
 5. Run `python3 scripts/verify.py`.
 6. Inspect the npm tarball, Swift products, and the affected consumer at the relevant appearances and constraints.
 7. Update `CHANGELOG.md` and version according to change type.

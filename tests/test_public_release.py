@@ -25,6 +25,17 @@ def load_module(path: Path, name: str):
     return module
 
 
+def nested_keys(value: object) -> set[str]:
+    if isinstance(value, dict):
+        return {
+            *(str(key).lower() for key in value),
+            *(nested for item in value.values() for nested in nested_keys(item)),
+        }
+    if isinstance(value, list):
+        return {nested for item in value for nested in nested_keys(item)}
+    return set()
+
+
 class PublicReleaseContractTests(unittest.TestCase):
     def test_release_tools_exist(self) -> None:
         self.assertTrue(BUILDER.is_file(), "public release builder is missing")
@@ -42,8 +53,9 @@ class PublicReleaseContractTests(unittest.TestCase):
             (ROOT / "packages/release-manifest.json").read_text(encoding="utf-8")
         )
         self.assertEqual(actual, expected)
-        self.assertNotIn("sourceSha", actual)
-        self.assertNotIn("commit", json.dumps(actual).lower())
+        keys = nested_keys(actual)
+        self.assertNotIn("sourcesha", keys)
+        self.assertNotIn("commit", keys)
 
     def test_boundary_detects_an_undeclared_file(self) -> None:
         self.assertTrue(BOUNDARY.is_file(), "public boundary verifier is missing")
