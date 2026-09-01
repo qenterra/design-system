@@ -4,7 +4,6 @@ import hashlib
 import importlib.util
 import json
 import os
-import re
 import subprocess
 import sys
 import tempfile
@@ -38,6 +37,32 @@ def nested_keys(value: object) -> set[str]:
 
 
 class PublicReleaseContractTests(unittest.TestCase):
+    def test_npm_publish_job_requires_a_version_aligned_release_tag(self) -> None:
+        workflow = (ROOT / ".github/workflows/release-packages.yml").read_text(
+            encoding="utf-8"
+        )
+        _, jobs = workflow.split("\njobs:\n", maxsplit=1)
+        snapshot, publish = jobs.split("\n  publish:\n", maxsplit=1)
+        publish_condition = next(
+            (
+                line.strip()
+                for line in publish.splitlines()
+                if line.startswith("    if: ")
+            ),
+            None,
+        )
+
+        self.assertEqual(
+            publish_condition,
+            "if: startsWith(github.ref, 'refs/tags/v')",
+        )
+        self.assertIn("  workflow_dispatch: {}", workflow)
+        self.assertNotIn("inputs.publish", workflow)
+        self.assertNotIn("github.event_name", publish)
+        self.assertIn("    needs: snapshot", publish)
+        self.assertIn("if: startsWith(github.ref, 'refs/tags/')", snapshot)
+        self.assertIn('test "$GITHUB_REF_NAME" = "v$version"', snapshot)
+
     def test_npm_publish_job_uses_trusted_publishing_with_pinned_tooling(self) -> None:
         workflow = (ROOT / ".github/workflows/release-packages.yml").read_text(
             encoding="utf-8"
