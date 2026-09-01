@@ -2,7 +2,7 @@ import Testing
 @testable import QenTerraDesignTokens
 
 @Test func publicTokenFacadeExposesCanonicalVersion() {
-    #expect(DesignTokens.version == "5.5.1")
+    #expect(DesignTokens.version == "1.0.0")
     #expect(DesignTokens.Space.value4 == 16)
     #expect(DesignTokens.Radius.control == 6)
 }

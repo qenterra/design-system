@@ -109,11 +109,11 @@ class UIableWorkflowTests(unittest.TestCase):
         root = Path(temporary) / "repository"
         (root / "registry").mkdir(parents=True)
         (root / "packages/Sources/UIable").mkdir(parents=True)
-        (root / "VERSION").write_text("5.4.0\n", encoding="utf-8")
+        (root / "VERSION").write_text("1.0.0\n", encoding="utf-8")
         (root / "registry/packages.json").write_text(
             json.dumps(
                 {
-                    "version": "5.4.0",
+                    "version": "1.0.0",
                     "packages": [
                         {
                             "id": "repository-metadata",

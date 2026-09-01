@@ -4,8 +4,8 @@
 
 | Release line | Supported | End of support | Evidence |
 | --- | --- | --- | --- |
-| `5.x` | Yes | Until `6.0.0` is published | Current tags, package metadata, and release manifest |
-| `< 5.0.0` | No | 2026-08-28 | Changelog and release history |
+| Current `main` and maintained `1.x` line | Yes | Until `2.0.0` is published | `VERSION`, package metadata, and release manifest |
+| Historical npm `5.0.0` artifact | No | 2026-09-01 | Registry metadata and Git history |
 
 Only the latest patch release in a supported line receives fixes unless a security advisory states otherwise.
 

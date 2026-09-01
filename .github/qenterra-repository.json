@@ -25,7 +25,7 @@
   "conduct_contact": "https://github.com/QenTerra/design-system/security/advisories/new",
   "copyright_holder": "Nikita Melnychenko (QenTerra)",
   "copyright_year_range": "2026",
-  "current_version": "5.5.1",
+  "current_version": "1.0.0",
   "default_branch": "main",
   "dependabot_ecosystem": "npm",
   "description": "Public canonical design system for QenTerra foundations, components, assets, and package delivery.",

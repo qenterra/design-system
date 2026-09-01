@@ -92,7 +92,7 @@ class ExploreSwiftUIParserTests(unittest.TestCase):
             url="https://exploreswiftui.com/library/another/link",
         )
         with self.assertRaisesRegex(ValueError, "duplicate source path"):
-            importer.build_catalog([first, duplicate], "5.1.0")
+            importer.build_catalog([first, duplicate], "1.0.0")
 
 
 class ExploreSwiftUIWorkflowTests(unittest.TestCase):
@@ -100,7 +100,7 @@ class ExploreSwiftUIWorkflowTests(unittest.TestCase):
         importer = load_importer()
         original = b"struct Original {}\n"
         manifest = {
-            "version": "5.1.0",
+            "version": "1.0.0",
             "source": "https://exploreswiftui.com/",
             "components": [
                 {
@@ -124,14 +124,14 @@ class ExploreSwiftUIWorkflowTests(unittest.TestCase):
             registry_path = repository_root / "registry/qenterra-components.json"
             registry_path.parent.mkdir(parents=True, exist_ok=True)
             registry_path.write_text(
-                json.dumps({"version": "5.1.0", "components": []}),
+                json.dumps({"version": "1.0.0", "components": []}),
                 encoding="utf-8",
             )
             package_registry_path = repository_root / "registry/packages.json"
             package_registry_path.write_text(
                 json.dumps(
                     {
-                        "version": "5.1.0",
+                        "version": "1.0.0",
                         "packages": [
                             {
                                 "id": "swift-components",
@@ -192,7 +192,7 @@ class ExploreSwiftUIWorkflowTests(unittest.TestCase):
             source.parent.mkdir(parents=True)
             source.write_bytes(b"originaL")
             manifest = {
-                "version": "5.1.0",
+                "version": "1.0.0",
                 "source": "https://exploreswiftui.com/",
                 "components": [
                     {

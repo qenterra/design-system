@@ -5,7 +5,9 @@
 - Release owner: Nikita Melnychenko (QenTerra)
 - Version scheme: semver
 - Version source: `VERSION`
-- Current version: `5.5.1`
+- Current version: `1.0.0`
+
+The maintained release line starts at `1.0.0`. Earlier source snapshot identifiers remain in Git history, and npmjs retains immutable historical `@qenterra/design-tokens@5.0.0`; neither is rewritten or backfilled as a canonical release.
 
 A local commit, tag, GitHub Release, package publication, deployment, store submission, and update-feed change are separate authorised actions.
 

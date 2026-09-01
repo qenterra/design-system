@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
-class DesignSystemV5ContractTests(unittest.TestCase):
+class DesignSystemV1ContractTests(unittest.TestCase):
     def test_repository_contains_no_agent_entrypoint(self) -> None:
         self.assertFalse((ROOT / "SKILL.md").exists())
         self.assertFalse((ROOT / "AGENTS.md").exists())
@@ -17,9 +17,9 @@ class DesignSystemV5ContractTests(unittest.TestCase):
         )
         self.assertFalse(contract["agent_control_plane"])
 
-    def test_major_release_and_public_packages_are_aligned(self) -> None:
+    def test_public_1_0_baseline_and_packages_are_aligned(self) -> None:
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual(version, "5.5.1")
+        self.assertEqual(version, "1.0.0")
         npm = json.loads(
             (ROOT / "packages/npm/design-tokens/package.json").read_text(
                 encoding="utf-8"
@@ -39,6 +39,15 @@ class DesignSystemV5ContractTests(unittest.TestCase):
         self.assertEqual(npm["publishConfig"], {"access": "public"})
         self.assertFalse(npm.get("private", False))
         self.assertTrue((ROOT / "Package.swift").is_file())
+
+    def test_public_npm_scope_uses_npmjs(self) -> None:
+        lines = [
+            line.strip()
+            for line in (ROOT / ".npmrc").read_text(encoding="utf-8").splitlines()
+            if line.strip() and not line.lstrip().startswith("#")
+        ]
+        self.assertIn("@qenterra:registry=https://registry.npmjs.org", lines)
+        self.assertNotIn("@qenterra:registry=https://npm.pkg.github.com", lines)
 
     def test_first_party_material_uses_apache_with_notice(self) -> None:
         root_license = (ROOT / "LICENSE").read_text(encoding="utf-8")
