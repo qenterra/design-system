@@ -139,7 +139,9 @@ Rules:
 
 ### 3.3 Typography
 
-Use the system font. Exact roles are in `tokens/typography.json`.
+Use the system font for shared product UI. Exact roles are in `tokens/typography.json`.
+
+QenTerra brand, editorial, and portfolio surfaces use the separately scoped Tektur + Onest pairing documented in `docs/TYPOGRAPHY.md`. Those assets do not replace platform fonts in Cadence or other product interfaces and do not alter the universal typography tokens.
 
 Roles:
 

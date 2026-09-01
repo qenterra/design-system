@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "catalog": "qenterra.brand.typography",
+  "scope": "brand-and-portfolio",
+  "universalUiDefaultsChanged": false,
+  "roleMap": {
+    "display": "Tektur",
+    "featureHeading": "Tektur",
+    "sectionHeading": "Onest",
+    "navigation": "Onest",
+    "body": "Onest",
+    "metadata": "Onest"
+  },
+  "families": [
+    {
+      "family": "Tektur",
+      "version": "1.005",
+      "license": "OFL-1.1",
+      "copyright": "Copyright 2019 The Tektur Project Authors (https://github.com/hyvyys/Tektur)",
+      "roles": [
+        "display",
+        "feature-heading"
+      ],
+      "scripts": [
+        "cyrillic",
+        "cyrillic-ext",
+        "greek",
+        "latin",
+        "latin-ext"
+      ],
+      "axes": [
+        {
+          "tag": "wdth",
+          "min": 75.0,
+          "default": 100.0,
+          "max": 100.0
+        },
+        {
+          "tag": "wght",
+          "min": 400.0,
+          "default": 400.0,
+          "max": 900.0
+        }
+      ],
+      "upstream": {
+        "repository": "https://github.com/hyvyys/Tektur",
+        "commit": "0313e9612ed814c7a480fa54c7b295452b966954",
+        "release": "v1.005"
+      },
+      "assets": [
+        {
+          "path": "assets/typography/tektur/Tektur[wdth,wght].ttf",
+          "format": "ttf-variable",
+          "bytes": 163160,
+          "sha256": "a4c451e5336874811267c2a514efa09bca7bc8cabf32a310f0b44e111eacb933",
+          "sourceUrl": "https://raw.githubusercontent.com/hyvyys/Tektur/0313e9612ed814c7a480fa54c7b295452b966954/fonts/variable/Tektur%5Bwdth%2Cwght%5D.ttf"
+        },
+        {
+          "path": "assets/typography/tektur/Tektur[wdth,wght].woff2",
+          "format": "woff2-variable",
+          "bytes": 60704,
+          "sha256": "d87e29330a10723f0861e2e611b63cacd66252683cfac979cbb8647b7445097f",
+          "sourceUrl": "https://github.com/hyvyys/Tektur/releases/download/v1.005/Tektur-v1.005.zip",
+          "archivePath": "Tektur-v1.005/webfonts - variable/Tektur[wdth,wght].woff2"
+        },
+        {
+          "path": "assets/typography/tektur/OFL.txt",
+          "format": "license",
+          "bytes": 4384,
+          "sha256": "044cfe19784be59c2ed1e2a58394f617337359233e056bf831eec6594c508ca6",
+          "sourceUrl": "https://raw.githubusercontent.com/hyvyys/Tektur/0313e9612ed814c7a480fa54c7b295452b966954/OFL.txt"
+        }
+      ]
+    },
+    {
+      "family": "Onest",
+      "version": "2.001",
+      "license": "OFL-1.1",
+      "copyright": "Copyright 2021 The Onest Project Authors (https://github.com/simpals/onest)",
+      "roles": [
+        "section-heading",
+        "navigation",
+        "body",
+        "metadata"
+      ],
+      "scripts": [
+        "cyrillic",
+        "cyrillic-ext",
+        "latin",
+        "latin-ext",
+        "math",
+        "symbols",
+        "vietnamese"
+      ],
+      "axes": [
+        {
+          "tag": "wght",
+          "min": 100.0,
+          "default": 400.0,
+          "max": 900.0
+        }
+      ],
+      "upstream": {
+        "repository": "https://github.com/simpals/onest",
+        "commit": "8739b1910618a15335e4cc48842052d0ee739ade",
+        "release": "2.001",
+        "googleFontsCommit": "4c1db3aec83c67dd223dd82a68c039cab30917a9"
+      },
+      "assets": [
+        {
+          "path": "assets/typography/onest/Onest[wght].ttf",
+          "format": "ttf-variable",
+          "bytes": 193056,
+          "sha256": "966c5c29b4755da84b6854d5c21dd4eaa2420225d0e9874de602de176d4a9f31",
+          "sourceUrl": "https://github.com/simpals/onest/releases/download/2.001/onest-2.001.zip",
+          "archivePath": "onest-2.001/fonts/variable/Onest[wght].ttf",
+          "distributionMirror": "https://raw.githubusercontent.com/google/fonts/4c1db3aec83c67dd223dd82a68c039cab30917a9/ofl/onest/Onest%5Bwght%5D.ttf"
+        },
+        {
+          "path": "assets/typography/onest/Onest[wght].woff2",
+          "format": "woff2-variable",
+          "bytes": 83980,
+          "sha256": "cb4d777c1b146887a2902ef01ba91cb3fb0c85e9804e95794eb289a1966c0782",
+          "sourceUrl": "https://github.com/simpals/onest/releases/download/2.001/onest-2.001.zip",
+          "archivePath": "onest-2.001/fonts/webfonts/Onest[wght].woff2"
+        },
+        {
+          "path": "assets/typography/onest/OFL.txt",
+          "format": "license",
+          "bytes": 4383,
+          "sha256": "7805ccc507e6dc0c0796f1afa4f03ad413a9d302a30a24f8dbeb1aeef07a6c17",
+          "sourceUrl": "https://raw.githubusercontent.com/simpals/onest/8739b1910618a15335e4cc48842052d0ee739ade/OFL.txt"
+        }
+      ]
+    }
+  ]
+}

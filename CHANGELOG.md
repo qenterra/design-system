@@ -4,7 +4,9 @@ All notable maintained Design System changes are recorded here. Versions follow 
 
 ## [Unreleased]
 
-No changes have been classified after the new baseline yet.
+### Added
+
+- Added the OFL-licensed Tektur + Onest brand and portfolio typography catalog with design-tool TTFs, web WOFF2s, pinned provenance, byte hashes, role guidance, and repository validation.
 
 ## [1.0.0] - 2026-09-01
 

@@ -74,6 +74,7 @@ def main() -> int:
     run([python, "scripts/uiable.py", "verify"])
     run([python, "scripts/reui.py", "verify"])
     run([python, "scripts/icon_catalogs.py", "verify"])
+    run([python, "scripts/verify_typography_assets.py"])
     run([python, "scripts/build_public_packages.py", "check"])
     run([python, "scripts/verify_public_boundary.py"])
     run([python, "packages/scripts/verify_release.py"])
