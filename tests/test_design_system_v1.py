@@ -17,9 +17,9 @@ class DesignSystemV1ContractTests(unittest.TestCase):
         )
         self.assertFalse(contract["agent_control_plane"])
 
-    def test_public_1_0_baseline_and_packages_are_aligned(self) -> None:
+    def test_public_1_0_line_and_packages_are_aligned(self) -> None:
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual(version, "1.0.0")
+        self.assertEqual(version, "1.0.1")
         npm = json.loads(
             (ROOT / "packages/npm/design-tokens/package.json").read_text(
                 encoding="utf-8"
@@ -27,7 +27,7 @@ class DesignSystemV1ContractTests(unittest.TestCase):
         )
         self.assertEqual(npm["name"], "@qenterra/design-tokens")
         self.assertEqual(npm["version"], version)
-        self.assertEqual(npm["license"], "Apache-2.0")
+        self.assertEqual(npm["license"], "MIT")
         self.assertEqual(
             npm["repository"],
             {
@@ -49,15 +49,17 @@ class DesignSystemV1ContractTests(unittest.TestCase):
         self.assertIn("@qenterra:registry=https://registry.npmjs.org", lines)
         self.assertNotIn("@qenterra:registry=https://npm.pkg.github.com", lines)
 
-    def test_first_party_material_uses_apache_with_notice(self) -> None:
+    def test_first_party_material_uses_mit_without_apache_notices(self) -> None:
         root_license = (ROOT / "LICENSE").read_text(encoding="utf-8")
         package_license = (ROOT / "packages/LICENSE").read_text(encoding="utf-8")
-        self.assertIn("Apache License", root_license)
+        self.assertIn("MIT License", root_license)
+        self.assertIn(
+            "Copyright (c) 2026 Nikita Melnychenko (QenTerra)",
+            root_license,
+        )
         self.assertEqual(root_license, package_license)
         for relative in ("NOTICE", "packages/NOTICE", "packages/npm/design-tokens/NOTICE"):
-            notice = (ROOT / relative).read_text(encoding="utf-8")
-            self.assertIn("Copyright", notice)
-            self.assertIn("Apache-2.0", notice)
+            self.assertFalse((ROOT / relative).exists(), relative)
 
     def test_removed_subsystems_are_absent(self) -> None:
         for relative in ("src", "dist", "output"):

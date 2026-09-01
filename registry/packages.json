@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/package-registry.schema.json",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": "https://github.com/qenterra/design-system",
   "versionPolicy": "shared",
   "packages": [
@@ -8,7 +8,7 @@
       "id": "repository-metadata",
       "ecosystem": "repository",
       "name": "qenterra/design-system",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "publicPaths": [
         "packages/.editorconfig",
         "packages/.gitattributes",
@@ -33,7 +33,6 @@
         "packages/GOVERNANCE.md",
         "packages/LICENSE",
         "packages/MAINTAINERS.md",
-        "packages/NOTICE",
         "packages/Package.swift",
         "packages/README.md",
         "packages/SECURITY.md",
@@ -25883,10 +25882,9 @@
       "id": "npm-design-tokens",
       "ecosystem": "npm",
       "name": "@qenterra/design-tokens",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "publicPaths": [
         "packages/npm/design-tokens/LICENSE",
-        "packages/npm/design-tokens/NOTICE",
         "packages/npm/design-tokens/README.md",
         "packages/npm/design-tokens/package.json",
         "packages/npm/design-tokens/schemas/components.schema.json",
@@ -25924,7 +25922,7 @@
       "id": "swift-components",
       "ecosystem": "swiftpm",
       "name": "QenTerraPackages",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "products": [
         "QenTerraDesignTokens",
         "QenTerraComponents"

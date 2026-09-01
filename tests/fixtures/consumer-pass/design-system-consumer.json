@@ -3,7 +3,7 @@
   "consumer": "Example Workspace",
   "platforms": ["macOS"],
   "packages": [
-    {"id": "swift-components", "version": "1.0.0", "source": "release"}
+    {"id": "swift-components", "version": "1.0.1", "source": "release"}
   ],
   "adoptedCapabilities": ["typed-tokens"],
   "sourceRoots": ["Sources"],

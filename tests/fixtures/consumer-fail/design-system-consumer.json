@@ -3,7 +3,7 @@
   "consumer": "Faultline",
   "platforms": ["web"],
   "packages": [
-    {"id": "npm-design-tokens", "version": "1.0.0", "source": "release"}
+    {"id": "npm-design-tokens", "version": "1.0.1", "source": "release"}
   ],
   "adoptedCapabilities": ["tokens.css"],
   "sourceRoots": ["src"],

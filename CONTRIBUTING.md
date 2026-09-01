@@ -62,4 +62,4 @@ manual gaps.
 - Keep unrelated formatting and generated churn out of the patch.
 
 By contributing, you agree that your contribution may be used under this
-repository's [Apache License 2.0](LICENSE).
+repository's [MIT License](LICENSE).

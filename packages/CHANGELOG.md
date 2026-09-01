@@ -4,7 +4,18 @@ All notable public package changes are recorded here. Versions follow Semantic V
 
 ## [Unreleased]
 
-No package changes have been classified after the new baseline yet.
+No package changes have been classified after `1.0.1`.
+
+## [1.0.1] - 2026-09-02
+
+### Added
+
+- Added the OFL-licensed Tektur + Onest typography catalog with exact font files, provenance, hashes, and validation.
+
+### Changed
+
+- Relicensed QenTerra-authored package material from Apache-2.0 to MIT while retaining every third-party license and notice.
+- Removed obsolete first-party Apache `NOTICE` files and publication-permission wording from the Explore SwiftUI catalog documentation.
 
 ## [1.0.0] - 2026-09-01
 
@@ -28,5 +39,6 @@ No package changes have been classified after the new baseline yet.
 - npmjs retains immutable historical version `5.0.0` from the retired Packages repository. It is not replaced, deleted, or presented as part of the new `1.x` line.
 - No tag, GitHub Release, or npm publication is implied by this changelog entry. Publication remains a separately authorised operation.
 
-[Unreleased]: https://github.com/QenTerra/design-system/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/QenTerra/design-system/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/QenTerra/design-system/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/QenTerra/design-system/releases/tag/v1.0.0

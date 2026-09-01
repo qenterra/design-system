@@ -62,7 +62,7 @@ class PublicReleaseContractTests(unittest.TestCase):
         self.assertNotIn("inputs.publish", workflow)
         self.assertIn("    needs: snapshot", publish)
         self.assertIn(
-            "ref: ${{ github.event_name == 'workflow_dispatch' && inputs.release_tag || github.ref }}",
+            "ref: ${{ github.event_name == 'workflow_dispatch' && format('refs/tags/{0}', inputs.release_tag) || github.ref }}",
             snapshot,
         )
         self.assertIn(
@@ -70,6 +70,14 @@ class PublicReleaseContractTests(unittest.TestCase):
             snapshot,
         )
         self.assertIn('test "$RELEASE_TAG" = "v$version"', snapshot)
+        self.assertIn(
+            'git show-ref --verify --quiet "refs/tags/$RELEASE_TAG"',
+            snapshot,
+        )
+        self.assertIn(
+            'test "$(git rev-parse HEAD)" = "$(git rev-list -n 1 "$RELEASE_TAG")"',
+            snapshot,
+        )
 
     def test_npm_publish_job_uses_trusted_publishing_with_pinned_tooling(self) -> None:
         workflow = (ROOT / ".github/workflows/release-packages.yml").read_text(

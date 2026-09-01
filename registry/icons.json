@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/icon-registry.schema.json",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "platform": "apple",
   "icons": [
     {"id":"accessibility","category":"status","meaning":"Accessibility","sfSymbol":"accessibility","minimumOS":"11.0"},

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": "https://github.com/qenterra/design-system",
   "files": [
     {
@@ -20,7 +20,7 @@
     },
     {
       "path": ".github/ISSUE_TEMPLATE/01-bug.yml",
-      "sha256": "e37c1aa5186caf3f368622de715f3728aa4c98d5d508900d3f73a831059bf5c2",
+      "sha256": "1b882d1475787d9432e276175e63d48453538bc63564d736e8062651c781b911",
       "bytes": 1740
     },
     {
@@ -55,8 +55,8 @@
     },
     {
       "path": ".github/qenterra-repository.json",
-      "sha256": "7770e9fa8fabbdecb7d0ab62626cf74fa38e4017aff8492f6611c48d6afb78da",
-      "bytes": 5370
+      "sha256": "d6ba3e9dffe1c37342182f8e76a76655a2715f9b343a7b7ef299a4dfd45d7138",
+      "bytes": 5347
     },
     {
       "path": ".github/qenterra-repository.schema.json",
@@ -90,8 +90,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "f15789e652ed1169db68b8588828bbcecf63ae6069194248f2ccd20c42ccfa43",
-      "bytes": 1869
+      "sha256": "628555a97725a12b1ad2ba7041b05f462bf4f9884150187c0ee9c07c066a6946",
+      "bytes": 2361
     },
     {
       "path": "CODE_OF_CONDUCT.md",
@@ -100,8 +100,8 @@
     },
     {
       "path": "CONTRIBUTING.md",
-      "sha256": "6dae398348abebab0bb33f9f5118cd788c7ef5c17cb15d840379657c429c0a7c",
-      "bytes": 2582
+      "sha256": "dac9802ea3d2541a7b56ec2bb6eb01781398d6f31efdc8218a39d82b64e1e27c",
+      "bytes": 2575
     },
     {
       "path": "GOVERNANCE.md",
@@ -110,18 +110,13 @@
     },
     {
       "path": "LICENSE",
-      "sha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff",
-      "bytes": 10280
+      "sha256": "8abf500850607a9159593ea4b06a9b4897ccd783e4a7d5ffdfeca2660250235f",
+      "bytes": 1086
     },
     {
       "path": "MAINTAINERS.md",
       "sha256": "94e7d8f7a26e096fd004826463c9b9c7e61c4718085b60cf24891b6e3586f195",
       "bytes": 715
-    },
-    {
-      "path": "NOTICE",
-      "sha256": "da36b4cc554b3ceb314905c4ee43703676507852ff1afec2d0b6bb67c15ecff5",
-      "bytes": 324
     },
     {
       "path": "Package.swift",
@@ -130,8 +125,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "fa64b380574eaa2a253080f0847a88e7fb39e1daf3d3555c0990ba89fab93157",
-      "bytes": 5683
+      "sha256": "db5023794ad4424108a9973adf306ab541435a514c5b837328493d1d6726b151",
+      "bytes": 5655
     },
     {
       "path": "SECURITY.md",
@@ -10545,7 +10540,7 @@
     },
     {
       "path": "Sources/BootstrapIcons/manifest.json",
-      "sha256": "eb42fafc8f36b435791abd418d8805a62c8370bbfde2506b4d0c423b220588e7",
+      "sha256": "5b78f457725fa23ac59cd7fbf6bc072c412ad00d766f9f02411cabaae4cd052d",
       "bytes": 851220
     },
     {
@@ -11655,12 +11650,12 @@
     },
     {
       "path": "Sources/ExploreSwiftUI/README.md",
-      "sha256": "515e3da783909ed16f1094cccf2216067d25bc9490cfec37deffd4a426db79e2",
-      "bytes": 1333
+      "sha256": "1319bb18a2151af7e245df7486bebe3d139c4bfc7d50a5f6d2815251f616dd94",
+      "bytes": 1221
     },
     {
       "path": "Sources/ExploreSwiftUI/manifest.json",
-      "sha256": "e2508f7eab46784009a4dcc96f2d6bf981473775e5af23cb5c8dac39bf88ac6e",
+      "sha256": "160e59864bdfa4d4b11252dddbe9dd705d974499b79b21475bd856b37d4ce149",
       "bytes": 248777
     },
     {
@@ -20030,7 +20025,7 @@
     },
     {
       "path": "Sources/Iconoir/manifest.json",
-      "sha256": "a350d6f07d84b163db1bb15da60768e068238a574affbd4cb8e61215e91e4d33",
+      "sha256": "0fb773f8e8aa19bc6dbf31a6132534fb2a610ff35b519b293171468da415afd3",
       "bytes": 736795
     },
     {
@@ -20805,7 +20800,7 @@
     },
     {
       "path": "Sources/MagicUI/manifest.json",
-      "sha256": "eff123accee226ff320b9dbc2bf7fedd73aef9520600e0366e11737ad4f131f1",
+      "sha256": "c2ab20e718d1670399af6fcff7988486f41355ddcc0dff82605ed7c8c4980a25",
       "bytes": 92963
     },
     {
@@ -66180,7 +66175,7 @@
     },
     {
       "path": "Sources/PhosphorIcons/manifest.json",
-      "sha256": "bd76b14654fafb4d31bb561045f68b1d1e5354a2162a7b8331f344b3fd4c81ba",
+      "sha256": "98bda664b16eb30f5ffbb3728cf4dbe5ea226c5968ace639115ab9d26cd412fc",
       "bytes": 4143937
     },
     {
@@ -66205,12 +66200,12 @@
     },
     {
       "path": "Sources/QenTerra/DesignTokens/GeneratedIcons.swift",
-      "sha256": "b140305ba4d41d975c83980e39dc287ca466198a5b83f705b86fd06f5ebf7c76",
+      "sha256": "5ac459e16bdcbb3fed4078c92608d55ce05f2598d099ae1470ac8ee86ba0041c",
       "bytes": 579
     },
     {
       "path": "Sources/QenTerra/DesignTokens/GeneratedTokens.swift",
-      "sha256": "1e10380344fff35c66e31e61b886cb4d799f78994e03874ce40aace90f1497b1",
+      "sha256": "db4c078ae3ac7c57b8f8364f690749d6a55c97df71755d880a72f0b00fec2b8a",
       "bytes": 17204
     },
     {
@@ -66225,7 +66220,7 @@
     },
     {
       "path": "Sources/QenTerra/manifest.json",
-      "sha256": "a028653f00207237fd188a60bbcaf64faec8a3d534267fb2d8f71c6239322a62",
+      "sha256": "d1dee75ee8b4db4923bfa85b5eef5b3ab266824003d875ccacddf5403e83d052",
       "bytes": 1380
     },
     {
@@ -89925,7 +89920,7 @@
     },
     {
       "path": "Sources/ReUI/manifest.json",
-      "sha256": "b99f34a27f876782b39f27ae7a58bdb185c2d27c7b43679db78667d5826e00d3",
+      "sha256": "6ee770e31703f7640f8606421acfcf29ec6a2c11ef32db0159da90f9dee49f35",
       "bytes": 3801818
     },
     {
@@ -90850,7 +90845,7 @@
     },
     {
       "path": "Sources/ShadcnUI/manifest.json",
-      "sha256": "08d342d7026bbba0170c4ed61e139e83ded1d2eac04c322fdccdd0ee3d3cef2d",
+      "sha256": "4facb6b45e485657da436f2592ba37665691a23773a218797d8ed58ced68b45e",
       "bytes": 103050
     },
     {
@@ -121785,7 +121780,7 @@
     },
     {
       "path": "Sources/TablerIcons/manifest.json",
-      "sha256": "aa45e677cd52f43aa732a1869598ca68fd3673812dea0b797d4bdef184bb8871",
+      "sha256": "a07c0989afd3ee504988e4e99870b3b1fb7b7f331c18a3810344b4c530d6f2da",
       "bytes": 2758421
     },
     {
@@ -129250,12 +129245,12 @@
     },
     {
       "path": "Sources/UIable/manifest.json",
-      "sha256": "1da33b424bcc11c69d187855e5b28ec8b0cfb1c1ed3f1e9af5afedff595d99ca",
+      "sha256": "0ae87aa5a5ecb13bc972472b332ff75ade6ae62d322c089275778a2c9d117efd",
       "bytes": 998977
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
-      "sha256": "83cc49cf89f2503c8763d1dd88d3967b2d57ec6acfac3972832cab897d2895aa",
+      "sha256": "df5bff5603113af160aeba7d09221947c4d2f3f1135b82d09149cc3839499c78",
       "bytes": 5497
     },
     {
@@ -129265,7 +129260,7 @@
     },
     {
       "path": "Tests/QenTerraDesignTokensTests/DesignTokensTests.swift",
-      "sha256": "7cb6a5d0b8a172187eab942c32868c7bc880e4fb733576c663476149e70c2779",
+      "sha256": "ffe19efe1b8d49f73c1971b9cf4af30b942792a75778304ce50d317426f819df",
       "bytes": 941
     },
     {
@@ -129275,12 +129270,12 @@
     },
     {
       "path": "docs/DEPENDENCIES.md",
-      "sha256": "ec14a9c70f2b38513fbb4e25efae7cd0cc79908a8a7442e17338ccfb257b68d6",
-      "bytes": 3857
+      "sha256": "38263b50ddadabf91fc9b15ea7cba6243ac71d2ece6492d33fcee4e306183a41",
+      "bytes": 3856
     },
     {
       "path": "docs/DEPRECATION.md",
-      "sha256": "955e83497418f76f6ba1a0e9a0b7b5d9411660851cfd2fa75cb448990394ec8b",
+      "sha256": "29c3728111d27cedea079940608bf7ad0d99b2e9f51ae7364b163a8bda7faee7",
       "bytes": 594
     },
     {
@@ -129315,7 +129310,7 @@
     },
     {
       "path": "docs/RELEASING.md",
-      "sha256": "7247e66eb11f794b9b1288b6a2b870523bbe1e4bcae38cfe56c7befbc54362e1",
+      "sha256": "4b59f40fb4f46d85e64bacf496b46660effdb3b2119b9425ba6f8d79ab6b8c2b",
       "bytes": 1782
     },
     {
@@ -129350,22 +129345,17 @@
     },
     {
       "path": "npm/design-tokens/LICENSE",
-      "sha256": "41ec2b920f33c7abe6df4d4ac50bd063d28ccebbbe71ca71d165f3f5e01a943e",
-      "bytes": 10852
-    },
-    {
-      "path": "npm/design-tokens/NOTICE",
-      "sha256": "44581386154b0b798ec7330b647b621492659aaee0a7c0e449a983dc00f9c40f",
-      "bytes": 215
+      "sha256": "8abf500850607a9159593ea4b06a9b4897ccd783e4a7d5ffdfeca2660250235f",
+      "bytes": 1086
     },
     {
       "path": "npm/design-tokens/README.md",
-      "sha256": "b79e28680beac8223bb008e63a3cc137ae878585db239434fbb6727b4bdbaa48",
-      "bytes": 614
+      "sha256": "70ddab83c1e266e267448391c8580ff1c6e790795c1fdea7a338b860ec29780a",
+      "bytes": 577
     },
     {
       "path": "npm/design-tokens/dist/icons.json",
-      "sha256": "8301e324536fd7512f0fe2031b91b4c0f363c7fe89b30b5085b2dad25e1c41cf",
+      "sha256": "a13303112962d47eb511a1207f404a9889b0bc727e8f07fb5f46fda84d2c9b41",
       "bytes": 1945
     },
     {
@@ -129375,18 +129365,18 @@
     },
     {
       "path": "npm/design-tokens/dist/tokens.css",
-      "sha256": "696670ab8c4964ec3c8f6d6af4edd667ad9797ec47914f99277d1e854946c729",
+      "sha256": "f8f1a399e555e5fd12e8bb44de384f545a30dddc796e35dbb6a59889740b20e4",
       "bytes": 14992
     },
     {
       "path": "npm/design-tokens/dist/tokens.json",
-      "sha256": "21c9108055c7f628d493036e7d623cc3b1da18c2b53e6ebd8569079b2c98d283",
+      "sha256": "94bc8fff6163178f41d48ac4969c35e3abf8f65d63e1d4e9e1099b3150046d85",
       "bytes": 21807
     },
     {
       "path": "npm/design-tokens/package.json",
-      "sha256": "ddfd621632e63ab2da909e6ce53e863776c91c1cbe38e1526e914e7185448a42",
-      "bytes": 750
+      "sha256": "3d9df09d41d69e44241c63ec2f2969c37b56402ab0ae535a4cbddb18b07f9357",
+      "bytes": 729
     },
     {
       "path": "npm/design-tokens/schemas/components.schema.json",
@@ -129435,7 +129425,7 @@
     },
     {
       "path": "npm/design-tokens/src/icons.json",
-      "sha256": "5a62d92bcf1b034efd282152b7cfd097a7a7aab8eb7d6cb9d54c96144e6aa75e",
+      "sha256": "7fb088f82f35fc61ba021d7f272e0885b204478e7aa0484c8d1beb1808ec59c7",
       "bytes": 1998
     },
     {
@@ -129450,12 +129440,12 @@
     },
     {
       "path": "npm/design-tokens/src/tokens.json",
-      "sha256": "21c9108055c7f628d493036e7d623cc3b1da18c2b53e6ebd8569079b2c98d283",
+      "sha256": "94bc8fff6163178f41d48ac4969c35e3abf8f65d63e1d4e9e1099b3150046d85",
       "bytes": 21807
     },
     {
       "path": "package.json",
-      "sha256": "f5949d730a51cdd8c5dea524b76fbe7db3d6fdee9862d3fb17cffb69b0ff60d5",
+      "sha256": "83f50491625dca441a86e96fb24f188a59de66176e8e6035c264aa1cfacd4261",
       "bytes": 225
     },
     {

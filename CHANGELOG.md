@@ -4,9 +4,20 @@ All notable maintained Design System changes are recorded here. Versions follow 
 
 ## [Unreleased]
 
+No maintained changes have been classified after `1.0.1`.
+
+## [1.0.1] - 2026-09-02
+
 ### Added
 
 - Added the OFL-licensed Tektur + Onest brand and portfolio typography catalog with design-tool TTFs, web WOFF2s, pinned provenance, byte hashes, role guidance, and repository validation.
+
+### Changed
+
+- Relicensed QenTerra-authored repository and package material from Apache-2.0 to MIT while preserving third-party licenses, provenance, and historical release records.
+- Updated the verification environment from Pillow `12.2.0` to `12.3.0`.
+- Removed obsolete first-party Apache `NOTICE` files and publication-permission wording from the Explore SwiftUI catalog documentation.
+- Required manual package publication to resolve an existing immutable tag instead of accepting a same-named branch or other Git reference.
 
 ## [1.0.0] - 2026-09-01
 
@@ -33,5 +44,6 @@ All notable maintained Design System changes are recorded here. Versions follow 
 - npmjs still retains the immutable historical `@qenterra/design-tokens@5.0.0` artifact whose metadata points to the retired Packages repository. Resetting source versioning does not erase or rewrite that registry fact.
 - No tag, GitHub Release, or npm publication is implied by this changelog entry. Publication remains a separately authorised operation.
 
-[Unreleased]: https://github.com/QenTerra/design-system/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/QenTerra/design-system/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/QenTerra/design-system/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/QenTerra/design-system/releases/tag/v1.0.0

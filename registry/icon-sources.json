@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/icon-source-registry.schema.json",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "selectionPolicy": {
     "projectFamilyLimit": 1,
     "searchBeforeCreate": true
