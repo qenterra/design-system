@@ -54,7 +54,7 @@ class PublicReleaseContractTests(unittest.TestCase):
             content = b"public\n"
             manifest = {
                 "schemaVersion": 1,
-                "version": "5.0.0",
+                "version": "1.0.0",
                 "repository": "https://github.com/qenterra/design-system",
                 "files": [
                     {
@@ -82,7 +82,7 @@ class PublicReleaseContractTests(unittest.TestCase):
                 json.dumps(
                     {
                         "schemaVersion": 1,
-                        "version": "5.0.0",
+                        "version": "1.0.0",
                         "repository": "https://github.com/qenterra/design-system",
                         "files": [
                             {
@@ -109,7 +109,7 @@ class PublicReleaseContractTests(unittest.TestCase):
                 json.dumps(
                     {
                         "schemaVersion": 1,
-                        "version": "5.0.0",
+                        "version": "1.0.0",
                         "repository": "https://github.com/qenterra/design-system",
                         "files": [
                             {

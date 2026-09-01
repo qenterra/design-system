@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/native-pattern-registry.schema.json",
-  "version": "5.5.1",
+  "version": "1.0.0",
   "source": "https://exploreswiftui.com/",
   "sitemap": "https://exploreswiftui.com/sitemap.xml",
   "count": 221,

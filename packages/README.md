@@ -61,7 +61,9 @@ Nikita Melnychenko (`@qenterra`) owns package APIs, release decisions, security 
 
 ## Version and release model
 
-All packages use one Semantic Versioning value. The current release is `5.5.1`; npm metadata, Swift source compatibility, source catalogs, release tags, changelog, and `release-manifest.json` move together. Tags use `v<version>` and published versions are immutable.
+All packages use one Semantic Versioning value. The current canonical baseline is `1.0.0`; npm metadata, Swift source compatibility, source catalogs, release tags, changelog, and `release-manifest.json` move together. Tags use `v<version>` and published versions are immutable.
+
+The first canonical `1.0.0` publication from this repository is still pending. npmjs retains immutable historical version `5.0.0` from the retired Packages repository; it remains registry history rather than part of the maintained `1.x` line.
 
 ## Documentation
 

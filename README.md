@@ -2,7 +2,7 @@
 
 Universal foundations, reusable visual components, palettes, platform adapters, and engineering contracts for websites, native applications, and other interface-bearing projects.
 
-> **Status:** public canonical source, version `5.5.1`, licensed under Apache-2.0.
+> **Status:** public canonical source, version `1.0.0`, licensed under Apache-2.0.
 
 ## Use it
 
@@ -59,6 +59,8 @@ Nikita Melnychenko (`@qenterra`) owns the canonical system and release decisions
 ## Version and release model
 
 `VERSION`, token metadata, registries, package manifests, generated adapters, and the release manifest move in lockstep under Semantic Versioning. Releases use immutable `v<version>` tags from a verified commit on this repository. See [RELEASING.md](docs/RELEASING.md) and [PACKAGE_RELEASE.md](docs/PACKAGE_RELEASE.md).
+
+The maintained public line starts at `1.0.0`. Earlier internal snapshot identifiers remain visible in Git history but do not define the active release line. npmjs also retains the immutable historical `@qenterra/design-tokens@5.0.0` artifact from the retired Packages repository; it is not rewritten by the new baseline.
 
 ## Verify
 
