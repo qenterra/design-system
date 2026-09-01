@@ -6,7 +6,7 @@ All notable public package changes are recorded here. Versions follow Semantic V
 
 No package changes have been classified after the new baseline yet.
 
-## [1.0.0] - Pending release
+## [1.0.0] - 2026-09-01
 
 ### Added
 
@@ -26,4 +26,7 @@ No package changes have been classified after the new baseline yet.
 
 - Previous internal package snapshot identifiers remain in Git history rather than the active release line.
 - npmjs retains immutable historical version `5.0.0` from the retired Packages repository. It is not replaced, deleted, or presented as part of the new `1.x` line.
-- `1.0.0` remains pending until an authorised tag, GitHub Release, and applicable package publication are verified against one commit.
+- No tag, GitHub Release, or npm publication is implied by this changelog entry. Publication remains a separately authorised operation.
+
+[Unreleased]: https://github.com/QenTerra/design-system/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/QenTerra/design-system/releases/tag/v1.0.0

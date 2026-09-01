@@ -6,7 +6,7 @@ All notable maintained Design System changes are recorded here. Versions follow 
 
 No changes have been classified after the new baseline yet.
 
-## [1.0.0] - Pending release
+## [1.0.0] - 2026-09-01
 
 ### Added
 
@@ -30,3 +30,6 @@ No changes have been classified after the new baseline yet.
 - Earlier internal snapshot identifiers through `5.5.1` remain preserved in Git history. They are development history, not the active public release line.
 - npmjs still retains the immutable historical `@qenterra/design-tokens@5.0.0` artifact whose metadata points to the retired Packages repository. Resetting source versioning does not erase or rewrite that registry fact.
 - No tag, GitHub Release, or npm publication is implied by this changelog entry. Publication remains a separately authorised operation.
+
+[Unreleased]: https://github.com/QenTerra/design-system/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/QenTerra/design-system/releases/tag/v1.0.0
