@@ -5,13 +5,13 @@
   "files": [
     {
       "path": "generated/TOKEN_REFERENCE.md",
-      "sha256": "1940c376656b1ba16002b34713260248fabe593928f10aff9a8cff77498435cd",
-      "bytes": 19667
+      "sha256": "383747cbb1ee929910e2bf1547bb31042093f0bb9176b0d5ff3271125b689f02",
+      "bytes": 22527
     },
     {
       "path": "generated/figma/components.json",
-      "sha256": "c344a7f3df28ebb4a24aaf4f46529c9765f05f776d5123f5e5fcd5f0594cec79",
-      "bytes": 29557
+      "sha256": "5a7397a28e471c7a169cd6a18f34b51b1a7b9dd696eacf4b79db400865b4ecae",
+      "bytes": 63120
     },
     {
       "path": "generated/figma/icons.json",
@@ -34,9 +34,14 @@
       "bytes": 579
     },
     {
+      "path": "packages/Sources/QenTerra/DesignTokens/GeneratedProductProfiles.swift",
+      "sha256": "03e01c1276fbf95a16377356dfde993422b2a1c4d4cbd269e0b6e0cfc1acdd4a",
+      "bytes": 414
+    },
+    {
       "path": "packages/Sources/QenTerra/DesignTokens/GeneratedTokens.swift",
-      "sha256": "db4c078ae3ac7c57b8f8364f690749d6a55c97df71755d880a72f0b00fec2b8a",
-      "bytes": 17204
+      "sha256": "2e76bf241230ae418fb6a0368441743b393fc77cc21d07737013dfed7444004a",
+      "bytes": 18425
     },
     {
       "path": "packages/Sources/ReUI/Base/Components/accordion/c-accordion-1.tsx",
@@ -17750,13 +17755,13 @@
     },
     {
       "path": "packages/npm/design-tokens/dist/tokens.css",
-      "sha256": "f8f1a399e555e5fd12e8bb44de384f545a30dddc796e35dbb6a59889740b20e4",
-      "bytes": 14992
+      "sha256": "80f6e925c1f18a94bdbb7928ea84c4ecbdba6478fa6a054cedd1b6ff77bbadc8",
+      "bytes": 15870
     },
     {
       "path": "packages/npm/design-tokens/dist/tokens.json",
-      "sha256": "94bc8fff6163178f41d48ac4969c35e3abf8f65d63e1d4e9e1099b3150046d85",
-      "bytes": 21807
+      "sha256": "bfa152bddc6a27d7b4ba97b2fdc1429fd6e2613e6a9f39c543d7ac6edcd8419c",
+      "bytes": 24183
     },
     {
       "path": "packages/npm/design-tokens/src/icons.json",
@@ -17775,8 +17780,8 @@
     },
     {
       "path": "packages/npm/design-tokens/src/tokens.json",
-      "sha256": "94bc8fff6163178f41d48ac4969c35e3abf8f65d63e1d4e9e1099b3150046d85",
-      "bytes": 21807
+      "sha256": "bfa152bddc6a27d7b4ba97b2fdc1429fd6e2613e6a9f39c543d7ac6edcd8419c",
+      "bytes": 24183
     },
     {
       "path": "registry/icons.json",
@@ -17785,8 +17790,8 @@
     },
     {
       "path": "tokens/components.json",
-      "sha256": "e8938e650edb5094227412647056d29c0764866570ceb9b557a319f757203cb7",
-      "bytes": 3552
+      "sha256": "3bf40e643fbdea18a629b930a64e508ba3f3421a1794e307ea105ba7a0387fc9",
+      "bytes": 5274
     },
     {
       "path": "tokens/foundation.json",
@@ -17800,13 +17805,13 @@
     },
     {
       "path": "tokens/platforms.json",
-      "sha256": "68230777b98ba2edaf57fe12fb2a6134a59eb3a42cb4c8361fc38479f496b35a",
-      "bytes": 1906
+      "sha256": "de4157c7dc5565beaa18ad5a8b7d904e069950c49958c3daca589143b3dd9e22",
+      "bytes": 1978
     },
     {
       "path": "tokens/products.json",
-      "sha256": "7bc39415db42fcc7940cc684830c4562fc6d1e933d1671e2b809a142f8ba0dc7",
-      "bytes": 2099
+      "sha256": "76d3c0baca3dca253a5c19616257160c6496c2e4bae9be9b4bc0ad2c5af2b318",
+      "bytes": 2545
     },
     {
       "path": "tokens/semantic.json",

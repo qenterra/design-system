@@ -7,6 +7,9 @@ All notable maintained Design System changes are recorded here. Versions follow 
 ### Changed
 
 - Raised the maintained Swift packages' minimum macOS version from 13 to 26 and moved macOS verification and package-release jobs to macOS 26. iOS remains at 16. This is a breaking change planned for `2.0.0`; macOS consumers must raise their deployment target or remain on a compatible immutable release. Existing releases and tags are unchanged.
+- Planned macOS feedback and configurable About components, including validated measured progress, consumer-owned recovery and URL handling, and explicit unavailable presentation. This is not a release and does not change `VERSION`.
+- Added deterministic native core-component snapshot tests to the root and public Swift packages, with reviewed per-platform references and strict dimension/color comparison.
+- Corrected primary/destructive button state foreground contrast and native loading indicator appearance. Explicit design environments now take precedence over native accessibility inputs; standalone components retain live native fallback and scoped profile/density resolution.
 
 ## [1.0.1] - 2026-09-02
 

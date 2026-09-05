@@ -3,15 +3,47 @@
   "version": "1.0.1",
   "components": [
     {
+      "id": "card-container",
+      "name": "CardContainer",
+      "category": "layout",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/Components/Containers/CardContainer.swift",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["CardContainer"],
+      "designTokens": true
+    },
+    {
+      "id": "design-button-style",
+      "name": "DesignButtonStyle",
+      "category": "control",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/Components/Controls/DesignButtonStyle.swift",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["DesignButtonRole", "DesignButtonState", "DesignButtonStyle"],
+      "designTokens": true
+    },
+    {
       "id": "group-container",
       "name": "GroupContainer",
       "category": "layout",
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/GroupContainer.swift",
+      "deliveryProduct": "QenTerraComponents",
       "publicSymbols": [
         "GroupContainer",
+        "View.designGroupContainer()",
         "View.designGroupContainer(appearance:)"
       ],
+      "designTokens": true
+    },
+    {
+      "id": "icon-action-button",
+      "name": "IconActionButton",
+      "category": "control",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/Components/Controls/IconActionButton.swift",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["IconActionButton"],
       "designTokens": true
     },
     {
@@ -20,9 +52,8 @@
       "category": "control",
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/InteractiveRowSurface.swift",
-      "publicSymbols": [
-        "InteractiveRowSurface"
-      ],
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["InteractiveRowState", "InteractiveRowSurface"],
       "designTokens": true
     },
     {
@@ -31,9 +62,218 @@
       "category": "control",
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/PrimaryButtonStyle.swift",
-      "publicSymbols": [
-        "PrimaryButtonStyle"
-      ],
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["PrimaryButtonStyle"],
+      "designTokens": true
+    },
+    {
+      "id": "row-action-button-style",
+      "name": "RowActionButtonStyle",
+      "category": "control",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/Components/Controls/RowActionButtonStyle.swift",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["RowActionButtonStyle"],
+      "designTokens": true
+    },
+    {
+      "id": "settings-row",
+      "name": "SettingsRow",
+      "category": "layout",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/Components/Containers/SettingsRow.swift",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["SettingsRow"],
+      "designTokens": true
+    },
+    {
+      "id": "settings-section",
+      "name": "SettingsSection",
+      "category": "layout",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/Components/Containers/SettingsSection.swift",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["SettingsSection"],
+      "designTokens": true
+    },
+    {
+      "id": "settings-toggle-row",
+      "name": "SettingsToggleRow",
+      "category": "control",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/Components/Containers/SettingsToggleRow.swift",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["SettingsToggleRow"],
+      "designTokens": true
+    },
+    {
+      "id": "page-header",
+      "name": "PageHeader",
+      "category": "layout",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/Components/Layout/PageHeader.swift",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["DesignComponentMetrics", "PageHeader"],
+      "designTokens": true
+    },
+    {
+      "id": "page-scroll-view",
+      "name": "PageScrollView",
+      "category": "layout",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/Components/Layout/PageScrollView.swift",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["PageScrollOwnership", "PageScrollPresentation", "PageScrollView"],
+      "designTokens": true
+    },
+    {
+      "id": "flow-layout",
+      "name": "DesignFlowLayout",
+      "category": "layout",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/Components/Layout/FlowLayout.swift",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["DesignFlowLayout", "DesignFlowLayout.Arrangement"],
+      "designTokens": true
+    },
+    {
+      "id": "resizable-split-view",
+      "name": "ResizableSplitView",
+      "category": "layout",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/Components/Layout/ResizableSplitView.swift",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["ResizableSplitLayout", "ResizableSplitLayout.AdjustmentDirection", "ResizableSplitView"],
+      "designTokens": true
+    },
+    {
+      "id": "design-separator",
+      "name": "DesignSeparator",
+      "category": "layout",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/Components/Layout/DesignSeparator.swift",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["DesignSeparatorOrientation", "DesignSeparator"],
+      "designTokens": true
+    },
+    {
+      "id": "workspace-pane-header",
+      "name": "WorkspacePaneHeader",
+      "category": "layout",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/Components/Layout/WorkspacePaneHeader.swift",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["WorkspacePaneHeader"],
+      "designTokens": true
+    },
+    {
+      "id": "navigation-rail",
+      "name": "NavigationRail",
+      "category": "navigation",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/Components/Navigation/NavigationRail.swift",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["NavigationRailItem", "NavigationRailItemPresentation", "NavigationRail"],
+      "designTokens": true
+    },
+    {
+      "id": "tab-strip",
+      "name": "TabStrip",
+      "category": "navigation",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/Components/Navigation/TabStrip.swift",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["TabItem", "TabStrip"],
+      "designTokens": true
+    },
+    {
+      "id": "sort-menu",
+      "name": "SortMenu",
+      "category": "overlay",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/Components/Overlays/SortMenu.swift",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["SortMenuOrder", "SortMenuField", "SortMenuLabels", "SortMenuUnavailableReason", "SortMenuReadyPresentation", "SortMenuPresentation", "SortMenu"],
+      "designTokens": true
+    },
+    {
+      "id": "rename-alert",
+      "name": "RenameAlertConfiguration",
+      "category": "overlay",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/Components/Overlays/RenameAlert.swift",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["RenameValidationState", "RenameAlertConfiguration"],
+      "designTokens": true
+    },
+    {
+      "id": "keycap",
+      "name": "Keycap",
+      "category": "control",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/Components/Overlays/Keycap.swift",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["Keycap", "KeycapChord", "KeycapChordPresentation"],
+      "designTokens": true
+    },
+    {
+      "id": "content-state-view",
+      "name": "ContentStateView",
+      "category": "feedback",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/Components/Feedback/ContentStateView.swift",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["ContentPresentationState", "PresentationAction", "ContentStateView"],
+      "designTokens": true
+    },
+    {
+      "id": "status-banner",
+      "name": "StatusBanner",
+      "category": "feedback",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/Components/Feedback/StatusBanner.swift",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["StatusTone", "StatusBannerConfiguration", "StatusBanner"],
+      "designTokens": true
+    },
+    {
+      "id": "drop-zone",
+      "name": "DropZone",
+      "category": "feedback",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/Components/Feedback/DropZone.swift",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["DropZoneState", "DropZonePresentation", "DropZone"],
+      "designTokens": true
+    },
+    {
+      "id": "operation-state-view",
+      "name": "OperationStateView",
+      "category": "feedback",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/Components/Feedback/OperationStateView.swift",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["MeasuredOperationProgress", "OperationPresentationState", "OperationStateView"],
+      "designTokens": true
+    },
+    {
+      "id": "about-page",
+      "name": "AboutPage",
+      "category": "feedback",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/Components/About/AboutPage.swift",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["AboutResourceAvailability", "AboutResource", "AboutPageConfiguration", "AboutPageAccessibilityPresentation", "AboutResourceAccessibilityPresentation", "AboutPage"],
+      "designTokens": true
+    },
+    {
+      "id": "about-resource-row",
+      "name": "AboutResourceRow",
+      "category": "feedback",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/Components/About/AboutResourceRow.swift",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": ["AboutResourceOpenRejection", "AboutResourceRowPresentation", "AboutResourceRow"],
       "designTokens": true
     }
   ]

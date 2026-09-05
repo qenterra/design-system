@@ -318,7 +318,20 @@ Shared component metrics and mandatory state contracts.
 - `extensions.rawMetricExceptions.overlay.dialogReadableWidth`: `Readable dialog width is specific to this overlay contract.`
 - `extensions.rawMetricExceptions.overlay.popoverMaxWidth`: `Readable popover cap is specific to this overlay contract.`
 - `extensions.rawMetricExceptions.overlay.sheetReadableWidth`: `Readable sheet width is specific to this overlay contract.`
+- `extensions.rawMetricExceptions.panel.about.iconSide`: `About icon scale belongs to the about-page composition.`
+- `extensions.rawMetricExceptions.panel.about.readableWidth`: `About readable width belongs to the about-page composition.`
+- `extensions.rawMetricExceptions.panel.artwork.heroSide`: `Artwork hero size belongs to the media surface.`
+- `extensions.rawMetricExceptions.panel.artwork.minimumSide`: `Artwork minimum is a media presentation constraint.`
+- `extensions.rawMetricExceptions.panel.lyrics.followDurationMs`: `Lyric follow timing belongs to the lyrics presentation.`
+- `extensions.rawMetricExceptions.panel.lyrics.inactiveOpacity`: `Inactive lyric treatment belongs to the lyrics presentation.`
+- `extensions.rawMetricExceptions.panel.lyrics.lineGap`: `Lyric line rhythm belongs to the lyrics presentation.`
+- `extensions.rawMetricExceptions.panel.player.minimumHeight`: `Player chrome height belongs to the player presentation.`
+- `extensions.rawMetricExceptions.panel.player.panelPickerWidth`: `Panel picker width belongs to the player shell.`
+- `extensions.rawMetricExceptions.panel.player.progressHeight`: `Progress thickness belongs to the player control.`
 - `extensions.rawMetricExceptions.status.gap`: `Status symbol and label use a deliberate optical gap.`
+- `extensions.rawMetricExceptions.table.media.artworkSide`: `Media table artwork size belongs to the native table contract.`
+- `extensions.rawMetricExceptions.table.media.playbackIndicatorSide`: `Playback indicator size belongs to the native table contract.`
+- `extensions.rawMetricExceptions.table.media.rowHeight`: `Media table row height belongs to the native table contract.`
 - `field.height`: `{size.controlStandard}`
 - `field.paddingX`: `{space.3}`
 - `field.radius`: `{radius.control}`
@@ -351,8 +364,19 @@ Shared component metrics and mandatory state contracts.
 - `overlay.restoreFocusRequired`: `true`
 - `overlay.scrim`: `fill.scrim`
 - `overlay.sheetReadableWidth`: `640`
+- `panel.about.iconSide`: `96`
+- `panel.about.readableWidth`: `480`
+- `panel.artwork.cornerRadius`: `{radius.hero}`
+- `panel.artwork.heroSide`: `320`
+- `panel.artwork.minimumSide`: `64`
 - `panel.gap`: `{space.4}`
+- `panel.lyrics.followDurationMs`: `320`
+- `panel.lyrics.inactiveOpacity`: `0.56`
+- `panel.lyrics.lineGap`: `12`
 - `panel.padding`: `{space.5}`
+- `panel.player.minimumHeight`: `88`
+- `panel.player.panelPickerWidth`: `184`
+- `panel.player.progressHeight`: `4`
 - `panel.radius`: `{radius.panel}`
 - `panel.surface`: `surface.overlay`
 - `status.colorAloneForbidden`: `true`
@@ -361,6 +385,9 @@ Shared component metrics and mandatory state contracts.
 - `status.requiredParts`: `["symbol-or-shape", "plain-language-label"]`
 - `table.columnGap`: `{space.4}`
 - `table.headerHeight`: `{size.controlStandard}`
+- `table.media.artworkSide`: `32`
+- `table.media.playbackIndicatorSide`: `14`
+- `table.media.rowHeight`: `48`
 - `table.rowHeights.compact`: `{size.rowCompact}`
 - `table.rowHeights.standard`: `{size.rowStandard}`
 - `table.selectionRequiresTextOrShape`: `true`
@@ -389,7 +416,7 @@ Platform-specific constraints over the shared semantic core.
 - `macOS.input`: `pointer-keyboard`
 - `macOS.minimumTarget`: `28`
 - `macOS.navigation`: `["toolbar", "sidebar", "rail", "split-view", "menu-bar", "settings-window"]`
-- `macOS.requirements`: `["menu commands", "keyboard shortcuts", "resizable windows", "VoiceOver", "Reduce Motion", "Reduce Transparency", "Increase Contrast"]`
+- `macOS.requirements`: `["menu commands", "keyboard shortcuts", "resizable windows", "VoiceOver", "Reduce Motion", "Reduce Transparency", "Increase Contrast", "AppKit dynamic colors", "NSAppearance updates", "AppKit table bridge"]`
 - `web.breakpoints.compact`: `480`
 - `web.breakpoints.max`: `1440`
 - `web.breakpoints.medium`: `768`
@@ -410,6 +437,19 @@ Reusable inheritance and exception profiles selected by interaction model.
 - `denseOperations.profile`: `operational-dense`
 - `denseOperations.replace`: `["invisible filter overflow", "pristine-field errors", "unnamed toggles", "unconfirmed session discard", "global untyped errors"]`
 - `immersiveContent.adapt`: `["navigation states", "settings containers", "buttons", "row interaction", "copy and localization", "screenshot harness"]`
+- `immersiveContent.cadence.archetype`: `immersive-content`
+- `immersiveContent.cadence.density`: `standard`
+- `immersiveContent.cadence.layout.compactGap`: `8`
+- `immersiveContent.cadence.layout.contentGap`: `16`
+- `immersiveContent.cadence.layout.controlGap`: `12`
+- `immersiveContent.cadence.layout.pageInset`: `24`
+- `immersiveContent.cadence.layout.panelInset`: `20`
+- `immersiveContent.cadence.layout.readableContentWidth`: `760`
+- `immersiveContent.cadence.layout.rowHeight`: `48`
+- `immersiveContent.cadence.layout.sectionGap`: `32`
+- `immersiveContent.cadence.layout.textStack`: `4`
+- `immersiveContent.cadence.motion.cadenceModeEnterMs`: `500`
+- `immersiveContent.cadence.platform`: `macOS`
 - `immersiveContent.defaultNavigation`: `expanded-rail`
 - `immersiveContent.density`: `standard`
 - `immersiveContent.keep`: `["adaptive Soft Graphite palette", "persistent content hierarchy", "stable data tables", "review-first import", "persistent task controls", "queue semantics", "guide mechanics", "recoverable removal"]`

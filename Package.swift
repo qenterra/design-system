@@ -10,6 +10,7 @@ let package = Package(
     products: [
         .library(name: "QenTerraDesignTokens", targets: ["QenTerraDesignTokens"]),
         .library(name: "QenTerraComponents", targets: ["QenTerraComponents"]),
+        .library(name: "QenTerraMediaComponents", targets: ["QenTerraMediaComponents"]),
     ],
     targets: [
         .target(
@@ -21,6 +22,12 @@ let package = Package(
             dependencies: ["QenTerraDesignTokens"],
             path: "packages/Sources/QenTerra/Components"
         ),
+        .target(
+            name: "QenTerraMediaComponents",
+            dependencies: ["QenTerraComponents", "QenTerraDesignTokens"],
+            path: "packages/Sources/QenTerra/MediaComponents",
+            resources: [.process("Resources")]
+        ),
         .testTarget(
             name: "QenTerraDesignTokensTests",
             dependencies: ["QenTerraDesignTokens"],
@@ -30,6 +37,17 @@ let package = Package(
             name: "QenTerraComponentsTests",
             dependencies: ["QenTerraComponents", "QenTerraDesignTokens"],
             path: "packages/Tests/QenTerraComponentsTests"
+        ),
+        .testTarget(
+            name: "QenTerraComponentSnapshotTests",
+            dependencies: ["QenTerraComponents", "QenTerraDesignTokens"],
+            path: "packages/Tests/QenTerraComponentSnapshotTests",
+            resources: [.copy("__Snapshots__")]
+        ),
+        .testTarget(
+            name: "QenTerraMediaComponentsTests",
+            dependencies: ["QenTerraMediaComponents", "QenTerraDesignTokens"],
+            path: "packages/Tests/QenTerraMediaComponentsTests"
         ),
     ]
 )

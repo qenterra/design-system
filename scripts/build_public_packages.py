@@ -14,6 +14,22 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_ROOT = ROOT / "packages"
 MANIFEST = PUBLIC_ROOT / "release-manifest.json"
+SWIFT_COMPONENTS_PACKAGE_ID = "swift-components"
+REQUIRED_MEDIA_PRODUCTS = {
+    "QenTerraDesignTokens",
+    "QenTerraComponents",
+    "QenTerraMediaComponents",
+}
+REQUIRED_MEDIA_PUBLIC_PATHS = {
+    "packages/Sources/QenTerra/DesignTokens/DesignEnvironment.swift",
+    "packages/Sources/QenTerra/MediaComponents/MediaComponents.swift",
+    "packages/Sources/QenTerra/MediaComponents/Resources/MediaComponents.txt",
+    "packages/Tests/QenTerraMediaComponentsTests/MediaComponentModuleTests.swift",
+}
+DELIVERY_SOURCE_ROOTS = {
+    "QenTerraComponents": "Sources/QenTerra/Components/",
+    "QenTerraMediaComponents": "Sources/QenTerra/MediaComponents/",
+}
 
 
 def sha256(path: Path) -> str:
@@ -24,12 +40,59 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def validate_media_delivery_closure(root: Path, registry: dict[str, object]) -> None:
+    packages = registry.get("packages")
+    if not isinstance(packages, list):
+        raise ValueError("registry/packages.json packages must be an array")
+    package = next(
+        (
+            item
+            for item in packages
+            if isinstance(item, dict) and item.get("id") == SWIFT_COMPONENTS_PACKAGE_ID
+        ),
+        None,
+    )
+    if package is None:
+        raise ValueError("registry/packages.json is missing the swift-components package")
+    products = package.get("products")
+    if not isinstance(products, list) or not REQUIRED_MEDIA_PRODUCTS.issubset(products):
+        raise ValueError("swift-components must deliver QenTerraMediaComponents with core products")
+    public_paths = package.get("publicPaths")
+    if not isinstance(public_paths, list):
+        raise ValueError("swift-components publicPaths must be an array")
+    missing_paths = sorted(REQUIRED_MEDIA_PUBLIC_PATHS - set(public_paths))
+    if missing_paths:
+        raise ValueError(
+            "swift-components is missing required native media delivery paths: "
+            + ", ".join(missing_paths)
+        )
+
+    component_manifest_path = root / "packages/Sources/QenTerra/manifest.json"
+    if not component_manifest_path.is_file():
+        raise ValueError("QenTerra component delivery manifest is missing")
+    component_manifest = json.loads(component_manifest_path.read_text(encoding="utf-8"))
+    components = component_manifest.get("components")
+    if not isinstance(components, list) or not components:
+        raise ValueError("QenTerra component delivery manifest has no components")
+    for component in components:
+        if not isinstance(component, dict):
+            raise ValueError("QenTerra component delivery manifest has an invalid component")
+        delivery_product = component.get("deliveryProduct")
+        source_path = component.get("sourcePath")
+        expected_root = DELIVERY_SOURCE_ROOTS.get(delivery_product)
+        if not isinstance(source_path, str) or expected_root is None:
+            raise ValueError("QenTerra component delivery manifest is missing deliveryProduct")
+        if not source_path.startswith(expected_root):
+            raise ValueError("QenTerra component delivery manifest has a crossed delivery product")
+
+
 def registered_paths(root: Path) -> list[Path]:
     registry_path = root / "registry/packages.json"
     registry = json.loads(registry_path.read_text(encoding="utf-8"))
     version = (root / "VERSION").read_text(encoding="utf-8").strip()
     if registry.get("version") != version:
         raise ValueError("registry/packages.json version does not match VERSION")
+    validate_media_delivery_closure(root, registry)
 
     relative_paths: list[str] = []
     for package in registry.get("packages", []):

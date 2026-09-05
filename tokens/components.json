@@ -32,7 +32,26 @@
     "radius": "{radius.panel}",
     "padding": "{space.5}",
     "gap": "{space.4}",
-    "surface": "surface.overlay"
+    "surface": "surface.overlay",
+    "artwork": {
+      "minimumSide": 64,
+      "heroSide": 320,
+      "cornerRadius": "{radius.hero}"
+    },
+    "player": {
+      "minimumHeight": 88,
+      "progressHeight": 4,
+      "panelPickerWidth": 184
+    },
+    "lyrics": {
+      "lineGap": 12,
+      "inactiveOpacity": 0.56,
+      "followDurationMs": 320
+    },
+    "about": {
+      "iconSide": 96,
+      "readableWidth": 480
+    }
   },
   "field": {
     "height": "{size.controlStandard}",
@@ -45,7 +64,12 @@
     "headerHeight": "{size.controlStandard}",
     "columnGap": "{space.4}",
     "selectionRequiresTextOrShape": true,
-    "sortRequiresDirection": true
+    "sortRequiresDirection": true,
+    "media": {
+      "rowHeight": 48,
+      "artworkSide": 32,
+      "playbackIndicatorSide": 14
+    }
   },
   "navigation": {
     "railCompact": "{size.railCompact}",
@@ -86,7 +110,20 @@
       "keycap.height": "Keycap optical height is not a general control size.",
       "keycap.paddingX": "Keycap optical inset is not a general spacing role.",
       "keycap.gap": "Keycap chord gap is intentionally tighter than component spacing.",
-      "status.gap": "Status symbol and label use a deliberate optical gap."
+      "status.gap": "Status symbol and label use a deliberate optical gap.",
+      "panel.artwork.minimumSide": "Artwork minimum is a media presentation constraint.",
+      "panel.artwork.heroSide": "Artwork hero size belongs to the media surface.",
+      "panel.player.minimumHeight": "Player chrome height belongs to the player presentation.",
+      "panel.player.progressHeight": "Progress thickness belongs to the player control.",
+      "panel.player.panelPickerWidth": "Panel picker width belongs to the player shell.",
+      "panel.lyrics.lineGap": "Lyric line rhythm belongs to the lyrics presentation.",
+      "panel.lyrics.inactiveOpacity": "Inactive lyric treatment belongs to the lyrics presentation.",
+      "panel.lyrics.followDurationMs": "Lyric follow timing belongs to the lyrics presentation.",
+      "panel.about.iconSide": "About icon scale belongs to the about-page composition.",
+      "panel.about.readableWidth": "About readable width belongs to the about-page composition.",
+      "table.media.rowHeight": "Media table row height belongs to the native table contract.",
+      "table.media.artworkSide": "Media table artwork size belongs to the native table contract.",
+      "table.media.playbackIndicatorSide": "Playback indicator size belongs to the native table contract."
     }
   }
 }

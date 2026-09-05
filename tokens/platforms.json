@@ -11,7 +11,7 @@
     "minimumTarget": 28,
     "defaultControlHeight": 32,
     "navigation": ["toolbar", "sidebar", "rail", "split-view", "menu-bar", "settings-window"],
-    "requirements": ["menu commands", "keyboard shortcuts", "resizable windows", "VoiceOver", "Reduce Motion", "Reduce Transparency", "Increase Contrast"]
+    "requirements": ["menu commands", "keyboard shortcuts", "resizable windows", "VoiceOver", "Reduce Motion", "Reduce Transparency", "Increase Contrast", "AppKit dynamic colors", "NSAppearance updates", "AppKit table bridge"]
   },
   "iOS": {
     "input": "touch-voice-pointer-optional",

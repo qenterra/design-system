@@ -285,6 +285,12 @@ Empty означает пустую коллекцию. No-results означа�
 
 Field error привязана к input; row error — к object; section notice — к workflow region; banner — к surface/app; alert — блокирует или требует решения. Ошибка называет: что случилось, что осталось safe/saved, что делать. Technical details уходят в optional disclosure или diagnostic export.
 
+### 9.5 Общие поверхности обратной связи и «О приложении»
+
+`ContentStateView`, `StatusBanner`, `DropZone` и `OperationStateView` только отображают переданное потребителем состояние. Они не запускают, не отменяют, не сохраняют, не повторяют операции и не выдумывают прогресс. Потребитель передаёт все видимые заголовки, сообщения, валидированный измеренный прогресс, подписи восстановления и закрытия; нативный индикатор прогресса выводит и визуальную долю, и accessibility-число из одних и тех же completed/total counts. Размещение баннера остаётся у потребителя. `PresentationAction` связывает необязательную подпись с main-actor callback, поэтому подпись не существует без действия. Эти feedback-поверхности документируют поддерживаемое нативное поведение только на macOS; совместимость компиляции с iOS 16 не является платформенным поведенческим обещанием.
+
+`AboutPage` получает идентичность продукта, версию, автора, copyright, универсальное содержимое иконки и упорядоченные URL `AboutResource` только через `AboutPageConfiguration`. В нём нет резервных текста или ссылок продукта. Строки ресурсов используют действие окружения SwiftUI `openURL`, поэтому хост управляет открытием URL; недоступные ресурсы сохраняют нативную семантику disabled. Эти About-поверхности документируют поддерживаемое нативное поведение только на macOS; совместимость компиляции с iOS 16 не является платформенным поведенческим обещанием. Тесты доказывают наблюдаемое представление синтетического продукта, а не выдают метаданные одного продукта за общий default.
+
 ## 10. Базовые сценарии
 
 ### 10.1 Select → Review → Execute → Complete/Recover
@@ -481,15 +487,15 @@ Popup, side panel, overlay dock, bottom sheet и options page — разные l
 
 Канонический публичный репозиторий — `qenterra/design-system`. Из одного
 версионированного источника он отдаёт `@qenterra/design-tokens` через npm и
-продукты `QenTerraDesignTokens` и `QenTerraComponents` через SwiftPM. Production-
+продукты `QenTerraDesignTokens`, `QenTerraComponents` и `QenTerraMediaComponents` через SwiftPM. Production-
 потребители фиксируют неизменяемые SemVer-релизы; локальные пути допустимы только
 для согласованной работы над Design System. Публикация требует совпадения версий,
 точного release manifest, полного gate и разрешения чистыми consumer-проектами.
 Релиз адаптеров не доказывает нативную отрисовку или приёмку доступности продукта.
 
 Дерево исходников пакетов намеренно разделено на шесть зон. `Sources/QenTerra/`
-содержит устанавливаемые токенизированные targets `QenTerraDesignTokens` и
-`QenTerraComponents`. `Sources/ExploreSwiftUI/` хранит точный атрибутированный
+содержит устанавливаемые токенизированные targets `QenTerraDesignTokens`,
+`QenTerraComponents` и macOS-first `QenTerraMediaComponents`; media target не предоставляет iOS media API. `Sources/ExploreSwiftUI/` хранит точный атрибутированный
 исходный код каждой detail page из sitemap Explore SwiftUI и не является SwiftPM-target.
 Файлы оригиналов неизменяемы: синхронизация может заменить их только
 текущим source field с той же страницы, а offline-проверка замыкает manifest и

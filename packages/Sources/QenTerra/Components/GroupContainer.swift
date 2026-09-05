@@ -3,17 +3,22 @@ import SwiftUI
 import QenTerraDesignTokens
 
 public struct GroupContainer: ViewModifier {
-    private let appearance: DesignAppearance
+    private let appearanceOverride: DesignAppearance?
 
+    public init() {
+        appearanceOverride = nil
+    }
+
+    @available(*, deprecated, message: "Use GroupContainer() with View.designSystem(_:) instead.")
     public init(appearance: DesignAppearance) {
-        self.appearance = appearance
+        appearanceOverride = appearance
     }
 
     public func body(content: Content) -> some View {
         content
             .padding(DesignTokens.Component.groupPadding.points)
             .background(
-                Color(designToken: DesignTokens.Color.surfaceSecondary, appearance: appearance)
+                color(DesignTokens.Color.surfaceSecondary)
             )
             .clipShape(
                 RoundedRectangle(
@@ -22,9 +27,21 @@ public struct GroupContainer: ViewModifier {
                 )
             )
     }
+
+    private func color(_ token: DesignColorValue) -> Color {
+        if let appearanceOverride {
+            return Color(designToken: token, appearance: appearanceOverride)
+        }
+        return Color(designToken: token)
+    }
 }
 
 public extension View {
+    func designGroupContainer() -> some View {
+        modifier(GroupContainer())
+    }
+
+    @available(*, deprecated, message: "Use designGroupContainer() with View.designSystem(_:) instead.")
     func designGroupContainer(appearance: DesignAppearance) -> some View {
         modifier(GroupContainer(appearance: appearance))
     }
