@@ -32,6 +32,19 @@ public struct MediaItemPresentation<ID: Hashable & Sendable>: Identifiable, Equa
     }
 }
 
+public struct MediaAccessoryInteractionContext: Equatable, Sendable {
+    public let isContainerHovered: Bool
+    public let isContainerFocused: Bool
+
+    public init(
+        isContainerHovered: Bool = false,
+        isContainerFocused: Bool = false
+    ) {
+        self.isContainerHovered = isContainerHovered
+        self.isContainerFocused = isContainerFocused
+    }
+}
+
 struct MediaItemVisualPresentation: Equatable, Sendable {
     let isSelected: Bool
     let isCurrent: Bool

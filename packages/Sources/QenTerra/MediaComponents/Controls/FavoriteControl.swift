@@ -40,7 +40,7 @@ public struct FavoritePresentation: Equatable, Sendable {
         )
     }
 
-    public var visualOpacity: Double { isRevealed ? 1 : 0 }
+    public var visualOpacity: Double { isRevealed || isPending ? 1 : 0 }
     public var acceptsPointerInteraction: Bool { isRevealed && !isPending }
     public var isEnabled: Bool { !isPending }
     public var requestedValue: Bool { !isFavorite }
@@ -52,17 +52,20 @@ public struct FavoriteControl: View {
     @FocusState private var isFocused: Bool
 
     private let presentation: FavoritePresentation
+    private let interactionContext: MediaAccessoryInteractionContext
     private let controlSize: CGFloat
     private let action: @MainActor (Bool) -> Void
 
     public init(
         presentation: FavoritePresentation,
+        interactionContext: MediaAccessoryInteractionContext = .init(),
         controlSize: CGFloat = CGFloat(
             DesignTokens.Component.panelMediaCollectionFavoriteControlSize.points
         ),
         action: @escaping @MainActor (Bool) -> Void
     ) {
         self.presentation = presentation
+        self.interactionContext = interactionContext
         self.controlSize = controlSize.isFinite ? max(controlSize, 0) : 0
         self.action = action
     }
@@ -81,7 +84,7 @@ public struct FavoriteControl: View {
         .focused($isFocused)
         .disabled(!presentation.isEnabled)
         .opacity(isRevealed ? 1 : 0)
-        .allowsHitTesting(isRevealed && presentation.isEnabled)
+        .allowsHitTesting(isRevealed)
         .animation(
             environment.reducesMotion
                 ? nil
@@ -94,7 +97,11 @@ public struct FavoriteControl: View {
     }
 
     private var isRevealed: Bool {
-        presentation.isRevealed || isFocused
+        presentation.isRevealed
+            || presentation.isPending
+            || interactionContext.isContainerHovered
+            || interactionContext.isContainerFocused
+            || isFocused
     }
 }
 #endif

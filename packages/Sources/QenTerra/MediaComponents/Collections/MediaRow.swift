@@ -11,7 +11,7 @@ public struct MediaRow<ID: Hashable & Sendable, Artwork: View, TrailingAccessory
     private let accessibilityLabel: String
     private let accessibilityValue: String?
     private let artwork: Artwork
-    private let trailingAccessory: TrailingAccessory
+    private let trailingAccessory: (MediaAccessoryInteractionContext) -> TrailingAccessory
     private let action: @MainActor () -> Void
 
     public init(
@@ -19,15 +19,33 @@ public struct MediaRow<ID: Hashable & Sendable, Artwork: View, TrailingAccessory
         accessibilityLabel: String,
         accessibilityValue: String? = nil,
         @ViewBuilder artwork: () -> Artwork,
-        @ViewBuilder trailingAccessory: () -> TrailingAccessory,
+        @ViewBuilder trailingAccessory: @escaping (MediaAccessoryInteractionContext) -> TrailingAccessory,
         action: @escaping @MainActor () -> Void
     ) {
         self.item = item
         self.accessibilityLabel = accessibilityLabel
         self.accessibilityValue = accessibilityValue
         self.artwork = artwork()
-        self.trailingAccessory = trailingAccessory()
+        self.trailingAccessory = trailingAccessory
         self.action = action
+    }
+
+    public init(
+        item: MediaItemPresentation<ID>,
+        accessibilityLabel: String,
+        accessibilityValue: String? = nil,
+        @ViewBuilder artwork: () -> Artwork,
+        @ViewBuilder trailingAccessory: @escaping () -> TrailingAccessory,
+        action: @escaping @MainActor () -> Void
+    ) {
+        self.init(
+            item: item,
+            accessibilityLabel: accessibilityLabel,
+            accessibilityValue: accessibilityValue,
+            artwork: artwork,
+            trailingAccessory: { _ in trailingAccessory() },
+            action: action
+        )
     }
 
     public var body: some View {
@@ -41,7 +59,7 @@ public struct MediaRow<ID: Hashable & Sendable, Artwork: View, TrailingAccessory
         ) {
             HStack(spacing: rowGap) {
                 primaryButton
-                trailingAccessory
+                trailingAccessory(accessoryInteractionContext)
             }
             .padding(.horizontal, DesignTokens.Component.interactiveRowPaddingX.points)
             .frame(minHeight: rowHeight)
@@ -102,6 +120,13 @@ public struct MediaRow<ID: Hashable & Sendable, Artwork: View, TrailingAccessory
 
     private var artworkSide: CGFloat {
         CGFloat(DesignTokens.Component.panelMediaCollectionRowArtworkSide.points)
+    }
+
+    private var accessoryInteractionContext: MediaAccessoryInteractionContext {
+        MediaAccessoryInteractionContext(
+            isContainerHovered: isHovered,
+            isContainerFocused: isFocused
+        )
     }
 }
 

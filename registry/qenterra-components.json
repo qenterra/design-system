@@ -53,7 +53,7 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/InteractiveRowSurface.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["InteractiveRowState", "InteractiveRowSurface"],
+      "publicSymbols": ["InteractiveRowState", "InteractiveRowCornerRadius", "InteractiveRowSurface"],
       "designTokens": true
     },
     {
@@ -353,7 +353,7 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Collections/MediaItemPresentation.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["MediaItemPresentation"],
+      "publicSymbols": ["MediaItemPresentation", "MediaAccessoryInteractionContext"],
       "designTokens": true
     },
     {

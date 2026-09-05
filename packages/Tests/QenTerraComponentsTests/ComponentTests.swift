@@ -30,6 +30,22 @@ import AppKit
     #expect(focused.border == DesignTokens.Color.borderFocus)
 }
 
+@Test func interactiveRowSurfaceAcceptsSemanticControlAndGroupRadii() {
+    #expect(
+        InteractiveRowCornerRadius.control.points == CGFloat(DesignTokens.Radius.control)
+    )
+    #expect(
+        InteractiveRowCornerRadius.group.points == CGFloat(DesignTokens.Radius.group)
+    )
+
+    _ = InteractiveRowSurface(
+        state: InteractiveRowState(isSelected: true),
+        cornerRadius: .group
+    ) {
+        Text("Media tile")
+    }
+}
+
 @Test func buttonRolesAndSettingsCompositionsRemainPublic() {
     for role in DesignButtonRole.allCases {
         _ = DesignButtonStyle(role: role)

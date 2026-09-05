@@ -1,0 +1,633 @@
+import AppKit
+import Foundation
+import QenTerraComponents
+import QenTerraDesignTokens
+import QenTerraMediaComponents
+import SwiftUI
+
+private enum HostFailure: Error, CustomStringConvertible {
+    case assertion(String)
+
+    var description: String {
+        switch self {
+        case let .assertion(message): message
+        }
+    }
+}
+
+@MainActor
+private final class InteractionRecorder {
+    var primaryActions = 0
+    var accessoryActions = 0
+    var context = MediaAccessoryInteractionContext()
+    var containerFrame = CGRect.null
+    var primaryFrame = CGRect.null
+    var accessoryFrame = CGRect.null
+}
+
+private enum CompositionKind: String, CaseIterable {
+    case tile
+    case row
+}
+
+private enum InteractionRegion {
+    case container
+    case primary
+    case accessory
+}
+
+private struct InteractionFrameReporter: View {
+    let region: InteractionRegion
+    let recorder: InteractionRecorder
+
+    var body: some View {
+        GeometryReader { proxy in
+            let frame = proxy.frame(in: .named("media-interaction-host"))
+            Color.clear
+                .onAppear { record(frame) }
+                .onChange(of: frame) { _, newValue in record(newValue) }
+        }
+        .accessibilityHidden(true)
+    }
+
+    private func record(_ frame: CGRect) {
+        switch region {
+        case .container: recorder.containerFrame = frame
+        case .primary: recorder.primaryFrame = frame
+        case .accessory: recorder.accessoryFrame = frame
+        }
+    }
+}
+
+private struct HostedFavoriteAccessory: View {
+    let context: MediaAccessoryInteractionContext
+    let presentation: FavoritePresentation
+    let recorder: InteractionRecorder
+
+    var body: some View {
+        FavoriteControl(
+            presentation: presentation,
+            interactionContext: context
+        ) { _ in
+            recorder.accessoryActions += 1
+        }
+        .background(InteractionFrameReporter(region: .accessory, recorder: recorder))
+        .onAppear { recorder.context = context }
+        .onChange(of: context) { _, newValue in recorder.context = newValue }
+    }
+}
+
+@MainActor
+private func composition(
+    _ kind: CompositionKind,
+    isAvailable: Bool,
+    isPending: Bool,
+    recorder: InteractionRecorder
+) -> AnyView {
+    let item = MediaItemPresentation(
+        id: "synthetic-\(kind.rawValue)",
+        title: "Synthetic Track",
+        subtitle: "Synthetic Artist",
+        metadata: "3:42",
+        isSelected: false,
+        isCurrent: false,
+        isPlaying: false,
+        isAvailable: isAvailable
+    )
+    let favorite = FavoritePresentation(
+        isFavorite: false,
+        isPending: isPending,
+        isRevealed: false,
+        accessibilityLabel: "Add Synthetic Track to saved items",
+        accessibilityValue: isPending ? "Saving" : "Not saved"
+    )
+
+    switch kind {
+    case .tile:
+        return AnyView(
+            MediaTile(item: item, accessibilityLabel: "Play Synthetic Track") {
+                Color.blue
+                    .frame(width: 140, height: 140)
+                    .overlay(alignment: .bottomLeading) {
+                        Color.clear
+                            .frame(width: 24, height: 24)
+                            .background(
+                                InteractionFrameReporter(region: .primary, recorder: recorder)
+                            )
+                    }
+            } trailingAccessory: { context in
+                HostedFavoriteAccessory(
+                    context: context,
+                    presentation: favorite,
+                    recorder: recorder
+                )
+            } action: {
+                recorder.primaryActions += 1
+            }
+            .frame(width: 220, height: 250)
+            .background(InteractionFrameReporter(region: .container, recorder: recorder))
+            .frame(width: 480, height: 360)
+            .coordinateSpace(name: "media-interaction-host")
+        )
+    case .row:
+        return AnyView(
+            MediaRow(item: item, accessibilityLabel: "Play Synthetic Track") {
+                Color.blue
+                    .overlay {
+                        Color.clear
+                            .frame(width: 24, height: 24)
+                            .background(
+                                InteractionFrameReporter(region: .primary, recorder: recorder)
+                            )
+                    }
+            } trailingAccessory: { context in
+                HostedFavoriteAccessory(
+                    context: context,
+                    presentation: favorite,
+                    recorder: recorder
+                )
+            } action: {
+                recorder.primaryActions += 1
+            }
+            .frame(width: 360, height: 80)
+            .background(InteractionFrameReporter(region: .container, recorder: recorder))
+            .frame(width: 480, height: 360)
+            .coordinateSpace(name: "media-interaction-host")
+        )
+    }
+}
+
+@MainActor
+private final class NativeInteractionHarness {
+    private let window: NSWindow
+    private let host: NSHostingView<AnyView>
+
+    init(rootView: AnyView) throws {
+        window = NSWindow(
+            contentRect: NSRect(x: 120, y: 120, width: 480, height: 360),
+            styleMask: [.titled],
+            backing: .buffered,
+            defer: false
+        )
+        host = NSHostingView(rootView: rootView)
+        host.sizingOptions = []
+        host.frame = NSRect(x: 0, y: 0, width: 480, height: 360)
+        host.autoresizingMask = [.width, .height]
+        window.contentView = host
+        window.acceptsMouseMovedEvents = true
+        window.makeKeyAndOrderFront(nil)
+        window.makeFirstResponder(host)
+        window.orderFrontRegardless()
+        let activationDeadline = Date().addingTimeInterval(1)
+        repeat {
+            NSApp.activate()
+            _ = NSRunningApplication.current.activate(options: [.activateAllWindows])
+            window.makeKey()
+            pump()
+        } while (!NSApp.isActive || !window.isKeyWindow) && Date() < activationDeadline
+
+        try require(
+            window.isKeyWindow,
+            "application host did not create a key NSWindow (active=\(NSApp.isActive))"
+        )
+        try require(NSApp.isActive, "application host is not active")
+    }
+
+    func validateFrames(_ recorder: InteractionRecorder) throws {
+        pump()
+        let namedFrames = [
+            ("container", recorder.containerFrame),
+            ("primary", recorder.primaryFrame),
+            ("accessory", recorder.accessoryFrame),
+        ]
+        for (name, frame) in namedFrames {
+            try require(
+                frame.origin.x.isFinite
+                    && frame.origin.y.isFinite
+                    && frame.width.isFinite
+                    && frame.height.isFinite
+                    && frame.width > 0
+                    && frame.height > 0,
+                "\(name) published an invalid interaction frame: \(frame)"
+            )
+        }
+        try require(
+            recorder.containerFrame.contains(recorder.primaryFrame),
+            "primary interaction frame escaped the container"
+        )
+        try require(
+            recorder.containerFrame.contains(recorder.accessoryFrame),
+            "accessory interaction frame escaped the container"
+        )
+        try require(
+            recorder.primaryFrame.intersection(recorder.accessoryFrame).isNull,
+            "primary and accessory interaction frames overlap"
+        )
+    }
+
+    func movePointer(to frame: CGRect) throws {
+        let physicalCursor = NSEvent.mouseLocation
+        let targetBeforeMove = window.convertPoint(toScreen: windowPoint(for: frame))
+        window.setFrameOrigin(
+            NSPoint(
+                x: window.frame.origin.x + physicalCursor.x - targetBeforeMove.x,
+                y: window.frame.origin.y + physicalCursor.y - targetBeforeMove.y
+            )
+        )
+        window.orderFrontRegardless()
+        window.makeKey()
+        pump()
+
+        let targetAfterMove = window.convertPoint(toScreen: windowPoint(for: frame))
+        try require(
+            abs(targetAfterMove.x - physicalCursor.x) < 1
+                && abs(targetAfterMove.y - physicalCursor.y) < 1,
+            "window could not place the published target under the physical cursor"
+        )
+        NSApp.postEvent(
+            try mouseEvent(
+                type: .mouseMoved,
+                point: windowPoint(for: frame),
+                clickCount: 0,
+                pressure: 0
+            ),
+            atStart: false
+        )
+        pump()
+    }
+
+    func moveContainerAwayFromPointer() throws {
+        let physicalCursor = NSEvent.mouseLocation
+        window.setFrameOrigin(
+            NSPoint(x: physicalCursor.x + 80, y: physicalCursor.y + 80)
+        )
+        NSApp.postEvent(
+            try mouseEvent(
+                type: .mouseMoved,
+                point: window.convertPoint(fromScreen: physicalCursor),
+                clickCount: 0,
+                pressure: 0
+            ),
+            atStart: false
+        )
+        pump()
+    }
+
+    func click(_ frame: CGRect) throws {
+        let point = windowPoint(for: frame)
+        NSApp.postEvent(
+            try mouseEvent(type: .leftMouseDown, point: point, clickCount: 1, pressure: 1),
+            atStart: false
+        )
+        NSApp.postEvent(
+            try mouseEvent(type: .leftMouseUp, point: point, clickCount: 1, pressure: 0),
+            atStart: false
+        )
+        pump()
+    }
+
+    func pressTab() throws {
+        window.recalculateKeyViewLoop()
+        NSApp.postEvent(
+            try keyEvent(
+                type: .keyDown,
+                characters: "\t",
+                keyCode: 48
+            ),
+            atStart: false
+        )
+        NSApp.postEvent(
+            try keyEvent(
+                type: .keyUp,
+                characters: "\t",
+                keyCode: 48
+            ),
+            atStart: false
+        )
+        pump()
+    }
+
+    func pressSpace() throws {
+        NSApp.postEvent(try keyEvent(type: .keyDown, characters: " ", keyCode: 49), atStart: false)
+        NSApp.postEvent(try keyEvent(type: .keyUp, characters: " ", keyCode: 49), atStart: false)
+        pump()
+    }
+
+    func validateAccessibility(
+        primaryLabel: String,
+        accessoryLabel: String,
+        accessoryValue: String,
+        accessoryEnabled: Bool
+    ) throws -> Bool {
+        pump()
+        let nodes = accessibilityDescendants(of: .view(host))
+        let labelledNodes = nodes.compactMap { node in
+            node.label.map { ($0, node) }
+        }
+        guard !labelledNodes.isEmpty else { return false }
+        try require(
+            labelledNodes.contains { $0.0 == primaryLabel },
+            "accessibility tree changed consumer primary label; labels: \(labelledNodes.map(\.0))"
+        )
+        let accessory = try requireValue(
+            labelledNodes.first { $0.0 == accessoryLabel }?.1,
+            "accessibility tree changed consumer accessory label; labels: \(labelledNodes.map(\.0))"
+        )
+        try require(
+            accessory.value == accessoryValue,
+            "accessibility tree changed consumer accessory value"
+        )
+        try require(
+            accessory.isEnabled == accessoryEnabled,
+            "accessibility tree changed accessory enabled state"
+        )
+        return true
+    }
+
+    func close() {
+        window.orderOut(nil)
+        window.close()
+        pump()
+    }
+
+    func pointerDiagnostics(for frame: CGRect) -> String {
+        let windowPoint = windowPoint(for: frame)
+        let hostPoint = host.convert(windowPoint, from: nil)
+        let hit = host.hitTest(hostPoint).map { String(describing: type(of: $0)) } ?? "nil"
+        let tracking = trackingAreaDescriptions(in: host, hostPoint: hostPoint)
+        return "frame=\(frame) hostFlipped=\(host.isFlipped) windowPoint=\(windowPoint) hit=\(hit) trackingAreas=\(tracking) mouse=\(window.mouseLocationOutsideOfEventStream)"
+    }
+
+    private func windowPoint(for frame: CGRect) -> NSPoint {
+        host.convert(NSPoint(x: frame.midX, y: frame.midY), to: nil)
+    }
+
+    private func trackingAreaDescriptions(in view: NSView, hostPoint: NSPoint) -> [String] {
+        let point = view.convert(hostPoint, from: host)
+        let local = view.trackingAreas.map { area in
+            let owner = area.owner.map { String(describing: type(of: $0)) } ?? "nil"
+            return "view=\(type(of: view)) owner=\(owner) rect=\(area.rect) contains=\(area.rect.contains(point)) options=\(area.options.rawValue)"
+        }
+        return local + view.subviews.flatMap { trackingAreaDescriptions(in: $0, hostPoint: hostPoint) }
+    }
+
+    private func mouseEvent(
+        type: NSEvent.EventType,
+        point: NSPoint,
+        clickCount: Int,
+        pressure: Float
+    ) throws -> NSEvent {
+        try requireValue(
+            NSEvent.mouseEvent(
+                with: type,
+                location: point,
+                modifierFlags: [],
+                timestamp: ProcessInfo.processInfo.systemUptime,
+                windowNumber: window.windowNumber,
+                context: nil,
+                eventNumber: 0,
+                clickCount: clickCount,
+                pressure: pressure
+            ),
+            "failed to create \(type) event"
+        )
+    }
+
+    private func keyEvent(
+        type: NSEvent.EventType,
+        characters: String,
+        keyCode: UInt16,
+        modifierFlags: NSEvent.ModifierFlags = []
+    ) throws -> NSEvent {
+        try requireValue(
+            NSEvent.keyEvent(
+                with: type,
+                location: .zero,
+                modifierFlags: modifierFlags,
+                timestamp: ProcessInfo.processInfo.systemUptime,
+                windowNumber: window.windowNumber,
+                context: nil,
+                characters: characters,
+                charactersIgnoringModifiers: characters,
+                isARepeat: false,
+                keyCode: keyCode
+            ),
+            "failed to create keyboard event"
+        )
+    }
+
+    private func pump() {
+        window.layoutIfNeeded()
+        host.layoutSubtreeIfNeeded()
+        while let event = NSApp.nextEvent(
+            matching: .any,
+            until: Date(),
+            inMode: .default,
+            dequeue: true
+        ) {
+            NSApp.sendEvent(event)
+        }
+        RunLoop.main.run(until: Date().addingTimeInterval(0.06))
+        window.layoutIfNeeded()
+        host.layoutSubtreeIfNeeded()
+    }
+}
+
+private enum AccessibilityNode {
+    case view(NSView)
+    case virtual(NSAccessibilityElement)
+
+    init?(_ rawElement: Any) {
+        if let view = rawElement as? NSView {
+            self = .view(view)
+        } else if let element = rawElement as? NSAccessibilityElement {
+            self = .virtual(element)
+        } else {
+            return nil
+        }
+    }
+
+    var label: String? {
+        switch self {
+        case let .view(view): view.accessibilityLabel()
+        case let .virtual(element): element.accessibilityLabel()
+        }
+    }
+
+    var value: String? {
+        let rawValue: Any?
+        switch self {
+        case let .view(view): rawValue = view.accessibilityValue()
+        case let .virtual(element): rawValue = element.accessibilityValue()
+        }
+        return rawValue as? String
+    }
+
+    var isEnabled: Bool {
+        switch self {
+        case let .view(view): view.isAccessibilityEnabled()
+        case let .virtual(element): element.isAccessibilityEnabled()
+        }
+    }
+
+    var children: [AccessibilityNode] {
+        let rawChildren: [Any]?
+        switch self {
+        case let .view(view): rawChildren = view.accessibilityChildren()
+        case let .virtual(element): rawChildren = element.accessibilityChildren()
+        }
+        return rawChildren?.compactMap(AccessibilityNode.init) ?? []
+    }
+
+}
+
+private func accessibilityDescendants(of root: AccessibilityNode) -> [AccessibilityNode] {
+    [root] + root.children.flatMap(accessibilityDescendants(of:))
+}
+
+@MainActor
+private func exercise(_ kind: CompositionKind) throws -> Bool {
+    var accessibilityWasAvailable = false
+
+    do {
+        let recorder = InteractionRecorder()
+        let harness = try NativeInteractionHarness(
+            rootView: composition(kind, isAvailable: true, isPending: false, recorder: recorder)
+        )
+        defer { harness.close() }
+        try harness.validateFrames(recorder)
+        try harness.movePointer(to: recorder.primaryFrame)
+        try require(
+            recorder.context.isContainerHovered,
+            "\(kind.rawValue) did not publish hover context; \(harness.pointerDiagnostics(for: recorder.primaryFrame))"
+        )
+        try harness.moveContainerAwayFromPointer()
+        try require(!recorder.context.isContainerHovered, "\(kind.rawValue) did not clear hover context")
+        try harness.movePointer(to: recorder.primaryFrame)
+        try require(recorder.context.isContainerHovered, "\(kind.rawValue) did not restore hover context")
+        accessibilityWasAvailable = try harness.validateAccessibility(
+            primaryLabel: "Play Synthetic Track",
+            accessoryLabel: "Add Synthetic Track to saved items",
+            accessoryValue: "Not saved",
+            accessoryEnabled: true
+        ) || accessibilityWasAvailable
+        try harness.click(recorder.accessoryFrame)
+        try require(recorder.accessoryActions == 1, "\(kind.rawValue) pointer accessory action count was \(recorder.accessoryActions)")
+        try require(recorder.primaryActions == 0, "\(kind.rawValue) pointer accessory activated primary")
+    }
+
+    if NSApp.isFullKeyboardAccessEnabled {
+        let recorder = InteractionRecorder()
+        let harness = try NativeInteractionHarness(
+            rootView: composition(kind, isAvailable: true, isPending: false, recorder: recorder)
+        )
+        defer { harness.close() }
+        try harness.validateFrames(recorder)
+        try harness.pressTab()
+        try require(recorder.context.isContainerFocused, "\(kind.rawValue) primary did not publish keyboard focus context")
+        try harness.pressTab()
+        try require(!recorder.context.isContainerFocused, "\(kind.rawValue) primary retained focus after Tab reached accessory")
+        try harness.pressSpace()
+        try require(recorder.accessoryActions == 1, "\(kind.rawValue) keyboard accessory action count was \(recorder.accessoryActions)")
+        try require(recorder.primaryActions == 0, "\(kind.rawValue) keyboard accessory activated primary")
+    }
+
+    do {
+        let recorder = InteractionRecorder()
+        let harness = try NativeInteractionHarness(
+            rootView: composition(kind, isAvailable: true, isPending: false, recorder: recorder)
+        )
+        defer { harness.close() }
+        try harness.validateFrames(recorder)
+        try harness.click(recorder.primaryFrame)
+        try require(recorder.primaryActions == 1, "\(kind.rawValue) primary action count was \(recorder.primaryActions)")
+        try require(recorder.accessoryActions == 0, "\(kind.rawValue) primary activated accessory")
+    }
+
+    do {
+        let recorder = InteractionRecorder()
+        let harness = try NativeInteractionHarness(
+            rootView: composition(kind, isAvailable: false, isPending: false, recorder: recorder)
+        )
+        defer { harness.close() }
+        try harness.validateFrames(recorder)
+        try harness.movePointer(to: recorder.primaryFrame)
+        try harness.click(recorder.primaryFrame)
+        try require(recorder.primaryActions == 0, "\(kind.rawValue) unavailable primary activated")
+        try harness.click(recorder.accessoryFrame)
+        try require(recorder.accessoryActions == 1, "\(kind.rawValue) valid accessory was suppressed by unavailable primary")
+        try require(recorder.primaryActions == 0, "\(kind.rawValue) accessory activated unavailable primary")
+    }
+
+    do {
+        let recorder = InteractionRecorder()
+        let harness = try NativeInteractionHarness(
+            rootView: composition(kind, isAvailable: true, isPending: true, recorder: recorder)
+        )
+        defer { harness.close() }
+        try harness.validateFrames(recorder)
+        accessibilityWasAvailable = try harness.validateAccessibility(
+            primaryLabel: "Play Synthetic Track",
+            accessoryLabel: "Add Synthetic Track to saved items",
+            accessoryValue: "Saving",
+            accessoryEnabled: false
+        ) || accessibilityWasAvailable
+        try harness.click(recorder.accessoryFrame)
+        try require(recorder.accessoryActions == 0, "\(kind.rawValue) pending favorite activated")
+        try require(recorder.primaryActions == 0, "\(kind.rawValue) pending favorite activated primary")
+    }
+
+    return accessibilityWasAvailable
+}
+
+private func require(_ condition: @autoclosure () -> Bool, _ message: String) throws {
+    guard condition() else { throw HostFailure.assertion(message) }
+}
+
+private func requireValue<Value>(_ value: Value?, _ message: String) throws -> Value {
+    guard let value else { throw HostFailure.assertion(message) }
+    return value
+}
+
+@MainActor
+private func run() throws {
+    try require(NSApp.activationPolicy() == .regular, "application host is not a regular app")
+
+    var accessibilityWasAvailable = false
+    for kind in CompositionKind.allCases {
+        accessibilityWasAvailable = try exercise(kind) || accessibilityWasAvailable
+    }
+    if !accessibilityWasAvailable {
+        print("MEDIA_INTERACTION_HOST_AX_UNAVAILABLE")
+    }
+    if !NSApp.isFullKeyboardAccessEnabled {
+        print("MEDIA_INTERACTION_HOST_KEYBOARD_FOCUS_UNAVAILABLE")
+    }
+}
+
+private final class ApplicationDelegate: NSObject, NSApplicationDelegate {
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        NSApp.activate()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            do {
+                try run()
+                print("MEDIA_INTERACTION_HOST_OK")
+                exit(0)
+            } catch {
+                print("MEDIA_INTERACTION_HOST_FAILURE: \(error)")
+                exit(1)
+            }
+        }
+    }
+}
+
+let application = NSApplication.shared
+if application.activationPolicy() != .regular {
+    guard application.setActivationPolicy(.regular) else {
+        print("MEDIA_INTERACTION_HOST_FAILURE: could not enable application activation policy")
+        exit(1)
+    }
+}
+private let applicationDelegate = ApplicationDelegate()
+application.delegate = applicationDelegate
+application.run()

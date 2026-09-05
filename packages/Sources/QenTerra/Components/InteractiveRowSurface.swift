@@ -4,18 +4,39 @@ import QenTerraDesignTokens
 
 public typealias InteractiveRowState = QenTerraDesignTokens.InteractiveRowState
 
+public enum InteractiveRowCornerRadius: Equatable, Sendable {
+    case control
+    case group
+
+    public var points: CGFloat {
+        switch self {
+        case .control:
+            DesignTokens.Radius.control
+        case .group:
+            DesignTokens.Radius.group
+        }
+    }
+}
+
 public struct InteractiveRowSurface<Content: View>: View {
     @Environment(\.designNativeEnvironment) private var nativeEnvironment
 
     private let state: InteractiveRowState
+    private let cornerRadius: InteractiveRowCornerRadius
     private let appearanceOverride: DesignAppearance?
     private let content: Content
 
     public init(
         state: InteractiveRowState,
+        cornerRadius: InteractiveRowCornerRadius = .control,
         @ViewBuilder content: () -> Content
     ) {
-        self.init(state: state, appearanceOverride: nil, content: content)
+        self.init(
+            state: state,
+            cornerRadius: cornerRadius,
+            appearanceOverride: nil,
+            content: content
+        )
     }
 
     @available(*, deprecated, message: "Use InteractiveRowSurface(state:content:) with View.designSystem(_:) instead.")
@@ -24,7 +45,12 @@ public struct InteractiveRowSurface<Content: View>: View {
         appearance: DesignAppearance,
         @ViewBuilder content: () -> Content
     ) {
-        self.init(state: state, appearanceOverride: appearance, content: content)
+        self.init(
+            state: state,
+            cornerRadius: .control,
+            appearanceOverride: appearance,
+            content: content
+        )
     }
 
     public var body: some View {
@@ -35,7 +61,7 @@ public struct InteractiveRowSurface<Content: View>: View {
             .overlay {
                 if let border = resolvedState.border {
                     RoundedRectangle(
-                        cornerRadius: DesignTokens.Radius.control,
+                        cornerRadius: cornerRadius.points,
                         style: .continuous
                     )
                     .stroke(
@@ -49,7 +75,7 @@ public struct InteractiveRowSurface<Content: View>: View {
             }
             .clipShape(
                 RoundedRectangle(
-                    cornerRadius: DesignTokens.Radius.control,
+                    cornerRadius: cornerRadius.points,
                     style: .continuous
                 )
             )
@@ -101,10 +127,12 @@ public struct InteractiveRowSurface<Content: View>: View {
 
     private init(
         state: InteractiveRowState,
+        cornerRadius: InteractiveRowCornerRadius,
         appearanceOverride: DesignAppearance?,
         @ViewBuilder content: () -> Content
     ) {
         self.state = state
+        self.cornerRadius = cornerRadius
         self.appearanceOverride = appearanceOverride
         self.content = content()
     }

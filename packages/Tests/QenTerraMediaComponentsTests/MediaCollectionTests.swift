@@ -95,6 +95,13 @@ import Testing
         accessibilityLabel: "Remove Synthetic Track from saved items",
         accessibilityValue: "Saved"
     )
+    let pendingHidden = FavoritePresentation(
+        isFavorite: false,
+        isPending: true,
+        isRevealed: false,
+        accessibilityLabel: "Add Synthetic Track to saved items",
+        accessibilityValue: "Saving"
+    )
 
     #expect(!hidden.isRevealed)
     #expect(hidden.visualOpacity == 0)
@@ -108,6 +115,11 @@ import Testing
     #expect(focused.requestedValue == false)
     #expect(focused.accessibilityLabel == "Remove Synthetic Track from saved items")
     #expect(focused.accessibilityValue == "Saved")
+    #expect(pendingHidden.visualOpacity == 1)
+    #expect(!pendingHidden.acceptsPointerInteraction)
+    #expect(!pendingHidden.isEnabled)
+    #expect(pendingHidden.accessibilityLabel == "Add Synthetic Track to saved items")
+    #expect(pendingHidden.accessibilityValue == "Saving")
 }
 
 @Test func adaptiveGridUsesCadenceProfileAndLiteralConsumerOverrides() {
@@ -158,6 +170,39 @@ import Testing
     #expect(metrics.itemWidth == 164)
 }
 
+@Test func adaptiveGridCapsOrFallsBackBeforeExtremeFiniteArithmeticCanTrap() {
+    let ordinary = MediaGridLayout.resolve(productProfile: .standard)
+    let capped = ordinary.metrics(availableWidth: .greatestFiniteMagnitude)
+    #expect(capped.columnCount == 10_000)
+    #expect(capped.itemWidth == 196)
+    #expect(capped.itemWidth.isFinite)
+
+    let overflowingDenominator = MediaGridLayout.resolve(
+        productProfile: .standard,
+        minimumWidth: .greatestFiniteMagnitude,
+        maximumWidth: .greatestFiniteMagnitude,
+        spacing: .greatestFiniteMagnitude
+    ).metrics(availableWidth: .greatestFiniteMagnitude)
+    #expect(overflowingDenominator.columnCount == 1)
+    #expect(overflowingDenominator.itemWidth == .greatestFiniteMagnitude)
+    #expect(overflowingDenominator.itemWidth.isFinite)
+
+    let overflowingNumerator = MediaGridLayout.resolve(
+        productProfile: .standard,
+        minimumWidth: 1,
+        maximumWidth: 2,
+        spacing: .greatestFiniteMagnitude
+    ).metrics(availableWidth: .greatestFiniteMagnitude)
+    #expect(overflowingNumerator.columnCount == 1)
+    #expect(overflowingNumerator.itemWidth == 2)
+    #expect(overflowingNumerator.itemWidth.isFinite)
+
+    let negative = ordinary.metrics(availableWidth: -.greatestFiniteMagnitude)
+    #expect(negative.columnCount == 1)
+    #expect(negative.itemWidth == 164)
+    #expect(negative.itemWidth.isFinite)
+}
+
 @Test func reducedMotionPlaybackIndicatorUsesExactStaticBars() {
     let state = PlaybackIndicatorState(isPlaying: true, reducesMotion: true)
     #expect(state.animates == false)
@@ -169,6 +214,8 @@ import Testing
     #expect(active.scale(forBar: 0, elapsed: 0) == 0.32)
     #expect(active.scale(forBar: 1, elapsed: 0) == 0.72)
     #expect(active.scale(forBar: 2, elapsed: 0) == 0.46)
+    #expect(active.scale(forBar: 1, elapsed: 0.1) == 0.72)
+    #expect(active.scale(forBar: 2, elapsed: 0.2) == 0.46)
 }
 
 @Test func playbackIndicatorGeometryMatchesTheCadenceBarContract() {
@@ -196,6 +243,22 @@ import Testing
     #expect(view.isAnimating)
     #expect(view.animationCount == 3)
 
+    let initialBeginTimes = nativeAnimationBeginTimes(in: view)
+    #expect(initialBeginTimes.count == 3)
+    #expect(abs((initialBeginTimes[1] - initialBeginTimes[0]) - 0.1) < 0.000_001)
+    #expect(abs((initialBeginTimes[2] - initialBeginTimes[1]) - 0.1) < 0.000_001)
+
+    view.setState(
+        PlaybackIndicatorState(isPlaying: true, reducesMotion: false),
+        color: .systemRed
+    )
+    #expect(nativeAnimationBeginTimes(in: view) == initialBeginTimes)
+    #expect(
+        view.layer?.sublayers?.allSatisfy { layer in
+            layer.backgroundColor == NSColor.systemRed.cgColor
+        } == true
+    )
+
     view.prepareForReuse()
     #expect(!view.isAnimating)
     #expect(view.animationCount == 0)
@@ -204,6 +267,14 @@ import Testing
     view.removeFromSuperview()
     #expect(!view.isAnimating)
     #expect(view.animationCount == 0)
+}
+
+@MainActor
+private func nativeAnimationBeginTimes(in view: NativePlaybackIndicatorView) -> [CFTimeInterval] {
+    view.layer?.sublayers?.compactMap { layer in
+        guard let key = layer.animationKeys()?.first else { return nil }
+        return layer.animation(forKey: key)?.beginTime
+    } ?? []
 }
 
 @Test @MainActor func collectionViewsRenderReadyContentWithoutOwningDataWork() throws {
@@ -247,4 +318,101 @@ import Testing
         #expect(renderer.cgImage != nil)
     }
 }
+
+@Test @MainActor func mediaTileUsesTheGroupBoundaryInNormalAndIncreasedContrast() throws {
+    let normal = try renderedMediaTileAlphaMask(isIncreasedContrast: false)
+    let increased = try renderedMediaTileAlphaMask(isIncreasedContrast: true)
+    let group = try renderedClippedRectangleAlphaMask(
+        width: normal.width,
+        height: normal.height,
+        radius: CGFloat(DesignTokens.Radius.group)
+    )
+    let control = try renderedClippedRectangleAlphaMask(
+        width: normal.width,
+        height: normal.height,
+        radius: CGFloat(DesignTokens.Radius.control)
+    )
+    #expect(cornerDistance(normal, increased) <= 2)
+    #expect(cornerDistance(normal, group) < cornerDistance(normal, control))
+    #expect(cornerDistance(increased, group) < cornerDistance(increased, control))
+}
+
+private func cornerSignature(_ mask: (width: Int, height: Int, alphaMask: [Bool])) -> [Int] {
+    (0 ..< 12).map { row in
+        (0 ..< mask.width).first { mask.alphaMask[(row * mask.width) + $0] } ?? mask.width
+    }
+}
+
+private func cornerDistance(
+    _ lhs: (width: Int, height: Int, alphaMask: [Bool]),
+    _ rhs: (width: Int, height: Int, alphaMask: [Bool])
+) -> Int {
+    zip(cornerSignature(lhs), cornerSignature(rhs)).reduce(into: 0) { distance, pair in
+        distance += abs(pair.0 - pair.1)
+    }
+}
+
+@MainActor
+private func renderedMediaTileAlphaMask(
+    isIncreasedContrast: Bool
+) throws -> (width: Int, height: Int, alphaMask: [Bool]) {
+    let item = MediaItemPresentation(
+        id: "radius-probe",
+        title: "Tile",
+        subtitle: "Boundary",
+        metadata: nil,
+        isSelected: true,
+        isCurrent: false,
+        isPlaying: false,
+        isAvailable: true
+    )
+    let view = MediaTile(item: item, accessibilityLabel: "Tile") {
+        Color.white.frame(width: 140, height: 140)
+    } trailingAccessory: {
+        EmptyView()
+    } action: {}
+    .environment(
+        \.designNativeEnvironment,
+        DesignNativeEnvironment(
+            appearance: .light,
+            productProfile: .cadence,
+            density: .standard,
+            isIncreasedContrast: isIncreasedContrast,
+            reducesMotion: true,
+            reducesTransparency: false
+        )
+    )
+
+    let renderer = ImageRenderer(content: view)
+    renderer.scale = 1
+    return try alphaMask(of: #require(renderer.cgImage))
+}
+
+@MainActor
+private func renderedClippedRectangleAlphaMask(
+    width: Int,
+    height: Int,
+    radius: CGFloat
+) throws -> (width: Int, height: Int, alphaMask: [Bool]) {
+    let renderer = ImageRenderer(
+        content: Color.white
+            .frame(width: CGFloat(width), height: CGFloat(height))
+            .clipShape(
+                RoundedRectangle(cornerRadius: radius, style: .continuous)
+            )
+        )
+    renderer.scale = 1
+    return try alphaMask(of: #require(renderer.cgImage))
+}
+
+private func alphaMask(of image: CGImage) throws -> (width: Int, height: Int, alphaMask: [Bool]) {
+    let bitmap = NSBitmapImageRep(cgImage: image)
+    let mask = (0 ..< image.height).flatMap { y in
+        (0 ..< image.width).map { x in
+            (bitmap.colorAt(x: x, y: y)?.alphaComponent ?? 0) > 0
+        }
+    }
+    return (image.width, image.height, mask)
+}
+
 #endif

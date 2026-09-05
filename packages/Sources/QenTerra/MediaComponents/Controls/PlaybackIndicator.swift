@@ -29,7 +29,8 @@ public struct PlaybackIndicatorState: Equatable, Sendable {
         let pattern = animationPatterns[index]
         let duration = animationDurations[index]
         guard duration > 0, elapsed.isFinite else { return pattern[0] }
-        let normalized = elapsed.truncatingRemainder(dividingBy: duration) / duration
+        let phasedElapsed = max(elapsed - phaseOffset(forBar: index), 0)
+        let normalized = phasedElapsed.truncatingRemainder(dividingBy: duration) / duration
         let keyTimes = animationKeyTimes
         guard normalized > 0 else { return pattern[0] }
         for upperIndex in 1 ..< keyTimes.count where normalized <= keyTimes[upperIndex] {
@@ -90,6 +91,11 @@ public struct PlaybackIndicatorState: Equatable, Sendable {
 
     var animationStagger: TimeInterval {
         DesignTokens.Component.panelMediaCollectionPlaybackIndicatorStaggerMs.milliseconds / 1_000
+    }
+
+    func phaseOffset(forBar index: Int) -> TimeInterval {
+        guard staticScales.indices.contains(index) else { return 0 }
+        return Double(index) * animationStagger
     }
 }
 
@@ -245,9 +251,9 @@ public final class NativePlaybackIndicatorView: NSView {
         for bar in bars { bar.backgroundColor = color.cgColor }
         CATransaction.commit()
 
-        if state.animates {
+        if state.animates, !isAnimating {
             startAnimating(state)
-        } else {
+        } else if !state.animates {
             stopAnimating(staticScales: state.staticScales)
         }
     }
@@ -296,7 +302,7 @@ public final class NativePlaybackIndicatorView: NSView {
             animation.values = state.animationPatterns[index]
             animation.keyTimes = state.animationKeyTimes.map(NSNumber.init(value:))
             animation.duration = state.animationDurations[index]
-            animation.beginTime = now + Double(index) * state.animationStagger
+            animation.beginTime = now + state.phaseOffset(forBar: index)
             animation.repeatCount = .infinity
             animation.isRemovedOnCompletion = true
             bar.add(animation, forKey: Self.animationKey)

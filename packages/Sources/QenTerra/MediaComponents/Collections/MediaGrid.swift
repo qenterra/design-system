@@ -13,6 +13,8 @@ public struct MediaGridMetrics: Equatable, Sendable {
 }
 
 public struct MediaGridLayout: Equatable, Sendable {
+    public static let maximumColumnCount = 10_000
+
     public let minimumWidth: CGFloat
     public let maximumWidth: CGFloat
     public let spacing: CGFloat
@@ -51,17 +53,40 @@ public struct MediaGridLayout: Equatable, Sendable {
         let width = availableWidth.isFinite
             ? max(availableWidth, minimumWidth)
             : minimumWidth
-        let denominator = minimumWidth + spacing
-        let count = denominator > 0
-            ? max(Int((width + spacing) / denominator), 1)
-            : 1
-        let distributed = (
-            width - CGFloat(max(count - 1, 0)) * spacing
-        ) / CGFloat(count)
+        guard let denominator = finiteSum(minimumWidth, spacing), denominator > 0,
+              let numerator = finiteSum(width, spacing)
+        else {
+            return singleColumnMetrics(for: width)
+        }
+        let quotient = numerator / denominator
+        guard quotient.isFinite, quotient > 0 else {
+            return singleColumnMetrics(for: width)
+        }
+        let boundedCount = min(floor(quotient), CGFloat(Self.maximumColumnCount))
+        let count = max(Int(boundedCount), 1)
+        guard let gapWidth = finiteProduct(CGFloat(count - 1), spacing) else {
+            return singleColumnMetrics(for: width)
+        }
+        let contentWidth = width - gapWidth
+        guard contentWidth.isFinite, contentWidth > 0 else {
+            return singleColumnMetrics(for: width)
+        }
+        let distributed = contentWidth / CGFloat(count)
+        guard distributed.isFinite, distributed > 0 else {
+            return singleColumnMetrics(for: width)
+        }
         return MediaGridMetrics(
             columnCount: count,
-            itemWidth: min(max(distributed, minimumWidth), maximumWidth)
+            itemWidth: boundedItemWidth(distributed)
         )
+    }
+
+    private func singleColumnMetrics(for width: CGFloat) -> MediaGridMetrics {
+        MediaGridMetrics(columnCount: 1, itemWidth: boundedItemWidth(width))
+    }
+
+    private func boundedItemWidth(_ width: CGFloat) -> CGFloat {
+        min(max(width, minimumWidth), maximumWidth)
     }
 
     var columns: [GridItem] {
@@ -79,6 +104,16 @@ public struct MediaGridLayout: Equatable, Sendable {
         self.maximumWidth = maximumWidth
         self.spacing = spacing
     }
+}
+
+private func finiteSum(_ lhs: CGFloat, _ rhs: CGFloat) -> CGFloat? {
+    let result = lhs + rhs
+    return result.isFinite ? result : nil
+}
+
+private func finiteProduct(_ lhs: CGFloat, _ rhs: CGFloat) -> CGFloat? {
+    let result = lhs * rhs
+    return result.isFinite ? result : nil
 }
 
 private func finitePositive(_ value: CGFloat?) -> CGFloat? {

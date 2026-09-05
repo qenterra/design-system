@@ -238,6 +238,18 @@ class RegistryContractTests(unittest.TestCase):
                 maintained_by_path[source]["deliveryProduct"],
                 "QenTerraMediaComponents",
             )
+        self.assertIn(
+            "MediaAccessoryInteractionContext",
+            maintained_by_path[
+                "packages/Sources/QenTerra/MediaComponents/Collections/MediaItemPresentation.swift"
+            ]["publicSymbols"],
+        )
+        self.assertIn(
+            "InteractiveRowCornerRadius",
+            maintained_by_path[
+                "packages/Sources/QenTerra/Components/InteractiveRowSurface.swift"
+            ]["publicSymbols"],
+        )
         manifest_paths = {
             f"packages/{item['sourcePath']}"
             for item in load("packages/Sources/QenTerra/manifest.json")["components"]
