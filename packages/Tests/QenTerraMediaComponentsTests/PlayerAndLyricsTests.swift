@@ -1,4 +1,5 @@
 #if os(macOS)
+import AppKit
 import AVFoundation
 import QenTerraDesignTokens
 @testable import QenTerraMediaComponents
@@ -66,7 +67,9 @@ import Testing
         hasCurrentItem: true,
         isPlaying: true,
         isShuffleEnabled: true,
-        repeatMode: .one
+        repeatMode: .one,
+        isShuffleActionAvailable: true,
+        isRepeatActionAvailable: true
     )
     #expect(playing.first(where: { $0.control == .playPause })?.accessibilityLabel == "Pause")
     #expect(playing.first(where: { $0.control == .shuffle })?.isActive == true)
@@ -84,6 +87,24 @@ import Testing
     #expect(repeatingAll.accessibilityLabel == "Repeat All")
     #expect(repeatingAll.symbolName == "repeat")
     #expect(repeatingAll.isActive)
+
+    let missingOptionalActions = TransportControlPresentation.all(
+        hasCurrentItem: true,
+        isPlaying: false,
+        isShuffleEnabled: false,
+        repeatMode: .off,
+        isShuffleActionAvailable: false,
+        isRepeatActionAvailable: false
+    )
+    #expect(
+        missingOptionalActions.first(where: { $0.control == .shuffle })?.isEnabled == false
+    )
+    #expect(
+        missingOptionalActions.first(where: { $0.control == .repeatMode })?.isEnabled == false
+    )
+    #expect(
+        missingOptionalActions.first(where: { $0.control == .playPause })?.isEnabled == true
+    )
 }
 
 @Test func playerLayoutMatchesTheCadenceThreeRegionGeometry() {
@@ -107,7 +128,10 @@ import Testing
         seek: { events.append("seek:\($0)") },
         setVolume: { events.append("volume:\($0)") },
         toggleMute: { events.append("mute") },
-        showQueue: { events.append("queue") }
+        showQueue: { events.append("queue") },
+        toggleShuffle: { events.append("shuffle") },
+        cycleRepeatMode: { events.append("repeat") },
+        setFavorite: { events.append("favorite:\($0)") }
     )
 
     actions.showNowPlaying()
@@ -118,10 +142,31 @@ import Testing
     actions.setVolume(0.375)
     actions.toggleMute()
     actions.showQueue()
+    actions.toggleShuffle?()
+    actions.cycleRepeatMode?()
+    actions.setFavorite?(true)
 
     #expect(events == [
         "show", "toggle", "previous", "next", "seek:0.625", "volume:0.375", "mute", "queue",
+        "shuffle", "repeat", "favorite:true",
     ])
+}
+
+@Test @MainActor func omittedOptionalPlayerActionsAreExplicitlyUnavailable() {
+    let actions = PlayerBarActions(
+        showNowPlaying: {},
+        togglePlayback: {},
+        previous: {},
+        next: {},
+        seek: { _ in },
+        setVolume: { _ in },
+        toggleMute: {},
+        showQueue: {}
+    )
+
+    #expect(actions.toggleShuffle == nil)
+    #expect(actions.cycleRepeatMode == nil)
+    #expect(actions.setFavorite == nil)
 }
 
 @Test func playerPresentationClampsVolumeAndKeepsSnapshotCopyLiteral() {
@@ -226,6 +271,72 @@ import Testing
     )
 }
 
+@Test func queueAndProgressVisualMetricsMatchTheProtectedCadenceGeometry() {
+    #expect(QueueVisualMetrics.dragPreviewGap == 10)
+    #expect(QueueVisualMetrics.dragPreviewArtworkSide == 38)
+    #expect(QueueVisualMetrics.dragPreviewTextGap == 2)
+    #expect(QueueVisualMetrics.insertionOpacity == 0.9)
+    #expect(QueueVisualMetrics.insertionYOffset == -1)
+    #expect(PlayerBarLayoutMetrics.progressLabelWidth == 34)
+    #expect(PlayerBarLayoutMetrics.queueControlSize == 34)
+}
+
+@Test @MainActor func queueMetricBackedViewsExposeExactRenderedGeometry() throws {
+    let recorder = QueueGeometryRecorder()
+    let preview = QueueDragPreview(title: "Synthetic", subtitle: "Artist") {
+        Color.red
+            .background(QueueGeometryReporter(kind: .artwork, recorder: recorder))
+    }
+    .background(QueueGeometryReporter(kind: .preview, recorder: recorder))
+    .frame(width: 400, height: 90, alignment: .topLeading)
+    .coordinateSpace(name: "queue-geometry-test")
+
+    let previewHost = NSHostingView(rootView: preview)
+    previewHost.frame = NSRect(x: 0, y: 0, width: 400, height: 90)
+    previewHost.layoutSubtreeIfNeeded()
+    RunLoop.main.run(until: Date().addingTimeInterval(0.05))
+    previewHost.layoutSubtreeIfNeeded()
+
+    #expect(recorder.preview.width == 330)
+    #expect(recorder.artwork.width == 38)
+    #expect(recorder.artwork.height == 38)
+
+    let insertionRenderer = ImageRenderer(
+        content: QueueInsertionIndicator()
+            .frame(width: 100, height: 20, alignment: .top)
+    )
+    insertionRenderer.scale = 1
+    let insertionImage = try #require(insertionRenderer.cgImage)
+    let insertionBitmap = NSBitmapImageRep(cgImage: insertionImage)
+    let visibleRows = (0 ..< insertionBitmap.pixelsHigh).filter { y in
+        (0 ..< insertionBitmap.pixelsWide).contains { x in
+            (insertionBitmap.colorAt(x: x, y: y)?.alphaComponent ?? 0) > 0.05
+        }
+    }
+    let maximumAlpha = (0 ..< insertionBitmap.pixelsHigh).flatMap { y in
+        (0 ..< insertionBitmap.pixelsWide).map { x in
+            insertionBitmap.colorAt(x: x, y: y)?.alphaComponent ?? 0
+        }
+    }.max() ?? 0
+    let literalOpacityRenderer = ImageRenderer(
+        content: Capsule()
+            .fill(Color.primary.opacity(0.9))
+            .frame(width: 84, height: 2)
+    )
+    literalOpacityRenderer.scale = 1
+    let literalOpacityBitmap = NSBitmapImageRep(
+        cgImage: try #require(literalOpacityRenderer.cgImage)
+    )
+    let literalMaximumAlpha = (0 ..< literalOpacityBitmap.pixelsHigh).flatMap { y in
+        (0 ..< literalOpacityBitmap.pixelsWide).map { x in
+            literalOpacityBitmap.colorAt(x: x, y: y)?.alphaComponent ?? 0
+        }
+    }.max() ?? 0
+
+    #expect(visibleRows.count == 1)
+    #expect(abs(maximumAlpha - literalMaximumAlpha) < 0.005)
+}
+
 @Test func inactiveSynchronizedLyricsAreSubtleButReadable() {
     let inactive = LyricLinePresentation(
         id: 2,
@@ -315,8 +426,12 @@ import Testing
     let probe = WeakPlayerProbe()
     let picker = makeAirPlayPicker(probe: probe)
 
+    let releaseDeadline = Date().addingTimeInterval(1)
+    while probe.player != nil, Date() < releaseDeadline {
+        RunLoop.main.run(until: Date().addingTimeInterval(0.01))
+    }
     #expect(probe.player == nil)
-    _ = picker
+    withExtendedLifetime(picker) {}
 }
 
 private final class WeakPlayerProbe {
@@ -351,7 +466,19 @@ private func makeAirPlayPicker(probe: WeakPlayerProbe) -> AirPlayRoutePicker {
         isQueuePresented: false,
         favorite: nil
     )
-    let actions = PlayerBarActions.noop
+    let actions = PlayerBarActions(
+        showNowPlaying: {},
+        togglePlayback: {},
+        previous: {},
+        next: {},
+        seek: { _ in },
+        setVolume: { _ in },
+        toggleMute: {},
+        showQueue: {},
+        toggleShuffle: {},
+        cycleRepeatMode: {},
+        setFavorite: { _ in }
+    )
     let queue = PlaybackQueueRowPresentation(
         id: "queue",
         title: "Synthetic Track",
@@ -373,7 +500,17 @@ private func makeAirPlayPicker(probe: WeakPlayerProbe) -> AirPlayRoutePicker {
         ),
     ]
     let views: [AnyView] = [
-        AnyView(PlayerBar(presentation: player, actions: actions) { Color.blue }),
+        AnyView(
+            PlayerBar(presentation: player, actions: actions) {
+                Color.blue
+            } metadataAccessory: {
+                Text(verbatim: "External")
+            } statusAccessory: {
+                Text(verbatim: "Failure")
+            } routeAccessory: {
+                Text(verbatim: "AirPlay")
+            }
+        ),
         AnyView(PlaybackProgressControl(presentation: progress, seek: { _ in })),
         AnyView(TransportControls(presentation: player, actions: actions)),
         AnyView(
@@ -398,6 +535,38 @@ private func makeAirPlayPicker(probe: WeakPlayerProbe) -> AirPlayRoutePicker {
     for view in views {
         let renderer = ImageRenderer(content: view.frame(width: 520, height: 180))
         #expect(renderer.cgImage != nil)
+    }
+}
+
+@MainActor
+private final class QueueGeometryRecorder {
+    var artwork = CGRect.null
+    var preview = CGRect.null
+}
+
+private enum QueueGeometryKind {
+    case artwork
+    case preview
+}
+
+private struct QueueGeometryReporter: View {
+    let kind: QueueGeometryKind
+    let recorder: QueueGeometryRecorder
+
+    var body: some View {
+        GeometryReader { proxy in
+            let frame = proxy.frame(in: .named("queue-geometry-test"))
+            Color.clear
+                .onAppear { record(frame) }
+                .onChange(of: frame) { _, value in record(value) }
+        }
+    }
+
+    private func record(_ frame: CGRect) {
+        switch kind {
+        case .artwork: recorder.artwork = frame
+        case .preview: recorder.preview = frame
+        }
     }
 }
 #endif

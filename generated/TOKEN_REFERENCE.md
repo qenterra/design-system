@@ -428,20 +428,26 @@ Shared component metrics and mandatory state contracts.
 - `extensions.rawMetricExceptions.panel.player.panelPickerWidth`: `Panel picker width belongs to the player shell.`
 - `extensions.rawMetricExceptions.panel.player.progressHeight`: `Progress thickness belongs to the player control.`
 - `extensions.rawMetricExceptions.panel.player.progressIdealWidth`: `Player progress width preserves the Cadence transport layout contract.`
+- `extensions.rawMetricExceptions.panel.player.progressLabelWidth`: `Player progress time-label width preserves the Cadence clock alignment contract.`
 - `extensions.rawMetricExceptions.panel.player.progressMaximumWidth`: `Player progress width preserves the Cadence transport layout contract.`
 - `extensions.rawMetricExceptions.panel.player.progressMinimumWidth`: `Player progress width preserves the Cadence transport layout contract.`
 - `extensions.rawMetricExceptions.panel.player.transportMinimumWidth`: `Player transport width preserves the Cadence three-region layout contract.`
 - `extensions.rawMetricExceptions.panel.player.volumeButtonSize`: `Player volume-button geometry preserves the Cadence control contract.`
 - `extensions.rawMetricExceptions.panel.player.volumeWidth`: `Player volume width preserves the Cadence output-control contract.`
 - `extensions.rawMetricExceptions.panel.queue.artworkSide`: `Queue artwork geometry belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.dragPreviewArtworkSide`: `Queue drag preview artwork geometry belongs to the queue presentation.`
 - `extensions.rawMetricExceptions.panel.queue.dragPreviewBorderOpacity`: `Queue drag preview border treatment belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.dragPreviewGap`: `Queue drag preview artwork-to-copy rhythm belongs to the queue presentation.`
 - `extensions.rawMetricExceptions.panel.queue.dragPreviewPadding`: `Queue drag preview padding belongs to the queue presentation.`
 - `extensions.rawMetricExceptions.panel.queue.dragPreviewShadowOpacity`: `Queue drag preview shadow treatment belongs to the queue presentation.`
 - `extensions.rawMetricExceptions.panel.queue.dragPreviewShadowRadius`: `Queue drag preview shadow treatment belongs to the queue presentation.`
 - `extensions.rawMetricExceptions.panel.queue.dragPreviewShadowYOffset`: `Queue drag preview shadow treatment belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.dragPreviewTextGap`: `Queue drag preview title-to-subtitle rhythm belongs to the queue presentation.`
 - `extensions.rawMetricExceptions.panel.queue.dragPreviewWidth`: `Queue drag preview width belongs to the queue presentation.`
 - `extensions.rawMetricExceptions.panel.queue.insertionHeight`: `Queue insertion feedback geometry belongs to the queue presentation.`
 - `extensions.rawMetricExceptions.panel.queue.insertionHorizontalInset`: `Queue insertion feedback inset belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.insertionOpacity`: `Queue insertion feedback prominence belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.insertionYOffset`: `Queue insertion feedback optical alignment belongs to the queue presentation.`
 - `extensions.rawMetricExceptions.panel.queue.rowGap`: `Queue row rhythm belongs to the queue presentation.`
 - `extensions.rawMetricExceptions.panel.queue.rowHeight`: `Queue row geometry belongs to the queue presentation.`
 - `extensions.rawMetricExceptions.panel.queue.rowHorizontalPadding`: `Queue row horizontal inset belongs to the queue presentation.`
@@ -595,20 +601,26 @@ Shared component metrics and mandatory state contracts.
 - `panel.player.panelPickerWidth`: `184`
 - `panel.player.progressHeight`: `4`
 - `panel.player.progressIdealWidth`: `300`
+- `panel.player.progressLabelWidth`: `34`
 - `panel.player.progressMaximumWidth`: `360`
 - `panel.player.progressMinimumWidth`: `220`
 - `panel.player.transportMinimumWidth`: `500`
 - `panel.player.volumeButtonSize`: `28`
 - `panel.player.volumeWidth`: `86`
 - `panel.queue.artworkSide`: `42`
+- `panel.queue.dragPreviewArtworkSide`: `38`
 - `panel.queue.dragPreviewBorderOpacity`: `0.14`
+- `panel.queue.dragPreviewGap`: `10`
 - `panel.queue.dragPreviewPadding`: `10`
 - `panel.queue.dragPreviewShadowOpacity`: `0.38`
 - `panel.queue.dragPreviewShadowRadius`: `16`
 - `panel.queue.dragPreviewShadowYOffset`: `8`
+- `panel.queue.dragPreviewTextGap`: `2`
 - `panel.queue.dragPreviewWidth`: `330`
 - `panel.queue.insertionHeight`: `2`
 - `panel.queue.insertionHorizontalInset`: `8`
+- `panel.queue.insertionOpacity`: `0.9`
+- `panel.queue.insertionYOffset`: `-1`
 - `panel.queue.rowGap`: `12`
 - `panel.queue.rowHeight`: `52`
 - `panel.queue.rowHorizontalPadding`: `8`

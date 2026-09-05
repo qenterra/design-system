@@ -87,7 +87,7 @@ public struct PlaybackProgressControl: View {
 
     private func timeLabel(_ text: String, alignment: Alignment) -> some View {
         Text(verbatim: text)
-            .frame(minWidth: 34, alignment: alignment)
+            .frame(minWidth: PlayerBarLayoutMetrics.progressLabelWidth, alignment: alignment)
     }
 }
 #endif

@@ -90,8 +90,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "37f8f30fa573c2d9fb91bb2cd098c2d2f54a971fe2f9f5b009f9a8a6d68054db",
-      "bytes": 4301
+      "sha256": "9a64117b021c546ae2d0bbd61e18df9ed33707b7d16b461b2c80baf9a4ce1b37",
+      "bytes": 4549
     },
     {
       "path": "CODE_OF_CONDUCT.md",
@@ -66335,8 +66335,8 @@
     },
     {
       "path": "Sources/QenTerra/DesignTokens/GeneratedTokens.swift",
-      "sha256": "277a20fbd7ad20aad2024547a69f06754dc8fbcce1926aa07e4587a9bc967507",
-      "bytes": 30252
+      "sha256": "be64cc45ebfbe7f0b954259a503e1a8384bb8277f05b10a192116b81e1e820ad",
+      "bytes": 30795
     },
     {
       "path": "Sources/QenTerra/DesignTokens/SwiftUIAdapters.swift",
@@ -66455,18 +66455,18 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Player/PlaybackProgressControl.swift",
-      "sha256": "455a7865c65c4241e1811c77f08da09e4e6143119cf094c2883b5b7e4bd94f4b",
-      "bytes": 2967
+      "sha256": "6ac6fc960826dc94c5e2f9880054f17faef37e1c73a7222d8c3e1cb24e6ac1a4",
+      "bytes": 3006
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Player/PlayerBar.swift",
-      "sha256": "f4bb397188802ea2a17e0b9747710373e76af5d3efe88fa54ba7c552ee07a401",
-      "bytes": 9316
+      "sha256": "c17faee46d61dce4fc1c1158ac141bcd5dbd20e539d030d9633b969c261cb633",
+      "bytes": 11071
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Player/PlayerBarActions.swift",
-      "sha256": "c016516261ff1ea0a8d0b8eae172deb100e5a9cd4b1b85c0558740e2377583c3",
-      "bytes": 2140
+      "sha256": "26b2475c60d18f70f7274d35e196acc0b5ab602f004f762f4c7584f2afb331fa",
+      "bytes": 1888
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Player/PlayerBarPresentation.swift",
@@ -66475,8 +66475,8 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Player/TransportControls.swift",
-      "sha256": "f05e9e7e173df93046390940fbdbf1ccbd0021938adfda033f0c65404b96392e",
-      "bytes": 5793
+      "sha256": "2f3ada54f631607e08a345aea3d3b27da0787337ebc38d605afd4595ddfa6031",
+      "bytes": 6622
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Queue/PlaybackQueueRow.swift",
@@ -66485,13 +66485,13 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Queue/QueueDragPreview.swift",
-      "sha256": "707b6bb023546c50bc8cd112948406c0010b614c9e314dea1d27d1ad0567d301",
-      "bytes": 2252
+      "sha256": "2dddb7ce552e8d748f868012f196b7ec123b74c42f4ca692cd7b16c0781aba64",
+      "bytes": 3031
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Queue/QueueInsertionIndicator.swift",
-      "sha256": "47b4e0bc267cd0d1061e19bd28069983a4613a435bee78dc680ee47cdd83828e",
-      "bytes": 498
+      "sha256": "7121ea0b0b882c67c55f557f219ce9011929cb2fc04af1bc133a4c197954c63d",
+      "bytes": 590
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Resources/MediaComponents.txt",
@@ -66505,8 +66505,8 @@
     },
     {
       "path": "Sources/QenTerra/manifest.json",
-      "sha256": "a9100121a20c2e41822b84e6815bd72430d5bc4c3abfc24517571a75ad376e13",
-      "bytes": 27703
+      "sha256": "5db305da5eb97073cebe0b17f5a5111e38aed222ffedebd5bc628ed84e7bb284",
+      "bytes": 27704
     },
     {
       "path": "Sources/ReUI/Base/Components/accordion/c-accordion-1.tsx",
@@ -129745,8 +129745,8 @@
     },
     {
       "path": "Tests/QenTerraDesignTokensTests/DesignTokensTests.swift",
-      "sha256": "61bd2e6e186612ed27f2307d0e1d4be0a07e4d2dc4ad5e5a7c6d14669bee4dca",
-      "bytes": 8119
+      "sha256": "038d46df370a7495e2febf6e158c7abe381466b8fb137bd5cc7b177d143902eb",
+      "bytes": 8601
     },
     {
       "path": "Tests/QenTerraMediaComponentsTests/ArtworkComponentTests.swift",
@@ -129765,8 +129765,8 @@
     },
     {
       "path": "Tests/QenTerraMediaComponentsTests/PlayerAndLyricsTests.swift",
-      "sha256": "389e6d8dc8b59b3b8db28b420b690a2086aa349502e3cfeeae44e1bfaa91e3cb",
-      "bytes": 13676
+      "sha256": "7815d17a26466b29e51b27a66d24323dc3c6183e864b25fc6e8a171b93b5fa49",
+      "bytes": 19459
     },
     {
       "path": "docs/ARCHITECTURE.md",
@@ -129870,13 +129870,13 @@
     },
     {
       "path": "npm/design-tokens/dist/tokens.css",
-      "sha256": "dcaa9872df654aa02db3282dd82753538cded3c1a61c344d2202b43305cb2bac",
-      "bytes": 24991
+      "sha256": "343a44415d421a7a08b04ba7429fd9afff9f68758cba1ce78b6f76e50a65abb0",
+      "bytes": 25394
     },
     {
       "path": "npm/design-tokens/dist/tokens.json",
-      "sha256": "394b16bba3db90c24e3b351004bc660ef036aefb23219cdd24a20daf5ee9cdc6",
-      "bytes": 43365
+      "sha256": "2b1aeb7fbd114c96ec7a02e362f854effbcc5dc4acaa62d885dcd4a918dbc833",
+      "bytes": 44289
     },
     {
       "path": "npm/design-tokens/package.json",
@@ -129945,8 +129945,8 @@
     },
     {
       "path": "npm/design-tokens/src/tokens.json",
-      "sha256": "394b16bba3db90c24e3b351004bc660ef036aefb23219cdd24a20daf5ee9cdc6",
-      "bytes": 43365
+      "sha256": "2b1aeb7fbd114c96ec7a02e362f854effbcc5dc4acaa62d885dcd4a918dbc833",
+      "bytes": 44289
     },
     {
       "path": "package.json",
@@ -129965,8 +129965,8 @@
     },
     {
       "path": "scripts/lib/token_tools.py",
-      "sha256": "17008cbd4cbcd6a7cbc3c484053c46cd2b8fb3dd618b690b8c6fcefc655b8fb0",
-      "bytes": 18779
+      "sha256": "f269f98457af2622f50d05c17adb8a1c803d3745f32162112e8d21010c1731b6",
+      "bytes": 18827
     },
     {
       "path": "scripts/qenterra_repository_check.py",

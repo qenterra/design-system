@@ -8,9 +8,9 @@ public struct PlayerBarActions: Sendable {
     public let setVolume: @MainActor @Sendable (Double) -> Void
     public let toggleMute: @MainActor @Sendable () -> Void
     public let showQueue: @MainActor @Sendable () -> Void
-    public let toggleShuffle: @MainActor @Sendable () -> Void
-    public let cycleRepeatMode: @MainActor @Sendable () -> Void
-    public let setFavorite: @MainActor @Sendable (Bool) -> Void
+    public let toggleShuffle: (@MainActor @Sendable () -> Void)?
+    public let cycleRepeatMode: (@MainActor @Sendable () -> Void)?
+    public let setFavorite: (@MainActor @Sendable (Bool) -> Void)?
 
     public init(
         showNowPlaying: @escaping @MainActor @Sendable () -> Void,
@@ -21,9 +21,9 @@ public struct PlayerBarActions: Sendable {
         setVolume: @escaping @MainActor @Sendable (Double) -> Void,
         toggleMute: @escaping @MainActor @Sendable () -> Void,
         showQueue: @escaping @MainActor @Sendable () -> Void,
-        toggleShuffle: @escaping @MainActor @Sendable () -> Void = {},
-        cycleRepeatMode: @escaping @MainActor @Sendable () -> Void = {},
-        setFavorite: @escaping @MainActor @Sendable (Bool) -> Void = { _ in }
+        toggleShuffle: (@MainActor @Sendable () -> Void)? = nil,
+        cycleRepeatMode: (@MainActor @Sendable () -> Void)? = nil,
+        setFavorite: (@MainActor @Sendable (Bool) -> Void)? = nil
     ) {
         self.showNowPlaying = showNowPlaying
         self.togglePlayback = togglePlayback
@@ -37,16 +37,5 @@ public struct PlayerBarActions: Sendable {
         self.cycleRepeatMode = cycleRepeatMode
         self.setFavorite = setFavorite
     }
-
-    public static let noop = Self(
-        showNowPlaying: {},
-        togglePlayback: {},
-        previous: {},
-        next: {},
-        seek: { _ in },
-        setVolume: { _ in },
-        toggleMute: {},
-        showQueue: {}
-    )
 }
 #endif

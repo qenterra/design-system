@@ -653,8 +653,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Player/PlayerBarActions.swift",
-      "sha256": "c016516261ff1ea0a8d0b8eae172deb100e5a9cd4b1b85c0558740e2377583c3",
-      "bytes": 2140
+      "sha256": "26b2475c60d18f70f7274d35e196acc0b5ab602f004f762f4c7584f2afb331fa",
+      "bytes": 1888
     },
     {
       "id": "player-bar",
@@ -667,8 +667,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Player/PlayerBar.swift",
-      "sha256": "f4bb397188802ea2a17e0b9747710373e76af5d3efe88fa54ba7c552ee07a401",
-      "bytes": 9316
+      "sha256": "c17faee46d61dce4fc1c1158ac141bcd5dbd20e539d030d9633b969c261cb633",
+      "bytes": 11071
     },
     {
       "id": "playback-progress-control",
@@ -682,8 +682,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Player/PlaybackProgressControl.swift",
-      "sha256": "455a7865c65c4241e1811c77f08da09e4e6143119cf094c2883b5b7e4bd94f4b",
-      "bytes": 2967
+      "sha256": "6ac6fc960826dc94c5e2f9880054f17faef37e1c73a7222d8c3e1cb24e6ac1a4",
+      "bytes": 3006
     },
     {
       "id": "transport-controls",
@@ -698,8 +698,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Player/TransportControls.swift",
-      "sha256": "f05e9e7e173df93046390940fbdbf1ccbd0021938adfda033f0c65404b96392e",
-      "bytes": 5793
+      "sha256": "2f3ada54f631607e08a345aea3d3b27da0787337ebc38d605afd4595ddfa6031",
+      "bytes": 6622
     },
     {
       "id": "airplay-route-picker",
@@ -741,8 +741,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Queue/QueueInsertionIndicator.swift",
-      "sha256": "47b4e0bc267cd0d1061e19bd28069983a4613a435bee78dc680ee47cdd83828e",
-      "bytes": 498
+      "sha256": "7121ea0b0b882c67c55f557f219ce9011929cb2fc04af1bc133a4c197954c63d",
+      "bytes": 590
     },
     {
       "id": "queue-drag-preview",
@@ -755,8 +755,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Queue/QueueDragPreview.swift",
-      "sha256": "707b6bb023546c50bc8cd112948406c0010b614c9e314dea1d27d1ad0567d301",
-      "bytes": 2252
+      "sha256": "2dddb7ce552e8d748f868012f196b7ec123b74c42f4ca692cd7b16c0781aba64",
+      "bytes": 3031
     },
     {
       "id": "lyric-line-presentation",

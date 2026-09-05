@@ -3514,15 +3514,20 @@
       "anatomy": [
         "ready-artwork-slot",
         "literal-title-and-subtitle",
+        "metadata-accessory-slot",
         "transport-controls",
         "measured-progress",
-        "volume-and-queue-controls"
+        "status-accessory-slot",
+        "volume-controls",
+        "route-accessory-slot",
+        "queue-control"
       ],
       "states": [
         "empty",
         "paused",
         "playing",
         "favorite",
+        "optional-actions-unavailable",
         "queue-presented",
         "reduced-transparency"
       ],
@@ -3544,11 +3549,12 @@
         "each native control remains an independent focus target and invokes only its supplied action"
       ],
       "accessibility": [
-        "transport labels and enabled states follow the explicit snapshot",
+        "transport labels and enabled states follow the explicit snapshot and supplied action availability",
+        "metadata, status, and route accessories retain their own semantics without an added group",
         "consumer time strings remain literal"
       ],
       "localization": [
-        "title, subtitle, progress strings, and consumer action context remain consumer-owned"
+        "title, subtitle, progress strings, accessory content, and consumer action context remain consumer-owned"
       ],
       "evidence": [
         "schema",
@@ -3655,7 +3661,9 @@
         "no-current-item",
         "paused",
         "playing",
+        "shuffle-unavailable",
         "shuffle-active",
+        "repeat-unavailable",
         "repeat-off",
         "repeat-all",
         "repeat-one"
@@ -3679,6 +3687,7 @@
       ],
       "accessibility": [
         "play-pause and repeat labels reflect the current explicit state",
+        "shuffle and repeat are disabled when their optional consumer actions are absent",
         "active state is not conveyed by color alone"
       ],
       "localization": [

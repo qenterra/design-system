@@ -2,6 +2,28 @@
 import QenTerraDesignTokens
 import SwiftUI
 
+enum QueueVisualMetrics {
+    static var dragPreviewGap: CGFloat {
+        DesignTokens.Component.panelQueueDragPreviewGap.points
+    }
+
+    static var dragPreviewArtworkSide: CGFloat {
+        DesignTokens.Component.panelQueueDragPreviewArtworkSide.points
+    }
+
+    static var dragPreviewTextGap: CGFloat {
+        DesignTokens.Component.panelQueueDragPreviewTextGap.points
+    }
+
+    static var insertionOpacity: Double {
+        DesignTokens.Component.panelQueueInsertionOpacity.value
+    }
+
+    static var insertionYOffset: CGFloat {
+        DesignTokens.Component.panelQueueInsertionYOffset.points
+    }
+}
+
 public struct QueueDragPreview<Artwork: View>: View {
     private let title: String
     private let subtitle: String
@@ -18,16 +40,19 @@ public struct QueueDragPreview<Artwork: View>: View {
     }
 
     public var body: some View {
-        HStack(spacing: DesignProductMetrics.cadence.compactGap) {
+        HStack(spacing: QueueVisualMetrics.dragPreviewGap) {
             artwork
-                .frame(width: 38, height: 38)
+                .frame(
+                    width: QueueVisualMetrics.dragPreviewArtworkSide,
+                    height: QueueVisualMetrics.dragPreviewArtworkSide
+                )
                 .clipShape(
                     RoundedRectangle(
                         cornerRadius: DesignTokens.Radius.control,
                         style: .continuous
                     )
                 )
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: QueueVisualMetrics.dragPreviewTextGap) {
                 Text(verbatim: title)
                     .font(.callout.weight(.medium))
                     .lineLimit(1)

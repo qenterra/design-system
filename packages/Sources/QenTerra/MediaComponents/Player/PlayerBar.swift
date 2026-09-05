@@ -9,6 +9,8 @@ enum PlayerBarLayoutMetrics {
     static var metadataMaximumWidth: CGFloat { DesignTokens.Component.panelPlayerMetadataMaximumWidth.points }
     static var outputWidth: CGFloat { DesignTokens.Component.panelPlayerOutputWidth.points }
     static var transportMinimumWidth: CGFloat { DesignTokens.Component.panelPlayerTransportMinimumWidth.points }
+    static var progressLabelWidth: CGFloat { DesignTokens.Component.panelPlayerProgressLabelWidth.points }
+    static var queueControlSize: CGFloat { DesignTokens.Component.panelPlayerControlSize.points }
 
     static func contentFrame(availableWidth: CGFloat) -> CGRect {
         CGRect(
@@ -33,21 +35,35 @@ enum PlayerBarLayoutMetrics {
     }
 }
 
-public struct PlayerBar<Artwork: View>: View {
+public struct PlayerBar<
+    Artwork: View,
+    MetadataAccessory: View,
+    StatusAccessory: View,
+    RouteAccessory: View
+>: View {
     @Environment(\.designNativeEnvironment) private var environment
     @State private var isArtworkHovered = false
     private let presentation: PlayerBarPresentation
     private let actions: PlayerBarActions
     private let artwork: Artwork
+    private let metadataAccessory: MetadataAccessory
+    private let statusAccessory: StatusAccessory
+    private let routeAccessory: RouteAccessory
 
     public init(
         presentation: PlayerBarPresentation,
         actions: PlayerBarActions,
-        @ViewBuilder artwork: () -> Artwork
+        @ViewBuilder artwork: () -> Artwork,
+        @ViewBuilder metadataAccessory: () -> MetadataAccessory,
+        @ViewBuilder statusAccessory: () -> StatusAccessory,
+        @ViewBuilder routeAccessory: () -> RouteAccessory
     ) {
         self.presentation = presentation
         self.actions = actions
         self.artwork = artwork()
+        self.metadataAccessory = metadataAccessory()
+        self.statusAccessory = statusAccessory()
+        self.routeAccessory = routeAccessory()
     }
 
     public var body: some View {
@@ -123,6 +139,12 @@ public struct PlayerBar<Artwork: View>: View {
                             .lineLimit(1)
                     }
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .layoutPriority(1)
+
+                metadataAccessory
+
+                Spacer(minLength: 0)
             }
         } else if let emptyTitle = presentation.emptyTitle {
             HStack(spacing: DesignProductMetrics.cadence.compactGap) {
@@ -144,8 +166,9 @@ public struct PlayerBar<Artwork: View>: View {
         HStack(spacing: DesignProductMetrics.cadence.contentGap) {
             HStack(spacing: DesignProductMetrics.cadence.controlGap) {
                 TransportControls(presentation: presentation, actions: actions)
-                if let favorite = presentation.favorite {
-                    FavoriteControl(presentation: favorite, action: actions.setFavorite)
+                if let favorite = presentation.favorite,
+                   let setFavorite = actions.setFavorite {
+                    FavoriteControl(presentation: favorite, action: setFavorite)
                 }
             }
 
@@ -164,6 +187,8 @@ public struct PlayerBar<Artwork: View>: View {
 
     private var outputControls: some View {
         HStack(spacing: DesignProductMetrics.cadence.controlGap) {
+            statusAccessory
+
             Button(action: actions.toggleMute) {
                 Image(systemName: presentation.isMuted ? "speaker.slash.fill" : volumeSymbol)
                     .frame(
@@ -184,9 +209,14 @@ public struct PlayerBar<Artwork: View>: View {
             .frame(width: DesignTokens.Component.panelPlayerVolumeWidth.points)
             .accessibilityLabel("Volume")
 
+            routeAccessory
+
             Button(action: actions.showQueue) {
                 Image(systemName: "list.bullet")
-                    .frame(width: 34, height: 34)
+                    .frame(
+                        width: PlayerBarLayoutMetrics.queueControlSize,
+                        height: PlayerBarLayoutMetrics.queueControlSize
+                    )
                     .background {
                         if presentation.isQueuePresented {
                             RoundedRectangle(
@@ -222,6 +252,27 @@ public struct PlayerBar<Artwork: View>: View {
     private func nowPlayingAccessibilityLabel(title: String) -> String {
         presentation.showNowPlayingAccessibilityLabel
             ?? [title, presentation.subtitle].compactMap { $0 }.joined(separator: ", ")
+    }
+}
+
+public extension PlayerBar where
+    MetadataAccessory == EmptyView,
+    StatusAccessory == EmptyView,
+    RouteAccessory == EmptyView
+{
+    init(
+        presentation: PlayerBarPresentation,
+        actions: PlayerBarActions,
+        @ViewBuilder artwork: () -> Artwork
+    ) {
+        self.init(
+            presentation: presentation,
+            actions: actions,
+            artwork: artwork,
+            metadataAccessory: { EmptyView() },
+            statusAccessory: { EmptyView() },
+            routeAccessory: { EmptyView() }
+        )
     }
 }
 #endif

@@ -187,6 +187,7 @@ class SwiftConsumerTests(unittest.TestCase):
             "swift-consumer-media",
             source="""
 import QenTerraMediaComponents
+import SwiftUI
 
 let progress = PlaybackProgressPresentation(
     progress: 0.5,
@@ -226,6 +227,26 @@ let lyric = LyricLinePresentation(
     inactiveBlurRadius: 0.45
 )
 let detail = AudioDetail(id: "codec", label: "Codec", value: "FLAC", order: 0)
+let actions = PlayerBarActions(
+    showNowPlaying: {},
+    togglePlayback: {},
+    previous: {},
+    next: {},
+    seek: { _ in },
+    setVolume: { _ in },
+    toggleMute: {},
+    showQueue: {}
+)
+let bar = PlayerBar(presentation: player, actions: actions) {
+    Color.blue
+} metadataAccessory: {
+    Text("External")
+} statusAccessory: {
+    Text("Status")
+} routeAccessory: {
+    Text("Route")
+}
+_ = bar
 print(player.hasCurrentItem, queue.isSelected, lyric.opacity, detail.value)
 """,
         )
@@ -274,6 +295,11 @@ print(player.hasCurrentItem, queue.isSelected, lyric.opacity, detail.value)
                 host_stdout,
                 f"media interaction host failed:\n{host_stdout}\n{host_stderr}",
             )
+            self.assertIn(
+                "PLAYER_INTERACTION_HOST_OK",
+                host_stdout,
+                f"player interaction host did not exercise every public control:\n{host_stdout}\n{host_stderr}",
+            )
             self.assertEqual(
                 result_path.read_text(encoding="utf-8") if result_path.exists() else "",
                 "OK\n",
@@ -285,6 +311,59 @@ print(player.hasCurrentItem, queue.isSelected, lyric.opacity, detail.value)
                 executable_path_for_pid(recorded_pid),
                 bundled_executable.resolve(),
                 "successful native interaction host remained alive",
+            )
+
+    def test_player_controls_run_against_copied_public_package(self) -> None:
+        if (
+            os.environ.get("CODEX_SANDBOX") == "seatbelt"
+            and os.environ.get("QDS_RUN_NATIVE_INTERACTION_HOST") != "1"
+        ):
+            self.skipTest(
+                "Codex seatbelt blocks LaunchServices; rerun with "
+                "QDS_RUN_NATIVE_INTERACTION_HOST=1 outside the sandbox"
+            )
+        with tempfile.TemporaryDirectory(prefix="qenterra-swift-player-interaction-") as directory:
+            staging = Path(directory)
+            application, bundled_executable, environment = self._prepare_media_interaction_host(staging)
+            run_id = uuid.uuid4().hex
+            pid_path = staging / f"player-interaction-host-{run_id}.pid"
+            result_path = staging / f"player-interaction-host-{run_id}.result"
+            stdout_path = staging / f"player-interaction-host-{run_id}.stdout"
+            stderr_path = staging / f"player-interaction-host-{run_id}.stderr"
+            launch = launch_native_interaction_host(
+                application,
+                bundled_executable,
+                environment,
+                pid_path,
+                result_path,
+                stdout_path,
+                stderr_path,
+                timeout=30,
+                extra_arguments=("--qenterra-player-only",),
+            )
+            host_stdout = stdout_path.read_text(encoding="utf-8") if stdout_path.exists() else ""
+            host_stderr = stderr_path.read_text(encoding="utf-8") if stderr_path.exists() else ""
+            self.assertEqual(
+                launch.returncode,
+                0,
+                f"player interaction host failed:\n{launch.stdout}\n{launch.stderr}\n{host_stdout}\n{host_stderr}",
+            )
+            self.assertIn(
+                "PLAYER_INTERACTION_HOST_OK",
+                host_stdout,
+                f"player interaction host did not exercise every public control:\n{host_stdout}\n{host_stderr}",
+            )
+            self.assertEqual(
+                result_path.read_text(encoding="utf-8") if result_path.exists() else "",
+                "OK\n",
+                "player interaction host did not publish its successful result",
+            )
+            recorded_pid = read_recorded_pid(pid_path)
+            self.assertIsNotNone(recorded_pid, "player interaction host did not record its PID")
+            self.assertNotEqual(
+                executable_path_for_pid(recorded_pid),
+                bundled_executable.resolve(),
+                "successful player interaction host remained alive",
             )
 
     def test_timed_out_media_interaction_host_is_terminated(self) -> None:

@@ -41,6 +41,7 @@ COMPONENT_VALUE_UNITS = {
     "panel.lyrics.inactiveOpacity": "unitless",
     "panel.queue.dragPreviewBorderOpacity": "unitless",
     "panel.queue.dragPreviewShadowOpacity": "unitless",
+    "panel.queue.insertionOpacity": "unitless",
     "panel.mediaCollection.pressedOpacity": "unitless",
     "panel.mediaCollection.playbackIndicatorStaticFirstScale": "scalar",
     "panel.mediaCollection.playbackIndicatorStaticSecondScale": "scalar",

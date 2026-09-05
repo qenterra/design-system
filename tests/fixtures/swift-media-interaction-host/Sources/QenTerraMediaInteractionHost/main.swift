@@ -9,6 +9,7 @@ private struct HostConfiguration {
     let pidPath: String?
     let resultPath: String?
     let shouldHangForCleanupTest: Bool
+    let shouldRunPlayerOnly: Bool
 
     static func current(arguments: [String] = CommandLine.arguments) -> HostConfiguration {
         func value(after option: String) -> String? {
@@ -21,7 +22,8 @@ private struct HostConfiguration {
         return HostConfiguration(
             pidPath: value(after: "--qenterra-pid-path"),
             resultPath: value(after: "--qenterra-result-path"),
-            shouldHangForCleanupTest: arguments.contains("--qenterra-test-hang")
+            shouldHangForCleanupTest: arguments.contains("--qenterra-test-hang"),
+            shouldRunPlayerOnly: arguments.contains("--qenterra-player-only")
         )
     }
 }
@@ -49,6 +51,54 @@ private final class InteractionRecorder {
     var containerFrame = CGRect.null
     var primaryFrame = CGRect.null
     var accessoryFrame = CGRect.null
+}
+
+@MainActor
+private final class PlayerInteractionRecorder {
+    private(set) var events: [String: Int] = [:]
+    var metadataAccessoryFrame = CGRect.null
+    var statusAccessoryFrame = CGRect.null
+    var routeAccessoryFrame = CGRect.null
+    var artworkFrame = CGRect.null
+
+    func record(_ event: String) {
+        events[event, default: 0] += 1
+    }
+
+    func count(_ event: String) -> Int {
+        events[event, default: 0]
+    }
+}
+
+private enum PlayerAccessoryRegion {
+    case artwork
+    case metadata
+    case status
+    case route
+}
+
+private struct PlayerAccessoryFrameReporter: View {
+    let region: PlayerAccessoryRegion
+    let recorder: PlayerInteractionRecorder
+
+    var body: some View {
+        GeometryReader { proxy in
+            let frame = proxy.frame(in: .named("player-interaction-host"))
+            Color.clear
+                .onAppear { record(frame) }
+                .onChange(of: frame) { _, value in record(value) }
+        }
+        .accessibilityHidden(true)
+    }
+
+    private func record(_ frame: CGRect) {
+        switch region {
+        case .artwork: recorder.artworkFrame = frame
+        case .metadata: recorder.metadataAccessoryFrame = frame
+        case .status: recorder.statusAccessoryFrame = frame
+        case .route: recorder.routeAccessoryFrame = frame
+        }
+    }
 }
 
 private enum CompositionKind: String, CaseIterable {
@@ -188,26 +238,28 @@ private final class NativeInteractionHarness {
     private let window: NSWindow
     private let host: NSHostingView<AnyView>
 
-    init(rootView: AnyView) throws {
+    init(rootView: AnyView, size: CGSize = CGSize(width: 480, height: 360)) throws {
         window = NSWindow(
-            contentRect: NSRect(x: 120, y: 120, width: 480, height: 360),
+            contentRect: NSRect(origin: NSPoint(x: 120, y: 120), size: size),
             styleMask: [.titled],
             backing: .buffered,
             defer: false
         )
         host = NSHostingView(rootView: rootView)
         host.sizingOptions = []
-        host.frame = NSRect(x: 0, y: 0, width: 480, height: 360)
+        host.frame = NSRect(origin: .zero, size: size)
         host.autoresizingMask = [.width, .height]
         window.contentView = host
         window.acceptsMouseMovedEvents = true
         window.makeKeyAndOrderFront(nil)
         window.makeFirstResponder(host)
         window.orderFrontRegardless()
-        let activationDeadline = Date().addingTimeInterval(1)
+        let activationDeadline = Date().addingTimeInterval(5)
         repeat {
             NSApp.activate()
-            _ = NSRunningApplication.current.activate(options: [.activateAllWindows])
+            _ = NSRunningApplication.current.activate(
+                options: [.activateAllWindows, .activateIgnoringOtherApps]
+            )
             window.makeKey()
             pump()
         } while (!NSApp.isActive || !window.isKeyWindow) && Date() < activationDeadline
@@ -606,6 +658,243 @@ private func exercise(_ kind: CompositionKind) throws -> Bool {
     return accessibilityWasAvailable
 }
 
+@MainActor
+private func playerPresentation(favorite: FavoritePresentation?) -> PlayerBarPresentation {
+    PlayerBarPresentation(
+        title: "Synthetic Track",
+        subtitle: "Synthetic Artist",
+        isPlaying: false,
+        isShuffleEnabled: false,
+        repeatMode: .off,
+        progress: PlaybackProgressPresentation(
+            progress: 0.5,
+            leadingText: "2:01",
+            trailingText: "4:02",
+            accessibilityLabel: "Playback Position",
+            isEnabled: true
+        ),
+        volume: 0.5,
+        isMuted: false,
+        isQueuePresented: false,
+        favorite: favorite,
+        showNowPlayingAccessibilityLabel: "Show Synthetic Track"
+    )
+}
+
+@MainActor
+private func playerActions(
+    recorder: PlayerInteractionRecorder,
+    includesOptionalActions: Bool
+) -> PlayerBarActions {
+    let toggleShuffle: (@MainActor @Sendable () -> Void)?
+    let cycleRepeatMode: (@MainActor @Sendable () -> Void)?
+    let setFavorite: (@MainActor @Sendable (Bool) -> Void)?
+    if includesOptionalActions {
+        toggleShuffle = { recorder.record("shuffle") }
+        cycleRepeatMode = { recorder.record("repeat") }
+        setFavorite = { _ in recorder.record("favorite") }
+    } else {
+        toggleShuffle = nil
+        cycleRepeatMode = nil
+        setFavorite = nil
+    }
+    return PlayerBarActions(
+        showNowPlaying: { recorder.record("show") },
+        togglePlayback: { recorder.record("play") },
+        previous: { recorder.record("previous") },
+        next: { recorder.record("next") },
+        seek: { _ in recorder.record("seek") },
+        setVolume: { _ in recorder.record("volume") },
+        toggleMute: { recorder.record("mute") },
+        showQueue: { recorder.record("queue") },
+        toggleShuffle: toggleShuffle,
+        cycleRepeatMode: cycleRepeatMode,
+        setFavorite: setFavorite
+    )
+}
+
+@MainActor
+private func fullPlayerBar(recorder: PlayerInteractionRecorder) -> AnyView {
+    let favorite = FavoritePresentation(
+        isFavorite: false,
+        isPending: false,
+        isRevealed: true,
+        accessibilityLabel: "Save Synthetic Track",
+        accessibilityValue: "Not saved"
+    )
+    return AnyView(
+        PlayerBar(
+            presentation: playerPresentation(favorite: favorite),
+            actions: playerActions(recorder: recorder, includesOptionalActions: true)
+        ) {
+            Color.blue
+                .background(PlayerAccessoryFrameReporter(region: .artwork, recorder: recorder))
+        } metadataAccessory: {
+            Button("External Item") { recorder.record("external") }
+                .background(PlayerAccessoryFrameReporter(region: .metadata, recorder: recorder))
+        } statusAccessory: {
+            Button("Playback Status") { recorder.record("status") }
+                .background(PlayerAccessoryFrameReporter(region: .status, recorder: recorder))
+        } routeAccessory: {
+            Button("Audio Output") { recorder.record("route") }
+                .background(PlayerAccessoryFrameReporter(region: .route, recorder: recorder))
+        }
+        .frame(width: 1_240, height: 160)
+        .coordinateSpace(name: "player-interaction-host")
+    )
+}
+
+@MainActor
+private func exercisePlayerControls() throws {
+    var transportFrames: [String: CGRect] = [:]
+    do {
+        let recorder = PlayerInteractionRecorder()
+        let controls = TransportControls(
+            presentation: playerPresentation(favorite: nil),
+            actions: playerActions(recorder: recorder, includesOptionalActions: true)
+        )
+        let harness = try NativeInteractionHarness(
+            rootView: AnyView(controls.frame(width: 520, height: 120)),
+            size: CGSize(width: 520, height: 120)
+        )
+        defer { harness.close() }
+        transportFrames = try discoverActionFrames(
+            harness: harness,
+            recorder: recorder,
+            xRange: 0 ... 520,
+            y: 60,
+            expectedEvents: ["shuffle", "previous", "play", "next", "repeat"]
+        )
+        try require(
+            Set(transportFrames.keys) == ["shuffle", "previous", "play", "next", "repeat"],
+            "transport did not expose every visible action: \(transportFrames.keys.sorted())"
+        )
+        try require(recorder.events.values.allSatisfy { $0 == 1 }, "transport dispatched duplicate events: \(recorder.events)")
+    }
+
+    do {
+        let recorder = PlayerInteractionRecorder()
+        let controls = TransportControls(
+            presentation: playerPresentation(favorite: nil),
+            actions: playerActions(recorder: recorder, includesOptionalActions: false)
+        )
+        let harness = try NativeInteractionHarness(
+            rootView: AnyView(controls.frame(width: 520, height: 120)),
+            size: CGSize(width: 520, height: 120)
+        )
+        defer { harness.close() }
+        for event in ["shuffle", "repeat"] {
+            try harness.click(try requireValue(transportFrames[event], "missing full-action \(event) frame"))
+        }
+        try require(recorder.events.isEmpty, "missing optional transport actions dispatched events")
+    }
+
+    do {
+        let recorder = PlayerInteractionRecorder()
+        let harness = try NativeInteractionHarness(
+            rootView: fullPlayerBar(recorder: recorder),
+            size: CGSize(width: 1_240, height: 160)
+        )
+        defer { harness.close() }
+        try harness.click(recorder.artworkFrame)
+        try harness.click(recorder.metadataAccessoryFrame)
+        let playerTransportFrames = try discoverActionFrames(
+            harness: harness,
+            recorder: recorder,
+            xRange: 400 ... 950,
+            y: recorder.artworkFrame.midY,
+            expectedEvents: ["shuffle", "previous", "play", "next", "repeat", "favorite", "seek"]
+        )
+        try require(
+            Set(playerTransportFrames.keys) == ["shuffle", "previous", "play", "next", "repeat", "favorite", "seek"],
+            "player bar did not expose every visible transport action: \(playerTransportFrames.keys.sorted())"
+        )
+        let outputFrames = try discoverActionFrames(
+            harness: harness,
+            recorder: recorder,
+            xRange: recorder.statusAccessoryFrame.minX ... 1_240,
+            y: recorder.artworkFrame.midY,
+            expectedEvents: ["status", "mute", "volume", "route", "queue"]
+        )
+        try require(
+            Set(outputFrames.keys) == ["status", "mute", "volume", "route", "queue"],
+            "player bar did not expose every visible output control: \(outputFrames.keys.sorted())"
+        )
+        try require(recorder.events.count == 14, "player bar missed visible controls: \(recorder.events)")
+        try require(recorder.events.values.allSatisfy { $0 == 1 }, "player bar dispatched duplicate events: \(recorder.events)")
+        try require(recorder.metadataAccessoryFrame.maxX < 620, "metadata accessory escaped the leading region")
+        try require(recorder.statusAccessoryFrame.minX > 620, "status accessory escaped the output region")
+        try require(recorder.routeAccessoryFrame.minX > 620, "route accessory escaped the output region")
+        try require(recorder.statusAccessoryFrame != recorder.routeAccessoryFrame, "output accessories collapsed into one frame")
+    }
+
+    do {
+        let recorder = PlayerInteractionRecorder()
+        let favorite = FavoritePresentation(
+            isFavorite: false,
+            isPending: false,
+            isRevealed: true,
+            accessibilityLabel: "Save Synthetic Track",
+            accessibilityValue: "Not saved"
+        )
+        let bar = PlayerBar(
+            presentation: playerPresentation(favorite: favorite),
+            actions: playerActions(recorder: recorder, includesOptionalActions: false)
+        ) { Color.blue }
+        let harness = try NativeInteractionHarness(
+            rootView: AnyView(bar.frame(width: 1_240, height: 160)),
+            size: CGSize(width: 1_240, height: 160)
+        )
+        defer { harness.close() }
+        let missingFrames = try discoverActionFrames(
+            harness: harness,
+            recorder: recorder,
+            xRange: 400 ... 950,
+            y: 80,
+            expectedEvents: ["previous", "play", "next", "seek"]
+        )
+        try require(
+            Set(missingFrames.keys) == ["previous", "play", "next", "seek"],
+            "optional-action bar exposed an unexpected action: \(missingFrames.keys.sorted())"
+        )
+        try require(recorder.events.values.allSatisfy { $0 == 1 }, "optional-action bar dispatched duplicate events")
+        try require(recorder.count("shuffle") == 0, "missing shuffle action activated")
+        try require(recorder.count("repeat") == 0, "missing repeat action activated")
+        try require(recorder.count("favorite") == 0, "missing favorite action activated")
+    }
+}
+
+@MainActor
+private func discoverActionFrames(
+    harness: NativeInteractionHarness,
+    recorder: PlayerInteractionRecorder,
+    xRange: ClosedRange<CGFloat>,
+    y: CGFloat,
+    expectedEvents: Set<String>
+) throws -> [String: CGRect] {
+    var result: [String: CGRect] = [:]
+    var x = xRange.lowerBound
+    while x <= xRange.upperBound, Set(result.keys) != expectedEvents {
+        let before = recorder.events
+        let target = CGRect(x: x, y: y, width: 1, height: 1)
+        try harness.click(target)
+        let changed = recorder.events.filter { event, count in
+            count != before[event, default: 0]
+        }
+        if let event = changed.keys.first {
+            try require(changed.count == 1, "one pointer activation dispatched multiple actions: \(changed)")
+            try require(expectedEvents.contains(event), "unexpected action \(event) while discovering controls")
+            try require(result[event] == nil, "action \(event) was reachable from multiple scan points")
+            try require(recorder.count(event) == 1, "action \(event) dispatched more than once")
+            result[event] = target
+            x += event == "volume" ? 90 : 38
+        } else {
+            x += 3
+        }
+    }
+    return result
+}
+
 private func require(_ condition: @autoclosure () -> Bool, _ message: String) throws {
     guard condition() else { throw HostFailure.assertion(message) }
 }
@@ -618,6 +907,9 @@ private func requireValue<Value>(_ value: Value?, _ message: String) throws -> V
 @MainActor
 private func run() throws {
     try require(NSApp.activationPolicy() == .regular, "application host is not a regular app")
+
+    try exercisePlayerControls()
+    print("PLAYER_INTERACTION_HOST_OK")
 
     var accessibilityWasAvailable = false
     for kind in CompositionKind.allCases {
@@ -662,7 +954,12 @@ private final class ApplicationDelegate: NSObject, NSApplicationDelegate {
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             do {
-                try run()
+                if self.configuration.shouldRunPlayerOnly {
+                    try exercisePlayerControls()
+                    print("PLAYER_INTERACTION_HOST_OK")
+                } else {
+                    try run()
+                }
                 try writeHostState("OK\n", to: self.configuration.resultPath)
                 print("MEDIA_INTERACTION_HOST_OK")
                 exit(0)

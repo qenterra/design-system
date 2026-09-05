@@ -22,15 +22,24 @@ public struct TransportControlPresentation: Equatable, Sendable {
         hasCurrentItem: Bool,
         isPlaying: Bool,
         isShuffleEnabled: Bool,
-        repeatMode: TransportRepeatMode
+        repeatMode: TransportRepeatMode,
+        isShuffleActionAvailable: Bool = true,
+        isRepeatActionAvailable: Bool = true
     ) -> [Self] {
-        TransportControl.allCases.map {
-            resolve(
-                $0,
+        TransportControl.allCases.map { control in
+            let isActionAvailable: Bool
+            switch control {
+            case .shuffle: isActionAvailable = isShuffleActionAvailable
+            case .repeatMode: isActionAvailable = isRepeatActionAvailable
+            default: isActionAvailable = true
+            }
+            return resolve(
+                control,
                 hasCurrentItem: hasCurrentItem,
                 isPlaying: isPlaying,
                 isShuffleEnabled: isShuffleEnabled,
-                repeatMode: repeatMode
+                repeatMode: repeatMode,
+                isActionAvailable: isActionAvailable
             )
         }
     }
@@ -40,7 +49,8 @@ public struct TransportControlPresentation: Equatable, Sendable {
         hasCurrentItem: Bool,
         isPlaying: Bool,
         isShuffleEnabled: Bool,
-        repeatMode: TransportRepeatMode
+        repeatMode: TransportRepeatMode,
+        isActionAvailable: Bool = true
     ) -> Self {
         let symbol: String
         let label: String
@@ -89,7 +99,7 @@ public struct TransportControlPresentation: Equatable, Sendable {
             symbolName: symbol,
             accessibilityLabel: label,
             accessibilityValue: accessibilityValue,
-            isEnabled: hasCurrentItem,
+            isEnabled: hasCurrentItem && isActionAvailable,
             isActive: active
         )
     }
@@ -112,7 +122,8 @@ public struct TransportControls: View {
                     hasCurrentItem: presentation.hasCurrentItem,
                     isPlaying: presentation.isPlaying,
                     isShuffleEnabled: presentation.isShuffleEnabled,
-                    repeatMode: presentation.repeatMode
+                    repeatMode: presentation.repeatMode,
+                    isActionAvailable: actionIsAvailable(for: control)
                 )
                 Button { perform(control) } label: {
                     Image(systemName: item.symbolName)
@@ -150,11 +161,19 @@ public struct TransportControls: View {
 
     private func perform(_ control: TransportControl) {
         switch control {
-        case .shuffle: actions.toggleShuffle()
+        case .shuffle: actions.toggleShuffle?()
         case .previous: actions.previous()
         case .playPause: actions.togglePlayback()
         case .next: actions.next()
-        case .repeatMode: actions.cycleRepeatMode()
+        case .repeatMode: actions.cycleRepeatMode?()
+        }
+    }
+
+    private func actionIsAvailable(for control: TransportControl) -> Bool {
+        switch control {
+        case .shuffle: actions.toggleShuffle != nil
+        case .repeatMode: actions.cycleRepeatMode != nil
+        default: true
         }
     }
 }

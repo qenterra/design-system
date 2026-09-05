@@ -7,9 +7,10 @@ public struct QueueInsertionIndicator: View {
 
     public var body: some View {
         Capsule()
-            .fill(Color.primary.opacity(0.9))
+            .fill(Color.primary.opacity(QueueVisualMetrics.insertionOpacity))
             .frame(height: DesignTokens.Component.panelQueueInsertionHeight.points)
             .padding(.horizontal, DesignTokens.Component.panelQueueInsertionHorizontalInset.points)
+            .offset(y: QueueVisualMetrics.insertionYOffset)
             .allowsHitTesting(false)
             .accessibilityHidden(true)
     }

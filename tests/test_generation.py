@@ -124,6 +124,16 @@ class GenerationContractTests(unittest.TestCase):
         self.assertIn("panelPlayerArtworkHoverOpacity = DesignComponentOpacity(value: 0.36)", swift)
         self.assertIn("--design-system-component-panel-player-artwork-hover-opacity: 0.36;", css)
         self.assertNotIn("--design-system-component-panel-player-artwork-hover-opacity: 0.36px;", css)
+        self.assertIn("--design-system-component-panel-queue-insertion-opacity: 0.9;", css)
+        self.assertNotIn("--design-system-component-panel-queue-insertion-opacity: 0.9px;", css)
+        self.assertIn(
+            "panelQueueInsertionOpacity = DesignComponentOpacity(value: 0.9)",
+            swift,
+        )
+        self.assertIn(
+            "panelQueueInsertionYOffset = DesignComponentMetric(points: -1)",
+            swift,
+        )
 
     def test_media_collection_metrics_generate_with_explicit_units(self) -> None:
         generator = load_generator()
@@ -154,6 +164,42 @@ class GenerationContractTests(unittest.TestCase):
             "panelMediaCollectionPlaybackIndicatorFirstDurationMs = DesignComponentDuration(milliseconds: 1200)",
             swift,
         )
+
+    def test_player_and_queue_views_consume_the_canonical_fidelity_metrics(self) -> None:
+        queue_preview = (
+            ROOT
+            / "packages/Sources/QenTerra/MediaComponents/Queue/QueueDragPreview.swift"
+        ).read_text(encoding="utf-8")
+        queue_insertion = (
+            ROOT
+            / "packages/Sources/QenTerra/MediaComponents/Queue/QueueInsertionIndicator.swift"
+        ).read_text(encoding="utf-8")
+        progress = (
+            ROOT
+            / "packages/Sources/QenTerra/MediaComponents/Player/PlaybackProgressControl.swift"
+        ).read_text(encoding="utf-8")
+        player_bar = (
+            ROOT / "packages/Sources/QenTerra/MediaComponents/Player/PlayerBar.swift"
+        ).read_text(encoding="utf-8")
+
+        for expected in (
+            "DesignTokens.Component.panelQueueDragPreviewGap.points",
+            "DesignTokens.Component.panelQueueDragPreviewArtworkSide.points",
+            "DesignTokens.Component.panelQueueDragPreviewTextGap.points",
+            "HStack(spacing: QueueVisualMetrics.dragPreviewGap)",
+            "width: QueueVisualMetrics.dragPreviewArtworkSide",
+            "height: QueueVisualMetrics.dragPreviewArtworkSide",
+            "VStack(alignment: .leading, spacing: QueueVisualMetrics.dragPreviewTextGap)",
+        ):
+            self.assertIn(expected, queue_preview)
+        for expected in (
+            ".fill(Color.primary.opacity(QueueVisualMetrics.insertionOpacity))",
+            ".offset(y: QueueVisualMetrics.insertionYOffset)",
+        ):
+            self.assertIn(expected, queue_insertion)
+        self.assertIn("PlayerBarLayoutMetrics.progressLabelWidth", progress)
+        self.assertIn("DesignTokens.Component.panelPlayerControlSize.points", player_bar)
+        self.assertIn("PlayerBarLayoutMetrics.queueControlSize", player_bar)
 
     def test_qenterra_component_manifest_is_generated_from_private_registry(self) -> None:
         generator = load_generator()
