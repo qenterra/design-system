@@ -70,7 +70,7 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "sha256": "70354ee71535bb03c155072980b77ecfc2e4f65d2139be3b121dc2d48fffcead",
+      "sha256": "37815b9680013c49191e8dc64f6d4774d9f2309897626499806bc43a5c0c705f",
       "bytes": 769
     },
     {
@@ -90,8 +90,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "628555a97725a12b1ad2ba7041b05f462bf4f9884150187c0ee9c07c066a6946",
-      "bytes": 2361
+      "sha256": "9c80512c5560614b5f27759958e2ab66947a0ac82d1981ba5cf1a9ac5c8a4ba3",
+      "bytes": 2630
     },
     {
       "path": "CODE_OF_CONDUCT.md",
@@ -120,13 +120,13 @@
     },
     {
       "path": "Package.swift",
-      "sha256": "6973ce2256ac32967f1b7f1c328a03c990a8e0c73a647f4e98d22e156ad948f5",
-      "bytes": 950
+      "sha256": "de92d0e86d3ed311618702cba50e3f44b9b9a06fdf801768683af5cd953802b8",
+      "bytes": 952
     },
     {
       "path": "README.md",
-      "sha256": "db5023794ad4424108a9973adf306ab541435a514c5b837328493d1d6726b151",
-      "bytes": 5655
+      "sha256": "b73096be07567b659c03a4de21f4b12e399f564ae1ffabb1b2787709c6dff4f8",
+      "bytes": 5741
     },
     {
       "path": "SECURITY.md",
