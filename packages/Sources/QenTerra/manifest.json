@@ -3,44 +3,421 @@
   "sourceRegistry": "registry/qenterra-components.json",
   "components": [
     {
+      "id": "card-container",
+      "name": "CardContainer",
+      "category": "layout",
+      "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": [
+        "CardContainer"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/Containers/CardContainer.swift",
+      "sha256": "85c8c1f5edd94c8b571371b16165dfa6defb9412da412eb6e9543e14d5f2b9be",
+      "bytes": 1134
+    },
+    {
+      "id": "design-button-style",
+      "name": "DesignButtonStyle",
+      "category": "control",
+      "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": [
+        "DesignButtonRole",
+        "DesignButtonState",
+        "DesignButtonStyle"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/Controls/DesignButtonStyle.swift",
+      "sha256": "19d9a050fbeb8fae53eacd264d9272f5e79e98d1ae37ba8ead7e81e5a72027ce",
+      "bytes": 6744
+    },
+    {
       "id": "group-container",
       "name": "GroupContainer",
       "category": "layout",
       "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
       "publicSymbols": [
         "GroupContainer",
+        "View.designGroupContainer()",
         "View.designGroupContainer(appearance:)"
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/GroupContainer.swift",
-      "sha256": "0cbcb0c2eccacf98d3cc6252e2ad5ed8737c9d0d0fd50e386743fb4cc451eaa2",
-      "bytes": 890
+      "sha256": "661d4a1ad53d829909943d4d88d4cfbdafe87042e3011ddb75125f44e5f18180",
+      "bytes": 1450
+    },
+    {
+      "id": "icon-action-button",
+      "name": "IconActionButton",
+      "category": "control",
+      "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": [
+        "IconActionButton"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/Controls/IconActionButton.swift",
+      "sha256": "767726908e2a098c28db77210a1ff4c62a0b21d9bc097e2e82dc6b88db67440e",
+      "bytes": 1272
     },
     {
       "id": "interactive-row-surface",
       "name": "InteractiveRowSurface",
       "category": "control",
       "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
       "publicSymbols": [
+        "InteractiveRowState",
         "InteractiveRowSurface"
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/InteractiveRowSurface.swift",
-      "sha256": "4fd0c527a963b14c802a21742bd9710e9a00f68efaa7b924cfc85223aeb4dc2a",
-      "bytes": 1745
+      "sha256": "7f8b4395bef4d4a9ab67ec6f9172086d01763dff4b8517d8e9360ab012f0e4cb",
+      "bytes": 3814
     },
     {
       "id": "primary-button-style",
       "name": "PrimaryButtonStyle",
       "category": "control",
       "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
       "publicSymbols": [
         "PrimaryButtonStyle"
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/PrimaryButtonStyle.swift",
-      "sha256": "d868a09ca4bcbd0607bc322a4e725cc4e94fb86a7bdcc71957853ed497bc9e3d",
-      "bytes": 2112
+      "sha256": "5f2d1ce743cd7b8acdd0a1250be6050586b0dc5ef6d005235c0566e4fcf67854",
+      "bytes": 660
+    },
+    {
+      "id": "row-action-button-style",
+      "name": "RowActionButtonStyle",
+      "category": "control",
+      "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": [
+        "RowActionButtonStyle"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/Controls/RowActionButtonStyle.swift",
+      "sha256": "890332f01d5c762b24bb07622a39053f5fd19a23f86685c4c4920aeba8ea79fd",
+      "bytes": 412
+    },
+    {
+      "id": "settings-row",
+      "name": "SettingsRow",
+      "category": "layout",
+      "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": [
+        "SettingsRow"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/Containers/SettingsRow.swift",
+      "sha256": "6d4df6af8379be12e9152759dedec3a31ce44b7a4e8762e700606020051f2222",
+      "bytes": 2541
+    },
+    {
+      "id": "settings-section",
+      "name": "SettingsSection",
+      "category": "layout",
+      "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": [
+        "SettingsSection"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/Containers/SettingsSection.swift",
+      "sha256": "e4ceb2632a0795183196c1b465a538c3e5c9456290f505e8fae6e3ef034c6961",
+      "bytes": 1576
+    },
+    {
+      "id": "settings-toggle-row",
+      "name": "SettingsToggleRow",
+      "category": "control",
+      "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": [
+        "SettingsToggleRow"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/Containers/SettingsToggleRow.swift",
+      "sha256": "ed918bce9c03292c85fb523be7f6f00e14548f2ae2fe56f93f1f0cda5f5c92ab",
+      "bytes": 1195
+    },
+    {
+      "id": "page-header",
+      "name": "PageHeader",
+      "category": "layout",
+      "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": [
+        "DesignComponentMetrics",
+        "PageHeader"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/Layout/PageHeader.swift",
+      "sha256": "d48ace1a201bdb1b8beb0d14574ee79f4415cb2c0c3a0378c39ccabc84fdae36",
+      "bytes": 4087
+    },
+    {
+      "id": "page-scroll-view",
+      "name": "PageScrollView",
+      "category": "layout",
+      "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": [
+        "PageScrollOwnership",
+        "PageScrollPresentation",
+        "PageScrollView"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/Layout/PageScrollView.swift",
+      "sha256": "d8ec50d34df329c402b61eceb6b830a789d80c5fe6470dd345a288e31150f37a",
+      "bytes": 1704
+    },
+    {
+      "id": "flow-layout",
+      "name": "DesignFlowLayout",
+      "category": "layout",
+      "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": [
+        "DesignFlowLayout",
+        "DesignFlowLayout.Arrangement"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/Layout/FlowLayout.swift",
+      "sha256": "79e0787ed5488c7da0efe2163c6781d7d74b322ae09be2b3d4585074348a0c4e",
+      "bytes": 3173
+    },
+    {
+      "id": "resizable-split-view",
+      "name": "ResizableSplitView",
+      "category": "layout",
+      "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": [
+        "ResizableSplitLayout",
+        "ResizableSplitLayout.AdjustmentDirection",
+        "ResizableSplitView"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/Layout/ResizableSplitView.swift",
+      "sha256": "e0ff6fb814b8ecfced1b1796dc484fdbede07c9ec79df44ab803a46069e840d7",
+      "bytes": 8898
+    },
+    {
+      "id": "design-separator",
+      "name": "DesignSeparator",
+      "category": "layout",
+      "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": [
+        "DesignSeparatorOrientation",
+        "DesignSeparator"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/Layout/DesignSeparator.swift",
+      "sha256": "6024c830943452003be540fe97ad1ad164196b376537254873f7918620c3a6c4",
+      "bytes": 935
+    },
+    {
+      "id": "workspace-pane-header",
+      "name": "WorkspacePaneHeader",
+      "category": "layout",
+      "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": [
+        "WorkspacePaneHeader"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/Layout/WorkspacePaneHeader.swift",
+      "sha256": "8c34bb7cea65e5b92d3719c6b98c8b36c3e5cd8ef0373408fbe0f2c56160fc6d",
+      "bytes": 1089
+    },
+    {
+      "id": "navigation-rail",
+      "name": "NavigationRail",
+      "category": "navigation",
+      "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": [
+        "NavigationRailItem",
+        "NavigationRailItemPresentation",
+        "NavigationRail"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/Navigation/NavigationRail.swift",
+      "sha256": "11fab2175966cafd35ba6ad53cef6dd2be254956c14fbd0b5e2abe419b163a53",
+      "bytes": 4907
+    },
+    {
+      "id": "tab-strip",
+      "name": "TabStrip",
+      "category": "navigation",
+      "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": [
+        "TabItem",
+        "TabStrip"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/Navigation/TabStrip.swift",
+      "sha256": "5cb91b563a7a588bd3aee31a154c15097584fb9b9efa9cf3702684ec4adbfe10",
+      "bytes": 2267
+    },
+    {
+      "id": "sort-menu",
+      "name": "SortMenu",
+      "category": "overlay",
+      "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": [
+        "SortMenuOrder",
+        "SortMenuField",
+        "SortMenuLabels",
+        "SortMenuUnavailableReason",
+        "SortMenuReadyPresentation",
+        "SortMenuPresentation",
+        "SortMenu"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/Overlays/SortMenu.swift",
+      "sha256": "59bc3ff09aa9b935a2ba5bd59a1bc600f2cb9ab7153fa3f0847a04b7159138e2",
+      "bytes": 5381
+    },
+    {
+      "id": "rename-alert",
+      "name": "RenameAlertConfiguration",
+      "category": "overlay",
+      "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": [
+        "RenameValidationState",
+        "RenameAlertConfiguration"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/Overlays/RenameAlert.swift",
+      "sha256": "c709d3c4c73fa8d45c2ccf44f67f491a9145f530283cf82f2554053088c00a30",
+      "bytes": 1199
+    },
+    {
+      "id": "keycap",
+      "name": "Keycap",
+      "category": "control",
+      "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": [
+        "Keycap",
+        "KeycapChord",
+        "KeycapChordPresentation"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/Overlays/Keycap.swift",
+      "sha256": "fe5fbd6601a571a2bb140a96a354ffe396fe035794a57776282dcf8b0b9abaf2",
+      "bytes": 2158
+    },
+    {
+      "id": "content-state-view",
+      "name": "ContentStateView",
+      "category": "feedback",
+      "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": [
+        "ContentPresentationState",
+        "PresentationAction",
+        "ContentStateView"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/Feedback/ContentStateView.swift",
+      "sha256": "85f341e37a670686c0347d140ca319cd82ef1830b8dd418ade4a71af1aecb8a2",
+      "bytes": 3797
+    },
+    {
+      "id": "status-banner",
+      "name": "StatusBanner",
+      "category": "feedback",
+      "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": [
+        "StatusTone",
+        "StatusBannerConfiguration",
+        "StatusBanner"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/Feedback/StatusBanner.swift",
+      "sha256": "548d3ecfffcefd585143d46af6d9336597821e0b451208713eb8e9a94639f50e",
+      "bytes": 4009
+    },
+    {
+      "id": "drop-zone",
+      "name": "DropZone",
+      "category": "feedback",
+      "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": [
+        "DropZoneState",
+        "DropZonePresentation",
+        "DropZone"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/Feedback/DropZone.swift",
+      "sha256": "16ef62d6e32be22e4691e6f726f5fdf43e234fb736dcca5cb87227444f5ebf74",
+      "bytes": 4030
+    },
+    {
+      "id": "operation-state-view",
+      "name": "OperationStateView",
+      "category": "feedback",
+      "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": [
+        "MeasuredOperationProgress",
+        "OperationPresentationState",
+        "OperationStateView"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/Feedback/OperationStateView.swift",
+      "sha256": "77a1d948ffbe8c5b50abfb313be07aa2e5d113dd412d176cf5276bc3ba31c791",
+      "bytes": 4115
+    },
+    {
+      "id": "about-page",
+      "name": "AboutPage",
+      "category": "feedback",
+      "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": [
+        "AboutResourceAvailability",
+        "AboutResource",
+        "AboutPageConfiguration",
+        "AboutPageAccessibilityPresentation",
+        "AboutResourceAccessibilityPresentation",
+        "AboutPage"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/About/AboutPage.swift",
+      "sha256": "d4ef4176bf13a51209b1fc19715d9194a1cf220f66508b5f52c7de4ce8abd927",
+      "bytes": 6468
+    },
+    {
+      "id": "about-resource-row",
+      "name": "AboutResourceRow",
+      "category": "feedback",
+      "status": "stable",
+      "deliveryProduct": "QenTerraComponents",
+      "publicSymbols": [
+        "AboutResourceOpenRejection",
+        "AboutResourceRowPresentation",
+        "AboutResourceRow"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/Components/About/AboutResourceRow.swift",
+      "sha256": "b23aca943ffcd1fa0ccab2cfc4566483b798d9794a8554f21bc44d9744917f71",
+      "bytes": 3296
     }
   ]
 }

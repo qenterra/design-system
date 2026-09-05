@@ -122,6 +122,51 @@ class PublicReleaseContractTests(unittest.TestCase):
         self.assertNotIn("sourcesha", keys)
         self.assertNotIn("commit", keys)
 
+    def test_builder_rejects_missing_media_delivery_product(self) -> None:
+        builder = load_module(BUILDER, "public_builder_media_product")
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "VERSION").write_text("1.0.1\n", encoding="utf-8")
+            registry = root / "registry/packages.json"
+            registry.parent.mkdir(parents=True)
+            registry.write_text(
+                json.dumps(
+                    {
+                        "version": "1.0.1",
+                        "packages": [
+                            {
+                                "id": "swift-components",
+                                "version": "1.0.1",
+                                "products": ["QenTerraDesignTokens", "QenTerraComponents"],
+                                "publicPaths": [],
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(ValueError, "QenTerraMediaComponents"):
+                builder.registered_paths(root)
+
+    def test_exported_tree_closes_native_media_delivery(self) -> None:
+        builder = load_module(BUILDER, "public_builder_media_delivery")
+        expected = {
+            "Sources/QenTerra/DesignTokens/DesignEnvironment.swift",
+            "Sources/QenTerra/MediaComponents/MediaComponents.swift",
+            "Sources/QenTerra/MediaComponents/Resources/MediaComponents.txt",
+            "Tests/QenTerraMediaComponentsTests/MediaComponentModuleTests.swift",
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            public = Path(directory) / "packages"
+            builder.export_public_tree(public, ROOT)
+            self.assertTrue(all((public / path).is_file() for path in expected))
+            component_manifest = json.loads(
+                (public / "Sources/QenTerra/manifest.json").read_text(encoding="utf-8")
+            )
+            self.assertTrue(
+                all("deliveryProduct" in component for component in component_manifest["components"])
+            )
+
     def test_boundary_detects_an_undeclared_file(self) -> None:
         self.assertTrue(BOUNDARY.is_file(), "public boundary verifier is missing")
         boundary = load_module(BOUNDARY, "public_boundary")

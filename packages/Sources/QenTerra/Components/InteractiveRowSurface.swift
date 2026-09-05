@@ -2,37 +2,49 @@
 import SwiftUI
 import QenTerraDesignTokens
 
+public typealias InteractiveRowState = QenTerraDesignTokens.InteractiveRowState
+
 public struct InteractiveRowSurface<Content: View>: View {
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.designNativeEnvironment) private var nativeEnvironment
 
     private let state: InteractiveRowState
-    private let appearance: DesignAppearance
+    private let appearanceOverride: DesignAppearance?
     private let content: Content
 
+    public init(
+        state: InteractiveRowState,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.init(state: state, appearanceOverride: nil, content: content)
+    }
+
+    @available(*, deprecated, message: "Use InteractiveRowSurface(state:content:) with View.designSystem(_:) instead.")
     public init(
         state: InteractiveRowState,
         appearance: DesignAppearance,
         @ViewBuilder content: () -> Content
     ) {
-        self.state = state
-        self.appearance = appearance
-        self.content = content()
+        self.init(state: state, appearanceOverride: appearance, content: content)
     }
 
     public var body: some View {
         content
             .contentShape(Rectangle())
+            .opacity(resolvedState.isLoading ? 0 : resolvedState.contentOpacity)
             .background(fillColor)
             .overlay {
-                if let border = state.border {
+                if let border = resolvedState.border {
                     RoundedRectangle(
                         cornerRadius: DesignTokens.Radius.control,
                         style: .continuous
                     )
                     .stroke(
-                        Color(designToken: border, appearance: appearance),
-                        lineWidth: state.borderWidth
+                        color(border),
+                        lineWidth: resolvedState.borderWidth
                     )
+                }
+                if resolvedState.isLoading {
+                    loadingIndicator
                 }
             }
             .clipShape(
@@ -41,19 +53,67 @@ public struct InteractiveRowSurface<Content: View>: View {
                     style: .continuous
                 )
             )
-            .opacity(state.contentOpacity)
+            .allowsHitTesting(!resolvedState.isLoading)
             .animation(
-                reduceMotion
+                reducesMotion
                     ? nil
                     : .easeOut(duration: DesignTokens.Motion.feedbackPress.seconds),
-                value: state
+                value: resolvedState
             )
+            .accessibilityValue(resolvedState.isLoading ? Text("Loading") : Text(""))
     }
 
     private var fillColor: Color {
-        state.fill.map {
-            Color(designToken: $0, appearance: appearance)
-        } ?? .clear
+        resolvedState.fill.map(color) ?? .clear
+    }
+
+    private var resolvedState: InteractiveRowState {
+        InteractiveRowState(
+            isHovered: state.isHovered,
+            isPressed: state.isPressed,
+            isFocused: state.isFocused,
+            isSelected: state.isSelected,
+            isDisabled: state.isDisabled,
+            isUnavailable: state.isUnavailable,
+            isIncreasedContrast: state.isIncreasedContrast || isIncreasedContrast,
+            isLoading: state.isLoading
+        )
+    }
+
+    @ViewBuilder private var loadingIndicator: some View {
+        if reducesMotion {
+            Image(systemName: "ellipsis")
+                .accessibilityHidden(true)
+        } else {
+            ProgressView()
+                .controlSize(.small)
+                .accessibilityHidden(true)
+        }
+    }
+
+    private var reducesMotion: Bool {
+        nativeEnvironment.reducesMotion
+    }
+
+    private var isIncreasedContrast: Bool {
+        nativeEnvironment.isIncreasedContrast
+    }
+
+    private init(
+        state: InteractiveRowState,
+        appearanceOverride: DesignAppearance?,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.state = state
+        self.appearanceOverride = appearanceOverride
+        self.content = content()
+    }
+
+    private func color(_ token: DesignColorValue) -> Color {
+        if let appearanceOverride {
+            return Color(designToken: token, appearance: appearanceOverride)
+        }
+        return Color(designToken: token)
     }
 }
 #endif

@@ -29,6 +29,29 @@ class SchemaToolsTests(unittest.TestCase):
         self.assertRegex("\n".join(self.validate(-1, {"type": "integer", "minimum": 0})), "at least")
         self.assertRegex("\n".join(self.validate(True, {"type": "integer", "minimum": 0})), "expected integer")
 
+    def test_all_of_conditional_enforces_its_matching_then_branch(self) -> None:
+        schema = {
+            "type": "object",
+            "properties": {
+                "product": {"enum": ["core", "media"]},
+                "path": {"type": "string"},
+            },
+            "allOf": [
+                {
+                    "if": {
+                        "properties": {"product": {"const": "core"}},
+                        "required": ["product"],
+                    },
+                    "then": {"properties": {"path": {"pattern": "^Core/.*"}}},
+                }
+            ],
+        }
+        self.assertEqual([], self.validate({"product": "core", "path": "Core/Button.swift"}, schema))
+        self.assertRegex(
+            "\n".join(self.validate({"product": "core", "path": "Media/Tile.swift"}, schema)),
+            "does not match",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -12,7 +12,26 @@
     "defaultNavigation": "expanded-rail",
     "keep": ["adaptive Soft Graphite palette", "persistent content hierarchy", "stable data tables", "review-first import", "persistent task controls", "queue semantics", "guide mechanics", "recoverable removal"],
     "adapt": ["navigation states", "settings containers", "buttons", "row interaction", "copy and localization", "screenshot harness"],
-    "replace": ["scattered radii and durations", "duplicate navigation symbols", "suppressed hover and focus", "persistence claims stronger than reality"]
+    "replace": ["scattered radii and durations", "duplicate navigation symbols", "suppressed hover and focus", "persistence claims stronger than reality"],
+    "cadence": {
+      "archetype": "immersive-content",
+      "density": "standard",
+      "platform": "macOS",
+      "layout": {
+        "textStack": 4,
+        "compactGap": 8,
+        "controlGap": 12,
+        "contentGap": 16,
+        "panelInset": 20,
+        "pageInset": 24,
+        "sectionGap": 32,
+        "rowHeight": 48,
+        "readableContentWidth": 760
+      },
+      "motion": {
+        "cadenceModeEnterMs": 500
+      }
+    }
   },
   "denseOperations": {
     "profile": "operational-dense",

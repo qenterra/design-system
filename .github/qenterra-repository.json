@@ -118,6 +118,14 @@
     },
     {
       "manifest": "registry/published-artifacts.json",
+      "path": "packages/Sources/QenTerra/DesignTokens/GeneratedProductProfiles.swift",
+      "purpose": "Typed Cadence product metrics consumed by the public Swift package",
+      "review_trigger": "Product token inputs, generator logic, Swift adapter structure, or package version changes",
+      "source": "packages/npm/design-tokens/src",
+      "verification_command": "python3 scripts/verify.py"
+    },
+    {
+      "manifest": "registry/published-artifacts.json",
       "path": "packages/Sources/QenTerra/DesignTokens/GeneratedIcons.swift",
       "purpose": "Typed SF Symbols registry consumed by the public Swift package",
       "review_trigger": "Public icon inputs, generator logic, Swift adapter structure, or package version changes",

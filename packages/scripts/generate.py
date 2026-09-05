@@ -18,6 +18,7 @@ from lib.token_tools import (  # noqa: E402
     generate_css,
     generate_swift,
     generate_swift_icons,
+    generate_swift_product_profiles,
     load_json,
 )
 
@@ -85,6 +86,11 @@ def build_outputs(root: Path = ROOT) -> dict[str, str]:
             tokens["semantic"],
             tokens["typography"],
             tokens["motion"],
+            tokens["components"],
+        ),
+        "Sources/QenTerra/DesignTokens/GeneratedProductProfiles.swift": generate_swift_product_profiles(
+            tokens["products"],
+            tokens["platforms"],
             tokens["components"],
         ),
         "Sources/QenTerra/DesignTokens/GeneratedIcons.swift": generate_swift_icons(icons),

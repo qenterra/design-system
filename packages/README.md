@@ -8,7 +8,7 @@ This directory is the verified package-delivery boundary of the public QenTerra 
 
 ## Workspace
 
-- `Sources/QenTerra/` and `Tests/` contain the installable Swift package sources and tests.
+- `Sources/QenTerra/` and `Tests/` contain the installable Swift package sources and tests, including the macOS-first media delivery target and its resource bundle.
 - `Sources/ExploreSwiftUI/` contains an exact, manifest-locked reference catalog and is deliberately not a SwiftPM target.
 - `Sources/MagicUI/` contains all 76 public Magic UI component sources and their exact install-registry payloads and is deliberately not a package target.
 - `Sources/ShadcnUI/` contains exact, manifest-locked React Aria, Base UI, and Radix UI component sources and is deliberately not a package target.
@@ -39,10 +39,11 @@ For web projects:
 npm install @qenterra/design-tokens
 ```
 
-For Swift Package Manager, add `https://github.com/QenTerra/design-system` and select one or both products:
+For Swift Package Manager, add `https://github.com/QenTerra/design-system` and select one or more products:
 
 - `QenTerraDesignTokens` for typed foundations and SwiftUI adapters;
 - `QenTerraComponents` for the maintained primary-button, group-container, and interactive-row primitives.
+- `QenTerraMediaComponents` for reusable macOS media presentation; it has no iOS media API.
 
 ## Common commands
 

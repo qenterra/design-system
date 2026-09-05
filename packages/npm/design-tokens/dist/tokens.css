@@ -208,13 +208,27 @@
   --design-system-component-overlay-dialog-readable-width: 480px;
   --design-system-component-overlay-popover-max-width: 360px;
   --design-system-component-overlay-sheet-readable-width: 640px;
+  --design-system-component-panel-about-icon-side: 96px;
+  --design-system-component-panel-about-readable-width: 480px;
+  --design-system-component-panel-artwork-corner-radius: 18px;
+  --design-system-component-panel-artwork-hero-side: 320px;
+  --design-system-component-panel-artwork-minimum-side: 64px;
   --design-system-component-panel-gap: 16px;
+  --design-system-component-panel-lyrics-follow-duration-ms: 320ms;
+  --design-system-component-panel-lyrics-inactive-opacity: 0.56;
+  --design-system-component-panel-lyrics-line-gap: 12px;
   --design-system-component-panel-padding: 20px;
+  --design-system-component-panel-player-minimum-height: 88px;
+  --design-system-component-panel-player-panel-picker-width: 184px;
+  --design-system-component-panel-player-progress-height: 4px;
   --design-system-component-panel-radius: 14px;
   --design-system-component-status-gap: 6px;
   --design-system-component-status-icon-size: 14px;
   --design-system-component-table-column-gap: 16px;
   --design-system-component-table-header-height: 32px;
+  --design-system-component-table-media-artwork-side: 32px;
+  --design-system-component-table-media-playback-indicator-side: 14px;
+  --design-system-component-table-media-row-height: 48px;
   --design-system-component-table-row-heights-compact: 40px;
   --design-system-component-table-row-heights-standard: 48px;
 }

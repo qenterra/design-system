@@ -9,8 +9,8 @@
         "ru": "Кнопка"
       },
       "summary": {
-        "en": "Starts one named action.",
-        "ru": "Запускает одно названное действие."
+        "en": "Starts one named action with a semantic role.",
+        "ru": "Запускает одно названное действие с семантической ролью."
       },
       "status": "stable",
       "category": "control",
@@ -27,7 +27,8 @@
       "anatomy": [
         "label",
         "optional-leading-symbol",
-        "optional-progress"
+        "stable-loading-overlay",
+        "focus-ring-separate-from-selection"
       ],
       "states": [
         "default",
@@ -82,7 +83,8 @@
       ],
       "keyboard": [
         "Space or Return activates",
-        "focus stays on the button"
+        "focus stays on the button",
+        "native button semantics are retained"
       ],
       "accessibility": [
         "native-button",
@@ -91,7 +93,7 @@
         "loading-name-stable"
       ],
       "localization": [
-        "label may wrap",
+        "label may wrap without loading-width changes",
         "leading symbol mirrors only when semantic direction changes"
       ],
       "evidence": [
@@ -138,7 +140,8 @@
         "hover",
         "pressed",
         "focused",
-        "disabled"
+        "disabled",
+        "loading"
       ],
       "stories": [
         {
@@ -160,25 +163,34 @@
         {
           "id": "disabled",
           "state": "disabled"
+        },
+        {
+          "id": "loading",
+          "state": "loading"
         }
       ],
       "keyboard": [
-        "Space or Return activates"
+        "Space or Return activates",
+        "focus stays on the native button"
       ],
       "accessibility": [
         "accessible-name-required",
+        "hover-help-required",
         "minimum-hit-area",
-        "visible-focus"
+        "visible-focus",
+        "native-button"
       ],
       "localization": [
-        "accessible name is localized"
+        "accessible name is localized",
+        "hover help defaults to the localized accessible name"
       ],
       "evidence": [
-        "schema"
+        "schema",
+        "unit"
       ],
       "delivery": {
-        "status": "specification-only",
-        "packages": []
+        "status": "delivered",
+        "packages": ["swift-components"]
       }
     },
     {
@@ -618,12 +630,12 @@
         }
       ],
       "keyboard": [
-        "Arrow keys move focus",
+        "Tab moves focus between native buttons",
         "Space or Return selects"
       ],
       "accessibility": [
-        "tablist-semantics",
-        "tab-controls-panel",
+        "native-button",
+        "visible-focus-independent-from-selection",
         "selected-tab-announced"
       ],
       "localization": [
@@ -631,11 +643,14 @@
         "overflow uses platform navigation"
       ],
       "evidence": [
-        "schema"
+        "schema",
+        "unit"
       ],
       "delivery": {
-        "status": "specification-only",
-        "packages": []
+        "status": "delivered",
+        "packages": [
+          "swift-components"
+        ]
       }
     },
     {
@@ -669,10 +684,12 @@
       "states": [
         "default",
         "hover",
+        "pressed",
         "focused",
         "selected",
         "disabled",
-        "unavailable"
+        "unavailable",
+        "loading"
       ],
       "stories": [
         {
@@ -682,6 +699,10 @@
         {
           "id": "hover",
           "state": "hover"
+        },
+        {
+          "id": "pressed",
+          "state": "pressed"
         },
         {
           "id": "focused",
@@ -698,16 +719,23 @@
         {
           "id": "unavailable",
           "state": "unavailable"
+        },
+        {
+          "id": "loading",
+          "state": "loading"
         }
       ],
       "keyboard": [
         "Arrow keys move in composite lists",
-        "Space selects when selection is the row action"
+        "Space selects when selection is the row action",
+        "Return activates when the row is a button"
       ],
       "accessibility": [
         "single-focus-target",
         "selection-announced",
-        "status-has-text"
+        "status-has-text",
+        "loading-status-announced",
+        "loading-removes-row-hit-testing"
       ],
       "localization": [
         "supporting text may wrap"
@@ -747,9 +775,9 @@
         "review": "major"
       },
       "anatomy": [
-        "heading",
-        "optional-summary",
-        "content"
+        "content",
+        "secondary-surface",
+        "group-radius"
       ],
       "states": [
         "default",
@@ -774,12 +802,11 @@
         "group adds no tab stop"
       ],
       "accessibility": [
-        "fieldset-or-labelled-region",
-        "heading-order",
+        "container-does-not-create-a-tab-stop",
         "children-remain-focusable"
       ],
       "localization": [
-        "heading and summary may wrap"
+        "contained labels and summaries may wrap"
       ],
       "evidence": [
         "schema",
@@ -792,6 +819,98 @@
           "swift-components"
         ]
       }
+    },
+    {
+      "id": "card",
+      "name": {
+        "en": "Card",
+        "ru": "Карточка"
+      },
+      "summary": {
+        "en": "Raises a bounded group of related content.",
+        "ru": "Выделяет ограниченную группу связанных данных."
+      },
+      "status": "stable",
+      "category": "layout",
+      "platforms": ["macOS"],
+      "lifecycle": {"introduced": "2.0.0", "review": "major"},
+      "anatomy": ["content", "raised-surface", "default-border"],
+      "states": ["default", "increased-contrast-border", "reduced-motion-no-animation", "reduced-transparency-no-op-opaque-surface"],
+      "stories": [{"id": "default", "state": "default"}],
+      "keyboard": ["card adds no tab stop"],
+      "accessibility": ["children-remain-focusable", "increased-contrast-uses-visible-border", "reduced-motion-not-applicable", "reduced-transparency-no-op-opaque-surface"],
+      "localization": ["contained text may wrap"],
+      "evidence": ["schema", "unit"],
+      "delivery": {"status": "delivered", "packages": ["swift-components"]}
+    },
+    {
+      "id": "settings-section",
+      "name": {
+        "en": "Settings section",
+        "ru": "Раздел настроек"
+      },
+      "summary": {
+        "en": "Groups named Settings rows under a visible heading.",
+        "ru": "Объединяет именованные строки настроек под видимым заголовком."
+      },
+      "status": "stable",
+      "category": "layout",
+      "platforms": ["macOS"],
+      "lifecycle": {"introduced": "2.0.0", "review": "major"},
+      "anatomy": ["visible-heading", "card-container", "rows"],
+      "states": ["default", "disabled", "long-copy", "increased-contrast-border", "reduced-motion-no-animation", "reduced-transparency-no-op-opaque-surface"],
+      "stories": [{"id": "default", "state": "default"}, {"id": "long-copy", "state": "long-copy", "localeWidth": "long"}],
+      "keyboard": ["section adds no tab stop", "row controls retain native keyboard handling"],
+      "accessibility": ["visible-heading", "labelled-region", "children-remain-focusable", "increased-contrast-inherits-card-border", "reduced-motion-not-applicable", "reduced-transparency-no-op-opaque-surface"],
+      "localization": ["heading may wrap", "row labels may expand by 30 percent"],
+      "evidence": ["schema", "unit"],
+      "delivery": {"status": "delivered", "packages": ["swift-components"]}
+    },
+    {
+      "id": "settings-row",
+      "name": {
+        "en": "Settings row",
+        "ru": "Строка настроек"
+      },
+      "summary": {
+        "en": "Pairs a visible name and optional consequence with a named control.",
+        "ru": "Сочетает видимое имя и необязательное последствие с именованным элементом управления."
+      },
+      "status": "stable",
+      "category": "layout",
+      "platforms": ["macOS"],
+      "lifecycle": {"introduced": "2.0.0", "review": "major"},
+      "anatomy": ["visible-label", "wrapping-description", "named-control"],
+      "states": ["default", "disabled", "long-copy", "increased-contrast-inherits-control", "reduced-motion-no-animation", "reduced-transparency-no-op-opaque-surface"],
+      "stories": [{"id": "default", "state": "default"}, {"id": "disabled", "state": "disabled"}, {"id": "long-copy", "state": "long-copy", "localeWidth": "long"}],
+      "keyboard": ["Tab reaches the named control", "native control keys are retained"],
+      "accessibility": ["label-and-control-composed", "description-explains-consequence", "increased-contrast-inherits-control", "reduced-motion-not-applicable", "reduced-transparency-no-op-opaque-surface"],
+      "localization": ["label and description may wrap", "description must explain consequence"],
+      "evidence": ["schema", "unit"],
+      "delivery": {"status": "delivered", "packages": ["swift-components"]}
+    },
+    {
+      "id": "settings-toggle-row",
+      "name": {
+        "en": "Settings toggle row",
+        "ru": "Строка-переключатель настроек"
+      },
+      "summary": {
+        "en": "Provides a visible Settings label for one native boolean control.",
+        "ru": "Предоставляет видимую метку настроек для одного нативного булевого элемента управления."
+      },
+      "status": "stable",
+      "category": "control",
+      "platforms": ["macOS"],
+      "lifecycle": {"introduced": "2.0.0", "review": "major"},
+      "anatomy": ["visible-label", "native-toggle"],
+      "states": ["off", "on", "focused", "disabled", "increased-contrast-inherits-native-toggle", "reduced-motion-no-animation", "reduced-transparency-no-op-opaque-surface"],
+      "stories": [{"id": "off", "state": "off"}, {"id": "on", "state": "on"}, {"id": "disabled", "state": "disabled"}],
+      "keyboard": ["Space toggles the native control"],
+      "accessibility": ["visible-label-required", "label-and-toggle-composed", "native-toggle", "increased-contrast-inherits-native-toggle", "reduced-motion-inherits-native-toggle", "reduced-transparency-no-op-opaque-surface"],
+      "localization": ["visible label may wrap"],
+      "evidence": ["schema", "unit"],
+      "delivery": {"status": "delivered", "packages": ["swift-components"]}
     },
     {
       "id": "menu",
@@ -1362,6 +1481,295 @@
         "status": "specification-only",
         "packages": []
       }
+    },
+    {
+      "id": "page-header",
+      "name": {"en": "Page header", "ru": "Заголовок страницы"},
+      "summary": {"en": "Introduces a page and its contextual actions.", "ru": "Представляет страницу и её контекстные действия."},
+      "status": "stable",
+      "category": "layout",
+      "platforms": ["macOS"],
+      "lifecycle": {"introduced": "2.0.0", "review": "major"},
+      "anatomy": ["title", "optional-subtitle", "trailing-actions"],
+      "states": ["default", "long-copy"],
+      "stories": [{"id": "default", "state": "default"}, {"id": "long-copy", "state": "long-copy", "localeWidth": "long"}],
+      "keyboard": ["trailing actions retain native control semantics"],
+      "accessibility": ["heading-content-is-readable", "actions-remain-separate-controls"],
+      "localization": ["title and subtitle may wrap"],
+      "evidence": ["schema", "unit"],
+      "delivery": {"status": "delivered", "packages": ["swift-components"]}
+    },
+    {
+      "id": "page-scroll-view",
+      "name": {"en": "Page scroll view", "ru": "Прокрутка страницы"},
+      "summary": {"en": "Makes page scroll ownership explicit.", "ru": "Явно задаёт владельца прокрутки страницы."},
+      "status": "stable",
+      "category": "layout",
+      "platforms": ["macOS"],
+      "lifecycle": {"introduced": "2.0.0", "review": "major"},
+      "anatomy": ["content", "optional-component-scroll-container"],
+      "states": ["component-owned", "consumer-owned"],
+      "stories": [{"id": "component-owned", "state": "component-owned"}, {"id": "consumer-owned", "state": "consumer-owned"}],
+      "keyboard": ["consumer-owned scroll containers retain their own keyboard behavior"],
+      "accessibility": ["scroll-ownership-is-not-duplicated"],
+      "localization": ["content expands vertically"],
+      "evidence": ["schema", "unit"],
+      "delivery": {"status": "delivered", "packages": ["swift-components"]}
+    },
+    {
+      "id": "flow-layout",
+      "name": {"en": "Flow layout", "ru": "Потоковая раскладка"},
+      "summary": {"en": "Wraps peer content using semantic token gaps.", "ru": "Переносит одноуровневое содержимое с семантическими промежутками."},
+      "status": "stable",
+      "category": "layout",
+      "platforms": ["macOS"],
+      "lifecycle": {"introduced": "2.0.0", "review": "major"},
+      "anatomy": ["peer-content", "horizontal-gap", "vertical-gap"],
+      "states": ["single-row", "wrapped"],
+      "stories": [{"id": "single-row", "state": "single-row"}, {"id": "wrapped", "state": "wrapped"}],
+      "keyboard": ["child controls retain document order"],
+      "accessibility": ["layout-adds-no-focus-target"],
+      "localization": ["content wraps rather than clipping"],
+      "evidence": ["schema", "unit"],
+      "delivery": {"status": "delivered", "packages": ["swift-components"]}
+    },
+    {
+      "id": "resizable-split-view",
+      "name": {"en": "Resizable split view", "ru": "Изменяемая разделённая панель"},
+      "summary": {"en": "Separates related panes while retaining consumer-owned state.", "ru": "Разделяет связанные панели, сохраняя состояние у потребителя."},
+      "status": "stable",
+      "category": "layout",
+      "platforms": ["macOS"],
+      "lifecycle": {"introduced": "2.0.0", "review": "major"},
+      "anatomy": ["leading-pane", "draggable-separator", "trailing-pane"],
+      "states": ["default", "dragging", "minimum-width-clamped"],
+      "stories": [{"id": "default", "state": "default"}, {"id": "clamped", "state": "minimum-width-clamped"}],
+      "keyboard": ["pane child focus remains consumer-owned"],
+      "accessibility": ["separator-does-not-replace-pane-content-focus"],
+      "localization": ["panes preserve available total width"],
+      "evidence": ["schema", "unit"],
+      "delivery": {"status": "delivered", "packages": ["swift-components"]}
+    },
+    {
+      "id": "design-separator",
+      "name": {"en": "Separator", "ru": "Разделитель"},
+      "summary": {"en": "Separates dense content with a stable hairline.", "ru": "Разделяет плотное содержимое стабильной тонкой линией."},
+      "status": "stable",
+      "category": "layout",
+      "platforms": ["macOS"],
+      "lifecycle": {"introduced": "2.0.0", "review": "minor"},
+      "anatomy": ["horizontal-or-vertical-hairline"],
+      "states": ["horizontal", "vertical"],
+      "stories": [{"id": "horizontal", "state": "horizontal"}, {"id": "vertical", "state": "vertical"}],
+      "keyboard": ["separator adds no tab stop"],
+      "accessibility": ["decorative-separator-hidden"],
+      "localization": ["geometry is independent of copy"],
+      "evidence": ["schema", "unit"],
+      "delivery": {"status": "delivered", "packages": ["swift-components"]}
+    },
+    {
+      "id": "workspace-pane-header",
+      "name": {"en": "Workspace pane header", "ru": "Заголовок панели рабочего пространства"},
+      "summary": {"en": "Labels a pane with optional native actions.", "ru": "Подписывает панель и добавляет необязательные нативные действия."},
+      "status": "stable",
+      "category": "layout",
+      "platforms": ["macOS"],
+      "lifecycle": {"introduced": "2.0.0", "review": "major"},
+      "anatomy": ["title", "trailing-actions"],
+      "states": ["default", "long-copy"],
+      "stories": [{"id": "default", "state": "default"}, {"id": "long-copy", "state": "long-copy", "localeWidth": "long"}],
+      "keyboard": ["trailing actions retain native control semantics"],
+      "accessibility": ["title-is-readable", "actions-remain-separate-controls"],
+      "localization": ["title may wrap"],
+      "evidence": ["schema", "unit"],
+      "delivery": {"status": "delivered", "packages": ["swift-components"]}
+    },
+    {
+      "id": "navigation-rail",
+      "name": {"en": "Navigation rail", "ru": "Панель навигации"},
+      "summary": {"en": "Moves among stable top-level destinations with value identities.", "ru": "Переключает стабильные верхнеуровневые разделы по значимым идентификаторам."},
+      "status": "stable",
+      "category": "navigation",
+      "platforms": ["macOS"],
+      "lifecycle": {"introduced": "2.0.0", "review": "major"},
+      "anatomy": ["stable-symbol-anchor", "label", "optional-badge"],
+      "states": ["expanded", "compact", "selected", "focused", "disabled"],
+      "stories": [{"id": "expanded", "state": "expanded"}, {"id": "compact", "state": "compact"}, {"id": "selected", "state": "selected"}],
+      "keyboard": ["native buttons retain Tab, Space, and Return behavior"],
+      "accessibility": ["native-button", "focus-independent-from-selection", "current-destination-announced"],
+      "localization": ["expanded labels may truncate after stable icon anchors"],
+      "evidence": ["schema", "unit"],
+      "delivery": {"status": "delivered", "packages": ["swift-components"]}
+    },
+    {
+      "id": "sort-menu",
+      "name": {"en": "Sort menu", "ru": "Меню сортировки"},
+      "summary": {"en": "Selects a stable sort field and direction without owning results.", "ru": "Выбирает стабильное поле и направление сортировки, не владея результатами."},
+      "status": "stable",
+      "category": "overlay",
+      "platforms": ["macOS"],
+      "lifecycle": {"introduced": "2.0.0", "review": "major"},
+      "anatomy": ["native-menu", "sort-field", "sort-direction"],
+      "states": ["closed", "open", "disabled-field"],
+      "stories": [{"id": "closed", "state": "closed"}, {"id": "disabled-field", "state": "disabled-field"}],
+      "keyboard": ["native menu commands retain platform semantics"],
+      "accessibility": ["native-menu", "sort-direction-is-textual"],
+      "localization": ["field labels may grow"],
+      "evidence": ["schema", "unit"],
+      "delivery": {"status": "delivered", "packages": ["swift-components"]}
+    },
+    {
+      "id": "rename-alert",
+      "name": {"en": "Rename alert configuration", "ru": "Конфигурация диалога переименования"},
+      "summary": {"en": "Describes a localized rename prompt while the consumer owns presentation and persistence.", "ru": "Описывает локализованный запрос переименования, а показ и сохранение остаются у потребителя."},
+      "status": "stable",
+      "category": "overlay",
+      "platforms": ["macOS"],
+      "lifecycle": {"introduced": "2.0.0", "review": "major"},
+      "anatomy": ["title", "message", "field-label", "initial-text", "validation", "outcome-labels"],
+      "states": ["valid", "invalid"],
+      "stories": [{"id": "valid", "state": "valid"}, {"id": "invalid", "state": "invalid"}],
+      "keyboard": ["consumer presents the native alert and owns its focus"],
+      "accessibility": ["localized-fields-and-outcomes-are-explicit"],
+      "localization": ["all labels are consumer-provided strings"],
+      "evidence": ["schema", "unit"],
+      "delivery": {"status": "delivered", "packages": ["swift-components"]}
+    },
+    {
+      "id": "keycap",
+      "name": {"en": "Keycap", "ru": "Клавиша"},
+      "summary": {"en": "Renders individual shortcut tokens and explicit chords.", "ru": "Отображает отдельные токены сочетания клавиш и явные последовательности."},
+      "status": "stable",
+      "category": "control",
+      "platforms": ["macOS"],
+      "lifecycle": {"introduced": "2.0.0", "review": "minor"},
+      "anatomy": ["single-token", "semantic-surface", "explicit-chord-composition"],
+      "states": ["single-token", "chord"],
+      "stories": [{"id": "single-token", "state": "single-token"}, {"id": "chord", "state": "chord"}],
+      "keyboard": ["keycaps are descriptive and add no action"],
+      "accessibility": ["token-text-remains-available"],
+      "localization": ["chords receive explicit token arrays without shortcut parsing"],
+      "evidence": ["schema", "unit"],
+      "delivery": {"status": "delivered", "packages": ["swift-components"]}
+    },
+    {
+      "id": "content-state-view",
+      "name": {"en": "Content state", "ru": "Состояние содержимого"},
+      "summary": {"en": "Presents consumer-supplied loading, empty, no-results, unavailable, and error states without performing recovery work.", "ru": "Показывает переданные потребителем состояния загрузки, пустоты, отсутствия результатов, недоступности и ошибки без выполнения восстановления."},
+      "status": "stable",
+      "category": "feedback",
+      "platforms": ["macOS"],
+      "lifecycle": {"introduced": "2.0.0", "review": "minor"},
+      "anatomy": ["state-symbol", "title", "message", "error-recovery-action"],
+      "states": ["loading", "empty", "no-results", "unavailable", "error"],
+      "stories": [{"id": "empty", "state": "empty"}, {"id": "no-results", "state": "no-results"}, {"id": "error", "state": "error", "localeWidth": "long"}],
+      "keyboard": ["recovery is a native button only for the error state"],
+      "accessibility": ["consumer-title-and-message-remain-text", "recovery-action-is-separate"],
+      "localization": ["all visible copy and recovery labels are consumer-provided and may wrap"],
+      "evidence": ["schema", "unit"],
+      "delivery": {"status": "delivered", "packages": ["swift-components"]}
+    },
+    {
+      "id": "status-banner",
+      "name": {"en": "Status banner", "ru": "Баннер состояния"},
+      "summary": {"en": "Presents a consumer-scoped application or surface condition with optional paired actions.", "ru": "Показывает переданное потребителем состояние приложения или поверхности с необязательными парными действиями."},
+      "status": "stable",
+      "category": "feedback",
+      "platforms": ["macOS"],
+      "lifecycle": {"introduced": "2.0.0", "review": "minor"},
+      "anatomy": ["status-symbol", "title", "optional-message", "optional-action", "optional-dismiss"],
+      "states": ["informative", "success", "warning", "destructive"],
+      "stories": [{"id": "informative", "state": "informative"}, {"id": "warning", "state": "warning"}],
+      "keyboard": ["optional actions remain native buttons in document order"],
+      "accessibility": ["title-and-message-are-text", "actions-have-consumer-supplied-labels"],
+      "localization": ["all copy and action labels are consumer-provided and may wrap before actions"],
+      "evidence": ["schema", "unit"],
+      "delivery": {"status": "delivered", "packages": ["swift-components"]}
+    },
+    {
+      "id": "drop-zone",
+      "name": {"en": "Drop zone", "ru": "Зона перетаскивания"},
+      "summary": {"en": "Displays a consumer-owned import target without receiving or starting an import.", "ru": "Отображает переданную потребителем цель импорта, не принимая файлы и не запуская импорт."},
+      "status": "stable",
+      "category": "feedback",
+      "platforms": ["macOS"],
+      "lifecycle": {"introduced": "2.0.0", "review": "minor"},
+      "anatomy": ["drop-symbol", "title", "message", "state-border"],
+      "states": ["ready", "targeted", "unavailable"],
+      "stories": [{"id": "ready", "state": "ready"}, {"id": "targeted", "state": "targeted"}, {"id": "unavailable", "state": "unavailable"}],
+      "keyboard": ["presentation-only surface adds no drop or import command"],
+      "accessibility": ["state-and-consumer-copy-are-combined"],
+      "localization": ["title, message, and unavailable reason are consumer-provided"],
+      "evidence": ["schema", "unit"],
+      "delivery": {"status": "delivered", "packages": ["swift-components"]}
+    },
+    {
+      "id": "operation-state-view",
+      "name": {"en": "Operation state", "ru": "Состояние операции"},
+      "summary": {"en": "Renders consumer-measured preparation, review, progress, completion, and failure without starting or cancelling work.", "ru": "Отрисовывает переданные потребителем подготовку, проверку, измеренный прогресс, завершение и ошибку без запуска или отмены работы."},
+      "status": "stable",
+      "category": "feedback",
+      "platforms": ["macOS"],
+      "lifecycle": {"introduced": "2.0.0", "review": "minor"},
+      "anatomy": ["state-symbol", "title", "message", "measured-progress-indicator"],
+      "states": ["preparing", "reviewing", "in-progress", "completed", "failed"],
+      "stories": [{"id": "reviewing", "state": "reviewing"}, {"id": "in-progress", "state": "in-progress"}, {"id": "completed", "state": "completed"}],
+      "keyboard": ["presentation-only surface adds no start or cancel command"],
+      "accessibility": ["native-progress-announces-the-validated-completed-and-total-counts", "completion-and-failure-are-textual"],
+      "localization": ["title and message are consumer-provided; native progress formats validated counts for the current locale"],
+      "evidence": ["schema", "unit"],
+      "delivery": {"status": "delivered", "packages": ["swift-components"]}
+    },
+    {
+      "id": "about-page-configuration",
+      "name": {"en": "About page configuration", "ru": "Конфигурация страницы «О приложении»"},
+      "summary": {"en": "Specifies configuration symbols delivered by AboutPage, with no shared fallback content.", "ru": "Описывает символы конфигурации, поставляемые через AboutPage, без общего резервного содержимого."},
+      "status": "stable",
+      "category": "feedback",
+      "platforms": ["macOS"],
+      "lifecycle": {"introduced": "2.0.0", "review": "minor"},
+      "anatomy": ["product-metadata", "ordered-resources", "validated-url"],
+      "states": ["configured", "multiple-resources"],
+      "stories": [{"id": "configured", "state": "configured"}, {"id": "resources", "state": "multiple-resources"}],
+      "keyboard": ["configuration adds no interaction"],
+      "accessibility": ["resource-hints-are-explicit-values"],
+      "localization": ["every product string is required from the consumer"],
+      "evidence": ["schema"],
+      "delivery": {"status": "specification-only", "packages": []}
+    },
+    {
+      "id": "about-page",
+      "name": {"en": "About page", "ru": "Страница «О приложении»"},
+      "summary": {"en": "Renders supplied product identity, metadata, generic icon content, and ordered external resources.", "ru": "Отрисовывает переданные идентичность продукта, метаданные, универсальное содержимое иконки и упорядоченные внешние ресурсы."},
+      "status": "stable",
+      "category": "feedback",
+      "platforms": ["macOS"],
+      "lifecycle": {"introduced": "2.0.0", "review": "minor"},
+      "anatomy": ["generic-icon", "product-identity", "metadata", "resource-section"],
+      "states": ["configured", "long-copy", "multiple-resources"],
+      "stories": [{"id": "configured", "state": "configured"}, {"id": "long-copy", "state": "long-copy", "localeWidth": "long"}],
+      "keyboard": ["resource rows expose native button activation"],
+      "accessibility": ["product-identity-and-resource-copy-remain-text", "resource-hints-are-consumer-supplied"],
+      "localization": ["all visible product copy, links, and labels come from configuration"],
+      "evidence": ["schema", "unit"],
+      "delivery": {"status": "delivered", "packages": ["swift-components"]}
+    },
+    {
+      "id": "about-resource-row",
+      "name": {"en": "About resource row", "ru": "Строка ресурса «О приложении»"},
+      "summary": {"en": "Opens one validated consumer-provided resource through SwiftUI’s environment action.", "ru": "Открывает один проверенный ресурс, переданный потребителем, через действие окружения SwiftUI."},
+      "status": "stable",
+      "category": "feedback",
+      "platforms": ["macOS"],
+      "lifecycle": {"introduced": "2.0.0", "review": "minor"},
+      "anatomy": ["sf-symbol", "title", "subtitle", "external-link-affordance"],
+      "states": ["default", "long-copy"],
+      "stories": [{"id": "default", "state": "default"}, {"id": "long-copy", "state": "long-copy", "localeWidth": "long"}],
+      "keyboard": ["native button supports Space and Return"],
+      "accessibility": ["title-subtitle-and-hint-remain-available"],
+      "localization": ["title, subtitle, hint, and URL are consumer-provided"],
+      "evidence": ["schema", "unit"],
+      "delivery": {"status": "delivered", "packages": ["swift-components"]}
     }
   ]
 }

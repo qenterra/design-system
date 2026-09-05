@@ -53,6 +53,11 @@ def python_sources() -> list[str]:
 def main() -> int:
     python = sys.executable
     environment = os.environ.copy()
+    if environment.get("QDS_RECORD_SNAPSHOTS") == "1":
+        raise RuntimeError(
+            "The complete gate only compares locked snapshots; unset QDS_RECORD_SNAPSHOTS. "
+            "Record and visually inspect references in a separate focused test run."
+        )
     developer_dir_value = environment.get("DEVELOPER_DIR")
     if not developer_dir_value:
         developer_dir_value = subprocess.run(
@@ -105,10 +110,16 @@ def main() -> int:
         swift_environment = environment.copy()
         swift_environment["CLANG_MODULE_CACHE_PATH"] = str(Path(swift_cache) / "clang-modules")
         swift_environment["SWIFTPM_MODULECACHE_OVERRIDE"] = str(Path(swift_cache) / "swift-modules")
+        swift_paths = [
+            "--cache-path", str(Path(swift_cache) / "cache"),
+            "--config-path", str(Path(swift_cache) / "configuration"),
+            "--security-path", str(Path(swift_cache) / "security"),
+        ]
         run(
             [
                 "swift",
                 "test",
+                *swift_paths,
                 "--package-path",
                 ".",
                 "--scratch-path",
@@ -121,10 +132,11 @@ def main() -> int:
             [
                 "swift",
                 "test",
+                *swift_paths,
                 "--package-path",
                 "packages",
                 "--scratch-path",
-                str(Path(swift_cache) / "snapshot-build"),
+                str(Path(swift_cache) / "public-build"),
                 "--disable-sandbox",
             ],
             env=swift_environment,
@@ -152,7 +164,8 @@ def main() -> int:
     run(["git", "diff", "--cached", "--check"])
     version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
     print(f"Verification passed for Design System {version}")
-    print("Manual runtime, native rendering, VoiceOver, and visual acceptance remain unproven.")
+    print("Native component snapshots compared in root and public packages without recording.")
+    print("Manual runtime, VoiceOver, motion, and consumer visual acceptance remain unproven.")
     return 0
 
 

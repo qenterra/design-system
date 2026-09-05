@@ -51,6 +51,29 @@ def validate_schema(instance: Any, schema: dict[str, Any], schema_path: Path, lo
             referenced, ref_path, ref_root = _load_reference(rule["$ref"], current_path, current_root)
             return walk(value, referenced, path, ref_path, ref_root)
 
+        for branch in rule.get("allOf", []):
+            errors.extend(walk(value, branch, path, current_path, current_root))
+
+        if "if" in rule:
+            condition_matches = not walk(
+                value,
+                rule["if"],
+                path,
+                current_path,
+                current_root,
+            )
+            selected_branch = "then" if condition_matches else "else"
+            if selected_branch in rule:
+                errors.extend(
+                    walk(
+                        value,
+                        rule[selected_branch],
+                        path,
+                        current_path,
+                        current_root,
+                    )
+                )
+
         expected = rule.get("type")
         if expected:
             expected_types = expected if isinstance(expected, list) else [expected]

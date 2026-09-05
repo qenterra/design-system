@@ -517,6 +517,12 @@ Errors state:
 
 Preserve technical details in an optional disclosure or diagnostic export.
 
+### 9.5 Shared feedback and About surfaces
+
+`ContentStateView`, `StatusBanner`, `DropZone`, and `OperationStateView` render only consumer-owned presentation. They do not start, cancel, persist, retry, or manufacture operation progress. Consumers supply every visible title, message, validated measured progress, recovery label, and dismiss label; the native progress indicator derives both its visual fraction and accessibility number from the same completed and total counts. Banner placement remains consumer-owned. A `PresentationAction` keeps an optional action label and its main-actor callback together so a label cannot exist without an action. These feedback surfaces document supported native behavior on macOS; their iOS 16 compilation compatibility is not a behavioral platform claim.
+
+`AboutPage` receives all product identity, version, creator, copyright, generic icon content, and ordered `AboutResource` URLs through `AboutPageConfiguration`. It has no product fallback copy or links. Resource rows use SwiftUI’s `openURL` environment action, so the host controls URL handling; unavailable resources retain native disabled semantics. These About surfaces document supported native behavior on macOS; iOS 16 compilation compatibility is not a behavioral platform claim. Tests prove a synthetic product’s observable About presentation rather than treating one product’s metadata as a shared default.
+
 ## 10. Core patterns
 
 ### 10.1 Select → Review → Execute → Complete/Recover
@@ -817,7 +823,7 @@ Deprecated tokens/components remain documented for one migration window with rep
 
 The canonical public repository is `qenterra/design-system`. It exposes
 `@qenterra/design-tokens` through npm and the `QenTerraDesignTokens` /
-`QenTerraComponents` SwiftPM products from the same versioned source. Production
+`QenTerraComponents` / `QenTerraMediaComponents` SwiftPM products from the same versioned source. Production
 consumers pin immutable SemVer releases; local paths are limited to coordinated
 Design System work. Publication requires aligned versions, the exact release
 manifest, the full verification gate, and clean consumer resolution. A package
@@ -825,8 +831,8 @@ release proves adapter availability, not native rendering or accessibility
 acceptance in a product.
 
 The package source tree has six deliberately separate zones. `Sources/QenTerra/`
-contains the installable, tokenized `QenTerraDesignTokens` and
-`QenTerraComponents` targets. `Sources/ExploreSwiftUI/` contains exact attributed
+contains the installable, tokenized `QenTerraDesignTokens`, `QenTerraComponents`, and macOS-first
+`QenTerraMediaComponents` targets. The media target exposes no iOS media API. `Sources/ExploreSwiftUI/` contains exact attributed
 source from every Explore SwiftUI sitemap detail page and is not a SwiftPM target.
 Its component files are immutable: synchronization may replace them only with the
 current source field from the same page, while offline verification closes the

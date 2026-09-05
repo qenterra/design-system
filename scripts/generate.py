@@ -19,6 +19,7 @@ from lib.token_tools import (  # noqa: E402
     generate_css,
     generate_swift,
     generate_swift_icons,
+    generate_swift_product_profiles,
     generate_token_reference,
     load_json,
 )
@@ -32,6 +33,10 @@ PUBLISHED_SOURCE_PATHS = (
     "packages/Sources/ReUI/Base",
 )
 PUBLISHED_ARTIFACT_PATHS = ("packages/Sources/ReUI/Registry",)
+DELIVERY_SOURCE_ROOTS = {
+    "QenTerraComponents": "packages/Sources/QenTerra/Components/",
+    "QenTerraMediaComponents": "packages/Sources/QenTerra/MediaComponents/",
+}
 
 
 def json_text(value: Any) -> str:
@@ -71,6 +76,7 @@ def published_artifact_manifest(root: Path, outputs: dict[str, str], version: st
         or relative
         in {
             "packages/Sources/QenTerra/DesignTokens/GeneratedIcons.swift",
+            "packages/Sources/QenTerra/DesignTokens/GeneratedProductProfiles.swift",
             "packages/Sources/QenTerra/DesignTokens/GeneratedTokens.swift",
         }
     )
@@ -106,6 +112,17 @@ def build_qenterra_component_manifest(root: Path, version: str) -> dict[str, Any
         source_path = component.get("sourcePath")
         if not isinstance(source_path, str):
             raise ValueError("QenTerra component sourcePath must be a string")
+        delivery_product = component.get("deliveryProduct")
+        if not isinstance(delivery_product, str):
+            raise ValueError("QenTerra component deliveryProduct must be a string")
+        expected_source_root = DELIVERY_SOURCE_ROOTS.get(delivery_product)
+        if expected_source_root is None:
+            raise ValueError(f"unknown QenTerra component deliveryProduct: {delivery_product}")
+        if not source_path.startswith(expected_source_root):
+            raise ValueError(
+                "QenTerra component deliveryProduct does not match its sourcePath: "
+                f"{delivery_product} / {source_path}"
+            )
         source = root / source_path
         if not source.is_file():
             raise ValueError(f"QenTerra component source is missing: {source_path}")
@@ -165,6 +182,11 @@ def build_outputs(root: Path = ROOT) -> dict[str, str]:
             tokens["components"],
         ),
         "packages/Sources/QenTerra/DesignTokens/GeneratedIcons.swift": generate_swift_icons(icons),
+        "packages/Sources/QenTerra/DesignTokens/GeneratedProductProfiles.swift": generate_swift_product_profiles(
+            tokens["products"],
+            tokens["platforms"],
+            tokens["components"],
+        ),
         "packages/Sources/QenTerra/manifest.json": json_text(
             build_qenterra_component_manifest(root, version)
         ),
