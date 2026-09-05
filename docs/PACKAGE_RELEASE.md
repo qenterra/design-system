@@ -3,7 +3,9 @@
 ## Registry contract
 
 - npm registry: `@qenterra/design-tokens`, Node.js 22 for verification, metadata in `packages/npm/design-tokens/package.json`.
-- Swift Package Manager: repository `https://github.com/QenTerra/design-system`, products `QenTerraDesignTokens` and `QenTerraComponents`, Swift tools 5.9, macOS 13+, and iOS 16+.
+- Swift Package Manager: repository `https://github.com/QenTerra/design-system`, products `QenTerraDesignTokens` and `QenTerraComponents`, Swift tools 5.9, macOS 26+, and iOS 16+ on the unreleased main branch. Released `1.0.1` retains its macOS 13+ requirement.
+
+The macOS minimum increase is a breaking change for the next major release (`2.0.0`). Before adopting it, raise the consuming application's macOS deployment target to 26 or later. Consumers that need macOS 13–15 must remain on a compatible immutable release. iOS requirements are unchanged. The source version stays at `1.0.1` until release preparation; this change does not replace that tag or publish a new package version.
 - Owner: Nikita Melnychenko (`@qenterra`). Publication credentials exist only in the protected release workflow and are never stored in source.
 - Provenance: `registry/packages.json` is the export allowlist; safe public token and icon inputs plus `packages/scripts/generate.py` reproduce all declared outputs; `packages/release-manifest.json` then records every public file, byte size, and SHA-256 digest.
 

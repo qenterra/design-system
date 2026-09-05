@@ -4,7 +4,9 @@ All notable maintained Design System changes are recorded here. Versions follow 
 
 ## [Unreleased]
 
-No maintained changes have been classified after `1.0.1`.
+### Changed
+
+- Raised the maintained Swift packages' minimum macOS version from 13 to 26 and moved macOS verification and package-release jobs to macOS 26. iOS remains at 16. This is a breaking change planned for `2.0.0`; macOS consumers must raise their deployment target or remain on a compatible immutable release. Existing releases and tags are unchanged.
 
 ## [1.0.1] - 2026-09-02
 

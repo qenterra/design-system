@@ -25,7 +25,7 @@ See the complete [repository structure](docs/REPOSITORY_STRUCTURE.md).
 ## Requirements and setup
 
 - Swift 5.9 or later for native packages.
-- macOS 13 or iOS 16 or later for supported Swift consumers.
+- macOS 26 or iOS 16 or later for supported Swift consumers on the unreleased main branch. Released `1.0.1` retains its original macOS 13 minimum.
 - Node.js 22 or later for npm package inspection.
 - Python 3.11 or later for repository verification.
 

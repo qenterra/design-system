@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "QenTerraDesignSystem",
     platforms: [
-        .macOS(.v13),
+        .macOS("26.0"),
         .iOS(.v16),
     ],
     products: [
