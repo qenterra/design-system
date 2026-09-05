@@ -52,12 +52,24 @@ class RegistryContractTests(unittest.TestCase):
         self.assertEqual(len({item["id"] for item in components}), len(components))
 
         delivered = {
+            "airplay-route-picker",
+            "audio-details-view",
             "favorite-control",
             "media-grid",
             "media-row",
             "media-shelf",
             "media-tile",
             "playback-indicator",
+            "playback-progress-control",
+            "playback-queue-row",
+            "player-bar",
+            "queue-drag-preview",
+            "queue-insertion-indicator",
+            "lyric-line",
+            "lyrics-edge-fade",
+            "lyrics-viewport",
+            "media-metadata-badge",
+            "transport-controls",
             "artwork-crop-surface",
             "artwork-haze",
             "artwork-mosaic",
@@ -169,6 +181,21 @@ class RegistryContractTests(unittest.TestCase):
                 "packages/Sources/QenTerra/MediaComponents/Collections/MediaTile.swift",
                 "packages/Sources/QenTerra/MediaComponents/Controls/FavoriteControl.swift",
                 "packages/Sources/QenTerra/MediaComponents/Controls/PlaybackIndicator.swift",
+                "packages/Sources/QenTerra/MediaComponents/Lyrics/LyricLine.swift",
+                "packages/Sources/QenTerra/MediaComponents/Lyrics/LyricLinePresentation.swift",
+                "packages/Sources/QenTerra/MediaComponents/Lyrics/LyricsEdgeFade.swift",
+                "packages/Sources/QenTerra/MediaComponents/Lyrics/LyricsViewport.swift",
+                "packages/Sources/QenTerra/MediaComponents/Metadata/AudioDetailsView.swift",
+                "packages/Sources/QenTerra/MediaComponents/Metadata/MediaMetadataBadge.swift",
+                "packages/Sources/QenTerra/MediaComponents/Player/AirPlayRoutePicker.swift",
+                "packages/Sources/QenTerra/MediaComponents/Player/PlaybackProgressControl.swift",
+                "packages/Sources/QenTerra/MediaComponents/Player/PlayerBar.swift",
+                "packages/Sources/QenTerra/MediaComponents/Player/PlayerBarActions.swift",
+                "packages/Sources/QenTerra/MediaComponents/Player/PlayerBarPresentation.swift",
+                "packages/Sources/QenTerra/MediaComponents/Player/TransportControls.swift",
+                "packages/Sources/QenTerra/MediaComponents/Queue/PlaybackQueueRow.swift",
+                "packages/Sources/QenTerra/MediaComponents/Queue/QueueDragPreview.swift",
+                "packages/Sources/QenTerra/MediaComponents/Queue/QueueInsertionIndicator.swift",
             },
         )
         for relative in paths:
@@ -183,6 +210,10 @@ class RegistryContractTests(unittest.TestCase):
 
     def test_migration_components_are_planned_for_2_0_0_and_absent_from_v1_0_1(self) -> None:
         migration_ids = {
+            "airplay-route-picker", "audio-details-view", "lyric-line",
+            "lyrics-edge-fade", "lyrics-viewport", "media-metadata-badge",
+            "playback-progress-control", "playback-queue-row", "player-bar",
+            "queue-drag-preview", "queue-insertion-indicator", "transport-controls",
             "favorite-control", "media-grid", "media-row", "media-shelf",
             "media-tile", "playback-indicator",
             "artwork-crop-surface", "artwork-haze", "artwork-mosaic",
@@ -255,6 +286,45 @@ class RegistryContractTests(unittest.TestCase):
             for item in load("packages/Sources/QenTerra/manifest.json")["components"]
         }
         self.assertTrue(collection_sources.issubset(manifest_paths))
+
+    def test_player_family_is_closed_over_public_swift_delivery(self) -> None:
+        package = next(
+            item
+            for item in load("registry/packages.json")["packages"]
+            if item["id"] == "swift-components"
+        )
+        player_sources = {
+            "packages/Sources/QenTerra/MediaComponents/Player/PlayerBarPresentation.swift",
+            "packages/Sources/QenTerra/MediaComponents/Player/PlayerBarActions.swift",
+            "packages/Sources/QenTerra/MediaComponents/Player/PlayerBar.swift",
+            "packages/Sources/QenTerra/MediaComponents/Player/PlaybackProgressControl.swift",
+            "packages/Sources/QenTerra/MediaComponents/Player/TransportControls.swift",
+            "packages/Sources/QenTerra/MediaComponents/Player/AirPlayRoutePicker.swift",
+            "packages/Sources/QenTerra/MediaComponents/Queue/PlaybackQueueRow.swift",
+            "packages/Sources/QenTerra/MediaComponents/Queue/QueueInsertionIndicator.swift",
+            "packages/Sources/QenTerra/MediaComponents/Queue/QueueDragPreview.swift",
+            "packages/Sources/QenTerra/MediaComponents/Lyrics/LyricLinePresentation.swift",
+            "packages/Sources/QenTerra/MediaComponents/Lyrics/LyricLine.swift",
+            "packages/Sources/QenTerra/MediaComponents/Lyrics/LyricsViewport.swift",
+            "packages/Sources/QenTerra/MediaComponents/Lyrics/LyricsEdgeFade.swift",
+            "packages/Sources/QenTerra/MediaComponents/Metadata/MediaMetadataBadge.swift",
+            "packages/Sources/QenTerra/MediaComponents/Metadata/AudioDetailsView.swift",
+        }
+        self.assertTrue(player_sources.issubset(set(package["publicPaths"])))
+        self.assertIn(
+            "packages/Tests/QenTerraMediaComponentsTests/PlayerAndLyricsTests.swift",
+            package["tests"],
+        )
+        self.assertIn("player-and-lyrics", package["capabilities"])
+
+        maintained = load("registry/qenterra-components.json")["components"]
+        maintained_paths = {item["sourcePath"] for item in maintained}
+        self.assertTrue(player_sources.issubset(maintained_paths))
+        manifest_paths = {
+            f"packages/{item['sourcePath']}"
+            for item in load("packages/Sources/QenTerra/manifest.json")["components"]
+        }
+        self.assertTrue(player_sources.issubset(manifest_paths))
 
     def test_artwork_family_is_closed_over_public_swift_delivery(self) -> None:
         package = next(

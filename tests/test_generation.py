@@ -104,21 +104,26 @@ class GenerationContractTests(unittest.TestCase):
         outputs = generator.build_outputs(ROOT)
         css = outputs["packages/npm/design-tokens/dist/tokens.css"]
         swift = outputs["packages/Sources/QenTerra/DesignTokens/GeneratedTokens.swift"]
-        self.assertIn("--design-system-component-panel-lyrics-inactive-opacity: 0.56;", css)
-        self.assertNotIn("--design-system-component-panel-lyrics-inactive-opacity: 0.56px;", css)
+        self.assertIn("--design-system-component-panel-lyrics-inactive-opacity: 0.58;", css)
+        self.assertNotIn("--design-system-component-panel-lyrics-inactive-opacity: 0.58px;", css)
+        self.assertIn("--design-system-component-panel-lyrics-inactive-blur-radius: 0.45px;", css)
         self.assertIn("--design-system-component-panel-lyrics-follow-duration-ms: 320ms;", css)
         self.assertNotIn("--design-system-component-panel-lyrics-follow-duration-ms: 320px;", css)
-        self.assertIn("DesignComponentOpacity(value: 0.56)", swift)
+        self.assertIn("DesignComponentOpacity(value: 0.58)", swift)
         self.assertNotIn(
-            "panelLyricsInactiveOpacity = DesignComponentMetric(points: 0.56)",
+            "panelLyricsInactiveOpacity = DesignComponentMetric(points: 0.58)",
             swift,
         )
+        self.assertIn("panelLyricsInactiveBlurRadius = DesignComponentMetric(points: 0.45)", swift)
         self.assertIn("DesignComponentDuration(milliseconds: 320)", swift)
         self.assertNotIn(
             "panelLyricsFollowDurationMs = DesignComponentMetric(points: 320)",
             swift,
         )
         self.assertIn("DesignComponentMetric(points: 12)", swift)
+        self.assertIn("panelPlayerArtworkHoverOpacity = DesignComponentOpacity(value: 0.36)", swift)
+        self.assertIn("--design-system-component-panel-player-artwork-hover-opacity: 0.36;", css)
+        self.assertNotIn("--design-system-component-panel-player-artwork-hover-opacity: 0.36px;", css)
 
     def test_media_collection_metrics_generate_with_explicit_units(self) -> None:
         generator = load_generator()

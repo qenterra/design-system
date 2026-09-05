@@ -6,6 +6,7 @@ All notable public package changes are recorded here. Versions follow Semantic V
 
 ### Added
 
+- Planned the macOS playback and Now Playing APIs for `2.0.0`: player and transport snapshots, consumer-timed progress, weak native AirPlay routing, mutation-free queue views, explicit-identity lyrics with Reduced Motion behavior, and consumer-supplied metadata. The package does not own playback clocks, queue persistence, lyric loading or editing, or product-specific empty copy; its current version remains `1.0.1`.
 - Planned the macOS media-collection presentation family for `2.0.0`: item models, tiles, rows, adaptive grids, shelves, favorite controls, and SwiftUI/AppKit playback indicators. The package owns ready-state rendering and synchronous interaction forwarding only; consumers retain domain, data, playback, persistence, and accessibility-copy ownership.
 - Planned the macOS artwork presentation family for `2.0.0`, including ready-content states, placeholders, clamped crop geometry, zero-to-four-slot mosaics, and Reduced Transparency-aware ready-palette haze. The public package performs no loading, caching, gesture coordination, or mutation; its current version remains `1.0.1`.
 

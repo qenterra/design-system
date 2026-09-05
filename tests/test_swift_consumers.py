@@ -182,6 +182,54 @@ class SwiftConsumerTests(unittest.TestCase):
     def test_media_consumer_builds_against_copied_public_package(self) -> None:
         self._build_fixture("swift-consumer-media")
 
+    def test_player_family_builds_against_copied_public_package(self) -> None:
+        self._build_fixture(
+            "swift-consumer-media",
+            source="""
+import QenTerraMediaComponents
+
+let progress = PlaybackProgressPresentation(
+    progress: 0.5,
+    leadingText: "1:00",
+    trailingText: "2:00",
+    accessibilityLabel: "Playback progress",
+    isEnabled: true
+)
+let player = PlayerBarPresentation(
+    title: "Public Track",
+    subtitle: "Public Artist",
+    isPlaying: false,
+    isShuffleEnabled: false,
+    repeatMode: .off,
+    progress: progress,
+    volume: 0.5,
+    isMuted: false,
+    isQueuePresented: false,
+    favorite: nil
+)
+let queue = PlaybackQueueRowPresentation(
+    id: "public-queue-item",
+    title: "Public Track",
+    subtitle: "Public Artist",
+    durationText: "2:00",
+    isCurrent: false,
+    isSelected: true,
+    isAvailable: true,
+    isDraggable: true,
+    accessibilityLabel: "Public Track"
+)
+let lyric = LyricLinePresentation(
+    id: "public-lyric",
+    text: "Public lyric",
+    isActive: false,
+    isSynchronized: true,
+    inactiveBlurRadius: 0.45
+)
+let detail = AudioDetail(id: "codec", label: "Codec", value: "FLAC", order: 0)
+print(player.hasCurrentItem, queue.isSelected, lyric.opacity, detail.value)
+""",
+        )
+
     def test_media_interaction_host_runs_against_copied_public_package(self) -> None:
         if (
             os.environ.get("CODEX_SANDBOX") == "seatbelt"
@@ -336,7 +384,7 @@ class SwiftConsumerTests(unittest.TestCase):
         )
         return application, bundled_executable, environment
 
-    def _build_fixture(self, fixture_name: str) -> None:
+    def _build_fixture(self, fixture_name: str, source: str | None = None) -> None:
         builder = load_builder()
         fixture = ROOT / "tests/fixtures" / fixture_name
         with tempfile.TemporaryDirectory(prefix="qenterra-swift-consumer-") as directory:
@@ -344,6 +392,10 @@ class SwiftConsumerTests(unittest.TestCase):
             consumer = staging / "consumer"
             public = staging / "public"
             shutil.copytree(fixture, consumer)
+            if source is not None:
+                source_files = list((consumer / "Sources").rglob("*.swift"))
+                self.assertEqual(len(source_files), 1, fixture_name)
+                source_files[0].write_text(source, encoding="utf-8")
             builder.export_public_tree(public, ROOT)
             environment = os.environ.copy()
             environment["SWIFTPM_DISABLE_SANDBOX"] = "1"

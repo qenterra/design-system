@@ -415,6 +415,156 @@
       "deliveryProduct": "QenTerraMediaComponents",
       "publicSymbols": ["PlaybackIndicatorState", "PlaybackIndicatorGeometry", "PlaybackIndicator", "NativePlaybackIndicatorView"],
       "designTokens": true
+    },
+    {
+      "id": "player-bar-presentation",
+      "name": "PlayerBarPresentation",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Player/PlayerBarPresentation.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["TransportRepeatMode", "PlayerBarPresentation"],
+      "designTokens": true
+    },
+    {
+      "id": "player-bar-actions",
+      "name": "PlayerBarActions",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Player/PlayerBarActions.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["PlayerBarActions"],
+      "designTokens": true
+    },
+    {
+      "id": "player-bar",
+      "name": "PlayerBar",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Player/PlayerBar.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["PlayerBar"],
+      "designTokens": true
+    },
+    {
+      "id": "playback-progress-control",
+      "name": "PlaybackProgressControl",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Player/PlaybackProgressControl.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["PlaybackProgressPresentation", "PlaybackProgressControl"],
+      "designTokens": true
+    },
+    {
+      "id": "transport-controls",
+      "name": "TransportControls",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Player/TransportControls.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["TransportControl", "TransportControlPresentation", "TransportControls"],
+      "designTokens": true
+    },
+    {
+      "id": "airplay-route-picker",
+      "name": "AirPlayRoutePicker",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Player/AirPlayRoutePicker.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["AirPlayRoutePicker"],
+      "designTokens": true
+    },
+    {
+      "id": "playback-queue-row",
+      "name": "PlaybackQueueRow",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Queue/PlaybackQueueRow.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["PlaybackQueueRowPresentation", "PlaybackQueueRow"],
+      "designTokens": true
+    },
+    {
+      "id": "queue-insertion-indicator",
+      "name": "QueueInsertionIndicator",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Queue/QueueInsertionIndicator.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["QueueInsertionIndicator"],
+      "designTokens": true
+    },
+    {
+      "id": "queue-drag-preview",
+      "name": "QueueDragPreview",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Queue/QueueDragPreview.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["QueueDragPreview"],
+      "designTokens": true
+    },
+    {
+      "id": "lyric-line-presentation",
+      "name": "LyricLinePresentation",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Lyrics/LyricLinePresentation.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["LyricLineTone", "LyricLinePresentation"],
+      "designTokens": true
+    },
+    {
+      "id": "lyric-line",
+      "name": "LyricLine",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Lyrics/LyricLine.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["LyricLine"],
+      "designTokens": true
+    },
+    {
+      "id": "lyrics-viewport",
+      "name": "LyricsViewport",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Lyrics/LyricsViewport.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["LyricsScrollDecision", "LyricsViewport"],
+      "designTokens": true
+    },
+    {
+      "id": "lyrics-edge-fade",
+      "name": "LyricsEdgeFade",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Lyrics/LyricsEdgeFade.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["LyricsEdgeFade"],
+      "designTokens": true
+    },
+    {
+      "id": "media-metadata-badge",
+      "name": "MediaMetadataBadge",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Metadata/MediaMetadataBadge.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["MediaMetadataBadge"],
+      "designTokens": true
+    },
+    {
+      "id": "audio-details-view",
+      "name": "AudioDetailsView",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Metadata/AudioDetailsView.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["AudioDetail", "AudioDetailsView"],
+      "designTokens": true
     }
   ]
 }

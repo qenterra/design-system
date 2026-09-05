@@ -11,6 +11,7 @@ from typing import Any
 REFERENCE = re.compile(r"^\{([^}]+)}$")
 COMPONENT_VALUE_UNITS = {
     "panel.artwork.highlightOpacity": "unitless",
+    "panel.player.artworkHoverOpacity": "unitless",
     "panel.artwork.highlightSizeRatio": "scalar",
     "panel.artwork.highlightBlurRatio": "scalar",
     "panel.artwork.highlightOffsetXRatio": "scalar",
@@ -38,6 +39,8 @@ COMPONENT_VALUE_UNITS = {
     "panel.artwork.hazeLightBackgroundOpacity": "unitless",
     "panel.lyrics.followDurationMs": "milliseconds",
     "panel.lyrics.inactiveOpacity": "unitless",
+    "panel.queue.dragPreviewBorderOpacity": "unitless",
+    "panel.queue.dragPreviewShadowOpacity": "unitless",
     "panel.mediaCollection.pressedOpacity": "unitless",
     "panel.mediaCollection.playbackIndicatorStaticFirstScale": "scalar",
     "panel.mediaCollection.playbackIndicatorStaticSecondScale": "scalar",
