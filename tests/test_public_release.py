@@ -167,6 +167,13 @@ class PublicReleaseContractTests(unittest.TestCase):
                 all("deliveryProduct" in component for component in component_manifest["components"])
             )
 
+    def test_public_source_catalog_accepts_all_delivered_qenterra_products(self) -> None:
+        verifier = load_module(
+            ROOT / "packages/scripts/verify_source_catalogs.py",
+            "public_source_catalog_delivery",
+        )
+        self.assertEqual(verifier.validate_catalogs(ROOT / "packages"), [])
+
     def test_boundary_detects_an_undeclared_file(self) -> None:
         self.assertTrue(BOUNDARY.is_file(), "public boundary verifier is missing")
         boundary = load_module(BOUNDARY, "public_boundary")

@@ -7,6 +7,7 @@ import hashlib
 import json
 import sys
 from pathlib import Path
+from typing import Union
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -59,7 +60,7 @@ def _load(path: Path) -> dict[str, object]:
 def _validate_manifest(
     root: Path,
     manifest_path: Path,
-    source_prefix: str,
+    source_prefix: Union[str, tuple[str, ...]],
     source_extensions: tuple[str, ...] = (".swift",),
 ) -> tuple[list[str], dict[str, dict[str, object]]]:
     errors: list[str] = []
@@ -73,6 +74,7 @@ def _validate_manifest(
     if "count" in manifest and manifest.get("count") != len(records):
         errors.append(f"{manifest_path}: count mismatch")
 
+    source_prefixes = (source_prefix,) if isinstance(source_prefix, str) else source_prefix
     expected_paths: set[str] = set()
     by_id: dict[str, dict[str, object]] = {}
     for index, record in enumerate(records):
@@ -87,14 +89,15 @@ def _validate_manifest(
         if identifier in by_id:
             errors.append(f"{manifest_path}: duplicate id {identifier}")
         by_id[identifier] = record
-        if not isinstance(source_path, str) or not source_path.startswith(source_prefix):
+        if not isinstance(source_path, str) or not source_path.startswith(source_prefixes):
             errors.append(f"{manifest_path}: invalid source path for {identifier}")
             continue
         if source_path in expected_paths:
             errors.append(f"{manifest_path}: duplicate source path {source_path}")
         expected_paths.add(source_path)
         source = (root / source_path).resolve()
-        source_root = (root / source_prefix).resolve()
+        matching_prefix = next(prefix for prefix in source_prefixes if source_path.startswith(prefix))
+        source_root = (root / matching_prefix).resolve()
         if source_root != source and source_root not in source.parents:
             errors.append(f"{manifest_path}: source path escapes its catalog")
             continue
@@ -107,12 +110,12 @@ def _validate_manifest(
         if record.get("sha256") != hashlib.sha256(payload).hexdigest():
             errors.append(f"{manifest_path}: hash mismatch for {source_path}")
 
-    source_root = root / source_prefix
     actual_paths = {
         path.relative_to(root).as_posix()
-        for path in source_root.rglob("*")
+        for prefix in source_prefixes
+        for path in (root / prefix).rglob("*")
         if path.is_file() and path.suffix in source_extensions
-    } if source_root.is_dir() else set()
+    }
     for source_path in sorted(expected_paths - actual_paths):
         errors.append(f"{manifest_path}: declared source is missing {source_path}")
     for source_path in sorted(actual_paths - expected_paths):
@@ -896,7 +899,10 @@ def validate_catalogs(root: Path = ROOT) -> list[str]:
     qenterra_errors, qenterra = _validate_manifest(
         root,
         qenterra_manifest,
-        "Sources/QenTerra/Components/",
+        (
+            "Sources/QenTerra/Components/",
+            "Sources/QenTerra/MediaComponents/Artwork/",
+        ),
     )
     shadcn_manifest = root / "Sources/ShadcnUI/manifest.json"
     shadcn_errors, shadcn = _validate_manifest(

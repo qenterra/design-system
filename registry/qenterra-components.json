@@ -275,6 +275,76 @@
       "deliveryProduct": "QenTerraComponents",
       "publicSymbols": ["AboutResourceOpenRejection", "AboutResourceRowPresentation", "AboutResourceRow"],
       "designTokens": true
+    },
+    {
+      "id": "artwork-palette",
+      "name": "ArtworkPalette",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkPalette.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["ArtworkPalette"],
+      "designTokens": true
+    },
+    {
+      "id": "artwork-presentation-state",
+      "name": "ArtworkPresentationState",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkPresentationState.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["ArtworkPresentationState"],
+      "designTokens": true
+    },
+    {
+      "id": "artwork-surface",
+      "name": "ArtworkSurface",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkSurface.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["ArtworkSurface"],
+      "designTokens": true
+    },
+    {
+      "id": "artwork-placeholder",
+      "name": "ArtworkPlaceholder",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkPlaceholder.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["ArtworkPlaceholderKind", "ArtworkPlaceholder"],
+      "designTokens": true
+    },
+    {
+      "id": "artwork-crop-surface",
+      "name": "ArtworkCropSurface",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkCropSurface.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["ArtworkCropShape", "ArtworkCropTransform", "ArtworkCropSurface"],
+      "designTokens": true
+    },
+    {
+      "id": "artwork-mosaic",
+      "name": "ArtworkMosaic",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkMosaic.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["ArtworkMosaicLayout", "ArtworkMosaic"],
+      "designTokens": true
+    },
+    {
+      "id": "artwork-haze",
+      "name": "ArtworkHaze",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkHaze.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["ArtworkHaze"],
+      "designTokens": true
     }
   ]
 }

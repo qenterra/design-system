@@ -43,7 +43,7 @@ For Swift Package Manager, add `https://github.com/QenTerra/design-system` and s
 
 - `QenTerraDesignTokens` for typed foundations and SwiftUI adapters;
 - `QenTerraComponents` for the maintained primary-button, group-container, and interactive-row primitives.
-- `QenTerraMediaComponents` for reusable macOS media presentation; it has no iOS media API.
+- `QenTerraMediaComponents` for reusable macOS artwork states, placeholders, crop presentation, mosaics, and ready-palette haze; it performs no loading or mutation and has no iOS media API.
 
 ## Common commands
 

@@ -50,6 +50,15 @@ import SwiftUI
     #expect(GeneratedTokens.Component.panelLyricsLineGap.points == 12)
 }
 
+@Test func componentScalarsPreserveDimensionlessValuesOutsideOpacityRange() {
+    #expect(DesignComponentScalar(value: 1.28).value == 1.28)
+    #expect(DesignComponentScalar(value: -0.18).value == -0.18)
+    #expect(DesignComponentScalar(value: .nan).value == 0)
+    #expect(DesignComponentScalar(value: .infinity).value == 0)
+    #expect(GeneratedTokens.Component.panelArtworkHazeLightSaturation.value == 1.28)
+    #expect(GeneratedTokens.Component.panelArtworkHighlightOffsetYRatio.value == -0.18)
+}
+
 #if canImport(SwiftUI)
 @Test func systemPreferenceDoesNotFreezeAResolvedAppearance() {
     #expect(DesignAppearancePreference.system.preferredColorScheme == nil)

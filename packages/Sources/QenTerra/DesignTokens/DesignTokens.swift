@@ -96,6 +96,15 @@ public struct DesignComponentOpacity: Equatable, Sendable {
     }
 }
 
+/// A finite dimensionless coefficient, including signed offsets and saturation above one.
+public struct DesignComponentScalar: Equatable, Sendable {
+    public let value: Double
+
+    public init(value: Double) {
+        self.value = value.isFinite ? value : 0
+    }
+}
+
 public struct DesignProductMetrics: Equatable, Sendable {
     public let textStack: Double
     public let compactGap: Double

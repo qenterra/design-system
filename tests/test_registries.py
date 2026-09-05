@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 import sys
 import unittest
@@ -51,6 +52,11 @@ class RegistryContractTests(unittest.TestCase):
         self.assertEqual(len({item["id"] for item in components}), len(components))
 
         delivered = {
+            "artwork-crop-surface",
+            "artwork-haze",
+            "artwork-mosaic",
+            "artwork-placeholder",
+            "artwork-surface",
             "button",
             "content-state-view",
             "card",
@@ -143,6 +149,13 @@ class RegistryContractTests(unittest.TestCase):
                 "packages/Sources/QenTerra/Components/GroupContainer.swift",
                 "packages/Sources/QenTerra/Components/InteractiveRowSurface.swift",
                 "packages/Sources/QenTerra/Components/PrimaryButtonStyle.swift",
+                "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkCropSurface.swift",
+                "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkHaze.swift",
+                "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkMosaic.swift",
+                "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkPalette.swift",
+                "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkPlaceholder.swift",
+                "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkPresentationState.swift",
+                "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkSurface.swift",
             },
         )
         for relative in paths:
@@ -157,6 +170,8 @@ class RegistryContractTests(unittest.TestCase):
 
     def test_migration_components_are_planned_for_2_0_0_and_absent_from_v1_0_1(self) -> None:
         migration_ids = {
+            "artwork-crop-surface", "artwork-haze", "artwork-mosaic",
+            "artwork-placeholder", "artwork-surface",
             "card", "settings-section", "settings-row", "settings-toggle-row",
             "page-header", "page-scroll-view", "flow-layout", "resizable-split-view",
             "design-separator", "workspace-pane-header", "navigation-rail", "sort-menu",
@@ -177,6 +192,60 @@ class RegistryContractTests(unittest.TestCase):
         )
         tagged_ids = {item["id"] for item in tagged["components"]}
         self.assertTrue(migration_ids.isdisjoint(tagged_ids))
+
+    def test_artwork_family_is_closed_over_public_swift_delivery(self) -> None:
+        package = next(
+            item
+            for item in load("registry/packages.json")["packages"]
+            if item["id"] == "swift-components"
+        )
+        artwork_sources = {
+            "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkCropSurface.swift",
+            "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkHaze.swift",
+            "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkMosaic.swift",
+            "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkPalette.swift",
+            "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkPlaceholder.swift",
+            "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkPresentationState.swift",
+            "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkSurface.swift",
+        }
+        self.assertLessEqual(artwork_sources, set(package["publicPaths"]))
+        self.assertIn(
+            "packages/Tests/QenTerraMediaComponentsTests/ArtworkComponentTests.swift",
+            package["publicPaths"],
+        )
+        self.assertIn(
+            "packages/Tests/QenTerraMediaComponentsTests/ArtworkComponentTests.swift",
+            package["tests"],
+        )
+        self.assertIn("artwork-presentation", package["capabilities"])
+
+    def test_artwork_sources_enforce_the_presentation_only_boundary(self) -> None:
+        source_root = ROOT / "packages/Sources/QenTerra/MediaComponents/Artwork"
+        expected = {
+            "ArtworkCropSurface.swift",
+            "ArtworkHaze.swift",
+            "ArtworkMosaic.swift",
+            "ArtworkPalette.swift",
+            "ArtworkPlaceholder.swift",
+            "ArtworkPresentationState.swift",
+            "ArtworkSurface.swift",
+        }
+        self.assertEqual({path.name for path in source_root.glob("*.swift")}, expected)
+        forbidden_imports = {"ImageIO", "CoreImage"}
+        forbidden_symbols = {
+            "ArtworkAsset",
+            "ArtworkImageCache",
+            "CadenceAppModel",
+            "Data",
+            "Task",
+            "URL",
+        }
+        for path in source_root.glob("*.swift"):
+            source = path.read_text(encoding="utf-8")
+            imports = set(re.findall(r"^import\s+(\w+)", source, flags=re.MULTILINE))
+            symbols = set(re.findall(r"\b[A-Za-z_]\w*\b", source))
+            self.assertTrue(forbidden_imports.isdisjoint(imports), path.name)
+            self.assertTrue(forbidden_symbols.isdisjoint(symbols), path.name)
 
     def test_settings_toggle_category_agrees_across_component_registries(self) -> None:
         maintained = next(

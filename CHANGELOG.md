@@ -4,6 +4,10 @@ All notable maintained Design System changes are recorded here. Versions follow 
 
 ## [Unreleased]
 
+### Added
+
+- Planned the macOS `QenTerraMediaComponents` artwork family for `2.0.0`: ready-content states, semantic placeholders and borders, clamped crop presentation, zero-to-four-slot mosaics, and Reduced Transparency-aware ready-palette haze. Consumers retain decoding, cache, request, gesture, and mutation ownership; `VERSION` remains `1.0.1`.
+
 ### Changed
 
 - Raised the maintained Swift packages' minimum macOS version from 13 to 26 and moved macOS verification and package-release jobs to macOS 26. iOS remains at 16. This is a breaking change planned for `2.0.0`; macOS consumers must raise their deployment target or remain on a compatible immutable release. Existing releases and tags are unchanged.

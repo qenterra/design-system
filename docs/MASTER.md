@@ -407,6 +407,12 @@ Use a neutral extension tile when filename recognition is primary. Do not replac
 
 Artwork may lead a media row. Title is primary, creator is secondary, and codec/quality is compact metadata. Embedded links must not trigger playback or break multi-selection.
 
+### 6.7 Artwork presentation
+
+The macOS artwork family frames consumer-supplied ready content and exposes explicit `content`, `loading`, `placeholder`, and `error` presentation. Shared code owns the synthetic placeholder, semantic border, crop viewport and clamped transform, zero-to-four-slot mosaic geometry, and decorative palette haze. The consumer owns decoding, file and network access, cache and request identity, gestures, and save or cancel actions.
+
+Artwork labels retain the complete consumer title. Increased Contrast strengthens boundaries without changing geometry. Reduced Transparency removes the decorative haze and suppresses the translucent placeholder highlight. Decorative placeholder and haze layers do not intercept input or create separate accessibility elements.
+
 ## 7. Navigation
 
 Shared navigation defines states, icon treatment, label behavior, keyboard movement, focus, persistence, and responsive transformation. It does not define one universal shell.

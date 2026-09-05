@@ -25958,6 +25958,13 @@
         "packages/Sources/QenTerra/Components/GroupContainer.swift",
         "packages/Sources/QenTerra/Components/InteractiveRowSurface.swift",
         "packages/Sources/QenTerra/Components/PrimaryButtonStyle.swift",
+        "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkCropSurface.swift",
+        "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkHaze.swift",
+        "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkMosaic.swift",
+        "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkPalette.swift",
+        "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkPlaceholder.swift",
+        "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkPresentationState.swift",
+        "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkSurface.swift",
         "packages/Sources/QenTerra/MediaComponents/MediaComponents.swift",
         "packages/Sources/QenTerra/MediaComponents/Resources/MediaComponents.txt",
         "packages/Sources/QenTerra/DesignTokens/DesignTokens.swift",
@@ -26008,6 +26015,7 @@
         "packages/Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/settings-standard-light.png",
         "packages/Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/system-live-dark.png",
         "packages/Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/system-live-light.png",
+        "packages/Tests/QenTerraMediaComponentsTests/ArtworkComponentTests.swift",
         "packages/Tests/QenTerraMediaComponentsTests/MediaComponentModuleTests.swift"
       ],
       "tests": [
@@ -26015,6 +26023,7 @@
         "packages/Tests/QenTerraComponentsTests/ComponentTests.swift",
         "packages/Tests/QenTerraComponentSnapshotTests/SnapshotSupportTests.swift",
         "packages/Tests/QenTerraComponentSnapshotTests/CoreComponentSnapshots.swift",
+        "packages/Tests/QenTerraMediaComponentsTests/ArtworkComponentTests.swift",
         "packages/Tests/QenTerraMediaComponentsTests/MediaComponentModuleTests.swift"
       ],
       "capabilities": [
@@ -26041,7 +26050,8 @@
         "sort-menu",
         "rename-alert",
         "keycap",
-        "native-media-component-foundation"
+        "native-media-component-foundation",
+        "artwork-presentation"
       ]
     }
   ]

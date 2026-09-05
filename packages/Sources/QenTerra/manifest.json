@@ -418,6 +418,108 @@
       "sourcePath": "Sources/QenTerra/Components/About/AboutResourceRow.swift",
       "sha256": "b23aca943ffcd1fa0ccab2cfc4566483b798d9794a8554f21bc44d9744917f71",
       "bytes": 3296
+    },
+    {
+      "id": "artwork-palette",
+      "name": "ArtworkPalette",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkPalette"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Artwork/ArtworkPalette.swift",
+      "sha256": "b5dbcb352dec34a21e51c9e6627f6bcd8adaf6bbb69918381dd7d08f76ed4c75",
+      "bytes": 832
+    },
+    {
+      "id": "artwork-presentation-state",
+      "name": "ArtworkPresentationState",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkPresentationState"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Artwork/ArtworkPresentationState.swift",
+      "sha256": "e7fa8681b2a5a7f3e1528252a9b8763a7d5fb20ac29645e46f7d3b226bd889aa",
+      "bytes": 1225
+    },
+    {
+      "id": "artwork-surface",
+      "name": "ArtworkSurface",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkSurface"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Artwork/ArtworkSurface.swift",
+      "sha256": "951ab08360f3668c074f5440d07d387ad8b48e12e0d8038566e3b8120a18ce93",
+      "bytes": 2894
+    },
+    {
+      "id": "artwork-placeholder",
+      "name": "ArtworkPlaceholder",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkPlaceholderKind",
+        "ArtworkPlaceholder"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Artwork/ArtworkPlaceholder.swift",
+      "sha256": "d40a220f085bad74f92cd4227cdfb5b6c2e3e5dd4008338cb8ca1e5a21f1d82e",
+      "bytes": 5041
+    },
+    {
+      "id": "artwork-crop-surface",
+      "name": "ArtworkCropSurface",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkCropShape",
+        "ArtworkCropTransform",
+        "ArtworkCropSurface"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Artwork/ArtworkCropSurface.swift",
+      "sha256": "8e36c07642d73a9b87f700017b593976136f53737ff3388d0c35c7486ccfed41",
+      "bytes": 5106
+    },
+    {
+      "id": "artwork-mosaic",
+      "name": "ArtworkMosaic",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkMosaicLayout",
+        "ArtworkMosaic"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Artwork/ArtworkMosaic.swift",
+      "sha256": "02d6aec2f6d3a2fde96c3ddea5df6db72e749017b1ad79c20b1d9d4e6107d8a0",
+      "bytes": 4240
+    },
+    {
+      "id": "artwork-haze",
+      "name": "ArtworkHaze",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkHaze"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Artwork/ArtworkHaze.swift",
+      "sha256": "4e7dce1a0c6cb31792819b59d1d7c92336afa5cf2d919bb1dca2bc47920f98b5",
+      "bytes": 4410
     }
   ]
 }

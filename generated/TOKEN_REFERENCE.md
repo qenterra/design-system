@@ -320,8 +320,45 @@ Shared component metrics and mandatory state contracts.
 - `extensions.rawMetricExceptions.overlay.sheetReadableWidth`: `Readable sheet width is specific to this overlay contract.`
 - `extensions.rawMetricExceptions.panel.about.iconSide`: `About icon scale belongs to the about-page composition.`
 - `extensions.rawMetricExceptions.panel.about.readableWidth`: `About readable width belongs to the about-page composition.`
+- `extensions.rawMetricExceptions.panel.artwork.artistOffsetRatio`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.artistPaddingRatio`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.collectionPaddingRatio`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.cropBorderOpacity`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.cropMaximumScale`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.cropMinimumScale`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.cropPreviewSide`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeBackgroundFalloffRatio`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeBlurRadius`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeDarkBackgroundOpacity`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeDarkLeadingOpacity`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeDarkSaturation`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeDarkTrailingOpacity`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeFalloffRatio`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeLeadingEndRadius`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeLeadingStartRadius`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeLightBackgroundOpacity`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeLightLeadingOpacity`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeLightSaturation`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeLightTrailingOpacity`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeTrailingEndRadius`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeTrailingStartRadius`: `Preserves the reusable artwork presentation geometry and appearance contract.`
 - `extensions.rawMetricExceptions.panel.artwork.heroSide`: `Artwork hero size belongs to the media surface.`
+- `extensions.rawMetricExceptions.panel.artwork.highlightBlurRatio`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.highlightOffsetXRatio`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.highlightOffsetYRatio`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.highlightOpacity`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.highlightSizeRatio`: `Preserves the reusable artwork presentation geometry and appearance contract.`
 - `extensions.rawMetricExceptions.panel.artwork.minimumSide`: `Artwork minimum is a media presentation constraint.`
+- `extensions.rawMetricExceptions.panel.artwork.mosaicBorderOpacity`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.mosaicEmptySymbolSize`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.mosaicGap`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.scrimOpacity`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.surfaceCornerRadius`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.symbolMaximumSize`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.symbolMinimumSize`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.symbolOpacity`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.symbolSizeRatio`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.trackPaddingRatio`: `Preserves the reusable artwork presentation geometry and appearance contract.`
 - `extensions.rawMetricExceptions.panel.lyrics.followDurationMs`: `Lyric follow timing belongs to the lyrics presentation.`
 - `extensions.rawMetricExceptions.panel.lyrics.inactiveOpacity`: `Inactive lyric treatment belongs to the lyrics presentation.`
 - `extensions.rawMetricExceptions.panel.lyrics.lineGap`: `Lyric line rhythm belongs to the lyrics presentation.`
@@ -366,9 +403,46 @@ Shared component metrics and mandatory state contracts.
 - `overlay.sheetReadableWidth`: `640`
 - `panel.about.iconSide`: `96`
 - `panel.about.readableWidth`: `480`
+- `panel.artwork.artistOffsetRatio`: `0.013`
+- `panel.artwork.artistPaddingRatio`: `0.2`
+- `panel.artwork.collectionPaddingRatio`: `0.26`
 - `panel.artwork.cornerRadius`: `{radius.hero}`
+- `panel.artwork.cropBorderOpacity`: `0.32`
+- `panel.artwork.cropMaximumScale`: `4`
+- `panel.artwork.cropMinimumScale`: `1`
+- `panel.artwork.cropPreviewSide`: `340`
+- `panel.artwork.hazeBackgroundFalloffRatio`: `0.84`
+- `panel.artwork.hazeBlurRadius`: `44`
+- `panel.artwork.hazeDarkBackgroundOpacity`: `0.12`
+- `panel.artwork.hazeDarkLeadingOpacity`: `0.48`
+- `panel.artwork.hazeDarkSaturation`: `1.12`
+- `panel.artwork.hazeDarkTrailingOpacity`: `0.4`
+- `panel.artwork.hazeFalloffRatio`: `0.42`
+- `panel.artwork.hazeLeadingEndRadius`: `330`
+- `panel.artwork.hazeLeadingStartRadius`: `18`
+- `panel.artwork.hazeLightBackgroundOpacity`: `0.22`
+- `panel.artwork.hazeLightLeadingOpacity`: `0.62`
+- `panel.artwork.hazeLightSaturation`: `1.28`
+- `panel.artwork.hazeLightTrailingOpacity`: `0.54`
+- `panel.artwork.hazeTrailingEndRadius`: `310`
+- `panel.artwork.hazeTrailingStartRadius`: `12`
 - `panel.artwork.heroSide`: `320`
+- `panel.artwork.highlightBlurRatio`: `0.12`
+- `panel.artwork.highlightOffsetXRatio`: `0.2`
+- `panel.artwork.highlightOffsetYRatio`: `-0.18`
+- `panel.artwork.highlightOpacity`: `0.52`
+- `panel.artwork.highlightSizeRatio`: `0.72`
 - `panel.artwork.minimumSide`: `64`
+- `panel.artwork.mosaicBorderOpacity`: `0.14`
+- `panel.artwork.mosaicEmptySymbolSize`: `42`
+- `panel.artwork.mosaicGap`: `1`
+- `panel.artwork.scrimOpacity`: `0.42`
+- `panel.artwork.surfaceCornerRadius`: `8`
+- `panel.artwork.symbolMaximumSize`: `34`
+- `panel.artwork.symbolMinimumSize`: `10`
+- `panel.artwork.symbolOpacity`: `0.62`
+- `panel.artwork.symbolSizeRatio`: `0.18`
+- `panel.artwork.trackPaddingRatio`: `0.3`
 - `panel.gap`: `{space.4}`
 - `panel.lyrics.followDurationMs`: `320`
 - `panel.lyrics.inactiveOpacity`: `0.56`

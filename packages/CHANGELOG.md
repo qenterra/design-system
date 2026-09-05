@@ -4,6 +4,10 @@ All notable public package changes are recorded here. Versions follow Semantic V
 
 ## [Unreleased]
 
+### Added
+
+- Planned the macOS artwork presentation family for `2.0.0`, including ready-content states, placeholders, clamped crop geometry, zero-to-four-slot mosaics, and Reduced Transparency-aware ready-palette haze. The public package performs no loading, caching, gesture coordination, or mutation; its current version remains `1.0.1`.
+
 ### Changed
 
 - Raised the Swift package's minimum macOS version from 13 to 26 and moved macOS verification to macOS 26. iOS remains at 16. This is a breaking change planned for `2.0.0`; macOS consumers must raise their deployment target or remain on a compatible immutable release. Existing releases and tags are unchanged.

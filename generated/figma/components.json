@@ -2698,6 +2698,373 @@
           "swift-components"
         ]
       }
+    },
+    {
+      "id": "artwork-surface",
+      "name": {
+        "en": "Artwork surface",
+        "ru": "Поверхность обложки"
+      },
+      "summary": {
+        "en": "Frames consumer-supplied ready artwork and explicit loading, placeholder, or error presentation without performing media work.",
+        "ru": "Обрамляет готовую обложку от потребителя и явные состояния загрузки, заглушки или ошибки без работы с медиа."
+      },
+      "status": "stable",
+      "category": "layout",
+      "platforms": [
+        "macOS"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "major"
+      },
+      "anatomy": [
+        "ready-content-slot",
+        "placeholder",
+        "loading-indicator",
+        "semantic-border"
+      ],
+      "states": [
+        "content",
+        "loading",
+        "placeholder",
+        "error",
+        "increased-contrast",
+        "reduced-transparency"
+      ],
+      "stories": [
+        {
+          "id": "content",
+          "state": "content"
+        },
+        {
+          "id": "loading",
+          "state": "loading"
+        },
+        {
+          "id": "placeholder",
+          "state": "placeholder"
+        },
+        {
+          "id": "error",
+          "state": "error"
+        },
+        {
+          "id": "long-title",
+          "state": "content",
+          "localeWidth": "long"
+        },
+        {
+          "id": "increased-contrast",
+          "state": "increased-contrast"
+        },
+        {
+          "id": "reduced-transparency",
+          "state": "reduced-transparency"
+        }
+      ],
+      "keyboard": [
+        "presentation-only surface adds no action or focus target"
+      ],
+      "accessibility": [
+        "the-complete-consumer-title-is-the-label",
+        "loading-placeholder-and-error-remain-distinct-values"
+      ],
+      "localization": [
+        "consumer titles are not truncated in the accessibility label"
+      ],
+      "evidence": [
+        "schema",
+        "unit"
+      ],
+      "delivery": {
+        "status": "delivered",
+        "packages": [
+          "swift-components"
+        ]
+      }
+    },
+    {
+      "id": "artwork-placeholder",
+      "name": {
+        "en": "Artwork placeholder",
+        "ru": "Заглушка обложки"
+      },
+      "summary": {
+        "en": "Renders tokenized synthetic artwork or a recognizable media-kind symbol inside an accessible parent.",
+        "ru": "Отрисовывает токенизированную синтетическую обложку или узнаваемый символ типа медиа внутри доступного родителя."
+      },
+      "status": "stable",
+      "category": "feedback",
+      "platforms": [
+        "macOS"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "minor"
+      },
+      "anatomy": [
+        "semantic-surface",
+        "gradient-or-kind-symbol",
+        "optical-inset"
+      ],
+      "states": [
+        "artist",
+        "album",
+        "track",
+        "playlist",
+        "collection",
+        "synthetic",
+        "reduced-transparency",
+        "increased-contrast"
+      ],
+      "stories": [
+        {
+          "id": "artist",
+          "state": "artist"
+        },
+        {
+          "id": "collection",
+          "state": "collection"
+        },
+        {
+          "id": "synthetic",
+          "state": "synthetic"
+        },
+        {
+          "id": "reduced-transparency",
+          "state": "reduced-transparency"
+        }
+      ],
+      "keyboard": [
+        "decorative placeholder adds no action or focus target"
+      ],
+      "accessibility": [
+        "placeholder-is-hidden-because-the-parent-artwork-surface-supplies-the-label"
+      ],
+      "localization": [
+        "placeholder geometry is independent of visible copy"
+      ],
+      "evidence": [
+        "schema",
+        "unit"
+      ],
+      "delivery": {
+        "status": "delivered",
+        "packages": [
+          "swift-components"
+        ]
+      }
+    },
+    {
+      "id": "artwork-crop-surface",
+      "name": {
+        "en": "Artwork crop surface",
+        "ru": "Поверхность кадрирования обложки"
+      },
+      "summary": {
+        "en": "Presents a tokenized crop viewport and clamped transform while the consumer owns gestures and save or cancel actions.",
+        "ru": "Показывает токенизированное окно кадрирования и ограниченное преобразование, а жесты и действия сохранения или отмены остаются у потребителя."
+      },
+      "status": "stable",
+      "category": "layout",
+      "platforms": [
+        "macOS"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "major"
+      },
+      "anatomy": [
+        "ready-content-slot",
+        "circle-or-square-viewport",
+        "crop-border",
+        "clamped-transform"
+      ],
+      "states": [
+        "circle",
+        "square",
+        "minimum-zoom",
+        "maximum-zoom",
+        "clamped-offset"
+      ],
+      "stories": [
+        {
+          "id": "circle",
+          "state": "circle"
+        },
+        {
+          "id": "square",
+          "state": "square"
+        },
+        {
+          "id": "clamped-offset",
+          "state": "clamped-offset"
+        },
+        {
+          "id": "long-title",
+          "state": "square",
+          "localeWidth": "long"
+        }
+      ],
+      "keyboard": [
+        "consumer-owned controls and actions retain native keyboard behavior"
+      ],
+      "accessibility": [
+        "shape-and-complete-title-form-the-preview-label",
+        "consumer-attached-actions-remain-separate-controls"
+      ],
+      "localization": [
+        "the consumer supplies the artwork title and all action copy"
+      ],
+      "evidence": [
+        "schema",
+        "unit"
+      ],
+      "delivery": {
+        "status": "delivered",
+        "packages": [
+          "swift-components"
+        ]
+      }
+    },
+    {
+      "id": "artwork-mosaic",
+      "name": {
+        "en": "Artwork mosaic",
+        "ru": "Мозаика обложек"
+      },
+      "summary": {
+        "en": "Places zero to four ready artwork slots in the established one-, split-, trio-, or grid geometry.",
+        "ru": "Размещает от нуля до четырёх готовых обложек в заданной геометрии одного элемента, разделения, трио или сетки."
+      },
+      "status": "stable",
+      "category": "layout",
+      "platforms": [
+        "macOS"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "major"
+      },
+      "anatomy": [
+        "zero-to-four-content-slots",
+        "one-point-gutters",
+        "empty-symbol",
+        "shared-border"
+      ],
+      "states": [
+        "empty",
+        "single",
+        "split",
+        "trio",
+        "grid"
+      ],
+      "stories": [
+        {
+          "id": "empty",
+          "state": "empty"
+        },
+        {
+          "id": "single",
+          "state": "single"
+        },
+        {
+          "id": "split",
+          "state": "split"
+        },
+        {
+          "id": "trio",
+          "state": "trio"
+        },
+        {
+          "id": "grid",
+          "state": "grid"
+        }
+      ],
+      "keyboard": [
+        "presentation-only mosaic adds no action or focus target"
+      ],
+      "accessibility": [
+        "slot-children-are-combined-into-one-complete-mosaic-title"
+      ],
+      "localization": [
+        "consumer titles are not truncated in the accessibility label"
+      ],
+      "evidence": [
+        "schema",
+        "unit"
+      ],
+      "delivery": {
+        "status": "delivered",
+        "packages": [
+          "swift-components"
+        ]
+      }
+    },
+    {
+      "id": "artwork-haze",
+      "name": {
+        "en": "Artwork haze",
+        "ru": "Свечение обложки"
+      },
+      "summary": {
+        "en": "Composes a decorative haze from ready palette colors and removes it under Reduced Transparency.",
+        "ru": "Создаёт декоративное свечение из готовых цветов палитры и убирает его при включённом уменьшении прозрачности."
+      },
+      "status": "stable",
+      "category": "layout",
+      "platforms": [
+        "macOS"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "minor"
+      },
+      "anatomy": [
+        "leading-radial-layer",
+        "trailing-radial-layer",
+        "background-gradient",
+        "blur-and-blend"
+      ],
+      "states": [
+        "light",
+        "dark",
+        "reduced-transparency"
+      ],
+      "stories": [
+        {
+          "id": "light",
+          "state": "light"
+        },
+        {
+          "id": "dark",
+          "state": "dark"
+        },
+        {
+          "id": "reduced-transparency",
+          "state": "reduced-transparency"
+        }
+      ],
+      "keyboard": [
+        "decorative haze never intercepts input or creates a focus target"
+      ],
+      "accessibility": [
+        "all-haze-layers-are-hidden-from-assistive-technology"
+      ],
+      "localization": [
+        "decorative haze contains no copy"
+      ],
+      "evidence": [
+        "schema",
+        "unit"
+      ],
+      "delivery": {
+        "status": "delivered",
+        "packages": [
+          "swift-components"
+        ]
+      }
     }
   ]
 }

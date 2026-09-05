@@ -25,6 +25,19 @@ def load_generator():
 
 
 class GenerationContractTests(unittest.TestCase):
+    def test_artwork_ratio_and_saturation_generate_scalars_not_lengths_or_opacity(self) -> None:
+        generator = load_generator()
+        tokens, _, _ = generator.load_sources(ROOT)
+        components = copy.deepcopy(tokens["components"])
+        components["panel"]["artwork"]["highlightSizeRatio"] = 0.72
+        components["panel"]["artwork"]["hazeLightSaturation"] = 1.28
+        swift = generator.generate_swift(tokens["foundation"], tokens["semantic"], tokens["typography"], tokens["motion"], components)
+        css = generator.generate_css(tokens["foundation"], tokens["semantic"], tokens["typography"], tokens["motion"], components)
+        self.assertIn("panelArtworkHighlightSizeRatio = DesignComponentScalar(value: 0.72)", swift)
+        self.assertIn("panelArtworkHazeLightSaturation = DesignComponentScalar(value: 1.28)", swift)
+        self.assertIn("--design-system-component-panel-artwork-highlight-size-ratio: 0.72;", css)
+        self.assertIn("--design-system-component-panel-artwork-haze-light-saturation: 1.28;", css)
+
     def test_generated_outputs_are_current(self) -> None:
         generator = load_generator()
         outputs = generator.build_outputs(ROOT)
