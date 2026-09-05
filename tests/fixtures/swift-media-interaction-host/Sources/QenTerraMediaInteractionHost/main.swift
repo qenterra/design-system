@@ -5,6 +5,32 @@ import QenTerraDesignTokens
 import QenTerraMediaComponents
 import SwiftUI
 
+private struct HostConfiguration {
+    let pidPath: String?
+    let resultPath: String?
+    let shouldHangForCleanupTest: Bool
+
+    static func current(arguments: [String] = CommandLine.arguments) -> HostConfiguration {
+        func value(after option: String) -> String? {
+            guard let index = arguments.firstIndex(of: option), arguments.indices.contains(index + 1) else {
+                return nil
+            }
+            return arguments[index + 1]
+        }
+
+        return HostConfiguration(
+            pidPath: value(after: "--qenterra-pid-path"),
+            resultPath: value(after: "--qenterra-result-path"),
+            shouldHangForCleanupTest: arguments.contains("--qenterra-test-hang")
+        )
+    }
+}
+
+private func writeHostState(_ value: String, to path: String?) throws {
+    guard let path else { return }
+    try value.write(toFile: path, atomically: true, encoding: .utf8)
+}
+
 private enum HostFailure: Error, CustomStringConvertible {
     case assertion(String)
 
@@ -606,19 +632,55 @@ private func run() throws {
 }
 
 private final class ApplicationDelegate: NSObject, NSApplicationDelegate {
+    private let configuration: HostConfiguration
+    private var hangWindow: NSWindow?
+
+    init(configuration: HostConfiguration) {
+        self.configuration = configuration
+    }
+
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.activate()
+        if configuration.shouldHangForCleanupTest {
+            let window = NSWindow(
+                contentRect: NSRect(x: 0, y: 0, width: 240, height: 120),
+                styleMask: [.titled, .closable],
+                backing: .buffered,
+                defer: false
+            )
+            window.title = "Media cleanup regression host"
+            window.makeKeyAndOrderFront(nil)
+            hangWindow = window
+            try? writeHostState("HANG_READY\n", to: configuration.resultPath)
+
+            // A hard test-only watchdog prevents an infrastructure failure from
+            // leaving the deliberately hung regression host alive indefinitely.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                exit(86)
+            }
+            return
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             do {
                 try run()
+                try writeHostState("OK\n", to: self.configuration.resultPath)
                 print("MEDIA_INTERACTION_HOST_OK")
                 exit(0)
             } catch {
+                try? writeHostState("FAILURE: \(error)\n", to: self.configuration.resultPath)
                 print("MEDIA_INTERACTION_HOST_FAILURE: \(error)")
                 exit(1)
             }
         }
     }
+}
+
+private let hostConfiguration = HostConfiguration.current()
+do {
+    try writeHostState("\(ProcessInfo.processInfo.processIdentifier)\n", to: hostConfiguration.pidPath)
+} catch {
+    print("MEDIA_INTERACTION_HOST_FAILURE: could not record process identifier: \(error)")
+    exit(1)
 }
 
 let application = NSApplication.shared
@@ -628,6 +690,6 @@ if application.activationPolicy() != .regular {
         exit(1)
     }
 }
-private let applicationDelegate = ApplicationDelegate()
+private let applicationDelegate = ApplicationDelegate(configuration: hostConfiguration)
 application.delegate = applicationDelegate
 application.run()
