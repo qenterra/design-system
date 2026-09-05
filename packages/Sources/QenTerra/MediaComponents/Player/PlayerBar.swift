@@ -217,6 +217,7 @@ public struct PlayerBar<
                         width: PlayerBarLayoutMetrics.queueControlSize,
                         height: PlayerBarLayoutMetrics.queueControlSize
                     )
+                    .contentShape(Rectangle())
                     .background {
                         if presentation.isQueuePresented {
                             RoundedRectangle(

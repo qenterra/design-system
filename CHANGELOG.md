@@ -12,7 +12,7 @@ All notable maintained Design System changes are recorded here. Versions follow 
 
 ### Changed
 
-- Made optional shuffle, repeat, and favorite action availability explicit, added consumer-owned player metadata/status/route composition slots, and canonicalized the protected queue/progress geometry metrics for the planned `2.0.0` playback family.
+- Made optional shuffle, repeat, and favorite action availability explicit, added consumer-owned player metadata/status/route composition slots, canonicalized the protected queue/progress geometry metrics, and made the 34-point queue control fully hit-testable for the planned `2.0.0` playback family.
 - Raised the maintained Swift packages' minimum macOS version from 13 to 26 and moved macOS verification and package-release jobs to macOS 26. iOS remains at 16. This is a breaking change planned for `2.0.0`; macOS consumers must raise their deployment target or remain on a compatible immutable release. Existing releases and tags are unchanged.
 - Planned macOS feedback and configurable About components, including validated measured progress, consumer-owned recovery and URL handling, and explicit unavailable presentation. This is not a release and does not change `VERSION`.
 - Added deterministic native core-component snapshot tests to the root and public Swift packages, with reviewed per-platform references and strict dimension/color comparison.

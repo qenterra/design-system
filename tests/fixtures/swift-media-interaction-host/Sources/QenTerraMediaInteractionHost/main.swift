@@ -830,6 +830,26 @@ private func exercisePlayerControls() throws {
 
     do {
         let recorder = PlayerInteractionRecorder()
+        let harness = try NativeInteractionHarness(
+            rootView: fullPlayerBar(recorder: recorder),
+            size: CGSize(width: 1_240, height: 160)
+        )
+        defer { harness.close() }
+        let queueHitColumns = try discoverHorizontalActionHitColumns(
+            harness: harness,
+            recorder: recorder,
+            event: "queue",
+            xRange: 1_170 ... 1_230,
+            y: recorder.artworkFrame.midY
+        )
+        try require(
+            queueHitColumns == Array(1_186 ... 1_219),
+            "queue control did not expose the protected 34-point hit region: \(queueHitColumns)"
+        )
+    }
+
+    do {
+        let recorder = PlayerInteractionRecorder()
         let favorite = FavoritePresentation(
             isFavorite: false,
             isPending: false,
@@ -893,6 +913,27 @@ private func discoverActionFrames(
         }
     }
     return result
+}
+
+@MainActor
+private func discoverHorizontalActionHitColumns(
+    harness: NativeInteractionHarness,
+    recorder: PlayerInteractionRecorder,
+    event: String,
+    xRange: ClosedRange<Int>,
+    y: CGFloat
+) throws -> [Int] {
+    var hitColumns: [Int] = []
+    for x in xRange {
+        let before = recorder.count(event)
+        try harness.click(CGRect(x: CGFloat(x), y: y, width: 1, height: 1))
+        let after = recorder.count(event)
+        try require(after == before || after == before + 1, "one pointer click dispatched \(event) repeatedly")
+        if after == before + 1 {
+            hitColumns.append(x)
+        }
+    }
+    return hitColumns
 }
 
 private func require(_ condition: @autoclosure () -> Bool, _ message: String) throws {

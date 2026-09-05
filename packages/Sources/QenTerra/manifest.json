@@ -667,8 +667,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Player/PlayerBar.swift",
-      "sha256": "c17faee46d61dce4fc1c1158ac141bcd5dbd20e539d030d9633b969c261cb633",
-      "bytes": 11071
+      "sha256": "2b84547b0a38a206d834458ef547c77431d190c37c320c7ed64ff88e3ac0f3ea",
+      "bytes": 11118
     },
     {
       "id": "playback-progress-control",

@@ -90,8 +90,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "9a64117b021c546ae2d0bbd61e18df9ed33707b7d16b461b2c80baf9a4ce1b37",
-      "bytes": 4549
+      "sha256": "febca7434f93a21c6147b6f5547b1a9a2f3eab6237d78b400cddbf5f9b21a0d0",
+      "bytes": 4601
     },
     {
       "path": "CODE_OF_CONDUCT.md",
@@ -66460,8 +66460,8 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Player/PlayerBar.swift",
-      "sha256": "c17faee46d61dce4fc1c1158ac141bcd5dbd20e539d030d9633b969c261cb633",
-      "bytes": 11071
+      "sha256": "2b84547b0a38a206d834458ef547c77431d190c37c320c7ed64ff88e3ac0f3ea",
+      "bytes": 11118
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Player/PlayerBarActions.swift",
@@ -66505,7 +66505,7 @@
     },
     {
       "path": "Sources/QenTerra/manifest.json",
-      "sha256": "5db305da5eb97073cebe0b17f5a5111e38aed222ffedebd5bc628ed84e7bb284",
+      "sha256": "3bc2d63fae8ef9934389c3a17d3925d9f74dad97164cdff173b39f410583e72e",
       "bytes": 27704
     },
     {
@@ -129765,8 +129765,8 @@
     },
     {
       "path": "Tests/QenTerraMediaComponentsTests/PlayerAndLyricsTests.swift",
-      "sha256": "7815d17a26466b29e51b27a66d24323dc3c6183e864b25fc6e8a171b93b5fa49",
-      "bytes": 19459
+      "sha256": "ae1d4b427d27db592a9421d5dd4d873fb5643930fc68c49458d48eb82a65d50d",
+      "bytes": 25204
     },
     {
       "path": "docs/ARCHITECTURE.md",

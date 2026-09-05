@@ -271,16 +271,6 @@ import Testing
     )
 }
 
-@Test func queueAndProgressVisualMetricsMatchTheProtectedCadenceGeometry() {
-    #expect(QueueVisualMetrics.dragPreviewGap == 10)
-    #expect(QueueVisualMetrics.dragPreviewArtworkSide == 38)
-    #expect(QueueVisualMetrics.dragPreviewTextGap == 2)
-    #expect(QueueVisualMetrics.insertionOpacity == 0.9)
-    #expect(QueueVisualMetrics.insertionYOffset == -1)
-    #expect(PlayerBarLayoutMetrics.progressLabelWidth == 34)
-    #expect(PlayerBarLayoutMetrics.queueControlSize == 34)
-}
-
 @Test @MainActor func queueMetricBackedViewsExposeExactRenderedGeometry() throws {
     let recorder = QueueGeometryRecorder()
     let preview = QueueDragPreview(title: "Synthetic", subtitle: "Artist") {
@@ -335,6 +325,65 @@ import Testing
 
     #expect(visibleRows.count == 1)
     #expect(abs(maximumAlpha - literalMaximumAlpha) < 0.005)
+}
+
+@Test @MainActor func queueDragPreviewRendersProtectedArtworkAndTextGaps() throws {
+    let preview = try renderedBitmap(
+        QueueDragPreview(title: "████", subtitle: "████") { Color.red }
+            .foregroundStyle(.green),
+        width: 400,
+        height: 90
+    )
+    let greenPixels = matchingPixels(preview) { color in
+        color.greenComponent > color.redComponent * 1.35
+            && color.greenComponent > color.blueComponent * 1.35
+            && color.greenComponent > 0.25
+    }
+    let artworkPixels = matchingPixels(preview) { color in
+        color.redComponent > 0.75
+            && color.greenComponent < 0.25
+            && color.blueComponent < 0.25
+    }
+    let artworkBounds = pixelBounds(artworkPixels)
+    let textBounds = pixelBounds(greenPixels)
+    let textRows = contiguousRanges(greenPixels.map(\.y))
+    let titleRows = try #require(textRows.first)
+    let subtitleRows = try #require(textRows.dropFirst().first)
+
+    #expect(artworkBounds == CGRect(x: 10, y: 10, width: 38, height: 38))
+    #expect(textBounds == CGRect(x: 58, y: 16, width: 45, height: 27))
+    #expect(textBounds.minX - artworkBounds.maxX == 10)
+    #expect(textRows.count == 2)
+    #expect(titleRows == 16 ... 26)
+    #expect(subtitleRows == 33 ... 42)
+    // The two fonts contribute four pixels of ink leading; the remaining two
+    // pixels are the protected title/subtitle stack spacing.
+    #expect(subtitleRows.lowerBound - titleRows.upperBound - 1 == 6)
+}
+
+@Test @MainActor func progressLabelsAndPlayerQueueControlRenderProtectedWidths() throws {
+    let progress = PlaybackProgressPresentation(
+        progress: 1,
+        leadingText: "",
+        trailingText: "",
+        accessibilityLabel: "Playback progress",
+        isEnabled: true
+    )
+    let progressBitmap = try renderedBitmap(
+        PlaybackProgressControl(presentation: progress, seek: { _ in })
+            .tint(.red),
+        width: 240,
+        height: 40
+    )
+    let redPixels = matchingPixels(progressBitmap) { color in
+        color.redComponent > 0.6 && color.greenComponent < 0.4 && color.blueComponent < 0.4
+    }
+    #expect(pixelBounds(redPixels) == CGRect(x: 42, y: 5, width: 136, height: 6))
+
+    let queueShown = try renderedPlayerBarBitmap(isQueuePresented: true)
+    let queueHidden = try renderedPlayerBarBitmap(isQueuePresented: false)
+    let queueDifference = differingPixels(queueShown, queueHidden)
+    #expect(pixelBounds(queueDifference) == CGRect(x: 1_186, y: 27, width: 34, height: 34))
 }
 
 @Test func inactiveSynchronizedLyricsAreSubtleButReadable() {
@@ -568,5 +617,127 @@ private struct QueueGeometryReporter: View {
         case .preview: recorder.preview = frame
         }
     }
+}
+
+private struct PixelCoordinate: Hashable {
+    let x: Int
+    let y: Int
+}
+
+@MainActor
+private func renderedBitmap<Content: View>(
+    _ content: Content,
+    width: CGFloat,
+    height: CGFloat
+) throws -> NSBitmapImageRep {
+    let renderer = ImageRenderer(
+        content: content
+            .frame(width: width, height: height, alignment: .topLeading)
+            .environment(\.colorScheme, .light)
+    )
+    renderer.scale = 1
+    return NSBitmapImageRep(cgImage: try #require(renderer.cgImage))
+}
+
+private func matchingPixels(
+    _ bitmap: NSBitmapImageRep,
+    predicate: (NSColor) -> Bool
+) -> [PixelCoordinate] {
+    (0 ..< bitmap.pixelsHigh).flatMap { y in
+        (0 ..< bitmap.pixelsWide).compactMap { x in
+            guard let color = bitmap.colorAt(x: x, y: y), predicate(color) else { return nil }
+            return PixelCoordinate(x: x, y: y)
+        }
+    }
+}
+
+private func differingPixels(
+    _ lhs: NSBitmapImageRep,
+    _ rhs: NSBitmapImageRep
+) -> [PixelCoordinate] {
+    precondition(lhs.pixelsWide == rhs.pixelsWide && lhs.pixelsHigh == rhs.pixelsHigh)
+    return (0 ..< lhs.pixelsHigh).flatMap { y in
+        (0 ..< lhs.pixelsWide).compactMap { x in
+            guard let left = lhs.colorAt(x: x, y: y),
+                  let right = rhs.colorAt(x: x, y: y)
+            else { return nil }
+            let delta = max(
+                abs(left.redComponent - right.redComponent),
+                abs(left.greenComponent - right.greenComponent),
+                abs(left.blueComponent - right.blueComponent),
+                abs(left.alphaComponent - right.alphaComponent)
+            )
+            return delta > 0.04 ? PixelCoordinate(x: x, y: y) : nil
+        }
+    }
+}
+
+private func pixelBounds(_ pixels: [PixelCoordinate]) -> CGRect {
+    guard let first = pixels.first else { return .null }
+    let xs = pixels.map(\.x)
+    let ys = pixels.map(\.y)
+    return CGRect(
+        x: xs.min() ?? first.x,
+        y: ys.min() ?? first.y,
+        width: (xs.max() ?? first.x) - (xs.min() ?? first.x) + 1,
+        height: (ys.max() ?? first.y) - (ys.min() ?? first.y) + 1
+    )
+}
+
+private func contiguousRanges(_ values: [Int]) -> [ClosedRange<Int>] {
+    let sorted = Array(Set(values)).sorted()
+    guard let first = sorted.first else { return [] }
+    var ranges: [ClosedRange<Int>] = []
+    var lower = first
+    var upper = first
+    for value in sorted.dropFirst() {
+        if value == upper + 1 {
+            upper = value
+        } else {
+            ranges.append(lower ... upper)
+            lower = value
+            upper = value
+        }
+    }
+    ranges.append(lower ... upper)
+    return ranges
+}
+
+@MainActor
+private func renderedPlayerBarBitmap(isQueuePresented: Bool) throws -> NSBitmapImageRep {
+    let progress = PlaybackProgressPresentation(
+        progress: 0.5,
+        leadingText: "2:01",
+        trailingText: "4:02",
+        accessibilityLabel: "Playback progress",
+        isEnabled: true
+    )
+    let presentation = PlayerBarPresentation(
+        title: "Synthetic Track",
+        subtitle: "Synthetic Artist",
+        isPlaying: false,
+        isShuffleEnabled: false,
+        repeatMode: .off,
+        progress: progress,
+        volume: 0.5,
+        isMuted: false,
+        isQueuePresented: isQueuePresented,
+        favorite: nil
+    )
+    let actions = PlayerBarActions(
+        showNowPlaying: {},
+        togglePlayback: {},
+        previous: {},
+        next: {},
+        seek: { _ in },
+        setVolume: { _ in },
+        toggleMute: {},
+        showQueue: {}
+    )
+    return try renderedBitmap(
+        PlayerBar(presentation: presentation, actions: actions) { Color.blue },
+        width: 1_240,
+        height: 160
+    )
 }
 #endif
