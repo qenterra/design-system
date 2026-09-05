@@ -49,7 +49,30 @@ public struct ArtworkMosaicLayout: Equatable, Sendable {
     }
 }
 
+struct ArtworkMosaicBorderPresentation: Equatable {
+    let semanticColor: DesignColorValue?
+    let opacity: Double
+    let lineWidth: CGFloat
+
+    init(increasedContrast: Bool) {
+        if increasedContrast {
+            semanticColor = DesignTokens.Color.borderStrong
+            opacity = 1
+            lineWidth = DesignTokens.Stroke.emphasis
+        } else {
+            semanticColor = nil
+            opacity = DesignTokens.Component.panelArtworkMosaicBorderOpacity.value
+            lineWidth = DesignTokens.Stroke.hairline
+        }
+    }
+
+    func color(for appearance: DesignAppearance) -> Color {
+        semanticColor.map { Color(designToken: $0, appearance: appearance) } ?? .white
+    }
+}
+
 public struct ArtworkMosaic<SlotContent: View>: View {
+    @Environment(\.designNativeEnvironment) private var environment
     private let layout: ArtworkMosaicLayout
     private let title: String
     private let cornerRadius: CGFloat
@@ -68,6 +91,9 @@ public struct ArtworkMosaic<SlotContent: View>: View {
     }
 
     public var body: some View {
+        let border = ArtworkMosaicBorderPresentation(
+            increasedContrast: environment.isIncreasedContrast
+        )
         GeometryReader { geometry in
             let frames = layout.frames(in: CGRect(origin: .zero, size: geometry.size))
             ZStack(alignment: .topLeading) {
@@ -89,8 +115,8 @@ public struct ArtworkMosaic<SlotContent: View>: View {
         .overlay {
             RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
                 .strokeBorder(
-                    .white.opacity(DesignTokens.Component.panelArtworkMosaicBorderOpacity.value),
-                    lineWidth: DesignTokens.Stroke.hairline
+                    border.color(for: environment.appearance).opacity(border.opacity),
+                    lineWidth: border.lineWidth
                 )
         }
         .accessibilityElement(children: .ignore)

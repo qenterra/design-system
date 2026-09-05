@@ -56,7 +56,30 @@ public struct ArtworkCropTransform: Equatable, Sendable {
     }
 }
 
+struct ArtworkCropBorderPresentation: Equatable {
+    let semanticColor: DesignColorValue?
+    let opacity: Double
+    let lineWidth: CGFloat
+
+    init(increasedContrast: Bool) {
+        if increasedContrast {
+            semanticColor = DesignTokens.Color.borderStrong
+            opacity = 1
+            lineWidth = DesignTokens.Stroke.emphasis
+        } else {
+            semanticColor = nil
+            opacity = DesignTokens.Component.panelArtworkCropBorderOpacity.value
+            lineWidth = DesignTokens.Stroke.default
+        }
+    }
+
+    func color(for appearance: DesignAppearance) -> Color {
+        semanticColor.map { Color(designToken: $0, appearance: appearance) } ?? .white
+    }
+}
+
 public struct ArtworkCropSurface<Content: View>: View {
+    @Environment(\.designNativeEnvironment) private var environment
     private let transform: ArtworkCropTransform
     private let sourceSize: CGSize
     private let viewportSize: CGSize
@@ -113,14 +136,36 @@ public struct ArtworkCropSurface<Content: View>: View {
             }
             .clipShape(cropShape)
             .overlay {
-                cropShape.stroke(
-                    .white.opacity(DesignTokens.Component.panelArtworkCropBorderOpacity.value),
-                    lineWidth: DesignTokens.Stroke.default
-                )
+                cropBorder
             }
             .contentShape(cropShape)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("\(shape.accessibilityName) crop preview for \(title)")
+    }
+
+    @ViewBuilder
+    private var cropBorder: some View {
+        let presentation = ArtworkCropBorderPresentation(
+            increasedContrast: environment.isIncreasedContrast
+        )
+        let color = presentation.color(for: environment.appearance).opacity(presentation.opacity)
+        if presentation.semanticColor != nil {
+            switch shape {
+            case .circle:
+                Circle().strokeBorder(color, lineWidth: presentation.lineWidth)
+            case .square:
+                RoundedRectangle(
+                    cornerRadius: DesignTokens.Radius.group,
+                    style: .continuous
+                )
+                .strokeBorder(color, lineWidth: presentation.lineWidth)
+            }
+        } else {
+            shape.mask.stroke(
+                color,
+                lineWidth: presentation.lineWidth
+            )
+        }
     }
 }
 

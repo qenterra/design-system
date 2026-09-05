@@ -130,6 +130,29 @@ import Testing
     )
 }
 
+@Test func cropAndMosaicBordersPublishLiteralNormalAndIncreasedContrastTreatments() {
+    let normalCrop = ArtworkCropBorderPresentation(increasedContrast: false)
+    #expect(normalCrop.semanticColor == nil)
+    #expect(normalCrop.opacity == 0.32)
+    #expect(normalCrop.lineWidth == 1)
+
+    let normalMosaic = ArtworkMosaicBorderPresentation(increasedContrast: false)
+    #expect(normalMosaic.semanticColor == nil)
+    #expect(normalMosaic.opacity == 0.14)
+    #expect(normalMosaic.lineWidth == 0.5)
+
+    let increasedCrop = ArtworkCropBorderPresentation(increasedContrast: true)
+    let increasedMosaic = ArtworkMosaicBorderPresentation(increasedContrast: true)
+    #expect(increasedCrop.semanticColor?.value(for: .light) == "rgba(15, 15, 17, 0.22)")
+    #expect(increasedCrop.semanticColor?.value(for: .dark) == "rgba(255, 255, 255, 0.24)")
+    #expect(increasedCrop.opacity == 1)
+    #expect(increasedCrop.lineWidth == 2)
+    #expect(increasedMosaic.semanticColor?.value(for: .light) == "rgba(15, 15, 17, 0.22)")
+    #expect(increasedMosaic.semanticColor?.value(for: .dark) == "rgba(255, 255, 255, 0.24)")
+    #expect(increasedMosaic.opacity == 1)
+    #expect(increasedMosaic.lineWidth == 2)
+}
+
 @Test func hazeDropsAllLayersUnderReducedTransparencyAndNeverInterceptsInput() {
     let reduced = ArtworkHazePresentation(appearance: .dark, reducesTransparency: true)
     #expect(!reduced.isVisible)
@@ -173,6 +196,108 @@ import Testing
             .usingColorSpace(.deviceRGB)
     )
     #expect(color.alphaComponent == 0)
+}
+
+@Test @MainActor func cropBorderStrengthensUnderIncreasedContrastWithoutChangingContentGeometry() throws {
+    func render(
+        increasedContrast: Bool,
+        contentColor: Color
+    ) throws -> (edge: NSColor, inset: NSColor, interior: NSColor, center: NSColor, size: CGSize) {
+        let environment = DesignNativeEnvironment(
+            appearance: .light,
+            productProfile: .cadence,
+            density: .standard,
+            isIncreasedContrast: increasedContrast,
+            reducesMotion: false,
+            reducesTransparency: false
+        )
+        let renderer = ImageRenderer(
+            content: ArtworkCropSurface(
+                transform: ArtworkCropTransform(),
+                sourceSize: CGSize(width: 80, height: 80),
+                viewportSize: CGSize(width: 80, height: 80),
+                shape: .square,
+                title: "Contrast fixture"
+            ) {
+                contentColor
+            }
+            .environment(\.designNativeEnvironment, environment)
+            .frame(width: 80, height: 80)
+        )
+        renderer.scale = 2
+        let image = try #require(renderer.cgImage)
+        let bitmap = NSBitmapImageRep(cgImage: image)
+        return try (
+            #require(bitmap.colorAt(x: 0, y: 80)?.usingColorSpace(.deviceRGB)),
+            #require(bitmap.colorAt(x: 2, y: 80)?.usingColorSpace(.deviceRGB)),
+            #require(bitmap.colorAt(x: 4, y: 80)?.usingColorSpace(.deviceRGB)),
+            #require(bitmap.colorAt(x: 80, y: 80)?.usingColorSpace(.deviceRGB)),
+            CGSize(width: image.width, height: image.height)
+        )
+    }
+
+    let normal = try render(increasedContrast: false, contentColor: .white)
+    let increased = try render(increasedContrast: true, contentColor: .white)
+    let normalOnBlack = try render(increasedContrast: false, contentColor: .black)
+    #expect(normal.size == CGSize(width: 160, height: 160))
+    #expect(increased.size == normal.size)
+    #expect(normal.edge.redComponent > 0.98)
+    #expect((0.36 ... 0.43).contains(normalOnBlack.edge.redComponent))
+    #expect(normalOnBlack.inset.redComponent < 0.02)
+    #expect((0.80 ... 0.87).contains(increased.edge.redComponent))
+    #expect((0.80 ... 0.87).contains(increased.inset.redComponent))
+    #expect(increased.interior.redComponent > 0.98)
+    #expect(abs(increased.center.redComponent - normal.center.redComponent) < 0.001)
+}
+
+@Test @MainActor func mosaicBorderStrengthensUnderIncreasedContrastWithoutChangingContentGeometry() throws {
+    func render(
+        increasedContrast: Bool,
+        contentColor: Color
+    ) throws -> (edge: NSColor, inset: NSColor, interior: NSColor, center: NSColor, size: CGSize) {
+        let environment = DesignNativeEnvironment(
+            appearance: .light,
+            productProfile: .cadence,
+            density: .standard,
+            isIncreasedContrast: increasedContrast,
+            reducesMotion: false,
+            reducesTransparency: false
+        )
+        let renderer = ImageRenderer(
+            content: ArtworkMosaic(
+                slotCount: 1,
+                title: "Contrast fixture",
+                cornerRadius: 0
+            ) { _ in
+                contentColor
+            }
+            .environment(\.designNativeEnvironment, environment)
+            .frame(width: 80, height: 80)
+        )
+        renderer.scale = 2
+        let image = try #require(renderer.cgImage)
+        let bitmap = NSBitmapImageRep(cgImage: image)
+        return try (
+            #require(bitmap.colorAt(x: 0, y: 80)?.usingColorSpace(.deviceRGB)),
+            #require(bitmap.colorAt(x: 2, y: 80)?.usingColorSpace(.deviceRGB)),
+            #require(bitmap.colorAt(x: 4, y: 80)?.usingColorSpace(.deviceRGB)),
+            #require(bitmap.colorAt(x: 80, y: 80)?.usingColorSpace(.deviceRGB)),
+            CGSize(width: image.width, height: image.height)
+        )
+    }
+
+    let normal = try render(increasedContrast: false, contentColor: .white)
+    let increased = try render(increasedContrast: true, contentColor: .white)
+    let normalOnBlack = try render(increasedContrast: false, contentColor: .black)
+    #expect(normal.size == CGSize(width: 160, height: 160))
+    #expect(increased.size == normal.size)
+    #expect(normal.edge.redComponent > 0.98)
+    #expect((0.16 ... 0.22).contains(normalOnBlack.edge.redComponent))
+    #expect(normalOnBlack.inset.redComponent < 0.02)
+    #expect((0.80 ... 0.87).contains(increased.edge.redComponent))
+    #expect((0.80 ... 0.87).contains(increased.inset.redComponent))
+    #expect(increased.interior.redComponent > 0.98)
+    #expect(abs(increased.center.redComponent - normal.center.redComponent) < 0.001)
 }
 
 @Test @MainActor func surfaceRendersReadyContentOnlyInContentState() throws {

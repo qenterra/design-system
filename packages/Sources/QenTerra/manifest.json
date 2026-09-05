@@ -489,8 +489,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Artwork/ArtworkCropSurface.swift",
-      "sha256": "8e36c07642d73a9b87f700017b593976136f53737ff3388d0c35c7486ccfed41",
-      "bytes": 5106
+      "sha256": "b692468d174fa744967203ad67e6cfc537a547a12225c2542ffb0b489323d81a",
+      "bytes": 6578
     },
     {
       "id": "artwork-mosaic",
@@ -504,8 +504,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Artwork/ArtworkMosaic.swift",
-      "sha256": "02d6aec2f6d3a2fde96c3ddea5df6db72e749017b1ad79c20b1d9d4e6107d8a0",
-      "bytes": 4240
+      "sha256": "148b8039444ca2dd8732a5f8f0bcc9cd37ec7698f236a4cc66bcb16c21a44365",
+      "bytes": 5119
     },
     {
       "id": "artwork-haze",

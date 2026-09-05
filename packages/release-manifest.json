@@ -66345,8 +66345,8 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Artwork/ArtworkCropSurface.swift",
-      "sha256": "8e36c07642d73a9b87f700017b593976136f53737ff3388d0c35c7486ccfed41",
-      "bytes": 5106
+      "sha256": "b692468d174fa744967203ad67e6cfc537a547a12225c2542ffb0b489323d81a",
+      "bytes": 6578
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Artwork/ArtworkHaze.swift",
@@ -66355,8 +66355,8 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Artwork/ArtworkMosaic.swift",
-      "sha256": "02d6aec2f6d3a2fde96c3ddea5df6db72e749017b1ad79c20b1d9d4e6107d8a0",
-      "bytes": 4240
+      "sha256": "148b8039444ca2dd8732a5f8f0bcc9cd37ec7698f236a4cc66bcb16c21a44365",
+      "bytes": 5119
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Artwork/ArtworkPalette.swift",
@@ -66395,7 +66395,7 @@
     },
     {
       "path": "Sources/QenTerra/manifest.json",
-      "sha256": "25ddab6bfd4e4c1e1e694d15d3b7e229429909c61811e692ca9485f83e3bea82",
+      "sha256": "ec600c7890f0067cbf27eb0e80bdf5ed6f1376920c4c87a32d835f862b60319b",
       "bytes": 16964
     },
     {
@@ -129640,8 +129640,8 @@
     },
     {
       "path": "Tests/QenTerraMediaComponentsTests/ArtworkComponentTests.swift",
-      "sha256": "5860e515862bff92e0479af73bc6c624252c51527b3293f7301a2e689c76abd9",
-      "bytes": 9424
+      "sha256": "6945a3bf77dd0157612fe0bd173b8c3bfcf3a3be12d3da6f9d7a21db8d98ba9b",
+      "bytes": 15303
     },
     {
       "path": "Tests/QenTerraMediaComponentsTests/MediaComponentModuleTests.swift",

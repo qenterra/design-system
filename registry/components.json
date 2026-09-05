@@ -1827,12 +1827,13 @@
       "platforms": ["macOS"],
       "lifecycle": {"introduced": "2.0.0", "review": "major"},
       "anatomy": ["ready-content-slot", "circle-or-square-viewport", "crop-border", "clamped-transform"],
-      "states": ["circle", "square", "minimum-zoom", "maximum-zoom", "clamped-offset"],
+      "states": ["circle", "square", "minimum-zoom", "maximum-zoom", "clamped-offset", "increased-contrast"],
       "stories": [
         {"id": "circle", "state": "circle"},
         {"id": "square", "state": "square"},
         {"id": "clamped-offset", "state": "clamped-offset"},
-        {"id": "long-title", "state": "square", "localeWidth": "long"}
+        {"id": "long-title", "state": "square", "localeWidth": "long"},
+        {"id": "increased-contrast", "state": "increased-contrast"}
       ],
       "keyboard": ["consumer-owned controls and actions retain native keyboard behavior"],
       "accessibility": ["shape-and-complete-title-form-the-preview-label", "consumer-attached-actions-remain-separate-controls"],
@@ -1849,13 +1850,14 @@
       "platforms": ["macOS"],
       "lifecycle": {"introduced": "2.0.0", "review": "major"},
       "anatomy": ["zero-to-four-content-slots", "one-point-gutters", "empty-symbol", "shared-border"],
-      "states": ["empty", "single", "split", "trio", "grid"],
+      "states": ["empty", "single", "split", "trio", "grid", "increased-contrast"],
       "stories": [
         {"id": "empty", "state": "empty"},
         {"id": "single", "state": "single"},
         {"id": "split", "state": "split"},
         {"id": "trio", "state": "trio"},
-        {"id": "grid", "state": "grid"}
+        {"id": "grid", "state": "grid"},
+        {"id": "increased-contrast", "state": "increased-contrast"}
       ],
       "keyboard": ["presentation-only mosaic adds no action or focus target"],
       "accessibility": ["slot-children-are-combined-into-one-complete-mosaic-title"],

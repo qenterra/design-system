@@ -2886,7 +2886,8 @@
         "square",
         "minimum-zoom",
         "maximum-zoom",
-        "clamped-offset"
+        "clamped-offset",
+        "increased-contrast"
       ],
       "stories": [
         {
@@ -2905,6 +2906,10 @@
           "id": "long-title",
           "state": "square",
           "localeWidth": "long"
+        },
+        {
+          "id": "increased-contrast",
+          "state": "increased-contrast"
         }
       ],
       "keyboard": [
@@ -2958,7 +2963,8 @@
         "single",
         "split",
         "trio",
-        "grid"
+        "grid",
+        "increased-contrast"
       ],
       "stories": [
         {
@@ -2980,6 +2986,10 @@
         {
           "id": "grid",
           "state": "grid"
+        },
+        {
+          "id": "increased-contrast",
+          "state": "increased-contrast"
         }
       ],
       "keyboard": [
