@@ -52,6 +52,12 @@ class RegistryContractTests(unittest.TestCase):
         self.assertEqual(len({item["id"] for item in components}), len(components))
 
         delivered = {
+            "favorite-control",
+            "media-grid",
+            "media-row",
+            "media-shelf",
+            "media-tile",
+            "playback-indicator",
             "artwork-crop-surface",
             "artwork-haze",
             "artwork-mosaic",
@@ -156,6 +162,13 @@ class RegistryContractTests(unittest.TestCase):
                 "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkPlaceholder.swift",
                 "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkPresentationState.swift",
                 "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkSurface.swift",
+                "packages/Sources/QenTerra/MediaComponents/Collections/MediaGrid.swift",
+                "packages/Sources/QenTerra/MediaComponents/Collections/MediaItemPresentation.swift",
+                "packages/Sources/QenTerra/MediaComponents/Collections/MediaRow.swift",
+                "packages/Sources/QenTerra/MediaComponents/Collections/MediaShelf.swift",
+                "packages/Sources/QenTerra/MediaComponents/Collections/MediaTile.swift",
+                "packages/Sources/QenTerra/MediaComponents/Controls/FavoriteControl.swift",
+                "packages/Sources/QenTerra/MediaComponents/Controls/PlaybackIndicator.swift",
             },
         )
         for relative in paths:
@@ -170,6 +183,8 @@ class RegistryContractTests(unittest.TestCase):
 
     def test_migration_components_are_planned_for_2_0_0_and_absent_from_v1_0_1(self) -> None:
         migration_ids = {
+            "favorite-control", "media-grid", "media-row", "media-shelf",
+            "media-tile", "playback-indicator",
             "artwork-crop-surface", "artwork-haze", "artwork-mosaic",
             "artwork-placeholder", "artwork-surface",
             "card", "settings-section", "settings-row", "settings-toggle-row",
@@ -192,6 +207,42 @@ class RegistryContractTests(unittest.TestCase):
         )
         tagged_ids = {item["id"] for item in tagged["components"]}
         self.assertTrue(migration_ids.isdisjoint(tagged_ids))
+
+    def test_media_collection_family_is_closed_over_public_swift_delivery(self) -> None:
+        package = next(
+            item
+            for item in load("registry/packages.json")["packages"]
+            if item["id"] == "swift-components"
+        )
+        collection_sources = {
+            "packages/Sources/QenTerra/MediaComponents/Collections/MediaGrid.swift",
+            "packages/Sources/QenTerra/MediaComponents/Collections/MediaItemPresentation.swift",
+            "packages/Sources/QenTerra/MediaComponents/Collections/MediaRow.swift",
+            "packages/Sources/QenTerra/MediaComponents/Collections/MediaShelf.swift",
+            "packages/Sources/QenTerra/MediaComponents/Collections/MediaTile.swift",
+            "packages/Sources/QenTerra/MediaComponents/Controls/FavoriteControl.swift",
+            "packages/Sources/QenTerra/MediaComponents/Controls/PlaybackIndicator.swift",
+        }
+        self.assertTrue(collection_sources.issubset(set(package["publicPaths"])))
+        self.assertIn(
+            "packages/Tests/QenTerraMediaComponentsTests/MediaCollectionTests.swift",
+            package["tests"],
+        )
+        self.assertIn("media-collections", package["capabilities"])
+
+        maintained = load("registry/qenterra-components.json")["components"]
+        maintained_by_path = {item["sourcePath"]: item for item in maintained}
+        self.assertTrue(collection_sources.issubset(maintained_by_path))
+        for source in collection_sources:
+            self.assertEqual(
+                maintained_by_path[source]["deliveryProduct"],
+                "QenTerraMediaComponents",
+            )
+        manifest_paths = {
+            f"packages/{item['sourcePath']}"
+            for item in load("packages/Sources/QenTerra/manifest.json")["components"]
+        }
+        self.assertTrue(collection_sources.issubset(manifest_paths))
 
     def test_artwork_family_is_closed_over_public_swift_delivery(self) -> None:
         package = next(

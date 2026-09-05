@@ -120,6 +120,36 @@ class GenerationContractTests(unittest.TestCase):
         )
         self.assertIn("DesignComponentMetric(points: 12)", swift)
 
+    def test_media_collection_metrics_generate_with_explicit_units(self) -> None:
+        generator = load_generator()
+        outputs = generator.build_outputs(ROOT)
+        css = outputs["packages/npm/design-tokens/dist/tokens.css"]
+        swift = outputs["packages/Sources/QenTerra/DesignTokens/GeneratedTokens.swift"]
+        self.assertIn(
+            "--design-system-component-panel-media-collection-grid-minimum-width: 164px;",
+            css,
+        )
+        self.assertIn(
+            "--design-system-component-panel-media-collection-playback-indicator-static-first-scale: 0.48;",
+            css,
+        )
+        self.assertNotIn(
+            "--design-system-component-panel-media-collection-playback-indicator-static-first-scale: 0.48px;",
+            css,
+        )
+        self.assertIn(
+            "--design-system-component-panel-media-collection-playback-indicator-first-duration-ms: 1200ms;",
+            css,
+        )
+        self.assertIn(
+            "panelMediaCollectionPlaybackIndicatorStaticFirstScale = DesignComponentScalar(value: 0.48)",
+            swift,
+        )
+        self.assertIn(
+            "panelMediaCollectionPlaybackIndicatorFirstDurationMs = DesignComponentDuration(milliseconds: 1200)",
+            swift,
+        )
+
     def test_qenterra_component_manifest_is_generated_from_private_registry(self) -> None:
         generator = load_generator()
         outputs = generator.build_outputs(ROOT)

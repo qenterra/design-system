@@ -5,13 +5,13 @@
   "files": [
     {
       "path": "generated/TOKEN_REFERENCE.md",
-      "sha256": "7e08428d4b8b1ce3e4e36443d8c8e3eadfd7aa2226360426ad820e8b3e9f190d",
-      "bytes": 29736
+      "sha256": "2d5131f3e2f0bbf91431e5355ee963faabb55563161a5e611dee7f9e7ff1c665",
+      "bytes": 38772
     },
     {
       "path": "generated/figma/components.json",
-      "sha256": "6651385f98bb304cc898fb28bf8b658f2519a843587450e7a3de3c01507e8eff",
-      "bytes": 73012
+      "sha256": "d3ece689510fbd642aa76f0fbce87dfef7b291437a57d5727efdded5a786d0b2",
+      "bytes": 84308
     },
     {
       "path": "generated/figma/icons.json",
@@ -40,8 +40,8 @@
     },
     {
       "path": "packages/Sources/QenTerra/DesignTokens/GeneratedTokens.swift",
-      "sha256": "be3ba39a75d57b27be085b45b56b88da294dbef696e4bdbffdb3538da0473d8a",
-      "bytes": 21926
+      "sha256": "4444d098601fe743c1b4f9097012fb60fce3c478894f08551cd792ac70e5bee2",
+      "bytes": 26617
     },
     {
       "path": "packages/Sources/ReUI/Base/Components/accordion/c-accordion-1.tsx",
@@ -17755,13 +17755,13 @@
     },
     {
       "path": "packages/npm/design-tokens/dist/tokens.css",
-      "sha256": "bd6e0d89f9a5297735c3c0c0e7996b84505e2d2e2de2dfeeaec5692d770ab36c",
-      "bytes": 18491
+      "sha256": "abb132b270ec852e4c1e4f941f1e7168df6663072a87897b43196bbb122d6c7c",
+      "bytes": 22292
     },
     {
       "path": "packages/npm/design-tokens/dist/tokens.json",
-      "sha256": "763a25b8d0e7073560e29bcc4f25f2033cc00a23b5120a6d5ad16e5d9439868c",
-      "bytes": 30171
+      "sha256": "8f13b40215775177152c1d0051dbc4643c6b0a4148db10819d92945133404a41",
+      "bytes": 37561
     },
     {
       "path": "packages/npm/design-tokens/src/icons.json",
@@ -17780,8 +17780,8 @@
     },
     {
       "path": "packages/npm/design-tokens/src/tokens.json",
-      "sha256": "763a25b8d0e7073560e29bcc4f25f2033cc00a23b5120a6d5ad16e5d9439868c",
-      "bytes": 30171
+      "sha256": "8f13b40215775177152c1d0051dbc4643c6b0a4148db10819d92945133404a41",
+      "bytes": 37561
     },
     {
       "path": "registry/icons.json",
@@ -17790,8 +17790,8 @@
     },
     {
       "path": "tokens/components.json",
-      "sha256": "1a6c62cb9fae01bd83c213dd2651ea99b4468c816942c4986124826bf1d9798e",
-      "bytes": 11114
+      "sha256": "d81d2ae9782ff9ea1e024a1249725d238d2d6d9738b46a1017d845f2c1b0435e",
+      "bytes": 18336
     },
     {
       "path": "tokens/foundation.json",

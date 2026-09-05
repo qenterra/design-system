@@ -6,6 +6,7 @@ All notable maintained Design System changes are recorded here. Versions follow 
 
 ### Added
 
+- Planned the macOS reusable media-collection family for `2.0.0`: domain-neutral item presentation, tile/row/grid/shelf composition, favorite controls, and shared SwiftUI/AppKit playback indicators. Selection and current playback remain independent, embedded controls do not activate their row, Reduced Motion uses fixed bars, and consumers retain identity, data, playback, persistence, and accessibility-copy ownership; `VERSION` remains `1.0.1`.
 - Planned the macOS `QenTerraMediaComponents` artwork family for `2.0.0`: ready-content states, semantic placeholders and borders, clamped crop presentation, zero-to-four-slot mosaics, and Reduced Transparency-aware ready-palette haze. Consumers retain decoding, cache, request, gesture, and mutation ownership; `VERSION` remains `1.0.1`.
 
 ### Changed

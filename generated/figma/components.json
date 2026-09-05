@@ -3075,6 +3075,422 @@
           "swift-components"
         ]
       }
+    },
+    {
+      "id": "media-tile",
+      "name": {
+        "en": "Media tile",
+        "ru": "Медиаплитка"
+      },
+      "summary": {
+        "en": "Presents consumer-supplied artwork and media text with separate primary activation and embedded-control hit regions.",
+        "ru": "Показывает переданные потребителем обложку и текст с раздельными областями основной активации и встроенных элементов управления."
+      },
+      "status": "stable",
+      "category": "layout",
+      "platforms": [
+        "macOS"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "major"
+      },
+      "anatomy": [
+        "ready-artwork-slot",
+        "title",
+        "subtitle",
+        "optional-metadata",
+        "trailing-accessory-slot"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focused",
+        "selected",
+        "current",
+        "playing",
+        "unavailable"
+      ],
+      "stories": [
+        {
+          "id": "default",
+          "state": "default"
+        },
+        {
+          "id": "selected",
+          "state": "selected"
+        },
+        {
+          "id": "current-playing",
+          "state": "playing"
+        },
+        {
+          "id": "long-copy",
+          "state": "default",
+          "localeWidth": "long"
+        }
+      ],
+      "keyboard": [
+        "the primary native button activates the item; embedded controls retain independent activation"
+      ],
+      "accessibility": [
+        "consumer-supplied primary label and value remain separate from embedded control labels",
+        "selected and current are independent states"
+      ],
+      "localization": [
+        "title, subtitle, metadata, accessibility label, and accessibility value are consumer-supplied"
+      ],
+      "evidence": [
+        "schema",
+        "unit"
+      ],
+      "delivery": {
+        "status": "delivered",
+        "packages": [
+          "swift-components"
+        ]
+      }
+    },
+    {
+      "id": "media-row",
+      "name": {
+        "en": "Media row",
+        "ru": "Медиастрока"
+      },
+      "summary": {
+        "en": "Composes ready artwork, media metadata, primary activation, and independent trailing controls without owning selection coordination.",
+        "ru": "Компонует готовую обложку, метаданные, основную активацию и независимые конечные элементы управления, не владея координацией выбора."
+      },
+      "status": "stable",
+      "category": "layout",
+      "platforms": [
+        "macOS"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "major"
+      },
+      "anatomy": [
+        "ready-artwork-slot",
+        "title",
+        "subtitle",
+        "optional-metadata",
+        "trailing-accessory-slot"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focused",
+        "selected",
+        "current",
+        "playing",
+        "unavailable"
+      ],
+      "stories": [
+        {
+          "id": "default",
+          "state": "default"
+        },
+        {
+          "id": "selected",
+          "state": "selected"
+        },
+        {
+          "id": "current-playing",
+          "state": "playing"
+        },
+        {
+          "id": "unavailable",
+          "state": "unavailable"
+        }
+      ],
+      "keyboard": [
+        "the primary native button supports keyboard activation; embedded controls are separate focus targets"
+      ],
+      "accessibility": [
+        "consumer-supplied primary label and value remain separate from embedded control labels",
+        "selected and current are independent states"
+      ],
+      "localization": [
+        "title, subtitle, metadata, accessibility label, and accessibility value are consumer-supplied"
+      ],
+      "evidence": [
+        "schema",
+        "unit"
+      ],
+      "delivery": {
+        "status": "delivered",
+        "packages": [
+          "swift-components"
+        ]
+      }
+    },
+    {
+      "id": "media-grid",
+      "name": {
+        "en": "Media grid",
+        "ru": "Медиасетка"
+      },
+      "summary": {
+        "en": "Lays out ready media content with the Cadence adaptive card range or explicit finite consumer overrides.",
+        "ru": "Размещает готовое медиасодержимое по адаптивному диапазону карточек Cadence или явным конечным переопределениям потребителя."
+      },
+      "status": "stable",
+      "category": "layout",
+      "platforms": [
+        "macOS"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "minor"
+      },
+      "anatomy": [
+        "adaptive-columns",
+        "minimum-width",
+        "maximum-width",
+        "inter-item-spacing"
+      ],
+      "states": [
+        "cadence-profile",
+        "consumer-override",
+        "constrained-width"
+      ],
+      "stories": [
+        {
+          "id": "cadence-profile",
+          "state": "cadence-profile"
+        },
+        {
+          "id": "consumer-override",
+          "state": "consumer-override"
+        },
+        {
+          "id": "constrained",
+          "state": "constrained-width"
+        }
+      ],
+      "keyboard": [
+        "grid layout adds no focus target or selection coordination"
+      ],
+      "accessibility": [
+        "content preserves its own reading order and semantics"
+      ],
+      "localization": [
+        "layout contains no built-in copy"
+      ],
+      "evidence": [
+        "schema",
+        "unit"
+      ],
+      "delivery": {
+        "status": "delivered",
+        "packages": [
+          "swift-components"
+        ]
+      }
+    },
+    {
+      "id": "media-shelf",
+      "name": {
+        "en": "Media shelf",
+        "ru": "Медиаполка"
+      },
+      "summary": {
+        "en": "Composes consumer-supplied section chrome and ready content without loading, fetching, or pagination ownership.",
+        "ru": "Компонует переданное потребителем оформление раздела и готовое содержимое без владения загрузкой, получением данных или пагинацией."
+      },
+      "status": "stable",
+      "category": "layout",
+      "platforms": [
+        "macOS"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "minor"
+      },
+      "anatomy": [
+        "title",
+        "optional-subtitle",
+        "optional-action",
+        "ready-content-slot"
+      ],
+      "states": [
+        "title-only",
+        "subtitle",
+        "action",
+        "long-copy"
+      ],
+      "stories": [
+        {
+          "id": "title-only",
+          "state": "title-only"
+        },
+        {
+          "id": "with-action",
+          "state": "action"
+        },
+        {
+          "id": "long-copy",
+          "state": "long-copy",
+          "localeWidth": "long"
+        }
+      ],
+      "keyboard": [
+        "optional action uses native button activation"
+      ],
+      "accessibility": [
+        "header copy and optional action remain independent accessible elements"
+      ],
+      "localization": [
+        "all visible header and action copy is consumer-supplied"
+      ],
+      "evidence": [
+        "schema",
+        "unit"
+      ],
+      "delivery": {
+        "status": "delivered",
+        "packages": [
+          "swift-components"
+        ]
+      }
+    },
+    {
+      "id": "favorite-control",
+      "name": {
+        "en": "Favorite control",
+        "ru": "Элемент избранного"
+      },
+      "summary": {
+        "en": "Renders explicit favorite and pending presentation while the consumer owns persistence and reconciliation.",
+        "ru": "Отрисовывает явное представление избранного и ожидания, пока потребитель владеет сохранением и согласованием состояния."
+      },
+      "status": "stable",
+      "category": "control",
+      "platforms": [
+        "macOS"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "major"
+      },
+      "anatomy": [
+        "heart-symbol",
+        "pointer-target",
+        "consumer-action"
+      ],
+      "states": [
+        "not-favorite",
+        "favorite",
+        "hidden",
+        "hover-revealed",
+        "focus-revealed",
+        "pending"
+      ],
+      "stories": [
+        {
+          "id": "not-favorite",
+          "state": "not-favorite"
+        },
+        {
+          "id": "favorite",
+          "state": "favorite"
+        },
+        {
+          "id": "focus-revealed",
+          "state": "focus-revealed"
+        },
+        {
+          "id": "pending",
+          "state": "pending"
+        }
+      ],
+      "keyboard": [
+        "native button remains independently focusable and activates only its consumer closure"
+      ],
+      "accessibility": [
+        "label and value are required consumer inputs",
+        "hidden visual state remains available to assistive technology"
+      ],
+      "localization": [
+        "the consumer supplies label, value, and surrounding item copy"
+      ],
+      "evidence": [
+        "schema",
+        "unit"
+      ],
+      "delivery": {
+        "status": "delivered",
+        "packages": [
+          "swift-components"
+        ]
+      }
+    },
+    {
+      "id": "playback-indicator",
+      "name": {
+        "en": "Playback indicator",
+        "ru": "Индикатор воспроизведения"
+      },
+      "summary": {
+        "en": "Shares one three-bar state and geometry contract across SwiftUI and AppKit without owning playback.",
+        "ru": "Использует единый контракт состояния и геометрии трёх полос для SwiftUI и AppKit, не владея воспроизведением."
+      },
+      "status": "stable",
+      "category": "feedback",
+      "platforms": [
+        "macOS"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "major"
+      },
+      "anatomy": [
+        "three-bars",
+        "shared-geometry",
+        "swiftui-renderer",
+        "appkit-renderer"
+      ],
+      "states": [
+        "idle",
+        "playing",
+        "reduced-motion",
+        "reuse",
+        "removed"
+      ],
+      "stories": [
+        {
+          "id": "playing",
+          "state": "playing"
+        },
+        {
+          "id": "reduced-motion",
+          "state": "reduced-motion"
+        },
+        {
+          "id": "idle",
+          "state": "idle"
+        }
+      ],
+      "keyboard": [
+        "decorative indicator adds no action or focus target"
+      ],
+      "accessibility": [
+        "indicator is decorative; the consumer supplies playback label and value on the owning control or row"
+      ],
+      "localization": [
+        "indicator contains no built-in copy"
+      ],
+      "evidence": [
+        "schema",
+        "unit"
+      ],
+      "delivery": {
+        "status": "delivered",
+        "packages": [
+          "swift-components"
+        ]
+      }
     }
   ]
 }

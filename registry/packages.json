@@ -25965,6 +25965,13 @@
         "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkPlaceholder.swift",
         "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkPresentationState.swift",
         "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkSurface.swift",
+        "packages/Sources/QenTerra/MediaComponents/Collections/MediaGrid.swift",
+        "packages/Sources/QenTerra/MediaComponents/Collections/MediaItemPresentation.swift",
+        "packages/Sources/QenTerra/MediaComponents/Collections/MediaRow.swift",
+        "packages/Sources/QenTerra/MediaComponents/Collections/MediaShelf.swift",
+        "packages/Sources/QenTerra/MediaComponents/Collections/MediaTile.swift",
+        "packages/Sources/QenTerra/MediaComponents/Controls/FavoriteControl.swift",
+        "packages/Sources/QenTerra/MediaComponents/Controls/PlaybackIndicator.swift",
         "packages/Sources/QenTerra/MediaComponents/MediaComponents.swift",
         "packages/Sources/QenTerra/MediaComponents/Resources/MediaComponents.txt",
         "packages/Sources/QenTerra/DesignTokens/DesignTokens.swift",
@@ -26016,6 +26023,7 @@
         "packages/Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/system-live-dark.png",
         "packages/Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/system-live-light.png",
         "packages/Tests/QenTerraMediaComponentsTests/ArtworkComponentTests.swift",
+        "packages/Tests/QenTerraMediaComponentsTests/MediaCollectionTests.swift",
         "packages/Tests/QenTerraMediaComponentsTests/MediaComponentModuleTests.swift"
       ],
       "tests": [
@@ -26024,6 +26032,7 @@
         "packages/Tests/QenTerraComponentSnapshotTests/SnapshotSupportTests.swift",
         "packages/Tests/QenTerraComponentSnapshotTests/CoreComponentSnapshots.swift",
         "packages/Tests/QenTerraMediaComponentsTests/ArtworkComponentTests.swift",
+        "packages/Tests/QenTerraMediaComponentsTests/MediaCollectionTests.swift",
         "packages/Tests/QenTerraMediaComponentsTests/MediaComponentModuleTests.swift"
       ],
       "capabilities": [
@@ -26051,7 +26060,8 @@
         "rename-alert",
         "keycap",
         "native-media-component-foundation",
-        "artwork-presentation"
+        "artwork-presentation",
+        "media-collections"
       ]
     }
   ]

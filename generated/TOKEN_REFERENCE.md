@@ -362,6 +362,47 @@ Shared component metrics and mandatory state contracts.
 - `extensions.rawMetricExceptions.panel.lyrics.followDurationMs`: `Lyric follow timing belongs to the lyrics presentation.`
 - `extensions.rawMetricExceptions.panel.lyrics.inactiveOpacity`: `Inactive lyric treatment belongs to the lyrics presentation.`
 - `extensions.rawMetricExceptions.panel.lyrics.lineGap`: `Lyric line rhythm belongs to the lyrics presentation.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.favoriteCompactControlSize`: `Compact favourite hit-region geometry belongs to media tiles.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.favoriteControlSize`: `Favourite hit-region geometry belongs to its shared control.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.gridMaximumWidth`: `Preserves the Cadence adaptive media-card profile while allowing explicit consumer overrides.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.gridMinimumWidth`: `Preserves the Cadence adaptive media-card profile while allowing explicit consumer overrides.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorBarWidth`: `Playback-indicator bar geometry belongs to the shared SwiftUI and AppKit renderers.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorCornerRadius`: `Playback-indicator bar geometry belongs to the shared SwiftUI and AppKit renderers.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorFirstDurationMs`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorFirstPatternFifthScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorFirstPatternFirstScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorFirstPatternFourthScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorFirstPatternSecondScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorFirstPatternThirdScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorFourthKeyTimeRatio`: `Playback-indicator keyframe timing belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorGap`: `Playback-indicator bar geometry belongs to the shared SwiftUI and AppKit renderers.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorMaximumHeight`: `Playback-indicator bar geometry belongs to the shared SwiftUI and AppKit renderers.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorScrimOpacity`: `Current-item playback chrome uses the established artwork scrim.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorSecondDurationMs`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorSecondKeyTimeRatio`: `Playback-indicator keyframe timing belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorSecondPatternFifthScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorSecondPatternFirstScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorSecondPatternFourthScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorSecondPatternSecondScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorSecondPatternThirdScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorStaggerMs`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorStaticFirstScale`: `Reduced Motion uses the exact shared static bar shape.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorStaticSecondScale`: `Reduced Motion uses the exact shared static bar shape.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorStaticThirdScale`: `Reduced Motion uses the exact shared static bar shape.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorThirdDurationMs`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorThirdKeyTimeRatio`: `Playback-indicator keyframe timing belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorThirdPatternFifthScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorThirdPatternFirstScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorThirdPatternFourthScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorThirdPatternSecondScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorThirdPatternThirdScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorVerticalInset`: `Playback-indicator bar geometry belongs to the shared SwiftUI and AppKit renderers.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.pressedOpacity`: `Pressed feedback opacity belongs to reusable media activation.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.rowArtworkSide`: `Media-row artwork size belongs to the reusable collection presentation.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.rowGap`: `Media-row content spacing belongs to the reusable collection presentation.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.rowHeight`: `Media-row height belongs to the reusable collection presentation.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.tilePadding`: `Media-card content padding belongs to the reusable tile presentation.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.tileTextGap`: `Media-card title rhythm belongs to the reusable tile presentation.`
 - `extensions.rawMetricExceptions.panel.player.minimumHeight`: `Player chrome height belongs to the player presentation.`
 - `extensions.rawMetricExceptions.panel.player.panelPickerWidth`: `Panel picker width belongs to the player shell.`
 - `extensions.rawMetricExceptions.panel.player.progressHeight`: `Progress thickness belongs to the player control.`
@@ -447,6 +488,47 @@ Shared component metrics and mandatory state contracts.
 - `panel.lyrics.followDurationMs`: `320`
 - `panel.lyrics.inactiveOpacity`: `0.56`
 - `panel.lyrics.lineGap`: `12`
+- `panel.mediaCollection.favoriteCompactControlSize`: `22`
+- `panel.mediaCollection.favoriteControlSize`: `30`
+- `panel.mediaCollection.gridMaximumWidth`: `196`
+- `panel.mediaCollection.gridMinimumWidth`: `164`
+- `panel.mediaCollection.playbackIndicatorBarWidth`: `3`
+- `panel.mediaCollection.playbackIndicatorCornerRadius`: `1.5`
+- `panel.mediaCollection.playbackIndicatorFirstDurationMs`: `1200`
+- `panel.mediaCollection.playbackIndicatorFirstPatternFifthScale`: `0.32`
+- `panel.mediaCollection.playbackIndicatorFirstPatternFirstScale`: `0.32`
+- `panel.mediaCollection.playbackIndicatorFirstPatternFourthScale`: `0.76`
+- `panel.mediaCollection.playbackIndicatorFirstPatternSecondScale`: `0.94`
+- `panel.mediaCollection.playbackIndicatorFirstPatternThirdScale`: `0.54`
+- `panel.mediaCollection.playbackIndicatorFourthKeyTimeRatio`: `0.76`
+- `panel.mediaCollection.playbackIndicatorGap`: `2.5`
+- `panel.mediaCollection.playbackIndicatorMaximumHeight`: `17`
+- `panel.mediaCollection.playbackIndicatorScrimOpacity`: `0.34`
+- `panel.mediaCollection.playbackIndicatorSecondDurationMs`: `1380`
+- `panel.mediaCollection.playbackIndicatorSecondKeyTimeRatio`: `0.24`
+- `panel.mediaCollection.playbackIndicatorSecondPatternFifthScale`: `0.72`
+- `panel.mediaCollection.playbackIndicatorSecondPatternFirstScale`: `0.72`
+- `panel.mediaCollection.playbackIndicatorSecondPatternFourthScale`: `0.58`
+- `panel.mediaCollection.playbackIndicatorSecondPatternSecondScale`: `0.38`
+- `panel.mediaCollection.playbackIndicatorSecondPatternThirdScale`: `1`
+- `panel.mediaCollection.playbackIndicatorStaggerMs`: `100`
+- `panel.mediaCollection.playbackIndicatorStaticFirstScale`: `0.48`
+- `panel.mediaCollection.playbackIndicatorStaticSecondScale`: `0.82`
+- `panel.mediaCollection.playbackIndicatorStaticThirdScale`: `0.62`
+- `panel.mediaCollection.playbackIndicatorThirdDurationMs`: `1280`
+- `panel.mediaCollection.playbackIndicatorThirdKeyTimeRatio`: `0.5`
+- `panel.mediaCollection.playbackIndicatorThirdPatternFifthScale`: `0.46`
+- `panel.mediaCollection.playbackIndicatorThirdPatternFirstScale`: `0.46`
+- `panel.mediaCollection.playbackIndicatorThirdPatternFourthScale`: `0.96`
+- `panel.mediaCollection.playbackIndicatorThirdPatternSecondScale`: `0.82`
+- `panel.mediaCollection.playbackIndicatorThirdPatternThirdScale`: `0.34`
+- `panel.mediaCollection.playbackIndicatorVerticalInset`: `14`
+- `panel.mediaCollection.pressedOpacity`: `0.72`
+- `panel.mediaCollection.rowArtworkSide`: `40`
+- `panel.mediaCollection.rowGap`: `8`
+- `panel.mediaCollection.rowHeight`: `48`
+- `panel.mediaCollection.tilePadding`: `8`
+- `panel.mediaCollection.tileTextGap`: `4`
 - `panel.padding`: `{space.5}`
 - `panel.player.minimumHeight`: `88`
 - `panel.player.panelPickerWidth`: `184`

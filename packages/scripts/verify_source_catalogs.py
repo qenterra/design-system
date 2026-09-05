@@ -902,6 +902,8 @@ def validate_catalogs(root: Path = ROOT) -> list[str]:
         (
             "Sources/QenTerra/Components/",
             "Sources/QenTerra/MediaComponents/Artwork/",
+            "Sources/QenTerra/MediaComponents/Collections/",
+            "Sources/QenTerra/MediaComponents/Controls/",
         ),
     )
     shadcn_manifest = root / "Sources/ShadcnUI/manifest.json"

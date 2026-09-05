@@ -59,6 +59,14 @@ import SwiftUI
     #expect(GeneratedTokens.Component.panelArtworkHighlightOffsetYRatio.value == -0.18)
 }
 
+@Test func mediaCollectionTokensKeepGeometryMotionAndStaticScaleUnitsDistinct() {
+    #expect(GeneratedTokens.Component.panelMediaCollectionGridMinimumWidth.points == 164)
+    #expect(GeneratedTokens.Component.panelMediaCollectionPlaybackIndicatorBarWidth.points == 3)
+    #expect(GeneratedTokens.Component.panelMediaCollectionPlaybackIndicatorStaticFirstScale.value == 0.48)
+    #expect(GeneratedTokens.Component.panelMediaCollectionPlaybackIndicatorFirstDurationMs.milliseconds == 1200)
+    #expect(GeneratedTokens.Component.panelMediaCollectionPlaybackIndicatorScrimOpacity.value == 0.34)
+}
+
 #if canImport(SwiftUI)
 @Test func systemPreferenceDoesNotFreezeAResolvedAppearance() {
     #expect(DesignAppearancePreference.system.preferredColorScheme == nil)

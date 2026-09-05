@@ -345,6 +345,76 @@
       "deliveryProduct": "QenTerraMediaComponents",
       "publicSymbols": ["ArtworkHaze"],
       "designTokens": true
+    },
+    {
+      "id": "media-item-presentation",
+      "name": "MediaItemPresentation",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Collections/MediaItemPresentation.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["MediaItemPresentation"],
+      "designTokens": true
+    },
+    {
+      "id": "media-tile",
+      "name": "MediaTile",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Collections/MediaTile.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["MediaTile"],
+      "designTokens": true
+    },
+    {
+      "id": "media-row",
+      "name": "MediaRow",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Collections/MediaRow.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["MediaRow"],
+      "designTokens": true
+    },
+    {
+      "id": "media-grid",
+      "name": "MediaGrid",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Collections/MediaGrid.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["MediaGridMetrics", "MediaGridLayout", "MediaGrid"],
+      "designTokens": true
+    },
+    {
+      "id": "media-shelf",
+      "name": "MediaShelf",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Collections/MediaShelf.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["MediaShelf"],
+      "designTokens": true
+    },
+    {
+      "id": "favorite-control",
+      "name": "FavoriteControl",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Controls/FavoriteControl.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["FavoritePresentation", "FavoriteControl"],
+      "designTokens": true
+    },
+    {
+      "id": "playback-indicator",
+      "name": "PlaybackIndicator",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Controls/PlaybackIndicator.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["PlaybackIndicatorState", "PlaybackIndicatorGeometry", "PlaybackIndicator", "NativePlaybackIndicatorView"],
+      "designTokens": true
     }
   ]
 }
