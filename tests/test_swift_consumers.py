@@ -182,6 +182,59 @@ class SwiftConsumerTests(unittest.TestCase):
     def test_media_consumer_builds_against_copied_public_package(self) -> None:
         self._build_fixture("swift-consumer-media")
 
+    def test_media_table_family_builds_against_copied_public_package(self) -> None:
+        self._build_fixture(
+            "swift-consumer-media",
+            source="""
+import AppKit
+import QenTerraDesignTokens
+import QenTerraMediaComponents
+import SwiftUI
+
+let row = MediaTableRowPresentation(
+    id: "public-track",
+    title: "Public Track",
+    creator: "Public Artist",
+    collection: "Public Collection",
+    year: "2026",
+    duration: "2:00",
+    isExplicit: false,
+    isFavorite: true,
+    isCurrent: true,
+    isPlaying: false,
+    isAvailable: true,
+    artworkIdentity: "public-artwork"
+)
+let geometry = MediaTableGeometry(density: .standard)
+let widths = geometry.resolvedWidths(
+    availableWidth: 900,
+    columns: [.collection, .year, .duration]
+)
+let placeholder = MediaTablePlaceholderRow(density: .compact, showsArtwork: true)
+
+@MainActor
+func constructNativeTable() {
+    let table = NativeMediaTableView()
+    table.configureKeyboardActions(
+        target: { (id: row.id, isAvailable: row.isAvailable) },
+        onAction: { _, _ in }
+    )
+    let cell = NativeMediaTableCell()
+    cell.configure(
+        presentation: row,
+        state: .standard,
+        columns: [.collection, .year, .duration],
+        widths: widths,
+        requestArtwork: { _, _ in },
+        onAction: { _, _ in }
+    )
+}
+
+_ = placeholder
+print(row.title, widths.title)
+""",
+        )
+
     def test_player_family_builds_against_copied_public_package(self) -> None:
         self._build_fixture(
             "swift-consumer-media",

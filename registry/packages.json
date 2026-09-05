@@ -25987,6 +25987,11 @@
         "packages/Sources/QenTerra/MediaComponents/Queue/PlaybackQueueRow.swift",
         "packages/Sources/QenTerra/MediaComponents/Queue/QueueDragPreview.swift",
         "packages/Sources/QenTerra/MediaComponents/Queue/QueueInsertionIndicator.swift",
+        "packages/Sources/QenTerra/MediaComponents/Table/MediaTableGeometry.swift",
+        "packages/Sources/QenTerra/MediaComponents/Table/MediaTablePlaceholderRow.swift",
+        "packages/Sources/QenTerra/MediaComponents/Table/MediaTableRowPresentation.swift",
+        "packages/Sources/QenTerra/MediaComponents/Table/NativeMediaTableCell.swift",
+        "packages/Sources/QenTerra/MediaComponents/Table/NativeMediaTableView.swift",
         "packages/Sources/QenTerra/MediaComponents/MediaComponents.swift",
         "packages/Sources/QenTerra/MediaComponents/Resources/MediaComponents.txt",
         "packages/Sources/QenTerra/DesignTokens/DesignTokens.swift",
@@ -26040,6 +26045,7 @@
         "packages/Tests/QenTerraMediaComponentsTests/ArtworkComponentTests.swift",
         "packages/Tests/QenTerraMediaComponentsTests/MediaCollectionTests.swift",
         "packages/Tests/QenTerraMediaComponentsTests/MediaComponentModuleTests.swift",
+        "packages/Tests/QenTerraMediaComponentsTests/NativeMediaTableTests.swift",
         "packages/Tests/QenTerraMediaComponentsTests/PlayerAndLyricsTests.swift"
       ],
       "tests": [
@@ -26050,6 +26056,7 @@
         "packages/Tests/QenTerraMediaComponentsTests/ArtworkComponentTests.swift",
         "packages/Tests/QenTerraMediaComponentsTests/MediaCollectionTests.swift",
         "packages/Tests/QenTerraMediaComponentsTests/MediaComponentModuleTests.swift",
+        "packages/Tests/QenTerraMediaComponentsTests/NativeMediaTableTests.swift",
         "packages/Tests/QenTerraMediaComponentsTests/PlayerAndLyricsTests.swift"
       ],
       "capabilities": [
@@ -26079,7 +26086,8 @@
         "native-media-component-foundation",
         "artwork-presentation",
         "media-collections",
-        "player-and-lyrics"
+        "player-and-lyrics",
+        "native-media-table"
       ]
     }
   ]

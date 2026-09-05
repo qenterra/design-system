@@ -69,6 +69,8 @@ class RegistryContractTests(unittest.TestCase):
             "lyrics-edge-fade",
             "lyrics-viewport",
             "media-metadata-badge",
+            "media-table-placeholder-row",
+            "native-media-table",
             "transport-controls",
             "artwork-crop-surface",
             "artwork-haze",
@@ -196,6 +198,11 @@ class RegistryContractTests(unittest.TestCase):
                 "packages/Sources/QenTerra/MediaComponents/Queue/PlaybackQueueRow.swift",
                 "packages/Sources/QenTerra/MediaComponents/Queue/QueueDragPreview.swift",
                 "packages/Sources/QenTerra/MediaComponents/Queue/QueueInsertionIndicator.swift",
+                "packages/Sources/QenTerra/MediaComponents/Table/MediaTableGeometry.swift",
+                "packages/Sources/QenTerra/MediaComponents/Table/MediaTablePlaceholderRow.swift",
+                "packages/Sources/QenTerra/MediaComponents/Table/MediaTableRowPresentation.swift",
+                "packages/Sources/QenTerra/MediaComponents/Table/NativeMediaTableCell.swift",
+                "packages/Sources/QenTerra/MediaComponents/Table/NativeMediaTableView.swift",
             },
         )
         for relative in paths:
@@ -218,6 +225,7 @@ class RegistryContractTests(unittest.TestCase):
             "media-tile", "playback-indicator",
             "artwork-crop-surface", "artwork-haze", "artwork-mosaic",
             "artwork-placeholder", "artwork-surface",
+            "media-table-placeholder-row", "native-media-table",
             "card", "settings-section", "settings-row", "settings-toggle-row",
             "page-header", "page-scroll-view", "flow-layout", "resizable-split-view",
             "design-separator", "workspace-pane-header", "navigation-rail", "sort-menu",
@@ -325,6 +333,35 @@ class RegistryContractTests(unittest.TestCase):
             for item in load("packages/Sources/QenTerra/manifest.json")["components"]
         }
         self.assertTrue(player_sources.issubset(manifest_paths))
+
+    def test_native_media_table_family_is_closed_over_public_swift_delivery(self) -> None:
+        package = next(
+            item
+            for item in load("registry/packages.json")["packages"]
+            if item["id"] == "swift-components"
+        )
+        table_sources = {
+            "packages/Sources/QenTerra/MediaComponents/Table/MediaTableGeometry.swift",
+            "packages/Sources/QenTerra/MediaComponents/Table/MediaTablePlaceholderRow.swift",
+            "packages/Sources/QenTerra/MediaComponents/Table/MediaTableRowPresentation.swift",
+            "packages/Sources/QenTerra/MediaComponents/Table/NativeMediaTableCell.swift",
+            "packages/Sources/QenTerra/MediaComponents/Table/NativeMediaTableView.swift",
+        }
+        self.assertTrue(table_sources.issubset(set(package["publicPaths"])))
+        self.assertIn(
+            "packages/Tests/QenTerraMediaComponentsTests/NativeMediaTableTests.swift",
+            package["tests"],
+        )
+        self.assertIn("native-media-table", package["capabilities"])
+
+        maintained = load("registry/qenterra-components.json")["components"]
+        maintained_paths = {item["sourcePath"] for item in maintained}
+        self.assertTrue(table_sources.issubset(maintained_paths))
+        manifest_paths = {
+            f"packages/{item['sourcePath']}"
+            for item in load("packages/Sources/QenTerra/manifest.json")["components"]
+        }
+        self.assertTrue(table_sources.issubset(manifest_paths))
 
     def test_artwork_family_is_closed_over_public_swift_delivery(self) -> None:
         package = next(

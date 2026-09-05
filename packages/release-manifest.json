@@ -90,8 +90,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "febca7434f93a21c6147b6f5547b1a9a2f3eab6237d78b400cddbf5f9b21a0d0",
-      "bytes": 4601
+      "sha256": "ead53d27c3129c4ecdb8555af119f52775f070a901a4a551e3a9d3b3220a07d8",
+      "bytes": 5026
     },
     {
       "path": "CODE_OF_CONDUCT.md",
@@ -66335,8 +66335,8 @@
     },
     {
       "path": "Sources/QenTerra/DesignTokens/GeneratedTokens.swift",
-      "sha256": "be64cc45ebfbe7f0b954259a503e1a8384bb8277f05b10a192116b81e1e820ad",
-      "bytes": 30795
+      "sha256": "1818f7d71f1a3b62c52157fdbae38bd639b645ca2a0bf9b164b7d50c8f198013",
+      "bytes": 33162
     },
     {
       "path": "Sources/QenTerra/DesignTokens/SwiftUIAdapters.swift",
@@ -66499,14 +66499,39 @@
       "bytes": 41
     },
     {
+      "path": "Sources/QenTerra/MediaComponents/Table/MediaTableGeometry.swift",
+      "sha256": "78b86a2d39907bc28f701f13123e5a597a32a5773193efcd0d212525b2a67122",
+      "bytes": 4948
+    },
+    {
+      "path": "Sources/QenTerra/MediaComponents/Table/MediaTablePlaceholderRow.swift",
+      "sha256": "a6f03f1114dbb3e62af6c651798223078aa853a06f21a3cecc6c67979749c903",
+      "bytes": 1352
+    },
+    {
+      "path": "Sources/QenTerra/MediaComponents/Table/MediaTableRowPresentation.swift",
+      "sha256": "2b02bd45490d2269f11eac5bd714d3948ae883251b298eea80ca0a091c026316",
+      "bytes": 2699
+    },
+    {
+      "path": "Sources/QenTerra/MediaComponents/Table/NativeMediaTableCell.swift",
+      "sha256": "e91c658560eaeb7a494ae5e54377087f08692d97cd2bc73c560cd8a9040ba3dd",
+      "bytes": 24302
+    },
+    {
+      "path": "Sources/QenTerra/MediaComponents/Table/NativeMediaTableView.swift",
+      "sha256": "0d847a18a30678ff4c064cd83044253318d0d76a7e00c974a14bd7a4e38562e8",
+      "bytes": 1945
+    },
+    {
       "path": "Sources/QenTerra/README.md",
       "sha256": "795a92724788d540803deab529a7488d6c5b2c9f2b426ede8642f9a4098ab6be",
       "bytes": 1169
     },
     {
       "path": "Sources/QenTerra/manifest.json",
-      "sha256": "3bc2d63fae8ef9934389c3a17d3925d9f74dad97164cdff173b39f410583e72e",
-      "bytes": 27704
+      "sha256": "07987514f3a75773935a7eb1a21041741ec67426570e8252e7fd63c2e30149e6",
+      "bytes": 30266
     },
     {
       "path": "Sources/ReUI/Base/Components/accordion/c-accordion-1.tsx",
@@ -129764,6 +129789,11 @@
       "bytes": 1400
     },
     {
+      "path": "Tests/QenTerraMediaComponentsTests/NativeMediaTableTests.swift",
+      "sha256": "e7c47ba8c7e2c14e0cb0a05f716868ba93f63cbf7c7b24aeb2c2c973d1389562",
+      "bytes": 17408
+    },
+    {
       "path": "Tests/QenTerraMediaComponentsTests/PlayerAndLyricsTests.swift",
       "sha256": "ae1d4b427d27db592a9421d5dd4d873fb5643930fc68c49458d48eb82a65d50d",
       "bytes": 25204
@@ -129870,13 +129900,13 @@
     },
     {
       "path": "npm/design-tokens/dist/tokens.css",
-      "sha256": "343a44415d421a7a08b04ba7429fd9afff9f68758cba1ce78b6f76e50a65abb0",
-      "bytes": 25394
+      "sha256": "2f0e8a2242474bad03f5b39baf41b368122662bfdc468a2329c13279e5fc8781",
+      "bytes": 27203
     },
     {
       "path": "npm/design-tokens/dist/tokens.json",
-      "sha256": "2b1aeb7fbd114c96ec7a02e362f854effbcc5dc4acaa62d885dcd4a918dbc833",
-      "bytes": 44289
+      "sha256": "4bdfd991ae42583add89c4a060cbb91ea4ae942798bd2a48acb1af5475bf58b0",
+      "bytes": 47929
     },
     {
       "path": "npm/design-tokens/package.json",
@@ -129945,8 +129975,8 @@
     },
     {
       "path": "npm/design-tokens/src/tokens.json",
-      "sha256": "2b1aeb7fbd114c96ec7a02e362f854effbcc5dc4acaa62d885dcd4a918dbc833",
-      "bytes": 44289
+      "sha256": "4bdfd991ae42583add89c4a060cbb91ea4ae942798bd2a48acb1af5475bf58b0",
+      "bytes": 47929
     },
     {
       "path": "package.json",
@@ -129980,8 +130010,8 @@
     },
     {
       "path": "scripts/verify_source_catalogs.py",
-      "sha256": "09cc9ae9cd4e29d128e1f12bca4947af9d02e07228ba1924f6604311bbb1a78b",
-      "bytes": 49306
+      "sha256": "ceadfaa02defd0d6f130f45acfe345e9ca912a230ab461bf28e0fd7c0bb69278",
+      "bytes": 49361
     }
   ]
 }

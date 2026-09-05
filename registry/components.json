@@ -2162,6 +2162,36 @@
       "accessibility": ["each label and value is combined in consumer order"],
       "localization": ["title, subtitle, labels, and values are consumer-provided"], "evidence": ["schema", "unit"],
       "delivery": {"status": "delivered", "packages": ["swift-components"]}
+    },
+    {
+      "id": "native-media-table",
+      "name": {"en": "Native media table", "ru": "Нативная медиатаблица"},
+      "summary": {"en": "Provides stable reusable AppKit table and cell presentation while consumer data sources retain media coordination and asynchronous work.", "ru": "Предоставляет стабильное переиспользуемое представление таблицы и ячейки AppKit, оставляя координацию медиа и асинхронную работу источникам данных потребителя."},
+      "status": "stable", "category": "layout", "platforms": ["macOS"],
+      "lifecycle": {"introduced": "2.0.0", "review": "major"},
+      "anatomy": ["first-responder-table", "stable-cell-hierarchy", "artwork-slot", "title-and-creator", "optional-columns", "favorite-control", "playback-indicator", "actions-control"],
+      "states": ["compact", "standard", "hover", "focused", "selected", "current", "playing", "explicit", "favorite", "unavailable", "increased-contrast", "reduced-motion", "reuse", "removed"],
+      "stories": [{"id": "standard", "state": "standard"}, {"id": "selected", "state": "selected"}, {"id": "playing", "state": "playing"}, {"id": "unavailable", "state": "unavailable"}],
+      "keyboard": ["Return, Space, and Delete dispatch only the exact available consumer identity", "the table owns first-responder focus but not selection resolution"],
+      "accessibility": ["focus and selection remain distinct", "the row exposes literal consumer media metadata and enabled state", "embedded controls retain independent actions"],
+      "localization": ["title, creator, collection, year, duration, and media identity are consumer-supplied"],
+      "evidence": ["schema", "unit"],
+      "delivery": {"status": "delivered", "packages": ["swift-components"]}
+    },
+    {
+      "id": "media-table-placeholder-row",
+      "name": {"en": "Media table placeholder row", "ru": "Строка-заполнитель медиатаблицы"},
+      "summary": {"en": "Renders a density-aware redacted SwiftUI fallback row without loading or data ownership.", "ru": "Отрисовывает учитывающую плотность скрытую строку SwiftUI без владения загрузкой или данными."},
+      "status": "stable", "category": "feedback", "platforms": ["macOS"],
+      "lifecycle": {"introduced": "2.0.0", "review": "minor"},
+      "anatomy": ["favorite-reserve", "optional-artwork-placeholder", "title-placeholder"],
+      "states": ["compact", "standard", "with-artwork", "without-artwork"],
+      "stories": [{"id": "standard", "state": "standard"}, {"id": "compact", "state": "compact"}, {"id": "without-artwork", "state": "without-artwork"}],
+      "keyboard": ["placeholder adds no action or focus target"],
+      "accessibility": ["placeholder exposes one loading label without fabricated media data"],
+      "localization": ["loading terminology is localized by the shared package"],
+      "evidence": ["schema", "unit"],
+      "delivery": {"status": "delivered", "packages": ["swift-components"]}
     }
   ]
 }

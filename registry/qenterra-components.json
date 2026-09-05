@@ -565,6 +565,56 @@
       "deliveryProduct": "QenTerraMediaComponents",
       "publicSymbols": ["AudioDetail", "AudioDetailsView"],
       "designTokens": true
+    },
+    {
+      "id": "media-table-geometry",
+      "name": "MediaTableGeometry",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Table/MediaTableGeometry.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["MediaTableColumn", "MediaTableResolvedWidths", "MediaTableGeometry"],
+      "designTokens": true
+    },
+    {
+      "id": "media-table-row-presentation",
+      "name": "MediaTableRowPresentation",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Table/MediaTableRowPresentation.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["MediaTableRowPresentation", "NativeMediaTableAction", "MediaTableCellState"],
+      "designTokens": true
+    },
+    {
+      "id": "native-media-table-view",
+      "name": "NativeMediaTableView",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Table/NativeMediaTableView.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["NativeMediaTableView"],
+      "designTokens": true
+    },
+    {
+      "id": "native-media-table-cell",
+      "name": "NativeMediaTableCell",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Table/NativeMediaTableCell.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["NativeMediaTableCell"],
+      "designTokens": true
+    },
+    {
+      "id": "media-table-placeholder-row",
+      "name": "MediaTablePlaceholderRow",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Table/MediaTablePlaceholderRow.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": ["MediaTablePlaceholderRow"],
+      "designTokens": true
     }
   ]
 }

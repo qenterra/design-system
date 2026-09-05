@@ -408,6 +408,31 @@ Shared component metrics and mandatory state contracts.
 - `extensions.rawMetricExceptions.panel.mediaCollection.rowHeight`: `Media-row height belongs to the reusable collection presentation.`
 - `extensions.rawMetricExceptions.panel.mediaCollection.tilePadding`: `Media-card content padding belongs to the reusable tile presentation.`
 - `extensions.rawMetricExceptions.panel.mediaCollection.tileTextGap`: `Media-card title rhythm belongs to the reusable tile presentation.`
+- `extensions.rawMetricExceptions.panel.mediaTable.actionWidth`: `The trailing native actions control retains its established hit region.`
+- `extensions.rawMetricExceptions.panel.mediaTable.collectionWidth`: `The optional collection column retains its established width.`
+- `extensions.rawMetricExceptions.panel.mediaTable.columnSpacing`: `Native media-table columns use one reusable spacing contract.`
+- `extensions.rawMetricExceptions.panel.mediaTable.comfortableArtworkSize`: `Comfortable artwork stays inside the reusable native cell presentation.`
+- `extensions.rawMetricExceptions.panel.mediaTable.comfortableHeaderHeight`: `Comfortable native table headers align with comfortable rows.`
+- `extensions.rawMetricExceptions.panel.mediaTable.comfortableRowHeight`: `Comfortable native media-table row geometry remains deterministic across reuse.`
+- `extensions.rawMetricExceptions.panel.mediaTable.compactArtworkSize`: `Compact artwork stays inside the reusable native cell presentation.`
+- `extensions.rawMetricExceptions.panel.mediaTable.compactHeaderHeight`: `Compact native table headers align with compact rows.`
+- `extensions.rawMetricExceptions.panel.mediaTable.compactRowHeight`: `Compact native media-table row geometry remains deterministic across reuse.`
+- `extensions.rawMetricExceptions.panel.mediaTable.durationWidth`: `The optional duration column retains its established width.`
+- `extensions.rawMetricExceptions.panel.mediaTable.explicitBadgeGap`: `The explicit badge remains separated from the title.`
+- `extensions.rawMetricExceptions.panel.mediaTable.explicitBadgeHeight`: `The explicit badge retains stable vertical geometry.`
+- `extensions.rawMetricExceptions.panel.mediaTable.explicitBadgeWidth`: `The explicit badge reserves stable horizontal space.`
+- `extensions.rawMetricExceptions.panel.mediaTable.favoriteControlWidth`: `The leading favorite control retains its established hit region.`
+- `extensions.rawMetricExceptions.panel.mediaTable.horizontalInset`: `Native media-table rows own their horizontal chrome inset.`
+- `extensions.rawMetricExceptions.panel.mediaTable.lineGap`: `Two-line native title metadata uses a compact stable gap.`
+- `extensions.rawMetricExceptions.panel.mediaTable.lineHeight`: `Native title and metadata lines share one vertical metric.`
+- `extensions.rawMetricExceptions.panel.mediaTable.minimumSongWidth`: `The primary media-table title column keeps a readable minimum.`
+- `extensions.rawMetricExceptions.panel.mediaTable.selectionHorizontalInset`: `Selection presentation remains inset from the row edge.`
+- `extensions.rawMetricExceptions.panel.mediaTable.selectionVerticalInset`: `Selection presentation remains inset vertically from adjacent rows.`
+- `extensions.rawMetricExceptions.panel.mediaTable.songContentSpacing`: `Artwork and title metadata retain their established rhythm.`
+- `extensions.rawMetricExceptions.panel.mediaTable.standardArtworkSize`: `Standard artwork stays inside the reusable native cell presentation.`
+- `extensions.rawMetricExceptions.panel.mediaTable.standardHeaderHeight`: `Standard native table headers align with standard rows.`
+- `extensions.rawMetricExceptions.panel.mediaTable.standardRowHeight`: `Standard native media-table row geometry remains deterministic across reuse.`
+- `extensions.rawMetricExceptions.panel.mediaTable.yearWidth`: `The optional year column retains its established width.`
 - `extensions.rawMetricExceptions.panel.metadata.badgeGap`: `Media metadata badge rhythm belongs to the metadata presentation.`
 - `extensions.rawMetricExceptions.panel.metadata.badgeHeight`: `Media metadata badge geometry belongs to the metadata presentation.`
 - `extensions.rawMetricExceptions.panel.metadata.badgeHorizontalPadding`: `Media metadata badge inset belongs to the metadata presentation.`
@@ -580,6 +605,31 @@ Shared component metrics and mandatory state contracts.
 - `panel.mediaCollection.rowHeight`: `48`
 - `panel.mediaCollection.tilePadding`: `8`
 - `panel.mediaCollection.tileTextGap`: `4`
+- `panel.mediaTable.actionWidth`: `28`
+- `panel.mediaTable.collectionWidth`: `190`
+- `panel.mediaTable.columnSpacing`: `12`
+- `panel.mediaTable.comfortableArtworkSize`: `48`
+- `panel.mediaTable.comfortableHeaderHeight`: `42`
+- `panel.mediaTable.comfortableRowHeight`: `68`
+- `panel.mediaTable.compactArtworkSize`: `34`
+- `panel.mediaTable.compactHeaderHeight`: `34`
+- `panel.mediaTable.compactRowHeight`: `50`
+- `panel.mediaTable.durationWidth`: `64`
+- `panel.mediaTable.explicitBadgeGap`: `7`
+- `panel.mediaTable.explicitBadgeHeight`: `16`
+- `panel.mediaTable.explicitBadgeWidth`: `16`
+- `panel.mediaTable.favoriteControlWidth`: `30`
+- `panel.mediaTable.horizontalInset`: `24`
+- `panel.mediaTable.lineGap`: `2`
+- `panel.mediaTable.lineHeight`: `19`
+- `panel.mediaTable.minimumSongWidth`: `360`
+- `panel.mediaTable.selectionHorizontalInset`: `8`
+- `panel.mediaTable.selectionVerticalInset`: `3`
+- `panel.mediaTable.songContentSpacing`: `8`
+- `panel.mediaTable.standardArtworkSize`: `40`
+- `panel.mediaTable.standardHeaderHeight`: `38`
+- `panel.mediaTable.standardRowHeight`: `58`
+- `panel.mediaTable.yearWidth`: `64`
 - `panel.metadata.badgeGap`: `8`
 - `panel.metadata.badgeHeight`: `28`
 - `panel.metadata.badgeHorizontalPadding`: `10`
