@@ -1,4 +1,5 @@
 import AppKit
+import CoreGraphics
 import Foundation
 import QenTerraComponents
 import QenTerraDesignTokens
@@ -1074,6 +1075,74 @@ private func nativeDescendant(in view: NSView, identifier: String) -> NSView? {
 }
 
 @MainActor
+private func quartzCursorPosition() throws -> CGPoint {
+    try requireValue(CGEvent(source: nil)?.location, "could not read the physical Quartz cursor")
+}
+
+@MainActor
+private func movePhysicalCursor(to point: CGPoint) throws {
+    try require(CGWarpMouseCursorPosition(point) == .success, "could not move the physical cursor")
+    let deadline = Date().addingTimeInterval(1)
+    repeat {
+        RunLoop.main.run(until: Date().addingTimeInterval(0.01))
+        let actual = try quartzCursorPosition()
+        if abs(actual.x - point.x) < 1 && abs(actual.y - point.y) < 1 { return }
+    } while Date() < deadline
+    throw HostFailure.assertion("physical cursor did not settle at \(point)")
+}
+
+@MainActor
+private func withSafePhysicalCursor(_ body: () throws -> Void) throws {
+    let bounds = CGDisplayBounds(CGMainDisplayID())
+    try withPhysicalCursor(at: CGPoint(x: bounds.midX, y: bounds.midY), body)
+}
+
+@MainActor
+private func withPhysicalCursor(at point: CGPoint, _ body: () throws -> Void) throws {
+    let original = try quartzCursorPosition()
+    var restorationError: Error?
+    let result = Result<Void, Error> {
+        defer {
+            do {
+                try movePhysicalCursor(to: original)
+            } catch {
+                restorationError = error
+            }
+        }
+        try movePhysicalCursor(to: point)
+        try body()
+    }
+    if let restorationError {
+        throw HostFailure.assertion("cursor restoration failed: \(restorationError); behavioral result: \(result)")
+    }
+    try result.get()
+}
+
+@MainActor
+private func exercisePhysicalCursorRestoration() throws {
+    let bounds = CGDisplayBounds(CGMainDisplayID())
+    let start = CGPoint(x: bounds.midX + 80, y: bounds.midY + 80)
+    let safe = CGPoint(x: bounds.midX, y: bounds.midY)
+    try withPhysicalCursor(at: start) {
+        try withSafePhysicalCursor {
+            let actual = try quartzCursorPosition()
+            try require(abs(actual.x - safe.x) < 1 && abs(actual.y - safe.y) < 1,
+                        "cursor scope did not enter the safe display interior")
+        }
+        let afterSuccess = try quartzCursorPosition()
+        try require(afterSuccess == start, "cursor scope did not restore after success")
+        enum ExpectedFailure: Error { case probe }
+        do {
+            try withSafePhysicalCursor { throw ExpectedFailure.probe }
+            throw HostFailure.assertion("cursor scope swallowed a behavioral failure")
+        } catch ExpectedFailure.probe {}
+        let afterFailure = try quartzCursorPosition()
+        try require(afterFailure == start, "cursor scope did not restore after failure")
+    }
+    print("PHYSICAL_CURSOR_SCOPE_SUCCESS_AND_FAILURE_OK")
+}
+
+@MainActor
 private func run() throws {
     try require(NSApp.activationPolicy() == .regular, "application host is not a regular app")
 
@@ -1083,6 +1152,13 @@ private func run() throws {
         try harness.validatePointerPlacementAtScreenEdges()
     }
 
+    try exercisePhysicalCursorRestoration()
+    try withSafePhysicalCursor { try runBehavioralChecks() }
+    print("PHYSICAL_CURSOR_RESTORED_OK")
+}
+
+@MainActor
+private func runBehavioralChecks() throws {
     try exerciseMediaTableControls()
     print("MEDIA_TABLE_INTERACTION_HOST_OK")
 

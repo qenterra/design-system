@@ -409,6 +409,8 @@ print(player.hasCurrentItem, queue.isSelected, lyric.opacity, detail.value)
                 f"media interaction host failed:\n{host_stdout}\n{host_stderr}",
             )
             self.assertIn("POINTER_PLACEMENT_EDGES_OK", host_stdout)
+            self.assertIn("PHYSICAL_CURSOR_SCOPE_SUCCESS_AND_FAILURE_OK", host_stdout)
+            self.assertIn("PHYSICAL_CURSOR_RESTORED_OK", host_stdout)
             self.assertIn(
                 "PLAYER_INTERACTION_HOST_OK",
                 host_stdout,
