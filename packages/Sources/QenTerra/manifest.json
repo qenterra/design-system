@@ -870,12 +870,15 @@
       "publicSymbols": [
         "MediaTableRowPresentation",
         "NativeMediaTableAction",
+        "NativeMediaTableActions",
+        "MediaTableArtworkRequest",
+        "MediaTableTypography",
         "MediaTableCellState"
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Table/MediaTableRowPresentation.swift",
-      "sha256": "2b02bd45490d2269f11eac5bd714d3948ae883251b298eea80ca0a091c026316",
-      "bytes": 2699
+      "sha256": "71ce754717582b4cd3d192fc815308fb7c39326af5f4a2a94b9c25e10b86afa7",
+      "bytes": 5506
     },
     {
       "id": "native-media-table-view",
@@ -888,8 +891,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Table/NativeMediaTableView.swift",
-      "sha256": "0d847a18a30678ff4c064cd83044253318d0d76a7e00c974a14bd7a4e38562e8",
-      "bytes": 1945
+      "sha256": "7ac6965afdf56f98886e8843154df5a811ccac6dfcae7e410fc38251dcfc0893",
+      "bytes": 1511
     },
     {
       "id": "native-media-table-cell",
@@ -902,8 +905,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Table/NativeMediaTableCell.swift",
-      "sha256": "e91c658560eaeb7a494ae5e54377087f08692d97cd2bc73c560cd8a9040ba3dd",
-      "bytes": 24302
+      "sha256": "0cdbd7a347c6b83fd3f393d8286c7e45d97243877e96893fdde36b5c97ef0431",
+      "bytes": 29711
     },
     {
       "id": "media-table-placeholder-row",

@@ -12,25 +12,14 @@ public final class NativeMediaTableView: NSTableView {
 
     public override var acceptsFirstResponder: Bool { true }
 
-    public func configureKeyboardActions<ID: Hashable & Sendable>(
-        target: @escaping @MainActor () -> (id: ID, isAvailable: Bool),
-        onAction: @escaping @MainActor (ID, NativeMediaTableAction) -> Void
+    public func configureKeyboardActions(
+        onReturn: (@MainActor () -> Void)? = nil,
+        onSpace: (@MainActor () -> Void)? = nil,
+        onDelete: (@MainActor () -> Void)? = nil
     ) {
-        returnAction = {
-            let current = target()
-            guard current.isAvailable else { return }
-            onAction(current.id, .play)
-        }
-        spaceAction = {
-            let current = target()
-            guard current.isAvailable else { return }
-            onAction(current.id, .togglePlayback)
-        }
-        deleteAction = {
-            let current = target()
-            guard current.isAvailable else { return }
-            onAction(current.id, .delete)
-        }
+        returnAction = onReturn
+        spaceAction = onSpace
+        deleteAction = onDelete
     }
 
     public override func becomeFirstResponder() -> Bool {

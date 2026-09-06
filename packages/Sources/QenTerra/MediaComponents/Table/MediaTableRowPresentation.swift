@@ -45,7 +45,7 @@ public struct MediaTableRowPresentation<ID: Hashable & Sendable>: Identifiable, 
     }
 }
 
-public enum NativeMediaTableAction: Equatable, Sendable {
+public enum NativeMediaTableAction: Hashable, Sendable {
     case select
     case play
     case togglePlayback
@@ -56,12 +56,82 @@ public enum NativeMediaTableAction: Equatable, Sendable {
     case delete
 }
 
+public struct NativeMediaTableActions<ID: Hashable & Sendable> {
+    public let select: (@MainActor (ID) -> Void)?
+    public let play: (@MainActor (ID) -> Void)?
+    public let favorite: (@MainActor (ID) -> Void)?
+    public let creator: (@MainActor (ID) -> Void)?
+    public let collection: (@MainActor (ID) -> Void)?
+    public let actions: (@MainActor (ID) -> Void)?
+
+    public init(
+        select: (@MainActor (ID) -> Void)? = nil,
+        play: (@MainActor (ID) -> Void)? = nil,
+        favorite: (@MainActor (ID) -> Void)? = nil,
+        creator: (@MainActor (ID) -> Void)? = nil,
+        collection: (@MainActor (ID) -> Void)? = nil,
+        actions: (@MainActor (ID) -> Void)? = nil
+    ) {
+        self.select = select
+        self.play = play
+        self.favorite = favorite
+        self.creator = creator
+        self.collection = collection
+        self.actions = actions
+    }
+}
+
+public struct MediaTableArtworkRequest<ID: Hashable & Sendable>: Equatable, Sendable {
+    public let itemID: ID
+    public let artworkIdentity: String
+    let generation: UInt64
+
+    init(itemID: ID, artworkIdentity: String, generation: UInt64) {
+        self.itemID = itemID
+        self.artworkIdentity = artworkIdentity
+        self.generation = generation
+    }
+}
+
+public struct MediaTableTypography: Equatable, Sendable {
+    public let primaryPointSize: Double
+    public let secondaryPointSize: Double
+    public let primaryRole: DesignTypographyValue
+    public let secondaryRole: DesignTypographyValue
+    public let badgeRole: DesignTypographyValue
+    public let durationRole: DesignTypographyValue
+
+    public init(
+        primaryPointSize: Double,
+        secondaryPointSize: Double,
+        primaryRole: DesignTypographyValue = DesignTokens.Typography.row,
+        secondaryRole: DesignTypographyValue = DesignTokens.Typography.row,
+        badgeRole: DesignTypographyValue = DesignTokens.Typography.compactMetadata,
+        durationRole: DesignTypographyValue = DesignTokens.Typography.monospacedData
+    ) {
+        self.primaryPointSize = primaryPointSize
+        self.secondaryPointSize = secondaryPointSize
+        self.primaryRole = primaryRole
+        self.secondaryRole = secondaryRole
+        self.badgeRole = badgeRole
+        self.durationRole = durationRole
+    }
+
+    public static let small = MediaTableTypography(primaryPointSize: 12, secondaryPointSize: 11)
+    public static let standard = MediaTableTypography(
+        primaryPointSize: DesignTokens.Typography.row.size,
+        secondaryPointSize: DesignTokens.Typography.row.size
+    )
+    public static let large = MediaTableTypography(primaryPointSize: 15, secondaryPointSize: 14)
+}
+
 public struct MediaTableCellState: Equatable, Sendable {
     public let isSelected: Bool
     public let isFocused: Bool
     public let isLiveScrolling: Bool
     public let showsArtwork: Bool
     public let density: DesignDensity
+    public let typography: MediaTableTypography
     public let environment: DesignNativeEnvironment
 
     public init(
@@ -70,6 +140,7 @@ public struct MediaTableCellState: Equatable, Sendable {
         isLiveScrolling: Bool = false,
         showsArtwork: Bool = true,
         density: DesignDensity = .standard,
+        typography: MediaTableTypography = .standard,
         environment: DesignNativeEnvironment = MediaTableCellState.defaultEnvironment
     ) {
         self.isSelected = isSelected
@@ -77,6 +148,7 @@ public struct MediaTableCellState: Equatable, Sendable {
         self.isLiveScrolling = isLiveScrolling
         self.showsArtwork = showsArtwork
         self.density = density
+        self.typography = typography
         self.environment = environment
     }
 

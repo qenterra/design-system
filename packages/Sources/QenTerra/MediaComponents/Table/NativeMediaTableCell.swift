@@ -4,12 +4,29 @@ import QenTerraDesignTokens
 import QuartzCore
 
 @MainActor
+private final class MediaTableActionButton: NSButton {
+    override var acceptsFirstResponder: Bool { isEnabled }
+
+    override func accessibilityPerformPress() -> Bool {
+        guard isEnabled, action != nil else { return false }
+        performClick(nil)
+        return true
+    }
+}
+
+@MainActor
 private final class MediaTableMetadataControl: NSTextField {
     var hoverChanged: (@MainActor () -> Void)?
     private(set) var isPointerHovered = false
     private var hoverTrackingArea: NSTrackingArea?
 
     override var acceptsFirstResponder: Bool { isEnabled }
+
+    override func accessibilityPerformPress() -> Bool {
+        guard isEnabled, action != nil else { return false }
+        sendConfiguredAction()
+        return true
+    }
 
     override func updateTrackingAreas() {
         if let hoverTrackingArea { removeTrackingArea(hoverTrackingArea) }
@@ -100,8 +117,8 @@ public final class NativeMediaTableCell: NSTableCellView {
     private let selectionLayer = CALayer()
     private let artworkLayer = CALayer()
     private let artworkOverlayLayer = CALayer()
-    private let favoriteButton = NSButton()
-    private let artworkButton = NSButton()
+    private let favoriteButton = MediaTableActionButton()
+    private let artworkButton = MediaTableActionButton()
     private let playbackIndicator = NativePlaybackIndicatorView()
     private let titleLabel = NSTextField(labelWithString: "")
     private let creatorButton = MediaTableMetadataControl()
@@ -109,15 +126,17 @@ public final class NativeMediaTableCell: NSTableCellView {
     private let collectionButton = MediaTableMetadataControl()
     private let yearLabel = NSTextField(labelWithString: "")
     private let durationLabel = NSTextField(labelWithString: "")
-    private let actionButton = NSButton()
+    private let actionButton = MediaTableActionButton()
 
     private var hoverTrackingArea: NSTrackingArea?
     private var presentation: Presentation?
     private var state = MediaTableCellState.standard
     private var columns: [MediaTableColumn] = []
     private var widths = MediaTableResolvedWidths(title: 360, collection: 190, year: 64, duration: 64)
-    private var actionHandler: (@MainActor (NativeMediaTableAction) -> Void)?
+    private var actionHandlers: [NativeMediaTableAction: @MainActor () -> Void] = [:]
     private var representedArtworkIdentity: String?
+    private var artworkRequestGeneration: UInt64 = 0
+    private var currentArtworkRequestGeneration: UInt64?
 
     public private(set) var representedItemID: AnyHashable?
     public private(set) var publishedArtworkIdentity: String?
@@ -180,8 +199,8 @@ public final class NativeMediaTableCell: NSTableCellView {
             year: 64,
             duration: 64
         ),
-        requestArtwork: (@MainActor (ID, String) -> Void)? = nil,
-        onAction: (@MainActor (ID, NativeMediaTableAction) -> Void)? = nil
+        requestArtwork: (@MainActor (MediaTableArtworkRequest<ID>) -> Void)? = nil,
+        actions: NativeMediaTableActions<ID> = NativeMediaTableActions()
     ) {
         let next = Presentation(
             id: AnyHashable(presentation.id),
@@ -199,6 +218,7 @@ public final class NativeMediaTableCell: NSTableCellView {
         )
         let identityChanged = representedItemID != next.id
         let contentChanged = self.presentation != next
+        let typographyChanged = self.presentation == nil || self.state.typography != state.typography
         let artworkVisibilityChanged = self.state.showsArtwork != state.showsArtwork
         let layoutChanged = self.columns != columns
             || self.widths != widths
@@ -213,18 +233,26 @@ public final class NativeMediaTableCell: NSTableCellView {
         self.state = state
         self.columns = columns
         self.widths = widths
-        actionHandler = onAction.map { callback in
-            { action in callback(presentation.id, action) }
-        }
+        actionHandlers = Self.actionHandlers(for: presentation.id, actions: actions)
 
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         if contentChanged { applyContent() }
+        if typographyChanged { applyTypography() }
+        updateControlAvailability()
         updateChrome()
         if identityChanged || previousArtwork != next.artworkIdentity || artworkVisibilityChanged {
             clearArtwork()
             if state.showsArtwork, let artworkIdentity = next.artworkIdentity {
-                requestArtwork?(presentation.id, artworkIdentity)
+                artworkRequestGeneration &+= 1
+                currentArtworkRequestGeneration = artworkRequestGeneration
+                requestArtwork?(
+                    MediaTableArtworkRequest(
+                        itemID: presentation.id,
+                        artworkIdentity: artworkIdentity,
+                        generation: artworkRequestGeneration
+                    )
+                )
             }
         }
         if contentChanged || layoutChanged { needsLayout = true }
@@ -234,12 +262,13 @@ public final class NativeMediaTableCell: NSTableCellView {
     @discardableResult
     public func publishArtwork<ID: Hashable & Sendable>(
         _ image: CGImage,
-        forItemID itemID: ID,
-        artworkIdentity: String
+        for request: MediaTableArtworkRequest<ID>
     ) -> Bool {
         guard
-            representedItemID == AnyHashable(itemID),
-            representedArtworkIdentity == artworkIdentity
+            state.showsArtwork,
+            representedItemID == AnyHashable(request.itemID),
+            representedArtworkIdentity == request.artworkIdentity,
+            currentArtworkRequestGeneration == request.generation
         else { return false }
         CATransaction.begin()
         CATransaction.setDisableActions(true)
@@ -248,14 +277,14 @@ public final class NativeMediaTableCell: NSTableCellView {
         artworkLayer.contentsScale = window?.backingScaleFactor
             ?? NSScreen.main?.backingScaleFactor
             ?? 2
-        publishedArtworkIdentity = artworkIdentity
+        publishedArtworkIdentity = request.artworkIdentity
         CATransaction.commit()
         return true
     }
 
     public func performAction(_ action: NativeMediaTableAction) {
         guard presentation?.isAvailable == true else { return }
-        actionHandler?(action)
+        actionHandlers[action]?()
     }
 
     public func setPointerHovered(_ value: Bool) {
@@ -351,6 +380,7 @@ public final class NativeMediaTableCell: NSTableCellView {
         button.isBordered = false
         button.bezelStyle = .inline
         button.focusRingType = .none
+        button.setAccessibilityRole(.button)
         if let cell = button.cell as? NSButtonCell {
             cell.highlightsBy = []
             cell.showsStateBy = []
@@ -419,6 +449,62 @@ public final class NativeMediaTableCell: NSTableCellView {
         )
         artworkButton.setAccessibilityLabel(String(localized: "Play \(presentation.title)"))
         artworkButton.toolTip = String(localized: "Play \(presentation.title)")
+        creatorButton.setAccessibilityLabel(presentation.creator)
+        collectionButton.setAccessibilityLabel(presentation.collection)
+        actionButton.setAccessibilityLabel(String(localized: "Media actions"))
+    }
+
+    private func updateControlAvailability() {
+        guard let presentation else {
+            for control in interactiveSubviews {
+                control.isEnabled = false
+                control.setAccessibilityEnabled(false)
+            }
+            return
+        }
+        let controls: [(NSControl, NativeMediaTableAction)] = [
+            (favoriteButton, .favorite),
+            (artworkButton, .play),
+            (creatorButton, .creator),
+            (collectionButton, .collection),
+            (actionButton, .actions),
+        ]
+        for (control, action) in controls {
+            let enabled = presentation.isAvailable && actionHandlers[action] != nil
+            control.isEnabled = enabled
+            control.setAccessibilityEnabled(enabled)
+        }
+    }
+
+    private func applyTypography() {
+        let typography = state.typography
+        titleLabel.font = .systemFont(
+            ofSize: CGFloat(typography.primaryPointSize),
+            weight: fontWeight(for: typography.primaryRole)
+        )
+        for label in [creatorButton, collectionButton, yearLabel] {
+            label.font = .systemFont(
+                ofSize: CGFloat(typography.secondaryPointSize),
+                weight: fontWeight(for: typography.secondaryRole)
+            )
+        }
+        durationLabel.font = .monospacedDigitSystemFont(
+            ofSize: CGFloat(typography.secondaryPointSize),
+            weight: fontWeight(for: typography.durationRole)
+        )
+        explicitLabel.font = .systemFont(
+            ofSize: CGFloat(typography.badgeRole.size),
+            weight: fontWeight(for: typography.badgeRole)
+        )
+    }
+
+    private func fontWeight(for role: DesignTypographyValue) -> NSFont.Weight {
+        switch role.weight {
+        case 700...: .bold
+        case 600...: .semibold
+        case 500...: .medium
+        default: .regular
+        }
     }
 
     private func updateChrome() {
@@ -453,8 +539,8 @@ public final class NativeMediaTableCell: NSTableCellView {
         favoriteButton.contentTintColor = presentation.isFavorite
             ? .designToken(DesignTokens.Color.actionPrimary)
             : .secondaryLabelColor
-        favoriteButton.isHidden = !presentation.isFavorite && !isPointerHovered && !state.isFocused
-        actionButton.contentTintColor = isPointerHovered || state.isFocused
+        favoriteButton.isHidden = !presentation.isFavorite && !isPointerHovered
+        actionButton.contentTintColor = isPointerHovered
             ? .labelColor
             : .tertiaryLabelColor
 
@@ -581,6 +667,7 @@ public final class NativeMediaTableCell: NSTableCellView {
     }
 
     private func clearArtwork() {
+        currentArtworkRequestGeneration = nil
         publishedArtworkIdentity = nil
         artworkLayer.contents = nil
         artworkLayer.contentsRect = CGRect(x: 0, y: 0, width: 1, height: 1)
@@ -591,14 +678,54 @@ public final class NativeMediaTableCell: NSTableCellView {
         representedItemID = nil
         representedArtworkIdentity = nil
         presentation = nil
-        actionHandler = nil
+        state = .standard
+        columns = []
+        widths = MediaTableResolvedWidths(title: 360, collection: 190, year: 64, duration: 64)
+        actionHandlers.removeAll(keepingCapacity: true)
+        updateControlAvailability()
         clearArtwork()
         playbackIndicator.prepareForReuse()
         playbackIndicator.isHidden = true
+        selectionLayer.backgroundColor = NSColor.clear.cgColor
+        selectionLayer.borderColor = NSColor.clear.cgColor
+        selectionLayer.borderWidth = 0
+        artworkLayer.backgroundColor = NSColor.clear.cgColor
+        artworkOverlayLayer.backgroundColor = NSColor.clear.cgColor
+        contentOpacity = 1
+        for view in subviews { view.alphaValue = 1 }
+        for label in [titleLabel, creatorButton, explicitLabel, collectionButton, yearLabel, durationLabel] {
+            label.stringValue = ""
+            label.toolTip = nil
+        }
+        favoriteButton.isHidden = true
+        artworkButton.isHidden = true
+        explicitLabel.isHidden = true
+        collectionButton.isHidden = true
+        yearLabel.isHidden = true
+        durationLabel.isHidden = true
+        for control in interactiveSubviews { control.setAccessibilityLabel(nil) }
+        setAccessibilitySelected(false)
+        setAccessibilityEnabled(false)
+        setAccessibilityLabel(nil)
+        needsLayout = true
     }
 
     private var interactiveSubviews: [NSControl] {
         [favoriteButton, artworkButton, creatorButton, collectionButton, actionButton]
+    }
+
+    private static func actionHandlers<ID: Hashable & Sendable>(
+        for id: ID,
+        actions: NativeMediaTableActions<ID>
+    ) -> [NativeMediaTableAction: @MainActor () -> Void] {
+        var handlers: [NativeMediaTableAction: @MainActor () -> Void] = [:]
+        if let action = actions.select { handlers[.select] = { action(id) } }
+        if let action = actions.play { handlers[.play] = { action(id) } }
+        if let action = actions.favorite { handlers[.favorite] = { action(id) } }
+        if let action = actions.creator { handlers[.creator] = { action(id) } }
+        if let action = actions.collection { handlers[.collection] = { action(id) } }
+        if let action = actions.actions { handlers[.actions] = { action(id) } }
+        return handlers
     }
 
     @objc private func favoritePressed() { performAction(.favorite) }

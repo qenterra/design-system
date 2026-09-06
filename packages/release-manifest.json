@@ -90,8 +90,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "ead53d27c3129c4ecdb8555af119f52775f070a901a4a551e3a9d3b3220a07d8",
-      "bytes": 5026
+      "sha256": "a75c6a1f3a98facbab164c7689bc6c4430b52d9b1119ee2dbc8b0a16a4d9963b",
+      "bytes": 5318
     },
     {
       "path": "CODE_OF_CONDUCT.md",
@@ -66510,18 +66510,18 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Table/MediaTableRowPresentation.swift",
-      "sha256": "2b02bd45490d2269f11eac5bd714d3948ae883251b298eea80ca0a091c026316",
-      "bytes": 2699
+      "sha256": "71ce754717582b4cd3d192fc815308fb7c39326af5f4a2a94b9c25e10b86afa7",
+      "bytes": 5506
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Table/NativeMediaTableCell.swift",
-      "sha256": "e91c658560eaeb7a494ae5e54377087f08692d97cd2bc73c560cd8a9040ba3dd",
-      "bytes": 24302
+      "sha256": "0cdbd7a347c6b83fd3f393d8286c7e45d97243877e96893fdde36b5c97ef0431",
+      "bytes": 29711
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Table/NativeMediaTableView.swift",
-      "sha256": "0d847a18a30678ff4c064cd83044253318d0d76a7e00c974a14bd7a4e38562e8",
-      "bytes": 1945
+      "sha256": "7ac6965afdf56f98886e8843154df5a811ccac6dfcae7e410fc38251dcfc0893",
+      "bytes": 1511
     },
     {
       "path": "Sources/QenTerra/README.md",
@@ -66530,8 +66530,8 @@
     },
     {
       "path": "Sources/QenTerra/manifest.json",
-      "sha256": "07987514f3a75773935a7eb1a21041741ec67426570e8252e7fd63c2e30149e6",
-      "bytes": 30266
+      "sha256": "51eb702ba5e4409eef97a75604f3590e17607427974119b748c5a088d35bf748",
+      "bytes": 30369
     },
     {
       "path": "Sources/ReUI/Base/Components/accordion/c-accordion-1.tsx",
@@ -129790,8 +129790,8 @@
     },
     {
       "path": "Tests/QenTerraMediaComponentsTests/NativeMediaTableTests.swift",
-      "sha256": "e7c47ba8c7e2c14e0cb0a05f716868ba93f63cbf7c7b24aeb2c2c973d1389562",
-      "bytes": 17408
+      "sha256": "47f8d07532d86ee386df05bf186e04d9dd2ce2d8e559de914706889a06dc62b6",
+      "bytes": 27196
     },
     {
       "path": "Tests/QenTerraMediaComponentsTests/PlayerAndLyricsTests.swift",

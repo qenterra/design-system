@@ -86,8 +86,7 @@ import Testing
             state: .standard,
             columns: [.collection, .year, .duration],
             widths: MediaTableResolvedWidths(title: 446, collection: 190, year: 64, duration: 64),
-            requestArtwork: { requested.append(($0, $1)) },
-            onAction: { _, _ in }
+            requestArtwork: { requested.append(($0.itemID, $0.artworkIdentity)) }
         )
     }
 
@@ -132,6 +131,38 @@ import Testing
     #expect(compactTitle.frame == CGRect(x: 108, y: 26, width: 640, height: 19))
 }
 
+@Test @MainActor func reusedCellAppliesSmallStandardAndLargeTableTypography() throws {
+    let cell = NativeMediaTableCell(frame: CGRect(x: 0, y: 0, width: 900, height: 58))
+    let row = syntheticRow(id: "same-track", isExplicit: true)
+    let hierarchy = cell.renderHierarchyIdentity
+    let title = try #require(cell.descendant(identifier: "media-table.title") as? NSTextField)
+    let creator = try #require(cell.descendant(identifier: "media-table.creator") as? NSTextField)
+    let collection = try #require(cell.descendant(identifier: "media-table.collection") as? NSTextField)
+    let year = try #require(cell.descendant(identifier: "media-table.year") as? NSTextField)
+    let duration = try #require(cell.descendant(identifier: "media-table.duration") as? NSTextField)
+    let badge = try #require(cell.descendant(identifier: "media-table.explicit") as? NSTextField)
+
+    let cases: [(MediaTableTypography, CGFloat, CGFloat)] = [
+        (MediaTableTypography.small, 12.0, 11.0),
+        (MediaTableTypography.standard, 13.0, 13.0),
+        (MediaTableTypography.large, 15.0, 14.0),
+    ]
+    for (typography, primary, secondary) in cases {
+        cell.configure(
+            presentation: row,
+            state: MediaTableCellState(typography: typography)
+        )
+        #expect(title.font?.pointSize == primary)
+        #expect(creator.font?.pointSize == secondary)
+        #expect(collection.font?.pointSize == secondary)
+        #expect(year.font?.pointSize == secondary)
+        #expect(duration.font?.pointSize == secondary)
+        #expect(badge.font?.pointSize == 10)
+        #expect(cell.renderHierarchyIdentity == hierarchy)
+        #expect(cell.representedItemID == AnyHashable("same-track"))
+    }
+}
+
 @Test @MainActor func hoverResetsWhenRepresentedIdentityChanges() throws {
     let cell = NativeMediaTableCell()
     cell.configure(presentation: syntheticRow(id: "track-a"), state: .standard)
@@ -168,7 +199,10 @@ import Testing
     cell.configure(
         presentation: syntheticRow(id: "unavailable", isAvailable: false),
         state: .standard,
-        onAction: { actions.append(($0, $1)) }
+        actions: NativeMediaTableActions(
+            play: { actions.append(($0, .play)) },
+            favorite: { actions.append(($0, .favorite)) }
+        )
     )
     let favorite = try #require(cell.descendant(identifier: "media-table.favorite") as? NSButton)
     #expect(!favorite.isEnabled)
@@ -176,6 +210,66 @@ import Testing
     cell.performAction(.play)
     #expect(actions.isEmpty)
     #expect(cell.contentOpacity < 1)
+}
+
+@Test @MainActor func nativeCellExposesOnlySuppliedControlActionsAndDispatchesItsExactIdentity() throws {
+    let cell = NativeMediaTableCell(frame: CGRect(x: 0, y: 0, width: 900, height: 58))
+    let controls = try [
+        "media-table.artwork",
+        "media-table.favorite",
+        "media-table.creator",
+        "media-table.collection",
+        "media-table.actions",
+    ].map { identifier in
+        try #require(cell.descendant(identifier: identifier) as? NSControl)
+    }
+
+    cell.configure(
+        presentation: syntheticRow(id: "first"),
+        state: .standard,
+        columns: [.collection]
+    )
+    for control in controls {
+        #expect(!control.isEnabled)
+        #expect(!control.acceptsFirstResponder)
+        #expect(control.isAccessibilityEnabled() == false)
+        #expect(!control.accessibilityPerformPress())
+    }
+
+    var events: [String] = []
+    cell.configure(
+        presentation: syntheticRow(id: "represented"),
+        state: .standard,
+        columns: [.collection],
+        actions: NativeMediaTableActions(
+            play: { events.append("play:\($0)") },
+            favorite: { events.append("favorite:\($0)") },
+            creator: { events.append("creator:\($0)") },
+            collection: { events.append("collection:\($0)") },
+            actions: { events.append("actions:\($0)") }
+        )
+    )
+    cell.setPointerHovered(true)
+
+    #expect(cell.accessibilityRole() == .row)
+    #expect(cell.isAccessibilitySelected() == false)
+    #expect(cell.isAccessibilityEnabled() == true)
+    #expect(cell.accessibilityLabel() == "Synthetic Track, Synthetic Creator, Synthetic Collection, 3:42")
+    for control in controls {
+        #expect(control.isEnabled)
+        #expect(control.acceptsFirstResponder)
+        #expect(control.isAccessibilityEnabled() == true)
+        #expect(control.accessibilityPerformPress())
+    }
+    #expect(events == [
+        "play:represented",
+        "favorite:represented",
+        "creator:represented",
+        "collection:represented",
+        "actions:represented",
+    ])
+    #expect(controls.map { $0.accessibilityRole() } == [.button, .button, .link, .link, .button])
+    #expect(controls.allSatisfy { !($0.accessibilityLabel() ?? "").isEmpty })
 }
 
 @Test @MainActor func explicitFavoriteCurrentAndPlaybackChromeFollowPresentation() throws {
@@ -211,6 +305,32 @@ import Testing
     #expect(!play.isHidden)
     #expect(indicator.isHidden)
     #expect(!indicator.isAnimating)
+}
+
+@Test @MainActor func nonfavoriteAndActionRevealOnlyForPointerHover() throws {
+    let cell = NativeMediaTableCell()
+    let row = syntheticRow(id: "track", isFavorite: false)
+    let favorite = try #require(cell.descendant(identifier: "media-table.favorite") as? NSButton)
+    let action = try #require(cell.descendant(identifier: "media-table.actions") as? NSButton)
+    let actions = NativeMediaTableActions<String>(
+        favorite: { _ in },
+        actions: { _ in }
+    )
+
+    for state in [
+        MediaTableCellState.standard,
+        MediaTableCellState(isSelected: true),
+        MediaTableCellState(isFocused: true),
+        MediaTableCellState(isSelected: true, isFocused: true),
+    ] {
+        cell.configure(presentation: row, state: state, actions: actions)
+        #expect(favorite.isHidden)
+        #expect(action.contentTintColor?.isEqual(NSColor.tertiaryLabelColor) == true)
+    }
+
+    cell.setPointerHovered(true)
+    #expect(!favorite.isHidden)
+    #expect(action.contentTintColor?.isEqual(NSColor.labelColor) == true)
 }
 
 @Test @MainActor func increasedContrastStrengthensFocusWithoutChangingSelectionSemantics() {
@@ -255,52 +375,85 @@ import Testing
 
 @Test @MainActor func cellDisablesImplicitLayerActionsAndRejectsStaleArtworkPublication() throws {
     let cell = NativeMediaTableCell()
-    var requests: [(String, String)] = []
+    var requests: [MediaTableArtworkRequest<String>] = []
     cell.configure(
         presentation: syntheticRow(id: "track-a", artworkIdentity: "art-a"),
         state: .standard,
-        requestArtwork: { requests.append(($0, $1)) }
+        requestArtwork: { requests.append($0) }
     )
     cell.configure(
         presentation: syntheticRow(id: "track-b", artworkIdentity: "art-b"),
         state: .standard,
-        requestArtwork: { requests.append(($0, $1)) }
+        requestArtwork: { requests.append($0) }
     )
 
     let image = try makeOnePixelImage()
-    #expect(!cell.publishArtwork(image, forItemID: "track-a", artworkIdentity: "art-a"))
+    #expect(!cell.publishArtwork(image, for: requests[0]))
     #expect(cell.publishedArtworkIdentity == nil)
-    #expect(cell.publishArtwork(image, forItemID: "track-b", artworkIdentity: "art-b"))
+    #expect(cell.publishArtwork(image, for: requests[1]))
     #expect(cell.publishedArtworkIdentity == "art-b")
-    #expect(requests.map(\.0) == ["track-a", "track-b"])
+    #expect(requests.map(\.itemID) == ["track-a", "track-b"])
     #expect(cell.hasDisabledImplicitLayerActions)
 }
 
 @Test @MainActor func hiddenArtworkDefersItsRequestUntilTheArtworkColumnBecomesVisible() {
     let cell = NativeMediaTableCell()
-    var requests: [(String, String)] = []
+    var requests: [MediaTableArtworkRequest<String>] = []
     let row = syntheticRow(id: "track", artworkIdentity: "art")
 
     cell.configure(
         presentation: row,
         state: MediaTableCellState(showsArtwork: false),
-        requestArtwork: { requests.append(($0, $1)) }
+        requestArtwork: { requests.append($0) }
     )
     #expect(requests.isEmpty)
 
     cell.configure(
         presentation: row,
         state: MediaTableCellState(showsArtwork: true),
-        requestArtwork: { requests.append(($0, $1)) }
+        requestArtwork: { requests.append($0) }
     )
     #expect(requests.count == 1)
-    #expect(requests.first?.0 == "track")
-    #expect(requests.first?.1 == "art")
+    #expect(requests.first?.itemID == "track")
+    #expect(requests.first?.artworkIdentity == "art")
+}
+
+@Test @MainActor func hiddenArtworkInvalidatesAnOlderRequestForTheSameRepresentedIdentity() throws {
+    let cell = NativeMediaTableCell()
+    let row = syntheticRow(id: "track", artworkIdentity: "art")
+    var requests: [MediaTableArtworkRequest<String>] = []
+
+    cell.configure(
+        presentation: row,
+        state: MediaTableCellState(showsArtwork: true),
+        requestArtwork: { requests.append($0) }
+    )
+    let firstRequest = try #require(requests.first)
+
+    cell.configure(
+        presentation: row,
+        state: MediaTableCellState(showsArtwork: false),
+        requestArtwork: { requests.append($0) }
+    )
+    let image = try makeOnePixelImage()
+    #expect(!cell.publishArtwork(image, for: firstRequest))
+
+    cell.configure(
+        presentation: row,
+        state: MediaTableCellState(showsArtwork: true),
+        requestArtwork: { requests.append($0) }
+    )
+    let secondRequest = try #require(requests.last)
+    #expect(secondRequest != firstRequest)
+    #expect(!cell.publishArtwork(image, for: firstRequest))
+    #expect(cell.publishArtwork(image, for: secondRequest))
+    #expect(cell.publishedArtworkIdentity == "art")
 }
 
 @Test @MainActor func nativeCellRemovalClearsIdentityHoverArtworkAndPlaybackAnimations() throws {
     let host = NSView()
     let cell = NativeMediaTableCell()
+    var request: MediaTableArtworkRequest<String>?
     host.addSubview(cell)
     cell.configure(
         presentation: syntheticRow(
@@ -309,10 +462,11 @@ import Testing
             isPlaying: true,
             artworkIdentity: "art"
         ),
-        state: .standard
+        state: .standard,
+        requestArtwork: { request = $0 }
     )
     cell.setPointerHovered(true)
-    #expect(cell.publishArtwork(try makeOnePixelImage(), forItemID: "track", artworkIdentity: "art"))
+    #expect(cell.publishArtwork(try makeOnePixelImage(), for: try #require(request)))
     cell.removeFromSuperview()
 
     let indicator = try #require(cell.subviews.first { $0 is NativePlaybackIndicatorView } as? NativePlaybackIndicatorView)
@@ -323,26 +477,92 @@ import Testing
     #expect(indicator.animationCount == 0)
 }
 
-@Test @MainActor func nativeTableDispatchesReturnSpaceAndDeleteForTheExactAvailableIdentity() throws {
+@Test @MainActor func prepareForReuseClearsConfiguredVisualInteractionAndAccessibilityState() throws {
+    let cell = NativeMediaTableCell()
+    var request: MediaTableArtworkRequest<String>?
+    var events: [String] = []
+    cell.configure(
+        presentation: syntheticRow(
+            id: "configured",
+            isExplicit: true,
+            isFavorite: true,
+            isCurrent: true,
+            isPlaying: true,
+            artworkIdentity: "art"
+        ),
+        state: MediaTableCellState(isSelected: true),
+        columns: [.collection, .year, .duration],
+        requestArtwork: { request = $0 },
+        actions: NativeMediaTableActions(
+            select: { events.append("select:\($0)") },
+            play: { events.append("play:\($0)") },
+            favorite: { events.append("favorite:\($0)") },
+            creator: { events.append("creator:\($0)") },
+            collection: { events.append("collection:\($0)") },
+            actions: { events.append("actions:\($0)") }
+        )
+    )
+    cell.setPointerHovered(true)
+    #expect(cell.publishArtwork(try makeOnePixelImage(), for: try #require(request)))
+    let controls = try [
+        "media-table.artwork",
+        "media-table.favorite",
+        "media-table.creator",
+        "media-table.collection",
+        "media-table.actions",
+    ].map { identifier in
+        try #require(cell.descendant(identifier: identifier) as? NSControl)
+    }
+    let indicator = try #require(cell.subviews.first { $0 is NativePlaybackIndicatorView } as? NativePlaybackIndicatorView)
+    #expect(indicator.isAnimating)
+    #expect(cell.isAccessibilitySelected() == true)
+
+    cell.prepareForReuse()
+
+    #expect(cell.representedItemID == nil)
+    #expect(cell.publishedArtworkIdentity == nil)
+    #expect(!cell.isPointerHovered)
+    #expect(!indicator.isAnimating)
+    #expect(indicator.animationCount == 0)
+    #expect(cell.isAccessibilitySelected() == false)
+    #expect(cell.isAccessibilityEnabled() == false)
+    #expect((cell.accessibilityLabel() ?? "").isEmpty)
+    #expect(cell.selectionLayerBackgroundAlpha == 0)
+    #expect(cell.selectionLayerBorderWidth == 0)
+    #expect(cell.contentOpacity == 1)
+    for control in controls {
+        #expect(!control.isEnabled)
+        #expect(control.isAccessibilityEnabled() == false)
+        #expect(!control.accessibilityPerformPress())
+    }
+    #expect(events.isEmpty)
+    #expect(cell.subviews.compactMap { $0 as? NSTextField }.allSatisfy { $0.stringValue.isEmpty })
+}
+
+@Test @MainActor func nativeTablePublishesIndependentKeyIntentsWithoutResolvingRows() throws {
     let table = NativeMediaTableView()
-    var target = (id: "track-a", isAvailable: true)
-    var events: [(String, NativeMediaTableAction)] = []
+    table.allowsEmptySelection = true
+    table.allowsMultipleSelection = true
+    var intents: [String] = []
     table.configureKeyboardActions(
-        target: { target },
-        onAction: { events.append(($0, $1)) }
+        onReturn: { intents.append("return") },
+        onSpace: { intents.append("space") },
+        onDelete: { intents.append("delete") }
     )
 
+    #expect(table.selectedRow == -1)
     table.keyDown(with: try keyEvent(keyCode: 36))
     table.keyDown(with: try keyEvent(keyCode: 49))
     table.keyDown(with: try keyEvent(keyCode: 51))
-    #expect(events.map(\.0) == ["track-a", "track-a", "track-a"])
-    #expect(events.map(\.1) == [.play, .togglePlayback, .delete])
+    #expect(intents == ["return", "space", "delete"])
+    #expect(table.selectedRow == -1)
 
-    target = (id: "track-b", isAvailable: false)
+    intents.removeAll()
+    table.configureKeyboardActions(onSpace: { intents.append("space") })
     table.keyDown(with: try keyEvent(keyCode: 36))
     table.keyDown(with: try keyEvent(keyCode: 49))
     table.keyDown(with: try keyEvent(keyCode: 117))
-    #expect(events.count == 3)
+    #expect(intents == ["space"])
 }
 
 @Test @MainActor func nativeTablePublishesFirstResponderFocusIndependentlyOfSelection() {
@@ -374,8 +594,28 @@ import Testing
         return try #require(renderer.cgImage)
     }
 
-    #expect(try image(density: .compact, showsArtwork: true).height == 50)
-    #expect(try image(density: .standard, showsArtwork: false).height == 58)
+    let withArtwork = try image(density: .standard, showsArtwork: true)
+    let withoutArtwork = try image(density: .standard, showsArtwork: false)
+    #expect(withArtwork.height == 58)
+    #expect(withoutArtwork.height == 58)
+    #expect(try pixelAlpha(in: withArtwork, x: 80, y: 15) > 0)
+    #expect(try pixelAlpha(in: withoutArtwork, x: 80, y: 15) == 0)
+}
+
+private func pixelAlpha(in image: CGImage, x: Int, y: Int) throws -> UInt8 {
+    var pixels = [UInt8](repeating: 0, count: image.width * image.height * 4)
+    let context = try #require(CGContext(
+        data: &pixels,
+        width: image.width,
+        height: image.height,
+        bitsPerComponent: 8,
+        bytesPerRow: image.width * 4,
+        space: CGColorSpaceCreateDeviceRGB(),
+        bitmapInfo: CGBitmapInfo.byteOrder32Big.rawValue
+            | CGImageAlphaInfo.premultipliedLast.rawValue
+    ))
+    context.draw(image, in: CGRect(x: 0, y: 0, width: image.width, height: image.height))
+    return pixels[(y * image.width + x) * 4 + 3]
 }
 
 private func syntheticRow<ID: Hashable & Sendable>(

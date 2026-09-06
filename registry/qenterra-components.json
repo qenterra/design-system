@@ -583,7 +583,14 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Table/MediaTableRowPresentation.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["MediaTableRowPresentation", "NativeMediaTableAction", "MediaTableCellState"],
+      "publicSymbols": [
+        "MediaTableRowPresentation",
+        "NativeMediaTableAction",
+        "NativeMediaTableActions",
+        "MediaTableArtworkRequest",
+        "MediaTableTypography",
+        "MediaTableCellState"
+      ],
       "designTokens": true
     },
     {

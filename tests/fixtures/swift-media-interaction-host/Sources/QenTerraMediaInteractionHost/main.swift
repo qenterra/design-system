@@ -946,8 +946,114 @@ private func requireValue<Value>(_ value: Value?, _ message: String) throws -> V
 }
 
 @MainActor
+private func exerciseMediaTableControls() throws {
+    let frame = CGRect(x: 0, y: 0, width: 900, height: 58)
+    let window = NSWindow(
+        contentRect: frame,
+        styleMask: [.titled],
+        backing: .buffered,
+        defer: false
+    )
+    let host = NSView(frame: frame)
+    let cell = NativeMediaTableCell(frame: frame)
+    window.contentView = host
+    host.addSubview(cell)
+    window.makeKeyAndOrderFront(nil)
+    defer {
+        window.orderOut(nil)
+        window.close()
+    }
+
+    let row = MediaTableRowPresentation(
+        id: "hosted-track",
+        title: "Hosted Track",
+        creator: "Hosted Creator",
+        collection: "Hosted Collection",
+        year: "2026",
+        duration: "3:42",
+        isExplicit: false,
+        isFavorite: false,
+        isCurrent: false,
+        isPlaying: false,
+        isAvailable: true,
+        artworkIdentity: nil
+    )
+    let identifiers = [
+        "media-table.artwork",
+        "media-table.favorite",
+        "media-table.creator",
+        "media-table.collection",
+        "media-table.actions",
+    ]
+    let controls = try identifiers.map { identifier in
+        try requireValue(
+            nativeDescendant(in: cell, identifier: identifier) as? NSControl,
+            "public media table omitted \(identifier)"
+        )
+    }
+
+    cell.configure(presentation: row, state: .standard, columns: [.collection])
+    for (identifier, control) in zip(identifiers, controls) {
+        try require(!control.isEnabled, "missing \(identifier) action remained enabled")
+        try require(!control.acceptsFirstResponder, "missing \(identifier) action remained focusable")
+        try require(!control.isAccessibilityEnabled(), "missing \(identifier) action remained AX-enabled")
+        try require(!control.accessibilityPerformPress(), "missing \(identifier) action remained AX-actionable")
+    }
+
+    var events: [String] = []
+    cell.configure(
+        presentation: row,
+        state: MediaTableCellState(isSelected: true),
+        columns: [.collection],
+        actions: NativeMediaTableActions(
+            play: { events.append("play:\($0)") },
+            favorite: { events.append("favorite:\($0)") },
+            creator: { events.append("creator:\($0)") },
+            collection: { events.append("collection:\($0)") },
+            actions: { events.append("actions:\($0)") }
+        )
+    )
+    cell.setPointerHovered(true)
+    window.layoutIfNeeded()
+    cell.layoutSubtreeIfNeeded()
+
+    try require(cell.accessibilityRole() == .row, "public media table cell lost its AX row role")
+    try require(cell.isAccessibilitySelected(), "public media table cell lost AX selection")
+    let expectedRoles: [NSAccessibility.Role] = [.button, .button, .link, .link, .button]
+    for ((identifier, control), expectedRole) in zip(zip(identifiers, controls), expectedRoles) {
+        try require(control.isEnabled, "supplied \(identifier) action remained disabled")
+        try require(control.acceptsFirstResponder, "supplied \(identifier) action remained nonfocusable")
+        try require(control.isAccessibilityEnabled(), "supplied \(identifier) action remained AX-disabled")
+        try require(control.accessibilityRole() == expectedRole, "\(identifier) published the wrong AX role")
+        try require(!(control.accessibilityLabel() ?? "").isEmpty, "\(identifier) published no AX label")
+        try require(control.accessibilityPerformPress(), "supplied \(identifier) AX action did not run")
+    }
+    try require(
+        events == [
+            "play:hosted-track",
+            "favorite:hosted-track",
+            "creator:hosted-track",
+            "collection:hosted-track",
+            "actions:hosted-track",
+        ],
+        "public media table did not dispatch exact represented IDs once: \(events)"
+    )
+}
+
+private func nativeDescendant(in view: NSView, identifier: String) -> NSView? {
+    if view.identifier?.rawValue == identifier { return view }
+    for child in view.subviews {
+        if let match = nativeDescendant(in: child, identifier: identifier) { return match }
+    }
+    return nil
+}
+
+@MainActor
 private func run() throws {
     try require(NSApp.activationPolicy() == .regular, "application host is not a regular app")
+
+    try exerciseMediaTableControls()
+    print("MEDIA_TABLE_INTERACTION_HOST_OK")
 
     try exercisePlayerControls()
     print("PLAYER_INTERACTION_HOST_OK")

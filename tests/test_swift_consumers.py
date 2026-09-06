@@ -216,17 +216,28 @@ let placeholder = MediaTablePlaceholderRow(density: .compact, showsArtwork: true
 func constructNativeTable() {
     let table = NativeMediaTableView()
     table.configureKeyboardActions(
-        target: { (id: row.id, isAvailable: row.isAvailable) },
-        onAction: { _, _ in }
+        onReturn: {},
+        onSpace: {},
+        onDelete: {}
     )
     let cell = NativeMediaTableCell()
     cell.configure(
         presentation: row,
-        state: .standard,
+        state: MediaTableCellState(typography: .large),
         columns: [.collection, .year, .duration],
         widths: widths,
-        requestArtwork: { _, _ in },
-        onAction: { _, _ in }
+        requestArtwork: { request in
+            _ = request.itemID
+            _ = request.artworkIdentity
+        },
+        actions: NativeMediaTableActions(
+            select: { _ in },
+            play: { _ in },
+            favorite: { _ in },
+            creator: { _ in },
+            collection: { _ in },
+            actions: { _ in }
+        )
     )
 }
 
@@ -352,6 +363,11 @@ print(player.hasCurrentItem, queue.isSelected, lyric.opacity, detail.value)
                 "PLAYER_INTERACTION_HOST_OK",
                 host_stdout,
                 f"player interaction host did not exercise every public control:\n{host_stdout}\n{host_stderr}",
+            )
+            self.assertIn(
+                "MEDIA_TABLE_INTERACTION_HOST_OK",
+                host_stdout,
+                f"media table host did not exercise every public control:\n{host_stdout}\n{host_stderr}",
             )
             self.assertEqual(
                 result_path.read_text(encoding="utf-8") if result_path.exists() else "",

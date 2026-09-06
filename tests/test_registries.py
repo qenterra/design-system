@@ -357,6 +357,20 @@ class RegistryContractTests(unittest.TestCase):
         maintained = load("registry/qenterra-components.json")["components"]
         maintained_paths = {item["sourcePath"] for item in maintained}
         self.assertTrue(table_sources.issubset(maintained_paths))
+        presentation_entry = next(
+            item for item in maintained if item["id"] == "media-table-row-presentation"
+        )
+        self.assertEqual(
+            set(presentation_entry["publicSymbols"]),
+            {
+                "MediaTableArtworkRequest",
+                "MediaTableCellState",
+                "MediaTableRowPresentation",
+                "MediaTableTypography",
+                "NativeMediaTableAction",
+                "NativeMediaTableActions",
+            },
+        )
         manifest_paths = {
             f"packages/{item['sourcePath']}"
             for item in load("packages/Sources/QenTerra/manifest.json")["components"]
