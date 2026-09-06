@@ -6,6 +6,11 @@ public enum AboutResourceOpenRejection: Equatable, Sendable {
     case discarded
 }
 
+public enum AboutResourceRowStyle: Equatable, Sendable {
+    case standard
+    case cadence
+}
+
 public struct AboutResourceRowPresentation: Equatable, Sendable {
     public let title: String
     public let accessibilityHint: String
@@ -25,15 +30,18 @@ public struct AboutResourceRow: View {
     @Environment(\.openURL) private var openURL
 
     private let resource: AboutResource
+    private let style: AboutResourceRowStyle
     private let injectedOpenURLAction: OpenURLAction?
     private let onOpenRejected: @MainActor @Sendable (AboutResourceOpenRejection) -> Void
 
     public init(
         resource: AboutResource,
+        style: AboutResourceRowStyle = .standard,
         openURLAction: OpenURLAction? = nil,
         onOpenRejected: @escaping @MainActor @Sendable (AboutResourceOpenRejection) -> Void = { _ in }
     ) {
         self.resource = resource
+        self.style = style
         injectedOpenURLAction = openURLAction
         self.onOpenRejected = onOpenRejected
     }
@@ -55,13 +63,31 @@ public struct AboutResourceRow: View {
         Button {
             activate()
         } label: {
-            HStack(spacing: DesignTokens.Space.value3) {
+            HStack(spacing: style == .cadence ? DesignProductMetrics.cadence.controlGap : DesignTokens.Space.value3) {
                 Image(systemName: resource.symbol)
-                    .foregroundStyle(Color(designToken: DesignTokens.Color.textLink))
-                    .accessibilityHidden(true)
+                    .font(style == .cadence ? .system(size: 15, weight: .medium) : .body)
+                    .symbolRenderingMode(.hierarchical)
+                    .foregroundStyle(
+                        Color(
+                            designToken: style == .cadence
+                                ? DesignTokens.Color.textSecondary
+                                : DesignTokens.Color.textLink
+                        )
+                    )
+                    .frame(
+                        width: style == .cadence ? 26 : nil,
+                        height: style == .cadence ? 26 : nil
+                    )
                 VStack(alignment: .leading, spacing: DesignTokens.Space.value1) {
                     Text(resource.title)
-                        .foregroundStyle(Color(designToken: DesignTokens.Color.textLink))
+                        .font(style == .cadence ? .callout.weight(.medium) : .body)
+                        .foregroundStyle(
+                            Color(
+                                designToken: style == .cadence
+                                    ? DesignTokens.Color.textPrimary
+                                    : DesignTokens.Color.textLink
+                            )
+                        )
                     Text(resource.subtitle)
                         .font(
                             .system(
@@ -69,15 +95,37 @@ public struct AboutResourceRow: View {
                                 weight: DesignTokens.Typography.supporting.swiftUIWeight
                             )
                         )
-                        .foregroundStyle(Color(designToken: DesignTokens.Color.textSecondary))
+                        .foregroundStyle(
+                            Color(
+                                designToken: style == .cadence
+                                    ? DesignTokens.Color.textTertiary
+                                    : DesignTokens.Color.textSecondary
+                            )
+                        )
+                        .lineLimit(style == .cadence ? 1 : nil)
                 }
                 Spacer(minLength: 0)
                 Image(systemName: "arrow.up.right")
-                    .foregroundStyle(Color(designToken: DesignTokens.Color.textLink))
+                    .foregroundStyle(
+                        Color(
+                            designToken: style == .cadence
+                                ? DesignTokens.Color.textSecondary
+                                : DesignTokens.Color.textLink
+                        )
+                    )
                     .accessibilityHidden(true)
             }
-            .padding(DesignTokens.Space.value4)
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(
+                style == .cadence ? .horizontal : .all,
+                style == .cadence
+                    ? DesignProductMetrics.cadence.compactGap
+                    : DesignTokens.Space.value4
+            )
+            .frame(
+                maxWidth: .infinity,
+                minHeight: style == .cadence ? 54 : nil,
+                alignment: .leading
+            )
         }
         .buttonStyle(DesignButtonStyle(role: .link))
         .disabled(!presentation.isEnabled)

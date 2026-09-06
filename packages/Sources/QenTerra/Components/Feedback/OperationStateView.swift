@@ -43,14 +43,45 @@ public enum OperationPresentationState: Equatable, Sendable {
 
 }
 
+public enum OperationStateVisualStyle: Equatable, Sendable {
+    case standard
+    case cadenceScanning
+    case cadenceCompletion
+
+    public var symbolSize: CGFloat {
+        switch self {
+        case .standard: 16
+        case .cadenceScanning: 32
+        case .cadenceCompletion: 46
+        }
+    }
+}
+
 public struct OperationStateView: View {
     private let state: OperationPresentationState
+    private let symbolName: String?
+    private let visualStyle: OperationStateVisualStyle
 
-    public init(state: OperationPresentationState) {
+    public init(
+        state: OperationPresentationState,
+        symbolName: String? = nil,
+        visualStyle: OperationStateVisualStyle = .standard
+    ) {
         self.state = state
+        self.symbolName = symbolName
+        self.visualStyle = visualStyle
     }
 
+    @ViewBuilder
     public var body: some View {
+        if visualStyle == .standard {
+            standardBody
+        } else {
+            cadenceBody
+        }
+    }
+
+    private var standardBody: some View {
         VStack(alignment: .leading, spacing: DesignTokens.Space.value2) {
             HStack(spacing: DesignTokens.Space.value2) {
                 symbol
@@ -87,6 +118,28 @@ public struct OperationStateView: View {
         .accessibilityElement(children: .contain)
     }
 
+    private var cadenceBody: some View {
+        VStack(spacing: visualStyle == .cadenceScanning ? 12 : 8) {
+            symbol
+                .font(.system(size: visualStyle.symbolSize, weight: .light))
+                .foregroundStyle(tint)
+                .accessibilityHidden(true)
+            VStack(spacing: 8) {
+                Text(title)
+                    .font(
+                        visualStyle == .cadenceCompletion
+                            ? .title2.weight(.semibold)
+                            : .title3.weight(.semibold)
+                    )
+                Text(message)
+                    .font(.callout)
+                    .foregroundStyle(Color(designToken: DesignTokens.Color.textSecondary))
+                    .multilineTextAlignment(.center)
+            }
+        }
+        .accessibilityElement(children: .contain)
+    }
+
     private var title: String {
         switch state {
         case let .preparing(title, _), let .reviewing(title, _), let .inProgress(title, _, _), let .completed(title, _), let .failed(title, _): title
@@ -100,12 +153,16 @@ public struct OperationStateView: View {
     }
 
     @ViewBuilder private var symbol: some View {
-        switch state {
-        case .preparing, .reviewing:
-            ProgressView()
-        case .inProgress: ProgressView()
-        case .completed: Image(systemName: "checkmark.circle")
-        case .failed: Image(systemName: "xmark.octagon")
+        if let symbolName {
+            Image(systemName: symbolName)
+        } else {
+            switch state {
+            case .preparing, .reviewing:
+                ProgressView()
+            case .inProgress: ProgressView()
+            case .completed: Image(systemName: "checkmark.circle")
+            case .failed: Image(systemName: "xmark.octagon")
+            }
         }
     }
 

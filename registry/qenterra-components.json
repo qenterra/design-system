@@ -9,7 +9,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/Containers/CardContainer.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["CardContainer"],
+      "publicSymbols": [
+        "CardContainer"
+      ],
       "designTokens": true
     },
     {
@@ -19,7 +21,11 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/Controls/DesignButtonStyle.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["DesignButtonRole", "DesignButtonState", "DesignButtonStyle"],
+      "publicSymbols": [
+        "DesignButtonRole",
+        "DesignButtonState",
+        "DesignButtonStyle"
+      ],
       "designTokens": true
     },
     {
@@ -43,7 +49,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/Controls/IconActionButton.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["IconActionButton"],
+      "publicSymbols": [
+        "IconActionButton"
+      ],
       "designTokens": true
     },
     {
@@ -53,7 +61,11 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/InteractiveRowSurface.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["InteractiveRowState", "InteractiveRowCornerRadius", "InteractiveRowSurface"],
+      "publicSymbols": [
+        "InteractiveRowState",
+        "InteractiveRowCornerRadius",
+        "InteractiveRowSurface"
+      ],
       "designTokens": true
     },
     {
@@ -63,7 +75,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/PrimaryButtonStyle.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["PrimaryButtonStyle"],
+      "publicSymbols": [
+        "PrimaryButtonStyle"
+      ],
       "designTokens": true
     },
     {
@@ -73,7 +87,10 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/Controls/RowActionButtonStyle.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["RowActionButtonStyle"],
+      "publicSymbols": [
+        "RowActionButtonPresentation",
+        "RowActionButtonStyle"
+      ],
       "designTokens": true
     },
     {
@@ -83,7 +100,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/Containers/SettingsRow.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["SettingsRow"],
+      "publicSymbols": [
+        "SettingsRow"
+      ],
       "designTokens": true
     },
     {
@@ -93,7 +112,10 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/Containers/SettingsSection.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["SettingsSection"],
+      "publicSymbols": [
+        "SettingsSectionPresentation",
+        "SettingsSection"
+      ],
       "designTokens": true
     },
     {
@@ -103,7 +125,10 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/Containers/SettingsToggleRow.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["SettingsToggleRow"],
+      "publicSymbols": [
+        "SettingsTogglePresentation",
+        "SettingsToggleRow"
+      ],
       "designTokens": true
     },
     {
@@ -113,7 +138,11 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/Layout/PageHeader.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["DesignComponentMetrics", "PageHeader"],
+      "publicSymbols": [
+        "DesignComponentMetrics",
+        "PageHeaderPresentation",
+        "PageHeader"
+      ],
       "designTokens": true
     },
     {
@@ -123,7 +152,12 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/Layout/PageScrollView.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["PageScrollOwnership", "PageScrollPresentation", "PageScrollView"],
+      "publicSymbols": [
+        "PageScrollOwnership",
+        "PageScrollPresentation",
+        "PageRefreshAction",
+        "PageScrollView"
+      ],
       "designTokens": true
     },
     {
@@ -133,7 +167,10 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/Layout/FlowLayout.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["DesignFlowLayout", "DesignFlowLayout.Arrangement"],
+      "publicSymbols": [
+        "DesignFlowLayout",
+        "DesignFlowLayout.Arrangement"
+      ],
       "designTokens": true
     },
     {
@@ -143,7 +180,12 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/Layout/ResizableSplitView.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["ResizableSplitLayout", "ResizableSplitLayout.AdjustmentDirection", "ResizableSplitView"],
+      "publicSymbols": [
+        "ResizableSplitLayout",
+        "ResizableSplitLayout.AdjustmentDirection",
+        "ResizableSplitLayout.FixedPane",
+        "ResizableSplitView"
+      ],
       "designTokens": true
     },
     {
@@ -153,7 +195,10 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/Layout/DesignSeparator.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["DesignSeparatorOrientation", "DesignSeparator"],
+      "publicSymbols": [
+        "DesignSeparatorOrientation",
+        "DesignSeparator"
+      ],
       "designTokens": true
     },
     {
@@ -163,7 +208,10 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/Layout/WorkspacePaneHeader.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["WorkspacePaneHeader"],
+      "publicSymbols": [
+        "WorkspacePaneHeaderPresentation",
+        "WorkspacePaneHeader"
+      ],
       "designTokens": true
     },
     {
@@ -173,7 +221,14 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/Navigation/NavigationRail.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["NavigationRailItem", "NavigationRailItemPresentation", "NavigationRail"],
+      "publicSymbols": [
+        "NavigationRailItem",
+        "NavigationRailItemPresentation",
+        "NavigationRailBackground",
+        "NavigationRailPresentation",
+        "NavigationRailExpansionConfiguration",
+        "NavigationRail"
+      ],
       "designTokens": true
     },
     {
@@ -183,7 +238,11 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/Navigation/TabStrip.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["TabItem", "TabStrip"],
+      "publicSymbols": [
+        "TabItem",
+        "TabStripPresentation",
+        "TabStrip"
+      ],
       "designTokens": true
     },
     {
@@ -193,7 +252,16 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/Overlays/SortMenu.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["SortMenuOrder", "SortMenuField", "SortMenuLabels", "SortMenuUnavailableReason", "SortMenuReadyPresentation", "SortMenuPresentation", "SortMenu"],
+      "publicSymbols": [
+        "SortMenuOrder",
+        "SortMenuField",
+        "SortMenuLabels",
+        "SortMenuUnavailableReason",
+        "SortMenuReadyPresentation",
+        "SortMenuPresentation",
+        "SortMenuVisualStyle",
+        "SortMenu"
+      ],
       "designTokens": true
     },
     {
@@ -203,7 +271,11 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/Overlays/RenameAlert.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["RenameValidationState", "RenameAlertConfiguration"],
+      "publicSymbols": [
+        "RenameValidationState",
+        "View.renameAlert(configuration:isPresented:text:onConfirm:)",
+        "RenameAlertConfiguration"
+      ],
       "designTokens": true
     },
     {
@@ -213,7 +285,12 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/Overlays/Keycap.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["Keycap", "KeycapChord", "KeycapChordPresentation"],
+      "publicSymbols": [
+        "Keycap",
+        "KeycapChord",
+        "KeycapPresentation",
+        "KeycapChordPresentation"
+      ],
       "designTokens": true
     },
     {
@@ -223,7 +300,13 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/Feedback/ContentStateView.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["ContentPresentationState", "PresentationAction", "ContentStateView"],
+      "publicSymbols": [
+        "ContentPresentationState",
+        "PresentationAction",
+        "ContentStatePresentationStyle",
+        "PresentationActionStyle",
+        "ContentStateView"
+      ],
       "designTokens": true
     },
     {
@@ -233,7 +316,11 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/Feedback/StatusBanner.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["StatusTone", "StatusBannerConfiguration", "StatusBanner"],
+      "publicSymbols": [
+        "StatusTone",
+        "StatusBannerConfiguration",
+        "StatusBanner"
+      ],
       "designTokens": true
     },
     {
@@ -243,7 +330,13 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/Feedback/DropZone.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["DropZoneState", "DropZonePresentation", "DropZone"],
+      "publicSymbols": [
+        "DropZoneState",
+        "DropZonePresentation",
+        "DropZoneVisualStyle",
+        "DropZoneAction",
+        "DropZone"
+      ],
       "designTokens": true
     },
     {
@@ -253,7 +346,12 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/Feedback/OperationStateView.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["MeasuredOperationProgress", "OperationPresentationState", "OperationStateView"],
+      "publicSymbols": [
+        "MeasuredOperationProgress",
+        "OperationPresentationState",
+        "OperationStateVisualStyle",
+        "OperationStateView"
+      ],
       "designTokens": true
     },
     {
@@ -263,7 +361,15 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/About/AboutPage.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["AboutResourceAvailability", "AboutResource", "AboutPageConfiguration", "AboutPageAccessibilityPresentation", "AboutResourceAccessibilityPresentation", "AboutPage"],
+      "publicSymbols": [
+        "AboutResourceAvailability",
+        "AboutResource",
+        "AboutPageConfiguration",
+        "AboutPageAccessibilityPresentation",
+        "AboutResourceAccessibilityPresentation",
+        "AboutPagePresentation",
+        "AboutPage"
+      ],
       "designTokens": true
     },
     {
@@ -273,7 +379,12 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/Components/About/AboutResourceRow.swift",
       "deliveryProduct": "QenTerraComponents",
-      "publicSymbols": ["AboutResourceOpenRejection", "AboutResourceRowPresentation", "AboutResourceRow"],
+      "publicSymbols": [
+        "AboutResourceOpenRejection",
+        "AboutResourceRowPresentation",
+        "AboutResourceRowStyle",
+        "AboutResourceRow"
+      ],
       "designTokens": true
     },
     {
@@ -283,7 +394,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkPalette.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["ArtworkPalette"],
+      "publicSymbols": [
+        "ArtworkPalette"
+      ],
       "designTokens": true
     },
     {
@@ -293,7 +406,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkPresentationState.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["ArtworkPresentationState"],
+      "publicSymbols": [
+        "ArtworkPresentationState"
+      ],
       "designTokens": true
     },
     {
@@ -303,7 +418,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkSurface.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["ArtworkSurface"],
+      "publicSymbols": [
+        "ArtworkSurface"
+      ],
       "designTokens": true
     },
     {
@@ -313,7 +430,10 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkPlaceholder.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["ArtworkPlaceholderKind", "ArtworkPlaceholder"],
+      "publicSymbols": [
+        "ArtworkPlaceholderKind",
+        "ArtworkPlaceholder"
+      ],
       "designTokens": true
     },
     {
@@ -323,7 +443,11 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkCropSurface.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["ArtworkCropShape", "ArtworkCropTransform", "ArtworkCropSurface"],
+      "publicSymbols": [
+        "ArtworkCropShape",
+        "ArtworkCropTransform",
+        "ArtworkCropSurface"
+      ],
       "designTokens": true
     },
     {
@@ -333,7 +457,10 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkMosaic.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["ArtworkMosaicLayout", "ArtworkMosaic"],
+      "publicSymbols": [
+        "ArtworkMosaicLayout",
+        "ArtworkMosaic"
+      ],
       "designTokens": true
     },
     {
@@ -343,7 +470,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Artwork/ArtworkHaze.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["ArtworkHaze"],
+      "publicSymbols": [
+        "ArtworkHaze"
+      ],
       "designTokens": true
     },
     {
@@ -353,7 +482,10 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Collections/MediaItemPresentation.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["MediaItemPresentation", "MediaAccessoryInteractionContext"],
+      "publicSymbols": [
+        "MediaItemPresentation",
+        "MediaAccessoryInteractionContext"
+      ],
       "designTokens": true
     },
     {
@@ -363,7 +495,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Collections/MediaTile.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["MediaTile"],
+      "publicSymbols": [
+        "MediaTile"
+      ],
       "designTokens": true
     },
     {
@@ -373,7 +507,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Collections/MediaRow.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["MediaRow"],
+      "publicSymbols": [
+        "MediaRow"
+      ],
       "designTokens": true
     },
     {
@@ -383,7 +519,11 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Collections/MediaGrid.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["MediaGridMetrics", "MediaGridLayout", "MediaGrid"],
+      "publicSymbols": [
+        "MediaGridMetrics",
+        "MediaGridLayout",
+        "MediaGrid"
+      ],
       "designTokens": true
     },
     {
@@ -393,7 +533,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Collections/MediaShelf.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["MediaShelf"],
+      "publicSymbols": [
+        "MediaShelf"
+      ],
       "designTokens": true
     },
     {
@@ -403,7 +545,10 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Controls/FavoriteControl.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["FavoritePresentation", "FavoriteControl"],
+      "publicSymbols": [
+        "FavoritePresentation",
+        "FavoriteControl"
+      ],
       "designTokens": true
     },
     {
@@ -413,7 +558,12 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Controls/PlaybackIndicator.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["PlaybackIndicatorState", "PlaybackIndicatorGeometry", "PlaybackIndicator", "NativePlaybackIndicatorView"],
+      "publicSymbols": [
+        "PlaybackIndicatorState",
+        "PlaybackIndicatorGeometry",
+        "PlaybackIndicator",
+        "NativePlaybackIndicatorView"
+      ],
       "designTokens": true
     },
     {
@@ -423,7 +573,10 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Player/PlayerBarPresentation.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["TransportRepeatMode", "PlayerBarPresentation"],
+      "publicSymbols": [
+        "TransportRepeatMode",
+        "PlayerBarPresentation"
+      ],
       "designTokens": true
     },
     {
@@ -433,7 +586,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Player/PlayerBarActions.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["PlayerBarActions"],
+      "publicSymbols": [
+        "PlayerBarActions"
+      ],
       "designTokens": true
     },
     {
@@ -443,7 +598,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Player/PlayerBar.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["PlayerBar"],
+      "publicSymbols": [
+        "PlayerBar"
+      ],
       "designTokens": true
     },
     {
@@ -453,7 +610,10 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Player/PlaybackProgressControl.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["PlaybackProgressPresentation", "PlaybackProgressControl"],
+      "publicSymbols": [
+        "PlaybackProgressPresentation",
+        "PlaybackProgressControl"
+      ],
       "designTokens": true
     },
     {
@@ -463,7 +623,11 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Player/TransportControls.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["TransportControl", "TransportControlPresentation", "TransportControls"],
+      "publicSymbols": [
+        "TransportControl",
+        "TransportControlPresentation",
+        "TransportControls"
+      ],
       "designTokens": true
     },
     {
@@ -473,7 +637,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Player/AirPlayRoutePicker.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["AirPlayRoutePicker"],
+      "publicSymbols": [
+        "AirPlayRoutePicker"
+      ],
       "designTokens": true
     },
     {
@@ -483,7 +649,10 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Queue/PlaybackQueueRow.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["PlaybackQueueRowPresentation", "PlaybackQueueRow"],
+      "publicSymbols": [
+        "PlaybackQueueRowPresentation",
+        "PlaybackQueueRow"
+      ],
       "designTokens": true
     },
     {
@@ -493,7 +662,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Queue/QueueInsertionIndicator.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["QueueInsertionIndicator"],
+      "publicSymbols": [
+        "QueueInsertionIndicator"
+      ],
       "designTokens": true
     },
     {
@@ -503,7 +674,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Queue/QueueDragPreview.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["QueueDragPreview"],
+      "publicSymbols": [
+        "QueueDragPreview"
+      ],
       "designTokens": true
     },
     {
@@ -513,7 +686,10 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Lyrics/LyricLinePresentation.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["LyricLineTone", "LyricLinePresentation"],
+      "publicSymbols": [
+        "LyricLineTone",
+        "LyricLinePresentation"
+      ],
       "designTokens": true
     },
     {
@@ -523,7 +699,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Lyrics/LyricLine.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["LyricLine"],
+      "publicSymbols": [
+        "LyricLine"
+      ],
       "designTokens": true
     },
     {
@@ -533,7 +711,10 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Lyrics/LyricsViewport.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["LyricsScrollDecision", "LyricsViewport"],
+      "publicSymbols": [
+        "LyricsScrollDecision",
+        "LyricsViewport"
+      ],
       "designTokens": true
     },
     {
@@ -543,7 +724,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Lyrics/LyricsEdgeFade.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["LyricsEdgeFade"],
+      "publicSymbols": [
+        "LyricsEdgeFade"
+      ],
       "designTokens": true
     },
     {
@@ -553,7 +736,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Metadata/MediaMetadataBadge.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["MediaMetadataBadge"],
+      "publicSymbols": [
+        "MediaMetadataBadge"
+      ],
       "designTokens": true
     },
     {
@@ -563,7 +748,10 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Metadata/AudioDetailsView.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["AudioDetail", "AudioDetailsView"],
+      "publicSymbols": [
+        "AudioDetail",
+        "AudioDetailsView"
+      ],
       "designTokens": true
     },
     {
@@ -573,7 +761,11 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Table/MediaTableGeometry.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["MediaTableColumn", "MediaTableResolvedWidths", "MediaTableGeometry"],
+      "publicSymbols": [
+        "MediaTableColumn",
+        "MediaTableResolvedWidths",
+        "MediaTableGeometry"
+      ],
       "designTokens": true
     },
     {
@@ -600,7 +792,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Table/NativeMediaTableView.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["NativeMediaTableView"],
+      "publicSymbols": [
+        "NativeMediaTableView"
+      ],
       "designTokens": true
     },
     {
@@ -610,7 +804,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Table/NativeMediaTableCell.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["NativeMediaTableCell"],
+      "publicSymbols": [
+        "NativeMediaTableCell"
+      ],
       "designTokens": true
     },
     {
@@ -620,7 +816,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Table/MediaTablePlaceholderRow.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["MediaTablePlaceholderRow"],
+      "publicSymbols": [
+        "MediaTablePlaceholderRow"
+      ],
       "designTokens": true
     },
     {
@@ -630,7 +828,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentColor.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["ArtworkAccentColor"],
+      "publicSymbols": [
+        "ArtworkAccentColor"
+      ],
       "designTokens": true
     },
     {
@@ -657,7 +857,10 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientTransition.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["ArtworkAccentGradientTransition", "ArtworkAccentGradientTimeline"],
+      "publicSymbols": [
+        "ArtworkAccentGradientTransition",
+        "ArtworkAccentGradientTimeline"
+      ],
       "designTokens": true
     },
     {
@@ -667,7 +870,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientResources.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["ArtworkAccentGradientResourceAvailability"],
+      "publicSymbols": [
+        "ArtworkAccentGradientResourceAvailability"
+      ],
       "designTokens": true
     },
     {
@@ -677,7 +882,10 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradient.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["ArtworkAccentGradient", "ArtworkAccentGradientView"],
+      "publicSymbols": [
+        "ArtworkAccentGradient",
+        "ArtworkAccentGradientView"
+      ],
       "designTokens": true
     },
     {
@@ -687,7 +895,9 @@
       "status": "stable",
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientSnapshot.swift",
       "deliveryProduct": "QenTerraMediaComponents",
-      "publicSymbols": ["ArtworkAccentGradientSnapshot"],
+      "publicSymbols": [
+        "ArtworkAccentGradientSnapshot"
+      ],
       "designTokens": true
     }
   ]

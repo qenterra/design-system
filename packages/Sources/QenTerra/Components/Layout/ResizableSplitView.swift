@@ -3,6 +3,11 @@ import SwiftUI
 import QenTerraDesignTokens
 
 public struct ResizableSplitLayout: Equatable, Sendable {
+    public enum FixedPane: Equatable, Sendable {
+        case leading
+        case trailing
+    }
+
     public struct Resolution: Equatable, Sendable {
         public let leadingWidth: Double
         public let trailingWidth: Double
@@ -54,6 +59,35 @@ public struct ResizableSplitLayout: Equatable, Sendable {
         return Resolution(
             leadingWidth: leadingWidth,
             trailingWidth: contentWidth - leadingWidth,
+            separatorWidth: resolvedSeparatorWidth
+        )
+    }
+
+    public static func resolve(
+        availableWidth: Double,
+        proposedFixedWidth: Double,
+        fixedPane: FixedPane,
+        minimumFixedWidth: Double,
+        maximumFixedWidth: Double,
+        minimumFlexibleWidth: Double,
+        separatorWidth: Double
+    ) -> Resolution {
+        let resolvedSeparatorWidth = normalizedSeparatorWidth(
+            separatorWidth,
+            availableWidth: availableWidth
+        )
+        let contentWidth = max(0, availableWidth - resolvedSeparatorWidth)
+        let minimum = min(max(0, minimumFixedWidth), contentWidth)
+        let maximum = min(
+            max(minimum, maximumFixedWidth),
+            max(contentWidth - max(0, minimumFlexibleWidth), minimum),
+            contentWidth
+        )
+        let fixedWidth = min(max(proposedFixedWidth, minimum), maximum)
+        let flexibleWidth = max(contentWidth - fixedWidth, 0)
+        return Resolution(
+            leadingWidth: fixedPane == .leading ? fixedWidth : flexibleWidth,
+            trailingWidth: fixedPane == .leading ? flexibleWidth : fixedWidth,
             separatorWidth: resolvedSeparatorWidth
         )
     }

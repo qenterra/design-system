@@ -1,5 +1,8 @@
 import Foundation
 import QenTerraDesignTokens
+#if canImport(SwiftUI)
+import SwiftUI
+#endif
 
 public enum RenameValidationState: Equatable, Sendable {
     case valid
@@ -24,6 +27,10 @@ public struct RenameAlertConfiguration: Equatable, Sendable {
         }
     }
 
+    public var isConfirmationEnabled: Bool {
+        validation == .valid
+    }
+
     public init(
         title: String,
         message: String? = nil,
@@ -42,3 +49,29 @@ public struct RenameAlertConfiguration: Equatable, Sendable {
         self.cancelLabel = cancelLabel
     }
 }
+
+#if canImport(SwiftUI)
+public extension View {
+    func renameAlert(
+        configuration: RenameAlertConfiguration,
+        isPresented: Binding<Bool>,
+        text: Binding<String>,
+        onConfirm: @escaping (String) -> Void
+    ) -> some View {
+        alert(configuration.title, isPresented: isPresented) {
+            TextField(configuration.fieldLabel, text: text)
+            Button(configuration.cancelLabel, role: .cancel) {}
+            Button(configuration.confirmLabel) {
+                onConfirm(text.wrappedValue)
+            }
+            .disabled(!configuration.isConfirmationEnabled)
+        } message: {
+            if let message = configuration.message {
+                Text(message)
+            } else if case let .invalid(message) = configuration.validation {
+                Text(message)
+            }
+        }
+    }
+}
+#endif

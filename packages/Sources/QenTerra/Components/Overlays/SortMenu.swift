@@ -7,6 +7,25 @@ public enum SortMenuOrder: String, CaseIterable, Equatable, Sendable {
     case descending
 }
 
+public struct SortMenuVisualStyle: Equatable, Sendable {
+    public let triggerSymbol: String
+    public let usesExplicitChoiceMarks: Bool
+
+    public init(triggerSymbol: String, usesExplicitChoiceMarks: Bool) {
+        self.triggerSymbol = triggerSymbol
+        self.usesExplicitChoiceMarks = usesExplicitChoiceMarks
+    }
+
+    public static let standard = Self(
+        triggerSymbol: "arrow.up.arrow.down",
+        usesExplicitChoiceMarks: false
+    )
+    public static let cadence = Self(
+        triggerSymbol: "arrow.up.arrow.down.circle",
+        usesExplicitChoiceMarks: true
+    )
+}
+
 public struct SortMenuField<ID: Hashable & Sendable>: Identifiable, Equatable, Sendable {
     public let id: ID
     public let title: String
@@ -71,39 +90,76 @@ public struct SortMenu<ID: Hashable & Sendable>: View {
     @Binding private var selection: ID
     @Binding private var order: SortMenuOrder
     private let labels: SortMenuLabels
+    private let visualStyle: SortMenuVisualStyle
 
     public init(
         fields: [SortMenuField<ID>],
         selection: Binding<ID>,
         order: Binding<SortMenuOrder>,
-        labels: SortMenuLabels
+        labels: SortMenuLabels,
+        visualStyle: SortMenuVisualStyle = .standard
     ) {
         self.fields = fields
         _selection = selection
         _order = order
         self.labels = labels
+        self.visualStyle = visualStyle
     }
 
     public var body: some View {
         switch presentation {
         case let .ready(ready):
             Menu {
-                Picker(labels.field, selection: selectableField) {
+                if visualStyle.usesExplicitChoiceMarks {
                     ForEach(fields) { field in
-                        Text(field.title)
-                            .tag(field.id)
-                            .disabled(!field.isEnabled)
+                        Button {
+                            selection = Self.selectionAfterActivating(
+                                field,
+                                current: selection
+                            )
+                        } label: {
+                            choiceLabel(
+                                field.title,
+                                isSelected: selection == field.id
+                            )
+                        }
+                        .disabled(!field.isEnabled)
+                    }
+                    Divider()
+                    ForEach(SortMenuOrder.allCases, id: \.self) { candidate in
+                        Button {
+                            order = candidate
+                        } label: {
+                            choiceLabel(
+                                candidate == .ascending ? labels.ascending : labels.descending,
+                                isSelected: order == candidate
+                            )
+                        }
+                    }
+                } else {
+                    Picker(labels.field, selection: selectableField) {
+                        ForEach(fields) { field in
+                            Text(field.title)
+                                .tag(field.id)
+                                .disabled(!field.isEnabled)
+                        }
+                    }
+                    Divider()
+                    Picker(labels.order, selection: $order) {
+                        Text(labels.ascending).tag(SortMenuOrder.ascending)
+                        Text(labels.descending).tag(SortMenuOrder.descending)
                     }
                 }
-                Divider()
-                Picker(labels.order, selection: $order) {
-                    Text(labels.ascending).tag(SortMenuOrder.ascending)
-                    Text(labels.descending).tag(SortMenuOrder.descending)
-                }
             } label: {
-                Label(ready.triggerTitle, systemImage: "arrow.up.arrow.down")
+                Label(
+                    visualStyle.usesExplicitChoiceMarks
+                        ? cadenceTriggerTitle(selectedFieldID: ready.selectedFieldID)
+                        : ready.triggerTitle,
+                    systemImage: visualStyle.triggerSymbol
+                )
                     .foregroundStyle(Color(designToken: DesignTokens.Color.textPrimary))
             }
+            .menuStyle(.borderlessButton)
             .accessibilityValue(ready.accessibilityValue)
         case .unavailable:
             Label(labels.unavailable, systemImage: "arrow.up.arrow.down")
@@ -162,6 +218,22 @@ public struct SortMenu<ID: Hashable & Sendable>: View {
 
     private var selectableField: Binding<ID> {
         Self.selectionBinding(fields: fields, selection: $selection)
+    }
+
+    private func cadenceTriggerTitle(selectedFieldID: ID) -> String {
+        guard let field = fields.first(where: { $0.id == selectedFieldID }) else {
+            return labels.trigger
+        }
+        return "\(labels.trigger): \(field.title)"
+    }
+
+    private func choiceLabel(_ title: String, isSelected: Bool) -> some View {
+        HStack {
+            Text(title)
+            if isSelected {
+                Image(systemName: "checkmark")
+            }
+        }
     }
 }
 #endif
