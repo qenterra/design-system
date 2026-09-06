@@ -204,6 +204,10 @@ Semantic system-font roles. Platform adapters may map to native text styles.
 - `roles.keycap.size`: `12`
 - `roles.keycap.tracking`: `0`
 - `roles.keycap.weight`: `500`
+- `roles.mediaExplicitBadge.line`: `11`
+- `roles.mediaExplicitBadge.size`: `9`
+- `roles.mediaExplicitBadge.tracking`: `0`
+- `roles.mediaExplicitBadge.weight`: `700`
 - `roles.metadata.line`: `15`
 - `roles.metadata.size`: `11`
 - `roles.metadata.tracking`: `0.08`

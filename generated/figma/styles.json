@@ -91,6 +91,14 @@
       "letterSpacing": 0.16
     },
     {
+      "name": "mediaExplicitBadge",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif",
+      "fontSize": 9,
+      "lineHeight": 11,
+      "fontWeight": 700,
+      "letterSpacing": 0
+    },
+    {
       "name": "eyebrow",
       "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif",
       "fontSize": 11,

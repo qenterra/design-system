@@ -26120,6 +26120,9 @@
         "packages/Tests/QenTerraMediaComponentsTests/MediaCollectionTests.swift",
         "packages/Tests/QenTerraMediaComponentsTests/MediaComponentModuleTests.swift",
         "packages/Tests/QenTerraMediaComponentsTests/NativeMediaTableTests.swift",
+        "packages/Tests/QenTerraMediaComponentsTests/NativeMediaTableConsumerBoundaryTests.swift",
+        "packages/Tests/QenTerraMediaComponentsTests/GradientPrewarmTests.swift",
+        "packages/Tests/QenTerraMediaComponentsTests/GradientSwiftUICompositionTests.swift",
         "packages/Tests/QenTerraMediaComponentsTests/PlayerAndLyricsTests.swift"
       ],
       "tests": [
@@ -26134,7 +26137,10 @@
         "packages/Tests/QenTerraMediaComponentsTests/MediaCollectionTests.swift",
         "packages/Tests/QenTerraMediaComponentsTests/MediaComponentModuleTests.swift",
         "packages/Tests/QenTerraMediaComponentsTests/NativeMediaTableTests.swift",
-        "packages/Tests/QenTerraMediaComponentsTests/PlayerAndLyricsTests.swift"
+        "packages/Tests/QenTerraMediaComponentsTests/PlayerAndLyricsTests.swift",
+        "packages/Tests/QenTerraMediaComponentsTests/NativeMediaTableConsumerBoundaryTests.swift",
+        "packages/Tests/QenTerraMediaComponentsTests/GradientPrewarmTests.swift",
+        "packages/Tests/QenTerraMediaComponentsTests/GradientSwiftUICompositionTests.swift"
       ],
       "capabilities": [
         "typed-tokens",

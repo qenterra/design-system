@@ -880,8 +880,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Table/MediaTableGeometry.swift",
-      "sha256": "78b86a2d39907bc28f701f13123e5a597a32a5773193efcd0d212525b2a67122",
-      "bytes": 4948
+      "sha256": "e319bb7a9cc41b1646c0cb3a8a2df597ce6dae3ff69ed16367b3fe1b7028658a",
+      "bytes": 5427
     },
     {
       "id": "media-table-row-presentation",
@@ -899,8 +899,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Table/MediaTableRowPresentation.swift",
-      "sha256": "71ce754717582b4cd3d192fc815308fb7c39326af5f4a2a94b9c25e10b86afa7",
-      "bytes": 5506
+      "sha256": "d57d2ecfb3099bcf0f573e30a68096f0d048c071a1c431392bcbeadf104d88c7",
+      "bytes": 6894
     },
     {
       "id": "native-media-table-view",
@@ -927,8 +927,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Table/NativeMediaTableCell.swift",
-      "sha256": "0cdbd7a347c6b83fd3f393d8286c7e45d97243877e96893fdde36b5c97ef0431",
-      "bytes": 29711
+      "sha256": "bcb15eddcf2b11d62eba046346984c877b103c056aeab886e4a81b087fad207b",
+      "bytes": 33642
     },
     {
       "id": "media-table-placeholder-row",
@@ -1003,8 +1003,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientResources.swift",
-      "sha256": "d7e89960533fde7aa1154de3ce6ff62f4d0a336293065472d9ca0826c6ee7eb0",
-      "bytes": 4376
+      "sha256": "cde7660eb88c4b10091636b37f5b03c5e2971790580e901a35ecb1d98d3d684e",
+      "bytes": 5969
     },
     {
       "id": "artwork-accent-gradient",
@@ -1018,8 +1018,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradient.swift",
-      "sha256": "ebf364f45ba39db03e2b2c881223dd71fed07a12e735cbc951a3f74ec9259b81",
-      "bytes": 20147
+      "sha256": "16cc5c3bc8ba2fdd0d6e53b35def3560aa223b5b0291d870ce1904d6cd472da5",
+      "bytes": 21941
     },
     {
       "id": "artwork-accent-gradient-snapshot",

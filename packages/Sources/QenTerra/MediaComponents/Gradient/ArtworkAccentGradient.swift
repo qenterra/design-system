@@ -6,8 +6,7 @@
     import SwiftUI
 
     /// A reusable artwork-colour terrain. The consumer retains palette extraction and effect state.
-    /// `ArtworkAccentGradientView` is the single composition boundary for terrain, idle
-    /// darkening, effect tint, and the opaque failure fallback used by both public surfaces.
+    /// SwiftUI owns its native blend semantics; direct AppKit consumers use layer composition.
     public struct ArtworkAccentGradient: View {
         public let palette: ArtworkAccentPalette
         public let isEffectActive: Bool
@@ -15,6 +14,7 @@
         private let explicitAppearance: ArtworkAccentGradientAppearance?
 
         @Environment(\.designNativeEnvironment) private var environment
+        @State private var hasTerrain = false
 
         public init(
             palette: ArtworkAccentPalette,
@@ -45,13 +45,43 @@
                     isEffectActive: isEffectActive,
                     environment: environment
                 )
-            ArtworkAccentGradientSurface(
-                palette: palette,
-                appearance: appearance,
-                fallbackColor: fallbackColor
-            )
+            ArtworkAccentGradientComposition(palette: palette, appearance: appearance, hasTerrain: hasTerrain) {
+                ArtworkAccentGradientSurface(
+                    palette: palette,
+                    appearance: appearance,
+                    fallbackColor: fallbackColor,
+                    hasTerrain: $hasTerrain
+                )
+            }
             .allowsHitTesting(false)
             .accessibilityHidden(true)
+        }
+    }
+
+    struct ArtworkAccentGradientComposition<Terrain: View>: View {
+        let palette: ArtworkAccentPalette
+        let appearance: ArtworkAccentGradientAppearance
+        var hasTerrain = true
+        @ViewBuilder let terrain: () -> Terrain
+
+        var body: some View {
+            let paletteAnimation: Animation? = appearance.isAnimated
+                ? .easeInOut(duration: ArtworkAccentGradientTransition.duration) : nil
+            ZStack {
+                terrain()
+                if hasTerrain {
+                    Color.black.opacity(ArtworkAccentGradientTint.baseOpacity(for: palette))
+                        .animation(paletteAnimation, value: palette)
+                    Color(red: appearance.tint.color.red, green: appearance.tint.color.green, blue: appearance.tint.color.blue)
+                        .blendMode(.multiply)
+                        .opacity(appearance.tint.amount)
+                        .animation(
+                            appearance.isAnimated ? .easeInOut(duration: appearance.tint.transitionDuration) : nil,
+                            value: appearance.tint.amount
+                        )
+                        .animation(paletteAnimation, value: palette)
+                }
+            }
         }
     }
 
@@ -59,13 +89,18 @@
         let palette: ArtworkAccentPalette
         let appearance: ArtworkAccentGradientAppearance
         let fallbackColor: ArtworkAccentColor
+        @Binding var hasTerrain: Bool
 
         func makeNSView(context _: Context) -> ArtworkAccentGradientView {
-            ArtworkAccentGradientView(
+            let view = ArtworkAccentGradientView(
                 frame: .zero,
                 device: MTLCreateSystemDefaultDevice(),
                 fallbackColor: fallbackColor
             )
+            view.appliesAppearanceOverlays = false
+            let ready = view.delegate != nil
+            DispatchQueue.main.async { hasTerrain = ready }
+            return view
         }
 
         func updateNSView(_ view: ArtworkAccentGradientView, context _: Context) {
@@ -84,6 +119,8 @@
         private let idleOverlay = ArtworkAccentGradientOverlayView()
         private let tintOverlay = ArtworkAccentGradientOverlayView()
         private var hasAppliedComposition = false
+        /// The SwiftUI surface supplies these overlays with SwiftUI blend semantics.
+        var appliesAppearanceOverlays = true
 
         public init(
             frame frameRect: NSRect,
@@ -281,7 +318,7 @@
             palette: ArtworkAccentPalette,
             appearance: ArtworkAccentGradientAppearance
         ) {
-            guard gradientRenderer != nil else {
+            guard gradientRenderer != nil, appliesAppearanceOverlays else {
                 idleOverlay.apply(color: fallbackColor, opacity: 0, duration: 0, animated: false)
                 tintOverlay.apply(color: fallbackColor, opacity: 0, duration: 0, animated: false)
                 hasAppliedComposition = true

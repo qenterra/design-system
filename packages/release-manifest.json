@@ -125,8 +125,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "886d145ab5c5d1d841d9e6e155e2aa798ed00ee47955bbfbb480d130c69ba55e",
-      "bytes": 6585
+      "sha256": "c5bb539c6c474ad3a5be5e1b47a3e7a0ac121112ace57c88097108f0349bf64a",
+      "bytes": 7517
     },
     {
       "path": "SECURITY.md",
@@ -66335,8 +66335,8 @@
     },
     {
       "path": "Sources/QenTerra/DesignTokens/GeneratedTokens.swift",
-      "sha256": "406d00e27bc520837a14286b8c6531039b1caa73b7d5d08a956196e806fda14e",
-      "bytes": 33253
+      "sha256": "40c1faf5a374c03c689c442d48c0d9a700ff3e43124b40a1f2e6991b27d4cfe9",
+      "bytes": 33487
     },
     {
       "path": "Sources/QenTerra/DesignTokens/SwiftUIAdapters.swift",
@@ -66420,8 +66420,8 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradient.swift",
-      "sha256": "ebf364f45ba39db03e2b2c881223dd71fed07a12e735cbc951a3f74ec9259b81",
-      "bytes": 20147
+      "sha256": "16cc5c3bc8ba2fdd0d6e53b35def3560aa223b5b0291d870ce1904d6cd472da5",
+      "bytes": 21941
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientModels.swift",
@@ -66430,8 +66430,8 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientResources.swift",
-      "sha256": "d7e89960533fde7aa1154de3ce6ff62f4d0a336293065472d9ca0826c6ee7eb0",
-      "bytes": 4376
+      "sha256": "cde7660eb88c4b10091636b37f5b03c5e2971790580e901a35ecb1d98d3d684e",
+      "bytes": 5969
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientSnapshot.swift",
@@ -66535,8 +66535,8 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Table/MediaTableGeometry.swift",
-      "sha256": "78b86a2d39907bc28f701f13123e5a597a32a5773193efcd0d212525b2a67122",
-      "bytes": 4948
+      "sha256": "e319bb7a9cc41b1646c0cb3a8a2df597ce6dae3ff69ed16367b3fe1b7028658a",
+      "bytes": 5427
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Table/MediaTablePlaceholderRow.swift",
@@ -66545,13 +66545,13 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Table/MediaTableRowPresentation.swift",
-      "sha256": "71ce754717582b4cd3d192fc815308fb7c39326af5f4a2a94b9c25e10b86afa7",
-      "bytes": 5506
+      "sha256": "d57d2ecfb3099bcf0f573e30a68096f0d048c071a1c431392bcbeadf104d88c7",
+      "bytes": 6894
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Table/NativeMediaTableCell.swift",
-      "sha256": "0cdbd7a347c6b83fd3f393d8286c7e45d97243877e96893fdde36b5c97ef0431",
-      "bytes": 29711
+      "sha256": "bcb15eddcf2b11d62eba046346984c877b103c056aeab886e4a81b087fad207b",
+      "bytes": 33642
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Table/NativeMediaTableView.swift",
@@ -66565,7 +66565,7 @@
     },
     {
       "path": "Sources/QenTerra/manifest.json",
-      "sha256": "6b14df191f30cdede47373596a67d71c76b4eae3138bada47a9185351b78e781",
+      "sha256": "1a08e8e4b2a619bb8c48ff84fcbbf27cfe2b7bba3ac6573fe4e00dd3afd08ed3",
       "bytes": 34526
     },
     {
@@ -130149,6 +130149,16 @@
       "bytes": 15303
     },
     {
+      "path": "Tests/QenTerraMediaComponentsTests/GradientPrewarmTests.swift",
+      "sha256": "28bdbf525d9cf52d2fae3eeb0426b074f6d448fed72af54e4e20cde4442bf470",
+      "bytes": 759
+    },
+    {
+      "path": "Tests/QenTerraMediaComponentsTests/GradientSwiftUICompositionTests.swift",
+      "sha256": "0a6be68ad52231c17c90396b671ad5a128055ecc080a267428389530d0b06b16",
+      "bytes": 3060
+    },
+    {
       "path": "Tests/QenTerraMediaComponentsTests/MediaCollectionTests.swift",
       "sha256": "6bf5a17c52385116e9ae0c7f36bd7ae0cbe7ee6c80afa4f3241791e74cc4db98",
       "bytes": 16863
@@ -130157,6 +130167,11 @@
       "path": "Tests/QenTerraMediaComponentsTests/MediaComponentModuleTests.swift",
       "sha256": "31921109d55d2197a52ff21cb6dfc25ce1938ba3cd53c7b91dbc6cc1a4f788f0",
       "bytes": 1400
+    },
+    {
+      "path": "Tests/QenTerraMediaComponentsTests/NativeMediaTableConsumerBoundaryTests.swift",
+      "sha256": "efb8414aa8f3db4c6fd14c597798224988ef558d9b43edaa92421bd3ed13ed95",
+      "bytes": 5711
     },
     {
       "path": "Tests/QenTerraMediaComponentsTests/NativeMediaTableTests.swift",
@@ -130270,13 +130285,13 @@
     },
     {
       "path": "npm/design-tokens/dist/tokens.css",
-      "sha256": "bd06f8390acfbca4df09f720d96580d764429e09ab56942bfaf110b941e55bba",
-      "bytes": 27271
+      "sha256": "710a366f9712216a6f5d57f0f6c3a01bd914057a252566b02480024312ff020f",
+      "bytes": 27624
     },
     {
       "path": "npm/design-tokens/dist/tokens.json",
-      "sha256": "42d0639c6ecd88c0406761e23616b3450352f70d59ae1252adcc2262c119ce17",
-      "bytes": 48070
+      "sha256": "0d14d8b4d8bfcb3e1eb337104b95863a6a34b95dea04dd1d913fa56c7e575d6c",
+      "bytes": 48193
     },
     {
       "path": "npm/design-tokens/package.json",
@@ -130345,8 +130360,8 @@
     },
     {
       "path": "npm/design-tokens/src/tokens.json",
-      "sha256": "42d0639c6ecd88c0406761e23616b3450352f70d59ae1252adcc2262c119ce17",
-      "bytes": 48070
+      "sha256": "0d14d8b4d8bfcb3e1eb337104b95863a6a34b95dea04dd1d913fa56c7e575d6c",
+      "bytes": 48193
     },
     {
       "path": "package.json",

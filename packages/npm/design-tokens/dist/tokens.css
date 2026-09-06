@@ -147,6 +147,11 @@
   --design-system-type-compact-metadata-weight: 500;
   --design-system-type-compact-metadata-tracking: 0.16px;
   --design-system-type-compact-metadata-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+  --design-system-type-media-explicit-badge-size: 9px;
+  --design-system-type-media-explicit-badge-line: 11px;
+  --design-system-type-media-explicit-badge-weight: 700;
+  --design-system-type-media-explicit-badge-tracking: 0px;
+  --design-system-type-media-explicit-badge-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
   --design-system-type-eyebrow-size: 11px;
   --design-system-type-eyebrow-line: 15px;
   --design-system-type-eyebrow-weight: 600;

@@ -40,6 +40,15 @@
         }
     }
 
+    /// Starts optional shader compilation off the UI thread. The renderer reuses the same library.
+    public enum ArtworkAccentGradientPrewarmer {
+        public static func prepare() {
+            Task.detached(priority: .utility) {
+                _ = ArtworkAccentGradientResources.preparedDefaultLibrary
+            }
+        }
+    }
+
     enum ArtworkAccentGradientResources {
         static func pipelineStates(
             device: MTLDevice,
@@ -49,8 +58,7 @@
             shaderSource: String? = ArtworkAccentGradientShader.source
         ) -> ArtworkAccentGradientPipelineStates? {
             guard
-                let shaderSource,
-                let library = try? device.makeLibrary(source: shaderSource, options: nil),
+                let library = library(device: device, shaderSource: shaderSource),
                 let vertexFunction = library.makeFunction(name: "artworkAccentGradientVertex"),
                 let fragmentFunction = library.makeFunction(name: "artworkAccentGradientFragment")
             else {
@@ -72,6 +80,24 @@
             }
             return ArtworkAccentGradientPipelineStates(onscreen: onscreen, snapshot: snapshot)
         }
+
+        static func library(device: MTLDevice, shaderSource: String?) -> MTLLibrary? {
+            guard let shaderSource else { return nil }
+            if shaderSource == ArtworkAccentGradientShader.source,
+               let preparedDefaultLibrary,
+               preparedDefaultLibrary.registryID == device.registryID
+            {
+                return preparedDefaultLibrary.library
+            }
+            return try? device.makeLibrary(source: shaderSource, options: nil)
+        }
+
+        static let preparedDefaultLibrary: PreparedArtworkAccentLibrary? = {
+            guard let device = MTLCreateSystemDefaultDevice(),
+                  let source = ArtworkAccentGradientShader.source,
+                  let library = try? device.makeLibrary(source: source, options: nil) else { return nil }
+            return PreparedArtworkAccentLibrary(registryID: device.registryID, library: library)
+        }()
 
         static func depthStencilState(device: MTLDevice) -> MTLDepthStencilState? {
             let descriptor = MTLDepthStencilDescriptor()
@@ -110,6 +136,17 @@
                 indices: indices,
                 indexCount: mesh.indices.count
             )
+        }
+    }
+
+    /// Immutable Metal library; Swift static initialization serializes the single compilation.
+    final class PreparedArtworkAccentLibrary: @unchecked Sendable {
+        let registryID: UInt64
+        let library: MTLLibrary
+
+        init(registryID: UInt64, library: MTLLibrary) {
+            self.registryID = registryID
+            self.library = library
         }
     }
 #endif
