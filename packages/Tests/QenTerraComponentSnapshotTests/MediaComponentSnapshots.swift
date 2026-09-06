@@ -31,7 +31,14 @@ struct MediaComponentSnapshots {
 
     @Test(arguments: [DesignAppearancePreference.light, .dark])
     func favoriteAndPlaybackStates(appearance: DesignAppearancePreference) throws {
-        try snapshot("media-controls", appearance: appearance, size: .init(width: 680, height: 190)) {
+        try snapshot(
+            "media-controls",
+            appearance: appearance,
+            size: .init(width: 680, height: 190),
+            accessibility: .init(reducesMotion: false),
+            presentationTime: 0,
+            materializesLayerPresentation: true
+        ) {
             MediaControlsFixture()
         }
     }
@@ -88,6 +95,8 @@ struct MediaComponentSnapshots {
         appearance: DesignAppearancePreference,
         size: CGSize,
         accessibility: SnapshotAccessibility = .init(reducesMotion: true),
+        presentationTime: TimeInterval = 1,
+        materializesLayerPresentation: Bool = false,
         @ViewBuilder content: () -> Content
     ) throws {
         let configuration = DesignSystemConfiguration(
@@ -99,6 +108,8 @@ struct MediaComponentSnapshots {
             size: size,
             configuration: configuration,
             accessibility: accessibility,
+            presentationTime: presentationTime,
+            materializesLayerPresentation: materializesLayerPresentation,
             content: content
         )
         try assertSnapshotImage(host.render(), name: "\(stem)-\(appearance.rawValue)")
@@ -266,11 +277,23 @@ private struct MediaControlsFixture: View {
 
     private func indicator(_ title: String, _ isPlaying: Bool) -> some View {
         VStack(spacing: 8) {
-            PlaybackIndicator(isPlaying: isPlaying, color: .accentColor)
+            HostedPlaybackIndicator(isPlaying: isPlaying)
                 .frame(width: 40, height: 40)
                 .background(Color.secondary.opacity(0.08), in: RoundedRectangle(cornerRadius: 8))
             Text(title).font(.caption)
         }
+    }
+}
+
+private struct HostedPlaybackIndicator: NSViewRepresentable {
+    let isPlaying: Bool
+
+    func makeNSView(context _: Context) -> NativePlaybackIndicatorView {
+        NativePlaybackIndicatorView(frame: .zero)
+    }
+
+    func updateNSView(_ view: NativePlaybackIndicatorView, context _: Context) {
+        view.setPlaying(isPlaying, reduceMotion: false)
     }
 }
 

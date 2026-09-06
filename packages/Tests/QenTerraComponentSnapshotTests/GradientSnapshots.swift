@@ -68,16 +68,17 @@ struct GradientSnapshots {
     @Test
     func opaqueFallback() throws {
         let fallback = ArtworkAccentColor(red: 0.08, green: 0.11, blue: 0.17)
-        guard let image = ArtworkAccentGradientSnapshot.render(
-            palette: .primary,
+        try hostedSnapshot(
+            name: "gradient-opaque-fallback",
             size: CGSize(width: 720, height: 420),
-            time: 4.25,
-            device: nil,
-            fallbackColor: fallback
-        ) else {
-            throw SnapshotFailure.rendering("Gradient fallback did not produce an image")
+            reducesMotion: true
+        ) {
+            HostedArtworkAccentFallback(
+                palette: .primary,
+                appearance: staticAppearance(for: .primary),
+                fallbackColor: fallback
+            )
         }
-        try assertSnapshotImage(RGBAImage(cgImage: image), name: "gradient-opaque-fallback")
     }
 
     @Test(arguments: [
@@ -135,6 +136,24 @@ struct GradientSnapshots {
                 : 1.055 * pow(linear, 1 / 2.4) - 0.055
         }
         return ArtworkAccentColor(red: component(color.x), green: component(color.y), blue: component(color.z))
+    }
+}
+
+private struct HostedArtworkAccentFallback: NSViewRepresentable {
+    let palette: ArtworkAccentPalette
+    let appearance: ArtworkAccentGradientAppearance
+    let fallbackColor: ArtworkAccentColor
+
+    func makeNSView(context _: Context) -> ArtworkAccentGradientView {
+        ArtworkAccentGradientView(
+            frame: .zero,
+            device: nil,
+            fallbackColor: fallbackColor
+        )
+    }
+
+    func updateNSView(_ view: ArtworkAccentGradientView, context _: Context) {
+        view.update(palette: palette, appearance: appearance)
     }
 }
 

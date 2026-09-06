@@ -158,11 +158,15 @@ final class NativeSnapshotHost<Content: View> {
     let view: NSHostingView<AnyView>
     private let window: NSWindow
     private let size: CGSize
+    private let presentationTime: TimeInterval
+    private let materializesLayerPresentation: Bool
 
     init(
         size: CGSize,
         configuration: DesignSystemConfiguration?,
         accessibility: SnapshotAccessibility? = .init(),
+        presentationTime: TimeInterval = 1,
+        materializesLayerPresentation: Bool = false,
         @ViewBuilder content: () -> Content
     ) throws {
         guard size.width > 0, size.height > 0,
@@ -170,6 +174,8 @@ final class NativeSnapshotHost<Content: View> {
             throw SnapshotFailure.rendering("Snapshot size must use positive integral pixels")
         }
         self.size = size
+        self.presentationTime = presentationTime
+        self.materializesLayerPresentation = materializesLayerPresentation
         _ = NSApplication.shared
         view = NSHostingView(rootView: AnyView(
             content()
@@ -213,8 +219,12 @@ final class NativeSnapshotHost<Content: View> {
     func render() throws -> RGBAImage {
         view.layoutSubtreeIfNeeded()
         // Keep real native progress indicators at one presentation instant. Nothing is hidden or substituted.
-        freezeTiming(view)
+        freezeTiming(view, at: presentationTime)
         CATransaction.flush()
+        if materializesLayerPresentation, let layer = view.layer {
+            materializeFrozenPresentation(layer)
+            CATransaction.flush()
+        }
         guard view.bitmapImageRepForCachingDisplay(in: view.bounds) != nil,
               let bitmap = NSBitmapImageRep(
                 bitmapDataPlanes: nil, pixelsWide: Int(size.width), pixelsHigh: Int(size.height),
@@ -230,25 +240,41 @@ final class NativeSnapshotHost<Content: View> {
         return try RGBAImage(cgImage: image)
     }
 
-    private func freezeTiming(_ view: NSView) {
-        if let layer = view.layer { freezeTiming(layer) }
+    private func freezeTiming(_ view: NSView, at presentationTime: TimeInterval) {
+        if let layer = view.layer { freezeTiming(layer, at: presentationTime) }
         if let progress = view as? NSProgressIndicator {
             progress.usesThreadedAnimation = false
         }
-        view.subviews.forEach(freezeTiming)
+        for subview in view.subviews {
+            freezeTiming(subview, at: presentationTime)
+        }
     }
 
-    private func freezeTiming(_ layer: CALayer) {
+    private func freezeTiming(_ layer: CALayer, at presentationTime: TimeInterval) {
         layer.speed = 0
         layer.beginTime = 0
-        layer.timeOffset = 1
+        layer.timeOffset = presentationTime
         for key in layer.animationKeys() ?? [] {
-            if let animation = layer.animation(forKey: key) {
+            if let animation = layer.animation(forKey: key)?.copy() as? CAAnimation {
                 animation.beginTime = 0
                 layer.add(animation, forKey: key)
             }
         }
-        layer.sublayers?.forEach(freezeTiming)
+        for sublayer in layer.sublayers ?? [] {
+            freezeTiming(sublayer, at: presentationTime)
+        }
+    }
+
+    private func materializeFrozenPresentation(_ layer: CALayer) {
+        for sublayer in layer.sublayers ?? [] {
+            materializeFrozenPresentation(sublayer)
+        }
+        guard let presentation = layer.presentation() else { return }
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        layer.transform = presentation.transform
+        layer.removeAllAnimations()
+        CATransaction.commit()
     }
 }
 
