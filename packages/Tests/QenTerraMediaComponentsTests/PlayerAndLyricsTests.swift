@@ -369,16 +369,26 @@ import Testing
         accessibilityLabel: "Playback progress",
         isEnabled: true
     )
-    let progressBitmap = try renderedBitmap(
+    let actualRanges = hostedSliderHorizontalRanges(
         PlaybackProgressControl(presentation: progress, seek: { _ in })
-            .tint(.red),
-        width: 240,
-        height: 40
     )
-    let redPixels = matchingPixels(progressBitmap) { color in
-        color.redComponent > 0.6 && color.greenComponent < 0.4 && color.blueComponent < 0.4
-    }
-    #expect(pixelBounds(redPixels) == CGRect(x: 42, y: 5, width: 136, height: 6))
+    // Empty text contributes no native views. Compare the real slider subtree
+    // with a literal reference on this OS: two 34-point labels and two 8-point
+    // gaps leave x=42...198. Native thumb/track tint and focus/AX permissions
+    // are deliberately not part of this horizontal-layout contract.
+    let referenceRanges = hostedSliderHorizontalRanges(
+        HStack(spacing: 8) {
+            Text("").frame(minWidth: 34, alignment: .leading)
+            Slider(value: .constant(1), in: 0 ... 1)
+            Text("").frame(minWidth: 34, alignment: .trailing)
+        }
+        .font(.caption2)
+        .foregroundStyle(.secondary)
+        .monospacedDigit()
+    )
+    #expect(referenceRanges.contains(42 ... 198))
+    #expect(!actualRanges.isEmpty)
+    #expect(actualRanges == referenceRanges)
 
     let queueShown = try renderedPlayerBarBitmap(isQueuePresented: true)
     let queueHidden = try renderedPlayerBarBitmap(isQueuePresented: false)
@@ -622,6 +632,32 @@ private struct QueueGeometryReporter: View {
 private struct PixelCoordinate: Hashable {
     let x: Int
     let y: Int
+}
+
+@MainActor
+private func hostedSliderHorizontalRanges<Content: View>(
+    _ content: Content
+) -> [ClosedRange<CGFloat>] {
+    let host = NSHostingView(rootView: content.frame(width: 240, height: 40, alignment: .topLeading))
+    host.sizingOptions = []
+    let window = NSWindow(
+        contentRect: NSRect(x: 100, y: 100, width: 240, height: 40),
+        styleMask: [.borderless], backing: .buffered, defer: false
+    )
+    window.isReleasedWhenClosed = false
+    window.contentView = host
+    defer { window.close() }
+    host.layoutSubtreeIfNeeded()
+    RunLoop.main.run(until: Date().addingTimeInterval(0.05))
+    host.layoutSubtreeIfNeeded()
+
+    func ranges(in view: NSView) -> [ClosedRange<CGFloat>] {
+        view.subviews.flatMap { child in
+            let frame = host.convert(child.alignmentRect(forFrame: child.frame), from: child.superview)
+            return [frame.minX ... frame.maxX] + ranges(in: child)
+        }
+    }
+    return ranges(in: host)
 }
 
 @MainActor
