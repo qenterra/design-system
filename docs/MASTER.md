@@ -413,6 +413,8 @@ The artwork-accent terrain shares its packaged Metal library with `ArtworkAccent
 
 `ArtworkAccentGradient` composes idle darkening and effect tint using SwiftUI's native color blending over raw Metal terrain. `ArtworkAccentGradientView` retains AppKit layer composition for direct native consumers. Do not add duplicate consumer overlays. Both surfaces retain opaque fallback; SwiftUI palette transitions use 0.8 seconds and effect opacity uses the supplied symmetric duration, with animations disabled for Reduced Motion.
 
+Gradient availability is resolved by one retained native surface before its first SwiftUI frame; initial tint does not wait for a later event-loop turn. Standard About-resource rows inherit typography and symbol rendering from their environment, while the Cadence style opts into its own treatment. Designed feedback actions honor each supplied action style; the default recovery action remains secondary.
+
 ### 6.7 Artwork presentation
 
 The macOS artwork family frames consumer-supplied ready content and exposes explicit `content`, `loading`, `placeholder`, and `error` presentation. Shared code owns the synthetic placeholder, semantic border, crop viewport and clamped transform, zero-to-four-slot mosaic geometry, and decorative palette haze. The consumer owns decoding, file and network access, cache and request identity, gestures, and save or cancel actions.

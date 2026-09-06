@@ -1,6 +1,6 @@
 #if canImport(SwiftUI)
-import SwiftUI
 import QenTerraDesignTokens
+import SwiftUI
 
 public enum AboutResourceOpenRejection: Equatable, Sendable {
     case discarded
@@ -64,30 +64,9 @@ public struct AboutResourceRow: View {
             activate()
         } label: {
             HStack(spacing: style == .cadence ? DesignProductMetrics.cadence.controlGap : DesignTokens.Space.value3) {
-                Image(systemName: resource.symbol)
-                    .font(style == .cadence ? .system(size: 15, weight: .medium) : .body)
-                    .symbolRenderingMode(.hierarchical)
-                    .foregroundStyle(
-                        Color(
-                            designToken: style == .cadence
-                                ? DesignTokens.Color.textSecondary
-                                : DesignTokens.Color.textLink
-                        )
-                    )
-                    .frame(
-                        width: style == .cadence ? 26 : nil,
-                        height: style == .cadence ? 26 : nil
-                    )
+                resourceSymbol.accessibilityHidden(true)
                 VStack(alignment: .leading, spacing: DesignTokens.Space.value1) {
-                    Text(resource.title)
-                        .font(style == .cadence ? .callout.weight(.medium) : .body)
-                        .foregroundStyle(
-                            Color(
-                                designToken: style == .cadence
-                                    ? DesignTokens.Color.textPrimary
-                                    : DesignTokens.Color.textLink
-                            )
-                        )
+                    resourceTitle
                     Text(resource.subtitle)
                         .font(
                             .system(
@@ -132,6 +111,28 @@ public struct AboutResourceRow: View {
         .accessibilityLabel(presentation.title)
         .accessibilityHint(presentation.accessibilityHint)
         .accessibilityValue(presentation.accessibilityValue)
+    }
+
+    @ViewBuilder private var resourceSymbol: some View {
+        if style == .cadence {
+            Image(systemName: resource.symbol)
+                .font(.system(size: 15, weight: .medium))
+                .symbolRenderingMode(.hierarchical)
+                .foregroundStyle(Color(designToken: DesignTokens.Color.textSecondary))
+                .frame(width: 26, height: 26)
+        } else {
+            Image(systemName: resource.symbol)
+                .foregroundStyle(Color(designToken: DesignTokens.Color.textLink))
+        }
+    }
+
+    @ViewBuilder private var resourceTitle: some View {
+        if style == .cadence {
+            Text(resource.title).font(.callout.weight(.medium))
+                .foregroundStyle(Color(designToken: DesignTokens.Color.textPrimary))
+        } else {
+            Text(resource.title).foregroundStyle(Color(designToken: DesignTokens.Color.textLink))
+        }
     }
 }
 #endif

@@ -14,7 +14,7 @@
         private let explicitAppearance: ArtworkAccentGradientAppearance?
 
         @Environment(\.designNativeEnvironment) private var environment
-        @State private var hasTerrain = false
+        @StateObject private var surface: ArtworkAccentGradientSurfaceState
 
         public init(
             palette: ArtworkAccentPalette,
@@ -25,6 +25,7 @@
             self.isEffectActive = isEffectActive
             self.fallbackColor = fallbackColor
             explicitAppearance = nil
+            _surface = StateObject(wrappedValue: ArtworkAccentGradientSurfaceState(fallbackColor: fallbackColor))
         }
 
         public init(
@@ -36,6 +37,7 @@
             isEffectActive = appearance.tint.amount > 0
             self.fallbackColor = fallbackColor
             explicitAppearance = appearance
+            _surface = StateObject(wrappedValue: ArtworkAccentGradientSurfaceState(fallbackColor: fallbackColor))
         }
 
         public var body: some View {
@@ -45,12 +47,11 @@
                     isEffectActive: isEffectActive,
                     environment: environment
                 )
-            ArtworkAccentGradientComposition(palette: palette, appearance: appearance, hasTerrain: hasTerrain) {
+            ArtworkAccentGradientComposition(palette: palette, appearance: appearance, hasTerrain: surface.view.delegate != nil) {
                 ArtworkAccentGradientSurface(
                     palette: palette,
                     appearance: appearance,
-                    fallbackColor: fallbackColor,
-                    hasTerrain: $hasTerrain
+                    view: surface.view
                 )
             }
             .allowsHitTesting(false)
@@ -85,22 +86,27 @@
         }
     }
 
-    private struct ArtworkAccentGradientSurface: NSViewRepresentable {
-        let palette: ArtworkAccentPalette
-        let appearance: ArtworkAccentGradientAppearance
-        let fallbackColor: ArtworkAccentColor
-        @Binding var hasTerrain: Bool
+    @MainActor
+    private final class ArtworkAccentGradientSurfaceState: ObservableObject {
+        let view: ArtworkAccentGradientView
 
-        func makeNSView(context _: Context) -> ArtworkAccentGradientView {
-            let view = ArtworkAccentGradientView(
+        init(fallbackColor: ArtworkAccentColor) {
+            view = ArtworkAccentGradientView(
                 frame: .zero,
                 device: MTLCreateSystemDefaultDevice(),
                 fallbackColor: fallbackColor
             )
             view.appliesAppearanceOverlays = false
-            let ready = view.delegate != nil
-            DispatchQueue.main.async { hasTerrain = ready }
-            return view
+        }
+    }
+
+    private struct ArtworkAccentGradientSurface: NSViewRepresentable {
+        let palette: ArtworkAccentPalette
+        let appearance: ArtworkAccentGradientAppearance
+        let view: ArtworkAccentGradientView
+
+        func makeNSView(context _: Context) -> ArtworkAccentGradientView {
+            view
         }
 
         func updateNSView(_ view: ArtworkAccentGradientView, context _: Context) {

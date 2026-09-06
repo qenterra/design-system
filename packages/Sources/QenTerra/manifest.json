@@ -350,8 +350,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/Feedback/ContentStateView.swift",
-      "sha256": "69543d29394949120bdc6b76450c6e94035e04c585f017429043d3d9e922b687",
-      "bytes": 7077
+      "sha256": "bccc4e65c79686ec5d650faa0759cb6cb9a20a341058d3193874daf46ca24687",
+      "bytes": 7329
     },
     {
       "id": "status-banner",
@@ -438,8 +438,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/About/AboutResourceRow.swift",
-      "sha256": "7c9185aaed1b79df6ce110e72d50dc18d182d71a7cb4097bd34980fab3a949be",
-      "bytes": 5206
+      "sha256": "c9333af37f19019d1730f7e233e9d5d0ba401e70ac893e07b985f7defbd3faf6",
+      "bytes": 5076
     },
     {
       "id": "artwork-palette",
@@ -1018,8 +1018,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradient.swift",
-      "sha256": "16cc5c3bc8ba2fdd0d6e53b35def3560aa223b5b0291d870ce1904d6cd472da5",
-      "bytes": 21941
+      "sha256": "4f57fae893e71593f7fa569171b5c5946c95432c707d4ac1564292a2948d66a8",
+      "bytes": 22211
     },
     {
       "id": "artwork-accent-gradient-snapshot",

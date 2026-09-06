@@ -1,9 +1,69 @@
 #if os(macOS)
+import AppKit
 import Foundation
+import QenTerraComponents
+import QenTerraDesignTokens
+import QenTerraMediaComponents
+import SwiftUI
 import Testing
 
 @Suite("Snapshot comparison contracts")
 struct SnapshotSupportTests {
+    @Test @MainActor func firstNativeGradientFrameIncludesItsEffectTint() throws {
+        func render(_ active: Bool) throws -> RGBAImage {
+            let host = try NativeSnapshotHost(size: CGSize(width: 320, height: 240), configuration: .init(appearance: .dark)) {
+                ArtworkAccentGradient(palette: .fallback, appearance: .init(
+                    isAnimated: false, maximumFramesPerSecond: 60,
+                    tint: .resolve(palette: .fallback, isEffectActive: active, reducesMotion: true)
+                ))
+            }
+            return try host.render()
+        }
+        let idle = try render(false)
+        let active = try render(true)
+        let tintChangesPixels = active.pixels != idle.pixels
+        #expect(tintChangesPixels)
+        #expect(active.pixels[0] < idle.pixels[0])
+    }
+
+    @Test @MainActor func recoveryRetainsSecondaryPresentationAndResourceRowsInheritTypography() throws {
+        func render<V: View>(@ViewBuilder _ content: () -> V) throws -> RGBAImage {
+            try NativeSnapshotHost(size: CGSize(width: 360, height: 240), configuration: .init(appearance: .light), content: content).render()
+        }
+        let recovery = try render {
+            ContentStateView(state: .error(title: "Error", message: "Try again"), recovery: .init(title: "Retry", handler: {}))!
+        }
+        let original = try render {
+            VStack(spacing: DesignTokens.Space.value3) {
+                Image(systemName: "xmark.octagon").font(.title2)
+                Text("Error").font(.system(size: DesignTokens.Typography.sectionTitle.size, weight: DesignTokens.Typography.sectionTitle.swiftUIWeight))
+                    .foregroundStyle(Color(designToken: DesignTokens.Color.textPrimary)).multilineTextAlignment(.center)
+                Text("Try again").font(.system(size: DesignTokens.Typography.supporting.size, weight: DesignTokens.Typography.supporting.swiftUIWeight))
+                    .foregroundStyle(Color(designToken: DesignTokens.Color.textSecondary)).multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
+                Button("Retry") {}.buttonStyle(DesignButtonStyle(role: .secondary))
+            }.padding(DesignTokens.Space.value6).frame(maxWidth: .infinity)
+        }
+        #expect(throws: Never.self) { try original.compare(recovery) }
+
+        let resource = try AboutResource(id: "source", title: "Source", subtitle: "Project source", symbol: "doc.text", destination: #require(URL(string: "https://example.com")), accessibilityHint: "Open source")
+        let row = try render { AboutResourceRow(resource: resource).font(.system(size: 19)) }
+        let reference = try render {
+            Button {} label: {
+                HStack(spacing: DesignTokens.Space.value3) {
+                    Image(systemName: "doc.text").foregroundStyle(Color(designToken: DesignTokens.Color.textLink))
+                    VStack(alignment: .leading, spacing: DesignTokens.Space.value1) {
+                        Text("Source").foregroundStyle(Color(designToken: DesignTokens.Color.textLink))
+                        Text("Project source").font(.system(size: DesignTokens.Typography.supporting.size, weight: DesignTokens.Typography.supporting.swiftUIWeight))
+                            .foregroundStyle(Color(designToken: DesignTokens.Color.textSecondary))
+                    }
+                    Spacer(minLength: 0)
+                    Image(systemName: "arrow.up.right").foregroundStyle(Color(designToken: DesignTokens.Color.textLink))
+                }.padding(DesignTokens.Space.value4).frame(maxWidth: .infinity, alignment: .leading)
+            }.buttonStyle(DesignButtonStyle(role: .link)).font(.system(size: 19))
+        }
+        #expect(throws: Never.self) { try reference.compare(row) }
+    }
+
     @Test func missingPlatformProfileFailsWithoutCreatingOrSubstitutingIt() throws {
         let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString).appendingPathComponent("macos-unavailable-arm64")
         #expect(throws: SnapshotFailure.missingProfile(directory.path)) {
@@ -34,7 +94,7 @@ struct SnapshotSupportTests {
 
     @Test func toleranceIncludesThreeButRejectsFourInEveryChannel() throws {
         let expected = try RGBAImage(width: 1, height: 1, pixels: [100, 110, 120, 200])
-        for channel in 0..<4 {
+        for channel in 0 ..< 4 {
             for direction in [-1, 1] {
                 var boundary = expected.pixels
                 boundary[channel] = UInt8(Int(boundary[channel]) + direction * 3)

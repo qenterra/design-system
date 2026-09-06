@@ -66185,8 +66185,8 @@
     },
     {
       "path": "Sources/QenTerra/Components/About/AboutResourceRow.swift",
-      "sha256": "7c9185aaed1b79df6ce110e72d50dc18d182d71a7cb4097bd34980fab3a949be",
-      "bytes": 5206
+      "sha256": "c9333af37f19019d1730f7e233e9d5d0ba401e70ac893e07b985f7defbd3faf6",
+      "bytes": 5076
     },
     {
       "path": "Sources/QenTerra/Components/Containers/CardContainer.swift",
@@ -66225,8 +66225,8 @@
     },
     {
       "path": "Sources/QenTerra/Components/Feedback/ContentStateView.swift",
-      "sha256": "69543d29394949120bdc6b76450c6e94035e04c585f017429043d3d9e922b687",
-      "bytes": 7077
+      "sha256": "bccc4e65c79686ec5d650faa0759cb6cb9a20a341058d3193874daf46ca24687",
+      "bytes": 7329
     },
     {
       "path": "Sources/QenTerra/Components/Feedback/DropZone.swift",
@@ -66420,8 +66420,8 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradient.swift",
-      "sha256": "16cc5c3bc8ba2fdd0d6e53b35def3560aa223b5b0291d870ce1904d6cd472da5",
-      "bytes": 21941
+      "sha256": "4f57fae893e71593f7fa569171b5c5946c95432c707d4ac1564292a2948d66a8",
+      "bytes": 22211
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientModels.swift",
@@ -66565,7 +66565,7 @@
     },
     {
       "path": "Sources/QenTerra/manifest.json",
-      "sha256": "1a08e8e4b2a619bb8c48ff84fcbbf27cfe2b7bba3ac6573fe4e00dd3afd08ed3",
+      "sha256": "d70ada9fd198176f56b69be95defbb82d7cce98d500625633cfeb37181a5d2e8",
       "bytes": 34526
     },
     {
@@ -129620,8 +129620,8 @@
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/SnapshotSupportTests.swift",
-      "sha256": "8bfa39f1580ac105521bb3e5d172a5718c3611923921a6809b43b86ab572887b",
-      "bytes": 3620
+      "sha256": "d00d64899f5a374d367473558023f316d170df323b9771a7bb189218ac1c764e",
+      "bytes": 7528
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/README.md",

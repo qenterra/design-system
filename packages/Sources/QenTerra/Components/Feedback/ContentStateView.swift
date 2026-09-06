@@ -1,6 +1,6 @@
 #if canImport(SwiftUI)
-import SwiftUI
 import QenTerraDesignTokens
+import SwiftUI
 
 public enum ContentPresentationState: Equatable, Sendable {
     case loading(title: String)
@@ -86,7 +86,6 @@ public struct ContentStateView: View {
         presentation = .designed
     }
 
-    @ViewBuilder
     public var body: some View {
         if presentation == .nativeUnavailable {
             nativeUnavailableBody
@@ -127,12 +126,7 @@ public struct ContentStateView: View {
             if !actions.isEmpty {
                 HStack(spacing: DesignTokens.Space.value3) {
                     ForEach(actions.indices, id: \.self) { index in
-                        Button(actions[index].title) {
-                            actions[index].perform()
-                        }
-                        .buttonStyle(
-                            DesignButtonStyle(role: index == 0 ? .primary : .secondary)
-                        )
+                        designedActionButton(actions[index])
                     }
                 }
             }
@@ -140,6 +134,18 @@ public struct ContentStateView: View {
         .padding(DesignTokens.Space.value6)
         .frame(maxWidth: .infinity)
         .accessibilityElement(children: .contain)
+    }
+
+    @ViewBuilder
+    private func designedActionButton(_ action: PresentationAction) -> some View {
+        switch action.style {
+        case .primary:
+            Button(action.title) { action.perform() }.buttonStyle(DesignButtonStyle(role: .primary))
+        case .secondary:
+            Button(action.title) { action.perform() }.buttonStyle(DesignButtonStyle(role: .secondary))
+        case .plain:
+            Button(action.title) { action.perform() }
+        }
     }
 
     private var nativeUnavailableBody: some View {
@@ -223,7 +229,9 @@ public struct ContentStateView: View {
 
 private extension ContentPresentationState {
     var isError: Bool {
-        if case .error = self { return true }
+        if case .error = self {
+            return true
+        }
         return false
     }
 }

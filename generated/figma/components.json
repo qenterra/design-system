@@ -2283,7 +2283,8 @@
         "state-symbol",
         "title",
         "message",
-        "error-recovery-action"
+        "error-recovery-action",
+        "explicit-action-style"
       ],
       "states": [
         "loading",
@@ -2662,7 +2663,8 @@
         "sf-symbol",
         "title",
         "subtitle",
-        "external-link-affordance"
+        "external-link-affordance",
+        "inherited-standard-typography"
       ],
       "states": [
         "default",
@@ -4418,6 +4420,7 @@
         "shared-prewarmed-library",
         "five-colour-palette",
         "native-swiftui-or-appkit-composition",
+        "first-frame-composition",
         "idle-darkening",
         "effect-tint",
         "opaque-fallback"

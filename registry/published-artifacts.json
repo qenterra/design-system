@@ -10,8 +10,8 @@
     },
     {
       "path": "generated/figma/components.json",
-      "sha256": "cfeac20204c86f08166a1facba6156a8ede5746d9fe68e56c638515e6b5d72d0",
-      "bytes": 111020
+      "sha256": "c887ea31afc3734b6062afcd59496799490b32eace231721985c344196aad505",
+      "bytes": 111129
     },
     {
       "path": "generated/figma/icons.json",
