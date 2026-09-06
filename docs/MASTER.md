@@ -835,6 +835,14 @@ Deprecated tokens/components remain documented for one migration window with rep
 
 ### 18.6 Package distribution
 
+`LyricsEdgeFade()` retains its fixed-height destination-out edge overlay. For a
+whole-viewport alpha mask, use `.mask { LyricsEdgeFade(presentation:
+.viewportMask(.init(topOpaqueLocation: 0.18, bottomOpaqueLocation: 0.88))) }`.
+The top-to-bottom gradient is clear at 0, black at both supplied opaque positions,
+and clear at 1. Finite positions are clamped to 0...1 and ordered; nonfinite top
+and bottom inputs fall back to 0 and 1 respectively. Both modes are decorative,
+hidden from accessibility, and ignore hit testing; consumers own mask placement.
+
 The canonical public repository is `qenterra/design-system`. It exposes
 `@qenterra/design-tokens` through npm and the `QenTerraDesignTokens` /
 `QenTerraComponents` / `QenTerraMediaComponents` SwiftPM products from the same versioned source. Production

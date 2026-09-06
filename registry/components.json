@@ -2132,7 +2132,7 @@
       "summary": {"en": "Adds decorative viewport edge fading without material, input, or document behavior.", "ru": "Добавляет декоративное затухание краёв без материала, ввода или поведения документа."},
       "status": "stable", "category": "feedback", "platforms": ["macOS"],
       "lifecycle": {"introduced": "2.0.0", "review": "minor"},
-      "anatomy": ["top-gradient", "bottom-gradient"], "states": ["visible"], "stories": [{"id": "visible", "state": "visible"}],
+      "anatomy": ["top-gradient", "bottom-gradient", "optional-normalized-opaque-plateau"], "states": ["visible", "viewport-mask"], "stories": [{"id": "visible", "state": "visible"}, {"id": "viewport-mask", "state": "viewport-mask"}],
       "keyboard": ["fade adds no focus target"], "accessibility": ["fade is hidden from assistive technology"],
       "localization": ["fade contains no copy"], "evidence": ["schema", "unit"],
       "delivery": {"status": "delivered", "packages": ["swift-components"]}

@@ -4095,15 +4095,21 @@
       },
       "anatomy": [
         "top-gradient",
-        "bottom-gradient"
+        "bottom-gradient",
+        "optional-normalized-opaque-plateau"
       ],
       "states": [
-        "visible"
+        "visible",
+        "viewport-mask"
       ],
       "stories": [
         {
           "id": "visible",
           "state": "visible"
+        },
+        {
+          "id": "viewport-mask",
+          "state": "viewport-mask"
         }
       ],
       "keyboard": [

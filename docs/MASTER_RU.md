@@ -499,6 +499,15 @@ Popup, side panel, overlay dock, bottom sheet и options page — разные l
 
 ### 18.6 Дистрибуция пакетов
 
+`LyricsEdgeFade()` сохраняет исходный destination-out overlay фиксированной высоты.
+Для alpha mask всей области используйте `.mask { LyricsEdgeFade(presentation:
+.viewportMask(.init(topOpaqueLocation: 0.18, bottomOpaqueLocation: 0.88))) }`.
+Градиент сверху вниз прозрачен в 0 и 1, чёрный в обеих переданных непрозрачных
+позициях. Конечные значения ограничиваются диапазоном 0...1 и упорядочиваются;
+нечисловые и бесконечные top/bottom заменяются на 0/1 соответственно. Оба режима
+декоративны, скрыты от accessibility и не перехватывают ввод; место применения
+маски остаётся решением потребителя.
+
 Канонический публичный репозиторий — `qenterra/design-system`. Из одного
 версионированного источника он отдаёт `@qenterra/design-tokens` через npm и
 продукты `QenTerraDesignTokens`, `QenTerraComponents` и `QenTerraMediaComponents` через SwiftPM. Production-

@@ -831,12 +831,14 @@
       "status": "stable",
       "deliveryProduct": "QenTerraMediaComponents",
       "publicSymbols": [
-        "LyricsEdgeFade"
+        "LyricsEdgeFade",
+        "LyricsEdgeFadeMaskConfiguration",
+        "LyricsEdgeFadePresentation"
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Lyrics/LyricsEdgeFade.swift",
-      "sha256": "5d38ad73eba912d372a3166e4eb9343df2dc439f3e8fdfb13ea2d6ae86e379fc",
-      "bytes": 725
+      "sha256": "55a6d12ac9b37d2203f711c0d357ce6af97ee9a9fa02d60091052e039db9b161",
+      "bytes": 2591
     },
     {
       "id": "media-metadata-badge",

@@ -125,8 +125,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "c5bb539c6c474ad3a5be5e1b47a3e7a0ac121112ace57c88097108f0349bf64a",
-      "bytes": 7517
+      "sha256": "e2fad6c73f3950ee168a336e15ba0f66897369c6ce621e8579983204ea7e3caa",
+      "bytes": 7982
     },
     {
       "path": "SECURITY.md",
@@ -66455,8 +66455,8 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Lyrics/LyricsEdgeFade.swift",
-      "sha256": "5d38ad73eba912d372a3166e4eb9343df2dc439f3e8fdfb13ea2d6ae86e379fc",
-      "bytes": 725
+      "sha256": "55a6d12ac9b37d2203f711c0d357ce6af97ee9a9fa02d60091052e039db9b161",
+      "bytes": 2591
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Lyrics/LyricsViewport.swift",
@@ -66565,8 +66565,8 @@
     },
     {
       "path": "Sources/QenTerra/manifest.json",
-      "sha256": "d70ada9fd198176f56b69be95defbb82d7cce98d500625633cfeb37181a5d2e8",
-      "bytes": 34526
+      "sha256": "436d92d7901dda7f822ed216c1d9e0988caa3ef9191ac7c925674ab219efa0ce",
+      "bytes": 34608
     },
     {
       "path": "Sources/ReUI/Base/Components/accordion/c-accordion-1.tsx",
@@ -130157,6 +130157,11 @@
       "path": "Tests/QenTerraMediaComponentsTests/GradientSwiftUICompositionTests.swift",
       "sha256": "0a6be68ad52231c17c90396b671ad5a128055ecc080a267428389530d0b06b16",
       "bytes": 3060
+    },
+    {
+      "path": "Tests/QenTerraMediaComponentsTests/LyricsEdgeFadeTests.swift",
+      "sha256": "4178263dbbb1284ca000b4880bef85fe99308f84c90bacc9ef30b97d92cba3f7",
+      "bytes": 3221
     },
     {
       "path": "Tests/QenTerraMediaComponentsTests/MediaCollectionTests.swift",

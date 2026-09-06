@@ -49,6 +49,13 @@ Native table consumers can configure identity-free loading placeholders, observe
 
 ## Common commands
 
+`LyricsEdgeFade()` preserves the fixed-height destination-out edge overlay. To mask
+an entire viewport, use `.mask { LyricsEdgeFade(presentation:
+.viewportMask(.init(topOpaqueLocation: 0.18, bottomOpaqueLocation: 0.88))) }`.
+The top-to-bottom mask has clear endpoints at 0 and 1 and black stops at the two
+normalized opaque positions. Finite inputs are clamped and ordered; nonfinite
+top/bottom inputs fall back to 0/1. Both modes are decorative and ignore input.
+
 ```sh
 python3 scripts/generate.py check
 python3 scripts/verify_release.py
