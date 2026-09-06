@@ -77,6 +77,7 @@ class RegistryContractTests(unittest.TestCase):
             "artwork-mosaic",
             "artwork-placeholder",
             "artwork-surface",
+            "artwork-accent-gradient",
             "button",
             "content-state-view",
             "card",
@@ -183,6 +184,12 @@ class RegistryContractTests(unittest.TestCase):
                 "packages/Sources/QenTerra/MediaComponents/Collections/MediaTile.swift",
                 "packages/Sources/QenTerra/MediaComponents/Controls/FavoriteControl.swift",
                 "packages/Sources/QenTerra/MediaComponents/Controls/PlaybackIndicator.swift",
+                "packages/Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentColor.swift",
+                "packages/Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradient.swift",
+                "packages/Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientModels.swift",
+                "packages/Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientResources.swift",
+                "packages/Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientSnapshot.swift",
+                "packages/Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientTransition.swift",
                 "packages/Sources/QenTerra/MediaComponents/Lyrics/LyricLine.swift",
                 "packages/Sources/QenTerra/MediaComponents/Lyrics/LyricLinePresentation.swift",
                 "packages/Sources/QenTerra/MediaComponents/Lyrics/LyricsEdgeFade.swift",
@@ -226,6 +233,7 @@ class RegistryContractTests(unittest.TestCase):
             "artwork-crop-surface", "artwork-haze", "artwork-mosaic",
             "artwork-placeholder", "artwork-surface",
             "media-table-placeholder-row", "native-media-table",
+            "artwork-accent-gradient",
             "card", "settings-section", "settings-row", "settings-toggle-row",
             "page-header", "page-scroll-view", "flow-layout", "resizable-split-view",
             "design-separator", "workspace-pane-header", "navigation-rail", "sort-menu",
@@ -376,6 +384,41 @@ class RegistryContractTests(unittest.TestCase):
             for item in load("packages/Sources/QenTerra/manifest.json")["components"]
         }
         self.assertTrue(table_sources.issubset(manifest_paths))
+
+    def test_artwork_accent_gradient_family_is_closed_over_public_swift_delivery(self) -> None:
+        package = next(
+            item
+            for item in load("registry/packages.json")["packages"]
+            if item["id"] == "swift-components"
+        )
+        gradient_sources = {
+            "packages/Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentColor.swift",
+            "packages/Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradient.swift",
+            "packages/Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientModels.swift",
+            "packages/Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientResources.swift",
+            "packages/Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientSnapshot.swift",
+            "packages/Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientTransition.swift",
+        }
+        public_paths = set(package["publicPaths"])
+        self.assertLessEqual(gradient_sources, public_paths)
+        self.assertIn(
+            "packages/Sources/QenTerra/MediaComponents/Resources/ArtworkAccentGradientShader.metal.txt",
+            public_paths,
+        )
+        self.assertIn(
+            "packages/Tests/QenTerraMediaComponentsTests/ArtworkAccentGradientTests.swift",
+            package["tests"],
+        )
+        self.assertIn("artwork-accent-gradient", package["capabilities"])
+
+        maintained = load("registry/qenterra-components.json")["components"]
+        maintained_paths = {item["sourcePath"] for item in maintained}
+        self.assertLessEqual(gradient_sources, maintained_paths)
+        manifest_paths = {
+            f"packages/{item['sourcePath']}"
+            for item in load("packages/Sources/QenTerra/manifest.json")["components"]
+        }
+        self.assertLessEqual(gradient_sources, manifest_paths)
 
     def test_artwork_family_is_closed_over_public_swift_delivery(self) -> None:
         package = next(

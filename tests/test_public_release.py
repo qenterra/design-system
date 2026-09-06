@@ -37,6 +37,26 @@ def nested_keys(value: object) -> set[str]:
 
 
 class PublicReleaseContractTests(unittest.TestCase):
+    def test_root_and_public_swift_manifests_process_media_resources(self) -> None:
+        for relative in (".", "packages"):
+            with self.subTest(package=relative):
+                manifest = json.loads(
+                    subprocess.check_output(
+                        ["swift", "package", "dump-package", "--package-path", relative],
+                        cwd=ROOT,
+                        text=True,
+                    )
+                )
+                target = next(
+                    item
+                    for item in manifest["targets"]
+                    if item["name"] == "QenTerraMediaComponents"
+                )
+                self.assertIn(
+                    {"path": "Resources", "rule": {"process": {}}},
+                    target["resources"],
+                )
+
     def test_npm_publish_job_requires_a_version_aligned_release_tag(self) -> None:
         workflow = (ROOT / ".github/workflows/release-packages.yml").read_text(
             encoding="utf-8"

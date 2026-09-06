@@ -904,6 +904,7 @@ def validate_catalogs(root: Path = ROOT) -> list[str]:
             "Sources/QenTerra/MediaComponents/Artwork/",
             "Sources/QenTerra/MediaComponents/Collections/",
             "Sources/QenTerra/MediaComponents/Controls/",
+            "Sources/QenTerra/MediaComponents/Gradient/",
             "Sources/QenTerra/MediaComponents/Player/",
             "Sources/QenTerra/MediaComponents/Queue/",
             "Sources/QenTerra/MediaComponents/Lyrics/",

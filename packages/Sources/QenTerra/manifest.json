@@ -921,6 +921,97 @@
       "sourcePath": "Sources/QenTerra/MediaComponents/Table/MediaTablePlaceholderRow.swift",
       "sha256": "a6f03f1114dbb3e62af6c651798223078aa853a06f21a3cecc6c67979749c903",
       "bytes": 1352
+    },
+    {
+      "id": "artwork-accent-color",
+      "name": "ArtworkAccentColor",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkAccentColor"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentColor.swift",
+      "sha256": "c76ebfc3ca9bd4527129083fba887aec9d3e08ff04e44b3ac7afc5e0b2f6870b",
+      "bytes": 1070
+    },
+    {
+      "id": "artwork-accent-gradient-models",
+      "name": "ArtworkAccentGradientModels",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkAccentPalette",
+        "ArtworkAccentGradientVertex",
+        "ArtworkAccentGradientMesh",
+        "ArtworkAccentGradientReference",
+        "ArtworkAccentGradientTint",
+        "ArtworkAccentGradientAppearance"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientModels.swift",
+      "sha256": "7f6ac8427b20d97efa94e968152521e5f5dfb1873b0163e14e443e54cb80b510",
+      "bytes": 10269
+    },
+    {
+      "id": "artwork-accent-gradient-transition",
+      "name": "ArtworkAccentGradientTransition",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkAccentGradientTransition",
+        "ArtworkAccentGradientTimeline"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientTransition.swift",
+      "sha256": "a1c6afb465f3be0ab1d54a10ed21045fcd918f997f1c5aea596ff741a151ab0c",
+      "bytes": 2314
+    },
+    {
+      "id": "artwork-accent-gradient-resources",
+      "name": "ArtworkAccentGradientResourceAvailability",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkAccentGradientResourceAvailability"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientResources.swift",
+      "sha256": "d7e89960533fde7aa1154de3ce6ff62f4d0a336293065472d9ca0826c6ee7eb0",
+      "bytes": 4376
+    },
+    {
+      "id": "artwork-accent-gradient",
+      "name": "ArtworkAccentGradient",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkAccentGradient",
+        "ArtworkAccentGradientView"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradient.swift",
+      "sha256": "68fecf4af6c16b5d9d91ae95decd65d54b11b26451a46ac8d3930d162283a599",
+      "bytes": 13764
+    },
+    {
+      "id": "artwork-accent-gradient-snapshot",
+      "name": "ArtworkAccentGradientSnapshot",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkAccentGradientSnapshot"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientSnapshot.swift",
+      "sha256": "5c69ed036f285cbcf318378e0f1ca4b299b2576abf60f0fe01cfee0f5527efa3",
+      "bytes": 6964
     }
   ]
 }

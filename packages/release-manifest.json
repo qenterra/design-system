@@ -90,8 +90,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "a75c6a1f3a98facbab164c7689bc6c4430b52d9b1119ee2dbc8b0a16a4d9963b",
-      "bytes": 5318
+      "sha256": "be4eb2fcf75fd0dc58569b1c7a11f6ddbc4020dc663b0ab29082d7c249f55495",
+      "bytes": 5768
     },
     {
       "path": "CODE_OF_CONDUCT.md",
@@ -66414,6 +66414,36 @@
       "bytes": 12849
     },
     {
+      "path": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentColor.swift",
+      "sha256": "c76ebfc3ca9bd4527129083fba887aec9d3e08ff04e44b3ac7afc5e0b2f6870b",
+      "bytes": 1070
+    },
+    {
+      "path": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradient.swift",
+      "sha256": "68fecf4af6c16b5d9d91ae95decd65d54b11b26451a46ac8d3930d162283a599",
+      "bytes": 13764
+    },
+    {
+      "path": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientModels.swift",
+      "sha256": "7f6ac8427b20d97efa94e968152521e5f5dfb1873b0163e14e443e54cb80b510",
+      "bytes": 10269
+    },
+    {
+      "path": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientResources.swift",
+      "sha256": "d7e89960533fde7aa1154de3ce6ff62f4d0a336293065472d9ca0826c6ee7eb0",
+      "bytes": 4376
+    },
+    {
+      "path": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientSnapshot.swift",
+      "sha256": "5c69ed036f285cbcf318378e0f1ca4b299b2576abf60f0fe01cfee0f5527efa3",
+      "bytes": 6964
+    },
+    {
+      "path": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientTransition.swift",
+      "sha256": "a1c6afb465f3be0ab1d54a10ed21045fcd918f997f1c5aea596ff741a151ab0c",
+      "bytes": 2314
+    },
+    {
       "path": "Sources/QenTerra/MediaComponents/Lyrics/LyricLine.swift",
       "sha256": "e37e37f09dd0f5fe05a7a186152c84010c93bc7fd986ef056b18da5564333078",
       "bytes": 2214
@@ -66494,6 +66524,11 @@
       "bytes": 590
     },
     {
+      "path": "Sources/QenTerra/MediaComponents/Resources/ArtworkAccentGradientShader.metal.txt",
+      "sha256": "a4e58b3ee9f46b9eeb9a0ccf760edbc0c39f9590eeb831e7384ef1180b59a846",
+      "bytes": 4798
+    },
+    {
       "path": "Sources/QenTerra/MediaComponents/Resources/MediaComponents.txt",
       "sha256": "eceb1bd2e2ca1ccdd0d53ce790ce0ea8c0270b0d92da468bd4b2031890263527",
       "bytes": 41
@@ -66530,8 +66565,8 @@
     },
     {
       "path": "Sources/QenTerra/manifest.json",
-      "sha256": "51eb702ba5e4409eef97a75604f3590e17607427974119b748c5a088d35bf748",
-      "bytes": 30369
+      "sha256": "d7934553c89def4e646638eda01fd2aed500426894fff455345cc674dcda57a1",
+      "bytes": 33708
     },
     {
       "path": "Sources/ReUI/Base/Components/accordion/c-accordion-1.tsx",
@@ -129774,6 +129809,11 @@
       "bytes": 8601
     },
     {
+      "path": "Tests/QenTerraMediaComponentsTests/ArtworkAccentGradientTests.swift",
+      "sha256": "66da9ef99eaf88bd68ad15643d820ce6c156b83af367af3243027cc9b12c6442",
+      "bytes": 16022
+    },
+    {
       "path": "Tests/QenTerraMediaComponentsTests/ArtworkComponentTests.swift",
       "sha256": "6945a3bf77dd0157612fe0bd173b8c3bfcf3a3be12d3da6f9d7a21db8d98ba9b",
       "bytes": 15303
@@ -130010,8 +130050,8 @@
     },
     {
       "path": "scripts/verify_source_catalogs.py",
-      "sha256": "ceadfaa02defd0d6f130f45acfe345e9ca912a230ab461bf28e0fd7c0bb69278",
-      "bytes": 49361
+      "sha256": "f4a1cf94b93b9c108c19368f7367a8d9b0f400b0e7286f7d9d85325f0cff5d51",
+      "bytes": 49419
     }
   ]
 }

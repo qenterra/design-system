@@ -246,6 +246,55 @@ print(row.title, widths.title)
 """,
         )
 
+    def test_artwork_accent_gradient_builds_against_copied_public_package(self) -> None:
+        self._build_fixture(
+            "swift-consumer-media",
+            source="""
+import AppKit
+import Metal
+import QenTerraDesignTokens
+import QenTerraMediaComponents
+import SwiftUI
+
+let palette = ArtworkAccentPalette(colors: [
+    ArtworkAccentColor(red: 0.2, green: 0.4, blue: 0.8),
+    ArtworkAccentColor(red: 0.9, green: 0.5, blue: 0.1),
+])
+let environment = DesignNativeEnvironment(
+    appearance: .dark,
+    productProfile: .standard,
+    density: .standard,
+    isIncreasedContrast: false,
+    reducesMotion: false,
+    reducesTransparency: false
+)
+let appearance = ArtworkAccentGradientAppearance.resolve(
+    palette: palette,
+    isEffectActive: true,
+    environment: environment
+)
+var transition = ArtworkAccentGradientTransition(palette: palette)
+transition.retarget(to: .fallback, at: 0.4, reducesMotion: false)
+let swiftUIView = ArtworkAccentGradient(palette: palette, appearance: appearance)
+
+@MainActor
+func constructNativeGradient() {
+    let view = ArtworkAccentGradientView(frame: .zero, device: nil)
+    view.update(palette: palette, appearance: appearance)
+    _ = ArtworkAccentGradientSnapshot.render(
+        palette: palette,
+        size: CGSize(width: 64, height: 64),
+        time: 0,
+        device: nil
+    )
+}
+
+_ = transition.colors(at: 0.8)
+_ = swiftUIView
+print(ArtworkAccentGradientResourceAvailability.hasPackagedShader)
+""",
+        )
+
     def test_player_family_builds_against_copied_public_package(self) -> None:
         self._build_fixture(
             "swift-consumer-media",

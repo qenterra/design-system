@@ -4390,6 +4390,80 @@
           "swift-components"
         ]
       }
+    },
+    {
+      "id": "artwork-accent-gradient",
+      "name": {
+        "en": "Artwork accent gradient",
+        "ru": "Градиент в цветах обложки"
+      },
+      "summary": {
+        "en": "Renders a fixed-reference Metal terrain from consumer-supplied artwork colours, animation state, and effect tint without owning media or input behavior.",
+        "ru": "Отрисовывает эталонный Metal-рельеф из переданных цветов обложки, состояния анимации и оттенка эффекта без владения медиа или вводом."
+      },
+      "status": "stable",
+      "category": "feedback",
+      "platforms": [
+        "macOS"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "major"
+      },
+      "anatomy": [
+        "runtime-compiled-metal-terrain",
+        "five-colour-palette",
+        "idle-darkening",
+        "effect-tint",
+        "opaque-fallback"
+      ],
+      "states": [
+        "animated",
+        "paused",
+        "palette-transition",
+        "effect-active",
+        "reduced-motion",
+        "missing-metal",
+        "missing-shader"
+      ],
+      "stories": [
+        {
+          "id": "animated",
+          "state": "animated"
+        },
+        {
+          "id": "effect-active",
+          "state": "effect-active"
+        },
+        {
+          "id": "reduced-motion",
+          "state": "reduced-motion"
+        },
+        {
+          "id": "fallback",
+          "state": "missing-metal"
+        }
+      ],
+      "keyboard": [
+        "decorative renderer adds no input or focus target"
+      ],
+      "accessibility": [
+        "surface is decorative and hidden from assistive technology",
+        "opaque fallback preserves the background boundary"
+      ],
+      "localization": [
+        "renderer contains no copy"
+      ],
+      "evidence": [
+        "schema",
+        "unit"
+      ],
+      "delivery": {
+        "status": "delivered",
+        "packages": [
+          "swift-components"
+        ]
+      }
     }
   ]
 }
