@@ -164,7 +164,7 @@ def main() -> int:
     run(["git", "diff", "--cached", "--check"])
     version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
     print(f"Verification passed for Design System {version}")
-    print("Native component snapshots compared in root and public packages without recording.")
+    print("Locked core, media, native-table, and gradient snapshots compared in root and public packages without recording.")
     print("Manual runtime, VoiceOver, motion, and consumer visual acceptance remain unproven.")
     return 0
 

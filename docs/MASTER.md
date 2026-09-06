@@ -836,6 +836,15 @@ manifest, the full verification gate, and clean consumer resolution. A package
 release proves adapter availability, not native rendering or accessibility
 acceptance in a product.
 
+The local version-alignment command accepts plain `MAJOR.MINOR.PATCH` only. It
+updates every declared canonical version surface through a staged transaction,
+regenerates derived and public manifests, and reports changed paths; it never
+commits, tags, pushes, publishes, or authorises a release. Native component
+snapshots use synthetic data and an exact OS/architecture profile. Recording is
+a separate focused operation followed by original-size review; the complete gate
+is comparison-only and covers core, media, native-table, Reduced Motion, fallback,
+and fixed-time gradient boundaries.
+
 The package source tree has six deliberately separate zones. `Sources/QenTerra/`
 contains the installable, tokenized `QenTerraDesignTokens`, `QenTerraComponents`, and macOS-first
 `QenTerraMediaComponents` targets. The media target exposes no iOS media API. `Sources/ExploreSwiftUI/` contains exact attributed

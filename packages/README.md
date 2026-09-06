@@ -43,7 +43,7 @@ For Swift Package Manager, add `https://github.com/QenTerra/design-system` and s
 
 - `QenTerraDesignTokens` for typed foundations and SwiftUI adapters;
 - `QenTerraComponents` for the maintained primary-button, group-container, and interactive-row primitives.
-- `QenTerraMediaComponents` for reusable macOS artwork states, placeholders, crop presentation, mosaics, and ready-palette haze; it performs no loading or mutation and has no iOS media API.
+- `QenTerraMediaComponents` for reusable macOS artwork, collections, playback, queue, lyrics, metadata, native-table, and artwork-accent gradient presentation; it performs no loading or mutation and has no iOS media API.
 
 ## Common commands
 
@@ -55,6 +55,8 @@ npm pack --workspace @qenterra/design-tokens --dry-run --json --cache /tmp/qente
 swift test --scratch-path /tmp/qenterra-packages-swift --disable-sandbox
 ```
 
+The snapshot target compares the complete native core and media catalog against the exact OS/architecture profile. Record with `QDS_RECORD_SNAPSHOTS=1` only in a focused target run on the capture host, then inspect every new PNG at original size before accepting it. The complete verifier refuses record mode.
+
 Use a unique temporary path outside the repository for every cache, build, report, or package-staging run. Remove it when the run is complete.
 
 ## Ownership and boundaries
@@ -64,6 +66,8 @@ Nikita Melnychenko (`@qenterra`) owns package APIs, release decisions, security 
 ## Version and release model
 
 All packages use one Semantic Versioning value. The maintained line began at `1.0.0` and the current version is `1.0.1`; npm metadata, Swift source compatibility, source catalogs, release tags, changelog, and `release-manifest.json` move together. Tags use `v<version>` and published versions are immutable.
+
+From the repository root, `python3 scripts/set_version.py <MAJOR.MINOR.PATCH>` validates plain SemVer, stages the full alignment transaction, regenerates public outputs, and prints changed paths. It performs no Git or publication action.
 
 The canonical `1.0.0` release remains immutable. npmjs also retains historical version `5.0.0` from the retired Packages repository; it remains registry history rather than part of the maintained `1.x` line.
 

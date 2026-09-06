@@ -180,7 +180,7 @@ class SwiftConsumerTests(unittest.TestCase):
         self._build_fixture("swift-consumer-core")
 
     def test_media_consumer_builds_against_copied_public_package(self) -> None:
-        self._build_fixture("swift-consumer-media")
+        self._build_fixture("swift-consumer-media", expected_output="PUBLIC_MEDIA_CATALOG_OK")
 
     def test_media_table_family_builds_against_copied_public_package(self) -> None:
         self._build_fixture(
@@ -581,7 +581,12 @@ print(player.hasCurrentItem, queue.isSelected, lyric.opacity, detail.value)
         )
         return application, bundled_executable, environment
 
-    def _build_fixture(self, fixture_name: str, source: str | None = None) -> None:
+    def _build_fixture(
+        self,
+        fixture_name: str,
+        source: str | None = None,
+        expected_output: str | None = None,
+    ) -> None:
         builder = load_builder()
         fixture = ROOT / "tests/fixtures" / fixture_name
         with tempfile.TemporaryDirectory(prefix="qenterra-swift-consumer-") as directory:
@@ -608,3 +613,26 @@ print(player.hasCurrentItem, queue.isSelected, lyric.opacity, detail.value)
                 0,
                 f"{fixture_name} failed to build against copied public package:\n{result.stdout}\n{result.stderr}",
             )
+            if expected_output is not None:
+                execution = subprocess.run(
+                    [
+                        "swift",
+                        "run",
+                        "--package-path",
+                        str(consumer),
+                        "--scratch-path",
+                        str(staging / "scratch"),
+                        "--disable-sandbox",
+                        "--skip-build",
+                    ],
+                    capture_output=True,
+                    text=True,
+                    env=environment,
+                    check=False,
+                )
+                self.assertEqual(
+                    execution.returncode,
+                    0,
+                    f"{fixture_name} failed to run after build:\n{execution.stdout}\n{execution.stderr}",
+                )
+                self.assertIn(expected_output, execution.stdout)
