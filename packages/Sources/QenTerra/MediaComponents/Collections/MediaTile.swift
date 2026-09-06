@@ -3,6 +3,91 @@ import QenTerraComponents
 import QenTerraDesignTokens
 import SwiftUI
 
+public enum MediaTileHorizontalAlignment: Equatable, Sendable {
+    case leading
+    case center
+}
+
+public enum MediaTileAccessoryPlacement: Equatable, Sendable {
+    case artworkOverlay
+    case labelTrailing
+    case titleLeadingOverlay
+}
+
+public enum MediaTileMetadataStyle: Equatable, Sendable {
+    case secondary
+    case tertiary
+}
+
+public struct MediaTilePresentation: Equatable, Sendable {
+    public let horizontalAlignment: MediaTileHorizontalAlignment
+    public let padding: CGFloat
+    public let contentSpacing: CGFloat
+    public let textSpacing: CGFloat
+    public let titleLineLimit: Int
+    public let accessoryPlacement: MediaTileAccessoryPlacement
+    public let titleAccessoryInset: CGFloat
+    public let metadataStyle: MediaTileMetadataStyle
+    public let showsPlaybackOverlay: Bool
+
+    public init(
+        horizontalAlignment: MediaTileHorizontalAlignment,
+        padding: CGFloat,
+        contentSpacing: CGFloat,
+        textSpacing: CGFloat,
+        titleLineLimit: Int,
+        accessoryPlacement: MediaTileAccessoryPlacement,
+        titleAccessoryInset: CGFloat = 0,
+        metadataStyle: MediaTileMetadataStyle = .tertiary,
+        showsPlaybackOverlay: Bool = true
+    ) {
+        self.horizontalAlignment = horizontalAlignment
+        self.padding = padding
+        self.contentSpacing = contentSpacing
+        self.textSpacing = textSpacing
+        self.titleLineLimit = titleLineLimit
+        self.accessoryPlacement = accessoryPlacement
+        self.titleAccessoryInset = titleAccessoryInset
+        self.metadataStyle = metadataStyle
+        self.showsPlaybackOverlay = showsPlaybackOverlay
+    }
+
+    public static let standard = Self(
+        horizontalAlignment: .leading,
+        padding: CGFloat(DesignTokens.Component.panelMediaCollectionTilePadding.points),
+        contentSpacing: CGFloat(DesignTokens.Component.panelMediaCollectionTilePadding.points),
+        textSpacing: CGFloat(DesignTokens.Component.panelMediaCollectionTileTextGap.points),
+        titleLineLimit: 2,
+        accessoryPlacement: .artworkOverlay
+    )
+
+    public static let cadenceHome = Self(
+        horizontalAlignment: .leading,
+        padding: 8,
+        contentSpacing: 8,
+        textSpacing: 4,
+        titleLineLimit: 2,
+        accessoryPlacement: .labelTrailing,
+        showsPlaybackOverlay: false
+    )
+
+    public static func cadenceCatalog(
+        contentSpacing: CGFloat = 10,
+        metadataStyle: MediaTileMetadataStyle = .tertiary
+    ) -> Self {
+        Self(
+            horizontalAlignment: .center,
+            padding: 10,
+            contentSpacing: contentSpacing,
+            textSpacing: contentSpacing,
+            titleLineLimit: 1,
+            accessoryPlacement: .titleLeadingOverlay,
+            titleAccessoryInset: 26,
+            metadataStyle: metadataStyle
+        )
+    }
+}
+
 public struct MediaTile<ID: Hashable & Sendable, Artwork: View, TrailingAccessory: View>: View {
     @FocusState private var isFocused: Bool
     @State private var isHovered = false
@@ -10,6 +95,7 @@ public struct MediaTile<ID: Hashable & Sendable, Artwork: View, TrailingAccessor
     private let item: MediaItemPresentation<ID>
     private let accessibilityLabel: String
     private let accessibilityValue: String?
+    private let presentation: MediaTilePresentation
     private let artwork: Artwork
     private let trailingAccessory: (MediaAccessoryInteractionContext) -> TrailingAccessory
     private let action: @MainActor () -> Void
@@ -18,6 +104,7 @@ public struct MediaTile<ID: Hashable & Sendable, Artwork: View, TrailingAccessor
         item: MediaItemPresentation<ID>,
         accessibilityLabel: String,
         accessibilityValue: String? = nil,
+        presentation: MediaTilePresentation = .standard,
         @ViewBuilder artwork: () -> Artwork,
         @ViewBuilder trailingAccessory: @escaping (MediaAccessoryInteractionContext) -> TrailingAccessory,
         action: @escaping @MainActor () -> Void
@@ -25,6 +112,7 @@ public struct MediaTile<ID: Hashable & Sendable, Artwork: View, TrailingAccessor
         self.item = item
         self.accessibilityLabel = accessibilityLabel
         self.accessibilityValue = accessibilityValue
+        self.presentation = presentation
         self.artwork = artwork()
         self.trailingAccessory = trailingAccessory
         self.action = action
@@ -34,6 +122,7 @@ public struct MediaTile<ID: Hashable & Sendable, Artwork: View, TrailingAccessor
         item: MediaItemPresentation<ID>,
         accessibilityLabel: String,
         accessibilityValue: String? = nil,
+        presentation: MediaTilePresentation = .standard,
         @ViewBuilder artwork: () -> Artwork,
         @ViewBuilder trailingAccessory: @escaping () -> TrailingAccessory,
         action: @escaping @MainActor () -> Void
@@ -42,6 +131,7 @@ public struct MediaTile<ID: Hashable & Sendable, Artwork: View, TrailingAccessor
             item: item,
             accessibilityLabel: accessibilityLabel,
             accessibilityValue: accessibilityValue,
+            presentation: presentation,
             artwork: artwork,
             trailingAccessory: { _ in trailingAccessory() },
             action: action
@@ -58,10 +148,8 @@ public struct MediaTile<ID: Hashable & Sendable, Artwork: View, TrailingAccessor
             ),
             cornerRadius: .group
         ) {
-            ZStack(alignment: .topTrailing) {
-                primaryButton
-                trailingAccessory(accessoryInteractionContext)
-            }
+            primaryButton
+                .overlay { accessoryOverlay }
         }
         .onHover { isHovered = $0 }
     }
@@ -73,34 +161,51 @@ public struct MediaTile<ID: Hashable & Sendable, Artwork: View, TrailingAccessor
                 isAvailable: item.isAvailable
             )
         } label: {
-            VStack(alignment: .leading, spacing: tilePadding) {
+            VStack(alignment: swiftUIAlignment, spacing: presentation.contentSpacing) {
                 artwork
                     .aspectRatio(1, contentMode: .fit)
                     .frame(maxWidth: .infinity)
-                    .overlay { MediaArtworkPlaybackOverlay(item: item) }
+                    .overlay {
+                        if presentation.showsPlaybackOverlay {
+                            MediaArtworkPlaybackOverlay(item: item)
+                        }
+                    }
 
-                HStack(alignment: .top, spacing: tilePadding) {
-                    VStack(alignment: .leading, spacing: tileTextGap) {
+                HStack(alignment: .top, spacing: presentation.padding) {
+                    VStack(alignment: swiftUIAlignment, spacing: presentation.textSpacing) {
                         Text(verbatim: item.title)
                             .font(.headline)
                             .foregroundStyle(.primary)
-                            .lineLimit(2)
-                        Text(verbatim: item.subtitle)
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                            .lineLimit(1)
+                            .lineLimit(presentation.titleLineLimit)
+                            .padding(
+                                .horizontal,
+                                presentation.accessoryPlacement == .titleLeadingOverlay
+                                    ? presentation.titleAccessoryInset
+                                    : 0
+                            )
+                            .frame(maxWidth: .infinity, alignment: frameAlignment)
+                        if !item.subtitle.isEmpty {
+                            Text(verbatim: item.subtitle)
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                                .lineLimit(1)
+                                .frame(maxWidth: .infinity, alignment: frameAlignment)
+                        }
                         if let metadata = item.metadata {
                             Text(verbatim: metadata)
                                 .font(.caption)
-                                .foregroundStyle(.tertiary)
+                                .foregroundStyle(metadataForegroundStyle)
                                 .lineLimit(1)
+                                .frame(maxWidth: .infinity, alignment: frameAlignment)
                         }
                     }
-                    Spacer(minLength: tileTextGap)
+                    if presentation.horizontalAlignment == .leading {
+                        Spacer(minLength: presentation.textSpacing)
+                    }
                 }
             }
-            .padding(tilePadding)
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(presentation.padding)
+            .frame(maxWidth: .infinity, alignment: frameAlignment)
             .contentShape(Rectangle())
         }
         .buttonStyle(MediaActivationButtonStyle())
@@ -111,12 +216,54 @@ public struct MediaTile<ID: Hashable & Sendable, Artwork: View, TrailingAccessor
         .modifier(OptionalAccessibilityValue(value: accessibilityValue))
     }
 
-    private var tilePadding: CGFloat {
-        CGFloat(DesignTokens.Component.panelMediaCollectionTilePadding.points)
+    @ViewBuilder
+    private var accessoryOverlay: some View {
+        switch presentation.accessoryPlacement {
+        case .artworkOverlay:
+            VStack {
+                HStack {
+                    Spacer()
+                    trailingAccessory(accessoryInteractionContext)
+                }
+                Spacer()
+            }
+        case .labelTrailing:
+            VStack(spacing: presentation.contentSpacing) {
+                Color.clear
+                    .aspectRatio(1, contentMode: .fit)
+                    .frame(maxWidth: .infinity)
+                HStack {
+                    Spacer()
+                    trailingAccessory(accessoryInteractionContext)
+                }
+                Spacer(minLength: 0)
+            }
+            .padding(presentation.padding)
+        case .titleLeadingOverlay:
+            VStack(spacing: presentation.contentSpacing) {
+                Color.clear
+                    .aspectRatio(1, contentMode: .fit)
+                    .frame(maxWidth: .infinity)
+                HStack {
+                    trailingAccessory(accessoryInteractionContext)
+                    Spacer()
+                }
+                Spacer(minLength: 0)
+            }
+            .padding(presentation.padding)
+        }
     }
 
-    private var tileTextGap: CGFloat {
-        CGFloat(DesignTokens.Component.panelMediaCollectionTileTextGap.points)
+    private var swiftUIAlignment: HorizontalAlignment {
+        presentation.horizontalAlignment == .center ? .center : .leading
+    }
+
+    private var frameAlignment: Alignment {
+        presentation.horizontalAlignment == .center ? .center : .leading
+    }
+
+    private var metadataForegroundStyle: HierarchicalShapeStyle {
+        presentation.metadataStyle == .secondary ? .secondary : .tertiary
     }
 
     private var accessoryInteractionContext: MediaAccessoryInteractionContext {

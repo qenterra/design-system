@@ -23,7 +23,8 @@ public struct MediaGridLayout: Equatable, Sendable {
         productProfile: DesignProductProfile,
         minimumWidth: CGFloat? = nil,
         maximumWidth: CGFloat? = nil,
-        spacing: CGFloat? = nil
+        spacing: CGFloat? = nil,
+        honorsExplicitSizing: Bool = false
     ) -> Self {
         let defaultMinimum = CGFloat(
             DesignTokens.Component.panelMediaCollectionGridMinimumWidth.points
@@ -32,7 +33,7 @@ public struct MediaGridLayout: Equatable, Sendable {
             DesignTokens.Component.panelMediaCollectionGridMaximumWidth.points
         )
         let defaultSpacing = CGFloat(DesignProductMetrics.cadence.contentGap)
-        let acceptsOverrides = productProfile != .cadence
+        let acceptsOverrides = productProfile != .cadence || honorsExplicitSizing
         let resolvedMinimum = acceptsOverrides
             ? finitePositive(minimumWidth) ?? defaultMinimum
             : defaultMinimum
@@ -132,17 +133,20 @@ public struct MediaGrid<Content: View>: View {
     private let minimumWidth: CGFloat?
     private let maximumWidth: CGFloat?
     private let spacing: CGFloat?
+    private let honorsExplicitSizing: Bool
     private let content: Content
 
     public init(
         minimumWidth: CGFloat? = nil,
         maximumWidth: CGFloat? = nil,
         spacing: CGFloat? = nil,
+        honorsExplicitSizing: Bool = false,
         @ViewBuilder content: () -> Content
     ) {
         self.minimumWidth = minimumWidth
         self.maximumWidth = maximumWidth
         self.spacing = spacing
+        self.honorsExplicitSizing = honorsExplicitSizing
         self.content = content()
     }
 
@@ -151,7 +155,8 @@ public struct MediaGrid<Content: View>: View {
             productProfile: productProfile,
             minimumWidth: minimumWidth,
             maximumWidth: maximumWidth,
-            spacing: spacing
+            spacing: spacing,
+            honorsExplicitSizing: honorsExplicitSizing
         )
         LazyVGrid(
             columns: layout.columns,

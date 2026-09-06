@@ -7,13 +7,21 @@ import SwiftUI
 public struct PlaybackIndicatorState: Equatable, Sendable {
     public let isPlaying: Bool
     public let reducesMotion: Bool
+    public let allowsAnimation: Bool
 
-    public init(isPlaying: Bool, reducesMotion: Bool) {
+    public init(
+        isPlaying: Bool,
+        reducesMotion: Bool,
+        allowsAnimation: Bool = true
+    ) {
         self.isPlaying = isPlaying
         self.reducesMotion = reducesMotion
+        self.allowsAnimation = allowsAnimation
     }
 
-    public var animates: Bool { isPlaying && !reducesMotion }
+    public var animates: Bool {
+        isPlaying && !reducesMotion && allowsAnimation
+    }
 
     public var staticScales: [Double] {
         [
@@ -144,18 +152,25 @@ public struct PlaybackIndicatorGeometry: Equatable, Sendable {
 public struct PlaybackIndicator: View {
     @Environment(\.designNativeEnvironment) private var environment
     private let isPlaying: Bool
+    private let animates: Bool
     private let color: Color
     private let geometry = PlaybackIndicatorGeometry()
 
-    public init(isPlaying: Bool, color: Color = .white) {
+    public init(
+        isPlaying: Bool,
+        animates: Bool = true,
+        color: Color = .white
+    ) {
         self.isPlaying = isPlaying
+        self.animates = animates
         self.color = color
     }
 
     public var body: some View {
         let state = PlaybackIndicatorState(
             isPlaying: isPlaying,
-            reducesMotion: environment.reducesMotion
+            reducesMotion: environment.reducesMotion,
+            allowsAnimation: animates
         )
         TimelineView(.animation(paused: !state.animates)) { timeline in
             GeometryReader { proxy in

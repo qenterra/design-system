@@ -132,15 +132,26 @@ import Testing
     #expect(cadence.metrics(availableWidth: 800).columnCount == 4)
     #expect(cadence.metrics(availableWidth: 800).itemWidth == 188)
 
-    let cadenceWithOverrides = MediaGridLayout.resolve(
+    let cadenceDefaultsRemainStable = MediaGridLayout.resolve(
         productProfile: .cadence,
         minimumWidth: 120,
         maximumWidth: 180,
         spacing: 12
     )
-    #expect(cadenceWithOverrides.minimumWidth == 164)
-    #expect(cadenceWithOverrides.maximumWidth == 196)
-    #expect(cadenceWithOverrides.spacing == 16)
+    #expect(cadenceDefaultsRemainStable.minimumWidth == 164)
+    #expect(cadenceDefaultsRemainStable.maximumWidth == 196)
+    #expect(cadenceDefaultsRemainStable.spacing == 16)
+
+    let cadenceWithOverrides = MediaGridLayout.resolve(
+        productProfile: .cadence,
+        minimumWidth: 120,
+        maximumWidth: 180,
+        spacing: 12,
+        honorsExplicitSizing: true
+    )
+    #expect(cadenceWithOverrides.minimumWidth == 120)
+    #expect(cadenceWithOverrides.maximumWidth == 180)
+    #expect(cadenceWithOverrides.spacing == 12)
 
     let overridden = MediaGridLayout.resolve(
         productProfile: .standard,
@@ -153,6 +164,38 @@ import Testing
     #expect(overridden.spacing == 12)
     #expect(overridden.metrics(availableWidth: 384).columnCount == 3)
     #expect(overridden.metrics(availableWidth: 384).itemWidth == 120)
+}
+
+@Test func mediaTileCompatibilityProfilesKeepConsumerGeometryExplicit() {
+    let standard = MediaTilePresentation.standard
+    #expect(standard.horizontalAlignment == .leading)
+    #expect(standard.padding == 8)
+    #expect(standard.contentSpacing == 8)
+    #expect(standard.textSpacing == 4)
+    #expect(standard.titleLineLimit == 2)
+    #expect(standard.accessoryPlacement == .artworkOverlay)
+    #expect(standard.showsPlaybackOverlay)
+
+    let home = MediaTilePresentation.cadenceHome
+    #expect(home.horizontalAlignment == .leading)
+    #expect(home.padding == 8)
+    #expect(home.contentSpacing == 8)
+    #expect(home.titleLineLimit == 2)
+    #expect(home.accessoryPlacement == .labelTrailing)
+    #expect(!home.showsPlaybackOverlay)
+
+    let catalog = MediaTilePresentation.cadenceCatalog(contentSpacing: 9)
+    #expect(catalog.horizontalAlignment == .center)
+    #expect(catalog.padding == 10)
+    #expect(catalog.contentSpacing == 9)
+    #expect(catalog.textSpacing == 9)
+    #expect(catalog.titleLineLimit == 1)
+    #expect(catalog.accessoryPlacement == .titleLeadingOverlay)
+    #expect(catalog.titleAccessoryInset == 26)
+    #expect(catalog.metadataStyle == .tertiary)
+
+    let artist = MediaTilePresentation.cadenceCatalog(metadataStyle: .secondary)
+    #expect(artist.metadataStyle == .secondary)
 }
 
 @Test func invalidGridOverridesCannotPublishNonfiniteOrInvertedGeometry() {
@@ -216,6 +259,16 @@ import Testing
     #expect(active.scale(forBar: 2, elapsed: 0) == 0.46)
     #expect(active.scale(forBar: 1, elapsed: 0.1) == 0.72)
     #expect(active.scale(forBar: 2, elapsed: 0.2) == 0.46)
+}
+
+@Test func playbackIndicatorCanBeExplicitlyStaticWithoutReducedMotion() {
+    let state = PlaybackIndicatorState(
+        isPlaying: true,
+        reducesMotion: false,
+        allowsAnimation: false
+    )
+    #expect(!state.animates)
+    #expect((0 ..< 3).map { state.scale(forBar: $0, elapsed: 10) } == state.staticScales)
 }
 
 @Test func playbackIndicatorGeometryMatchesTheCadenceBarContract() {
