@@ -299,6 +299,7 @@ print(ArtworkAccentGradientResourceAvailability.hasPackagedShader)
         self._build_fixture(
             "swift-consumer-media",
             source="""
+import AVFoundation
 import QenTerraMediaComponents
 import SwiftUI
 
@@ -354,13 +355,42 @@ let bar = PlayerBar(presentation: player, actions: actions) {
     Color.blue
 } metadataAccessory: {
     Text("External")
+} favoriteAccessory: {
+    Text("Import")
 } statusAccessory: {
     Text("Status")
 } routeAccessory: {
     Text("Route")
 }
+let row = PlaybackQueueRow(
+    presentation: queue,
+    dragPayload: "public-queue-item",
+    select: {},
+    play: {},
+    remove: nil,
+    artwork: { Color.blue },
+    metadata: { Text("Public Artist · Public Album") },
+    contextMenu: { EmptyView() },
+    dragPreview: { Text("Public Track") }
+)
+let lyrics = LyricsViewport(
+    lines: [lyric],
+    currentIdentity: lyric.id,
+    resetIdentity: "public-track",
+    alignment: .leading
+) { line in
+    LyricLineLabel(
+        presentation: line,
+        textSize: 24,
+        alignment: .leading,
+        lineLimit: 3
+    )
+}
+let systemRoute = AirPlayRoutePicker.routingPlayer(AVPlayer())
 _ = bar
-print(player.hasCurrentItem, queue.isSelected, lyric.opacity, detail.value)
+_ = row
+_ = lyrics
+print(player.hasCurrentItem, queue.isSelected, lyric.opacity, detail.value, systemRoute == nil)
 """,
         )
 

@@ -66335,8 +66335,8 @@
     },
     {
       "path": "Sources/QenTerra/DesignTokens/GeneratedTokens.swift",
-      "sha256": "1818f7d71f1a3b62c52157fdbae38bd639b645ca2a0bf9b164b7d50c8f198013",
-      "bytes": 33162
+      "sha256": "406d00e27bc520837a14286b8c6531039b1caa73b7d5d08a956196e806fda14e",
+      "bytes": 33253
     },
     {
       "path": "Sources/QenTerra/DesignTokens/SwiftUIAdapters.swift",
@@ -66445,13 +66445,13 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Lyrics/LyricLine.swift",
-      "sha256": "e37e37f09dd0f5fe05a7a186152c84010c93bc7fd986ef056b18da5564333078",
-      "bytes": 2214
+      "sha256": "5a255b752e361fc77efdc2a72fd3ecbf5f7a7b2997f286c05f57e0aadcf03568",
+      "bytes": 3293
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Lyrics/LyricLinePresentation.swift",
-      "sha256": "0da593b6bf3e4c63a13d04fb8f03a0158fd8b9d2b7ef5d977012124c9dc61622",
-      "bytes": 1206
+      "sha256": "9d833caac6e381662b0034fec90a7f87f8c9006a935d7e8575e6516714b27043",
+      "bytes": 1321
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Lyrics/LyricsEdgeFade.swift",
@@ -66460,8 +66460,8 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Lyrics/LyricsViewport.swift",
-      "sha256": "4622d81ebf43ce6f5e06c7473d22371472aafc33ad5485b62f21adfe2776f55e",
-      "bytes": 4318
+      "sha256": "118c26527553b23b9e6a71bd6a5a075d4889de66adb0af5e9b16c7e8f94a0dd1",
+      "bytes": 6913
     },
     {
       "path": "Sources/QenTerra/MediaComponents/MediaComponents.swift",
@@ -66480,8 +66480,8 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Player/AirPlayRoutePicker.swift",
-      "sha256": "8a52eb252c4c3e590577b37f937aea81a63527188d9f56cb1d713a69cac0f581",
-      "bytes": 1015
+      "sha256": "e444227c2e7a387a1115f61984637631b294b248425185cb6fe921f4a9ca957c",
+      "bytes": 1022
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Player/PlaybackProgressControl.swift",
@@ -66490,8 +66490,8 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Player/PlayerBar.swift",
-      "sha256": "2b84547b0a38a206d834458ef547c77431d190c37c320c7ed64ff88e3ac0f3ea",
-      "bytes": 11118
+      "sha256": "6f2846ebd5942a4920372ba2e83a1d6b2e9c30389c7052ecff24b1a4cf2e4144",
+      "bytes": 12154
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Player/PlayerBarActions.swift",
@@ -66510,8 +66510,8 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Queue/PlaybackQueueRow.swift",
-      "sha256": "6abd769dbaaf6587502a1d6dfb84921f5746a0aeb2bd8ba579cafdc0baa6399c",
-      "bytes": 7174
+      "sha256": "4831188a85f10a0b1f0e628a2b1ab4a4ceb241f460fe06792f1408f877c07447",
+      "bytes": 10057
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Queue/QueueDragPreview.swift",
@@ -66565,8 +66565,8 @@
     },
     {
       "path": "Sources/QenTerra/manifest.json",
-      "sha256": "c01d4f7aa95cc045f92e5c57e75e80ad1bbf1a21b39c590fd0e1be04967966b4",
-      "bytes": 34498
+      "sha256": "6b14df191f30cdede47373596a67d71c76b4eae3138bada47a9185351b78e781",
+      "bytes": 34526
     },
     {
       "path": "Sources/ReUI/Base/Components/accordion/c-accordion-1.tsx",
@@ -130165,8 +130165,8 @@
     },
     {
       "path": "Tests/QenTerraMediaComponentsTests/PlayerAndLyricsTests.swift",
-      "sha256": "140ef3525a921102ad4f4f2a7ea5f7fe805e1b79110033afdc55da2db8aa8bbc",
-      "bytes": 26679
+      "sha256": "4510f4badffe521954628a99afeaafb5cfd52ece7fd86790986254f2f3ba0ef7",
+      "bytes": 31948
     },
     {
       "path": "docs/ARCHITECTURE.md",
@@ -130270,13 +130270,13 @@
     },
     {
       "path": "npm/design-tokens/dist/tokens.css",
-      "sha256": "2f0e8a2242474bad03f5b39baf41b368122662bfdc468a2329c13279e5fc8781",
-      "bytes": 27203
+      "sha256": "bd06f8390acfbca4df09f720d96580d764429e09ab56942bfaf110b941e55bba",
+      "bytes": 27271
     },
     {
       "path": "npm/design-tokens/dist/tokens.json",
-      "sha256": "4bdfd991ae42583add89c4a060cbb91ea4ae942798bd2a48acb1af5475bf58b0",
-      "bytes": 47929
+      "sha256": "42d0639c6ecd88c0406761e23616b3450352f70d59ae1252adcc2262c119ce17",
+      "bytes": 48070
     },
     {
       "path": "npm/design-tokens/package.json",
@@ -130345,8 +130345,8 @@
     },
     {
       "path": "npm/design-tokens/src/tokens.json",
-      "sha256": "4bdfd991ae42583add89c4a060cbb91ea4ae942798bd2a48acb1af5475bf58b0",
-      "bytes": 47929
+      "sha256": "42d0639c6ecd88c0406761e23616b3450352f70d59ae1252adcc2262c119ce17",
+      "bytes": 48070
     },
     {
       "path": "package.json",

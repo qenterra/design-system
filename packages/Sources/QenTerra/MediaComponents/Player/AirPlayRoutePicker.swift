@@ -29,7 +29,7 @@ public struct AirPlayRoutePicker: NSViewRepresentable {
         picker.player = Self.routingPlayer(playerReference.player)
     }
 
-    static func routingPlayer(_ player: AVPlayer?) -> AVPlayer? {
+    public static func routingPlayer(_ player: AVPlayer?) -> AVPlayer? {
         guard player?.currentItem != nil else { return nil }
         return player
     }

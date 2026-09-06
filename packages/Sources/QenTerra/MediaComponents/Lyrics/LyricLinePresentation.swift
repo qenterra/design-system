@@ -11,6 +11,7 @@ public struct LyricLinePresentation<ID: Hashable & Sendable>: Identifiable, Equa
     public let text: String
     public let isActive: Bool
     public let isSynchronized: Bool
+    public let isBlankStanza: Bool
     public let inactiveBlurRadius: Double
 
     public init(
@@ -18,12 +19,14 @@ public struct LyricLinePresentation<ID: Hashable & Sendable>: Identifiable, Equa
         text: String,
         isActive: Bool,
         isSynchronized: Bool,
+        isBlankStanza: Bool = false,
         inactiveBlurRadius: Double = DesignTokens.Component.panelLyricsInactiveBlurRadius.points
     ) {
         self.id = id
         self.text = text
         self.isActive = isActive
         self.isSynchronized = isSynchronized
+        self.isBlankStanza = isBlankStanza
         self.inactiveBlurRadius = inactiveBlurRadius.isFinite ? max(inactiveBlurRadius, 0) : 0
     }
 
