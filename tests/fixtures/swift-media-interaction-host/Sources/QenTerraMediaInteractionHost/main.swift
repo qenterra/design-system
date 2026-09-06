@@ -234,12 +234,21 @@ private func composition(
 }
 
 @MainActor
+private final class PointerTrackingWindow: NSWindow {
+    override func constrainFrameRect(_ frameRect: NSRect, to screen: NSScreen?) -> NSRect {
+        // Move the fixture under a stationary cursor even at a screen edge.
+        // Normal window constraints would displace the target being exercised.
+        frameRect
+    }
+}
+
+@MainActor
 private final class NativeInteractionHarness {
     private let window: NSWindow
     private let host: NSHostingView<AnyView>
 
     init(rootView: AnyView, size: CGSize = CGSize(width: 480, height: 360)) throws {
-        window = NSWindow(
+        window = PointerTrackingWindow(
             contentRect: NSRect(origin: NSPoint(x: 120, y: 120), size: size),
             styleMask: [.titled],
             backing: .buffered,
@@ -305,6 +314,32 @@ private final class NativeInteractionHarness {
 
     func movePointer(to frame: CGRect) throws {
         let physicalCursor = NSEvent.mouseLocation
+        try placeTarget(frame, under: physicalCursor)
+        NSApp.postEvent(
+            try mouseEvent(
+                type: .mouseMoved,
+                point: windowPoint(for: frame),
+                clickCount: 0,
+                pressure: 0
+            ),
+            atStart: false
+        )
+        pump()
+    }
+
+    func validatePointerPlacementAtScreenEdges() throws {
+        let screen = try requireValue(window.screen, "pointer placement host has no screen")
+        let bounds = screen.frame
+        let target = CGRect(x: 20, y: 20, width: 100, height: 40)
+        for x in [bounds.minX + 1, bounds.maxX - 1] {
+            for y in [bounds.minY + 1, bounds.maxY - 1] {
+                try placeTarget(target, under: NSPoint(x: x, y: y))
+            }
+        }
+        print("POINTER_PLACEMENT_EDGES_OK")
+    }
+
+    private func placeTarget(_ frame: CGRect, under physicalCursor: NSPoint) throws {
         let targetBeforeMove = window.convertPoint(toScreen: windowPoint(for: frame))
         window.setFrameOrigin(
             NSPoint(
@@ -320,18 +355,8 @@ private final class NativeInteractionHarness {
         try require(
             abs(targetAfterMove.x - physicalCursor.x) < 1
                 && abs(targetAfterMove.y - physicalCursor.y) < 1,
-            "window could not place the published target under the physical cursor"
+            "window could not place the published target under the physical cursor: requested=\(physicalCursor) actual=\(targetAfterMove) window=\(window.frame)"
         )
-        NSApp.postEvent(
-            try mouseEvent(
-                type: .mouseMoved,
-                point: windowPoint(for: frame),
-                clickCount: 0,
-                pressure: 0
-            ),
-            atStart: false
-        )
-        pump()
     }
 
     func moveContainerAwayFromPointer() throws {
@@ -1051,6 +1076,12 @@ private func nativeDescendant(in view: NSView, identifier: String) -> NSView? {
 @MainActor
 private func run() throws {
     try require(NSApp.activationPolicy() == .regular, "application host is not a regular app")
+
+    do {
+        let harness = try NativeInteractionHarness(rootView: AnyView(Color.clear))
+        defer { harness.close() }
+        try harness.validatePointerPlacementAtScreenEdges()
+    }
 
     try exerciseMediaTableControls()
     print("MEDIA_TABLE_INTERACTION_HOST_OK")

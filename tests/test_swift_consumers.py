@@ -408,6 +408,7 @@ print(player.hasCurrentItem, queue.isSelected, lyric.opacity, detail.value)
                 host_stdout,
                 f"media interaction host failed:\n{host_stdout}\n{host_stderr}",
             )
+            self.assertIn("POINTER_PLACEMENT_EDGES_OK", host_stdout)
             self.assertIn(
                 "PLAYER_INTERACTION_HOST_OK",
                 host_stdout,
