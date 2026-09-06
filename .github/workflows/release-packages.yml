@@ -7,6 +7,14 @@ on:
         description: Existing version tag to publish
         required: true
         type: string
+      publication_target:
+        description: Verify the tagged packages or explicitly publish npm latest
+        required: true
+        type: choice
+        default: verify-only
+        options:
+          - verify-only
+          - npm-latest
   push:
     tags:
       - "v*.*.*"
@@ -60,7 +68,7 @@ jobs:
 
   publish:
     needs: snapshot
-    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v'))
+    if: github.event_name == 'workflow_dispatch' && inputs.publication_target == 'npm-latest'
     permissions:
       contents: read
       id-token: write
