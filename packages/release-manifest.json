@@ -66420,8 +66420,8 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradient.swift",
-      "sha256": "68fecf4af6c16b5d9d91ae95decd65d54b11b26451a46ac8d3930d162283a599",
-      "bytes": 13764
+      "sha256": "ebf364f45ba39db03e2b2c881223dd71fed07a12e735cbc951a3f74ec9259b81",
+      "bytes": 20147
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientModels.swift",
@@ -66565,7 +66565,7 @@
     },
     {
       "path": "Sources/QenTerra/manifest.json",
-      "sha256": "d7934553c89def4e646638eda01fd2aed500426894fff455345cc674dcda57a1",
+      "sha256": "f840462023788ff64b551d0acba0f2ffcad1b709471922db446e03d5ba5b0246",
       "bytes": 33708
     },
     {
@@ -129810,8 +129810,8 @@
     },
     {
       "path": "Tests/QenTerraMediaComponentsTests/ArtworkAccentGradientTests.swift",
-      "sha256": "66da9ef99eaf88bd68ad15643d820ce6c156b83af367af3243027cc9b12c6442",
-      "bytes": 16022
+      "sha256": "dbdc76cf7dbc58354d22911d81802191d76270f81f99ab4e87423ce1010d65ce",
+      "bytes": 20481
     },
     {
       "path": "Tests/QenTerraMediaComponentsTests/ArtworkComponentTests.swift",

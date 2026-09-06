@@ -6,6 +6,8 @@
     import SwiftUI
 
     /// A reusable artwork-colour terrain. The consumer retains palette extraction and effect state.
+    /// `ArtworkAccentGradientView` is the single composition boundary for terrain, idle
+    /// darkening, effect tint, and the opaque failure fallback used by both public surfaces.
     public struct ArtworkAccentGradient: View {
         public let palette: ArtworkAccentPalette
         public let isEffectActive: Bool
@@ -48,44 +50,6 @@
                 appearance: appearance,
                 fallbackColor: fallbackColor
             )
-            .overlay {
-                Color.black
-                    .opacity(ArtworkAccentGradientTint.baseOpacity(for: palette))
-                    .animation(
-                        appearance.isAnimated
-                            ? .easeInOut(duration: ArtworkAccentGradientTransition.duration)
-                            : nil,
-                        value: palette
-                    )
-            }
-            .overlay {
-                Color(
-                    red: appearance.tint.color.red,
-                    green: appearance.tint.color.green,
-                    blue: appearance.tint.color.blue
-                )
-                .blendMode(.multiply)
-                .opacity(appearance.tint.amount)
-                .animation(
-                    appearance.isAnimated
-                        ? .easeInOut(duration: appearance.tint.transitionDuration)
-                        : nil,
-                    value: appearance.tint.amount
-                )
-                .animation(
-                    appearance.isAnimated
-                        ? .easeInOut(duration: ArtworkAccentGradientTransition.duration)
-                        : nil,
-                    value: palette
-                )
-            }
-            .background(
-                Color(
-                    red: fallbackColor.red,
-                    green: fallbackColor.green,
-                    blue: fallbackColor.blue
-                )
-            )
             .allowsHitTesting(false)
             .accessibilityHidden(true)
         }
@@ -109,10 +73,17 @@
         }
     }
 
+    /// The AppKit composition surface shared by direct AppKit and SwiftUI consumers.
+    /// It owns the Metal terrain, appearance overlays, and opaque failure presentation.
     @MainActor
-    public final class ArtworkAccentGradientView: MTKView {
+    public final class ArtworkAccentGradientView: NSView {
         private var gradientRenderer: ArtworkAccentGradientRenderer?
         private let fallbackColor: ArtworkAccentColor
+        private let metalView: MTKView
+        private let fallbackOverlay = ArtworkAccentGradientOverlayView()
+        private let idleOverlay = ArtworkAccentGradientOverlayView()
+        private let tintOverlay = ArtworkAccentGradientOverlayView()
+        private var hasAppliedComposition = false
 
         public init(
             frame frameRect: NSRect,
@@ -120,7 +91,9 @@
             fallbackColor: ArtworkAccentColor = ArtworkAccentColor(red: 0, green: 0, blue: 0)
         ) {
             self.fallbackColor = fallbackColor
-            super.init(frame: frameRect, device: device)
+            metalView = MTKView(frame: frameRect, device: device)
+            super.init(frame: frameRect)
+            configureComposition()
             configureRenderer(shaderSource: ArtworkAccentGradientShader.source)
         }
 
@@ -131,14 +104,17 @@
             shaderSource: String?
         ) {
             self.fallbackColor = fallbackColor
-            super.init(frame: frameRect, device: device)
+            metalView = MTKView(frame: frameRect, device: device)
+            super.init(frame: frameRect)
+            configureComposition()
             configureRenderer(shaderSource: shaderSource)
         }
 
-        public required init(coder: NSCoder) {
+        public required init?(coder: NSCoder) {
             fallbackColor = ArtworkAccentColor(red: 0, green: 0, blue: 0)
+            metalView = MTKView(frame: .zero, device: MTLCreateSystemDefaultDevice())
             super.init(coder: coder)
-            device = MTLCreateSystemDefaultDevice()
+            configureComposition()
             configureRenderer(shaderSource: ArtworkAccentGradientShader.source)
         }
 
@@ -146,19 +122,81 @@
             true
         }
 
+        override public func layout() {
+            super.layout()
+            metalView.frame = bounds
+            fallbackOverlay.frame = bounds
+            idleOverlay.frame = bounds
+            tintOverlay.frame = bounds
+        }
+
+        override public func draw(_ dirtyRect: NSRect) {
+            if let image = gradientRenderer?.makeSnapshot(size: bounds.size, time: 0),
+               let context = NSGraphicsContext.current?.cgContext
+            {
+                context.saveGState()
+                context.interpolationQuality = .high
+                context.draw(image, in: bounds)
+                context.restoreGState()
+                return
+            }
+            NSColor(
+                srgbRed: fallbackColor.red,
+                green: fallbackColor.green,
+                blue: fallbackColor.blue,
+                alpha: 1
+            ).setFill()
+            dirtyRect.fill()
+        }
+
+        public var colorPixelFormat: MTLPixelFormat {
+            metalView.colorPixelFormat
+        }
+
+        public var depthStencilPixelFormat: MTLPixelFormat {
+            metalView.depthStencilPixelFormat
+        }
+
+        public var sampleCount: Int {
+            metalView.sampleCount
+        }
+
+        public var delegate: MTKViewDelegate? {
+            metalView.delegate
+        }
+
+        public var preferredFramesPerSecond: Int {
+            get { metalView.preferredFramesPerSecond }
+            set { metalView.preferredFramesPerSecond = newValue }
+        }
+
+        public var isPaused: Bool {
+            get { metalView.isPaused }
+            set { metalView.isPaused = newValue }
+        }
+
+        public var enableSetNeedsDisplay: Bool {
+            get { metalView.enableSetNeedsDisplay }
+            set { metalView.enableSetNeedsDisplay = newValue }
+        }
+
         public func update(
             palette: ArtworkAccentPalette,
             appearance: ArtworkAccentGradientAppearance
         ) {
             gradientRenderer?.update(palette: palette, appearance: appearance)
+            updateComposition(palette: palette, appearance: appearance)
             preferredFramesPerSecond = appearance.maximumFramesPerSecond
             isPaused = !appearance.isAnimated || gradientRenderer == nil
             enableSetNeedsDisplay = !appearance.isAnimated
             if isPaused {
                 setNeedsDisplay(bounds)
+                metalView.setNeedsDisplay(metalView.bounds)
             }
         }
 
+        /// Renders the raw terrain for deterministic reference comparison.
+        /// Capture the hosted view when validating appearance tint or fallback presentation.
         public func makeSnapshot(size: CGSize, time: Float) -> CGImage? {
             gradientRenderer?.makeSnapshot(size: size, time: time)
                 ?? ArtworkAccentGradientSnapshot.opaqueFallback(
@@ -169,27 +207,29 @@
 
         private func configureRenderer(shaderSource: String?) {
             wantsLayer = true
-            clearColor = MTLClearColorMake(
+            layer?.backgroundColor = fallbackColor.cgColor
+            metalView.clearColor = MTLClearColorMake(
                 fallbackColor.red,
                 fallbackColor.green,
                 fallbackColor.blue,
                 1
             )
-            guard let device else {
+            metalView.isHidden = true
+            guard let device = metalView.device else {
                 isPaused = true
                 enableSetNeedsDisplay = true
                 return
             }
 
-            framebufferOnly = true
-            autoResizeDrawable = true
-            colorPixelFormat = .bgra8Unorm_srgb
-            depthStencilPixelFormat = .depth32Float
-            sampleCount = device.supportsTextureSampleCount(4) ? 4 : 1
+            metalView.framebufferOnly = true
+            metalView.autoResizeDrawable = true
+            metalView.colorPixelFormat = .bgra8Unorm_srgb
+            metalView.depthStencilPixelFormat = .depth32Float
+            metalView.sampleCount = device.supportsTextureSampleCount(4) ? 4 : 1
             preferredFramesPerSecond = 60
             enableSetNeedsDisplay = false
             isPaused = false
-            if let metalLayer = layer as? CAMetalLayer {
+            if let metalLayer = metalView.layer as? CAMetalLayer {
                 metalLayer.colorspace = CGColorSpace(name: CGColorSpace.sRGB)
             }
 
@@ -205,7 +245,130 @@
                 return
             }
             gradientRenderer = renderer
-            delegate = renderer
+            metalView.delegate = renderer
+            metalView.isHidden = false
+            fallbackOverlay.isHidden = true
+        }
+
+        private func configureComposition() {
+            wantsLayer = true
+            layer?.backgroundColor = fallbackColor.cgColor
+            metalView.frame = bounds
+            metalView.autoresizingMask = [.width, .height]
+            addSubview(metalView)
+            fallbackOverlay.frame = bounds
+            fallbackOverlay.autoresizingMask = [.width, .height]
+            fallbackOverlay.overlayColor = fallbackColor
+            addSubview(fallbackOverlay)
+            idleOverlay.frame = bounds
+            idleOverlay.autoresizingMask = [.width, .height]
+            idleOverlay.overlayColor = ArtworkAccentColor(red: 0, green: 0, blue: 0)
+            idleOverlay.apply(
+                color: ArtworkAccentColor(red: 0, green: 0, blue: 0),
+                opacity: 0,
+                duration: 0,
+                animated: false
+            )
+            addSubview(idleOverlay)
+            tintOverlay.frame = bounds
+            tintOverlay.autoresizingMask = [.width, .height]
+            tintOverlay.usesMultiplyBlend = true
+            tintOverlay.apply(color: fallbackColor, opacity: 0, duration: 0, animated: false)
+            addSubview(tintOverlay)
+        }
+
+        private func updateComposition(
+            palette: ArtworkAccentPalette,
+            appearance: ArtworkAccentGradientAppearance
+        ) {
+            guard gradientRenderer != nil else {
+                idleOverlay.apply(color: fallbackColor, opacity: 0, duration: 0, animated: false)
+                tintOverlay.apply(color: fallbackColor, opacity: 0, duration: 0, animated: false)
+                hasAppliedComposition = true
+                return
+            }
+            let animates = hasAppliedComposition && appearance.isAnimated
+            idleOverlay.apply(
+                color: ArtworkAccentColor(red: 0, green: 0, blue: 0),
+                opacity: ArtworkAccentGradientTint.baseOpacity(for: palette),
+                duration: ArtworkAccentGradientTransition.duration,
+                animated: animates
+            )
+            tintOverlay.apply(
+                color: appearance.tint.color,
+                opacity: appearance.tint.amount,
+                duration: appearance.tint.transitionDuration,
+                animated: animates
+            )
+            hasAppliedComposition = true
+        }
+    }
+
+    @MainActor
+    private final class ArtworkAccentGradientOverlayView: NSView {
+        var usesMultiplyBlend = false {
+            didSet {
+                wantsLayer = true
+                layer?.compositingFilter = usesMultiplyBlend ? "multiplyBlendMode" : nil
+            }
+        }
+
+        var overlayColor = ArtworkAccentColor(red: 0, green: 0, blue: 0)
+
+        override var isOpaque: Bool {
+            false
+        }
+
+        override func hitTest(_: NSPoint) -> NSView? {
+            nil
+        }
+
+        override func draw(_ dirtyRect: NSRect) {
+            guard let context = NSGraphicsContext.current?.cgContext else {
+                return
+            }
+            context.saveGState()
+            NSColor(
+                srgbRed: overlayColor.red,
+                green: overlayColor.green,
+                blue: overlayColor.blue,
+                alpha: 1
+            ).setFill()
+            dirtyRect.fill()
+            context.restoreGState()
+        }
+
+        func apply(
+            color: ArtworkAccentColor,
+            opacity: Double,
+            duration: TimeInterval,
+            animated: Bool
+        ) {
+            wantsLayer = true
+            let oldOpacity = layer?.presentation()?.opacity ?? layer?.opacity ?? 0
+            overlayColor = color
+            needsDisplay = true
+            layer?.opacity = Float(opacity)
+            layer?.removeAllAnimations()
+            guard animated, duration > 0, abs(oldOpacity - Float(opacity)) > 0.000_001 else {
+                return
+            }
+            let animation = CABasicAnimation(keyPath: "opacity")
+            animation.fromValue = oldOpacity
+            animation.toValue = Float(opacity)
+            animation.duration = duration
+            animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            layer?.add(animation, forKey: "artworkAccentOpacity")
+        }
+    }
+
+    private extension ArtworkAccentColor {
+        var cgColor: CGColor {
+            CGColor(
+                colorSpace: CGColorSpace(name: CGColorSpace.sRGB)
+                    ?? CGColorSpaceCreateDeviceRGB(),
+                components: [red, green, blue, 1]
+            ) ?? CGColor(gray: 0, alpha: 1)
         }
     }
 

@@ -241,9 +241,11 @@
 
     @MainActor
     @Test func missingMetalDeviceProducesAnOpaqueStaticFallback() throws {
+        let fallback = ArtworkAccentColor.red
         let view = ArtworkAccentGradientView(
             frame: CGRect(x: 0, y: 0, width: 40, height: 30),
-            device: nil
+            device: nil,
+            fallbackColor: fallback
         )
         view.update(
             palette: ArtworkAccentPalette(colors: [.red]),
@@ -257,15 +259,19 @@
         #expect(view.isOpaque)
         #expect(view.isPaused)
         #expect(view.delegate == nil)
-        let image = try #require(ArtworkAccentGradientSnapshot.render(
-            palette: ArtworkAccentPalette(colors: [.red]),
-            size: CGSize(width: 40, height: 30),
-            time: 0,
-            device: nil
-        ))
-        #expect(image.width == 40)
-        #expect(image.height == 30)
-        #expect(opaqueBlackPixelCount(in: image) == 1200)
+        let image = try #require(captureHostedView(view))
+        let pixel = try #require(firstRGBA8Pixel(in: image))
+        #expect(pixel.0 > pixel.1)
+        #expect(pixel.0 > pixel.2)
+        #expect(pixel.3 == 255)
+
+        let blueView = ArtworkAccentGradientView(
+            frame: CGRect(x: 0, y: 0, width: 40, height: 30),
+            device: nil,
+            fallbackColor: .blue
+        )
+        let blueImage = try #require(captureHostedView(blueView))
+        #expect(imageBytes(image) != imageBytes(blueImage))
     }
 
     @Test func packagedRuntimeShaderResourceIsAvailableToThePublicTarget() {
@@ -276,7 +282,7 @@
     @Test(.enabled(if: MTLCreateSystemDefaultDevice() != nil))
     func missingShaderProducesTheConfiguredOpaqueFallback() throws {
         let device = try #require(MTLCreateSystemDefaultDevice())
-        let fallback = ArtworkAccentColor(red: 0.25, green: 0.5, blue: 0.75)
+        let fallback = ArtworkAccentColor.blue
         let view = ArtworkAccentGradientView(
             frame: CGRect(x: 0, y: 0, width: 40, height: 30),
             device: device,
@@ -286,14 +292,90 @@
 
         #expect(view.isPaused)
         #expect(view.delegate == nil)
-        let image = try #require(
-            view.makeSnapshot(size: CGSize(width: 40, height: 30), time: 0)
-        )
+        let image = try #require(captureHostedView(view))
         let pixel = try #require(firstRGBA8Pixel(in: image))
-        #expect(abs(Int(pixel.0) - 64) <= 1)
-        #expect(abs(Int(pixel.1) - 128) <= 1)
-        #expect(abs(Int(pixel.2) - 191) <= 1)
+        #expect(pixel.2 > pixel.0)
+        #expect(pixel.2 > pixel.1)
         #expect(pixel.3 == 255)
+    }
+
+    @MainActor
+    @Test(.enabled(if: MTLCreateSystemDefaultDevice() != nil))
+    func appKitSurfaceRendersTintAndConsumesSymmetricMotionTiming() throws {
+        let device = try #require(MTLCreateSystemDefaultDevice())
+        let palette = ArtworkAccentPalette.reference
+        let view = ArtworkAccentGradientView(
+            frame: CGRect(x: 0, y: 0, width: 96, height: 64),
+            device: device
+        )
+        let idle = ArtworkAccentGradientAppearance(
+            isAnimated: true,
+            maximumFramesPerSecond: 60,
+            tint: ArtworkAccentGradientTint(color: .red, amount: 0, transitionDuration: 1.4)
+        )
+        let active = ArtworkAccentGradientAppearance(
+            isAnimated: true,
+            maximumFramesPerSecond: 60,
+            tint: ArtworkAccentGradientTint(color: .red, amount: 0.75, transitionDuration: 1.4)
+        )
+        let blueActive = ArtworkAccentGradientAppearance(
+            isAnimated: true,
+            maximumFramesPerSecond: 60,
+            tint: ArtworkAccentGradientTint(color: .blue, amount: 0.75, transitionDuration: 1.4)
+        )
+
+        view.update(palette: palette, appearance: idle)
+        view.isPaused = true
+        let idleImage = try #require(captureHostedView(view))
+        removeAnimations(in: view)
+
+        view.update(palette: palette, appearance: active)
+        view.isPaused = true
+        let entryDurations = animationDurations(in: view)
+        removeAnimations(in: view)
+        let activeImage = try #require(captureHostedView(view))
+        #expect(imageBytes(idleImage) != imageBytes(activeImage))
+        #expect(entryDurations.contains { abs($0 - 1.4) <= 0.000_001 })
+        let idlePixel = try #require(firstColor(in: idleImage))
+        let activePixel = try #require(firstColor(in: activeImage))
+        #expect(activePixel.redComponent <= idlePixel.redComponent + 0.01)
+        #expect(activePixel.greenComponent < idlePixel.greenComponent)
+        #expect(activePixel.blueComponent < idlePixel.blueComponent)
+
+        view.update(palette: palette, appearance: blueActive)
+        view.isPaused = true
+        removeAnimations(in: view)
+        let blueImage = try #require(captureHostedView(view))
+        #expect(imageBytes(activeImage) != imageBytes(blueImage))
+
+        view.update(palette: palette, appearance: idle)
+        view.isPaused = true
+        let exitDurations = animationDurations(in: view)
+        #expect(exitDurations.contains { abs($0 - 1.4) <= 0.000_001 })
+    }
+
+    @MainActor
+    @Test(.enabled(if: MTLCreateSystemDefaultDevice() != nil))
+    func reducedMotionAppliesTintImmediatelyWithoutLayerAnimation() throws {
+        let device = try #require(MTLCreateSystemDefaultDevice())
+        let view = ArtworkAccentGradientView(
+            frame: CGRect(x: 0, y: 0, width: 96, height: 64),
+            device: device
+        )
+        let appearance = ArtworkAccentGradientAppearance(
+            isAnimated: false,
+            maximumFramesPerSecond: 60,
+            tint: ArtworkAccentGradientTint(color: .red, amount: 0.75, transitionDuration: 0.1)
+        )
+
+        view.update(palette: ArtworkAccentPalette.reference, appearance: appearance)
+        let image = try #require(captureHostedView(view))
+
+        #expect(animationDurations(in: view).isEmpty)
+        let pixel = try #require(firstColor(in: image))
+        #expect(pixel.redComponent > pixel.greenComponent)
+        #expect(pixel.redComponent > pixel.blueComponent)
+        #expect(pixel.alphaComponent == 1)
     }
 
     @MainActor
@@ -362,24 +444,46 @@
         simd_distance(lhs, rhs) <= tolerance
     }
 
-    private func opaqueBlackPixelCount(in image: CGImage) -> Int {
-        let bitmap = NSBitmapImageRep(cgImage: image)
-        var count = 0
-        for y in 0 ..< bitmap.pixelsHigh {
-            for x in 0 ..< bitmap.pixelsWide {
-                guard let color = bitmap.colorAt(x: x, y: y)?.usingColorSpace(.deviceRGB) else {
-                    continue
-                }
-                if color.alphaComponent > 0.999,
-                   color.redComponent < 0.001,
-                   color.greenComponent < 0.001,
-                   color.blueComponent < 0.001
-                {
-                    count += 1
-                }
+    @MainActor
+    private func captureHostedView(_ view: NSView) -> CGImage? {
+        let window = NSWindow(
+            contentRect: view.bounds,
+            styleMask: [.borderless],
+            backing: .buffered,
+            defer: false
+        )
+        window.contentView = view
+        window.displayIfNeeded()
+        view.displayIfNeeded()
+        guard let bitmap = view.bitmapImageRepForCachingDisplay(in: view.bounds) else {
+            return nil
+        }
+        view.cacheDisplay(in: view.bounds, to: bitmap)
+        return bitmap.cgImage
+    }
+
+    @MainActor
+    private func animationDurations(in view: NSView) -> [TimeInterval] {
+        layerTree(in: view).flatMap { layer in
+            (layer.animationKeys() ?? []).compactMap { key in
+                layer.animation(forKey: key)?.duration
             }
         }
-        return count
+    }
+
+    @MainActor
+    private func removeAnimations(in view: NSView) {
+        layerTree(in: view).forEach { $0.removeAllAnimations() }
+    }
+
+    @MainActor
+    private func layerTree(in view: NSView) -> [CALayer] {
+        let ownLayer = view.layer.map { [$0] } ?? []
+        return ownLayer + view.subviews.flatMap(layerTree(in:))
+    }
+
+    private func imageBytes(_ image: CGImage) -> Data? {
+        image.dataProvider?.data as Data?
     }
 
     private func firstRGBA8Pixel(in image: CGImage) -> (UInt8, UInt8, UInt8, UInt8)? {
@@ -391,6 +495,12 @@
             return nil
         }
         return (bytes[0], bytes[1], bytes[2], bytes[3])
+    }
+
+    private func firstColor(in image: CGImage) -> NSColor? {
+        let bitmap = NSBitmapImageRep(cgImage: image)
+        return bitmap.colorAt(x: bitmap.pixelsWide / 2, y: bitmap.pixelsHigh / 2)?
+            .usingColorSpace(.deviceRGB)
     }
 
     private func distinctChromaticPixelCount(in image: CGImage) -> Int {
