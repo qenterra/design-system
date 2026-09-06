@@ -1,5 +1,5 @@
 #if os(macOS)
-import Foundation
+import AppKit
 import QenTerraDesignTokens
 
 public struct MediaTableRowPresentation<ID: Hashable & Sendable>: Identifiable, Equatable, Sendable {
@@ -15,6 +15,8 @@ public struct MediaTableRowPresentation<ID: Hashable & Sendable>: Identifiable, 
     public let isPlaying: Bool
     public let isAvailable: Bool
     public let artworkIdentity: String?
+    public let favoriteAccessibilityLabel: String?
+    public let actionsAccessibilityLabel: String?
 
     public init(
         id: ID,
@@ -28,7 +30,9 @@ public struct MediaTableRowPresentation<ID: Hashable & Sendable>: Identifiable, 
         isCurrent: Bool,
         isPlaying: Bool,
         isAvailable: Bool,
-        artworkIdentity: String?
+        artworkIdentity: String?,
+        favoriteAccessibilityLabel: String? = nil,
+        actionsAccessibilityLabel: String? = nil
     ) {
         self.id = id
         self.title = title
@@ -42,6 +46,8 @@ public struct MediaTableRowPresentation<ID: Hashable & Sendable>: Identifiable, 
         self.isPlaying = isPlaying
         self.isAvailable = isAvailable
         self.artworkIdentity = artworkIdentity
+        self.favoriteAccessibilityLabel = favoriteAccessibilityLabel
+        self.actionsAccessibilityLabel = actionsAccessibilityLabel
     }
 }
 
@@ -63,6 +69,8 @@ public struct NativeMediaTableActions<ID: Hashable & Sendable> {
     public let creator: (@MainActor (ID) -> Void)?
     public let collection: (@MainActor (ID) -> Void)?
     public let actions: (@MainActor (ID) -> Void)?
+    public let actionsMenu: (@MainActor (ID, NSButton) -> Void)?
+    public let contextMenu: (@MainActor (ID, NSEvent) -> NSMenu?)?
 
     public init(
         select: (@MainActor (ID) -> Void)? = nil,
@@ -70,7 +78,9 @@ public struct NativeMediaTableActions<ID: Hashable & Sendable> {
         favorite: (@MainActor (ID) -> Void)? = nil,
         creator: (@MainActor (ID) -> Void)? = nil,
         collection: (@MainActor (ID) -> Void)? = nil,
-        actions: (@MainActor (ID) -> Void)? = nil
+        actions: (@MainActor (ID) -> Void)? = nil,
+        actionsMenu: (@MainActor (ID, NSButton) -> Void)? = nil,
+        contextMenu: (@MainActor (ID, NSEvent) -> NSMenu?)? = nil
     ) {
         self.select = select
         self.play = play
@@ -78,7 +88,15 @@ public struct NativeMediaTableActions<ID: Hashable & Sendable> {
         self.creator = creator
         self.collection = collection
         self.actions = actions
+        self.actionsMenu = actionsMenu
+        self.contextMenu = contextMenu
     }
+}
+
+/// Work performed by one configuration, independent of native layout scheduling.
+public struct MediaTableCellUpdate: Equatable, Sendable {
+    public let contentApplied: Bool
+    public let layoutInvalidated: Bool
 }
 
 public struct MediaTableArtworkRequest<ID: Hashable & Sendable>: Equatable, Sendable {
@@ -133,6 +151,8 @@ public struct MediaTableCellState: Equatable, Sendable {
     public let density: DesignDensity
     public let typography: MediaTableTypography
     public let environment: DesignNativeEnvironment
+    public let favoriteControlWidth: Double
+    public let usesPrimaryActionTint: Bool
 
     public init(
         isSelected: Bool = false,
@@ -141,7 +161,9 @@ public struct MediaTableCellState: Equatable, Sendable {
         showsArtwork: Bool = true,
         density: DesignDensity = .standard,
         typography: MediaTableTypography = .standard,
-        environment: DesignNativeEnvironment = MediaTableCellState.defaultEnvironment
+        environment: DesignNativeEnvironment = MediaTableCellState.defaultEnvironment,
+        favoriteControlWidth: Double = DesignTokens.Component.panelMediaTableFavoriteControlWidth.points,
+        usesPrimaryActionTint: Bool = false
     ) {
         self.isSelected = isSelected
         self.isFocused = isFocused
@@ -150,6 +172,9 @@ public struct MediaTableCellState: Equatable, Sendable {
         self.density = density
         self.typography = typography
         self.environment = environment
+        self.favoriteControlWidth = favoriteControlWidth.isFinite && favoriteControlWidth > 0
+            ? favoriteControlWidth : DesignTokens.Component.panelMediaTableFavoriteControlWidth.points
+        self.usesPrimaryActionTint = usesPrimaryActionTint
     }
 
     public static let standard = MediaTableCellState()

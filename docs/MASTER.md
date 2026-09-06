@@ -407,6 +407,12 @@ Use a neutral extension tile when filename recognition is primary. Do not replac
 
 Artwork may lead a media row. Title is primary, creator is secondary, and codec/quality is compact metadata. Embedded links must not trigger playback or break multi-selection.
 
+The native macOS table keeps one reusable AppKit hierarchy. `NativeMediaTableCell.configure` reports actual content and layout work; `configurePlaceholder` preserves that hierarchy without fabricating an item identity. Ready artwork publication accepts a validated normalized `contentsRect` and rejects stale request generations. Consumer menu callbacks receive the original `NSEvent` and the actual actions `NSButton` anchor; selection resolution, loading, caching, and menu construction remain consumer-owned. Presentation can opt into a different finite favorite-control reservation, primary action tint, and consumer accessibility terminology; defaults remain unchanged. `mediaExplicitBadge` is the compact single-glyph badge typography role, distinct from supporting text.
+
+The artwork-accent terrain shares its packaged Metal library with `ArtworkAccentGradientPrewarmer.prepare()`, which starts compilation off the UI thread. Prewarming is optional and never changes the fixed terrain, palette transition, effect tint, or opaque fallback.
+
+`ArtworkAccentGradient` composes idle darkening and effect tint using SwiftUI's native color blending over raw Metal terrain. `ArtworkAccentGradientView` retains AppKit layer composition for direct native consumers. Do not add duplicate consumer overlays. Both surfaces retain opaque fallback; SwiftUI palette transitions use 0.8 seconds and effect opacity uses the supplied symmetric duration, with animations disabled for Reduced Motion.
+
 ### 6.7 Artwork presentation
 
 The macOS artwork family frames consumer-supplied ready content and exposes explicit `content`, `loading`, `placeholder`, and `error` presentation. Shared code owns the synthetic placeholder, semantic border, crop viewport and clamped transform, zero-to-four-slot mosaic geometry, and decorative palette haze. The consumer owns decoding, file and network access, cache and request identity, gestures, and save or cancel actions.

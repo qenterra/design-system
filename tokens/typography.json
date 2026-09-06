@@ -29,6 +29,7 @@
     "supporting": {"size": 12, "line": 17, "weight": 400, "tracking": 0},
     "metadata": {"size": 11, "line": 15, "weight": 400, "tracking": 0.08},
     "compactMetadata": {"size": 10, "line": 14, "weight": 500, "tracking": 0.16},
+    "mediaExplicitBadge": {"size": 9, "line": 11, "weight": 700, "tracking": 0},
     "eyebrow": {"size": 11, "line": 15, "weight": 600, "tracking": 0.7, "transform": "uppercase"},
     "keycap": {"size": 12, "line": 16, "weight": 500, "tracking": 0, "family": "rounded"},
     "monospacedData": {"size": 12, "line": 17, "weight": 500, "tracking": 0, "family": "mono", "numeric": "tabular"}

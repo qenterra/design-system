@@ -4264,11 +4264,14 @@
         "first-responder-table",
         "stable-cell-hierarchy",
         "artwork-slot",
+        "normalized-artwork-crop",
+        "native-placeholder",
         "title-and-creator",
         "optional-columns",
         "favorite-control",
         "playback-indicator",
-        "actions-control"
+        "actions-control",
+        "consumer-menu-anchor"
       ],
       "states": [
         "compact",
@@ -4412,7 +4415,9 @@
       },
       "anatomy": [
         "runtime-compiled-metal-terrain",
+        "shared-prewarmed-library",
         "five-colour-palette",
+        "native-swiftui-or-appkit-composition",
         "idle-darkening",
         "effect-tint",
         "opaque-fallback"

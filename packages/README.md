@@ -45,6 +45,8 @@ For Swift Package Manager, add `https://github.com/QenTerra/design-system` and s
 - `QenTerraComponents` for the maintained primary-button, group-container, and interactive-row primitives.
 - `QenTerraMediaComponents` for reusable macOS artwork, collections, playback, queue, lyrics, metadata, native-table, and artwork-accent gradient presentation; it performs no loading or mutation and has no iOS media API.
 
+Native table consumers can configure identity-free loading placeholders, observe actual configure work, and publish ready artwork with a validated normalized `contentsRect`. Keep the request token supplied by the cell: stale publications are rejected after reuse. `NativeMediaTableActions` passes the original context-menu event and the actual actions-button anchor; optional consumer accessibility labels preserve product terminology. Favorite-control width and primary action tint are explicit opt-ins with unchanged defaults. The compact explicit-media badge has its own `mediaExplicitBadge` typography role. `ArtworkAccentGradientPrewarmer.prepare()` optionally starts reusable Metal-library compilation off the UI thread without changing renderer output. The SwiftUI gradient owns native SwiftUI idle/tint blending over raw terrain; the direct AppKit surface owns layer blending. Do not duplicate these overlays in consumers.
+
 ## Common commands
 
 ```sh

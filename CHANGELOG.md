@@ -15,6 +15,8 @@ All notable maintained Design System changes are recorded here. Versions follow 
 
 ### Changed
 
+- Preserved native SwiftUI multiply blending for artwork-gradient idle/tint overlays over raw Metal terrain, while direct AppKit consumers retain layer composition and both surfaces retain opaque fallback. Table favorite-control width and primary action tint are explicit opt-ins with unchanged defaults; `VERSION` remains `1.0.1`.
+- Added native table placeholder configuration, normalized ready-artwork crop publication, original-event context menus and native action-button anchors, consumer accessibility copy, a compact explicit-media badge typography role, plus configure-work observations and reusable off-main shader prewarming for the planned `2.0.0` consumer boundary. `VERSION` remains `1.0.1`.
 - Tightened the planned `2.0.0` AppKit media-table contract with domain-neutral table typography, independent keyboard intents, request-scoped artwork publication, per-control action availability, hover-only chrome reveal, and complete reuse/accessibility cleanup; `VERSION` remains `1.0.1`.
 - Made optional shuffle, repeat, and favorite action availability explicit, added consumer-owned player metadata/status/route composition slots, canonicalized the protected queue/progress geometry metrics, and made the 34-point queue control fully hit-testable for the planned `2.0.0` playback family.
 - Raised the maintained Swift packages' minimum macOS version from 13 to 26 and moved macOS verification and package-release jobs to macOS 26. iOS remains at 16. This is a breaking change planned for `2.0.0`; macOS consumers must raise their deployment target or remain on a compatible immutable release. Existing releases and tags are unchanged.

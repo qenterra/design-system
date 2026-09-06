@@ -7,7 +7,9 @@ public enum MediaTableColumn: String, CaseIterable, Identifiable, Codable, Senda
     case year
     case duration
 
-    public var id: Self { self }
+    public var id: Self {
+        self
+    }
 }
 
 public struct MediaTableResolvedWidths: Equatable, Sendable {
@@ -34,9 +36,15 @@ public struct MediaTableResolvedWidths: Equatable, Sendable {
 
 public struct MediaTableGeometry: Equatable, Sendable {
     public let density: DesignDensity
+    private let favoriteWidth: Double
 
-    public init(density: DesignDensity) {
+    public init(
+        density: DesignDensity,
+        favoriteControlWidth: Double = DesignTokens.Component.panelMediaTableFavoriteControlWidth.points
+    ) {
         self.density = density
+        favoriteWidth = favoriteControlWidth.isFinite && favoriteControlWidth > 0
+            ? favoriteControlWidth : DesignTokens.Component.panelMediaTableFavoriteControlWidth.points
     }
 
     public var rowHeight: CGFloat {
@@ -63,19 +71,57 @@ public struct MediaTableGeometry: Equatable, Sendable {
         }
     }
 
-    public var horizontalInset: CGFloat { metric(DesignTokens.Component.panelMediaTableHorizontalInset) }
-    public var selectionHorizontalInset: CGFloat { metric(DesignTokens.Component.panelMediaTableSelectionHorizontalInset) }
-    public var selectionVerticalInset: CGFloat { metric(DesignTokens.Component.panelMediaTableSelectionVerticalInset) }
-    public var columnSpacing: CGFloat { metric(DesignTokens.Component.panelMediaTableColumnSpacing) }
-    public var actionWidth: CGFloat { metric(DesignTokens.Component.panelMediaTableActionWidth) }
-    public var favoriteControlWidth: CGFloat { metric(DesignTokens.Component.panelMediaTableFavoriteControlWidth) }
-    public var songContentSpacing: CGFloat { metric(DesignTokens.Component.panelMediaTableSongContentSpacing) }
-    public var minimumSongWidth: Double { DesignTokens.Component.panelMediaTableMinimumSongWidth.points }
-    public var lineHeight: CGFloat { metric(DesignTokens.Component.panelMediaTableLineHeight) }
-    public var lineGap: CGFloat { metric(DesignTokens.Component.panelMediaTableLineGap) }
-    public var explicitBadgeGap: CGFloat { metric(DesignTokens.Component.panelMediaTableExplicitBadgeGap) }
-    public var explicitBadgeWidth: CGFloat { metric(DesignTokens.Component.panelMediaTableExplicitBadgeWidth) }
-    public var explicitBadgeHeight: CGFloat { metric(DesignTokens.Component.panelMediaTableExplicitBadgeHeight) }
+    public var horizontalInset: CGFloat {
+        metric(DesignTokens.Component.panelMediaTableHorizontalInset)
+    }
+
+    public var selectionHorizontalInset: CGFloat {
+        metric(DesignTokens.Component.panelMediaTableSelectionHorizontalInset)
+    }
+
+    public var selectionVerticalInset: CGFloat {
+        metric(DesignTokens.Component.panelMediaTableSelectionVerticalInset)
+    }
+
+    public var columnSpacing: CGFloat {
+        metric(DesignTokens.Component.panelMediaTableColumnSpacing)
+    }
+
+    public var actionWidth: CGFloat {
+        metric(DesignTokens.Component.panelMediaTableActionWidth)
+    }
+
+    public var favoriteControlWidth: CGFloat {
+        CGFloat(favoriteWidth)
+    }
+
+    public var songContentSpacing: CGFloat {
+        metric(DesignTokens.Component.panelMediaTableSongContentSpacing)
+    }
+
+    public var minimumSongWidth: Double {
+        DesignTokens.Component.panelMediaTableMinimumSongWidth.points
+    }
+
+    public var lineHeight: CGFloat {
+        metric(DesignTokens.Component.panelMediaTableLineHeight)
+    }
+
+    public var lineGap: CGFloat {
+        metric(DesignTokens.Component.panelMediaTableLineGap)
+    }
+
+    public var explicitBadgeGap: CGFloat {
+        metric(DesignTokens.Component.panelMediaTableExplicitBadgeGap)
+    }
+
+    public var explicitBadgeWidth: CGFloat {
+        metric(DesignTokens.Component.panelMediaTableExplicitBadgeWidth)
+    }
+
+    public var explicitBadgeHeight: CGFloat {
+        metric(DesignTokens.Component.panelMediaTableExplicitBadgeHeight)
+    }
 
     public func fixedWidth(for column: MediaTableColumn) -> Double {
         switch column {
