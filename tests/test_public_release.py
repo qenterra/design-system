@@ -57,7 +57,7 @@ class PublicReleaseContractTests(unittest.TestCase):
                     target["resources"],
                 )
 
-    def test_npm_publish_job_requires_a_version_aligned_release_tag(self) -> None:
+    def test_tag_push_verifies_only_and_npm_requires_explicit_manual_target(self) -> None:
         workflow = (ROOT / ".github/workflows/release-packages.yml").read_text(
             encoding="utf-8"
         )
@@ -74,12 +74,17 @@ class PublicReleaseContractTests(unittest.TestCase):
 
         self.assertEqual(
             publish_condition,
-            "if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v'))",
+            "if: github.event_name == 'workflow_dispatch' && inputs.publication_target == 'npm-latest'",
         )
         self.assertIn("  workflow_dispatch:", workflow)
         self.assertIn("      release_tag:", workflow)
         self.assertIn("        required: true", workflow)
-        self.assertNotIn("inputs.publish", workflow)
+        self.assertIn("      publication_target:", workflow)
+        self.assertIn("        type: choice", workflow)
+        self.assertIn("        default: verify-only", workflow)
+        self.assertIn("          - verify-only", workflow)
+        self.assertIn("          - npm-latest", workflow)
+        self.assertNotIn("github.event_name == 'push'", publish_condition)
         self.assertIn("    needs: snapshot", publish)
         self.assertIn(
             "ref: ${{ github.event_name == 'workflow_dispatch' && format('refs/tags/{0}', inputs.release_tag) || github.ref }}",
