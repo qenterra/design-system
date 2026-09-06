@@ -38,6 +38,7 @@ enum PlayerBarLayoutMetrics {
 public struct PlayerBar<
     Artwork: View,
     MetadataAccessory: View,
+    FavoriteAccessory: View,
     StatusAccessory: View,
     RouteAccessory: View
 >: View {
@@ -47,6 +48,7 @@ public struct PlayerBar<
     private let actions: PlayerBarActions
     private let artwork: Artwork
     private let metadataAccessory: MetadataAccessory
+    private let favoriteAccessory: FavoriteAccessory
     private let statusAccessory: StatusAccessory
     private let routeAccessory: RouteAccessory
 
@@ -55,6 +57,7 @@ public struct PlayerBar<
         actions: PlayerBarActions,
         @ViewBuilder artwork: () -> Artwork,
         @ViewBuilder metadataAccessory: () -> MetadataAccessory,
+        @ViewBuilder favoriteAccessory: () -> FavoriteAccessory,
         @ViewBuilder statusAccessory: () -> StatusAccessory,
         @ViewBuilder routeAccessory: () -> RouteAccessory
     ) {
@@ -62,6 +65,7 @@ public struct PlayerBar<
         self.actions = actions
         self.artwork = artwork()
         self.metadataAccessory = metadataAccessory()
+        self.favoriteAccessory = favoriteAccessory()
         self.statusAccessory = statusAccessory()
         self.routeAccessory = routeAccessory()
     }
@@ -170,6 +174,7 @@ public struct PlayerBar<
                    let setFavorite = actions.setFavorite {
                     FavoriteControl(presentation: favorite, action: setFavorite)
                 }
+                favoriteAccessory
             }
 
             PlaybackProgressControl(
@@ -258,6 +263,7 @@ public struct PlayerBar<
 
 public extension PlayerBar where
     MetadataAccessory == EmptyView,
+    FavoriteAccessory == EmptyView,
     StatusAccessory == EmptyView,
     RouteAccessory == EmptyView
 {
@@ -271,8 +277,30 @@ public extension PlayerBar where
             actions: actions,
             artwork: artwork,
             metadataAccessory: { EmptyView() },
+            favoriteAccessory: { EmptyView() },
             statusAccessory: { EmptyView() },
             routeAccessory: { EmptyView() }
+        )
+    }
+}
+
+public extension PlayerBar where FavoriteAccessory == EmptyView {
+    init(
+        presentation: PlayerBarPresentation,
+        actions: PlayerBarActions,
+        @ViewBuilder artwork: () -> Artwork,
+        @ViewBuilder metadataAccessory: () -> MetadataAccessory,
+        @ViewBuilder statusAccessory: () -> StatusAccessory,
+        @ViewBuilder routeAccessory: () -> RouteAccessory
+    ) {
+        self.init(
+            presentation: presentation,
+            actions: actions,
+            artwork: artwork,
+            metadataAccessory: metadataAccessory,
+            favoriteAccessory: { EmptyView() },
+            statusAccessory: statusAccessory,
+            routeAccessory: routeAccessory
         )
     }
 }

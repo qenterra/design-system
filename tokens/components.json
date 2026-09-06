@@ -186,6 +186,7 @@
     },
     "lyrics": {
       "lineGap": 18,
+      "stanzaBreakHeight": 10,
       "inactiveOpacity": 0.58,
       "inactiveBlurRadius": 0.45,
       "followDurationMs": 320,
@@ -409,6 +410,7 @@
       "panel.queue.dragPreviewShadowRadius": "Queue drag preview shadow treatment belongs to the queue presentation.",
       "panel.queue.dragPreviewShadowYOffset": "Queue drag preview shadow treatment belongs to the queue presentation.",
       "panel.lyrics.lineGap": "Lyric line rhythm belongs to the lyrics presentation.",
+      "panel.lyrics.stanzaBreakHeight": "Blank lyric stanza spacing belongs to the lyrics presentation.",
       "panel.lyrics.inactiveOpacity": "Inactive lyric treatment belongs to the lyrics presentation.",
       "panel.lyrics.inactiveBlurRadius": "Inactive synchronized lyric blur belongs to the lyrics presentation.",
       "panel.lyrics.followDurationMs": "Lyric follow timing belongs to the lyrics presentation.",

@@ -222,6 +222,7 @@ import Testing
         isSelected: false,
         isAvailable: true,
         isDraggable: false,
+        isPlaying: true,
         accessibilityLabel: "Current by Artist"
     )
     let unavailable = PlaybackQueueRowPresentation(
@@ -241,7 +242,58 @@ import Testing
     #expect(unavailable.accessibilityValue == "Selected, unavailable")
     #expect(unavailable.isSelected)
     #expect(!unavailable.acceptsPlayback)
-    #expect(!unavailable.isDraggable)
+    #expect(unavailable.isDraggable)
+    #expect(current.trailingSymbolName == "waveform")
+    #expect(current.trailingAccessibilityLabel == "Playing")
+}
+
+@Test func queueTapResolutionNeverSelectsAndPlaysFromOneGesture() {
+    #expect(PlaybackQueueTapAction.resolve(tapCount: 1, acceptsPlayback: true) == .select)
+    #expect(PlaybackQueueTapAction.resolve(tapCount: 2, acceptsPlayback: true) == .play)
+    #expect(PlaybackQueueTapAction.resolve(tapCount: 2, acceptsPlayback: false) == .none)
+}
+
+@Test @MainActor func queueMetadataButtonOwnsItsTapWithoutSelectingOrPlayingTheRow() throws {
+    let recorder = QueueInteractionRecorder()
+    let presentation = PlaybackQueueRowPresentation(
+        id: "interactive",
+        title: "Synthetic Track",
+        subtitle: "Synthetic Artist",
+        durationText: "4:02",
+        isCurrent: false,
+        isSelected: false,
+        isAvailable: true,
+        isDraggable: false,
+        accessibilityLabel: "Synthetic Track"
+    )
+    let content = PlaybackQueueRow(
+        presentation: presentation,
+        select: { recorder.selections += 1 },
+        play: { recorder.plays += 1 },
+        remove: nil,
+        artwork: { Color.blue },
+        metadata: {
+            Button("Open artist") { recorder.metadataActions += 1 }
+                .buttonStyle(.plain)
+                .background {
+                    GeometryReader { proxy in
+                        Color.clear.onAppear {
+                            recorder.metadataFrame = proxy.frame(in: .named("queue-interaction"))
+                        }
+                    }
+                }
+        },
+        contextMenu: { EmptyView() },
+        dragPreview: { EmptyView() }
+    )
+    .frame(width: 420, height: 58)
+    .coordinateSpace(name: "queue-interaction")
+
+    try clickHostedQueueMetadata(content, recorder: recorder)
+
+    #expect(recorder.metadataActions == 1)
+    #expect(recorder.selections == 0)
+    #expect(recorder.plays == 0)
 }
 
 @Test func queueAccessibilityOffersOnlyActionsThatCanRun() {
@@ -461,6 +513,40 @@ import Testing
     )
 }
 
+@Test func lyricScrollDecisionResetsANewDocumentToTheTopBeforeFollowingLines() {
+    #expect(
+        LyricsScrollDecision.resolve(
+            previousResetIdentity: "first-track",
+            currentResetIdentity: "second-track",
+            previousIdentity: 1,
+            currentIdentity: 2,
+            reducesMotion: false
+        ) == .top
+    )
+    #expect(
+        LyricsScrollDecision.resolve(
+            previousResetIdentity: "second-track",
+            currentResetIdentity: "second-track",
+            previousIdentity: 1,
+            currentIdentity: 2,
+            reducesMotion: true
+        ) == .line(id: 2, duration: 0)
+    )
+}
+
+@Test func blankLyricsRemainExplicitStanzaBreaks() {
+    let stanza = LyricLinePresentation(
+        id: 8,
+        text: "",
+        isActive: false,
+        isSynchronized: false,
+        isBlankStanza: true
+    )
+
+    #expect(stanza.isBlankStanza)
+    #expect(stanza.blurRadius == 0)
+}
+
 @Test func audioDetailsPreserveConsumerOrderingWithoutDerivingPlaybackMetadata() {
     let details = [
         AudioDetail(id: "output", label: "Output", value: "Built-in", order: 30),
@@ -564,6 +650,8 @@ private func makeAirPlayPicker(probe: WeakPlayerProbe) -> AirPlayRoutePicker {
                 Color.blue
             } metadataAccessory: {
                 Text(verbatim: "External")
+            } favoriteAccessory: {
+                Text(verbatim: "Favorite")
             } statusAccessory: {
                 Text(verbatim: "Failure")
             } routeAccessory: {
@@ -575,17 +663,36 @@ private func makeAirPlayPicker(probe: WeakPlayerProbe) -> AirPlayRoutePicker {
         AnyView(
             PlaybackQueueRow(
                 presentation: queue,
+                select: {},
                 play: {},
                 remove: nil,
                 artwork: { Color.blue },
+                metadata: { Text(verbatim: "Artist link · Album link") },
                 contextMenu: { EmptyView() },
                 dragPreview: { EmptyView() }
             )
         ),
         AnyView(QueueInsertionIndicator()),
         AnyView(QueueDragPreview(title: "Synthetic Track", subtitle: "Synthetic Artist") { Color.blue }),
+        AnyView(
+            LyricLineLabel(
+                presentation: lyrics[0],
+                textSize: 22,
+                alignment: .leading,
+                lineLimit: 2
+            )
+        ),
         AnyView(LyricLine(presentation: lyrics[0], textSize: 22, alignment: .leading, select: {}, edit: {})),
-        AnyView(LyricsViewport(lines: lyrics, currentIdentity: 1, textSize: 22, alignment: .leading, selectLine: { _ in }, editLine: { _ in })),
+        AnyView(
+            LyricsViewport(
+                lines: lyrics,
+                currentIdentity: 1,
+                resetIdentity: 100,
+                alignment: .leading
+            ) { line in
+                LyricLineLabel(presentation: line, textSize: 22, alignment: .leading)
+            }
+        ),
         AnyView(LyricsEdgeFade()),
         AnyView(MediaMetadataBadge(label: "Lossless", symbolName: "waveform")),
         AnyView(AudioDetailsView(title: "Audio Details", subtitle: "Current playback path", details: [AudioDetail(id: "codec", label: "Codec", value: "FLAC", order: 0)])),
@@ -632,6 +739,67 @@ private struct QueueGeometryReporter: View {
 private struct PixelCoordinate: Hashable {
     let x: Int
     let y: Int
+}
+
+@MainActor
+private final class QueueInteractionRecorder {
+    var metadataFrame: CGRect?
+    var metadataActions = 0
+    var selections = 0
+    var plays = 0
+}
+
+@MainActor
+private func clickHostedQueueMetadata<Content: View>(
+    _ content: Content,
+    recorder: QueueInteractionRecorder
+) throws {
+    let host = NSHostingView(rootView: content)
+    host.sizingOptions = []
+    host.frame = CGRect(x: 0, y: 0, width: 420, height: 58)
+    let window = NSWindow(
+        contentRect: NSRect(x: 100, y: 100, width: 420, height: 58),
+        styleMask: [.borderless], backing: .buffered, defer: false
+    )
+    window.isReleasedWhenClosed = false
+    window.contentView = host
+    window.makeKeyAndOrderFront(nil)
+    defer { window.close() }
+
+    host.layoutSubtreeIfNeeded()
+    RunLoop.main.run(until: Date().addingTimeInterval(0.05))
+    host.layoutSubtreeIfNeeded()
+    let metadataFrame = try #require(recorder.metadataFrame)
+    let location = CGPoint(
+        x: metadataFrame.midX,
+        y: host.bounds.height - metadataFrame.midY
+    )
+    let timestamp = ProcessInfo.processInfo.systemUptime
+    let down = try #require(NSEvent.mouseEvent(
+        with: .leftMouseDown,
+        location: location,
+        modifierFlags: [],
+        timestamp: timestamp,
+        windowNumber: window.windowNumber,
+        context: nil,
+        eventNumber: 1,
+        clickCount: 1,
+        pressure: 1
+    ))
+    let up = try #require(NSEvent.mouseEvent(
+        with: .leftMouseUp,
+        location: location,
+        modifierFlags: [],
+        timestamp: timestamp + 0.01,
+        windowNumber: window.windowNumber,
+        context: nil,
+        eventNumber: 2,
+        clickCount: 1,
+        pressure: 0
+    ))
+    window.sendEvent(down)
+    window.sendEvent(up)
+    RunLoop.main.run(until: Date().addingTimeInterval(0.4))
 }
 
 @MainActor

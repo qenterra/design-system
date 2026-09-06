@@ -115,6 +115,7 @@ class GenerationContractTests(unittest.TestCase):
             swift,
         )
         self.assertIn("panelLyricsInactiveBlurRadius = DesignComponentMetric(points: 0.45)", swift)
+        self.assertIn("panelLyricsStanzaBreakHeight = DesignComponentMetric(points: 10)", swift)
         self.assertIn("DesignComponentDuration(milliseconds: 320)", swift)
         self.assertNotIn(
             "panelLyricsFollowDurationMs = DesignComponentMetric(points: 320)",

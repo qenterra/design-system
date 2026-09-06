@@ -700,7 +700,8 @@
       "sourcePath": "packages/Sources/QenTerra/MediaComponents/Lyrics/LyricLine.swift",
       "deliveryProduct": "QenTerraMediaComponents",
       "publicSymbols": [
-        "LyricLine"
+        "LyricLine",
+        "LyricLineLabel"
       ],
       "designTokens": true
     },

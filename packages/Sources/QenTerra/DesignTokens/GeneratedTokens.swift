@@ -278,6 +278,7 @@ public enum GeneratedTokens {
         public static let panelLyricsInactiveOpacity = DesignComponentOpacity(value: 0.58)
         public static let panelLyricsLineGap = DesignComponentMetric(points: 18)
         public static let panelLyricsLineSpacing = DesignComponentMetric(points: 3)
+        public static let panelLyricsStanzaBreakHeight = DesignComponentMetric(points: 10)
         public static let panelLyricsViewportHorizontalPadding = DesignComponentMetric(points: 34)
         public static let panelLyricsViewportVerticalPadding = DesignComponentMetric(points: 34)
         public static let panelMediaCollectionFavoriteCompactControlSize = DesignComponentMetric(points: 22)

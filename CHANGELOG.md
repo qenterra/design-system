@@ -15,6 +15,7 @@ All notable maintained Design System changes are recorded here. Versions follow 
 
 ### Changed
 
+- Extended the planned `2.0.0` playback family with consumer-composed favorite/import controls, custom queue metadata and selection without double dispatch, reset-aware lyrics with blank stanzas and reusable labels, and an explicit public AirPlay routing policy seam. Playback clocks, async mutations, queue ownership, and lyric document lifecycle remain consumer-owned; `VERSION` remains `1.0.1`.
 - Tightened the planned `2.0.0` AppKit media-table contract with domain-neutral table typography, independent keyboard intents, request-scoped artwork publication, per-control action availability, hover-only chrome reveal, and complete reuse/accessibility cleanup; `VERSION` remains `1.0.1`.
 - Made optional shuffle, repeat, and favorite action availability explicit, added consumer-owned player metadata/status/route composition slots, canonicalized the protected queue/progress geometry metrics, and made the 34-point queue control fully hit-testable for the planned `2.0.0` playback family.
 - Raised the maintained Swift packages' minimum macOS version from 13 to 26 and moved macOS verification and package-release jobs to macOS 26. iOS remains at 16. This is a breaking change planned for `2.0.0`; macOS consumers must raise their deployment target or remain on a compatible immutable release. Existing releases and tags are unchanged.

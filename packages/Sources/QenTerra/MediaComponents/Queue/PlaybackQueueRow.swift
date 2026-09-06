@@ -15,6 +15,23 @@ enum PlaybackQueueAccessibilityAction: Equatable, Sendable {
     }
 }
 
+enum PlaybackQueueTapAction: Equatable, Sendable {
+    case none
+    case select
+    case play
+
+    static func resolve(tapCount: Int, acceptsPlayback: Bool) -> Self {
+        switch tapCount {
+        case 1:
+            .select
+        case 2 where acceptsPlayback:
+            .play
+        default:
+            .none
+        }
+    }
+}
+
 public struct PlaybackQueueRowPresentation<ID: Hashable & Sendable>: Identifiable, Equatable, Sendable {
     public let id: ID
     public let title: String
@@ -24,6 +41,7 @@ public struct PlaybackQueueRowPresentation<ID: Hashable & Sendable>: Identifiabl
     public let isSelected: Bool
     public let isAvailable: Bool
     public let isDraggable: Bool
+    public let isPlaying: Bool
     public let accessibilityLabel: String
 
     public init(
@@ -35,6 +53,7 @@ public struct PlaybackQueueRowPresentation<ID: Hashable & Sendable>: Identifiabl
         isSelected: Bool,
         isAvailable: Bool,
         isDraggable: Bool,
+        isPlaying: Bool = false,
         accessibilityLabel: String
     ) {
         self.id = id
@@ -44,11 +63,22 @@ public struct PlaybackQueueRowPresentation<ID: Hashable & Sendable>: Identifiabl
         self.isCurrent = isCurrent
         self.isSelected = isSelected
         self.isAvailable = isAvailable
-        self.isDraggable = isDraggable && isAvailable
+        self.isDraggable = isDraggable
+        self.isPlaying = isPlaying
         self.accessibilityLabel = accessibilityLabel
     }
 
     public var acceptsPlayback: Bool { isAvailable }
+
+    public var trailingSymbolName: String? {
+        if isCurrent { return isPlaying ? "waveform" : "speaker.fill" }
+        return isDraggable ? "line.3.horizontal" : nil
+    }
+
+    public var trailingAccessibilityLabel: String? {
+        guard isCurrent else { return nil }
+        return isPlaying ? String(localized: "Playing") : String(localized: "Paused")
+    }
 
     public var accessibilityValue: String {
         var states: [String] = []
@@ -63,31 +93,40 @@ public struct PlaybackQueueRowPresentation<ID: Hashable & Sendable>: Identifiabl
 public struct PlaybackQueueRow<
     ID: Hashable & Sendable,
     Artwork: View,
+    Metadata: View,
     ContextMenu: View,
     DragPreview: View
 >: View {
+    @State private var metadataOwnsCurrentTap = false
+
     private let presentation: PlaybackQueueRowPresentation<ID>
     private let dragPayload: String?
+    private let select: (@MainActor () -> Void)?
     private let play: @MainActor () -> Void
     private let remove: (@MainActor () -> Void)?
     private let artwork: Artwork
+    private let metadata: Metadata
     private let contextMenu: ContextMenu
     private let dragPreview: DragPreview
 
     public init(
         presentation: PlaybackQueueRowPresentation<ID>,
         dragPayload: String? = nil,
+        select: (@MainActor () -> Void)?,
         play: @escaping @MainActor () -> Void,
         remove: (@MainActor () -> Void)?,
         @ViewBuilder artwork: () -> Artwork,
+        @ViewBuilder metadata: () -> Metadata,
         @ViewBuilder contextMenu: () -> ContextMenu,
         @ViewBuilder dragPreview: () -> DragPreview
     ) {
         self.presentation = presentation
         self.dragPayload = dragPayload
+        self.select = select
         self.play = play
         self.remove = remove
         self.artwork = artwork()
+        self.metadata = metadata()
         self.contextMenu = contextMenu()
         self.dragPreview = dragPreview()
     }
@@ -120,22 +159,24 @@ public struct PlaybackQueueRow<
                 Text(verbatim: presentation.title)
                     .font(.callout.weight(presentation.isCurrent ? .semibold : .medium))
                     .lineLimit(1)
-                Text(verbatim: presentation.subtitle)
+                metadata
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
+                    .simultaneousGesture(
+                        TapGesture().onEnded { metadataOwnsCurrentTap = true }
+                    )
             }
 
             Spacer(minLength: DesignTokens.Component.panelQueueRowGap.points)
-            if presentation.isCurrent {
-                Image(systemName: "speaker.fill")
+            if let trailingSymbolName = presentation.trailingSymbolName {
+                Image(systemName: trailingSymbolName)
                     .font(.caption)
-                    .accessibilityHidden(true)
-            } else if presentation.isDraggable {
-                Image(systemName: "line.3.horizontal")
-                    .font(.caption)
-                    .foregroundStyle(.tertiary)
-                    .accessibilityHidden(true)
+                    .foregroundStyle(presentation.isCurrent ? .primary : .tertiary)
+                    .accessibilityLabel(
+                        Text(verbatim: presentation.trailingAccessibilityLabel ?? "")
+                    )
+                    .accessibilityHidden(presentation.trailingAccessibilityLabel == nil)
             }
             if let durationText = presentation.durationText {
                 Text(verbatim: durationText)
@@ -157,12 +198,32 @@ public struct PlaybackQueueRow<
             ) { Color.clear }
         }
         .contentShape(Rectangle())
-        .onTapGesture(count: 2) {
-            guard presentation.acceptsPlayback else { return }
-            play()
-        }
+        .simultaneousGesture(
+            TapGesture(count: 2).exclusively(before: TapGesture()).onEnded { value in
+                if metadataOwnsCurrentTap {
+                    metadataOwnsCurrentTap = false
+                    return
+                }
+                switch value {
+                case .first:
+                    if PlaybackQueueTapAction.resolve(
+                        tapCount: 2,
+                        acceptsPlayback: presentation.acceptsPlayback
+                    ) == .play {
+                        play()
+                    }
+                case .second:
+                    if PlaybackQueueTapAction.resolve(
+                        tapCount: 1,
+                        acceptsPlayback: presentation.acceptsPlayback
+                    ) == .select {
+                        select?()
+                    }
+                }
+            }
+        )
         .contextMenu { contextMenu }
-        .accessibilityElement(children: .ignore)
+        .accessibilityElement(children: .contain)
         .accessibilityLabel(Text(verbatim: presentation.accessibilityLabel))
         .accessibilityValue(Text(verbatim: presentation.accessibilityValue))
         .accessibilityAddTraits(presentation.isSelected ? .isSelected : [])
@@ -175,6 +236,31 @@ public struct PlaybackQueueRow<
                 play: play,
                 remove: remove
             )
+        )
+    }
+}
+
+public extension PlaybackQueueRow where Metadata == Text {
+    init(
+        presentation: PlaybackQueueRowPresentation<ID>,
+        dragPayload: String? = nil,
+        select: (@MainActor () -> Void)? = nil,
+        play: @escaping @MainActor () -> Void,
+        remove: (@MainActor () -> Void)?,
+        @ViewBuilder artwork: () -> Artwork,
+        @ViewBuilder contextMenu: () -> ContextMenu,
+        @ViewBuilder dragPreview: () -> DragPreview
+    ) {
+        self.init(
+            presentation: presentation,
+            dragPayload: dragPayload,
+            select: select,
+            play: play,
+            remove: remove,
+            artwork: artwork,
+            metadata: { Text(verbatim: presentation.subtitle) },
+            contextMenu: contextMenu,
+            dragPreview: dragPreview
         )
     }
 }

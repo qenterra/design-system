@@ -365,6 +365,7 @@ Shared component metrics and mandatory state contracts.
 - `extensions.rawMetricExceptions.panel.lyrics.inactiveOpacity`: `Inactive lyric treatment belongs to the lyrics presentation.`
 - `extensions.rawMetricExceptions.panel.lyrics.lineGap`: `Lyric line rhythm belongs to the lyrics presentation.`
 - `extensions.rawMetricExceptions.panel.lyrics.lineSpacing`: `Lyric text line spacing belongs to the lyrics presentation.`
+- `extensions.rawMetricExceptions.panel.lyrics.stanzaBreakHeight`: `Blank lyric stanza spacing belongs to the lyrics presentation.`
 - `extensions.rawMetricExceptions.panel.lyrics.viewportHorizontalPadding`: `Lyrics viewport horizontal inset belongs to the lyrics presentation.`
 - `extensions.rawMetricExceptions.panel.lyrics.viewportVerticalPadding`: `Lyrics viewport vertical inset belongs to the lyrics presentation.`
 - `extensions.rawMetricExceptions.panel.mediaCollection.favoriteCompactControlSize`: `Compact favourite hit-region geometry belongs to media tiles.`
@@ -562,6 +563,7 @@ Shared component metrics and mandatory state contracts.
 - `panel.lyrics.inactiveOpacity`: `0.58`
 - `panel.lyrics.lineGap`: `18`
 - `panel.lyrics.lineSpacing`: `3`
+- `panel.lyrics.stanzaBreakHeight`: `10`
 - `panel.lyrics.viewportHorizontalPadding`: `34`
 - `panel.lyrics.viewportVerticalPadding`: `34`
 - `panel.mediaCollection.favoriteCompactControlSize`: `22`
