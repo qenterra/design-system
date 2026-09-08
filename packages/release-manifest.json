@@ -66250,8 +66250,8 @@
     },
     {
       "path": "Sources/QenTerra/Components/InteractiveRowSurface.swift",
-      "sha256": "f67d3c695e00a24bc47b8fa1e8096986fb14dca15eab8c818ca702961810525e",
-      "bytes": 4466
+      "sha256": "7cde6a3e5f3e2f35b30c0c07365e0d70d475827f579df1d667d2dd710084314e",
+      "bytes": 4765
     },
     {
       "path": "Sources/QenTerra/Components/Layout/DesignSeparator.swift",
@@ -66335,8 +66335,8 @@
     },
     {
       "path": "Sources/QenTerra/DesignTokens/GeneratedTokens.swift",
-      "sha256": "40c1faf5a374c03c689c442d48c0d9a700ff3e43124b40a1f2e6991b27d4cfe9",
-      "bytes": 33487
+      "sha256": "84209e33a0778b9073b9ce5deccdf623190601f31ce15523a8609dc09188cf0c",
+      "bytes": 33748
     },
     {
       "path": "Sources/QenTerra/DesignTokens/SwiftUIAdapters.swift",
@@ -66405,8 +66405,8 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Controls/FavoriteControl.swift",
-      "sha256": "ac881f8c0356e54cf5b8386a1d769cbff7ae8b3c843bf8aa4b29f39b90e6273f",
-      "bytes": 3665
+      "sha256": "24c939bd1b8dee3cf6ab38575fa7e8d6fe11478008b313b21a94d3047ef7e7dd",
+      "bytes": 3786
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Controls/PlaybackIndicator.swift",
@@ -66420,8 +66420,8 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradient.swift",
-      "sha256": "4f57fae893e71593f7fa569171b5c5946c95432c707d4ac1564292a2948d66a8",
-      "bytes": 22211
+      "sha256": "cc8ced260fd028ab39d0a73d3edf4e6a898b790655599fe226f5f40555f50fa3",
+      "bytes": 23313
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientModels.swift",
@@ -66485,13 +66485,13 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Player/PlaybackProgressControl.swift",
-      "sha256": "6ac6fc960826dc94c5e2f9880054f17faef37e1c73a7222d8c3e1cb24e6ac1a4",
-      "bytes": 3006
+      "sha256": "ef37a532b089c1d411dab0d56b55fe53783f0c32a058b07dfb19cb6ba28b5a32",
+      "bytes": 3438
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Player/PlayerBar.swift",
-      "sha256": "6f2846ebd5942a4920372ba2e83a1d6b2e9c30389c7052ecff24b1a4cf2e4144",
-      "bytes": 12154
+      "sha256": "a2b7fb71de46f2609f39a1cfbcf33d20faa1666e0239682ebcd6b89f29bfc616",
+      "bytes": 12913
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Player/PlayerBarActions.swift",
@@ -66505,13 +66505,13 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Player/TransportControls.swift",
-      "sha256": "2f3ada54f631607e08a345aea3d3b27da0787337ebc38d605afd4595ddfa6031",
-      "bytes": 6622
+      "sha256": "3db7d6c41e217ce9d9256e49c557c0ad56ab7e1fba7123ababd3f5e74aabec2e",
+      "bytes": 7025
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Queue/PlaybackQueueRow.swift",
-      "sha256": "4831188a85f10a0b1f0e628a2b1ab4a4ceb241f460fe06792f1408f877c07447",
-      "bytes": 10057
+      "sha256": "55c9e3e6efeeb8aa2fb615625fa9e889d6e197a48bba4c2042a729e5a460e03a",
+      "bytes": 10481
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Queue/QueueDragPreview.swift",
@@ -66565,7 +66565,7 @@
     },
     {
       "path": "Sources/QenTerra/manifest.json",
-      "sha256": "436d92d7901dda7f822ed216c1d9e0988caa3ef9191ac7c925674ab219efa0ce",
+      "sha256": "afc30a547f27b3be703c3a8af30ea8afebe080fe7ea5e0a64b6ddffd72e1dffc",
       "bytes": 34608
     },
     {
@@ -130140,8 +130140,8 @@
     },
     {
       "path": "Tests/QenTerraMediaComponentsTests/ArtworkAccentGradientTests.swift",
-      "sha256": "dbdc76cf7dbc58354d22911d81802191d76270f81f99ab4e87423ce1010d65ce",
-      "bytes": 20481
+      "sha256": "3040d2044cf22fd8af524da8a9449cf741452a7bdb7f9a4c9bc0ed7185042181",
+      "bytes": 20612
     },
     {
       "path": "Tests/QenTerraMediaComponentsTests/ArtworkComponentTests.swift",
@@ -130290,13 +130290,13 @@
     },
     {
       "path": "npm/design-tokens/dist/tokens.css",
-      "sha256": "710a366f9712216a6f5d57f0f6c3a01bd914057a252566b02480024312ff020f",
-      "bytes": 27624
+      "sha256": "e1eff777cb63f7913e7c1d947840adf712db1b1b58a09773c5b125314f431033",
+      "bytes": 27815
     },
     {
       "path": "npm/design-tokens/dist/tokens.json",
-      "sha256": "0d14d8b4d8bfcb3e1eb337104b95863a6a34b95dea04dd1d913fa56c7e575d6c",
-      "bytes": 48193
+      "sha256": "6266e18d856b9ce19c099d4cbb546d5976c53ec67c6066f0c7940c677a02c94d",
+      "bytes": 48625
     },
     {
       "path": "npm/design-tokens/package.json",
@@ -130365,8 +130365,8 @@
     },
     {
       "path": "npm/design-tokens/src/tokens.json",
-      "sha256": "0d14d8b4d8bfcb3e1eb337104b95863a6a34b95dea04dd1d913fa56c7e575d6c",
-      "bytes": 48193
+      "sha256": "6266e18d856b9ce19c099d4cbb546d5976c53ec67c6066f0c7940c677a02c94d",
+      "bytes": 48625
     },
     {
       "path": "package.json",
