@@ -2,26 +2,72 @@
 import SwiftUI
 import QenTerraDesignTokens
 
+public enum KeycapPresentation: Equatable, Sendable {
+    case standard
+    case cadence
+}
+
 public struct Keycap: View {
     private let token: String
+    private let symbolName: String?
+    private let presentation: KeycapPresentation
 
     public init(_ token: String) {
+        self.init(token, symbolName: nil, presentation: .standard)
+    }
+
+    public init(
+        _ token: String,
+        symbolName: String?,
+        presentation: KeycapPresentation
+    ) {
         self.token = token
+        self.symbolName = symbolName
+        self.presentation = presentation
     }
 
     public var body: some View {
-        Text(token)
-            .font(.system(.caption, design: .rounded).weight(.medium))
-            .foregroundStyle(Color(designToken: DesignTokens.Color.textPrimary))
-            .padding(.horizontal, DesignTokens.Component.keycapPaddingX.points)
-            .frame(minHeight: DesignTokens.Component.keycapHeight.points)
-            .background(Color(designToken: DesignTokens.Color.surfaceSecondary))
-            .clipShape(RoundedRectangle(cornerRadius: DesignTokens.Component.keycapRadius.points, style: .continuous))
-            .overlay {
+        Group {
+            if let symbolName {
+                Image(systemName: symbolName)
+            } else {
+                Text(token)
+            }
+        }
+        .font(
+            presentation == .cadence
+                ? .callout.weight(.medium)
+                : .system(.caption, design: .rounded).weight(.medium)
+        )
+        .foregroundStyle(
+            Color(
+                designToken: presentation == .cadence
+                    ? DesignTokens.Color.textSecondary
+                    : DesignTokens.Color.textPrimary
+            )
+        )
+        .frame(minWidth: presentation == .cadence ? 18 : nil, minHeight: presentation == .cadence ? 18 : DesignTokens.Component.keycapHeight.points)
+        .padding(.horizontal, presentation == .cadence ? 5 : DesignTokens.Component.keycapPaddingX.points)
+        .background(
+            Color(
+                designToken: presentation == .cadence
+                    ? DesignTokens.Color.fillDisabled
+                    : DesignTokens.Color.surfaceSecondary
+            )
+        )
+        .clipShape(
+            RoundedRectangle(
+                cornerRadius: presentation == .cadence ? DesignTokens.Radius.control : DesignTokens.Component.keycapRadius.points,
+                style: .continuous
+            )
+        )
+        .overlay {
+            if presentation == .standard {
                 RoundedRectangle(cornerRadius: DesignTokens.Component.keycapRadius.points, style: .continuous)
                     .stroke(Color(designToken: DesignTokens.Color.borderDefault), lineWidth: DesignTokens.Stroke.hairline)
             }
-            .accessibilityLabel(token)
+        }
+        .accessibilityLabel(token)
     }
 }
 

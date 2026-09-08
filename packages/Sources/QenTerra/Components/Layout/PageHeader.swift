@@ -65,49 +65,99 @@ public struct DesignComponentMetrics: Equatable, Sendable {
     }
 }
 
+public struct PageHeaderPresentation: Equatable, Sendable {
+    public enum TitleStyle: Equatable, Sendable {
+        case sectionTitle
+        case largeTitleBold
+    }
+
+    public enum Alignment: Equatable, Sendable {
+        case firstTextBaseline
+        case bottom
+    }
+
+    public let titleStyle: TitleStyle
+    public let alignment: Alignment
+
+    public static let standard = Self(titleStyle: .sectionTitle, alignment: .firstTextBaseline)
+    public static let cadence = Self(titleStyle: .largeTitleBold, alignment: .bottom)
+
+    public init(titleStyle: TitleStyle, alignment: Alignment) {
+        self.titleStyle = titleStyle
+        self.alignment = alignment
+    }
+}
+
 public struct PageHeader<Actions: View>: View {
     @Environment(\.designNativeEnvironment) private var nativeEnvironment
 
     private let title: String
     private let subtitle: String?
+    private let presentation: PageHeaderPresentation
     private let actions: Actions
 
     public init(
         _ title: String,
         subtitle: String? = nil,
+        presentation: PageHeaderPresentation = .standard,
         @ViewBuilder actions: () -> Actions
     ) {
         self.title = title
         self.subtitle = subtitle
+        self.presentation = presentation
         self.actions = actions()
     }
 
     public var body: some View {
-        HStack(alignment: .firstTextBaseline, spacing: metrics.contentGap) {
+        HStack(
+            alignment: presentation.alignment == .bottom ? .bottom : .firstTextBaseline,
+            spacing: presentation == .cadence ? metrics.panelInset : metrics.contentGap
+        ) {
             VStack(alignment: .leading, spacing: metrics.textStack) {
                 Text(title)
-                    .font(.title2.weight(.semibold))
-                    .foregroundStyle(Color(designToken: DesignTokens.Color.textPrimary))
+                    .font(
+                        presentation.titleStyle == .largeTitleBold
+                            ? .largeTitle.bold()
+                            : .title2.weight(.semibold)
+                    )
+                    .foregroundStyle(titleForegroundStyle)
                 if let subtitle {
                     Text(subtitle)
-                        .font(.subheadline)
-                        .foregroundStyle(Color(designToken: DesignTokens.Color.textSecondary))
+                        .font(presentation == .cadence ? .callout : .subheadline)
+                        .foregroundStyle(subtitleForegroundStyle)
                 }
             }
-            Spacer(minLength: metrics.contentGap)
+            Spacer(minLength: presentation == .cadence ? metrics.pageInset : metrics.contentGap)
             actions
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .accessibilityElement(children: .contain)
     }
 
     private var metrics: DesignComponentMetrics {
         DesignComponentMetrics.resolve(for: nativeEnvironment)
     }
+
+    private var titleForegroundStyle: AnyShapeStyle {
+        presentation == .cadence
+            ? AnyShapeStyle(.primary)
+            : AnyShapeStyle(Color(designToken: DesignTokens.Color.textPrimary))
+    }
+
+    private var subtitleForegroundStyle: AnyShapeStyle {
+        presentation == .cadence
+            ? AnyShapeStyle(.secondary)
+            : AnyShapeStyle(Color(designToken: DesignTokens.Color.textSecondary))
+    }
 }
 
 public extension PageHeader where Actions == EmptyView {
-    init(_ title: String, subtitle: String? = nil) {
-        self.init(title, subtitle: subtitle) {
+    init(
+        _ title: String,
+        subtitle: String? = nil,
+        presentation: PageHeaderPresentation = .standard
+    ) {
+        self.init(title, subtitle: subtitle, presentation: presentation) {
             EmptyView()
         }
     }

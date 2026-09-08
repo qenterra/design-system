@@ -38,7 +38,7 @@ let package = Package(
         ),
         .testTarget(
             name: "QenTerraComponentSnapshotTests",
-            dependencies: ["QenTerraComponents", "QenTerraDesignTokens"],
+            dependencies: ["QenTerraComponents", "QenTerraDesignTokens", "QenTerraMediaComponents"],
             resources: [.copy("__Snapshots__")]
         ),
         .testTarget(

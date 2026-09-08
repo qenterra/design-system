@@ -10,8 +10,65 @@ from typing import Any
 
 REFERENCE = re.compile(r"^\{([^}]+)}$")
 COMPONENT_VALUE_UNITS = {
+    "panel.artwork.highlightOpacity": "unitless",
+    "panel.player.artworkHoverOpacity": "unitless",
+    "panel.artwork.highlightSizeRatio": "scalar",
+    "panel.artwork.highlightBlurRatio": "scalar",
+    "panel.artwork.highlightOffsetXRatio": "scalar",
+    "panel.artwork.highlightOffsetYRatio": "scalar",
+    "panel.artwork.scrimOpacity": "unitless",
+    "panel.artwork.symbolOpacity": "unitless",
+    "panel.artwork.symbolSizeRatio": "scalar",
+    "panel.artwork.artistPaddingRatio": "scalar",
+    "panel.artwork.collectionPaddingRatio": "scalar",
+    "panel.artwork.trackPaddingRatio": "scalar",
+    "panel.artwork.artistOffsetRatio": "scalar",
+    "panel.artwork.cropMinimumScale": "scalar",
+    "panel.artwork.cropMaximumScale": "scalar",
+    "panel.artwork.cropBorderOpacity": "unitless",
+    "panel.artwork.mosaicBorderOpacity": "unitless",
+    "panel.artwork.hazeFalloffRatio": "scalar",
+    "panel.artwork.hazeBackgroundFalloffRatio": "scalar",
+    "panel.artwork.hazeDarkSaturation": "scalar",
+    "panel.artwork.hazeLightSaturation": "scalar",
+    "panel.artwork.hazeDarkLeadingOpacity": "unitless",
+    "panel.artwork.hazeLightLeadingOpacity": "unitless",
+    "panel.artwork.hazeDarkTrailingOpacity": "unitless",
+    "panel.artwork.hazeLightTrailingOpacity": "unitless",
+    "panel.artwork.hazeDarkBackgroundOpacity": "unitless",
+    "panel.artwork.hazeLightBackgroundOpacity": "unitless",
     "panel.lyrics.followDurationMs": "milliseconds",
     "panel.lyrics.inactiveOpacity": "unitless",
+    "panel.queue.dragPreviewBorderOpacity": "unitless",
+    "panel.queue.dragPreviewShadowOpacity": "unitless",
+    "panel.queue.insertionOpacity": "unitless",
+    "panel.mediaCollection.pressedOpacity": "unitless",
+    "panel.mediaCollection.playbackIndicatorStaticFirstScale": "scalar",
+    "panel.mediaCollection.playbackIndicatorStaticSecondScale": "scalar",
+    "panel.mediaCollection.playbackIndicatorStaticThirdScale": "scalar",
+    "panel.mediaCollection.playbackIndicatorFirstDurationMs": "milliseconds",
+    "panel.mediaCollection.playbackIndicatorSecondDurationMs": "milliseconds",
+    "panel.mediaCollection.playbackIndicatorThirdDurationMs": "milliseconds",
+    "panel.mediaCollection.playbackIndicatorStaggerMs": "milliseconds",
+    "panel.mediaCollection.playbackIndicatorSecondKeyTimeRatio": "scalar",
+    "panel.mediaCollection.playbackIndicatorThirdKeyTimeRatio": "scalar",
+    "panel.mediaCollection.playbackIndicatorFourthKeyTimeRatio": "scalar",
+    "panel.mediaCollection.playbackIndicatorFirstPatternFirstScale": "scalar",
+    "panel.mediaCollection.playbackIndicatorFirstPatternSecondScale": "scalar",
+    "panel.mediaCollection.playbackIndicatorFirstPatternThirdScale": "scalar",
+    "panel.mediaCollection.playbackIndicatorFirstPatternFourthScale": "scalar",
+    "panel.mediaCollection.playbackIndicatorFirstPatternFifthScale": "scalar",
+    "panel.mediaCollection.playbackIndicatorSecondPatternFirstScale": "scalar",
+    "panel.mediaCollection.playbackIndicatorSecondPatternSecondScale": "scalar",
+    "panel.mediaCollection.playbackIndicatorSecondPatternThirdScale": "scalar",
+    "panel.mediaCollection.playbackIndicatorSecondPatternFourthScale": "scalar",
+    "panel.mediaCollection.playbackIndicatorSecondPatternFifthScale": "scalar",
+    "panel.mediaCollection.playbackIndicatorThirdPatternFirstScale": "scalar",
+    "panel.mediaCollection.playbackIndicatorThirdPatternSecondScale": "scalar",
+    "panel.mediaCollection.playbackIndicatorThirdPatternThirdScale": "scalar",
+    "panel.mediaCollection.playbackIndicatorThirdPatternFourthScale": "scalar",
+    "panel.mediaCollection.playbackIndicatorThirdPatternFifthScale": "scalar",
+    "panel.mediaCollection.playbackIndicatorScrimOpacity": "unitless",
 }
 
 
@@ -79,7 +136,7 @@ def css_value(value: Any) -> str:
 def component_value_unit(name: str) -> str:
     if name in COMPONENT_VALUE_UNITS:
         return COMPONENT_VALUE_UNITS[name]
-    if name.endswith(("Opacity", "DurationMs")):
+    if name.endswith(("Opacity", "DurationMs", "Ratio", "Saturation", "Scale")):
         raise ValueError(f"component token {name!r} needs an explicit semantic unit")
     return "points"
 
@@ -142,6 +199,7 @@ def generate_css(
             rendered = {
                 "points": css_value(value),
                 "unitless": str(value),
+                "scalar": str(value),
                 "milliseconds": f"{value}ms",
             }[unit]
             lines.append(f"  --design-system-component-{kebab(name)}: {rendered};")
@@ -230,6 +288,7 @@ def generate_swift(
             initializer = {
                 "points": f"DesignComponentMetric(points: {value})",
                 "unitless": f"DesignComponentOpacity(value: {value})",
+                "scalar": f"DesignComponentScalar(value: {value})",
                 "milliseconds": f"DesignComponentDuration(milliseconds: {value})",
             }[unit]
             component_lines.append(f"        public static let {swift_name(name)} = {initializer}")

@@ -31,47 +31,139 @@ public struct DropZonePresentation: Equatable, Sendable {
     }
 }
 
+public struct DropZoneVisualStyle: Equatable, Sendable {
+    public let maximumWidth: CGFloat?
+    public let minimumHeight: CGFloat?
+    public let overlayInset: CGFloat
+    public let isWorkspaceOverlay: Bool
+
+    public init(
+        maximumWidth: CGFloat?,
+        minimumHeight: CGFloat?,
+        overlayInset: CGFloat,
+        isWorkspaceOverlay: Bool
+    ) {
+        self.maximumWidth = maximumWidth
+        self.minimumHeight = minimumHeight
+        self.overlayInset = overlayInset
+        self.isWorkspaceOverlay = isWorkspaceOverlay
+    }
+
+    public static let standard = Self(
+        maximumWidth: nil,
+        minimumHeight: nil,
+        overlayInset: 0,
+        isWorkspaceOverlay: false
+    )
+    public static let cadenceHero = Self(
+        maximumWidth: 580,
+        minimumHeight: 250,
+        overlayInset: 0,
+        isWorkspaceOverlay: false
+    )
+    public static let cadenceOverlay = Self(
+        maximumWidth: nil,
+        minimumHeight: nil,
+        overlayInset: 18,
+        isWorkspaceOverlay: true
+    )
+}
+
+public struct DropZoneAction {
+    public let title: String
+    private let handler: @MainActor () -> Void
+
+    public init(
+        title: String,
+        handler: @escaping @MainActor () -> Void
+    ) {
+        self.title = title
+        self.handler = handler
+    }
+
+    @MainActor
+    public func perform() {
+        handler()
+    }
+}
+
 public struct DropZone: View {
     private let state: DropZoneState
     private let title: String
     private let message: String
+    private let action: DropZoneAction?
+    private let visualStyle: DropZoneVisualStyle
 
-    public init(state: DropZoneState, title: String, message: String) {
+    public init(
+        state: DropZoneState,
+        title: String,
+        message: String,
+        action: DropZoneAction? = nil,
+        visualStyle: DropZoneVisualStyle = .standard
+    ) {
         self.state = state
         self.title = title
         self.message = message
+        self.action = action
+        self.visualStyle = visualStyle
     }
 
     public var body: some View {
-        VStack(spacing: DesignTokens.Space.value2) {
-            Image(systemName: presentation.isTargeted ? "arrow.down.to.line.compact.fill" : "arrow.down.to.line.compact")
-                .font(.title2)
+        VStack(spacing: visualStyle == .standard ? DesignTokens.Space.value2 : DesignTokens.Space.value4) {
+            Image(systemName: visualStyle == .standard ? standardSymbol : "square.and.arrow.down")
+                .font(
+                    visualStyle == .standard
+                        ? .title2
+                        : .system(size: visualStyle.isWorkspaceOverlay ? 34 : 36, weight: .light)
+                )
+                .foregroundStyle(visualStyle == .standard ? .primary : .secondary)
                 .accessibilityHidden(true)
-            Text(title)
-                .font(
-                    .system(
-                        size: DesignTokens.Typography.rowEmphasized.size,
-                        weight: DesignTokens.Typography.rowEmphasized.swiftUIWeight
+            VStack(spacing: visualStyle == .standard ? 0 : DesignTokens.Space.value2) {
+                Text(title)
+                    .font(
+                        visualStyle == .standard
+                            ? .system(
+                                size: DesignTokens.Typography.rowEmphasized.size,
+                                weight: DesignTokens.Typography.rowEmphasized.swiftUIWeight
+                            )
+                            : .title3.weight(.semibold)
                     )
-                )
+                Text(message)
+                    .font(
+                        visualStyle == .standard
+                            ? .system(
+                                size: DesignTokens.Typography.supporting.size,
+                                weight: DesignTokens.Typography.supporting.swiftUIWeight
+                            )
+                            : .callout
+                    )
+                    .foregroundStyle(Color(designToken: DesignTokens.Color.textSecondary))
+                    .multilineTextAlignment(.center)
+            }
                 .foregroundStyle(Color(designToken: DesignTokens.Color.textPrimary))
-            Text(message)
-                .font(
-                    .system(
-                        size: DesignTokens.Typography.supporting.size,
-                        weight: DesignTokens.Typography.supporting.swiftUIWeight
+            if let action {
+                Button(action.title) { action.perform() }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.large)
+            }
+        }
+        .padding(visualStyle == .standard ? DesignTokens.Space.value6 : 0)
+        .frame(
+            maxWidth: visualStyle.maximumWidth ?? .infinity,
+            minHeight: visualStyle.minimumHeight
+        )
+        .background(background)
+        .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                .strokeBorder(
+                    border,
+                    style: StrokeStyle(
+                        lineWidth: visualStyle.isWorkspaceOverlay ? 2 : DesignTokens.Stroke.hairline,
+                        dash: visualStyle.isWorkspaceOverlay ? [9, 7] : [7, 6]
                     )
                 )
-                .foregroundStyle(Color(designToken: DesignTokens.Color.textSecondary))
-                .multilineTextAlignment(.center)
-        }
-        .padding(DesignTokens.Space.value6)
-        .frame(maxWidth: .infinity)
-        .background(Color(designToken: DesignTokens.Color.surfaceSecondary))
-        .clipShape(RoundedRectangle(cornerRadius: DesignTokens.Radius.group, style: .continuous))
-        .overlay {
-            RoundedRectangle(cornerRadius: DesignTokens.Radius.group, style: .continuous)
-                .stroke(border, style: StrokeStyle(lineWidth: DesignTokens.Stroke.hairline, dash: [DesignTokens.Space.value1]))
+                .padding(visualStyle.overlayInset)
         }
         .overlay {
             RoundedRectangle(cornerRadius: DesignTokens.Radius.group, style: .continuous)
@@ -89,11 +181,31 @@ public struct DropZone: View {
 
     private var presentation: DropZonePresentation { state.presentation }
 
+    private var standardSymbol: String {
+        presentation.isTargeted
+            ? "arrow.down.to.line.compact.fill"
+            : "arrow.down.to.line.compact"
+    }
+
+    private var cornerRadius: Double {
+        visualStyle == .standard ? DesignTokens.Radius.group : DesignTokens.Radius.hero
+    }
+
+    private var background: Color {
+        if visualStyle.isWorkspaceOverlay {
+            return Color(designToken: DesignTokens.Color.surfaceOverlay).opacity(0.97)
+        }
+        return Color(designToken: DesignTokens.Color.surfaceSecondary)
+    }
+
     private var border: Color {
+        if visualStyle.isWorkspaceOverlay {
+            return Color.primary.opacity(0.34)
+        }
         switch state {
-        case .ready: Color(designToken: DesignTokens.Color.borderDefault)
-        case .targeted: Color(designToken: DesignTokens.Color.borderFocus)
-        case .unavailable: Color(designToken: DesignTokens.Color.borderDefault)
+        case .ready: return Color(designToken: DesignTokens.Color.borderDefault)
+        case .targeted: return Color(designToken: DesignTokens.Color.borderFocus)
+        case .unavailable: return Color(designToken: DesignTokens.Color.borderDefault)
         }
     }
 }

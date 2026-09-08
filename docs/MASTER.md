@@ -407,6 +407,20 @@ Use a neutral extension tile when filename recognition is primary. Do not replac
 
 Artwork may lead a media row. Title is primary, creator is secondary, and codec/quality is compact metadata. Embedded links must not trigger playback or break multi-selection.
 
+The native macOS table keeps one reusable AppKit hierarchy. `NativeMediaTableCell.configure` reports actual content and layout work; `configurePlaceholder` preserves that hierarchy without fabricating an item identity. Ready artwork publication accepts a validated normalized `contentsRect` and rejects stale request generations. Consumer menu callbacks receive the original `NSEvent` and the actual actions `NSButton` anchor; selection resolution, loading, caching, and menu construction remain consumer-owned. Presentation can opt into a different finite favorite-control reservation, primary action tint, and consumer accessibility terminology; defaults remain unchanged. `mediaExplicitBadge` is the compact single-glyph badge typography role, distinct from supporting text.
+
+The artwork-accent terrain shares its packaged Metal library with `ArtworkAccentGradientPrewarmer.prepare()`, which starts compilation off the UI thread. Prewarming is optional and never changes the fixed terrain, palette transition, effect tint, or opaque fallback.
+
+`ArtworkAccentGradient` composes idle darkening and effect tint using SwiftUI's native color blending over raw Metal terrain. `ArtworkAccentGradientView` retains AppKit layer composition for direct native consumers. Do not add duplicate consumer overlays. Both surfaces retain opaque fallback; SwiftUI palette transitions use 0.8 seconds and effect opacity uses the supplied symmetric duration, with animations disabled for Reduced Motion.
+
+Gradient availability is resolved by one retained native surface before its first SwiftUI frame; initial tint does not wait for a later event-loop turn. Standard About-resource rows inherit typography and symbol rendering from their environment, while the Cadence style opts into its own treatment. Designed feedback actions honor each supplied action style; the default recovery action remains secondary.
+
+### 6.7 Artwork presentation
+
+The macOS artwork family frames consumer-supplied ready content and exposes explicit `content`, `loading`, `placeholder`, and `error` presentation. Shared code owns the synthetic placeholder, semantic border, crop viewport and clamped transform, zero-to-four-slot mosaic geometry, and decorative palette haze. The consumer owns decoding, file and network access, cache and request identity, gestures, and save or cancel actions.
+
+Artwork labels retain the complete consumer title. Increased Contrast strengthens boundaries without changing geometry. Reduced Transparency removes the decorative haze and suppresses the translucent placeholder highlight. Decorative placeholder and haze layers do not intercept input or create separate accessibility elements.
+
 ## 7. Navigation
 
 Shared navigation defines states, icon treatment, label behavior, keyboard movement, focus, persistence, and responsive transformation. It does not define one universal shell.
@@ -821,6 +835,14 @@ Deprecated tokens/components remain documented for one migration window with rep
 
 ### 18.6 Package distribution
 
+`LyricsEdgeFade()` retains its fixed-height destination-out edge overlay. For a
+whole-viewport alpha mask, use `.mask { LyricsEdgeFade(presentation:
+.viewportMask(.init(topOpaqueLocation: 0.18, bottomOpaqueLocation: 0.88))) }`.
+The top-to-bottom gradient is clear at 0, black at both supplied opaque positions,
+and clear at 1. Finite positions are clamped to 0...1 and ordered; nonfinite top
+and bottom inputs fall back to 0 and 1 respectively. Both modes are decorative,
+hidden from accessibility, and ignore hit testing; consumers own mask placement.
+
 The canonical public repository is `qenterra/design-system`. It exposes
 `@qenterra/design-tokens` through npm and the `QenTerraDesignTokens` /
 `QenTerraComponents` / `QenTerraMediaComponents` SwiftPM products from the same versioned source. Production
@@ -829,6 +851,15 @@ Design System work. Publication requires aligned versions, the exact release
 manifest, the full verification gate, and clean consumer resolution. A package
 release proves adapter availability, not native rendering or accessibility
 acceptance in a product.
+
+The local version-alignment command accepts plain `MAJOR.MINOR.PATCH` only. It
+updates every declared canonical version surface through a staged transaction,
+regenerates derived and public manifests, and reports changed paths; it never
+commits, tags, pushes, publishes, or authorises a release. Native component
+snapshots use synthetic data and an exact OS/architecture profile. Recording is
+a separate focused operation followed by original-size review; the complete gate
+is comparison-only and covers core, media, native-table, Reduced Motion, fallback,
+and fixed-time gradient boundaries.
 
 The package source tree has six deliberately separate zones. `Sources/QenTerra/`
 contains the installable, tokenized `QenTerraDesignTokens`, `QenTerraComponents`, and macOS-first

@@ -66,13 +66,13 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - name: Record synthetic core references
+      - name: Record complete synthetic component references
         env:
           QDS_RECORD_SNAPSHOTS: "1"
         run: |
           test "$(sw_vers -productVersion | cut -d. -f1)" = "26"
           test "$(uname -m)" = "arm64"
-          swift test --package-path . --scratch-path "$RUNNER_TEMP/snapshot-build" --filter CoreComponentSnapshots
+          swift test --package-path . --scratch-path "$RUNNER_TEMP/snapshot-build" --filter QenTerraComponentSnapshotTests
           mkdir -p "$RUNNER_TEMP/snapshot-capture"
           cp -R packages/Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-26-arm64 "$RUNNER_TEMP/snapshot-capture/"
           {

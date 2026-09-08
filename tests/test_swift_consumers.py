@@ -1,11 +1,15 @@
 from __future__ import annotations
 
+import ctypes
 import importlib.util
 import os
+import signal
 import shutil
 import subprocess
 import tempfile
+import time
 import unittest
+import uuid
 from pathlib import Path
 
 
@@ -22,14 +26,600 @@ def load_builder():
     return module
 
 
+def executable_path_for_pid(pid: int) -> Path | None:
+    libproc = ctypes.CDLL("/usr/lib/libproc.dylib", use_errno=True)
+    proc_pidpath = libproc.proc_pidpath
+    proc_pidpath.argtypes = [ctypes.c_int, ctypes.c_void_p, ctypes.c_uint32]
+    proc_pidpath.restype = ctypes.c_int
+    buffer = ctypes.create_string_buffer(4096)
+    length = proc_pidpath(pid, buffer, len(buffer))
+    if length <= 0:
+        return None
+    return Path(os.fsdecode(buffer.value)).resolve()
+
+
+def read_recorded_pid(pid_path: Path) -> int | None:
+    if not pid_path.exists():
+        return None
+    try:
+        pid = int(pid_path.read_text(encoding="utf-8").strip())
+    except (OSError, ValueError):
+        raise AssertionError(f"native interaction host wrote an invalid PID file: {pid_path}")
+    if pid <= 0:
+        raise AssertionError(f"native interaction host wrote a non-positive PID: {pid}")
+    return pid
+
+
+def terminate_exact_host(pid_path: Path, expected_executable: Path) -> None:
+    pid = read_recorded_pid(pid_path)
+    if pid is None:
+        return
+
+    expected = expected_executable.resolve()
+    actual = executable_path_for_pid(pid)
+    if actual is None:
+        return
+    if actual != expected:
+        raise AssertionError(
+            "refusing to terminate PID "
+            f"{pid}: expected {expected}, found {actual}"
+        )
+
+    try:
+        os.kill(pid, signal.SIGTERM)
+    except ProcessLookupError:
+        return
+    term_deadline = time.monotonic() + 2
+    while time.monotonic() < term_deadline:
+        actual = executable_path_for_pid(pid)
+        if actual is None or actual != expected:
+            return
+        time.sleep(0.02)
+
+    # Validate identity again immediately before the non-recoverable fallback.
+    actual = executable_path_for_pid(pid)
+    if actual is None or actual != expected:
+        return
+    try:
+        os.kill(pid, signal.SIGKILL)
+    except ProcessLookupError:
+        return
+    kill_deadline = time.monotonic() + 2
+    while time.monotonic() < kill_deadline:
+        actual = executable_path_for_pid(pid)
+        if actual is None or actual != expected:
+            return
+        time.sleep(0.02)
+    raise AssertionError(f"exact native interaction host PID {pid} survived SIGKILL")
+
+
+def launch_native_interaction_host(
+    application: Path,
+    bundled_executable: Path,
+    environment: dict[str, str],
+    pid_path: Path,
+    result_path: Path,
+    stdout_path: Path,
+    stderr_path: Path,
+    *,
+    timeout: float,
+    extra_arguments: tuple[str, ...] = (),
+    ready_result: str | None = None,
+) -> subprocess.CompletedProcess:
+    command = [
+        "open",
+        "-W",
+        "-n",
+        "-o",
+        str(stdout_path),
+        "--stderr",
+        str(stderr_path),
+        "-a",
+        str(application),
+        "--args",
+        "--qenterra-pid-path",
+        str(pid_path),
+        "--qenterra-result-path",
+        str(result_path),
+        *extra_arguments,
+    ]
+    launcher = subprocess.Popen(
+        command,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        env=environment,
+    )
+    try:
+        startup_deadline = time.monotonic() + 10
+        while not pid_path.exists() and launcher.poll() is None and time.monotonic() < startup_deadline:
+            time.sleep(0.02)
+
+        if not pid_path.exists() and launcher.poll() is None:
+            raise AssertionError("native interaction host did not record its PID during startup")
+
+        if pid_path.exists():
+            pid = read_recorded_pid(pid_path)
+            if pid is not None:
+                actual = executable_path_for_pid(pid)
+                if actual != bundled_executable.resolve() and launcher.poll() is None:
+                    raise AssertionError(
+                        f"native interaction host PID {pid} belongs to {actual}, "
+                        f"not {bundled_executable.resolve()}"
+                    )
+
+        if ready_result is not None:
+            ready_deadline = time.monotonic() + 10
+            while launcher.poll() is None and time.monotonic() < ready_deadline:
+                if result_path.exists() and result_path.read_text(encoding="utf-8") == ready_result:
+                    break
+                time.sleep(0.02)
+            else:
+                raise AssertionError(
+                    f"native interaction host did not publish expected ready result {ready_result!r}"
+                )
+
+        launcher_stdout, launcher_stderr = launcher.communicate(timeout=timeout)
+        return subprocess.CompletedProcess(
+            command,
+            launcher.returncode,
+            launcher_stdout,
+            launcher_stderr,
+        )
+    finally:
+        try:
+            terminate_exact_host(pid_path, bundled_executable)
+        finally:
+            if launcher.poll() is None:
+                launcher.kill()
+            launcher.communicate()
+
+
 class SwiftConsumerTests(unittest.TestCase):
     def test_core_only_consumer_builds_against_copied_public_package(self) -> None:
         self._build_fixture("swift-consumer-core")
 
     def test_media_consumer_builds_against_copied_public_package(self) -> None:
-        self._build_fixture("swift-consumer-media")
+        self._build_fixture("swift-consumer-media", expected_output="PUBLIC_MEDIA_CATALOG_OK")
 
-    def _build_fixture(self, fixture_name: str) -> None:
+    def test_media_table_family_builds_against_copied_public_package(self) -> None:
+        self._build_fixture(
+            "swift-consumer-media",
+            source="""
+import AppKit
+import QenTerraDesignTokens
+import QenTerraMediaComponents
+import SwiftUI
+
+let row = MediaTableRowPresentation(
+    id: "public-track",
+    title: "Public Track",
+    creator: "Public Artist",
+    collection: "Public Collection",
+    year: "2026",
+    duration: "2:00",
+    isExplicit: false,
+    isFavorite: true,
+    isCurrent: true,
+    isPlaying: false,
+    isAvailable: true,
+    artworkIdentity: "public-artwork"
+)
+let geometry = MediaTableGeometry(density: .standard)
+let widths = geometry.resolvedWidths(
+    availableWidth: 900,
+    columns: [.collection, .year, .duration]
+)
+let placeholder = MediaTablePlaceholderRow(density: .compact, showsArtwork: true)
+
+@MainActor
+func constructNativeTable() {
+    let table = NativeMediaTableView()
+    table.configureKeyboardActions(
+        onReturn: {},
+        onSpace: {},
+        onDelete: {}
+    )
+    let cell = NativeMediaTableCell()
+    cell.configure(
+        presentation: row,
+        state: MediaTableCellState(typography: .large),
+        columns: [.collection, .year, .duration],
+        widths: widths,
+        requestArtwork: { request in
+            _ = request.itemID
+            _ = request.artworkIdentity
+        },
+        actions: NativeMediaTableActions(
+            select: { _ in },
+            play: { _ in },
+            favorite: { _ in },
+            creator: { _ in },
+            collection: { _ in },
+            actions: { _ in }
+        )
+    )
+}
+
+_ = placeholder
+print(row.title, widths.title)
+""",
+        )
+
+    def test_artwork_accent_gradient_builds_against_copied_public_package(self) -> None:
+        self._build_fixture(
+            "swift-consumer-media",
+            source="""
+import AppKit
+import Metal
+import QenTerraDesignTokens
+import QenTerraMediaComponents
+import SwiftUI
+
+let palette = ArtworkAccentPalette(colors: [
+    ArtworkAccentColor(red: 0.2, green: 0.4, blue: 0.8),
+    ArtworkAccentColor(red: 0.9, green: 0.5, blue: 0.1),
+])
+let environment = DesignNativeEnvironment(
+    appearance: .dark,
+    productProfile: .standard,
+    density: .standard,
+    isIncreasedContrast: false,
+    reducesMotion: false,
+    reducesTransparency: false
+)
+let appearance = ArtworkAccentGradientAppearance.resolve(
+    palette: palette,
+    isEffectActive: true,
+    environment: environment
+)
+var transition = ArtworkAccentGradientTransition(palette: palette)
+transition.retarget(to: .fallback, at: 0.4, reducesMotion: false)
+let swiftUIView = ArtworkAccentGradient(palette: palette, appearance: appearance)
+
+@MainActor
+func constructNativeGradient() {
+    let view = ArtworkAccentGradientView(frame: .zero, device: nil)
+    view.update(palette: palette, appearance: appearance)
+    _ = ArtworkAccentGradientSnapshot.render(
+        palette: palette,
+        size: CGSize(width: 64, height: 64),
+        time: 0,
+        device: nil
+    )
+}
+
+_ = transition.colors(at: 0.8)
+_ = swiftUIView
+print(ArtworkAccentGradientResourceAvailability.hasPackagedShader)
+""",
+        )
+
+    def test_player_family_builds_against_copied_public_package(self) -> None:
+        self._build_fixture(
+            "swift-consumer-media",
+            source="""
+import AVFoundation
+import QenTerraMediaComponents
+import SwiftUI
+
+let progress = PlaybackProgressPresentation(
+    progress: 0.5,
+    leadingText: "1:00",
+    trailingText: "2:00",
+    accessibilityLabel: "Playback progress",
+    isEnabled: true
+)
+let player = PlayerBarPresentation(
+    title: "Public Track",
+    subtitle: "Public Artist",
+    isPlaying: false,
+    isShuffleEnabled: false,
+    repeatMode: .off,
+    progress: progress,
+    volume: 0.5,
+    isMuted: false,
+    isQueuePresented: false,
+    favorite: nil
+)
+let queue = PlaybackQueueRowPresentation(
+    id: "public-queue-item",
+    title: "Public Track",
+    subtitle: "Public Artist",
+    durationText: "2:00",
+    isCurrent: false,
+    isSelected: true,
+    isAvailable: true,
+    isDraggable: true,
+    accessibilityLabel: "Public Track"
+)
+let lyric = LyricLinePresentation(
+    id: "public-lyric",
+    text: "Public lyric",
+    isActive: false,
+    isSynchronized: true,
+    inactiveBlurRadius: 0.45
+)
+let detail = AudioDetail(id: "codec", label: "Codec", value: "FLAC", order: 0)
+let actions = PlayerBarActions(
+    showNowPlaying: {},
+    togglePlayback: {},
+    previous: {},
+    next: {},
+    seek: { _ in },
+    setVolume: { _ in },
+    toggleMute: {},
+    showQueue: {}
+)
+let bar = PlayerBar(presentation: player, actions: actions) {
+    Color.blue
+} metadataAccessory: {
+    Text("External")
+} favoriteAccessory: {
+    Text("Import")
+} statusAccessory: {
+    Text("Status")
+} routeAccessory: {
+    Text("Route")
+}
+let row = PlaybackQueueRow(
+    presentation: queue,
+    dragPayload: "public-queue-item",
+    select: {},
+    play: {},
+    remove: nil,
+    artwork: { Color.blue },
+    metadata: { Text("Public Artist · Public Album") },
+    contextMenu: { EmptyView() },
+    dragPreview: { Text("Public Track") }
+)
+let lyrics = LyricsViewport(
+    lines: [lyric],
+    currentIdentity: lyric.id,
+    resetIdentity: "public-track",
+    alignment: .leading
+) { line in
+    LyricLineLabel(
+        presentation: line,
+        textSize: 24,
+        alignment: .leading,
+        lineLimit: 3
+    )
+}
+let systemRoute = AirPlayRoutePicker.routingPlayer(AVPlayer())
+_ = bar
+_ = row
+_ = lyrics
+print(player.hasCurrentItem, queue.isSelected, lyric.opacity, detail.value, systemRoute == nil)
+""",
+        )
+
+    def test_media_interaction_host_runs_against_copied_public_package(self) -> None:
+        if (
+            os.environ.get("CODEX_SANDBOX") == "seatbelt"
+            and os.environ.get("QDS_RUN_NATIVE_INTERACTION_HOST") != "1"
+        ):
+            self.skipTest(
+                "Codex seatbelt blocks LaunchServices; rerun with "
+                "QDS_RUN_NATIVE_INTERACTION_HOST=1 outside the sandbox"
+            )
+        with tempfile.TemporaryDirectory(prefix="qenterra-swift-media-interaction-") as directory:
+            staging = Path(directory)
+            application, bundled_executable, environment = self._prepare_media_interaction_host(staging)
+            run_id = uuid.uuid4().hex
+            pid_path = staging / f"media-interaction-host-{run_id}.pid"
+            result_path = staging / f"media-interaction-host-{run_id}.result"
+            stdout_path = staging / f"media-interaction-host-{run_id}.stdout"
+            stderr_path = staging / f"media-interaction-host-{run_id}.stderr"
+            launch = launch_native_interaction_host(
+                application,
+                bundled_executable,
+                environment,
+                pid_path,
+                result_path,
+                stdout_path,
+                stderr_path,
+                timeout=30,
+            )
+            host_stdout = stdout_path.read_text(encoding="utf-8") if stdout_path.exists() else ""
+            host_stderr = stderr_path.read_text(encoding="utf-8") if stderr_path.exists() else ""
+            bundle_inventory = [
+                f"{path.relative_to(application)} mode={oct(path.stat().st_mode)} size={path.stat().st_size}"
+                for path in application.rglob("*")
+            ]
+            self.assertEqual(
+                launch.returncode,
+                0,
+                "media interaction host failed to launch:\n"
+                f"{launch.stdout}\n{launch.stderr}\n{host_stdout}\n{host_stderr}\n{bundle_inventory}",
+            )
+            self.assertIn(
+                "MEDIA_INTERACTION_HOST_OK",
+                host_stdout,
+                f"media interaction host failed:\n{host_stdout}\n{host_stderr}",
+            )
+            self.assertIn("POINTER_PLACEMENT_EDGES_OK", host_stdout)
+            self.assertIn("PHYSICAL_CURSOR_SCOPE_SUCCESS_AND_FAILURE_OK", host_stdout)
+            self.assertIn("PHYSICAL_CURSOR_RESTORED_OK", host_stdout)
+            self.assertIn(
+                "PLAYER_INTERACTION_HOST_OK",
+                host_stdout,
+                f"player interaction host did not exercise every public control:\n{host_stdout}\n{host_stderr}",
+            )
+            self.assertIn(
+                "MEDIA_TABLE_INTERACTION_HOST_OK",
+                host_stdout,
+                f"media table host did not exercise every public control:\n{host_stdout}\n{host_stderr}",
+            )
+            self.assertEqual(
+                result_path.read_text(encoding="utf-8") if result_path.exists() else "",
+                "OK\n",
+                "media interaction host did not publish its successful result",
+            )
+            recorded_pid = read_recorded_pid(pid_path)
+            self.assertIsNotNone(recorded_pid, "media interaction host did not record its PID")
+            self.assertNotEqual(
+                executable_path_for_pid(recorded_pid),
+                bundled_executable.resolve(),
+                "successful native interaction host remained alive",
+            )
+
+    def test_player_controls_run_against_copied_public_package(self) -> None:
+        if (
+            os.environ.get("CODEX_SANDBOX") == "seatbelt"
+            and os.environ.get("QDS_RUN_NATIVE_INTERACTION_HOST") != "1"
+        ):
+            self.skipTest(
+                "Codex seatbelt blocks LaunchServices; rerun with "
+                "QDS_RUN_NATIVE_INTERACTION_HOST=1 outside the sandbox"
+            )
+        with tempfile.TemporaryDirectory(prefix="qenterra-swift-player-interaction-") as directory:
+            staging = Path(directory)
+            application, bundled_executable, environment = self._prepare_media_interaction_host(staging)
+            run_id = uuid.uuid4().hex
+            pid_path = staging / f"player-interaction-host-{run_id}.pid"
+            result_path = staging / f"player-interaction-host-{run_id}.result"
+            stdout_path = staging / f"player-interaction-host-{run_id}.stdout"
+            stderr_path = staging / f"player-interaction-host-{run_id}.stderr"
+            launch = launch_native_interaction_host(
+                application,
+                bundled_executable,
+                environment,
+                pid_path,
+                result_path,
+                stdout_path,
+                stderr_path,
+                timeout=30,
+                extra_arguments=("--qenterra-player-only",),
+            )
+            host_stdout = stdout_path.read_text(encoding="utf-8") if stdout_path.exists() else ""
+            host_stderr = stderr_path.read_text(encoding="utf-8") if stderr_path.exists() else ""
+            self.assertEqual(
+                launch.returncode,
+                0,
+                f"player interaction host failed:\n{launch.stdout}\n{launch.stderr}\n{host_stdout}\n{host_stderr}",
+            )
+            self.assertIn(
+                "PLAYER_INTERACTION_HOST_OK",
+                host_stdout,
+                f"player interaction host did not exercise every public control:\n{host_stdout}\n{host_stderr}",
+            )
+            self.assertEqual(
+                result_path.read_text(encoding="utf-8") if result_path.exists() else "",
+                "OK\n",
+                "player interaction host did not publish its successful result",
+            )
+            recorded_pid = read_recorded_pid(pid_path)
+            self.assertIsNotNone(recorded_pid, "player interaction host did not record its PID")
+            self.assertNotEqual(
+                executable_path_for_pid(recorded_pid),
+                bundled_executable.resolve(),
+                "successful player interaction host remained alive",
+            )
+
+    def test_timed_out_media_interaction_host_is_terminated(self) -> None:
+        if (
+            os.environ.get("CODEX_SANDBOX") == "seatbelt"
+            and os.environ.get("QDS_RUN_NATIVE_INTERACTION_HOST") != "1"
+        ):
+            self.skipTest(
+                "Codex seatbelt blocks LaunchServices; rerun with "
+                "QDS_RUN_NATIVE_INTERACTION_HOST=1 outside the sandbox"
+            )
+        with tempfile.TemporaryDirectory(prefix="qenterra-swift-media-timeout-") as directory:
+            staging = Path(directory)
+            application, bundled_executable, environment = self._prepare_media_interaction_host(staging)
+
+            run_id = uuid.uuid4().hex
+            pid_path = staging / f"media-interaction-host-{run_id}.pid"
+            result_path = staging / f"media-interaction-host-{run_id}.result"
+            stdout_path = staging / f"media-interaction-host-{run_id}.stdout"
+            stderr_path = staging / f"media-interaction-host-{run_id}.stderr"
+            with self.assertRaises(subprocess.TimeoutExpired):
+                launch_native_interaction_host(
+                    application,
+                    bundled_executable,
+                    environment,
+                    pid_path,
+                    result_path,
+                    stdout_path,
+                    stderr_path,
+                    timeout=0.1,
+                    extra_arguments=("--qenterra-test-hang",),
+                    ready_result="HANG_READY\n",
+                )
+            self.assertEqual(
+                result_path.read_text(encoding="utf-8") if result_path.exists() else "",
+                "HANG_READY\n",
+                "timeout regression host did not reach its explicit hang state",
+            )
+            pid = read_recorded_pid(pid_path)
+            self.assertIsNotNone(pid, "timeout regression host did not record its PID")
+            self.assertNotEqual(
+                executable_path_for_pid(pid),
+                bundled_executable.resolve(),
+                "timed-out native interaction host survived after its open launcher was killed",
+            )
+
+    def _prepare_media_interaction_host(
+        self,
+        staging: Path,
+    ) -> tuple[Path, Path, dict[str, str]]:
+        builder = load_builder()
+        fixture = ROOT / "tests/fixtures/swift-media-interaction-host"
+        consumer = staging / "consumer"
+        public = staging / "public"
+        shutil.copytree(fixture, consumer)
+        builder.export_public_tree(public, ROOT)
+        environment = os.environ.copy()
+        environment["SWIFTPM_DISABLE_SANDBOX"] = "1"
+        scratch = staging / "scratch"
+        build = subprocess.run(
+            [
+                "swift",
+                "build",
+                "--package-path",
+                str(consumer),
+                "--scratch-path",
+                str(scratch),
+                "--disable-sandbox",
+            ],
+            capture_output=True,
+            text=True,
+            env=environment,
+            check=False,
+        )
+        self.assertEqual(
+            build.returncode,
+            0,
+            f"media interaction host failed to build:\n{build.stdout}\n{build.stderr}",
+        )
+        executable = scratch / "debug/QenTerraMediaInteractionHost"
+        application = staging / "QenTerraMediaInteractionHost.app"
+        bundled_executable = application / "Contents/MacOS/QenTerraMediaInteractionHost"
+        bundled_executable.parent.mkdir(parents=True)
+        shutil.copy2(executable, bundled_executable)
+        bundled_executable.chmod(0o755)
+        shutil.copy2(fixture / "Info.plist", application / "Contents/Info.plist")
+        sign = subprocess.run(
+            ["codesign", "--force", "--sign", "-", str(application)],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertEqual(
+            sign.returncode,
+            0,
+            f"media interaction host failed ad-hoc signing:\n{sign.stdout}\n{sign.stderr}",
+        )
+        return application, bundled_executable, environment
+
+    def _build_fixture(
+        self,
+        fixture_name: str,
+        source: str | None = None,
+        expected_output: str | None = None,
+    ) -> None:
         builder = load_builder()
         fixture = ROOT / "tests/fixtures" / fixture_name
         with tempfile.TemporaryDirectory(prefix="qenterra-swift-consumer-") as directory:
@@ -37,6 +627,10 @@ class SwiftConsumerTests(unittest.TestCase):
             consumer = staging / "consumer"
             public = staging / "public"
             shutil.copytree(fixture, consumer)
+            if source is not None:
+                source_files = list((consumer / "Sources").rglob("*.swift"))
+                self.assertEqual(len(source_files), 1, fixture_name)
+                source_files[0].write_text(source, encoding="utf-8")
             builder.export_public_tree(public, ROOT)
             environment = os.environ.copy()
             environment["SWIFTPM_DISABLE_SANDBOX"] = "1"
@@ -52,3 +646,26 @@ class SwiftConsumerTests(unittest.TestCase):
                 0,
                 f"{fixture_name} failed to build against copied public package:\n{result.stdout}\n{result.stderr}",
             )
+            if expected_output is not None:
+                execution = subprocess.run(
+                    [
+                        "swift",
+                        "run",
+                        "--package-path",
+                        str(consumer),
+                        "--scratch-path",
+                        str(staging / "scratch"),
+                        "--disable-sandbox",
+                        "--skip-build",
+                    ],
+                    capture_output=True,
+                    text=True,
+                    env=environment,
+                    check=False,
+                )
+                self.assertEqual(
+                    execution.returncode,
+                    0,
+                    f"{fixture_name} failed to run after build:\n{execution.stdout}\n{execution.stderr}",
+                )
+                self.assertIn(expected_output, execution.stdout)

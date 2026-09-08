@@ -70,12 +70,13 @@
       "deliveryProduct": "QenTerraComponents",
       "publicSymbols": [
         "InteractiveRowState",
+        "InteractiveRowCornerRadius",
         "InteractiveRowSurface"
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/InteractiveRowSurface.swift",
-      "sha256": "7f8b4395bef4d4a9ab67ec6f9172086d01763dff4b8517d8e9360ab012f0e4cb",
-      "bytes": 3814
+      "sha256": "7cde6a3e5f3e2f35b30c0c07365e0d70d475827f579df1d667d2dd710084314e",
+      "bytes": 4765
     },
     {
       "id": "primary-button-style",
@@ -98,12 +99,13 @@
       "status": "stable",
       "deliveryProduct": "QenTerraComponents",
       "publicSymbols": [
+        "RowActionButtonPresentation",
         "RowActionButtonStyle"
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/Controls/RowActionButtonStyle.swift",
-      "sha256": "890332f01d5c762b24bb07622a39053f5fd19a23f86685c4c4920aeba8ea79fd",
-      "bytes": 412
+      "sha256": "726ab483340cb662a9058f59bfd13294f89a647e8669280069759536caae1583",
+      "bytes": 1051
     },
     {
       "id": "settings-row",
@@ -126,12 +128,13 @@
       "status": "stable",
       "deliveryProduct": "QenTerraComponents",
       "publicSymbols": [
+        "SettingsSectionPresentation",
         "SettingsSection"
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/Containers/SettingsSection.swift",
-      "sha256": "e4ceb2632a0795183196c1b465a538c3e5c9456290f505e8fae6e3ef034c6961",
-      "bytes": 1576
+      "sha256": "c27ad9348f091d5c11dac9b5e0b0cc3d625df1c12199a6c377677fdd62b9b391",
+      "bytes": 3842
     },
     {
       "id": "settings-toggle-row",
@@ -140,12 +143,13 @@
       "status": "stable",
       "deliveryProduct": "QenTerraComponents",
       "publicSymbols": [
+        "SettingsTogglePresentation",
         "SettingsToggleRow"
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/Containers/SettingsToggleRow.swift",
-      "sha256": "ed918bce9c03292c85fb523be7f6f00e14548f2ae2fe56f93f1f0cda5f5c92ab",
-      "bytes": 1195
+      "sha256": "ebf3f3aaa1d141ca946ca5fe3ac52a47d9dbddb21f52ee3e21afa6dabe3aa9c2",
+      "bytes": 2767
     },
     {
       "id": "page-header",
@@ -155,12 +159,13 @@
       "deliveryProduct": "QenTerraComponents",
       "publicSymbols": [
         "DesignComponentMetrics",
+        "PageHeaderPresentation",
         "PageHeader"
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/Layout/PageHeader.swift",
-      "sha256": "d48ace1a201bdb1b8beb0d14574ee79f4415cb2c0c3a0378c39ccabc84fdae36",
-      "bytes": 4087
+      "sha256": "e2e4ac20e05b58ce35a06fd965b4f1a68a926f8d5764ff8d940d581600601075",
+      "bytes": 5838
     },
     {
       "id": "page-scroll-view",
@@ -171,12 +176,13 @@
       "publicSymbols": [
         "PageScrollOwnership",
         "PageScrollPresentation",
+        "PageRefreshAction",
         "PageScrollView"
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/Layout/PageScrollView.swift",
-      "sha256": "d8ec50d34df329c402b61eceb6b830a789d80c5fe6470dd345a288e31150f37a",
-      "bytes": 1704
+      "sha256": "e41fd57690409616afc5b97a5cb932dc6350ad9f64a9ae1358de2f534a07b162",
+      "bytes": 2776
     },
     {
       "id": "flow-layout",
@@ -202,12 +208,13 @@
       "publicSymbols": [
         "ResizableSplitLayout",
         "ResizableSplitLayout.AdjustmentDirection",
+        "ResizableSplitLayout.FixedPane",
         "ResizableSplitView"
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/Layout/ResizableSplitView.swift",
-      "sha256": "e0ff6fb814b8ecfced1b1796dc484fdbede07c9ec79df44ab803a46069e840d7",
-      "bytes": 8898
+      "sha256": "0748fa93c71cdf219c1e78ce4c8138b6a1ea813a355e28b297e473f560eaf665",
+      "bytes": 10138
     },
     {
       "id": "design-separator",
@@ -231,12 +238,13 @@
       "status": "stable",
       "deliveryProduct": "QenTerraComponents",
       "publicSymbols": [
+        "WorkspacePaneHeaderPresentation",
         "WorkspacePaneHeader"
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/Layout/WorkspacePaneHeader.swift",
-      "sha256": "8c34bb7cea65e5b92d3719c6b98c8b36c3e5cd8ef0373408fbe0f2c56160fc6d",
-      "bytes": 1089
+      "sha256": "be8946b32c3ecae42096d46831370ec7f9335f1abcb086356bbc540fa5fb077b",
+      "bytes": 2381
     },
     {
       "id": "navigation-rail",
@@ -247,12 +255,15 @@
       "publicSymbols": [
         "NavigationRailItem",
         "NavigationRailItemPresentation",
+        "NavigationRailBackground",
+        "NavigationRailPresentation",
+        "NavigationRailExpansionConfiguration",
         "NavigationRail"
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/Navigation/NavigationRail.swift",
-      "sha256": "11fab2175966cafd35ba6ad53cef6dd2be254956c14fbd0b5e2abe419b163a53",
-      "bytes": 4907
+      "sha256": "52cedea2609c98c289df27d0a7a8e6e6c23257c6cb14579e3c9ed21fafd4cec7",
+      "bytes": 16387
     },
     {
       "id": "tab-strip",
@@ -262,12 +273,13 @@
       "deliveryProduct": "QenTerraComponents",
       "publicSymbols": [
         "TabItem",
+        "TabStripPresentation",
         "TabStrip"
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/Navigation/TabStrip.swift",
-      "sha256": "5cb91b563a7a588bd3aee31a154c15097584fb9b9efa9cf3702684ec4adbfe10",
-      "bytes": 2267
+      "sha256": "b96584a169745160e35e6925184588fcb5e725483e261066eecec3ccb1f747b0",
+      "bytes": 4762
     },
     {
       "id": "sort-menu",
@@ -282,12 +294,13 @@
         "SortMenuUnavailableReason",
         "SortMenuReadyPresentation",
         "SortMenuPresentation",
+        "SortMenuVisualStyle",
         "SortMenu"
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/Overlays/SortMenu.swift",
-      "sha256": "59bc3ff09aa9b935a2ba5bd59a1bc600f2cb9ab7153fa3f0847a04b7159138e2",
-      "bytes": 5381
+      "sha256": "1e8109f9e8555534a1d2db23078deb2bf6accc2840b359a4f6c04a3539d3038b",
+      "bytes": 8086
     },
     {
       "id": "rename-alert",
@@ -297,12 +310,13 @@
       "deliveryProduct": "QenTerraComponents",
       "publicSymbols": [
         "RenameValidationState",
+        "View.renameAlert(configuration:isPresented:text:onConfirm:)",
         "RenameAlertConfiguration"
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/Overlays/RenameAlert.swift",
-      "sha256": "c709d3c4c73fa8d45c2ccf44f67f491a9145f530283cf82f2554053088c00a30",
-      "bytes": 1199
+      "sha256": "8acad7d6a5dc1540843a81ae6483c311b045774fd1b352e0cc9ff855b95eb40d",
+      "bytes": 2184
     },
     {
       "id": "keycap",
@@ -313,12 +327,13 @@
       "publicSymbols": [
         "Keycap",
         "KeycapChord",
+        "KeycapPresentation",
         "KeycapChordPresentation"
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/Overlays/Keycap.swift",
-      "sha256": "fe5fbd6601a571a2bb140a96a354ffe396fe035794a57776282dcf8b0b9abaf2",
-      "bytes": 2158
+      "sha256": "368e2993fd901868449f16251e2e22428a1a517acfa5e6705733e8b41faaeda8",
+      "bytes": 3425
     },
     {
       "id": "content-state-view",
@@ -329,12 +344,14 @@
       "publicSymbols": [
         "ContentPresentationState",
         "PresentationAction",
+        "ContentStatePresentationStyle",
+        "PresentationActionStyle",
         "ContentStateView"
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/Feedback/ContentStateView.swift",
-      "sha256": "85f341e37a670686c0347d140ca319cd82ef1830b8dd418ade4a71af1aecb8a2",
-      "bytes": 3797
+      "sha256": "bccc4e65c79686ec5d650faa0759cb6cb9a20a341058d3193874daf46ca24687",
+      "bytes": 7329
     },
     {
       "id": "status-banner",
@@ -361,12 +378,14 @@
       "publicSymbols": [
         "DropZoneState",
         "DropZonePresentation",
+        "DropZoneVisualStyle",
+        "DropZoneAction",
         "DropZone"
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/Feedback/DropZone.swift",
-      "sha256": "16ef62d6e32be22e4691e6f726f5fdf43e234fb736dcca5cb87227444f5ebf74",
-      "bytes": 4030
+      "sha256": "729f95ad71669bebfb8c1d362fa923225ce84a70be8dee13cfa40ebfbeaa63fd",
+      "bytes": 7566
     },
     {
       "id": "operation-state-view",
@@ -377,12 +396,13 @@
       "publicSymbols": [
         "MeasuredOperationProgress",
         "OperationPresentationState",
+        "OperationStateVisualStyle",
         "OperationStateView"
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/Feedback/OperationStateView.swift",
-      "sha256": "77a1d948ffbe8c5b50abfb313be07aa2e5d113dd412d176cf5276bc3ba31c791",
-      "bytes": 4115
+      "sha256": "2d6c7a18aa9522733d4dea5a78f12e83e1c990e561e3a4a2bec0980279a5ff62",
+      "bytes": 5861
     },
     {
       "id": "about-page",
@@ -396,12 +416,13 @@
         "AboutPageConfiguration",
         "AboutPageAccessibilityPresentation",
         "AboutResourceAccessibilityPresentation",
+        "AboutPagePresentation",
         "AboutPage"
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/About/AboutPage.swift",
-      "sha256": "d4ef4176bf13a51209b1fc19715d9194a1cf220f66508b5f52c7de4ce8abd927",
-      "bytes": 6468
+      "sha256": "0e6bcd554a7a5c77f6d5c41d6139b43ca538b31ec93c0436b14ce0bc0ee6bc34",
+      "bytes": 11070
     },
     {
       "id": "about-resource-row",
@@ -412,12 +433,609 @@
       "publicSymbols": [
         "AboutResourceOpenRejection",
         "AboutResourceRowPresentation",
+        "AboutResourceRowStyle",
         "AboutResourceRow"
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/About/AboutResourceRow.swift",
-      "sha256": "b23aca943ffcd1fa0ccab2cfc4566483b798d9794a8554f21bc44d9744917f71",
-      "bytes": 3296
+      "sha256": "c9333af37f19019d1730f7e233e9d5d0ba401e70ac893e07b985f7defbd3faf6",
+      "bytes": 5076
+    },
+    {
+      "id": "artwork-palette",
+      "name": "ArtworkPalette",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkPalette"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Artwork/ArtworkPalette.swift",
+      "sha256": "b5dbcb352dec34a21e51c9e6627f6bcd8adaf6bbb69918381dd7d08f76ed4c75",
+      "bytes": 832
+    },
+    {
+      "id": "artwork-presentation-state",
+      "name": "ArtworkPresentationState",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkPresentationState"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Artwork/ArtworkPresentationState.swift",
+      "sha256": "e7fa8681b2a5a7f3e1528252a9b8763a7d5fb20ac29645e46f7d3b226bd889aa",
+      "bytes": 1225
+    },
+    {
+      "id": "artwork-surface",
+      "name": "ArtworkSurface",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkSurface"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Artwork/ArtworkSurface.swift",
+      "sha256": "951ab08360f3668c074f5440d07d387ad8b48e12e0d8038566e3b8120a18ce93",
+      "bytes": 2894
+    },
+    {
+      "id": "artwork-placeholder",
+      "name": "ArtworkPlaceholder",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkPlaceholderKind",
+        "ArtworkPlaceholder"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Artwork/ArtworkPlaceholder.swift",
+      "sha256": "d40a220f085bad74f92cd4227cdfb5b6c2e3e5dd4008338cb8ca1e5a21f1d82e",
+      "bytes": 5041
+    },
+    {
+      "id": "artwork-crop-surface",
+      "name": "ArtworkCropSurface",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkCropShape",
+        "ArtworkCropTransform",
+        "ArtworkCropSurface"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Artwork/ArtworkCropSurface.swift",
+      "sha256": "b692468d174fa744967203ad67e6cfc537a547a12225c2542ffb0b489323d81a",
+      "bytes": 6578
+    },
+    {
+      "id": "artwork-mosaic",
+      "name": "ArtworkMosaic",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkMosaicLayout",
+        "ArtworkMosaic"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Artwork/ArtworkMosaic.swift",
+      "sha256": "148b8039444ca2dd8732a5f8f0bcc9cd37ec7698f236a4cc66bcb16c21a44365",
+      "bytes": 5119
+    },
+    {
+      "id": "artwork-haze",
+      "name": "ArtworkHaze",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkHaze"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Artwork/ArtworkHaze.swift",
+      "sha256": "4e7dce1a0c6cb31792819b59d1d7c92336afa5cf2d919bb1dca2bc47920f98b5",
+      "bytes": 4410
+    },
+    {
+      "id": "media-item-presentation",
+      "name": "MediaItemPresentation",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "MediaItemPresentation",
+        "MediaAccessoryInteractionContext"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Collections/MediaItemPresentation.swift",
+      "sha256": "461756d911ec9cab86d32415d3132c0359329c852c2952c4dd1c02d4dd596c67",
+      "bytes": 2210
+    },
+    {
+      "id": "media-tile",
+      "name": "MediaTile",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "MediaTile"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Collections/MediaTile.swift",
+      "sha256": "15918b8da9a70bf391c183d7a95a1bf2877c92c361905590e3c9630444747c29",
+      "bytes": 11758
+    },
+    {
+      "id": "media-row",
+      "name": "MediaRow",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "MediaRow"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Collections/MediaRow.swift",
+      "sha256": "1c9cb24ca4c7f0f2b3b7c64a66e86b8f4cd44b2b5b3bb887a3c7c3c2b9db652f",
+      "bytes": 5659
+    },
+    {
+      "id": "media-grid",
+      "name": "MediaGrid",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "MediaGridMetrics",
+        "MediaGridLayout",
+        "MediaGrid"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Collections/MediaGrid.swift",
+      "sha256": "4093c2cd844301b028dd878fb94360f3b48020b0f1d2778ee7932daee37fcf36",
+      "bytes": 5622
+    },
+    {
+      "id": "media-shelf",
+      "name": "MediaShelf",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "MediaShelf"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Collections/MediaShelf.swift",
+      "sha256": "561addf9afaf509c0c3a14742a1ab43e682ad77a8448adbbbcc9632798704f17",
+      "bytes": 1835
+    },
+    {
+      "id": "favorite-control",
+      "name": "FavoriteControl",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "FavoritePresentation",
+        "FavoriteControl"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Controls/FavoriteControl.swift",
+      "sha256": "24c939bd1b8dee3cf6ab38575fa7e8d6fe11478008b313b21a94d3047ef7e7dd",
+      "bytes": 3786
+    },
+    {
+      "id": "playback-indicator",
+      "name": "PlaybackIndicator",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "PlaybackIndicatorState",
+        "PlaybackIndicatorGeometry",
+        "PlaybackIndicator",
+        "NativePlaybackIndicatorView"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Controls/PlaybackIndicator.swift",
+      "sha256": "e1d09bb7a0ecd325403eb18048fd6858996abb79a57e4b307ced66ee9957b512",
+      "bytes": 13180
+    },
+    {
+      "id": "player-bar-presentation",
+      "name": "PlayerBarPresentation",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "TransportRepeatMode",
+        "PlayerBarPresentation"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Player/PlayerBarPresentation.swift",
+      "sha256": "767aee1bc77c0f624d37d0c54207183ef058ccb0b721d808e175ff49383cbaa9",
+      "bytes": 2471
+    },
+    {
+      "id": "player-bar-actions",
+      "name": "PlayerBarActions",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "PlayerBarActions"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Player/PlayerBarActions.swift",
+      "sha256": "26b2475c60d18f70f7274d35e196acc0b5ab602f004f762f4c7584f2afb331fa",
+      "bytes": 1888
+    },
+    {
+      "id": "player-bar",
+      "name": "PlayerBar",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "PlayerBar"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Player/PlayerBar.swift",
+      "sha256": "a2b7fb71de46f2609f39a1cfbcf33d20faa1666e0239682ebcd6b89f29bfc616",
+      "bytes": 12913
+    },
+    {
+      "id": "playback-progress-control",
+      "name": "PlaybackProgressControl",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "PlaybackProgressPresentation",
+        "PlaybackProgressControl"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Player/PlaybackProgressControl.swift",
+      "sha256": "ef37a532b089c1d411dab0d56b55fe53783f0c32a058b07dfb19cb6ba28b5a32",
+      "bytes": 3438
+    },
+    {
+      "id": "transport-controls",
+      "name": "TransportControls",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "TransportControl",
+        "TransportControlPresentation",
+        "TransportControls"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Player/TransportControls.swift",
+      "sha256": "3db7d6c41e217ce9d9256e49c557c0ad56ab7e1fba7123ababd3f5e74aabec2e",
+      "bytes": 7025
+    },
+    {
+      "id": "airplay-route-picker",
+      "name": "AirPlayRoutePicker",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "AirPlayRoutePicker"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Player/AirPlayRoutePicker.swift",
+      "sha256": "e444227c2e7a387a1115f61984637631b294b248425185cb6fe921f4a9ca957c",
+      "bytes": 1022
+    },
+    {
+      "id": "playback-queue-row",
+      "name": "PlaybackQueueRow",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "PlaybackQueueRowPresentation",
+        "PlaybackQueueRow"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Queue/PlaybackQueueRow.swift",
+      "sha256": "55c9e3e6efeeb8aa2fb615625fa9e889d6e197a48bba4c2042a729e5a460e03a",
+      "bytes": 10481
+    },
+    {
+      "id": "queue-insertion-indicator",
+      "name": "QueueInsertionIndicator",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "QueueInsertionIndicator"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Queue/QueueInsertionIndicator.swift",
+      "sha256": "7121ea0b0b882c67c55f557f219ce9011929cb2fc04af1bc133a4c197954c63d",
+      "bytes": 590
+    },
+    {
+      "id": "queue-drag-preview",
+      "name": "QueueDragPreview",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "QueueDragPreview"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Queue/QueueDragPreview.swift",
+      "sha256": "2dddb7ce552e8d748f868012f196b7ec123b74c42f4ca692cd7b16c0781aba64",
+      "bytes": 3031
+    },
+    {
+      "id": "lyric-line-presentation",
+      "name": "LyricLinePresentation",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "LyricLineTone",
+        "LyricLinePresentation"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Lyrics/LyricLinePresentation.swift",
+      "sha256": "9d833caac6e381662b0034fec90a7f87f8c9006a935d7e8575e6516714b27043",
+      "bytes": 1321
+    },
+    {
+      "id": "lyric-line",
+      "name": "LyricLine",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "LyricLine",
+        "LyricLineLabel"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Lyrics/LyricLine.swift",
+      "sha256": "5a255b752e361fc77efdc2a72fd3ecbf5f7a7b2997f286c05f57e0aadcf03568",
+      "bytes": 3293
+    },
+    {
+      "id": "lyrics-viewport",
+      "name": "LyricsViewport",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "LyricsScrollDecision",
+        "LyricsViewport"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Lyrics/LyricsViewport.swift",
+      "sha256": "118c26527553b23b9e6a71bd6a5a075d4889de66adb0af5e9b16c7e8f94a0dd1",
+      "bytes": 6913
+    },
+    {
+      "id": "lyrics-edge-fade",
+      "name": "LyricsEdgeFade",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "LyricsEdgeFade",
+        "LyricsEdgeFadeMaskConfiguration",
+        "LyricsEdgeFadePresentation"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Lyrics/LyricsEdgeFade.swift",
+      "sha256": "55a6d12ac9b37d2203f711c0d357ce6af97ee9a9fa02d60091052e039db9b161",
+      "bytes": 2591
+    },
+    {
+      "id": "media-metadata-badge",
+      "name": "MediaMetadataBadge",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "MediaMetadataBadge"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Metadata/MediaMetadataBadge.swift",
+      "sha256": "b7916341a3f6c9ece663c4dc5d5907eb3a937b86517313268f0d32e1d35dc537",
+      "bytes": 1185
+    },
+    {
+      "id": "audio-details-view",
+      "name": "AudioDetailsView",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "AudioDetail",
+        "AudioDetailsView"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Metadata/AudioDetailsView.swift",
+      "sha256": "8e47140525cb821e2906e6bbad2e06acce83891509fc1284088d491b807705a4",
+      "bytes": 2561
+    },
+    {
+      "id": "media-table-geometry",
+      "name": "MediaTableGeometry",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "MediaTableColumn",
+        "MediaTableResolvedWidths",
+        "MediaTableGeometry"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Table/MediaTableGeometry.swift",
+      "sha256": "e319bb7a9cc41b1646c0cb3a8a2df597ce6dae3ff69ed16367b3fe1b7028658a",
+      "bytes": 5427
+    },
+    {
+      "id": "media-table-row-presentation",
+      "name": "MediaTableRowPresentation",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "MediaTableRowPresentation",
+        "NativeMediaTableAction",
+        "NativeMediaTableActions",
+        "MediaTableArtworkRequest",
+        "MediaTableTypography",
+        "MediaTableCellState"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Table/MediaTableRowPresentation.swift",
+      "sha256": "d57d2ecfb3099bcf0f573e30a68096f0d048c071a1c431392bcbeadf104d88c7",
+      "bytes": 6894
+    },
+    {
+      "id": "native-media-table-view",
+      "name": "NativeMediaTableView",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "NativeMediaTableView"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Table/NativeMediaTableView.swift",
+      "sha256": "7ac6965afdf56f98886e8843154df5a811ccac6dfcae7e410fc38251dcfc0893",
+      "bytes": 1511
+    },
+    {
+      "id": "native-media-table-cell",
+      "name": "NativeMediaTableCell",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "NativeMediaTableCell"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Table/NativeMediaTableCell.swift",
+      "sha256": "bcb15eddcf2b11d62eba046346984c877b103c056aeab886e4a81b087fad207b",
+      "bytes": 33642
+    },
+    {
+      "id": "media-table-placeholder-row",
+      "name": "MediaTablePlaceholderRow",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "MediaTablePlaceholderRow"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Table/MediaTablePlaceholderRow.swift",
+      "sha256": "a6f03f1114dbb3e62af6c651798223078aa853a06f21a3cecc6c67979749c903",
+      "bytes": 1352
+    },
+    {
+      "id": "artwork-accent-color",
+      "name": "ArtworkAccentColor",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkAccentColor"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentColor.swift",
+      "sha256": "c76ebfc3ca9bd4527129083fba887aec9d3e08ff04e44b3ac7afc5e0b2f6870b",
+      "bytes": 1070
+    },
+    {
+      "id": "artwork-accent-gradient-models",
+      "name": "ArtworkAccentGradientModels",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkAccentPalette",
+        "ArtworkAccentGradientVertex",
+        "ArtworkAccentGradientMesh",
+        "ArtworkAccentGradientReference",
+        "ArtworkAccentGradientTint",
+        "ArtworkAccentGradientAppearance"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientModels.swift",
+      "sha256": "7f6ac8427b20d97efa94e968152521e5f5dfb1873b0163e14e443e54cb80b510",
+      "bytes": 10269
+    },
+    {
+      "id": "artwork-accent-gradient-transition",
+      "name": "ArtworkAccentGradientTransition",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkAccentGradientTransition",
+        "ArtworkAccentGradientTimeline"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientTransition.swift",
+      "sha256": "a1c6afb465f3be0ab1d54a10ed21045fcd918f997f1c5aea596ff741a151ab0c",
+      "bytes": 2314
+    },
+    {
+      "id": "artwork-accent-gradient-resources",
+      "name": "ArtworkAccentGradientResourceAvailability",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkAccentGradientResourceAvailability"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientResources.swift",
+      "sha256": "cde7660eb88c4b10091636b37f5b03c5e2971790580e901a35ecb1d98d3d684e",
+      "bytes": 5969
+    },
+    {
+      "id": "artwork-accent-gradient",
+      "name": "ArtworkAccentGradient",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkAccentGradient",
+        "ArtworkAccentGradientView"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradient.swift",
+      "sha256": "cc8ced260fd028ab39d0a73d3edf4e6a898b790655599fe226f5f40555f50fa3",
+      "bytes": 23313
+    },
+    {
+      "id": "artwork-accent-gradient-snapshot",
+      "name": "ArtworkAccentGradientSnapshot",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "ArtworkAccentGradientSnapshot"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientSnapshot.swift",
+      "sha256": "5c69ed036f285cbcf318378e0f1ca4b299b2576abf60f0fe01cfee0f5527efa3",
+      "bytes": 6964
     }
   ]
 }

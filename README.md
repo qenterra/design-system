@@ -26,7 +26,7 @@ Swift projects add:
 https://github.com/qenterra/design-system
 ```
 
-Available Swift products are `QenTerraDesignTokens`, `QenTerraComponents`, and the macOS-first `QenTerraMediaComponents`. The core component product contains the primary-button style, group container, and interactive-row surface, each in its own source file. The media product is the delivery boundary for reusable media presentation; it deliberately exposes no iOS media API. The public tree also includes non-target reference catalogs for Explore SwiftUI, shadcn/ui, Magic UI, UIable, ReUI, Tabler Icons, Phosphor Icons, Iconoir, and Bootstrap Icons. The four icon catalogs preserve 19,005 exact SVG originals: 6,184 Tabler, 9,072 Phosphor, 1,671 Iconoir, and 2,078 Bootstrap files. Every catalog retains manifest-backed provenance and exact source bytes; the MIT-licensed catalogs also carry their exact upstream license and copyright notice.
+Available Swift products are `QenTerraDesignTokens`, `QenTerraComponents`, and the macOS-first `QenTerraMediaComponents`. The core component product contains the primary-button style, group container, and interactive-row surface, each in its own source file. The media product delivers reusable artwork, collection, playback, queue, lyrics, metadata, native-table, and artwork-accent gradient presentation while leaving data work and mutation to the consumer; it deliberately exposes no iOS media API. The public tree also includes non-target reference catalogs for Explore SwiftUI, shadcn/ui, Magic UI, UIable, ReUI, Tabler Icons, Phosphor Icons, Iconoir, and Bootstrap Icons. The four icon catalogs preserve 19,005 exact SVG originals: 6,184 Tabler, 9,072 Phosphor, 1,671 Iconoir, and 2,078 Bootstrap files. Every catalog retains manifest-backed provenance and exact source bytes; the MIT-licensed catalogs also carry their exact upstream license and copyright notice.
 
 QenTerra-authored material uses the MIT License. Explore SwiftUI examples retain their original authorship and terms and are not relicensed as QenTerra work; shadcn/ui, Magic UI, UIable, ReUI, Tabler Icons, Phosphor Icons, Iconoir, and Bootstrap Icons retain their upstream MIT licenses and authorship. The reference catalogs are not SwiftPM or npm targets.
 
@@ -60,6 +60,8 @@ Nikita Melnychenko (`@qenterra`) owns the canonical system and release decisions
 
 `VERSION`, token metadata, registries, package manifests, generated adapters, and the release manifest move in lockstep under Semantic Versioning. Releases use immutable `v<version>` tags from a verified commit on this repository. See [RELEASING.md](docs/RELEASING.md) and [PACKAGE_RELEASE.md](docs/PACKAGE_RELEASE.md).
 
+`python3 scripts/set_version.py <MAJOR.MINOR.PATCH>` is the fail-closed local alignment command. It accepts plain SemVer only, updates declared canonical surfaces, regenerates derived and public manifests, and prints every changed path. It never commits, tags, pushes, publishes, or authorises a release.
+
 The maintained public line starts at `1.0.0`. Earlier internal snapshot identifiers remain visible in Git history but do not define the active release line. npmjs also retains the immutable historical `@qenterra/design-tokens@5.0.0` artifact from the retired Packages repository; it is not rewritten by the new baseline.
 
 ## Verify
@@ -73,7 +75,7 @@ DESIGN_SYSTEM_IMAGE_PYTHON=.venv/bin/python \
 python3 scripts/verify.py
 ```
 
-The complete gate checks generated adapters, registries, public boundaries, terminology, consumer contracts, Nyx manifests and profiles, npm contents, SwiftPM builds/tests, and Git whitespace. It does not pretend that static checks prove runtime rendering, VoiceOver, keyboard behavior, or visual acceptance in a consumer. Humanity survives another honest test report.
+The complete gate checks generated adapters, registries, public boundaries, terminology, consumer contracts, Nyx manifests and profiles, npm contents, SwiftPM builds/tests, and Git whitespace. The native snapshot target compares the locked core, media, native-table, and fixed-time Metal-gradient catalog for the exact OS/architecture profile; references are recorded only in a separate explicit run and must be visually reviewed at original size. It does not pretend that static checks prove runtime rendering, VoiceOver, keyboard behavior, or visual acceptance in a consumer. Humanity survives another honest test report.
 
 ## License
 

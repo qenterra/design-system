@@ -52,6 +52,9 @@
 | Keycap | Shortcut | Одна нотация, screen-reader expansion, platform mapping |
 | Extension tile | Тип файла | Нейтрален, filename первичен |
 | Avatar/artwork | Личность/медиа | Fallback, privacy, alt/accessibility |
+| Artwork crop | Позиционирование готового изображения | Ограниченный transform; жесты и outcomes принадлежат потребителю |
+| Artwork mosaic | Узнавание коллекции | Empty и геометрия для одного–четырёх элементов; один accessible label |
+| Artwork haze | Декоративный контекст медиа | Только готовая palette; скрывается и удаляется при Reduced Transparency |
 
 ## Навигация
 

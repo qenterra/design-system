@@ -1,6 +1,6 @@
 #if canImport(SwiftUI)
-import SwiftUI
 import QenTerraDesignTokens
+import SwiftUI
 
 public enum ContentPresentationState: Equatable, Sendable {
     case loading(title: String)
@@ -10,12 +10,29 @@ public enum ContentPresentationState: Equatable, Sendable {
     case error(title: String, message: String)
 }
 
-public struct PresentationAction: Sendable {
-    public let title: String
-    private let handler: @MainActor @Sendable () -> Void
+public enum ContentStatePresentationStyle: Equatable, Sendable {
+    case designed
+    case nativeUnavailable
+}
 
-    public init(title: String, handler: @escaping @MainActor @Sendable () -> Void) {
+public enum PresentationActionStyle: Equatable, Sendable {
+    case primary
+    case secondary
+    case plain
+}
+
+public struct PresentationAction {
+    public let title: String
+    public let style: PresentationActionStyle
+    private let handler: @MainActor () -> Void
+
+    public init(
+        title: String,
+        style: PresentationActionStyle = .secondary,
+        handler: @escaping @MainActor () -> Void
+    ) {
         self.title = title
+        self.style = style
         self.handler = handler
     }
 
@@ -28,20 +45,56 @@ public struct PresentationAction: Sendable {
 @MainActor
 public struct ContentStateView: View {
     private let state: ContentPresentationState
-    private let recovery: PresentationAction?
+    private let actions: [PresentationAction]
+    private let symbolName: String?
+    private let details: AnyView?
+    private let presentation: ContentStatePresentationStyle
 
-    public init(state: ContentPresentationState) {
+    public init(
+        state: ContentPresentationState,
+        symbolName: String? = nil,
+        actions: [PresentationAction] = [],
+        presentation: ContentStatePresentationStyle = .designed
+    ) {
         self.state = state
-        recovery = nil
+        self.symbolName = symbolName
+        self.actions = actions
+        details = nil
+        self.presentation = presentation
+    }
+
+    public init<Details: View>(
+        state: ContentPresentationState,
+        symbolName: String? = nil,
+        actions: [PresentationAction] = [],
+        presentation: ContentStatePresentationStyle = .designed,
+        @ViewBuilder details: () -> Details
+    ) {
+        self.state = state
+        self.symbolName = symbolName
+        self.actions = actions
+        self.details = AnyView(details())
+        self.presentation = presentation
     }
 
     public init?(state: ContentPresentationState, recovery: PresentationAction?) {
         guard recovery == nil || state.isError else { return nil }
         self.state = state
-        self.recovery = recovery
+        symbolName = nil
+        actions = recovery.map { [$0] } ?? []
+        details = nil
+        presentation = .designed
     }
 
     public var body: some View {
+        if presentation == .nativeUnavailable {
+            nativeUnavailableBody
+        } else {
+            designedBody
+        }
+    }
+
+    private var designedBody: some View {
         VStack(spacing: DesignTokens.Space.value3) {
             stateSymbol
                 .font(.title2)
@@ -67,16 +120,74 @@ public struct ContentStateView: View {
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
             }
-            if case .error = state, let recovery {
-                Button(recovery.title) {
-                    recovery.perform()
+            if let details {
+                details
+            }
+            if !actions.isEmpty {
+                HStack(spacing: DesignTokens.Space.value3) {
+                    ForEach(actions.indices, id: \.self) { index in
+                        designedActionButton(actions[index])
+                    }
                 }
-                .buttonStyle(DesignButtonStyle(role: .secondary))
             }
         }
         .padding(DesignTokens.Space.value6)
         .frame(maxWidth: .infinity)
         .accessibilityElement(children: .contain)
+    }
+
+    @ViewBuilder
+    private func designedActionButton(_ action: PresentationAction) -> some View {
+        switch action.style {
+        case .primary:
+            Button(action.title) { action.perform() }.buttonStyle(DesignButtonStyle(role: .primary))
+        case .secondary:
+            Button(action.title) { action.perform() }.buttonStyle(DesignButtonStyle(role: .secondary))
+        case .plain:
+            Button(action.title) { action.perform() }
+        }
+    }
+
+    private var nativeUnavailableBody: some View {
+        ContentUnavailableView {
+            Label(title, systemImage: symbolName ?? "exclamationmark.triangle")
+        } description: {
+            VStack(spacing: DesignTokens.Space.value3) {
+                if let message {
+                    Text(message)
+                }
+                if let details {
+                    details
+                }
+            }
+        } actions: {
+            HStack(spacing: DesignTokens.Space.value3) {
+                ForEach(actions.indices, id: \.self) { index in
+                    nativeActionButton(actions[index])
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func nativeActionButton(_ action: PresentationAction) -> some View {
+        switch action.style {
+        case .primary:
+            Button(action.title) { action.perform() }
+                .buttonStyle(.borderedProminent)
+        case .secondary:
+            Button(action.title) { action.perform() }
+                .buttonStyle(.bordered)
+        case .plain:
+            Button(action.title) { action.perform() }
+        }
+    }
+
+    public static func actionTitles(
+        for _: ContentPresentationState,
+        actions: [PresentationAction]
+    ) -> [String] {
+        actions.map(\.title)
     }
 
     private var title: String {
@@ -97,24 +208,30 @@ public struct ContentStateView: View {
     }
 
     @ViewBuilder private var stateSymbol: some View {
-        switch state {
-        case .loading:
-            ProgressView()
-        case .empty:
-            Image(systemName: "tray")
-        case .noResults:
-            Image(systemName: "magnifyingglass")
-        case .unavailable:
-            Image(systemName: "exclamationmark.triangle")
-        case .error:
-            Image(systemName: "xmark.octagon")
+        if let symbolName {
+            Image(systemName: symbolName)
+        } else {
+            switch state {
+            case .loading:
+                ProgressView()
+            case .empty:
+                Image(systemName: "tray")
+            case .noResults:
+                Image(systemName: "magnifyingglass")
+            case .unavailable:
+                Image(systemName: "exclamationmark.triangle")
+            case .error:
+                Image(systemName: "xmark.octagon")
+            }
         }
     }
 }
 
 private extension ContentPresentationState {
     var isError: Bool {
-        if case .error = self { return true }
+        if case .error = self {
+            return true
+        }
         return false
     }
 }

@@ -37,7 +37,27 @@ def nested_keys(value: object) -> set[str]:
 
 
 class PublicReleaseContractTests(unittest.TestCase):
-    def test_npm_publish_job_requires_a_version_aligned_release_tag(self) -> None:
+    def test_root_and_public_swift_manifests_process_media_resources(self) -> None:
+        for relative in (".", "packages"):
+            with self.subTest(package=relative):
+                manifest = json.loads(
+                    subprocess.check_output(
+                        ["swift", "package", "dump-package", "--package-path", relative],
+                        cwd=ROOT,
+                        text=True,
+                    )
+                )
+                target = next(
+                    item
+                    for item in manifest["targets"]
+                    if item["name"] == "QenTerraMediaComponents"
+                )
+                self.assertIn(
+                    {"path": "Resources", "rule": {"process": {}}},
+                    target["resources"],
+                )
+
+    def test_tag_push_verifies_only_and_npm_requires_explicit_manual_target(self) -> None:
         workflow = (ROOT / ".github/workflows/release-packages.yml").read_text(
             encoding="utf-8"
         )
@@ -54,12 +74,17 @@ class PublicReleaseContractTests(unittest.TestCase):
 
         self.assertEqual(
             publish_condition,
-            "if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v'))",
+            "if: github.event_name == 'workflow_dispatch' && inputs.publication_target == 'npm-latest'",
         )
         self.assertIn("  workflow_dispatch:", workflow)
         self.assertIn("      release_tag:", workflow)
         self.assertIn("        required: true", workflow)
-        self.assertNotIn("inputs.publish", workflow)
+        self.assertIn("      publication_target:", workflow)
+        self.assertIn("        type: choice", workflow)
+        self.assertIn("        default: verify-only", workflow)
+        self.assertIn("          - verify-only", workflow)
+        self.assertIn("          - npm-latest", workflow)
+        self.assertNotIn("github.event_name == 'push'", publish_condition)
         self.assertIn("    needs: snapshot", publish)
         self.assertIn(
             "ref: ${{ github.event_name == 'workflow_dispatch' && format('refs/tags/{0}', inputs.release_tag) || github.ref }}",
@@ -166,6 +191,13 @@ class PublicReleaseContractTests(unittest.TestCase):
             self.assertTrue(
                 all("deliveryProduct" in component for component in component_manifest["components"])
             )
+
+    def test_public_source_catalog_accepts_all_delivered_qenterra_products(self) -> None:
+        verifier = load_module(
+            ROOT / "packages/scripts/verify_source_catalogs.py",
+            "public_source_catalog_delivery",
+        )
+        self.assertEqual(verifier.validate_catalogs(ROOT / "packages"), [])
 
     def test_boundary_detects_an_undeclared_file(self) -> None:
         self.assertTrue(BOUNDARY.is_file(), "public boundary verifier is missing")

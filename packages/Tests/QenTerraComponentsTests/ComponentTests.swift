@@ -30,6 +30,22 @@ import AppKit
     #expect(focused.border == DesignTokens.Color.borderFocus)
 }
 
+@Test func interactiveRowSurfaceAcceptsSemanticControlAndGroupRadii() {
+    #expect(
+        InteractiveRowCornerRadius.control.points == CGFloat(DesignTokens.Radius.control)
+    )
+    #expect(
+        InteractiveRowCornerRadius.group.points == CGFloat(DesignTokens.Radius.group)
+    )
+
+    _ = InteractiveRowSurface(
+        state: InteractiveRowState(isSelected: true),
+        cornerRadius: .group
+    ) {
+        Text("Media tile")
+    }
+}
+
 @Test func buttonRolesAndSettingsCompositionsRemainPublic() {
     for role in DesignButtonRole.allCases {
         _ = DesignButtonStyle(role: role)
@@ -706,4 +722,113 @@ private final class CallbackCount {
     #expect(rename.initialText == "Morning run")
     _ = Keycap("⌘")
     _ = KeycapChord(tokens: ["⌘", "R"])
+}
+
+@Test func cadencePresentationProfilesPreserveNativeConsumerGeometry() {
+    #expect(PageHeaderPresentation.cadence.titleStyle == .largeTitleBold)
+    #expect(PageHeaderPresentation.cadence.alignment == .bottom)
+    #expect(TabStripPresentation.cadenceSettings.iconSize == CGSize(width: 24, height: 22))
+    #expect(TabStripPresentation.cadenceSettings.minimumItemSize == CGSize(width: 76, height: 54))
+    #expect(SettingsTogglePresentation.cadence.controlSize == .small)
+    #expect(SettingsTogglePresentation.cadence.controlAlignment == .trailing)
+    #expect(SettingsSectionPresentation.cadence.cardInset == 16)
+    #expect(SettingsSectionPresentation.cadence.contentSpacing == 12)
+    #expect(WorkspacePaneHeaderPresentation.cadence.minimumHeight == 64)
+    #expect(WorkspacePaneHeaderPresentation.cadence.showsSeparator)
+}
+
+@Test func splitLayoutSupportsBoundedTrailingFixedPanes() {
+    let resolution = ResizableSplitLayout.resolve(
+        availableWidth: 1_100,
+        proposedFixedWidth: 600,
+        fixedPane: .trailing,
+        minimumFixedWidth: 280,
+        maximumFixedWidth: 460,
+        minimumFlexibleWidth: 480,
+        separatorWidth: 7
+    )
+
+    #expect(resolution.leadingWidth == 633)
+    #expect(resolution.trailingWidth == 460)
+    #expect(resolution.separatorWidth == 7)
+}
+
+@Test @MainActor func contentStatesPublishOrderedMultiActionContracts() {
+    let actions = [
+        PresentationAction(title: "Repair") {},
+        PresentationAction(title: "Locate Library…") {},
+        PresentationAction(title: "Reveal in Finder") {},
+    ]
+
+    #expect(
+        ContentStateView.actionTitles(
+            for: .unavailable(title: "Library unavailable", message: "Permission is required."),
+            actions: actions
+        ) == ["Repair", "Locate Library…", "Reveal in Finder"]
+    )
+}
+
+@Test func renameAlertValidationControlsConfirmation() {
+    #expect(RenameAlertConfiguration(
+        title: "Rename",
+        fieldLabel: "Name",
+        initialText: "Album",
+        validation: .valid,
+        confirmLabel: "Rename",
+        cancelLabel: "Cancel"
+    ).isConfirmationEnabled)
+    #expect(!RenameAlertConfiguration(
+        title: "Rename",
+        fieldLabel: "Name",
+        initialText: "",
+        validation: .invalid(message: "Required"),
+        confirmLabel: "Rename",
+        cancelLabel: "Cancel"
+    ).isConfirmationEnabled)
+}
+
+@Test func aboutPageCanLeaveScrollOwnershipToItsConsumer() {
+    #expect(AboutPagePresentation.cadenceSettings.scrollOwnership == .consumer)
+    #expect(AboutPagePresentation.cadenceSettings.iconSize == 72)
+    #expect(AboutPagePresentation.cadenceSettings.resourceRowHeight == 54)
+}
+
+@Test func contentOnlyRowActionPreservesLabelGeometry() {
+    #expect(RowActionButtonPresentation.contentOnly.opacity(isPressed: false) == 1)
+    #expect(RowActionButtonPresentation.contentOnly.opacity(isPressed: true) == 0.72)
+}
+
+@Test func cadenceSortAndDropZoneProfilesPreserveConsumerPresentation() {
+    #expect(SortMenuVisualStyle.cadence.triggerSymbol == "arrow.up.arrow.down.circle")
+    #expect(DropZoneVisualStyle.cadenceHero.maximumWidth == 580)
+    #expect(DropZoneVisualStyle.cadenceHero.minimumHeight == 250)
+    #expect(DropZoneVisualStyle.cadenceOverlay.overlayInset == 18)
+    #expect(OperationStateVisualStyle.cadenceScanning.symbolSize == 32)
+    #expect(OperationStateVisualStyle.cadenceCompletion.symbolSize == 46)
+}
+
+@Test func cadenceNavigationRailProfilePreservesProductGeometry() {
+    let presentation = NavigationRailPresentation.cadence
+    #expect(presentation.compactWidth == 64)
+    #expect(presentation.expandedWidth == 216)
+    #expect(presentation.rowHeight == 48)
+    #expect(presentation.iconSlotWidth == 32)
+    #expect(presentation.rowSpacing == 2)
+    #expect(presentation.iconCenterX(isExpanded: false) == 32)
+    #expect(presentation.iconCenterX(isExpanded: true) == 32)
+    #expect(presentation.background == .thinMaterial)
+    #expect(presentation.expansionDuration == DesignTokens.Motion.stateReplace.seconds)
+
+    let expansion = NavigationRailExpansionConfiguration(
+        expandedTitle: "Collapse",
+        collapsedTitle: "Expand",
+        expandedSymbol: "sidebar.left",
+        collapsedSymbol: "sidebar.right",
+        expandedHint: "Shows navigation as icons only",
+        collapsedHint: "Shows navigation icons and labels",
+        expandedAccessibilityLabel: "Collapse Sidebar",
+        collapsedAccessibilityLabel: "Expand Sidebar"
+    )
+    #expect(expansion.expandedTitle == "Collapse")
+    #expect(expansion.expandedAccessibilityLabel == "Collapse Sidebar")
 }

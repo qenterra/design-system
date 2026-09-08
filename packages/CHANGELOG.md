@@ -4,8 +4,19 @@ All notable public package changes are recorded here. Versions follow Semantic V
 
 ## [Unreleased]
 
+### Added
+
+- Added complete deterministic macOS native references for every public media family and fixed-time Metal gradient boundaries, expanded the clean copied-package consumer across the catalog, and added fail-closed plain-SemVer alignment tooling that regenerates public outputs without Git or publication side effects. The package version remains `1.0.1`.
+- Planned the reusable macOS artwork-accent Metal gradient APIs for `2.0.0`: fixed-reference mesh and camera geometry, runtime simplex-noise shader, five-colour linear palette expansion, interruptible palette motion, effect tint, Reduced Motion static rendering, SwiftUI and AppKit surfaces, deterministic snapshots, and opaque fallback when Metal or the resource is unavailable. The package owns rendering only; its current version remains `1.0.1`.
+- Planned the reusable macOS AppKit media-table APIs for `2.0.0`: generic row presentation, deterministic density and column geometry, stable native cell reuse, identity-scoped ready-artwork publication, keyboard callbacks, and a SwiftUI placeholder. The package performs no table coordination, asynchronous loading, sorting, queue construction, drag/context-menu policy, or persistence; its current version remains `1.0.1`.
+- Planned the macOS playback and Now Playing APIs for `2.0.0`: player and transport snapshots, consumer-timed progress, weak native AirPlay routing, mutation-free queue views, explicit-identity lyrics with Reduced Motion behavior, and consumer-supplied metadata. The package does not own playback clocks, queue persistence, lyric loading or editing, or product-specific empty copy; its current version remains `1.0.1`.
+- Planned the macOS media-collection presentation family for `2.0.0`: item models, tiles, rows, adaptive grids, shelves, favorite controls, and SwiftUI/AppKit playback indicators. The package owns ready-state rendering and synchronous interaction forwarding only; consumers retain domain, data, playback, persistence, and accessibility-copy ownership.
+- Planned the macOS artwork presentation family for `2.0.0`, including ready-content states, placeholders, clamped crop geometry, zero-to-four-slot mosaics, and Reduced Transparency-aware ready-palette haze. The public package performs no loading, caching, gesture coordination, or mutation; its current version remains `1.0.1`.
+
 ### Changed
 
+- Tightened the planned `2.0.0` AppKit media-table APIs with domain-neutral typography, independent keyboard intents, request-scoped artwork publication, per-control action availability, hover-only chrome reveal, and complete reuse/accessibility cleanup; the package version remains `1.0.1`.
+- Made optional shuffle, repeat, and favorite action availability explicit, added consumer-owned player metadata/status/route composition slots, canonicalized the protected queue/progress geometry metrics, and made the 34-point queue control fully hit-testable for the planned `2.0.0` playback APIs.
 - Raised the Swift package's minimum macOS version from 13 to 26 and moved macOS verification to macOS 26. iOS remains at 16. This is a breaking change planned for `2.0.0`; macOS consumers must raise their deployment target or remain on a compatible immutable release. Existing releases and tags are unchanged.
 - Planned macOS `QenTerraComponents` feedback and configurable About APIs. This is not a release and does not change the package version.
 - Added deterministic native core-component snapshot tests with reviewed per-platform references, strict dimension/color comparison, and explicit recording.

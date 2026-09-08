@@ -52,6 +52,9 @@ This catalog defines the expected interface vocabulary. It does not require ever
 | Keycap | Shortcut notation | One notation, screen-reader expansion, platform mapping |
 | Extension tile | File type recognition | Neutral visual, filename remains primary |
 | Avatar/artwork | Identity or media recognition | Fallback, privacy, alt/accessibility treatment |
+| Artwork crop | Ready visual positioning | Clamped transform; consumer-owned gestures and outcomes |
+| Artwork mosaic | Collection recognition | Empty and one-to-four-slot geometry; one accessible label |
+| Artwork haze | Decorative media context | Ready palette only; hidden and removed for Reduced Transparency |
 
 ## Navigation
 

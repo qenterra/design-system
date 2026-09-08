@@ -25,6 +25,19 @@ def load_generator():
 
 
 class GenerationContractTests(unittest.TestCase):
+    def test_artwork_ratio_and_saturation_generate_scalars_not_lengths_or_opacity(self) -> None:
+        generator = load_generator()
+        tokens, _, _ = generator.load_sources(ROOT)
+        components = copy.deepcopy(tokens["components"])
+        components["panel"]["artwork"]["highlightSizeRatio"] = 0.72
+        components["panel"]["artwork"]["hazeLightSaturation"] = 1.28
+        swift = generator.generate_swift(tokens["foundation"], tokens["semantic"], tokens["typography"], tokens["motion"], components)
+        css = generator.generate_css(tokens["foundation"], tokens["semantic"], tokens["typography"], tokens["motion"], components)
+        self.assertIn("panelArtworkHighlightSizeRatio = DesignComponentScalar(value: 0.72)", swift)
+        self.assertIn("panelArtworkHazeLightSaturation = DesignComponentScalar(value: 1.28)", swift)
+        self.assertIn("--design-system-component-panel-artwork-highlight-size-ratio: 0.72;", css)
+        self.assertIn("--design-system-component-panel-artwork-haze-light-saturation: 1.28;", css)
+
     def test_generated_outputs_are_current(self) -> None:
         generator = load_generator()
         outputs = generator.build_outputs(ROOT)
@@ -91,21 +104,67 @@ class GenerationContractTests(unittest.TestCase):
         outputs = generator.build_outputs(ROOT)
         css = outputs["packages/npm/design-tokens/dist/tokens.css"]
         swift = outputs["packages/Sources/QenTerra/DesignTokens/GeneratedTokens.swift"]
-        self.assertIn("--design-system-component-panel-lyrics-inactive-opacity: 0.56;", css)
-        self.assertNotIn("--design-system-component-panel-lyrics-inactive-opacity: 0.56px;", css)
+        self.assertIn("--design-system-component-panel-lyrics-inactive-opacity: 0.58;", css)
+        self.assertNotIn("--design-system-component-panel-lyrics-inactive-opacity: 0.58px;", css)
+        self.assertIn("--design-system-component-panel-lyrics-inactive-blur-radius: 0.45px;", css)
         self.assertIn("--design-system-component-panel-lyrics-follow-duration-ms: 320ms;", css)
         self.assertNotIn("--design-system-component-panel-lyrics-follow-duration-ms: 320px;", css)
-        self.assertIn("DesignComponentOpacity(value: 0.56)", swift)
+        self.assertIn("DesignComponentOpacity(value: 0.58)", swift)
         self.assertNotIn(
-            "panelLyricsInactiveOpacity = DesignComponentMetric(points: 0.56)",
+            "panelLyricsInactiveOpacity = DesignComponentMetric(points: 0.58)",
             swift,
         )
+        self.assertIn("panelLyricsInactiveBlurRadius = DesignComponentMetric(points: 0.45)", swift)
+        self.assertIn("panelLyricsStanzaBreakHeight = DesignComponentMetric(points: 10)", swift)
         self.assertIn("DesignComponentDuration(milliseconds: 320)", swift)
         self.assertNotIn(
             "panelLyricsFollowDurationMs = DesignComponentMetric(points: 320)",
             swift,
         )
         self.assertIn("DesignComponentMetric(points: 12)", swift)
+        self.assertIn("panelPlayerArtworkHoverOpacity = DesignComponentOpacity(value: 0.36)", swift)
+        self.assertIn("--design-system-component-panel-player-artwork-hover-opacity: 0.36;", css)
+        self.assertNotIn("--design-system-component-panel-player-artwork-hover-opacity: 0.36px;", css)
+        self.assertIn("--design-system-component-panel-queue-insertion-opacity: 0.9;", css)
+        self.assertNotIn("--design-system-component-panel-queue-insertion-opacity: 0.9px;", css)
+        self.assertIn(
+            "panelQueueInsertionOpacity = DesignComponentOpacity(value: 0.9)",
+            swift,
+        )
+        self.assertIn(
+            "panelQueueInsertionYOffset = DesignComponentMetric(points: -1)",
+            swift,
+        )
+
+    def test_media_collection_metrics_generate_with_explicit_units(self) -> None:
+        generator = load_generator()
+        outputs = generator.build_outputs(ROOT)
+        css = outputs["packages/npm/design-tokens/dist/tokens.css"]
+        swift = outputs["packages/Sources/QenTerra/DesignTokens/GeneratedTokens.swift"]
+        self.assertIn(
+            "--design-system-component-panel-media-collection-grid-minimum-width: 164px;",
+            css,
+        )
+        self.assertIn(
+            "--design-system-component-panel-media-collection-playback-indicator-static-first-scale: 0.48;",
+            css,
+        )
+        self.assertNotIn(
+            "--design-system-component-panel-media-collection-playback-indicator-static-first-scale: 0.48px;",
+            css,
+        )
+        self.assertIn(
+            "--design-system-component-panel-media-collection-playback-indicator-first-duration-ms: 1200ms;",
+            css,
+        )
+        self.assertIn(
+            "panelMediaCollectionPlaybackIndicatorStaticFirstScale = DesignComponentScalar(value: 0.48)",
+            swift,
+        )
+        self.assertIn(
+            "panelMediaCollectionPlaybackIndicatorFirstDurationMs = DesignComponentDuration(milliseconds: 1200)",
+            swift,
+        )
 
     def test_qenterra_component_manifest_is_generated_from_private_registry(self) -> None:
         generator = load_generator()

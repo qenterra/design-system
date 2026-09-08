@@ -46,8 +46,48 @@ import SwiftUI
 
 @Test func componentSemanticValuesRetainUnitAwareSwiftTypes() {
     #expect(GeneratedTokens.Component.panelLyricsFollowDurationMs.milliseconds == 320)
-    #expect(GeneratedTokens.Component.panelLyricsInactiveOpacity.value == 0.56)
-    #expect(GeneratedTokens.Component.panelLyricsLineGap.points == 12)
+    #expect(GeneratedTokens.Component.panelLyricsInactiveOpacity.value == 0.58)
+    #expect(GeneratedTokens.Component.panelLyricsInactiveBlurRadius.points == 0.45)
+    #expect(GeneratedTokens.Component.panelLyricsLineGap.points == 18)
+    #expect(GeneratedTokens.Component.panelPlayerMinimumHeight.points == 96)
+    #expect(GeneratedTokens.Component.panelPlayerContentHeight.points == 56)
+    #expect(GeneratedTokens.Component.panelPlayerMetadataMinimumWidth.points == 244)
+    #expect(GeneratedTokens.Component.panelPlayerMetadataMaximumWidth.points == 380)
+    #expect(GeneratedTokens.Component.panelPlayerOutputWidth.points == 244)
+    #expect(GeneratedTokens.Component.panelPlayerTransportMinimumWidth.points == 500)
+    #expect(GeneratedTokens.Component.panelPlayerProgressMinimumWidth.points == 220)
+    #expect(GeneratedTokens.Component.panelPlayerProgressIdealWidth.points == 300)
+    #expect(GeneratedTokens.Component.panelPlayerProgressMaximumWidth.points == 360)
+    #expect(GeneratedTokens.Component.panelPlayerProgressLabelWidth.points == 34)
+    #expect(GeneratedTokens.Component.panelPlayerVolumeWidth.points == 86)
+    #expect(GeneratedTokens.Component.panelPlayerVolumeButtonSize.points == 28)
+    #expect(GeneratedTokens.Component.panelPlayerArtworkHoverOpacity.value == 0.36)
+    #expect(GeneratedTokens.Component.panelQueueRowHeight.points == 52)
+    #expect(GeneratedTokens.Component.panelQueueArtworkSide.points == 42)
+    #expect(GeneratedTokens.Component.panelQueueDragPreviewGap.points == 10)
+    #expect(GeneratedTokens.Component.panelQueueDragPreviewArtworkSide.points == 38)
+    #expect(GeneratedTokens.Component.panelQueueDragPreviewTextGap.points == 2)
+    #expect(GeneratedTokens.Component.panelQueueInsertionOpacity.value == 0.9)
+    #expect(GeneratedTokens.Component.panelQueueInsertionYOffset.points == -1)
+    #expect(GeneratedTokens.Component.panelMetadataBadgeHeight.points == 28)
+    #expect(GeneratedTokens.Component.panelMetadataDetailsWidth.points == 360)
+}
+
+@Test func componentScalarsPreserveDimensionlessValuesOutsideOpacityRange() {
+    #expect(DesignComponentScalar(value: 1.28).value == 1.28)
+    #expect(DesignComponentScalar(value: -0.18).value == -0.18)
+    #expect(DesignComponentScalar(value: .nan).value == 0)
+    #expect(DesignComponentScalar(value: .infinity).value == 0)
+    #expect(GeneratedTokens.Component.panelArtworkHazeLightSaturation.value == 1.28)
+    #expect(GeneratedTokens.Component.panelArtworkHighlightOffsetYRatio.value == -0.18)
+}
+
+@Test func mediaCollectionTokensKeepGeometryMotionAndStaticScaleUnitsDistinct() {
+    #expect(GeneratedTokens.Component.panelMediaCollectionGridMinimumWidth.points == 164)
+    #expect(GeneratedTokens.Component.panelMediaCollectionPlaybackIndicatorBarWidth.points == 3)
+    #expect(GeneratedTokens.Component.panelMediaCollectionPlaybackIndicatorStaticFirstScale.value == 0.48)
+    #expect(GeneratedTokens.Component.panelMediaCollectionPlaybackIndicatorFirstDurationMs.milliseconds == 1200)
+    #expect(GeneratedTokens.Component.panelMediaCollectionPlaybackIndicatorScrimOpacity.value == 0.34)
 }
 
 #if canImport(SwiftUI)

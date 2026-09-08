@@ -204,6 +204,10 @@ Semantic system-font roles. Platform adapters may map to native text styles.
 - `roles.keycap.size`: `12`
 - `roles.keycap.tracking`: `0`
 - `roles.keycap.weight`: `500`
+- `roles.mediaExplicitBadge.line`: `11`
+- `roles.mediaExplicitBadge.size`: `9`
+- `roles.mediaExplicitBadge.tracking`: `0`
+- `roles.mediaExplicitBadge.weight`: `700`
 - `roles.metadata.line`: `15`
 - `roles.metadata.size`: `11`
 - `roles.metadata.tracking`: `0.08`
@@ -320,14 +324,167 @@ Shared component metrics and mandatory state contracts.
 - `extensions.rawMetricExceptions.overlay.sheetReadableWidth`: `Readable sheet width is specific to this overlay contract.`
 - `extensions.rawMetricExceptions.panel.about.iconSide`: `About icon scale belongs to the about-page composition.`
 - `extensions.rawMetricExceptions.panel.about.readableWidth`: `About readable width belongs to the about-page composition.`
+- `extensions.rawMetricExceptions.panel.artwork.artistOffsetRatio`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.artistPaddingRatio`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.collectionPaddingRatio`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.cropBorderOpacity`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.cropMaximumScale`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.cropMinimumScale`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.cropPreviewSide`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeBackgroundFalloffRatio`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeBlurRadius`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeDarkBackgroundOpacity`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeDarkLeadingOpacity`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeDarkSaturation`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeDarkTrailingOpacity`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeFalloffRatio`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeLeadingEndRadius`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeLeadingStartRadius`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeLightBackgroundOpacity`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeLightLeadingOpacity`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeLightSaturation`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeLightTrailingOpacity`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeTrailingEndRadius`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.hazeTrailingStartRadius`: `Preserves the reusable artwork presentation geometry and appearance contract.`
 - `extensions.rawMetricExceptions.panel.artwork.heroSide`: `Artwork hero size belongs to the media surface.`
+- `extensions.rawMetricExceptions.panel.artwork.highlightBlurRatio`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.highlightOffsetXRatio`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.highlightOffsetYRatio`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.highlightOpacity`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.highlightSizeRatio`: `Preserves the reusable artwork presentation geometry and appearance contract.`
 - `extensions.rawMetricExceptions.panel.artwork.minimumSide`: `Artwork minimum is a media presentation constraint.`
+- `extensions.rawMetricExceptions.panel.artwork.mosaicBorderOpacity`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.mosaicEmptySymbolSize`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.mosaicGap`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.scrimOpacity`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.surfaceCornerRadius`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.symbolMaximumSize`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.symbolMinimumSize`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.symbolOpacity`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.symbolSizeRatio`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.artwork.trackPaddingRatio`: `Preserves the reusable artwork presentation geometry and appearance contract.`
+- `extensions.rawMetricExceptions.panel.lyrics.edgeFadeHeight`: `Lyrics edge fade geometry belongs to the lyrics presentation.`
 - `extensions.rawMetricExceptions.panel.lyrics.followDurationMs`: `Lyric follow timing belongs to the lyrics presentation.`
+- `extensions.rawMetricExceptions.panel.lyrics.inactiveBlurRadius`: `Inactive synchronized lyric blur belongs to the lyrics presentation.`
 - `extensions.rawMetricExceptions.panel.lyrics.inactiveOpacity`: `Inactive lyric treatment belongs to the lyrics presentation.`
 - `extensions.rawMetricExceptions.panel.lyrics.lineGap`: `Lyric line rhythm belongs to the lyrics presentation.`
+- `extensions.rawMetricExceptions.panel.lyrics.lineSpacing`: `Lyric text line spacing belongs to the lyrics presentation.`
+- `extensions.rawMetricExceptions.panel.lyrics.stanzaBreakHeight`: `Blank lyric stanza spacing belongs to the lyrics presentation.`
+- `extensions.rawMetricExceptions.panel.lyrics.viewportHorizontalPadding`: `Lyrics viewport horizontal inset belongs to the lyrics presentation.`
+- `extensions.rawMetricExceptions.panel.lyrics.viewportVerticalPadding`: `Lyrics viewport vertical inset belongs to the lyrics presentation.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.favoriteCompactControlSize`: `Compact favourite hit-region geometry belongs to media tiles.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.favoriteControlSize`: `Favourite hit-region geometry belongs to its shared control.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.gridMaximumWidth`: `Preserves the Cadence adaptive media-card profile while allowing explicit consumer overrides.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.gridMinimumWidth`: `Preserves the Cadence adaptive media-card profile while allowing explicit consumer overrides.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorBarWidth`: `Playback-indicator bar geometry belongs to the shared SwiftUI and AppKit renderers.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorCornerRadius`: `Playback-indicator bar geometry belongs to the shared SwiftUI and AppKit renderers.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorFirstDurationMs`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorFirstPatternFifthScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorFirstPatternFirstScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorFirstPatternFourthScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorFirstPatternSecondScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorFirstPatternThirdScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorFourthKeyTimeRatio`: `Playback-indicator keyframe timing belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorGap`: `Playback-indicator bar geometry belongs to the shared SwiftUI and AppKit renderers.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorMaximumHeight`: `Playback-indicator bar geometry belongs to the shared SwiftUI and AppKit renderers.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorScrimOpacity`: `Current-item playback chrome uses the established artwork scrim.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorSecondDurationMs`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorSecondKeyTimeRatio`: `Playback-indicator keyframe timing belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorSecondPatternFifthScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorSecondPatternFirstScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorSecondPatternFourthScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorSecondPatternSecondScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorSecondPatternThirdScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorStaggerMs`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorStaticFirstScale`: `Reduced Motion uses the exact shared static bar shape.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorStaticSecondScale`: `Reduced Motion uses the exact shared static bar shape.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorStaticThirdScale`: `Reduced Motion uses the exact shared static bar shape.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorThirdDurationMs`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorThirdKeyTimeRatio`: `Playback-indicator keyframe timing belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorThirdPatternFifthScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorThirdPatternFirstScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorThirdPatternFourthScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorThirdPatternSecondScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorThirdPatternThirdScale`: `Playback-indicator motion belongs to the shared renderer.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.playbackIndicatorVerticalInset`: `Playback-indicator bar geometry belongs to the shared SwiftUI and AppKit renderers.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.pressedOpacity`: `Pressed feedback opacity belongs to reusable media activation.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.rowArtworkSide`: `Media-row artwork size belongs to the reusable collection presentation.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.rowGap`: `Media-row content spacing belongs to the reusable collection presentation.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.rowHeight`: `Media-row height belongs to the reusable collection presentation.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.tilePadding`: `Media-card content padding belongs to the reusable tile presentation.`
+- `extensions.rawMetricExceptions.panel.mediaCollection.tileTextGap`: `Media-card title rhythm belongs to the reusable tile presentation.`
+- `extensions.rawMetricExceptions.panel.mediaTable.actionWidth`: `The trailing native actions control retains its established hit region.`
+- `extensions.rawMetricExceptions.panel.mediaTable.collectionWidth`: `The optional collection column retains its established width.`
+- `extensions.rawMetricExceptions.panel.mediaTable.columnSpacing`: `Native media-table columns use one reusable spacing contract.`
+- `extensions.rawMetricExceptions.panel.mediaTable.comfortableArtworkSize`: `Comfortable artwork stays inside the reusable native cell presentation.`
+- `extensions.rawMetricExceptions.panel.mediaTable.comfortableHeaderHeight`: `Comfortable native table headers align with comfortable rows.`
+- `extensions.rawMetricExceptions.panel.mediaTable.comfortableRowHeight`: `Comfortable native media-table row geometry remains deterministic across reuse.`
+- `extensions.rawMetricExceptions.panel.mediaTable.compactArtworkSize`: `Compact artwork stays inside the reusable native cell presentation.`
+- `extensions.rawMetricExceptions.panel.mediaTable.compactHeaderHeight`: `Compact native table headers align with compact rows.`
+- `extensions.rawMetricExceptions.panel.mediaTable.compactRowHeight`: `Compact native media-table row geometry remains deterministic across reuse.`
+- `extensions.rawMetricExceptions.panel.mediaTable.durationWidth`: `The optional duration column retains its established width.`
+- `extensions.rawMetricExceptions.panel.mediaTable.explicitBadgeGap`: `The explicit badge remains separated from the title.`
+- `extensions.rawMetricExceptions.panel.mediaTable.explicitBadgeHeight`: `The explicit badge retains stable vertical geometry.`
+- `extensions.rawMetricExceptions.panel.mediaTable.explicitBadgeWidth`: `The explicit badge reserves stable horizontal space.`
+- `extensions.rawMetricExceptions.panel.mediaTable.favoriteControlWidth`: `The leading favorite control retains its established hit region.`
+- `extensions.rawMetricExceptions.panel.mediaTable.horizontalInset`: `Native media-table rows own their horizontal chrome inset.`
+- `extensions.rawMetricExceptions.panel.mediaTable.lineGap`: `Two-line native title metadata uses a compact stable gap.`
+- `extensions.rawMetricExceptions.panel.mediaTable.lineHeight`: `Native title and metadata lines share one vertical metric.`
+- `extensions.rawMetricExceptions.panel.mediaTable.minimumSongWidth`: `The primary media-table title column keeps a readable minimum.`
+- `extensions.rawMetricExceptions.panel.mediaTable.selectionHorizontalInset`: `Selection presentation remains inset from the row edge.`
+- `extensions.rawMetricExceptions.panel.mediaTable.selectionVerticalInset`: `Selection presentation remains inset vertically from adjacent rows.`
+- `extensions.rawMetricExceptions.panel.mediaTable.songContentSpacing`: `Artwork and title metadata retain their established rhythm.`
+- `extensions.rawMetricExceptions.panel.mediaTable.standardArtworkSize`: `Standard artwork stays inside the reusable native cell presentation.`
+- `extensions.rawMetricExceptions.panel.mediaTable.standardHeaderHeight`: `Standard native table headers align with standard rows.`
+- `extensions.rawMetricExceptions.panel.mediaTable.standardRowHeight`: `Standard native media-table row geometry remains deterministic across reuse.`
+- `extensions.rawMetricExceptions.panel.mediaTable.yearWidth`: `The optional year column retains its established width.`
+- `extensions.rawMetricExceptions.panel.metadata.badgeGap`: `Media metadata badge rhythm belongs to the metadata presentation.`
+- `extensions.rawMetricExceptions.panel.metadata.badgeHeight`: `Media metadata badge geometry belongs to the metadata presentation.`
+- `extensions.rawMetricExceptions.panel.metadata.badgeHorizontalPadding`: `Media metadata badge inset belongs to the metadata presentation.`
+- `extensions.rawMetricExceptions.panel.metadata.detailsColumnGap`: `Audio details column rhythm belongs to the metadata presentation.`
+- `extensions.rawMetricExceptions.panel.metadata.detailsPadding`: `Audio details padding belongs to the metadata presentation.`
+- `extensions.rawMetricExceptions.panel.metadata.detailsRowGap`: `Audio details row rhythm belongs to the metadata presentation.`
+- `extensions.rawMetricExceptions.panel.metadata.detailsSectionGap`: `Audio details section rhythm belongs to the metadata presentation.`
+- `extensions.rawMetricExceptions.panel.metadata.detailsTitleGap`: `Audio details title rhythm belongs to the metadata presentation.`
+- `extensions.rawMetricExceptions.panel.metadata.detailsWidth`: `Audio details width belongs to the metadata presentation.`
+- `extensions.rawMetricExceptions.panel.player.artworkHoverOpacity`: `Player artwork hover treatment preserves the Cadence disclosure affordance.`
+- `extensions.rawMetricExceptions.panel.player.artworkSide`: `Player artwork geometry belongs to the player presentation.`
+- `extensions.rawMetricExceptions.panel.player.contentHeight`: `Player content height preserves the Cadence optical alignment contract.`
+- `extensions.rawMetricExceptions.panel.player.controlSize`: `Player transport target geometry belongs to the player presentation.`
+- `extensions.rawMetricExceptions.panel.player.metadataMaximumWidth`: `Player metadata width preserves the Cadence three-region layout contract.`
+- `extensions.rawMetricExceptions.panel.player.metadataMinimumWidth`: `Player metadata width preserves the Cadence three-region layout contract.`
 - `extensions.rawMetricExceptions.panel.player.minimumHeight`: `Player chrome height belongs to the player presentation.`
+- `extensions.rawMetricExceptions.panel.player.outputWidth`: `Player output width preserves the Cadence three-region layout contract.`
 - `extensions.rawMetricExceptions.panel.player.panelPickerWidth`: `Panel picker width belongs to the player shell.`
 - `extensions.rawMetricExceptions.panel.player.progressHeight`: `Progress thickness belongs to the player control.`
+- `extensions.rawMetricExceptions.panel.player.progressIdealWidth`: `Player progress width preserves the Cadence transport layout contract.`
+- `extensions.rawMetricExceptions.panel.player.progressLabelWidth`: `Player progress time-label width preserves the Cadence clock alignment contract.`
+- `extensions.rawMetricExceptions.panel.player.progressMaximumWidth`: `Player progress width preserves the Cadence transport layout contract.`
+- `extensions.rawMetricExceptions.panel.player.progressMinimumWidth`: `Player progress width preserves the Cadence transport layout contract.`
+- `extensions.rawMetricExceptions.panel.player.transportMinimumWidth`: `Player transport width preserves the Cadence three-region layout contract.`
+- `extensions.rawMetricExceptions.panel.player.volumeButtonSize`: `Player volume-button geometry preserves the Cadence control contract.`
+- `extensions.rawMetricExceptions.panel.player.volumeWidth`: `Player volume width preserves the Cadence output-control contract.`
+- `extensions.rawMetricExceptions.panel.queue.artworkSide`: `Queue artwork geometry belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.dragPreviewArtworkSide`: `Queue drag preview artwork geometry belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.dragPreviewBorderOpacity`: `Queue drag preview border treatment belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.dragPreviewGap`: `Queue drag preview artwork-to-copy rhythm belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.dragPreviewPadding`: `Queue drag preview padding belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.dragPreviewShadowOpacity`: `Queue drag preview shadow treatment belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.dragPreviewShadowRadius`: `Queue drag preview shadow treatment belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.dragPreviewShadowYOffset`: `Queue drag preview shadow treatment belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.dragPreviewTextGap`: `Queue drag preview title-to-subtitle rhythm belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.dragPreviewWidth`: `Queue drag preview width belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.durationWidth`: `Queue durations retain their established fixed-width alignment.`
+- `extensions.rawMetricExceptions.panel.queue.insertionHeight`: `Queue insertion feedback geometry belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.insertionHorizontalInset`: `Queue insertion feedback inset belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.insertionOpacity`: `Queue insertion feedback prominence belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.insertionYOffset`: `Queue insertion feedback optical alignment belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.rowGap`: `Queue row rhythm belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.rowHeight`: `Queue row geometry belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.rowHorizontalPadding`: `Queue row horizontal inset belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.rowTextGap`: `Queue title-to-metadata rhythm preserves the Cadence queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.rowVerticalPadding`: `Queue row vertical inset belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.trailingControlWidth`: `Queue trailing status and reorder controls preserve their established alignment.`
 - `extensions.rawMetricExceptions.status.gap`: `Status symbol and label use a deliberate optical gap.`
 - `extensions.rawMetricExceptions.table.media.artworkSide`: `Media table artwork size belongs to the native table contract.`
 - `extensions.rawMetricExceptions.table.media.playbackIndicatorSide`: `Playback indicator size belongs to the native table contract.`
@@ -366,17 +523,170 @@ Shared component metrics and mandatory state contracts.
 - `overlay.sheetReadableWidth`: `640`
 - `panel.about.iconSide`: `96`
 - `panel.about.readableWidth`: `480`
+- `panel.artwork.artistOffsetRatio`: `0.013`
+- `panel.artwork.artistPaddingRatio`: `0.2`
+- `panel.artwork.collectionPaddingRatio`: `0.26`
 - `panel.artwork.cornerRadius`: `{radius.hero}`
+- `panel.artwork.cropBorderOpacity`: `0.32`
+- `panel.artwork.cropMaximumScale`: `4`
+- `panel.artwork.cropMinimumScale`: `1`
+- `panel.artwork.cropPreviewSide`: `340`
+- `panel.artwork.hazeBackgroundFalloffRatio`: `0.84`
+- `panel.artwork.hazeBlurRadius`: `44`
+- `panel.artwork.hazeDarkBackgroundOpacity`: `0.12`
+- `panel.artwork.hazeDarkLeadingOpacity`: `0.48`
+- `panel.artwork.hazeDarkSaturation`: `1.12`
+- `panel.artwork.hazeDarkTrailingOpacity`: `0.4`
+- `panel.artwork.hazeFalloffRatio`: `0.42`
+- `panel.artwork.hazeLeadingEndRadius`: `330`
+- `panel.artwork.hazeLeadingStartRadius`: `18`
+- `panel.artwork.hazeLightBackgroundOpacity`: `0.22`
+- `panel.artwork.hazeLightLeadingOpacity`: `0.62`
+- `panel.artwork.hazeLightSaturation`: `1.28`
+- `panel.artwork.hazeLightTrailingOpacity`: `0.54`
+- `panel.artwork.hazeTrailingEndRadius`: `310`
+- `panel.artwork.hazeTrailingStartRadius`: `12`
 - `panel.artwork.heroSide`: `320`
+- `panel.artwork.highlightBlurRatio`: `0.12`
+- `panel.artwork.highlightOffsetXRatio`: `0.2`
+- `panel.artwork.highlightOffsetYRatio`: `-0.18`
+- `panel.artwork.highlightOpacity`: `0.52`
+- `panel.artwork.highlightSizeRatio`: `0.72`
 - `panel.artwork.minimumSide`: `64`
+- `panel.artwork.mosaicBorderOpacity`: `0.14`
+- `panel.artwork.mosaicEmptySymbolSize`: `42`
+- `panel.artwork.mosaicGap`: `1`
+- `panel.artwork.scrimOpacity`: `0.42`
+- `panel.artwork.surfaceCornerRadius`: `8`
+- `panel.artwork.symbolMaximumSize`: `34`
+- `panel.artwork.symbolMinimumSize`: `10`
+- `panel.artwork.symbolOpacity`: `0.62`
+- `panel.artwork.symbolSizeRatio`: `0.18`
+- `panel.artwork.trackPaddingRatio`: `0.3`
 - `panel.gap`: `{space.4}`
+- `panel.lyrics.edgeFadeHeight`: `32`
 - `panel.lyrics.followDurationMs`: `320`
-- `panel.lyrics.inactiveOpacity`: `0.56`
-- `panel.lyrics.lineGap`: `12`
+- `panel.lyrics.inactiveBlurRadius`: `0.45`
+- `panel.lyrics.inactiveOpacity`: `0.58`
+- `panel.lyrics.lineGap`: `18`
+- `panel.lyrics.lineSpacing`: `3`
+- `panel.lyrics.stanzaBreakHeight`: `10`
+- `panel.lyrics.viewportHorizontalPadding`: `34`
+- `panel.lyrics.viewportVerticalPadding`: `34`
+- `panel.mediaCollection.favoriteCompactControlSize`: `22`
+- `panel.mediaCollection.favoriteControlSize`: `30`
+- `panel.mediaCollection.gridMaximumWidth`: `196`
+- `panel.mediaCollection.gridMinimumWidth`: `164`
+- `panel.mediaCollection.playbackIndicatorBarWidth`: `3`
+- `panel.mediaCollection.playbackIndicatorCornerRadius`: `1.5`
+- `panel.mediaCollection.playbackIndicatorFirstDurationMs`: `1200`
+- `panel.mediaCollection.playbackIndicatorFirstPatternFifthScale`: `0.32`
+- `panel.mediaCollection.playbackIndicatorFirstPatternFirstScale`: `0.32`
+- `panel.mediaCollection.playbackIndicatorFirstPatternFourthScale`: `0.76`
+- `panel.mediaCollection.playbackIndicatorFirstPatternSecondScale`: `0.94`
+- `panel.mediaCollection.playbackIndicatorFirstPatternThirdScale`: `0.54`
+- `panel.mediaCollection.playbackIndicatorFourthKeyTimeRatio`: `0.76`
+- `panel.mediaCollection.playbackIndicatorGap`: `2.5`
+- `panel.mediaCollection.playbackIndicatorMaximumHeight`: `17`
+- `panel.mediaCollection.playbackIndicatorScrimOpacity`: `0.34`
+- `panel.mediaCollection.playbackIndicatorSecondDurationMs`: `1380`
+- `panel.mediaCollection.playbackIndicatorSecondKeyTimeRatio`: `0.24`
+- `panel.mediaCollection.playbackIndicatorSecondPatternFifthScale`: `0.72`
+- `panel.mediaCollection.playbackIndicatorSecondPatternFirstScale`: `0.72`
+- `panel.mediaCollection.playbackIndicatorSecondPatternFourthScale`: `0.58`
+- `panel.mediaCollection.playbackIndicatorSecondPatternSecondScale`: `0.38`
+- `panel.mediaCollection.playbackIndicatorSecondPatternThirdScale`: `1`
+- `panel.mediaCollection.playbackIndicatorStaggerMs`: `100`
+- `panel.mediaCollection.playbackIndicatorStaticFirstScale`: `0.48`
+- `panel.mediaCollection.playbackIndicatorStaticSecondScale`: `0.82`
+- `panel.mediaCollection.playbackIndicatorStaticThirdScale`: `0.62`
+- `panel.mediaCollection.playbackIndicatorThirdDurationMs`: `1280`
+- `panel.mediaCollection.playbackIndicatorThirdKeyTimeRatio`: `0.5`
+- `panel.mediaCollection.playbackIndicatorThirdPatternFifthScale`: `0.46`
+- `panel.mediaCollection.playbackIndicatorThirdPatternFirstScale`: `0.46`
+- `panel.mediaCollection.playbackIndicatorThirdPatternFourthScale`: `0.96`
+- `panel.mediaCollection.playbackIndicatorThirdPatternSecondScale`: `0.82`
+- `panel.mediaCollection.playbackIndicatorThirdPatternThirdScale`: `0.34`
+- `panel.mediaCollection.playbackIndicatorVerticalInset`: `14`
+- `panel.mediaCollection.pressedOpacity`: `0.72`
+- `panel.mediaCollection.rowArtworkSide`: `40`
+- `panel.mediaCollection.rowGap`: `8`
+- `panel.mediaCollection.rowHeight`: `48`
+- `panel.mediaCollection.tilePadding`: `8`
+- `panel.mediaCollection.tileTextGap`: `4`
+- `panel.mediaTable.actionWidth`: `28`
+- `panel.mediaTable.collectionWidth`: `190`
+- `panel.mediaTable.columnSpacing`: `12`
+- `panel.mediaTable.comfortableArtworkSize`: `48`
+- `panel.mediaTable.comfortableHeaderHeight`: `42`
+- `panel.mediaTable.comfortableRowHeight`: `68`
+- `panel.mediaTable.compactArtworkSize`: `34`
+- `panel.mediaTable.compactHeaderHeight`: `34`
+- `panel.mediaTable.compactRowHeight`: `50`
+- `panel.mediaTable.durationWidth`: `64`
+- `panel.mediaTable.explicitBadgeGap`: `7`
+- `panel.mediaTable.explicitBadgeHeight`: `16`
+- `panel.mediaTable.explicitBadgeWidth`: `16`
+- `panel.mediaTable.favoriteControlWidth`: `30`
+- `panel.mediaTable.horizontalInset`: `24`
+- `panel.mediaTable.lineGap`: `2`
+- `panel.mediaTable.lineHeight`: `19`
+- `panel.mediaTable.minimumSongWidth`: `360`
+- `panel.mediaTable.selectionHorizontalInset`: `8`
+- `panel.mediaTable.selectionVerticalInset`: `3`
+- `panel.mediaTable.songContentSpacing`: `8`
+- `panel.mediaTable.standardArtworkSize`: `40`
+- `panel.mediaTable.standardHeaderHeight`: `38`
+- `panel.mediaTable.standardRowHeight`: `58`
+- `panel.mediaTable.yearWidth`: `64`
+- `panel.metadata.badgeGap`: `8`
+- `panel.metadata.badgeHeight`: `28`
+- `panel.metadata.badgeHorizontalPadding`: `10`
+- `panel.metadata.detailsColumnGap`: `20`
+- `panel.metadata.detailsPadding`: `20`
+- `panel.metadata.detailsRowGap`: `9`
+- `panel.metadata.detailsSectionGap`: `16`
+- `panel.metadata.detailsTitleGap`: `3`
+- `panel.metadata.detailsWidth`: `360`
 - `panel.padding`: `{space.5}`
-- `panel.player.minimumHeight`: `88`
+- `panel.player.artworkHoverOpacity`: `0.36`
+- `panel.player.artworkSide`: `56`
+- `panel.player.contentHeight`: `56`
+- `panel.player.controlSize`: `34`
+- `panel.player.metadataMaximumWidth`: `380`
+- `panel.player.metadataMinimumWidth`: `244`
+- `panel.player.minimumHeight`: `96`
+- `panel.player.outputWidth`: `244`
 - `panel.player.panelPickerWidth`: `184`
 - `panel.player.progressHeight`: `4`
+- `panel.player.progressIdealWidth`: `300`
+- `panel.player.progressLabelWidth`: `34`
+- `panel.player.progressMaximumWidth`: `360`
+- `panel.player.progressMinimumWidth`: `220`
+- `panel.player.transportMinimumWidth`: `500`
+- `panel.player.volumeButtonSize`: `28`
+- `panel.player.volumeWidth`: `86`
+- `panel.queue.artworkSide`: `42`
+- `panel.queue.dragPreviewArtworkSide`: `38`
+- `panel.queue.dragPreviewBorderOpacity`: `0.14`
+- `panel.queue.dragPreviewGap`: `10`
+- `panel.queue.dragPreviewPadding`: `10`
+- `panel.queue.dragPreviewShadowOpacity`: `0.38`
+- `panel.queue.dragPreviewShadowRadius`: `16`
+- `panel.queue.dragPreviewShadowYOffset`: `8`
+- `panel.queue.dragPreviewTextGap`: `2`
+- `panel.queue.dragPreviewWidth`: `330`
+- `panel.queue.durationWidth`: `40`
+- `panel.queue.insertionHeight`: `2`
+- `panel.queue.insertionHorizontalInset`: `8`
+- `panel.queue.insertionOpacity`: `0.9`
+- `panel.queue.insertionYOffset`: `-1`
+- `panel.queue.rowGap`: `12`
+- `panel.queue.rowHeight`: `52`
+- `panel.queue.rowHorizontalPadding`: `8`
+- `panel.queue.rowTextGap`: `3`
+- `panel.queue.rowVerticalPadding`: `4`
+- `panel.queue.trailingControlWidth`: `28`
 - `panel.radius`: `{radius.panel}`
 - `panel.surface`: `surface.overlay`
 - `status.colorAloneForbidden`: `true`
