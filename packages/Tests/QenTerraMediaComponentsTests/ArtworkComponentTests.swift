@@ -174,6 +174,7 @@ import Testing
 }
 
 @Test @MainActor func reducedTransparencyHazeRendersNoDecorativePixels() throws {
+    let background = Color(red: 0.17, green: 0.29, blue: 0.43)
     let environment = DesignNativeEnvironment(
         appearance: .dark,
         productProfile: .cadence,
@@ -182,20 +183,35 @@ import Testing
         reducesMotion: false,
         reducesTransparency: true
     )
+    let baselineRenderer = ImageRenderer(
+        content: background.frame(width: 80, height: 80)
+    )
     let renderer = ImageRenderer(
-        content: ArtworkHaze(
-            palette: ArtworkPalette(leading: .blue, trailing: .purple)
-        )
-        .environment(\.designNativeEnvironment, environment)
+        content: ZStack {
+            background
+            ArtworkHaze(
+                palette: ArtworkPalette(leading: .blue, trailing: .purple)
+            )
+            .environment(\.designNativeEnvironment, environment)
+        }
         .frame(width: 80, height: 80)
     )
+    let baselineImage = try #require(baselineRenderer.cgImage)
     let image = try #require(renderer.cgImage)
+    let baselineColor = try #require(
+        NSBitmapImageRep(cgImage: baselineImage)
+            .colorAt(x: 40, y: 40)?
+            .usingColorSpace(.deviceRGB)
+    )
     let color = try #require(
         NSBitmapImageRep(cgImage: image)
             .colorAt(x: 40, y: 40)?
             .usingColorSpace(.deviceRGB)
     )
-    #expect(color.alphaComponent == 0)
+    #expect(abs(color.redComponent - baselineColor.redComponent) < 0.001)
+    #expect(abs(color.greenComponent - baselineColor.greenComponent) < 0.001)
+    #expect(abs(color.blueComponent - baselineColor.blueComponent) < 0.001)
+    #expect(abs(color.alphaComponent - baselineColor.alphaComponent) < 0.001)
 }
 
 @Test @MainActor func cropBorderStrengthensUnderIncreasedContrastWithoutChangingContentGeometry() throws {

@@ -130145,8 +130145,8 @@
     },
     {
       "path": "Tests/QenTerraMediaComponentsTests/ArtworkComponentTests.swift",
-      "sha256": "6945a3bf77dd0157612fe0bd173b8c3bfcf3a3be12d3da6f9d7a21db8d98ba9b",
-      "bytes": 15303
+      "sha256": "4cc1af671b862f4cf8f61302b81e096122a6fa9cdc88a9b7f2b01ca85a748f51",
+      "bytes": 16037
     },
     {
       "path": "Tests/QenTerraMediaComponentsTests/GradientPrewarmTests.swift",
