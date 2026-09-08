@@ -474,6 +474,7 @@ Shared component metrics and mandatory state contracts.
 - `extensions.rawMetricExceptions.panel.queue.dragPreviewShadowYOffset`: `Queue drag preview shadow treatment belongs to the queue presentation.`
 - `extensions.rawMetricExceptions.panel.queue.dragPreviewTextGap`: `Queue drag preview title-to-subtitle rhythm belongs to the queue presentation.`
 - `extensions.rawMetricExceptions.panel.queue.dragPreviewWidth`: `Queue drag preview width belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.durationWidth`: `Queue durations retain their established fixed-width alignment.`
 - `extensions.rawMetricExceptions.panel.queue.insertionHeight`: `Queue insertion feedback geometry belongs to the queue presentation.`
 - `extensions.rawMetricExceptions.panel.queue.insertionHorizontalInset`: `Queue insertion feedback inset belongs to the queue presentation.`
 - `extensions.rawMetricExceptions.panel.queue.insertionOpacity`: `Queue insertion feedback prominence belongs to the queue presentation.`
@@ -481,7 +482,9 @@ Shared component metrics and mandatory state contracts.
 - `extensions.rawMetricExceptions.panel.queue.rowGap`: `Queue row rhythm belongs to the queue presentation.`
 - `extensions.rawMetricExceptions.panel.queue.rowHeight`: `Queue row geometry belongs to the queue presentation.`
 - `extensions.rawMetricExceptions.panel.queue.rowHorizontalPadding`: `Queue row horizontal inset belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.rowTextGap`: `Queue title-to-metadata rhythm preserves the Cadence queue presentation.`
 - `extensions.rawMetricExceptions.panel.queue.rowVerticalPadding`: `Queue row vertical inset belongs to the queue presentation.`
+- `extensions.rawMetricExceptions.panel.queue.trailingControlWidth`: `Queue trailing status and reorder controls preserve their established alignment.`
 - `extensions.rawMetricExceptions.status.gap`: `Status symbol and label use a deliberate optical gap.`
 - `extensions.rawMetricExceptions.table.media.artworkSide`: `Media table artwork size belongs to the native table contract.`
 - `extensions.rawMetricExceptions.table.media.playbackIndicatorSide`: `Playback indicator size belongs to the native table contract.`
@@ -673,6 +676,7 @@ Shared component metrics and mandatory state contracts.
 - `panel.queue.dragPreviewShadowYOffset`: `8`
 - `panel.queue.dragPreviewTextGap`: `2`
 - `panel.queue.dragPreviewWidth`: `330`
+- `panel.queue.durationWidth`: `40`
 - `panel.queue.insertionHeight`: `2`
 - `panel.queue.insertionHorizontalInset`: `8`
 - `panel.queue.insertionOpacity`: `0.9`
@@ -680,7 +684,9 @@ Shared component metrics and mandatory state contracts.
 - `panel.queue.rowGap`: `12`
 - `panel.queue.rowHeight`: `52`
 - `panel.queue.rowHorizontalPadding`: `8`
+- `panel.queue.rowTextGap`: `3`
 - `panel.queue.rowVerticalPadding`: `4`
+- `panel.queue.trailingControlWidth`: `28`
 - `panel.radius`: `{radius.panel}`
 - `panel.surface`: `surface.overlay`
 - `status.colorAloneForbidden`: `true`

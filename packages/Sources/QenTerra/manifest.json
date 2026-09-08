@@ -75,8 +75,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/InteractiveRowSurface.swift",
-      "sha256": "f67d3c695e00a24bc47b8fa1e8096986fb14dca15eab8c818ca702961810525e",
-      "bytes": 4466
+      "sha256": "7cde6a3e5f3e2f35b30c0c07365e0d70d475827f579df1d667d2dd710084314e",
+      "bytes": 4765
     },
     {
       "id": "primary-button-style",
@@ -628,8 +628,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Controls/FavoriteControl.swift",
-      "sha256": "ac881f8c0356e54cf5b8386a1d769cbff7ae8b3c843bf8aa4b29f39b90e6273f",
-      "bytes": 3665
+      "sha256": "24c939bd1b8dee3cf6ab38575fa7e8d6fe11478008b313b21a94d3047ef7e7dd",
+      "bytes": 3786
     },
     {
       "id": "playback-indicator",
@@ -688,8 +688,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Player/PlayerBar.swift",
-      "sha256": "6f2846ebd5942a4920372ba2e83a1d6b2e9c30389c7052ecff24b1a4cf2e4144",
-      "bytes": 12154
+      "sha256": "a2b7fb71de46f2609f39a1cfbcf33d20faa1666e0239682ebcd6b89f29bfc616",
+      "bytes": 12913
     },
     {
       "id": "playback-progress-control",
@@ -703,8 +703,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Player/PlaybackProgressControl.swift",
-      "sha256": "6ac6fc960826dc94c5e2f9880054f17faef37e1c73a7222d8c3e1cb24e6ac1a4",
-      "bytes": 3006
+      "sha256": "ef37a532b089c1d411dab0d56b55fe53783f0c32a058b07dfb19cb6ba28b5a32",
+      "bytes": 3438
     },
     {
       "id": "transport-controls",
@@ -719,8 +719,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Player/TransportControls.swift",
-      "sha256": "2f3ada54f631607e08a345aea3d3b27da0787337ebc38d605afd4595ddfa6031",
-      "bytes": 6622
+      "sha256": "3db7d6c41e217ce9d9256e49c557c0ad56ab7e1fba7123ababd3f5e74aabec2e",
+      "bytes": 7025
     },
     {
       "id": "airplay-route-picker",
@@ -748,8 +748,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Queue/PlaybackQueueRow.swift",
-      "sha256": "4831188a85f10a0b1f0e628a2b1ab4a4ceb241f460fe06792f1408f877c07447",
-      "bytes": 10057
+      "sha256": "55c9e3e6efeeb8aa2fb615625fa9e889d6e197a48bba4c2042a729e5a460e03a",
+      "bytes": 10481
     },
     {
       "id": "queue-insertion-indicator",
@@ -1020,8 +1020,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradient.swift",
-      "sha256": "4f57fae893e71593f7fa569171b5c5946c95432c707d4ac1564292a2948d66a8",
-      "bytes": 22211
+      "sha256": "cc8ced260fd028ab39d0a73d3edf4e6a898b790655599fe226f5f40555f50fa3",
+      "bytes": 23313
     },
     {
       "id": "artwork-accent-gradient-snapshot",

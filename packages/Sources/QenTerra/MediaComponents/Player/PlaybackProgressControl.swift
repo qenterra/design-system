@@ -49,6 +49,7 @@ struct PlaybackProgressDragState: Equatable, Sendable {
 }
 
 public struct PlaybackProgressControl: View {
+    @Environment(\.designNativeEnvironment) private var environment
     private let presentation: PlaybackProgressPresentation
     private let seek: @MainActor (Double) -> Void
     @State private var dragState = PlaybackProgressDragState()
@@ -68,13 +69,14 @@ public struct PlaybackProgressControl: View {
                 guard !isEditing, let value = dragState.finish() else { return }
                 seek(value)
             }
+            .tint(.primary)
             .accessibilityLabel(Text(verbatim: presentation.accessibilityLabel))
             .accessibilityValue(Text(verbatim: presentation.leadingText))
             .disabled(!presentation.isEnabled)
             timeLabel(presentation.trailingText, alignment: .trailing)
         }
         .font(.caption2)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(secondaryTextColor)
         .monospacedDigit()
     }
 
@@ -87,7 +89,18 @@ public struct PlaybackProgressControl: View {
 
     private func timeLabel(_ text: String, alignment: Alignment) -> some View {
         Text(verbatim: text)
-            .frame(minWidth: PlayerBarLayoutMetrics.progressLabelWidth, alignment: alignment)
+            .frame(
+                minWidth: environment.productProfile == .cadence
+                    ? nil
+                    : PlayerBarLayoutMetrics.progressLabelWidth,
+                alignment: alignment
+            )
+    }
+
+    private var secondaryTextColor: Color {
+        environment.productProfile == .cadence
+            ? Color(designToken: DesignTokens.Color.textSecondary)
+            : Color.secondary
     }
 }
 #endif

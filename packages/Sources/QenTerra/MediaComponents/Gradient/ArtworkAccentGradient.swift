@@ -125,8 +125,8 @@
         private let idleOverlay = ArtworkAccentGradientOverlayView()
         private let tintOverlay = ArtworkAccentGradientOverlayView()
         private var hasAppliedComposition = false
-        /// The SwiftUI surface supplies these overlays with SwiftUI blend semantics.
-        var appliesAppearanceOverlays = true
+        /// Set this to `false` when the host supplies the appearance overlays.
+        public var appliesAppearanceOverlays = true
 
         public init(
             frame frameRect: NSRect,
@@ -171,6 +171,9 @@
             fallbackOverlay.frame = bounds
             idleOverlay.frame = bounds
             tintOverlay.frame = bounds
+            if isPaused {
+                updateStaticPresentation()
+            }
         }
 
         override public func draw(_ dirtyRect: NSRect) {
@@ -233,8 +236,12 @@
             isPaused = !appearance.isAnimated || gradientRenderer == nil
             enableSetNeedsDisplay = !appearance.isAnimated
             if isPaused {
+                updateStaticPresentation()
                 setNeedsDisplay(bounds)
                 metalView.setNeedsDisplay(metalView.bounds)
+            } else {
+                layer?.contents = nil
+                metalView.isHidden = false
             }
         }
 
@@ -291,6 +298,34 @@
             metalView.delegate = renderer
             metalView.isHidden = false
             fallbackOverlay.isHidden = true
+        }
+
+        private func updateStaticPresentation() {
+            guard
+                bounds.width > 0,
+                bounds.height > 0,
+                let gradientRenderer,
+                let layer
+            else {
+                return
+            }
+            let scale = window?.backingScaleFactor
+                ?? NSScreen.main?.backingScaleFactor
+                ?? 1
+            let snapshotSize = CGSize(
+                width: bounds.width * scale,
+                height: bounds.height * scale
+            )
+            guard let image = gradientRenderer.makeSnapshot(
+                size: snapshotSize,
+                time: 0
+            ) else {
+                return
+            }
+            layer.contents = image
+            layer.contentsGravity = .resize
+            layer.contentsScale = scale
+            metalView.isHidden = true
         }
 
         private func configureComposition() {

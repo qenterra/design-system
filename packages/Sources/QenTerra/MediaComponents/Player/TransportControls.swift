@@ -106,6 +106,7 @@ public struct TransportControlPresentation: Equatable, Sendable {
 }
 
 public struct TransportControls: View {
+    @Environment(\.designNativeEnvironment) private var environment
     private let presentation: PlayerBarPresentation
     private let actions: PlayerBarActions
 
@@ -128,11 +129,15 @@ public struct TransportControls: View {
                 Button { perform(control) } label: {
                     Image(systemName: item.symbolName)
                         .symbolVariant(item.isActive ? .fill : .none)
-                        .font(control == .playPause ? .body.weight(.bold) : .body)
+                        .font(
+                            control == .playPause
+                                ? .system(size: 14, weight: .bold)
+                                : .body
+                        )
                         .foregroundStyle(
                             control == .playPause
                                 ? Color(designToken: DesignTokens.Color.surfaceContent)
-                                : Color.primary
+                                : primaryControlColor
                         )
                         .frame(
                             width: DesignTokens.Component.panelPlayerControlSize.points,
@@ -140,7 +145,7 @@ public struct TransportControls: View {
                         )
                         .background {
                             if control == .playPause {
-                                Circle().fill(Color.primary)
+                                Circle().fill(primaryControlColor)
                             } else if item.isActive {
                                 RoundedRectangle(
                                     cornerRadius: DesignTokens.Radius.control,
@@ -175,6 +180,12 @@ public struct TransportControls: View {
         case .repeatMode: actions.cycleRepeatMode != nil
         default: true
         }
+    }
+
+    private var primaryControlColor: Color {
+        environment.productProfile == .cadence
+            ? Color(designToken: DesignTokens.Color.textPrimary)
+            : Color.primary
     }
 }
 #endif

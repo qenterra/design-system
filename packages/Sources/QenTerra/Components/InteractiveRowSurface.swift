@@ -59,7 +59,7 @@ public struct InteractiveRowSurface<Content: View>: View {
             .opacity(resolvedState.isLoading ? 0 : resolvedState.contentOpacity)
             .background(fillColor)
             .overlay {
-                if let border = resolvedState.border {
+                if let border = visibleBorder {
                     RoundedRectangle(
                         cornerRadius: cornerRadius.points,
                         style: .continuous
@@ -104,6 +104,16 @@ public struct InteractiveRowSurface<Content: View>: View {
             isIncreasedContrast: state.isIncreasedContrast || isIncreasedContrast,
             isLoading: state.isLoading
         )
+    }
+
+    private var visibleBorder: DesignColorValue? {
+        if nativeEnvironment.productProfile == .cadence,
+           resolvedState.isSelected,
+           !resolvedState.isFocused,
+           !resolvedState.isIncreasedContrast {
+            return nil
+        }
+        return resolvedState.border
     }
 
     @ViewBuilder private var loadingIndicator: some View {

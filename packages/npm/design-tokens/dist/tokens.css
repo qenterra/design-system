@@ -368,6 +368,7 @@
   --design-system-component-panel-queue-drag-preview-shadow-yoffset: 8px;
   --design-system-component-panel-queue-drag-preview-text-gap: 2px;
   --design-system-component-panel-queue-drag-preview-width: 330px;
+  --design-system-component-panel-queue-duration-width: 40px;
   --design-system-component-panel-queue-insertion-height: 2px;
   --design-system-component-panel-queue-insertion-horizontal-inset: 8px;
   --design-system-component-panel-queue-insertion-opacity: 0.9;
@@ -375,7 +376,9 @@
   --design-system-component-panel-queue-row-gap: 12px;
   --design-system-component-panel-queue-row-height: 52px;
   --design-system-component-panel-queue-row-horizontal-padding: 8px;
+  --design-system-component-panel-queue-row-text-gap: 3px;
   --design-system-component-panel-queue-row-vertical-padding: 4px;
+  --design-system-component-panel-queue-trailing-control-width: 28px;
   --design-system-component-panel-radius: 14px;
   --design-system-component-status-gap: 6px;
   --design-system-component-status-icon-size: 14px;

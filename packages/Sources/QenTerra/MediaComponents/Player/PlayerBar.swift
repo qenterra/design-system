@@ -135,11 +135,12 @@ public struct PlayerBar<
                 VStack(alignment: .leading, spacing: DesignProductMetrics.cadence.textStack) {
                     Text(verbatim: title)
                         .font(.subheadline.weight(.medium))
+                        .foregroundStyle(primaryTextColor)
                         .lineLimit(1)
                     if let subtitle = presentation.subtitle {
                         Text(verbatim: subtitle)
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(secondaryTextColor)
                             .lineLimit(1)
                     }
                 }
@@ -151,16 +152,19 @@ public struct PlayerBar<
                 Spacer(minLength: 0)
             }
         } else if let emptyTitle = presentation.emptyTitle {
-            HStack(spacing: DesignProductMetrics.cadence.compactGap) {
+            Group {
                 if let symbolName = presentation.emptySymbolName {
-                    Image(systemName: symbolName)
-                        .accessibilityHidden(true)
+                    Label {
+                        Text(verbatim: emptyTitle)
+                    } icon: {
+                        Image(systemName: symbolName)
+                    }
+                } else {
+                    Text(verbatim: emptyTitle)
                 }
-                Text(verbatim: emptyTitle)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .lineLimit(1)
             }
+            .foregroundStyle(.secondary)
+            .lineLimit(1)
             .accessibilityElement(children: .combine)
             .accessibilityLabel(Text(verbatim: emptyTitle))
         }
@@ -196,6 +200,7 @@ public struct PlayerBar<
 
             Button(action: actions.toggleMute) {
                 Image(systemName: presentation.isMuted ? "speaker.slash.fill" : volumeSymbol)
+                    .foregroundStyle(primaryTextColor)
                     .frame(
                         width: DesignTokens.Component.panelPlayerVolumeButtonSize.points,
                         height: DesignTokens.Component.panelPlayerVolumeButtonSize.points
@@ -218,6 +223,7 @@ public struct PlayerBar<
 
             Button(action: actions.showQueue) {
                 Image(systemName: "list.bullet")
+                    .foregroundStyle(primaryTextColor)
                     .frame(
                         width: PlayerBarLayoutMetrics.queueControlSize,
                         height: PlayerBarLayoutMetrics.queueControlSize
@@ -242,8 +248,26 @@ public struct PlayerBar<
 
     private var playerBackground: some ShapeStyle {
         environment.reducesTransparency
-            ? AnyShapeStyle(Color(designToken: DesignTokens.Color.surfaceChrome))
+            ? AnyShapeStyle(
+                Color(
+                    designToken: environment.productProfile == .cadence
+                        ? DesignTokens.Color.surfaceRaised
+                        : DesignTokens.Color.surfaceChrome
+                )
+            )
             : AnyShapeStyle(.bar)
+    }
+
+    private var primaryTextColor: Color {
+        environment.productProfile == .cadence
+            ? Color(designToken: DesignTokens.Color.textPrimary)
+            : Color.primary
+    }
+
+    private var secondaryTextColor: Color {
+        environment.productProfile == .cadence
+            ? Color(designToken: DesignTokens.Color.textSecondary)
+            : Color.secondary
     }
 
     private var volumeSymbol: String {

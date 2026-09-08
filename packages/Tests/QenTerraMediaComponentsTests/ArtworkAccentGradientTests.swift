@@ -406,6 +406,8 @@
         #expect(image.width == 320)
         #expect(image.height == 240)
         #expect(distinctChromaticPixelCount(in: image) > 32)
+        let hostedImage = try #require(captureHostedView(view))
+        #expect(distinctChromaticPixelCount(in: hostedImage) > 32)
     }
 
     private extension ArtworkAccentColor {

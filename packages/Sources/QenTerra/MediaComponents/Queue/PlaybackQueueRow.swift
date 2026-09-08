@@ -148,14 +148,11 @@ public struct PlaybackQueueRow<
                     width: DesignTokens.Component.panelQueueArtworkSide.points,
                     height: DesignTokens.Component.panelQueueArtworkSide.points
                 )
-                .clipShape(
-                    RoundedRectangle(
-                        cornerRadius: DesignTokens.Radius.control,
-                        style: .continuous
-                    )
-                )
 
-            VStack(alignment: .leading, spacing: DesignProductMetrics.cadence.textStack) {
+            VStack(
+                alignment: .leading,
+                spacing: DesignTokens.Component.panelQueueRowTextGap.points
+            ) {
                 Text(verbatim: presentation.title)
                     .font(.callout.weight(presentation.isCurrent ? .semibold : .medium))
                     .lineLimit(1)
@@ -173,6 +170,14 @@ public struct PlaybackQueueRow<
                 Image(systemName: trailingSymbolName)
                     .font(.caption)
                     .foregroundStyle(presentation.isCurrent ? .primary : .tertiary)
+                    .frame(
+                        width: presentation.isCurrent
+                            ? nil
+                            : DesignTokens.Component.panelQueueTrailingControlWidth.points,
+                        height: presentation.isCurrent
+                            ? nil
+                            : DesignTokens.Component.panelQueueArtworkSide.points
+                    )
                     .accessibilityLabel(
                         Text(verbatim: presentation.trailingAccessibilityLabel ?? "")
                     )
@@ -183,11 +188,15 @@ public struct PlaybackQueueRow<
                     .font(.caption)
                     .foregroundStyle(.tertiary)
                     .monospacedDigit()
+                    .frame(
+                        width: DesignTokens.Component.panelQueueDurationWidth.points,
+                        alignment: .trailing
+                    )
             }
         }
+        .frame(minHeight: DesignTokens.Component.panelQueueRowHeight.points)
         .padding(.horizontal, DesignTokens.Component.panelQueueRowHorizontalPadding.points)
         .padding(.vertical, DesignTokens.Component.panelQueueRowVerticalPadding.points)
-        .frame(minHeight: DesignTokens.Component.panelQueueRowHeight.points)
         .background {
             InteractiveRowSurface(
                 state: InteractiveRowState(

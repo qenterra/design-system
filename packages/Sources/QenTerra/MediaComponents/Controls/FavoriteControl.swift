@@ -76,7 +76,11 @@ public struct FavoriteControl: View {
             action(presentation.requestedValue)
         } label: {
             Image(systemName: presentation.symbolName)
-                .foregroundStyle(presentation.isFavorite ? Color.accentColor : .secondary)
+                .foregroundStyle(
+                    presentation.isFavorite
+                        ? Color(designToken: DesignTokens.Color.actionPrimary)
+                        : .secondary
+                )
                 .frame(width: controlSize, height: controlSize)
                 .contentShape(Rectangle())
         }
