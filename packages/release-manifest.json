@@ -40,8 +40,8 @@
     },
     {
       "path": ".github/PULL_REQUEST_TEMPLATE.md",
-      "sha256": "2bf298e6c3164e66f7b51e7b561fa13ecb64442b0f1220f98c89a56128973dec",
-      "bytes": 1135
+      "sha256": "a8e1787ae1ddf935373f3c8d73b3e89a9e9040d1115a33dc64c3d7093c9eb647",
+      "bytes": 1452
     },
     {
       "path": ".github/dependabot.yml",
@@ -65,8 +65,8 @@
     },
     {
       "path": ".github/release.yml",
-      "sha256": "8f3867f6bc8d21fc4efebb3a88b1392906a80f130ad0170b02df270c90b91add",
-      "bytes": 433
+      "sha256": "0d8d0de70adf884fa82de09a695818d7360a8e01f38012a9ffcf5cb8dbb8903c",
+      "bytes": 586
     },
     {
       "path": ".github/workflows/ci.yml",
@@ -90,8 +90,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "84aa146a0224d59066cfe08889695e0563ab22f836c75945dd5e09d1bcb930ac",
-      "bytes": 6121
+      "sha256": "46abd5d83c231c517b7c45fdde4f89398d28d7b1401de7f0a985516514878fbe",
+      "bytes": 6242
     },
     {
       "path": "CODE_OF_CONDUCT.md",
@@ -100,8 +100,8 @@
     },
     {
       "path": "CONTRIBUTING.md",
-      "sha256": "dac9802ea3d2541a7b56ec2bb6eb01781398d6f31efdc8218a39d82b64e1e27c",
-      "bytes": 2575
+      "sha256": "110f203db5c6875ad80908c501da64c0216a448256e5244f54cb8f95c152563c",
+      "bytes": 3076
     },
     {
       "path": "GOVERNANCE.md",
@@ -130234,9 +130234,14 @@
       "bytes": 1039
     },
     {
+      "path": "docs/RELEASE_WRITING.md",
+      "sha256": "07a3ab4ce84a4bc1fdbaae2173f0e64857c6af32e520679f13984d6b34e062c4",
+      "bytes": 11235
+    },
+    {
       "path": "docs/RELEASING.md",
-      "sha256": "4b59f40fb4f46d85e64bacf496b46660effdb3b2119b9425ba6f8d79ab6b8c2b",
-      "bytes": 1782
+      "sha256": "ef2c896ea5e17b9e34104be0745c64a6616dbb56d22087ecc5664a234155bf4c",
+      "bytes": 2029
     },
     {
       "path": "docs/REPOSITORY_STRUCTURE.md",
