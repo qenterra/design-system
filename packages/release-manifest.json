@@ -40,7 +40,7 @@
     },
     {
       "path": ".github/PULL_REQUEST_TEMPLATE.md",
-      "sha256": "90e457a35af21fb1e851beae8eab26570a2b285281304f79ec9a5dbf559e6317",
+      "sha256": "a8e1787ae1ddf935373f3c8d73b3e89a9e9040d1115a33dc64c3d7093c9eb647",
       "bytes": 1452
     },
     {
@@ -100,7 +100,7 @@
     },
     {
       "path": "CONTRIBUTING.md",
-      "sha256": "98c13885a81f8ce751335ae5190dd0188b05c7e0dc654f365bc619a60000d9da",
+      "sha256": "110f203db5c6875ad80908c501da64c0216a448256e5244f54cb8f95c152563c",
       "bytes": 3076
     },
     {
@@ -130234,8 +130234,13 @@
       "bytes": 1039
     },
     {
+      "path": "docs/RELEASE_WRITING.md",
+      "sha256": "07a3ab4ce84a4bc1fdbaae2173f0e64857c6af32e520679f13984d6b34e062c4",
+      "bytes": 11235
+    },
+    {
       "path": "docs/RELEASING.md",
-      "sha256": "66a3286fc9a98ead02868c5832c44e84de9a3520df92fc98a810a2c229e2bac8",
+      "sha256": "ef2c896ea5e17b9e34104be0745c64a6616dbb56d22087ecc5664a234155bf4c",
       "bytes": 2029
     },
     {
@@ -130267,11 +130272,6 @@
       "path": "docs/decisions/README.md",
       "sha256": "f1eb1510bd11e400cc17f26db8dd3b3a025ec01453b2cb5dea4d38911536eaa9",
       "bytes": 419
-    },
-    {
-      "path": "docs/release-writing.md",
-      "sha256": "b1c3e7c837debd469c6540112277f36f58a8ac984b2f95f9e0e697cd8f4a9ad3",
-      "bytes": 11236
     },
     {
       "path": "npm/design-tokens/LICENSE",

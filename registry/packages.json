@@ -25867,7 +25867,7 @@
         "packages/docs/TROUBLESHOOTING.md",
         "packages/docs/decisions/0000-template.md",
         "packages/docs/decisions/README.md",
-        "packages/docs/release-writing.md",
+        "packages/docs/RELEASE_WRITING.md",
         "packages/package.json",
         "packages/scripts/generate.py",
         "packages/scripts/lib/__init__.py",

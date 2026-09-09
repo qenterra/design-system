@@ -2,7 +2,7 @@
 
 ## Release text
 
-Use [Release writing](release-writing.md) for commit, PR, changelog and release
+Use [Release writing](RELEASE_WRITING.md) for commit, PR, changelog and release
 message templates. Keep the full version in the GitHub title and verify the
 actual body, target, flags and assets after each authorised publication.
 

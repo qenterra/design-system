@@ -53,7 +53,7 @@ manual gaps.
 
 ## Commit and review format
 
-Follow [Release writing](docs/release-writing.md) for commit grammar, PR and review
+Follow [Release writing](docs/RELEASE_WRITING.md) for commit grammar, PR and review
 comment templates, changelog entries, release notes, and publication updates.
 Write in English, use a specific Conventional Commit subject of at most 72
 characters, and keep one coherent outcome per change. Breaking changes include
