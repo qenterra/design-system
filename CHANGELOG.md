@@ -16,6 +16,8 @@ All notable maintained Design System changes are recorded here. Versions follow 
 
 ### Changed
 
+- Standardised commit messages, pull request reviews, changelogs, and release notes with shared contributor templates.
+
 - Restored secondary recovery actions and inherited standard About-resource typography, keeping consumer styles opt-in. Artwork gradients now retain one native surface and resolve terrain availability before their first SwiftUI frame, so initial idle/tint overlays are never deferred. No snapshot references or version were changed.
 - Extended the planned `2.0.0` playback family with consumer-composed favorite/import controls, custom queue metadata and selection without double dispatch, reset-aware lyrics with blank stanzas and reusable labels, and an explicit public AirPlay routing policy seam. Playback clocks, async mutations, queue ownership, and lyric document lifecycle remain consumer-owned; `VERSION` remains `1.0.1`.
 - Preserved native SwiftUI multiply blending for artwork-gradient idle/tint overlays over raw Metal terrain, while direct AppKit consumers retain layer composition and both surfaces retain opaque fallback. Table favorite-control width and primary action tint are explicit opt-ins with unchanged defaults; `VERSION` remains `1.0.1`.

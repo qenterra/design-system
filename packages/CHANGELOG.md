@@ -15,6 +15,8 @@ All notable public package changes are recorded here. Versions follow Semantic V
 
 ### Changed
 
+- Standardised contributor messages, changelog entries, and release notes with shared review and publication templates.
+
 - Tightened the planned `2.0.0` AppKit media-table APIs with domain-neutral typography, independent keyboard intents, request-scoped artwork publication, per-control action availability, hover-only chrome reveal, and complete reuse/accessibility cleanup; the package version remains `1.0.1`.
 - Made optional shuffle, repeat, and favorite action availability explicit, added consumer-owned player metadata/status/route composition slots, canonicalized the protected queue/progress geometry metrics, and made the 34-point queue control fully hit-testable for the planned `2.0.0` playback APIs.
 - Raised the Swift package's minimum macOS version from 13 to 26 and moved macOS verification to macOS 26. iOS remains at 16. This is a breaking change planned for `2.0.0`; macOS consumers must raise their deployment target or remain on a compatible immutable release. Existing releases and tags are unchanged.
