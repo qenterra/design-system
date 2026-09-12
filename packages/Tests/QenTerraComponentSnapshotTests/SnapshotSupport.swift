@@ -218,6 +218,8 @@ final class NativeSnapshotHost<Content: View> {
 
     func render() throws -> RGBAImage {
         view.layoutSubtreeIfNeeded()
+        // Materialize native glyph layers before freezing their clocks; otherwise first-frame symbols can disappear.
+        view.displayIfNeeded()
         // Keep real native progress indicators at one presentation instant. Nothing is hidden or substituted.
         freezeTiming(view, at: presentationTime)
         CATransaction.flush()

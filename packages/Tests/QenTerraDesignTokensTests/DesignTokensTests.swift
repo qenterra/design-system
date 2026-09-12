@@ -1,3 +1,4 @@
+import Foundation
 import Testing
 @testable import QenTerraDesignTokens
 
@@ -9,8 +10,13 @@ import AppKit
 import SwiftUI
 #endif
 
-@Test func publicTokenFacadeExposesCanonicalVersion() {
-    #expect(DesignTokens.version == "1.0.1")
+@Test func publicTokenFacadeExposesCanonicalVersion() throws {
+    let packageRoot = URL(fileURLWithPath: #filePath)
+        .deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+    let manifest = try #require(JSONSerialization.jsonObject(
+        with: Data(contentsOf: packageRoot.appendingPathComponent("Sources/QenTerra/manifest.json"))
+    ) as? [String: Any])
+    #expect(DesignTokens.version == manifest["version"] as? String)
     #expect(DesignTokens.Space.value4 == 16)
     #expect(DesignTokens.Radius.control == 6)
 }

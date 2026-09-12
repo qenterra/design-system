@@ -25,7 +25,7 @@ See the complete [repository structure](docs/REPOSITORY_STRUCTURE.md).
 ## Requirements and setup
 
 - Swift 5.9 or later for native packages.
-- macOS 26 or iOS 16 or later for supported Swift consumers on the unreleased main branch. Released `1.0.1` retains its original macOS 13 minimum.
+- macOS 26 or iOS 16 or later for supported Swift consumers in version `2.0.0`. Version `1.0.1` retains its original macOS 13 minimum.
 - Node.js 22 or later for npm package inspection.
 - Python 3.11 or later for repository verification.
 
@@ -41,6 +41,8 @@ npm install @qenterra/design-tokens
 
 For Swift Package Manager, add `https://github.com/QenTerra/design-system` and select one or more products:
 
+- `QenTerraFoundation` for reusable hashing, text, caches, pagination and ImageIO helpers;
+- `QenTerraAudioAnalysis` for independent media timing and macOS PCM bass analysis;
 - `QenTerraDesignTokens` for typed foundations and SwiftUI adapters;
 - `QenTerraComponents` for the maintained primary-button, group-container, and interactive-row primitives.
 - `QenTerraMediaComponents` for reusable macOS artwork, collections, playback, queue, lyrics, metadata, native-table, and artwork-accent gradient presentation; it performs no loading or mutation and has no iOS media API.
@@ -74,7 +76,7 @@ Nikita Melnychenko (`@qenterra`) owns package APIs, release decisions, security 
 
 ## Version and release model
 
-All packages use one Semantic Versioning value. The maintained line began at `1.0.0` and the current version is `1.0.1`; npm metadata, Swift source compatibility, source catalogs, release tags, changelog, and `release-manifest.json` move together. Tags use `v<version>` and published versions are immutable.
+All packages use one Semantic Versioning value. The maintained line began at `1.0.0` and the current source version is `2.0.0`; npm metadata, Swift source compatibility, source catalogs, release tags, changelog, and `release-manifest.json` move together. Tags use `v<version>` and published versions are immutable.
 
 From the repository root, `python3 scripts/set_version.py <MAJOR.MINOR.PATCH>` validates plain SemVer, stages the full alignment transaction, regenerates public outputs, and prints changed paths. It performs no Git or publication action.
 
@@ -97,3 +99,5 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing a change. Report vulner
 ## License
 
 Copyright 2026 Nikita Melnychenko (QenTerra). QenTerra-authored material is licensed under the [MIT License](LICENSE). Explore SwiftUI examples retain their original authorship and terms and are not relicensed as QenTerra work. Magic UI, shadcn/ui, UIable, ReUI, Tabler Icons, Phosphor Icons, Iconoir, and Bootstrap Icons retain their separate upstream MIT licenses and copyright notices. See [third-party notices](THIRD_PARTY_NOTICES.md).
+
+See [reusable Swift utilities](docs/SWIFT_UTILITIES.md) for product selection, local package imports and ownership contracts.

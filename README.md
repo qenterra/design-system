@@ -2,7 +2,7 @@
 
 Universal foundations, reusable visual components, palettes, platform adapters, and engineering contracts for websites, native applications, and other interface-bearing projects.
 
-> **Status:** public canonical source, version `1.0.1`, licensed under MIT.
+> **Status:** public canonical source, version `2.0.0`, licensed under MIT.
 
 ## Use it
 
@@ -26,7 +26,7 @@ Swift projects add:
 https://github.com/qenterra/design-system
 ```
 
-Available Swift products are `QenTerraDesignTokens`, `QenTerraComponents`, and the macOS-first `QenTerraMediaComponents`. The core component product contains the primary-button style, group container, and interactive-row surface, each in its own source file. The media product delivers reusable artwork, collection, playback, queue, lyrics, metadata, native-table, and artwork-accent gradient presentation while leaving data work and mutation to the consumer; it deliberately exposes no iOS media API. The public tree also includes non-target reference catalogs for Explore SwiftUI, shadcn/ui, Magic UI, UIable, ReUI, Tabler Icons, Phosphor Icons, Iconoir, and Bootstrap Icons. The four icon catalogs preserve 19,005 exact SVG originals: 6,184 Tabler, 9,072 Phosphor, 1,671 Iconoir, and 2,078 Bootstrap files. Every catalog retains manifest-backed provenance and exact source bytes; the MIT-licensed catalogs also carry their exact upstream license and copyright notice.
+Available Swift products are `QenTerraFoundation`, `QenTerraAudioAnalysis`, `QenTerraDesignTokens`, `QenTerraComponents`, and the macOS-first `QenTerraMediaComponents`. The two utility products are independent of SwiftUI and token modules; see [reusable Swift utilities](packages/docs/SWIFT_UTILITIES.md). The core component product contains the primary-button style, group container, and interactive-row surface, each in its own source file. The media product delivers reusable artwork, collection, playback, queue, lyrics, metadata, native-table, and artwork-accent gradient presentation while leaving data work and mutation to the consumer; it deliberately exposes no iOS media API. The public tree also includes non-target reference catalogs for Explore SwiftUI, shadcn/ui, Magic UI, UIable, ReUI, Tabler Icons, Phosphor Icons, Iconoir, and Bootstrap Icons. The four icon catalogs preserve 19,005 exact SVG originals: 6,184 Tabler, 9,072 Phosphor, 1,671 Iconoir, and 2,078 Bootstrap files. Every catalog retains manifest-backed provenance and exact source bytes; the MIT-licensed catalogs also carry their exact upstream license and copyright notice.
 
 QenTerra-authored material uses the MIT License. Explore SwiftUI examples retain their original authorship and terms and are not relicensed as QenTerra work; shadcn/ui, Magic UI, UIable, ReUI, Tabler Icons, Phosphor Icons, Iconoir, and Bootstrap Icons retain their upstream MIT licenses and authorship. The reference catalogs are not SwiftPM or npm targets.
 
@@ -86,3 +86,5 @@ QenTerra-authored contents are licensed under the [MIT License](LICENSE). Preser
 - Product support, product help, and technical questions: [support@qenterra.com](mailto:support@qenterra.com).
 - Proposals, general enquiries, and commercial matters: [contact@qenterra.com](mailto:contact@qenterra.com).
 - Vulnerabilities: follow the private reporting process in [SECURITY.md](SECURITY.md).
+
+See [reusable Swift utilities](packages/docs/SWIFT_UTILITIES.md) for product selection, local package imports and ownership contracts.

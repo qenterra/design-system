@@ -237,13 +237,13 @@ import Testing
         accessibilityLabel: "Unavailable queue item"
     )
 
-    #expect(current.accessibilityValue == "Current track")
+    #expect(current.accessibilityValue == "Current track, playing")
     #expect(!current.isSelected)
     #expect(unavailable.accessibilityValue == "Selected, unavailable")
     #expect(unavailable.isSelected)
     #expect(!unavailable.acceptsPlayback)
     #expect(unavailable.isDraggable)
-    #expect(current.trailingSymbolName == "waveform")
+    #expect(current.trailingSymbolName == nil)
     #expect(current.trailingAccessibilityLabel == "Playing")
 }
 

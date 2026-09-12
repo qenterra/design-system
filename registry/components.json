@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/component-registry.schema.json",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "components": [
     {
       "id": "button",
@@ -1763,7 +1763,7 @@
       "platforms": ["macOS"],
       "lifecycle": {"introduced": "2.0.0", "review": "minor"},
       "anatomy": ["sf-symbol", "title", "subtitle", "external-link-affordance", "inherited-standard-typography"],
-      "states": ["default", "long-copy"],
+      "states": ["default", "long-copy", "hover", "cadence-grouped"],
       "stories": [{"id": "default", "state": "default"}, {"id": "long-copy", "state": "long-copy", "localeWidth": "long"}],
       "keyboard": ["native button supports Space and Return"],
       "accessibility": ["title-subtitle-and-hint-remain-available"],
@@ -2068,7 +2068,7 @@
       "states": ["default", "current", "selected", "current-selected", "unavailable", "draggable"],
       "stories": [{"id": "current", "state": "current"}, {"id": "selected", "state": "selected"}, {"id": "unavailable", "state": "unavailable"}],
       "keyboard": ["consumer context-menu and accessibility actions remain separate from queue mutation"],
-      "accessibility": ["current, selected, and unavailable states compose into a textual value"],
+      "accessibility": ["current, selected, and unavailable states compose into a textual value", "Current playback state remains spoken without a decorative current-track symbol"],
       "localization": ["row title, subtitle, duration, label, menu, and drag payload are consumer-provided"],
       "evidence": ["schema", "unit"],
       "delivery": {"status": "delivered", "packages": ["swift-components"]}
@@ -2169,11 +2169,11 @@
       "summary": {"en": "Provides stable reusable AppKit table and cell presentation while consumer data sources retain media coordination and asynchronous work.", "ru": "Предоставляет стабильное переиспользуемое представление таблицы и ячейки AppKit, оставляя координацию медиа и асинхронную работу источникам данных потребителя."},
       "status": "stable", "category": "layout", "platforms": ["macOS"],
       "lifecycle": {"introduced": "2.0.0", "review": "major"},
-      "anatomy": ["first-responder-table", "stable-cell-hierarchy", "artwork-slot", "normalized-artwork-crop", "native-placeholder", "title-and-creator", "optional-columns", "favorite-control", "playback-indicator", "actions-control", "consumer-menu-anchor"],
+      "anatomy": ["first-responder-table", "stable-cell-hierarchy", "artwork-slot", "normalized-artwork-crop", "native-placeholder", "title-and-creator", "optional-columns", "favorite-control", "playback-indicator", "actions-control", "consumer-menu-anchor", "centered-year-and-duration"],
       "states": ["compact", "standard", "hover", "focused", "selected", "current", "playing", "explicit", "favorite", "unavailable", "increased-contrast", "reduced-motion", "reuse", "removed"],
       "stories": [{"id": "standard", "state": "standard"}, {"id": "selected", "state": "selected"}, {"id": "playing", "state": "playing"}, {"id": "unavailable", "state": "unavailable"}],
       "keyboard": ["Return, Space, and Delete dispatch only the exact available consumer identity", "the table owns first-responder focus but not selection resolution"],
-      "accessibility": ["focus and selection remain distinct", "the row exposes literal consumer media metadata and enabled state", "embedded controls retain independent actions"],
+      "accessibility": ["focus and selection remain distinct", "the row exposes literal consumer media metadata and enabled state", "embedded controls retain independent actions", "Cadence selection uses fill; increased contrast retains the stronger outline"],
       "localization": ["title, creator, collection, year, duration, and media identity are consumer-supplied"],
       "evidence": ["schema", "unit"],
       "delivery": {"status": "delivered", "packages": ["swift-components"]}
@@ -2207,6 +2207,61 @@
       "localization": ["renderer contains no copy"],
       "evidence": ["schema", "unit"],
       "delivery": {"status": "delivered", "packages": ["swift-components"]}
+    },
+    {
+      "id": "media-metadata-link",
+      "name": {
+        "en": "Media metadata link",
+        "ru": "Ссылка метаданных медиа"
+      },
+      "summary": {
+        "en": "A native metadata action with caller-owned destination and accessibility copy.",
+        "ru": "Нативное действие метаданных с назначением и доступной подписью от приложения."
+      },
+      "status": "stable",
+      "category": "feedback",
+      "platforms": [
+        "macOS"
+      ],
+      "lifecycle": {
+        "introduced": "2.0.0",
+        "review": "minor"
+      },
+      "anatomy": [
+        "single-line-label",
+        "native-button"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "frozen-highlights"
+      ],
+      "stories": [
+        {
+          "id": "default",
+          "state": "default"
+        }
+      ],
+      "keyboard": [
+        "native button retains keyboard activation"
+      ],
+      "accessibility": [
+        "caller-provided accessible label and native button semantics"
+      ],
+      "localization": [
+        "visible and accessible text supplied by caller"
+      ],
+      "evidence": [
+        "schema",
+        "unit"
+      ],
+      "delivery": {
+        "status": "delivered",
+        "packages": [
+          "swift-components"
+        ]
+      }
     }
   ]
 }

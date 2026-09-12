@@ -4,7 +4,7 @@ import Testing
 @testable import QenTerraDesignTokens
 
 @Test func mediaComponentModuleUsesTheDesignSystemVersion() {
-    #expect(MediaComponents.version == "1.0.1")
+    #expect(MediaComponents.version == DesignTokens.version)
 }
 
 @Test func nativeEnvironmentResolvesAppearanceAndAccessibilityFromLiveValues() {

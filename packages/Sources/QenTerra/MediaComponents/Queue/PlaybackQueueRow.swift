@@ -71,7 +71,7 @@ public struct PlaybackQueueRowPresentation<ID: Hashable & Sendable>: Identifiabl
     public var acceptsPlayback: Bool { isAvailable }
 
     public var trailingSymbolName: String? {
-        if isCurrent { return isPlaying ? "waveform" : "speaker.fill" }
+        if isCurrent { return nil }
         return isDraggable ? "line.3.horizontal" : nil
     }
 
@@ -82,7 +82,10 @@ public struct PlaybackQueueRowPresentation<ID: Hashable & Sendable>: Identifiabl
 
     public var accessibilityValue: String {
         var states: [String] = []
-        if isCurrent { states.append(String(localized: "Current track")) }
+        if isCurrent {
+            states.append(String(localized: "Current track"))
+            if let trailingAccessibilityLabel { states.append(trailingAccessibilityLabel) }
+        }
         if isSelected { states.append(String(localized: "Selected")) }
         if !isAvailable { states.append(String(localized: "Unavailable")) }
         guard let first = states.first else { return "" }

@@ -6,6 +6,7 @@ import json
 import re
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 
@@ -47,6 +48,59 @@ class GenerationContractTests(unittest.TestCase):
                 path = ROOT / relative
                 self.assertTrue(path.is_file(), f"{relative} is missing")
                 self.assertEqual(path.read_text(encoding="utf-8"), expected)
+
+    def test_source_catalog_manifests_preserve_all_pinned_metadata(self) -> None:
+        generator = load_generator()
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+        outputs = generator.build_outputs(ROOT)
+        registries = {
+            "native-patterns": "ExploreSwiftUI", "magic-ui": "MagicUI",
+            "shadcn-ui": "ShadcnUI", "uiable": "UIable", "reui": "ReUI",
+        }
+        for name, directory in registries.items():
+            with self.subTest(catalog=name):
+                registry = json.loads((ROOT / f"registry/{name}.json").read_text(encoding="utf-8"))
+                public = json.loads(outputs[f"packages/Sources/{directory}/manifest.json"])
+                self.assertEqual(public, {key: value for key, value in registry.items() if key != "$schema"})
+                self.assertEqual(public["version"], version)
+        icons = json.loads((ROOT / "registry/icon-sources.json").read_text(encoding="utf-8"))
+        for catalog in icons["catalogs"]:
+            with self.subTest(catalog=catalog["id"]):
+                previous = json.loads((ROOT / catalog["manifest"]).read_text(encoding="utf-8"))
+                public = json.loads(outputs[catalog["manifest"]])
+                self.assertEqual(public, {**previous, "version": version})
+                for key in ("id", "name", "source", "upstreamRepository", "upstreamCommit", "upstreamPackageVersion", "fileCount"):
+                    self.assertEqual(public[key], catalog[key])
+                self.assertEqual(public["license"]["name"], catalog["license"])
+        self.assertEqual(
+            {path for path in outputs if path.startswith("packages/Sources/") and path.endswith("/manifest.json")},
+            {f"packages/Sources/{directory}/manifest.json" for directory in registries.values()}
+            | {catalog["manifest"] for catalog in icons["catalogs"]}
+            | {"packages/Sources/QenTerra/manifest.json"},
+        )
+
+    def test_source_catalog_generation_rejects_mismatched_pins_and_versions(self) -> None:
+        generator = load_generator()
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+        original_load = generator.load_json
+        cases = (
+            ("registry/magic-ui.json", "version", "invalid", "version"),
+            ("registry/icon-sources.json", "version", "invalid", "version"),
+            ("packages/Sources/Iconoir/manifest.json", "upstreamCommit", "0" * 40, "upstreamCommit"),
+            ("packages/Sources/Iconoir/manifest.json", "upstreamPackageVersion", "invalid", "upstreamPackageVersion"),
+            ("packages/Sources/Iconoir/manifest.json", "license", {"name": "invalid"}, "license"),
+            ("packages/Sources/Iconoir/manifest.json", "icons", [], "inventory"),
+        )
+        for relative, key, value, message in cases:
+            def altered_load(path):
+                data = original_load(path)
+                if path == ROOT / relative:
+                    data[key] = value
+                return data
+
+            with self.subTest(relative=relative, key=key), mock.patch.object(generator, "load_json", side_effect=altered_load):
+                with self.assertRaisesRegex(ValueError, message):
+                    generator.build_source_catalog_manifests(ROOT, version)
 
     def test_public_generated_apis_use_active_terminology(self) -> None:
         generator = load_generator()

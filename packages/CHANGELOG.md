@@ -1,62 +1,88 @@
 # Changelog
 
-All notable public package changes are recorded here. Versions follow Semantic Versioning from the canonical `1.0.0` baseline.
+All notable maintained Design System changes are recorded here. Versions follow Semantic Versioning from the canonical `1.0.0` baseline.
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-09-12
+
+### Reusable application code
+
+- Added independent `QenTerraFoundation` and `QenTerraAudioAnalysis` Swift products. Cadence now consumes shared hashing, text normalization, deterministic random values, cache storage, page policies, ImageIO processing, PCM analysis and presentation-clock algorithms.
+- Added a native `MediaMetadataLink` with consumer-owned actions and accessibility copy, plus a standalone consumer that builds and runs without UI product dependencies.
+- Aligned the Swift source and package metadata to 2.0.0. npm publication is managed separately.
+
+
+### Fixed
+
+- Keep About resource links transparent at rest, with hover feedback inside grouped content.
+- Use selection fill without an outline for Cadence media rows and align numeric table columns centrally.
+- Remove the decorative current-track queue symbol while retaining spoken playback state and Up Next drag handles.
+
 ### Added
 
-- Added complete deterministic macOS native references for every public media family and fixed-time Metal gradient boundaries, expanded the clean copied-package consumer across the catalog, and added fail-closed plain-SemVer alignment tooling that regenerates public outputs without Git or publication side effects. The package version remains `1.0.1`.
-- Planned the reusable macOS artwork-accent Metal gradient APIs for `2.0.0`: fixed-reference mesh and camera geometry, runtime simplex-noise shader, five-colour linear palette expansion, interruptible palette motion, effect tint, Reduced Motion static rendering, SwiftUI and AppKit surfaces, deterministic snapshots, and opaque fallback when Metal or the resource is unavailable. The package owns rendering only; its current version remains `1.0.1`.
-- Planned the reusable macOS AppKit media-table APIs for `2.0.0`: generic row presentation, deterministic density and column geometry, stable native cell reuse, identity-scoped ready-artwork publication, keyboard callbacks, and a SwiftUI placeholder. The package performs no table coordination, asynchronous loading, sorting, queue construction, drag/context-menu policy, or persistence; its current version remains `1.0.1`.
-- Planned the macOS playback and Now Playing APIs for `2.0.0`: player and transport snapshots, consumer-timed progress, weak native AirPlay routing, mutation-free queue views, explicit-identity lyrics with Reduced Motion behavior, and consumer-supplied metadata. The package does not own playback clocks, queue persistence, lyric loading or editing, or product-specific empty copy; its current version remains `1.0.1`.
-- Planned the macOS media-collection presentation family for `2.0.0`: item models, tiles, rows, adaptive grids, shelves, favorite controls, and SwiftUI/AppKit playback indicators. The package owns ready-state rendering and synchronous interaction forwarding only; consumers retain domain, data, playback, persistence, and accessibility-copy ownership.
-- Planned the macOS artwork presentation family for `2.0.0`, including ready-content states, placeholders, clamped crop geometry, zero-to-four-slot mosaics, and Reduced Transparency-aware ready-palette haze. The public package performs no loading, caching, gesture coordination, or mutation; its current version remains `1.0.1`.
+- Added an opt-in, normalized whole-viewport alpha mask to `LyricsEdgeFade`, with clamped and ordered consumer-supplied opaque stops. The zero-argument initializer retains its original destination-out edge overlay.
+- Added the complete deterministic macOS native snapshot catalog for artwork, collections, playback, queue, lyrics, metadata, native tables, and fixed-time Metal gradients; clean copied-public consumers exercise every media family, and a fail-closed plain-SemVer command aligns canonical and generated version surfaces without performing Git or publication actions.
+- Added the reusable macOS artwork-accent Metal gradient for `2.0.0`: the protected indexed terrain, camera and simplex-noise shader, five-colour linear palette expansion, interruptible 0.8-second palette transitions, symmetric effect tint, Reduced Motion static rendering, SwiftUI and AppKit surfaces, deterministic fixed-time rendering, and opaque resource/device fallback. Consumers retain artwork extraction and domain behavior.
+- Added the reusable macOS AppKit media-table presentation for `2.0.0`: generic row snapshots, stable cell hierarchy and geometry, identity-scoped ready-artwork publication, explicit hover/focus/selection/current/unavailable states, first-responder keyboard dispatch, and a density-aware SwiftUI placeholder. Consumers retain table data/delegate coordination, async loading, sorting, selection resolution, queue, drag, context-menu, and persistence policy.
+- Added the macOS playback and Now Playing component family for `2.0.0`: player and transport presentation, consumer-timed progress, weak native AirPlay routing, mutation-free queue visuals, explicit-identity lyrics with Reduced Motion behavior, and consumer-supplied audio metadata. Playback clocks, queue persistence, lyric loading and editing, and product-specific empty copy remain outside the Design System.
+- Added the macOS reusable media-collection family for `2.0.0`: domain-neutral item presentation, tile/row/grid/shelf composition, favorite controls, and shared SwiftUI/AppKit playback indicators. Selection and current playback remain independent, embedded controls do not activate their row, Reduced Motion uses fixed bars, and consumers retain identity, data, playback, persistence, and accessibility-copy ownership.
+- Added the macOS `QenTerraMediaComponents` artwork family for `2.0.0`: ready-content states, semantic placeholders and borders, clamped crop presentation, zero-to-four-slot mosaics, and Reduced Transparency-aware ready-palette haze. Consumers retain decoding, cache, request, gesture, and mutation ownership.
 
 ### Changed
 
-- Standardised contributor messages, changelog entries, and release notes with shared review and publication templates.
+- Standardised commit messages, pull request reviews, changelogs, and release notes with shared contributor templates.
 
-- Tightened the planned `2.0.0` AppKit media-table APIs with domain-neutral typography, independent keyboard intents, request-scoped artwork publication, per-control action availability, hover-only chrome reveal, and complete reuse/accessibility cleanup; the package version remains `1.0.1`.
-- Made optional shuffle, repeat, and favorite action availability explicit, added consumer-owned player metadata/status/route composition slots, canonicalized the protected queue/progress geometry metrics, and made the 34-point queue control fully hit-testable for the planned `2.0.0` playback APIs.
-- Raised the Swift package's minimum macOS version from 13 to 26 and moved macOS verification to macOS 26. iOS remains at 16. This is a breaking change planned for `2.0.0`; macOS consumers must raise their deployment target or remain on a compatible immutable release. Existing releases and tags are unchanged.
-- Planned macOS `QenTerraComponents` feedback and configurable About APIs. This is not a release and does not change the package version.
-- Added deterministic native core-component snapshot tests with reviewed per-platform references, strict dimension/color comparison, and explicit recording.
-- Corrected primary/destructive button state foreground contrast and native loading indicator appearance. Explicit design environments now override native accessibility inputs; standalone components keep live native fallback and scoped profile/density resolution.
+- Restored secondary recovery actions and inherited standard About-resource typography, keeping consumer styles opt-in. Artwork gradients now retain one native surface and resolve terrain availability before their first SwiftUI frame, so initial idle/tint overlays are never deferred.
+- Extended the `2.0.0` playback family with consumer-composed favorite/import controls, custom queue metadata and selection without double dispatch, reset-aware lyrics with blank stanzas and reusable labels, and an explicit public AirPlay routing policy seam. Playback clocks, async mutations, queue ownership, and lyric document lifecycle remain consumer-owned.
+- Preserved native SwiftUI multiply blending for artwork-gradient idle/tint overlays over raw Metal terrain, while direct AppKit consumers retain layer composition and both surfaces retain opaque fallback. Table favorite-control width and primary action tint are explicit opt-ins with unchanged defaults.
+- Added native table placeholder configuration, normalized ready-artwork crop publication, original-event context menus and native action-button anchors, consumer accessibility copy, a compact explicit-media badge typography role, plus configure-work observations and reusable off-main shader prewarming for the `2.0.0` consumer boundary.
+- Tightened the `2.0.0` AppKit media-table contract with domain-neutral table typography, independent keyboard intents, request-scoped artwork publication, per-control action availability, hover-only chrome reveal, and complete reuse/accessibility cleanup.
+- Made optional shuffle, repeat, and favorite action availability explicit, added consumer-owned player metadata/status/route composition slots, canonicalized the protected queue/progress geometry metrics, and made the 34-point queue control fully hit-testable for the `2.0.0` playback family.
+- Raised the maintained Swift packages' minimum macOS version from 13 to 26 and moved macOS verification and package-release jobs to macOS 26. iOS remains at 16. This is a breaking change in `2.0.0`; macOS consumers must raise their deployment target or remain on a compatible immutable release. Existing releases and tags are unchanged.
+- Added macOS feedback and configurable About components, including validated measured progress, consumer-owned recovery and URL handling, and explicit unavailable presentation.
+- Added deterministic native core-component snapshot tests to the root and public Swift packages, with reviewed per-platform references and strict dimension/color comparison. The host materializes native display before freezing layer clocks so first-frame SF Symbols remain visible.
+- Corrected primary/destructive button state foreground contrast and native loading indicator appearance. Explicit design environments now take precedence over native accessibility inputs; standalone components retain live native fallback and scoped profile/density resolution.
 
 ## [1.0.1] - 2026-09-02
 
 ### Added
 
-- Added the OFL-licensed Tektur + Onest typography catalog with exact font files, provenance, hashes, and validation.
+- Added the OFL-licensed Tektur + Onest brand and portfolio typography catalog with design-tool TTFs, web WOFF2s, pinned provenance, byte hashes, role guidance, and repository validation.
 
 ### Changed
 
-- Relicensed QenTerra-authored package material from Apache-2.0 to MIT while retaining every third-party license and notice.
+- Relicensed QenTerra-authored repository and package material from Apache-2.0 to MIT while preserving third-party licenses, provenance, and historical release records.
+- Updated the verification environment from Pillow `12.2.0` to `12.3.0`.
 - Removed obsolete first-party Apache `NOTICE` files and publication-permission wording from the Explore SwiftUI catalog documentation.
+- Required manual package publication to resolve an existing immutable tag instead of accepting a same-named branch or other Git reference.
 
 ## [1.0.0] - 2026-09-01
 
 ### Added
 
-- Added public CSS, JSON, icon, and component-recipe exports through `@qenterra/design-tokens`.
-- Added `QenTerraDesignTokens` and `QenTerraComponents` through Swift Package Manager.
-- Added complete release-manifest coverage, deterministic regeneration, exported verification, clean-consumer checks, and npm archive inspection.
-- Added attributed reference catalogs for Explore SwiftUI, Magic UI, shadcn/ui, UIable, and ReUI without treating upstream originals as maintained package APIs.
-- Added non-target source catalogs containing 19,005 exact SVG originals from Tabler Icons, Phosphor Icons, Iconoir, and Bootstrap Icons with closed manifests and exact upstream MIT licenses.
+- Established the public canonical Design System for QenTerra foundations, semantic tokens, components, platform adapters, product profiles, accessibility contracts, and human documentation.
+- Added deterministic CSS, JSON, Swift, and Figma-oriented generated outputs from canonical token and registry sources.
+- Added the public `@qenterra/design-tokens`, `QenTerraDesignTokens`, and `QenTerraComponents` package surfaces with a manifest-closed delivery boundary.
+- Added complete attributed reference catalogs for Explore SwiftUI, Magic UI, shadcn/ui, UIable, and ReUI while keeping upstream originals immutable and outside maintained package targets where required.
+- Added 19,005 exact SVG originals from Tabler Icons, Phosphor Icons, Iconoir, and Bootstrap Icons with pinned commits, byte hashes, complete manifests, and exact upstream MIT licenses.
+- Added the Nyx brand asset family with manifest, Git LFS, license, provenance, and validation coverage.
+- Added repository governance, contribution, security, maintenance, deprecation, release, consumer-adoption, and clean-consumer verification contracts.
 
 ### Changed
 
-- Reset the maintained package SemVer line to `1.0.0`; future package releases advance from this baseline.
-- Made `QenTerra/design-system` the canonical source, support, issue, and release repository.
-- Licensed QenTerra-authored package material under Apache-2.0 and retained all required notices and third-party licenses.
+- Reset the maintained canonical SemVer line to `1.0.0`; future source and release changes advance from this baseline.
+- Opened the canonical repository under Apache-2.0 while preserving every third-party license, copyright notice, provenance record, and permission boundary.
+- Consolidated package source, SwiftPM delivery, npm metadata, issues, security reporting, and release automation under `QenTerra/design-system`.
+- Retired the separate Packages repository after verified replacement and recoverable backup.
 
 ### Historical continuity
 
-- Previous internal package snapshot identifiers remain in Git history rather than the active release line.
-- npmjs retains immutable historical version `5.0.0` from the retired Packages repository. It is not replaced, deleted, or presented as part of the new `1.x` line.
+- Earlier internal snapshot identifiers through `5.5.1` remain preserved in Git history. They are development history, not the active public release line.
+- npmjs still retains the immutable historical `@qenterra/design-tokens@5.0.0` artifact whose metadata points to the retired Packages repository. Resetting source versioning does not erase or rewrite that registry fact.
 - No tag, GitHub Release, or npm publication is implied by this changelog entry. Publication remains a separately authorised operation.
 
-[Unreleased]: https://github.com/QenTerra/design-system/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/QenTerra/design-system/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/QenTerra/design-system/compare/v1.0.1...v2.0.0
 [1.0.1]: https://github.com/QenTerra/design-system/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/QenTerra/design-system/releases/tag/v1.0.0

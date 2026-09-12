@@ -28,6 +28,7 @@ public struct AboutResourceRowPresentation: Equatable, Sendable {
 @MainActor
 public struct AboutResourceRow: View {
     @Environment(\.openURL) private var openURL
+    @State private var isHovered = false
 
     private let resource: AboutResource
     private let style: AboutResourceRowStyle
@@ -106,7 +107,8 @@ public struct AboutResourceRow: View {
                 alignment: .leading
             )
         }
-        .buttonStyle(DesignButtonStyle(role: .link))
+        .buttonStyle(DesignButtonStyle(role: .link, state: .init(isHovered: isHovered)))
+        .onHover { isHovered = $0 }
         .disabled(!presentation.isEnabled)
         .accessibilityLabel(presentation.title)
         .accessibilityHint(presentation.accessibilityHint)

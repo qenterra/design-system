@@ -17,9 +17,9 @@ class DesignSystemV1ContractTests(unittest.TestCase):
         )
         self.assertFalse(contract["agent_control_plane"])
 
-    def test_public_1_0_line_and_packages_are_aligned(self) -> None:
+    def test_public_version_and_packages_are_aligned(self) -> None:
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual(version, "1.0.1")
+        self.assertRegex(version, r"^(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)$")
         npm = json.loads(
             (ROOT / "packages/npm/design-tokens/package.json").read_text(
                 encoding="utf-8"
