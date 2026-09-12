@@ -41,6 +41,15 @@ Create every cache, build tree, report, or package-staging directory outside the
 - Keep one coherent outcome per commit and pull request.
 - Remove fixup, squash, WIP, and checkpoint commits before review.
 
+## Commit and review format
+
+Follow [Release writing](docs/RELEASE_WRITING.md) for commit grammar, PR and review
+comment templates, changelog entries, release notes, and publication updates.
+Write in English, use a specific Conventional Commit subject of at most 72
+characters, and keep one coherent outcome per change. Breaking changes include
+a migration footer. PR descriptions use the repository template's section order;
+review findings explain the condition, consequence, and requested change.
+
 ## Pull requests
 
 - Explain purpose, scope, verification, risk, migration, documentation, privacy/security, and release impact.
