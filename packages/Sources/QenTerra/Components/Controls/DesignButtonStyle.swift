@@ -88,7 +88,7 @@ private struct DesignButtonBody<Label: View>: View {
         .foregroundStyle(color(foregroundToken))
         .padding(.horizontal, horizontalPadding)
         .frame(minHeight: DesignTokens.Component.buttonHeightsStandard.points)
-        .background(color(backgroundToken))
+        .background(backgroundToken.map(color) ?? .clear)
         .clipShape(shape)
         .overlay {
             if resolvedState.isFocused {
@@ -163,7 +163,7 @@ private struct DesignButtonBody<Label: View>: View {
         return resolvedState.isPressed ? DesignTokens.Opacity.pressed : 1
     }
 
-    private var backgroundToken: DesignColorValue {
+    private var backgroundToken: DesignColorValue? {
         if resolvedState.isSelected {
             return isIncreasedContrast
                 ? DesignTokens.Color.fillSelectedStrong
@@ -179,7 +179,8 @@ private struct DesignButtonBody<Label: View>: View {
         case .primary: DesignTokens.Color.actionPrimary
         case .secondary: DesignTokens.Color.actionSecondary
         case .destructive: DesignTokens.Color.stateDestructive
-        case .quiet, .icon, .menuRow, .link: DesignTokens.Color.surfaceContent
+        case .quiet, .icon, .menuRow: DesignTokens.Color.surfaceContent
+        case .link: nil
         }
     }
 

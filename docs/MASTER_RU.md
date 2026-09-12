@@ -1,6 +1,6 @@
 # Design System
 
-Версия 1.0.1 · Нормативный справочник для людей
+Версия 2.0.0 · Нормативный справочник для людей
 
 ## 0. Как пользоваться этим файлом
 
@@ -510,7 +510,8 @@ Popup, side panel, overlay dock, bottom sheet и options page — разные l
 
 Канонический публичный репозиторий — `qenterra/design-system`. Из одного
 версионированного источника он отдаёт `@qenterra/design-tokens` через npm и
-продукты `QenTerraDesignTokens`, `QenTerraComponents` и `QenTerraMediaComponents` через SwiftPM. Production-
+продукты `QenTerraDesignTokens`, `QenTerraComponents`, `QenTerraMediaComponents`,
+`QenTerraFoundation` и `QenTerraAudioAnalysis` через SwiftPM. Production-
 потребители фиксируют неизменяемые SemVer-релизы; локальные пути допустимы только
 для согласованной работы над Design System. Публикация требует совпадения версий,
 точного release manifest, полного gate и разрешения чистыми consumer-проектами.
@@ -528,7 +529,8 @@ Popup, side panel, overlay dock, bottom sheet и options page — разные l
 
 Дерево исходников пакетов намеренно разделено на шесть зон. `Sources/QenTerra/`
 содержит устанавливаемые токенизированные targets `QenTerraDesignTokens`,
-`QenTerraComponents` и macOS-first `QenTerraMediaComponents`; media target не предоставляет iOS media API. `Sources/ExploreSwiftUI/` хранит точный атрибутированный
+`QenTerraComponents`, macOS-first `QenTerraMediaComponents`, а также независимые от SwiftUI и токенов
+`QenTerraFoundation` и `QenTerraAudioAnalysis`; media target не предоставляет iOS media API. `Sources/ExploreSwiftUI/` хранит точный атрибутированный
 исходный код каждой detail page из sitemap Explore SwiftUI и не является SwiftPM-target.
 Файлы оригиналов неизменяемы: синхронизация может заменить их только
 текущим source field с той же страницы, а offline-проверка замыкает manifest и

@@ -37,6 +37,26 @@ def copied_repository():
         yield destination.resolve()
 
 
+SOURCE_CATALOGS = (
+    "ExploreSwiftUI", "MagicUI", "ShadcnUI", "UIable", "ReUI",
+    "BootstrapIcons", "Iconoir", "PhosphorIcons", "TablerIcons",
+)
+
+
+def next_version(root: Path) -> str:
+    current = (root / "VERSION").read_text(encoding="utf-8").strip()
+    return f"{int(current.split('.')[0]) + 1}.0.0"
+
+
+def catalog_payload_hashes(root: Path) -> dict[str, str]:
+    return {
+        path.relative_to(root).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
+        for directory in SOURCE_CATALOGS
+        for path in (root / "packages/Sources" / directory).rglob("*")
+        if path.is_file() and path.name != "manifest.json"
+    }
+
+
 def file_hashes(root: Path) -> dict[str, str]:
     return {
         path.relative_to(root).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
@@ -49,25 +69,38 @@ class SetVersionTests(unittest.TestCase):
     def test_set_version_updates_every_canonical_version_surface_and_regenerates_outputs(self) -> None:
         module = load_set_version()
         with copied_repository() as root:
-            changed = {path.relative_to(root).as_posix() for path in module.set_version(root, "2.0.0")}
+            target = next_version(root)
+            before_payloads = catalog_payload_hashes(root)
+            before_manifests = {
+                directory: json.loads((root / "packages/Sources" / directory / "manifest.json").read_text(encoding="utf-8"))
+                for directory in SOURCE_CATALOGS
+            }
+            changed = {path.relative_to(root).as_posix() for path in module.set_version(root, target)}
 
-            self.assertEqual((root / "VERSION").read_text(encoding="utf-8"), "2.0.0\n")
+            self.assertEqual((root / "VERSION").read_text(encoding="utf-8"), f"{target}\n")
             for path in sorted((root / "tokens").glob("*.json")):
-                self.assertEqual(json.loads(path.read_text(encoding="utf-8"))["meta"]["version"], "2.0.0", path.name)
+                self.assertEqual(json.loads(path.read_text(encoding="utf-8"))["meta"]["version"], target, path.name)
             for path in sorted((root / "registry").glob("*.json")):
-                self.assertEqual(json.loads(path.read_text(encoding="utf-8"))["version"], "2.0.0", path.name)
+                self.assertEqual(json.loads(path.read_text(encoding="utf-8"))["version"], target, path.name)
 
             package_registry = json.loads((root / "registry/packages.json").read_text(encoding="utf-8"))
             self.assertTrue(package_registry["packages"])
-            self.assertEqual({item["version"] for item in package_registry["packages"]}, {"2.0.0"})
+            self.assertEqual({item["version"] for item in package_registry["packages"]}, {target})
             for relative in ("package.json", "packages/package.json", "packages/npm/design-tokens/package.json"):
-                self.assertEqual(json.loads((root / relative).read_text(encoding="utf-8"))["version"], "2.0.0")
+                self.assertEqual(json.loads((root / relative).read_text(encoding="utf-8"))["version"], target)
             for relative in (
                 "packages/Sources/QenTerra/manifest.json",
                 "registry/published-artifacts.json",
                 "packages/release-manifest.json",
             ):
-                self.assertEqual(json.loads((root / relative).read_text(encoding="utf-8"))["version"], "2.0.0")
+                self.assertEqual(json.loads((root / relative).read_text(encoding="utf-8"))["version"], target)
+
+            for directory, previous in before_manifests.items():
+                relative = f"packages/Sources/{directory}/manifest.json"
+                current = json.loads((root / relative).read_text(encoding="utf-8"))
+                self.assertEqual(current, {**previous, "version": target}, relative)
+                self.assertIn(relative, changed)
+            self.assertEqual(catalog_payload_hashes(root), before_payloads)
 
             self.assertIn("VERSION", changed)
             self.assertIn("packages/Sources/QenTerra/DesignTokens/GeneratedTokens.swift", changed)
@@ -88,18 +121,20 @@ class SetVersionTests(unittest.TestCase):
     def test_set_version_fails_before_writes_when_a_canonical_surface_is_invalid(self) -> None:
         module = load_set_version()
         with copied_repository() as root:
+            target = next_version(root)
             token = root / "tokens/semantic.json"
             data = json.loads(token.read_text(encoding="utf-8"))
             del data["meta"]["version"]
             token.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
             before = file_hashes(root)
             with self.assertRaisesRegex(ValueError, "tokens/semantic.json"):
-                module.set_version(root, "2.0.0")
+                module.set_version(root, target)
             self.assertEqual(file_hashes(root), before)
 
     def test_set_version_rolls_back_if_applying_the_transaction_fails(self) -> None:
         module = load_set_version()
         with copied_repository() as root:
+            target = next_version(root)
             before = file_hashes(root)
             original_replace = module.os.replace
             root_writes = 0
@@ -115,11 +150,12 @@ class SetVersionTests(unittest.TestCase):
 
             with mock.patch.object(module.os, "replace", side_effect=fail_second_root_replace):
                 with self.assertRaisesRegex(OSError, "synthetic transaction failure"):
-                    module.set_version(root, "2.0.0")
+                    module.set_version(root, target)
             self.assertEqual(file_hashes(root), before)
 
     def test_command_prints_changed_paths_without_changing_repository_history(self) -> None:
         with copied_repository() as root:
+            target = next_version(root)
             subprocess.run(["git", "init", "-q"], cwd=root, check=True)
             subprocess.run(["git", "add", "."], cwd=root, check=True)
             subprocess.run(
@@ -129,7 +165,7 @@ class SetVersionTests(unittest.TestCase):
             )
             before_head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip()
             result = subprocess.run(
-                ["python3", "scripts/set_version.py", "2.0.0", "--root", str(root)],
+                ["python3", "scripts/set_version.py", target, "--root", str(root)],
                 cwd=root,
                 capture_output=True,
                 text=True,

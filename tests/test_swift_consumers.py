@@ -176,6 +176,9 @@ def launch_native_interaction_host(
 
 
 class SwiftConsumerTests(unittest.TestCase):
+    def test_utility_products_build_without_ui_dependencies(self) -> None:
+        self._build_fixture("swift-consumer-utilities", expected_output="PUBLIC_UTILITIES_OK")
+
     def test_core_only_consumer_builds_against_copied_public_package(self) -> None:
         self._build_fixture("swift-consumer-core")
 

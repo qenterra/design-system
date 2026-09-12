@@ -33,6 +33,13 @@ PUBLISHED_SOURCE_PATHS = (
     "packages/Sources/ReUI/Base",
 )
 PUBLISHED_ARTIFACT_PATHS = ("packages/Sources/ReUI/Registry",)
+SOURCE_CATALOG_REGISTRIES = {
+    "native-patterns": "ExploreSwiftUI",
+    "magic-ui": "MagicUI",
+    "shadcn-ui": "ShadcnUI",
+    "uiable": "UIable",
+    "reui": "ReUI",
+}
 DELIVERY_SOURCE_ROOTS = {
     "QenTerraComponents": "packages/Sources/QenTerra/Components/",
     "QenTerraMediaComponents": "packages/Sources/QenTerra/MediaComponents/",
@@ -143,6 +150,49 @@ def build_qenterra_component_manifest(root: Path, version: str) -> dict[str, Any
     }
 
 
+def build_source_catalog_manifests(root: Path, version: str) -> dict[str, str]:
+    """Publish pinned catalog metadata without refreshing or modifying source assets."""
+    outputs: dict[str, str] = {}
+    for name, directory in SOURCE_CATALOG_REGISTRIES.items():
+        registry_path = f"registry/{name}.json"
+        registry = load_json(root / registry_path)
+        if registry.get("version") != version:
+            raise ValueError(f"{registry_path} version does not match VERSION")
+        outputs[f"packages/Sources/{directory}/manifest.json"] = json_text(
+            {key: value for key, value in registry.items() if key != "$schema"}
+        )
+
+    icon_registry = load_json(root / "registry/icon-sources.json")
+    if icon_registry.get("version") != version:
+        raise ValueError("registry/icon-sources.json version does not match VERSION")
+    for catalog in icon_registry["catalogs"]:
+        public_root = Path(catalog["publicRoot"])
+        relative = catalog["manifest"]
+        if (
+            public_root.parts[:2] != ("packages", "Sources")
+            or len(public_root.parts) != 3
+            or public_root.name in {".", ".."}
+            or relative != (public_root / "manifest.json").as_posix()
+        ):
+            raise ValueError(f"invalid icon catalog manifest path: {relative}")
+        # The canonical registry pins catalog identity; the imported manifest owns
+        # its full immutable per-file inventory, which is absent from that summary.
+        manifest = load_json(root / relative)
+        for key in (
+            "id", "name", "source", "upstreamRepository", "upstreamCommit",
+            "upstreamPackageVersion", "fileCount",
+        ):
+            if manifest.get(key) != catalog[key]:
+                raise ValueError(f"{relative} {key} does not match registry/icon-sources.json")
+        license_record = manifest.get("license")
+        if not isinstance(license_record, dict) or license_record.get("name") != catalog["license"]:
+            raise ValueError(f"{relative} license does not match registry/icon-sources.json")
+        if not isinstance(manifest.get("icons"), list) or len(manifest["icons"]) != catalog["fileCount"]:
+            raise ValueError(f"{relative} icon inventory does not match its pinned fileCount")
+        outputs[relative] = json_text({**manifest, "version": version})
+    return outputs
+
+
 def build_outputs(root: Path = ROOT) -> dict[str, str]:
     tokens, components, icons = load_sources(root)
     foundation = tokens["foundation"]
@@ -194,6 +244,7 @@ def build_outputs(root: Path = ROOT) -> dict[str, str]:
             [(f"{name}.json", tokens[name]) for name in TOKEN_NAMES]
         ),
     }
+    outputs.update(build_source_catalog_manifests(root, version))
     for filename, payload in generate_figma_exports(tokens, components, icons).items():
         outputs[f"generated/figma/{filename}"] = json_text(payload)
     outputs["registry/published-artifacts.json"] = json_text(

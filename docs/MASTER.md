@@ -1,6 +1,6 @@
 # Design System
 
-Version 1.0.1 · Normative reference for people
+Version 2.0.0 · Normative reference for people
 
 ## 0. How to use this file
 
@@ -845,7 +845,8 @@ hidden from accessibility, and ignore hit testing; consumers own mask placement.
 
 The canonical public repository is `qenterra/design-system`. It exposes
 `@qenterra/design-tokens` through npm and the `QenTerraDesignTokens` /
-`QenTerraComponents` / `QenTerraMediaComponents` SwiftPM products from the same versioned source. Production
+`QenTerraComponents` / `QenTerraMediaComponents` / `QenTerraFoundation` /
+`QenTerraAudioAnalysis` SwiftPM products from the same versioned source. Production
 consumers pin immutable SemVer releases; local paths are limited to coordinated
 Design System work. Publication requires aligned versions, the exact release
 manifest, the full verification gate, and clean consumer resolution. A package
@@ -863,7 +864,8 @@ and fixed-time gradient boundaries.
 
 The package source tree has six deliberately separate zones. `Sources/QenTerra/`
 contains the installable, tokenized `QenTerraDesignTokens`, `QenTerraComponents`, and macOS-first
-`QenTerraMediaComponents` targets. The media target exposes no iOS media API. `Sources/ExploreSwiftUI/` contains exact attributed
+`QenTerraMediaComponents` targets, plus independent `QenTerraFoundation` and
+`QenTerraAudioAnalysis` utilities. These utility targets do not depend on SwiftUI or tokens. The media target exposes no iOS media API. `Sources/ExploreSwiftUI/` contains exact attributed
 source from every Explore SwiftUI sitemap detail page and is not a SwiftPM target.
 Its component files are immutable: synchronization may replace them only with the
 current source field from the same page, while offline verification closes the

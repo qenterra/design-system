@@ -8,11 +8,31 @@ let package = Package(
         .iOS(.v16),
     ],
     products: [
+        .library(name: "QenTerraFoundation", targets: ["QenTerraFoundation"]),
+        .library(name: "QenTerraAudioAnalysis", targets: ["QenTerraAudioAnalysis"]),
         .library(name: "QenTerraDesignTokens", targets: ["QenTerraDesignTokens"]),
         .library(name: "QenTerraComponents", targets: ["QenTerraComponents"]),
         .library(name: "QenTerraMediaComponents", targets: ["QenTerraMediaComponents"]),
     ],
     targets: [
+        .target(
+            name: "QenTerraFoundation",
+            path: "packages/Sources/QenTerra/Foundation"
+        ),
+        .target(
+            name: "QenTerraAudioAnalysis",
+            path: "packages/Sources/QenTerra/AudioAnalysis"
+        ),
+        .testTarget(
+            name: "QenTerraFoundationTests",
+            dependencies: ["QenTerraFoundation"],
+            path: "packages/Tests/QenTerraFoundationTests"
+        ),
+        .testTarget(
+            name: "QenTerraAudioAnalysisTests",
+            dependencies: ["QenTerraAudioAnalysis"],
+            path: "packages/Tests/QenTerraAudioAnalysisTests"
+        ),
         .target(
             name: "QenTerraDesignTokens",
             path: "packages/Sources/QenTerra/DesignTokens"

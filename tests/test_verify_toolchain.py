@@ -5,8 +5,9 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
-from scripts.verify import require_swift_testing_macros, run
+from scripts.verify import python_sources, require_swift_testing_macros, run
 
 
 class SwiftToolchainPreflightTests(unittest.TestCase):
@@ -29,6 +30,17 @@ class SwiftToolchainPreflightTests(unittest.TestCase):
 
 
 class VerificationProcessIsolationTests(unittest.TestCase):
+    def test_source_discovery_ignores_only_build_directories_inside_project(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory) / ".build" / "isolated-project"
+            for relative in ("scripts/check.py", "tests/test_check.py", "tests/.build/generated.py"):
+                source = root / relative
+                source.parent.mkdir(parents=True, exist_ok=True)
+                source.write_text("pass\n", encoding="utf-8")
+            with patch("scripts.verify.ROOT", root):
+                self.assertEqual(python_sources(), ["scripts/check.py", "tests/test_check.py"])
+
+
     def test_python_child_does_not_write_bytecode_into_worktree(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
             root = Path(temporary_directory)

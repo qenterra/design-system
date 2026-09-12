@@ -69,6 +69,7 @@ class RegistryContractTests(unittest.TestCase):
             "lyrics-edge-fade",
             "lyrics-viewport",
             "media-metadata-badge",
+            "media-metadata-link",
             "media-table-placeholder-row",
             "native-media-table",
             "transport-controls",
@@ -196,6 +197,7 @@ class RegistryContractTests(unittest.TestCase):
                 "packages/Sources/QenTerra/MediaComponents/Lyrics/LyricsViewport.swift",
                 "packages/Sources/QenTerra/MediaComponents/Metadata/AudioDetailsView.swift",
                 "packages/Sources/QenTerra/MediaComponents/Metadata/MediaMetadataBadge.swift",
+                "packages/Sources/QenTerra/MediaComponents/Metadata/MediaMetadataLink.swift",
                 "packages/Sources/QenTerra/MediaComponents/Player/AirPlayRoutePicker.swift",
                 "packages/Sources/QenTerra/MediaComponents/Player/PlaybackProgressControl.swift",
                 "packages/Sources/QenTerra/MediaComponents/Player/PlayerBar.swift",
@@ -487,12 +489,67 @@ class RegistryContractTests(unittest.TestCase):
         )
         self.assertEqual(maintained["category"], contract["category"])
 
-    def test_root_and_public_manifests_deliver_media_components(self) -> None:
+    def test_root_and_public_manifests_deliver_registered_swift_products(self) -> None:
+        package = next(
+            item for item in load("registry/packages.json")["packages"]
+            if item["id"] == "swift-components"
+        )
+        expected_products = {
+            "QenTerraDesignTokens", "QenTerraComponents", "QenTerraMediaComponents",
+            "QenTerraFoundation", "QenTerraAudioAnalysis",
+        }
+        self.assertEqual(set(package["products"]), expected_products)
+        self.assertEqual(len(package["products"]), len(expected_products))
         for relative in ("Package.swift", "packages/Package.swift"):
             with self.subTest(relative=relative):
                 manifest = (ROOT / relative).read_text(encoding="utf-8")
-                self.assertIn('.library(name: "QenTerraMediaComponents"', manifest)
-                self.assertIn('name: "QenTerraMediaComponents"', manifest)
+                products = re.findall(r'\.library\(\s*name:\s*"([^\"]+)"', manifest)
+                self.assertEqual(set(products), expected_products)
+                self.assertEqual(len(products), len(expected_products))
+
+    def test_nonvisual_products_are_closed_over_public_source_and_test_delivery(self) -> None:
+        package = next(
+            item for item in load("registry/packages.json")["packages"]
+            if item["id"] == "swift-components"
+        )
+        families = {
+            "Foundation": {
+                "ContentHasher.swift", "CostLimitedCache.swift", "ImageDataDecoder.swift",
+                "ImageThumbnailGenerator.swift", "PageWindow.swift", "SearchNormalizer.swift",
+                "SplitMix64.swift",
+            },
+            "AudioAnalysis": {"PCMBassAnalysis.swift", "PlaybackPresentationClock.swift"},
+        }
+        public_paths = set(package["publicPaths"])
+        component_paths = {
+            item["sourcePath"] for item in load("registry/qenterra-components.json")["components"]
+        }
+        for family, filenames in families.items():
+            with self.subTest(family=family):
+                prefix = f"packages/Sources/QenTerra/{family}/"
+                expected = {prefix + filename for filename in filenames}
+                actual = {
+                    path.relative_to(ROOT).as_posix()
+                    for path in (ROOT / prefix).rglob("*.swift")
+                }
+                self.assertEqual(actual, expected)
+                self.assertEqual({path for path in public_paths if path.startswith(prefix)}, expected)
+                self.assertTrue(component_paths.isdisjoint(expected))
+        required_tests = {
+            "packages/Tests/QenTerraFoundationTests/FoundationUtilityTests.swift",
+            "packages/Tests/QenTerraAudioAnalysisTests/PCMBassAnalysisTests.swift",
+            "packages/Tests/QenTerraAudioAnalysisTests/PlaybackPresentationClockTests.swift",
+        }
+        self.assertLessEqual(required_tests, set(package["tests"]))
+        self.assertLessEqual(required_tests, public_paths)
+        self.assertLessEqual(
+            {
+                "content-hashing", "search-normalization", "bounded-caches", "page-window",
+                "image-processing", "deterministic-random", "pcm-bass-analysis",
+                "media-presentation-clock", "media-metadata-link",
+            },
+            set(package["capabilities"]),
+        )
 
     def test_source_catalog_registries_match_their_schemas(self) -> None:
         for registry_relative, schema_relative in (

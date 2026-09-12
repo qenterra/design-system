@@ -1,5 +1,5 @@
 {
-  "version": "1.0.1",
+  "version": "2.0.0",
   "sourceRegistry": "registry/qenterra-components.json",
   "components": [
     {
@@ -29,8 +29,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/Controls/DesignButtonStyle.swift",
-      "sha256": "19d9a050fbeb8fae53eacd264d9272f5e79e98d1ae37ba8ead7e81e5a72027ce",
-      "bytes": 6744
+      "sha256": "6e6711584b9a4904b3e75e0c2413af21e951079f47bfc1ab4d8970c3d7efec96",
+      "bytes": 6776
     },
     {
       "id": "group-container",
@@ -75,8 +75,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/InteractiveRowSurface.swift",
-      "sha256": "7cde6a3e5f3e2f35b30c0c07365e0d70d475827f579df1d667d2dd710084314e",
-      "bytes": 4765
+      "sha256": "d260f9eca7c11b999951fa211c2f91e6dd76e0e78fc9477fa11ed7a24824c679",
+      "bytes": 4728
     },
     {
       "id": "primary-button-style",
@@ -438,8 +438,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/About/AboutResourceRow.swift",
-      "sha256": "c9333af37f19019d1730f7e233e9d5d0ba401e70ac893e07b985f7defbd3faf6",
-      "bytes": 5076
+      "sha256": "cc8ba5d6a63bed5198880bce44c4a5b3ac21a5eb4f362f3f2a1ab96baf1ba26b",
+      "bytes": 5189
     },
     {
       "id": "artwork-palette",
@@ -748,8 +748,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Queue/PlaybackQueueRow.swift",
-      "sha256": "55c9e3e6efeeb8aa2fb615625fa9e889d6e197a48bba4c2042a729e5a460e03a",
-      "bytes": 10481
+      "sha256": "85a879f09d0da376e0eeda6404c1af0d82e4516742d0bcbadff1cc02ee57aa20",
+      "bytes": 10557
     },
     {
       "id": "queue-insertion-indicator",
@@ -929,8 +929,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Table/NativeMediaTableCell.swift",
-      "sha256": "bcb15eddcf2b11d62eba046346984c877b103c056aeab886e4a81b087fad207b",
-      "bytes": 33642
+      "sha256": "a7cb2ce25b35346d9b9db3bdd6572d939aeeda873a042e5378202a04a64af2da",
+      "bytes": 33790
     },
     {
       "id": "media-table-placeholder-row",
@@ -1036,6 +1036,20 @@
       "sourcePath": "Sources/QenTerra/MediaComponents/Gradient/ArtworkAccentGradientSnapshot.swift",
       "sha256": "5c69ed036f285cbcf318378e0f1ca4b299b2576abf60f0fe01cfee0f5527efa3",
       "bytes": 6964
+    },
+    {
+      "id": "media-metadata-link",
+      "name": "MediaMetadataLink",
+      "category": "media",
+      "status": "stable",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "MediaMetadataLink"
+      ],
+      "designTokens": true,
+      "sourcePath": "Sources/QenTerra/MediaComponents/Metadata/MediaMetadataLink.swift",
+      "sha256": "a1d8aabde226014a2130cb91a2ea5a55a8d572bfe545bf8b74f102bab9295f4e",
+      "bytes": 1649
     }
   ]
 }

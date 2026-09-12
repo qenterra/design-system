@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/package-registry.schema.json",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "repository": "https://github.com/qenterra/design-system",
   "versionPolicy": "shared",
   "packages": [
@@ -8,7 +8,7 @@
       "id": "repository-metadata",
       "ecosystem": "repository",
       "name": "qenterra/design-system",
-      "version": "1.0.1",
+      "version": "2.0.0",
       "publicPaths": [
         "packages/.editorconfig",
         "packages/.gitattributes",
@@ -25883,7 +25883,7 @@
       "id": "npm-design-tokens",
       "ecosystem": "npm",
       "name": "@qenterra/design-tokens",
-      "version": "1.0.1",
+      "version": "2.0.0",
       "publicPaths": [
         "packages/npm/design-tokens/LICENSE",
         "packages/npm/design-tokens/README.md",
@@ -25923,11 +25923,13 @@
       "id": "swift-components",
       "ecosystem": "swiftpm",
       "name": "QenTerraPackages",
-      "version": "1.0.1",
+      "version": "2.0.0",
       "products": [
         "QenTerraDesignTokens",
         "QenTerraComponents",
-        "QenTerraMediaComponents"
+        "QenTerraMediaComponents",
+        "QenTerraFoundation",
+        "QenTerraAudioAnalysis"
       ],
       "publicPaths": [
         "packages/Sources/QenTerra/README.md",
@@ -26125,7 +26127,22 @@
         "packages/Tests/QenTerraMediaComponentsTests/GradientPrewarmTests.swift",
         "packages/Tests/QenTerraMediaComponentsTests/GradientSwiftUICompositionTests.swift",
         "packages/Tests/QenTerraMediaComponentsTests/PlayerAndLyricsTests.swift",
-        "packages/Tests/QenTerraMediaComponentsTests/LyricsEdgeFadeTests.swift"
+        "packages/Tests/QenTerraMediaComponentsTests/LyricsEdgeFadeTests.swift",
+        "packages/Sources/QenTerra/Foundation/ContentHasher.swift",
+        "packages/Sources/QenTerra/Foundation/CostLimitedCache.swift",
+        "packages/Sources/QenTerra/Foundation/ImageDataDecoder.swift",
+        "packages/Sources/QenTerra/Foundation/ImageThumbnailGenerator.swift",
+        "packages/Sources/QenTerra/Foundation/PageWindow.swift",
+        "packages/Sources/QenTerra/Foundation/SearchNormalizer.swift",
+        "packages/Sources/QenTerra/Foundation/SplitMix64.swift",
+        "packages/Sources/QenTerra/AudioAnalysis/PCMBassAnalysis.swift",
+        "packages/Sources/QenTerra/AudioAnalysis/PlaybackPresentationClock.swift",
+        "packages/Sources/QenTerra/MediaComponents/Metadata/MediaMetadataLink.swift",
+        "packages/docs/SWIFT_UTILITIES.md",
+        "packages/Tests/QenTerraFoundationTests/FoundationUtilityTests.swift",
+        "packages/Tests/QenTerraAudioAnalysisTests/PCMBassAnalysisTests.swift",
+        "packages/Tests/QenTerraAudioAnalysisTests/PlaybackPresentationClockTests.swift",
+        "packages/Tests/QenTerraMediaComponentsTests/MediaMetadataLinkTests.swift"
       ],
       "tests": [
         "packages/Tests/QenTerraDesignTokensTests/DesignTokensTests.swift",
@@ -26143,7 +26160,11 @@
         "packages/Tests/QenTerraMediaComponentsTests/NativeMediaTableConsumerBoundaryTests.swift",
         "packages/Tests/QenTerraMediaComponentsTests/GradientPrewarmTests.swift",
         "packages/Tests/QenTerraMediaComponentsTests/GradientSwiftUICompositionTests.swift",
-        "packages/Tests/QenTerraMediaComponentsTests/LyricsEdgeFadeTests.swift"
+        "packages/Tests/QenTerraMediaComponentsTests/LyricsEdgeFadeTests.swift",
+        "packages/Tests/QenTerraFoundationTests/FoundationUtilityTests.swift",
+        "packages/Tests/QenTerraAudioAnalysisTests/PCMBassAnalysisTests.swift",
+        "packages/Tests/QenTerraAudioAnalysisTests/PlaybackPresentationClockTests.swift",
+        "packages/Tests/QenTerraMediaComponentsTests/MediaMetadataLinkTests.swift"
       ],
       "capabilities": [
         "typed-tokens",
@@ -26174,7 +26195,16 @@
         "media-collections",
         "player-and-lyrics",
         "native-media-table",
-        "artwork-accent-gradient"
+        "artwork-accent-gradient",
+        "content-hashing",
+        "search-normalization",
+        "bounded-caches",
+        "page-window",
+        "image-processing",
+        "deterministic-random",
+        "pcm-bass-analysis",
+        "media-presentation-clock",
+        "media-metadata-link"
       ]
     }
   ]

@@ -39,10 +39,10 @@ def nested_keys(value: object) -> set[str]:
 class PublicReleaseContractTests(unittest.TestCase):
     def test_root_and_public_swift_manifests_process_media_resources(self) -> None:
         for relative in (".", "packages"):
-            with self.subTest(package=relative):
+            with self.subTest(package=relative), tempfile.TemporaryDirectory(prefix="qenterra-manifest-") as scratch:
                 manifest = json.loads(
                     subprocess.check_output(
-                        ["swift", "package", "dump-package", "--package-path", relative],
+                        ["swift", "package", "dump-package", "--package-path", relative, "--scratch-path", scratch],
                         cwd=ROOT,
                         text=True,
                     )

@@ -316,6 +316,11 @@ private final class NativeInteractionHarness {
     func movePointer(to frame: CGRect) throws {
         let physicalCursor = NSEvent.mouseLocation
         try placeTarget(frame, under: physicalCursor)
+        // Confirm WindowServer has applied the move before delivering the pointer event.
+        let pointerWindow = NSWindow.windowNumber(at: physicalCursor, belowWindowWithWindowNumber: 0)
+        try require(pointerWindow == window.windowNumber,
+                    "pointer target belongs to window \(pointerWindow), expected \(window.windowNumber)")
+        print("POINTER_WINDOW_TARGET_OK \(pointerWindow)")
         NSApp.postEvent(
             try mouseEvent(
                 type: .mouseMoved,
@@ -1167,7 +1172,10 @@ private func runBehavioralChecks() throws {
 
     var accessibilityWasAvailable = false
     for kind in CompositionKind.allCases {
-        accessibilityWasAvailable = try exercise(kind) || accessibilityWasAvailable
+        // Reacquire a safe pointer position after the preceding control scans.
+        try withSafePhysicalCursor {
+            accessibilityWasAvailable = try exercise(kind) || accessibilityWasAvailable
+        }
     }
     if !accessibilityWasAvailable {
         print("MEDIA_INTERACTION_HOST_AX_UNAVAILABLE")

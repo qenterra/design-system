@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "1.0.1",
+  "version": "2.0.0",
   "repository": "https://github.com/qenterra/design-system",
   "files": [
     {
@@ -55,7 +55,7 @@
     },
     {
       "path": ".github/qenterra-repository.json",
-      "sha256": "cd646c55e00774674585c86bee5847fc93367beca6c4c0187ee1ad36341c943f",
+      "sha256": "44abdd1edfc89d84383771a16e86c7d6f198cf51549c6e82923ec4a280197967",
       "bytes": 5793
     },
     {
@@ -90,8 +90,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "46abd5d83c231c517b7c45fdde4f89398d28d7b1401de7f0a985516514878fbe",
-      "bytes": 6242
+      "sha256": "630648d73b03309d8e0d3f7d2b8522427f68133426cbda197b87d4985ce8115d",
+      "bytes": 10041
     },
     {
       "path": "CODE_OF_CONDUCT.md",
@@ -120,13 +120,13 @@
     },
     {
       "path": "Package.swift",
-      "sha256": "779df7f5070bab4fa50df402573577296b17c40794b42fee80ec1aead5fb8ed3",
-      "bytes": 1682
+      "sha256": "fb3f124b188c4ad18d4e78072cfc9fd1e649eb702be04031b77f5ed6754941ac",
+      "bytes": 2447
     },
     {
       "path": "README.md",
-      "sha256": "e2fad6c73f3950ee168a336e15ba0f66897369c6ce621e8579983204ea7e3caa",
-      "bytes": 7982
+      "sha256": "0094a3947fbdbb03ba1d4750a9505b2344979f06cd18dbbb44141c687abd7111",
+      "bytes": 8279
     },
     {
       "path": "SECURITY.md",
@@ -10540,7 +10540,7 @@
     },
     {
       "path": "Sources/BootstrapIcons/manifest.json",
-      "sha256": "5b78f457725fa23ac59cd7fbf6bc072c412ad00d766f9f02411cabaae4cd052d",
+      "sha256": "2f516d67ca83d000f97226c6162bbb3e8a25b6adccea52c38e8c0ca988b3e79e",
       "bytes": 851220
     },
     {
@@ -11655,7 +11655,7 @@
     },
     {
       "path": "Sources/ExploreSwiftUI/manifest.json",
-      "sha256": "160e59864bdfa4d4b11252dddbe9dd705d974499b79b21475bd856b37d4ce149",
+      "sha256": "1a2a4351124092f593307d848b9835f5d45799b01ce9d5f94b8b3fdaea7b586f",
       "bytes": 248777
     },
     {
@@ -20025,7 +20025,7 @@
     },
     {
       "path": "Sources/Iconoir/manifest.json",
-      "sha256": "0fb773f8e8aa19bc6dbf31a6132534fb2a610ff35b519b293171468da415afd3",
+      "sha256": "b58fbb5afc90b82bb73a3e8ddf752878d4722622b539e5366172aae0bbc0aaab",
       "bytes": 736795
     },
     {
@@ -20800,7 +20800,7 @@
     },
     {
       "path": "Sources/MagicUI/manifest.json",
-      "sha256": "c2ab20e718d1670399af6fcff7988486f41355ddcc0dff82605ed7c8c4980a25",
+      "sha256": "542ab9440df35a955771609328b3de46f7df1049d3e8359da77823b0d3876e4d",
       "bytes": 92963
     },
     {
@@ -66175,8 +66175,18 @@
     },
     {
       "path": "Sources/PhosphorIcons/manifest.json",
-      "sha256": "98bda664b16eb30f5ffbb3728cf4dbe5ea226c5968ace639115ab9d26cd412fc",
+      "sha256": "51b3d896c81fac3fc60df0d55301a89dee5a1e586a776ad681e71799d848bc07",
       "bytes": 4143937
+    },
+    {
+      "path": "Sources/QenTerra/AudioAnalysis/PCMBassAnalysis.swift",
+      "sha256": "96c88fa37a2e57dde1613f941c74cbb6f13d192a6611c3456ca10bd94778cb07",
+      "bytes": 31459
+    },
+    {
+      "path": "Sources/QenTerra/AudioAnalysis/PlaybackPresentationClock.swift",
+      "sha256": "a52f03c511086f0d23fce3beaf0e2b02d415300e608c73094cf2b393607b5d8c",
+      "bytes": 1125
     },
     {
       "path": "Sources/QenTerra/Components/About/AboutPage.swift",
@@ -66185,8 +66195,8 @@
     },
     {
       "path": "Sources/QenTerra/Components/About/AboutResourceRow.swift",
-      "sha256": "c9333af37f19019d1730f7e233e9d5d0ba401e70ac893e07b985f7defbd3faf6",
-      "bytes": 5076
+      "sha256": "cc8ba5d6a63bed5198880bce44c4a5b3ac21a5eb4f362f3f2a1ab96baf1ba26b",
+      "bytes": 5189
     },
     {
       "path": "Sources/QenTerra/Components/Containers/CardContainer.swift",
@@ -66210,8 +66220,8 @@
     },
     {
       "path": "Sources/QenTerra/Components/Controls/DesignButtonStyle.swift",
-      "sha256": "19d9a050fbeb8fae53eacd264d9272f5e79e98d1ae37ba8ead7e81e5a72027ce",
-      "bytes": 6744
+      "sha256": "6e6711584b9a4904b3e75e0c2413af21e951079f47bfc1ab4d8970c3d7efec96",
+      "bytes": 6776
     },
     {
       "path": "Sources/QenTerra/Components/Controls/IconActionButton.swift",
@@ -66250,8 +66260,8 @@
     },
     {
       "path": "Sources/QenTerra/Components/InteractiveRowSurface.swift",
-      "sha256": "7cde6a3e5f3e2f35b30c0c07365e0d70d475827f579df1d667d2dd710084314e",
-      "bytes": 4765
+      "sha256": "d260f9eca7c11b999951fa211c2f91e6dd76e0e78fc9477fa11ed7a24824c679",
+      "bytes": 4728
     },
     {
       "path": "Sources/QenTerra/Components/Layout/DesignSeparator.swift",
@@ -66325,23 +66335,58 @@
     },
     {
       "path": "Sources/QenTerra/DesignTokens/GeneratedIcons.swift",
-      "sha256": "5ac459e16bdcbb3fed4078c92608d55ce05f2598d099ae1470ac8ee86ba0041c",
+      "sha256": "005b6c794268e820ff7a92b7ef81fd9f8fbfc7b2d0b1cd88ca282fa28c8a6c0a",
       "bytes": 579
     },
     {
       "path": "Sources/QenTerra/DesignTokens/GeneratedProductProfiles.swift",
-      "sha256": "03e01c1276fbf95a16377356dfde993422b2a1c4d4cbd269e0b6e0cfc1acdd4a",
+      "sha256": "cca2751ef113ad6be874d56d03455c2b72fe7157727d4d3f03df3f125bb71a52",
       "bytes": 414
     },
     {
       "path": "Sources/QenTerra/DesignTokens/GeneratedTokens.swift",
-      "sha256": "84209e33a0778b9073b9ce5deccdf623190601f31ce15523a8609dc09188cf0c",
+      "sha256": "51e2a59e87a92db76cafef37259daa8f0b16f9327e067cff25fc6fdd012c4af4",
       "bytes": 33748
     },
     {
       "path": "Sources/QenTerra/DesignTokens/SwiftUIAdapters.swift",
       "sha256": "444d1c4a3c4e33cc3033a93977a132e168e778448c4d1c563d86b674511e83af",
       "bytes": 1297
+    },
+    {
+      "path": "Sources/QenTerra/Foundation/ContentHasher.swift",
+      "sha256": "efcf25e04e1162762958683369aeb11cf763ab8a08c8aa9a74b76dbffd672785",
+      "bytes": 1062
+    },
+    {
+      "path": "Sources/QenTerra/Foundation/CostLimitedCache.swift",
+      "sha256": "ede2cc9c16c8d9b8ddf4e97e3af4bd411bf33d81030ce4a265a7b41888cbd4b9",
+      "bytes": 2258
+    },
+    {
+      "path": "Sources/QenTerra/Foundation/ImageDataDecoder.swift",
+      "sha256": "480bf29e6cabb962454f4f0352e1d24462755bc05d2d0de61b2f7f28155d8f51",
+      "bytes": 1526
+    },
+    {
+      "path": "Sources/QenTerra/Foundation/ImageThumbnailGenerator.swift",
+      "sha256": "af91bbbc10e888dfc35c2f0c5a29c31e9fbbe9285bd947d144bbb2a083755f6f",
+      "bytes": 1402
+    },
+    {
+      "path": "Sources/QenTerra/Foundation/PageWindow.swift",
+      "sha256": "da4b73ec801d0ee2ded12a6c0a8dda82f4b46e22645b595730e7e62b49c95748",
+      "bytes": 5751
+    },
+    {
+      "path": "Sources/QenTerra/Foundation/SearchNormalizer.swift",
+      "sha256": "52b6f8dbe0a690ab8ebd63aed4d41b37326640d1abec69829f6c6d9d58614d88",
+      "bytes": 628
+    },
+    {
+      "path": "Sources/QenTerra/Foundation/SplitMix64.swift",
+      "sha256": "474704c4cfee6444b884a7816be2699b846a708eec99cab26f7e4b3245de04de",
+      "bytes": 436
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Artwork/ArtworkCropSurface.swift",
@@ -66479,6 +66524,11 @@
       "bytes": 1185
     },
     {
+      "path": "Sources/QenTerra/MediaComponents/Metadata/MediaMetadataLink.swift",
+      "sha256": "a1d8aabde226014a2130cb91a2ea5a55a8d572bfe545bf8b74f102bab9295f4e",
+      "bytes": 1649
+    },
+    {
       "path": "Sources/QenTerra/MediaComponents/Player/AirPlayRoutePicker.swift",
       "sha256": "e444227c2e7a387a1115f61984637631b294b248425185cb6fe921f4a9ca957c",
       "bytes": 1022
@@ -66510,8 +66560,8 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Queue/PlaybackQueueRow.swift",
-      "sha256": "55c9e3e6efeeb8aa2fb615625fa9e889d6e197a48bba4c2042a729e5a460e03a",
-      "bytes": 10481
+      "sha256": "85a879f09d0da376e0eeda6404c1af0d82e4516742d0bcbadff1cc02ee57aa20",
+      "bytes": 10557
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Queue/QueueDragPreview.swift",
@@ -66550,8 +66600,8 @@
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Table/NativeMediaTableCell.swift",
-      "sha256": "bcb15eddcf2b11d62eba046346984c877b103c056aeab886e4a81b087fad207b",
-      "bytes": 33642
+      "sha256": "a7cb2ce25b35346d9b9db3bdd6572d939aeeda873a042e5378202a04a64af2da",
+      "bytes": 33790
     },
     {
       "path": "Sources/QenTerra/MediaComponents/Table/NativeMediaTableView.swift",
@@ -66565,8 +66615,8 @@
     },
     {
       "path": "Sources/QenTerra/manifest.json",
-      "sha256": "afc30a547f27b3be703c3a8af30ea8afebe080fe7ea5e0a64b6ddffd72e1dffc",
-      "bytes": 34608
+      "sha256": "e5dcf1dd10b94a6e5df084cf51183db66916397c5ffc2397ccf8e7c6907570d7",
+      "bytes": 35079
     },
     {
       "path": "Sources/ReUI/Base/Components/accordion/c-accordion-1.tsx",
@@ -90265,7 +90315,7 @@
     },
     {
       "path": "Sources/ReUI/manifest.json",
-      "sha256": "6ee770e31703f7640f8606421acfcf29ec6a2c11ef32db0159da90f9dee49f35",
+      "sha256": "bd784cb30bebc5d4615926212391994ff0d4aef667f5103fd7de25dd937a1058",
       "bytes": 3801818
     },
     {
@@ -91190,7 +91240,7 @@
     },
     {
       "path": "Sources/ShadcnUI/manifest.json",
-      "sha256": "4facb6b45e485657da436f2592ba37665691a23773a218797d8ed58ced68b45e",
+      "sha256": "929d28f92c65fe8f61980e5a2e17f3fc96cc8d1269e7fa3684a76e6fbd790394",
       "bytes": 103050
     },
     {
@@ -122125,7 +122175,7 @@
     },
     {
       "path": "Sources/TablerIcons/manifest.json",
-      "sha256": "a07c0989afd3ee504988e4e99870b3b1fb7b7f331c18a3810344b4c530d6f2da",
+      "sha256": "64d75c6abc7e23780156cc1c2ed498d931251098445f8ed98e6b603962a9419f",
       "bytes": 2758421
     },
     {
@@ -129590,13 +129640,23 @@
     },
     {
       "path": "Sources/UIable/manifest.json",
-      "sha256": "0ae87aa5a5ecb13bc972472b332ff75ade6ae62d322c089275778a2c9d117efd",
+      "sha256": "39b69f2aaf81b921edc7b8aab406540f81121d4eefc3f3201182d75a70b7c9ab",
       "bytes": 998977
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
       "sha256": "df5bff5603113af160aeba7d09221947c4d2f3f1135b82d09149cc3839499c78",
       "bytes": 5497
+    },
+    {
+      "path": "Tests/QenTerraAudioAnalysisTests/PCMBassAnalysisTests.swift",
+      "sha256": "6b1c43b411704df29397e2d597f49a5ee221993ae9ff57e44a1af9b574a6f15d",
+      "bytes": 25016
+    },
+    {
+      "path": "Tests/QenTerraAudioAnalysisTests/PlaybackPresentationClockTests.swift",
+      "sha256": "865cee377e351182a371d91526ad0a3a3ee669cfd1bc0e272058478d34ebfec2",
+      "bytes": 1735
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/CoreComponentSnapshots.swift",
@@ -129615,8 +129675,8 @@
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/SnapshotSupport.swift",
-      "sha256": "ac52c0c487f192d916fc4594046fc5b62f774697cc7d9060abe30d5da9e88a1d",
-      "bytes": 14207
+      "sha256": "eebd0a18415a5678c2564a1b4c7f3856e76c79c8b14c4b4a1ce2021d56a46ec1",
+      "bytes": 14356
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/SnapshotSupportTests.swift",
@@ -129625,18 +129685,18 @@
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/README.md",
-      "sha256": "f3f876e13fd890912e856c3c42786682945e4f130d5e957e6869a1139c84291c",
-      "bytes": 4882
+      "sha256": "978386c403bb3ba2445f1c1f402355d6d2c084328f56e4e8c457b0b62d7fe9dc",
+      "bytes": 5774
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-26-arm64/about-two-products-dark.png",
-      "sha256": "b52c6de8f71c5758577a20af40082661fe466deaa8acde6aea6814384f198158",
-      "bytes": 98678
+      "sha256": "a36e0e2145f401a30c323078a2e89c2d82112d80a85cb3c4959d0caf5cdd7655",
+      "bytes": 98462
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-26-arm64/about-two-products-light.png",
-      "sha256": "db0c3f1c874ff9e9bba360667647d89a8574d59d64a95ca93e2bb83f07868a73",
-      "bytes": 95977
+      "sha256": "cfa2bc30fa80a938a0b8a992119947af40ced8e9b956ec5532662b376710d73a",
+      "bytes": 95742
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-26-arm64/controls-dark.png",
@@ -129790,13 +129850,13 @@
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-26-arm64/media-native-table-dark.png",
-      "sha256": "4c97ad1e753c3d647e3aad9d53fbc9f0387fce06e227f7854c605e4edc480919",
-      "bytes": 38437
+      "sha256": "92cead8443d8bd9707486bec7c3ad3080fd805d491d099847f5500bcaa4bf96a",
+      "bytes": 38892
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-26-arm64/media-native-table-light.png",
-      "sha256": "8c4e96f1ad4b1de56a6ef4bfc223edf1e2551c3c14c13af307c1a73e42888bb0",
-      "bytes": 37941
+      "sha256": "579c8c8813d5741b0108be587cf94c9831a2e2c40e72f188cebb60fc121504ee",
+      "bytes": 38309
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-26-arm64/media-player-dark.png",
@@ -129810,13 +129870,13 @@
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-26-arm64/media-queue-dark.png",
-      "sha256": "47d18aad19d103ebcc39aaca5e8df63db4133024b8a63f99f90deb130a5eade4",
-      "bytes": 49751
+      "sha256": "81ea47aab121843bec6ac97e4f07e3a01f2deef6e0f2d23e4232f8e73ec64b9d",
+      "bytes": 49649
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-26-arm64/media-queue-light.png",
-      "sha256": "32fb32d01a6d4b877168afc81d931837628b374c56b4d7483384fddab9091df8",
-      "bytes": 52232
+      "sha256": "96803ee691c4a8087253795c220a002b07b04f3152c34c1451660d31a21c9943",
+      "bytes": 52135
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-26-arm64/navigation-dark.png",
@@ -129880,33 +129940,33 @@
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/about-two-products-dark.png",
-      "sha256": "a713044cf33b1de18bbfce7d613a95b2ddf43121758f32013b10a7698725524a",
-      "bytes": 98586
+      "sha256": "4a09777560a7f39fda1945be8ea9d36f16e87595915fc5c3ac3fc5b229bf2a52",
+      "bytes": 123279
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/about-two-products-light.png",
-      "sha256": "4063dbac3288c597307ad65d2e16657781a1012aa58cf3ffcf8b2485a3771bb3",
-      "bytes": 96168
+      "sha256": "b99940c2ab0061c1fe14e9439fcb4f5473c5b0e8b9dd539c6ac24840c913cb4f",
+      "bytes": 120644
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/controls-dark.png",
-      "sha256": "f841a1f9da55fc9037978627d3f5bf74b1fd6d226cc650d07074f75d50e166e3",
-      "bytes": 56924
+      "sha256": "d0729a7f838d04725542e87956119dba922759b94abb7580ed99d0dcf7f6ea39",
+      "bytes": 64750
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/controls-light.png",
-      "sha256": "51e566afa825f81934ddcd751b31a96f06ac73b7ae267b5d67b50c5621d3ed98",
-      "bytes": 56006
+      "sha256": "6dc9696db2038df03da345b6f6dd80684365112647df7759f872eadcdaad41ba",
+      "bytes": 63971
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/feedback-dark.png",
-      "sha256": "d88d379cb2907cb87b4a23f2ef990af2fb6b87aabfb1bfd3fbd42b5a98bf94f6",
-      "bytes": 78848
+      "sha256": "e7a8674e71230b47366bda80fb55564c642059204e21583bb84d55d3cbf35808",
+      "bytes": 96281
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/feedback-light.png",
-      "sha256": "7ff9580598f9f8ec13e15eb119d8442785763ea9fa1b55297a545d5d2ccf7afc",
-      "bytes": 77404
+      "sha256": "0ab68b5acd9173c064f2e81a5661a7ccb6c4aa0a1d5de34667374a5280469455",
+      "bytes": 95773
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/gradient-appearance-dark.png",
@@ -129990,23 +130050,23 @@
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/media-collections-dark.png",
-      "sha256": "72893579c5b70ac74c0a84e8a2862935623bebda219d8f4d2c89412705f55d4f",
-      "bytes": 223968
+      "sha256": "d7d3348a60337e942f25f24008a18d232f4d3b3baebcee703235474223c131bd",
+      "bytes": 223874
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/media-collections-light.png",
-      "sha256": "59eeaa19964241cf57d76bb3b3cf20265ae13f4c3ef839ccf8d71075cbcd7139",
-      "bytes": 224826
+      "sha256": "6710bc14a9dc616663365f42fc07a4c0bd8edc811a345f8b9e81a8009143bf4e",
+      "bytes": 224570
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/media-controls-dark.png",
-      "sha256": "45f4cc589b66372e086975d2bfb934be125d19a18f38e162bc1935bdd673446f",
-      "bytes": 13343
+      "sha256": "7e5c1ea5229687202005e660e1f7d8db7f5f6d2d5073917eaf393bf475f597b1",
+      "bytes": 13334
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/media-controls-light.png",
-      "sha256": "e74876f12a524dd4a242b3d665befbacf7c48853d479e42c9a52ee7db0a87d84",
-      "bytes": 13366
+      "sha256": "6b151c124c496b57d19ea8ddfe5244474b461cfdc57535c6ceae4a9fa78e1a97",
+      "bytes": 13411
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/media-lyrics-dark.png",
@@ -130040,93 +130100,93 @@
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/media-native-table-dark.png",
-      "sha256": "7e2ff13cf196b6018046262400804ab37d0faa5beac155cf6a4a52857a31aa59",
-      "bytes": 38616
+      "sha256": "6bfd98d8fd03a709b1b95d584a2f9dddfa4807a3d13f35fb29551f537d09e83b",
+      "bytes": 39124
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/media-native-table-light.png",
-      "sha256": "5ad103e14c233fdc0e0fcaf7b8417647b354142150eef4cc5521d48b19688624",
-      "bytes": 38004
+      "sha256": "7b85a8f902581f8742da04bd6b6b70987ccc1698f0fb3133cbe77f5f866a5194",
+      "bytes": 38342
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/media-player-dark.png",
-      "sha256": "333d1c741852cc4bcc8a5294534660eeadbcaec9f2f0fbd41e511d7b2bc3b833",
-      "bytes": 46687
+      "sha256": "ce17260c62a9b33b7867adfc7705c3dd4462c6261971c63217981d870ab035e4",
+      "bytes": 49391
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/media-player-light.png",
-      "sha256": "7f4d4bdc775de4596a2e922bb262ad38098786e07136529ba33aaa874e568b65",
-      "bytes": 49400
+      "sha256": "4cbe93bafc3865b0db497c04a499dd9965f7ec336238e9dbd94bc33f8ff33e38",
+      "bytes": 51528
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/media-queue-dark.png",
-      "sha256": "7a4da64a989a59e97fb94bef1e4ae8952517f9267e4eaa68554a1a61467d6da0",
-      "bytes": 52342
+      "sha256": "34c73f67a137708e84bd53d8a57e3faba30a18c8afc1eefca206f43ca3be721f",
+      "bytes": 51828
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/media-queue-light.png",
-      "sha256": "e69255a8f67cd2e7969f1ceb8a39f73371a42cf2f81e7d67d53a736461906d1f",
-      "bytes": 55291
+      "sha256": "84f99eaff105a97cdc5b733f5fd52ecdae5e91c1e597fbb10bf15b9ba737bccb",
+      "bytes": 54846
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/navigation-dark.png",
-      "sha256": "7ed1ba0d80e721573e894296dffc907e6e3f85ab8083a44d9ebc93a835c0b9cc",
-      "bytes": 22621
+      "sha256": "3d2fa8d75b824927601f9045f05496a24e2dde117a741d7fea22a21daf96cea8",
+      "bytes": 25395
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/navigation-light.png",
-      "sha256": "c5ec5117f1157a374965deab1d108e147ba7ea6072d5043198b57308ee17a895",
-      "bytes": 22040
+      "sha256": "29ad473de5d2fa23f3a34f1a2df130ec6f45261410b691d851563aa3b194d554",
+      "bytes": 25295
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/reduced-effects-dark.png",
-      "sha256": "a9cc48befa026e0341b849d1cffbf586079a34e4b2c5bfe489be4a67ec0cd2bc",
-      "bytes": 21435
+      "sha256": "575737a003c8d8ec1a3fd27cd1d3c59553e5d3bbee148be9c38d8afbabf34260",
+      "bytes": 25509
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/reduced-effects-light.png",
-      "sha256": "a6e9c0809e7513cb895c23342ca707e8ac75e28859202ce2d106d3c7a886d49b",
-      "bytes": 20831
+      "sha256": "eb8038fbfda940ab15909e6bf4237dddb60edb3177e2872f7aff1cf2b7116230",
+      "bytes": 24960
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/rows-dark.png",
-      "sha256": "a5a3c398969f844e17a612ac42656f48057b374e0fb783fe0a9be088eba82661",
-      "bytes": 61278
+      "sha256": "4b613c1a8129f795db59e5d1915c97e49313e3852d62333b643493a5a35d3fd7",
+      "bytes": 68675
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/rows-light.png",
-      "sha256": "c1089263745e21d56baf77253dac10a63b19d8c33e8ad32a894c2ee5f4720778",
-      "bytes": 59523
+      "sha256": "0769970b64811979eb6daffae711aad22b6916f0dffa6d40f7349a3962b36a11",
+      "bytes": 68094
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/settings-long-copy-dark.png",
-      "sha256": "17fd63bdccad0f8fe50ecfbb37848f3cdf14628b0cb66f4078fd1ac5f759e80e",
-      "bytes": 70005
+      "sha256": "c40128de1e287eb0a71117719a24a8178afd20d3016c1310e968f91434f78d8b",
+      "bytes": 90115
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/settings-long-copy-light.png",
-      "sha256": "99f6b383de7568c29dbf62c913e93acf980cf7398bc5dccb181fc63c3d97d32b",
-      "bytes": 67764
+      "sha256": "2a660ffdf8f9baa1593e7c59b9a40ee4b79fb5812104caddcacc8ad4d40bbb9b",
+      "bytes": 88850
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/settings-standard-dark.png",
-      "sha256": "12dd8dd32eedd7dda15759cd0e48ed70f52c242c3111303fe44fa42859fce06f",
-      "bytes": 45799
+      "sha256": "5556b8a8296e5e42bbdbecdc7a6d2ea287436f91e62139ceb7a80b1e1691be80",
+      "bytes": 52665
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/settings-standard-light.png",
-      "sha256": "392a6c0b0fd3b017d0f486ba29a4669b0a6a4ce6ae2f1943b06a57d9aacf247a",
-      "bytes": 44891
+      "sha256": "d8149fe738e0d484c7bf0ba106c5963bec1ffbf56fd6d7f4f20d41114a3a5994",
+      "bytes": 52709
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/system-live-dark.png",
-      "sha256": "f841a1f9da55fc9037978627d3f5bf74b1fd6d226cc650d07074f75d50e166e3",
-      "bytes": 56924
+      "sha256": "d0729a7f838d04725542e87956119dba922759b94abb7580ed99d0dcf7f6ea39",
+      "bytes": 64750
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-27-arm64/system-live-light.png",
-      "sha256": "51e566afa825f81934ddcd751b31a96f06ac73b7ae267b5d67b50c5621d3ed98",
-      "bytes": 56006
+      "sha256": "6dc9696db2038df03da345b6f6dd80684365112647df7759f872eadcdaad41ba",
+      "bytes": 63971
     },
     {
       "path": "Tests/QenTerraComponentsTests/ComponentTests.swift",
@@ -130135,8 +130195,13 @@
     },
     {
       "path": "Tests/QenTerraDesignTokensTests/DesignTokensTests.swift",
-      "sha256": "038d46df370a7495e2febf6e158c7abe381466b8fb137bd5cc7b177d143902eb",
-      "bytes": 8601
+      "sha256": "1a357da06bf710d727292cd37db9121e77fd789c58168e6f80825fe07afaa033",
+      "bytes": 8984
+    },
+    {
+      "path": "Tests/QenTerraFoundationTests/FoundationUtilityTests.swift",
+      "sha256": "9b6e9a953d6e03d823397fcc4a9998c1a26c511046889e5dccdef55a8db64abf",
+      "bytes": 7478
     },
     {
       "path": "Tests/QenTerraMediaComponentsTests/ArtworkAccentGradientTests.swift",
@@ -130170,8 +130235,13 @@
     },
     {
       "path": "Tests/QenTerraMediaComponentsTests/MediaComponentModuleTests.swift",
-      "sha256": "31921109d55d2197a52ff21cb6dfc25ce1938ba3cd53c7b91dbc6cc1a4f788f0",
-      "bytes": 1400
+      "sha256": "01d36fa25118305c391eb1da3358b30e7d14c8196f4808c7661a03a06f8d84c6",
+      "bytes": 1413
+    },
+    {
+      "path": "Tests/QenTerraMediaComponentsTests/MediaMetadataLinkTests.swift",
+      "sha256": "d292b125efef3018734186e338051eb4ccf29f8de90aabdb2a0fd2e61056721c",
+      "bytes": 2604
     },
     {
       "path": "Tests/QenTerraMediaComponentsTests/NativeMediaTableConsumerBoundaryTests.swift",
@@ -130180,13 +130250,13 @@
     },
     {
       "path": "Tests/QenTerraMediaComponentsTests/NativeMediaTableTests.swift",
-      "sha256": "47f8d07532d86ee386df05bf186e04d9dd2ce2d8e559de914706889a06dc62b6",
-      "bytes": 27196
+      "sha256": "fe87ec502f07ef181eda550184fbe634b2b79fde7e62b590145b3592d2bafd81",
+      "bytes": 28408
     },
     {
       "path": "Tests/QenTerraMediaComponentsTests/PlayerAndLyricsTests.swift",
-      "sha256": "4510f4badffe521954628a99afeaafb5cfd52ece7fd86790986254f2f3ba0ef7",
-      "bytes": 31948
+      "sha256": "7b06171747c106fd84497cf66c4ad0ccbac3907f4588a2e2a420dd5eb15fd8ee",
+      "bytes": 31950
     },
     {
       "path": "docs/ARCHITECTURE.md",
@@ -130240,7 +130310,7 @@
     },
     {
       "path": "docs/RELEASING.md",
-      "sha256": "ef2c896ea5e17b9e34104be0745c64a6616dbb56d22087ecc5664a234155bf4c",
+      "sha256": "57698c30222699075cca37b31babdfabac8f51e277a35f61c8bc1bf8010e19fd",
       "bytes": 2029
     },
     {
@@ -130252,6 +130322,11 @@
       "path": "docs/STYLE_GUIDE.md",
       "sha256": "58b6c8e96f460df51b0cd25b03f1a85dba2dc5762ce59b446fe9634e0357a3d6",
       "bytes": 1366
+    },
+    {
+      "path": "docs/SWIFT_UTILITIES.md",
+      "sha256": "956407cd419d9599775a2212877c85707bbebf7a11ea7496f60562b836c1340d",
+      "bytes": 4790
     },
     {
       "path": "docs/TESTING.md",
@@ -130285,7 +130360,7 @@
     },
     {
       "path": "npm/design-tokens/dist/icons.json",
-      "sha256": "a13303112962d47eb511a1207f404a9889b0bc727e8f07fb5f46fda84d2c9b41",
+      "sha256": "ad28fcf081c9298af436c3dd3b8dde746489486f8216a8e60b3e8d47dd2a71d5",
       "bytes": 1945
     },
     {
@@ -130295,17 +130370,17 @@
     },
     {
       "path": "npm/design-tokens/dist/tokens.css",
-      "sha256": "e1eff777cb63f7913e7c1d947840adf712db1b1b58a09773c5b125314f431033",
+      "sha256": "f5f5763da9cf8244cb8f59d18ec1462c405d37e89458c41f13d47a910199b9e6",
       "bytes": 27815
     },
     {
       "path": "npm/design-tokens/dist/tokens.json",
-      "sha256": "6266e18d856b9ce19c099d4cbb546d5976c53ec67c6066f0c7940c677a02c94d",
+      "sha256": "f15ad0adb825905e4fd8029512d7a384d439268cf2ec94134b08c095777de65b",
       "bytes": 48625
     },
     {
       "path": "npm/design-tokens/package.json",
-      "sha256": "3d9df09d41d69e44241c63ec2f2969c37b56402ab0ae535a4cbddb18b07f9357",
+      "sha256": "86b7d93a42ff838bd73b5dca8c52d12303c84f2b2ba306aae345290061473fb1",
       "bytes": 729
     },
     {
@@ -130355,7 +130430,7 @@
     },
     {
       "path": "npm/design-tokens/src/icons.json",
-      "sha256": "7fb088f82f35fc61ba021d7f272e0885b204478e7aa0484c8d1beb1808ec59c7",
+      "sha256": "dfbfe6023a6cdc586f6ef39a86da096160ea1688bb4d066a8cbf9834eb084fb3",
       "bytes": 1998
     },
     {
@@ -130370,12 +130445,12 @@
     },
     {
       "path": "npm/design-tokens/src/tokens.json",
-      "sha256": "6266e18d856b9ce19c099d4cbb546d5976c53ec67c6066f0c7940c677a02c94d",
+      "sha256": "f15ad0adb825905e4fd8029512d7a384d439268cf2ec94134b08c095777de65b",
       "bytes": 48625
     },
     {
       "path": "package.json",
-      "sha256": "83f50491625dca441a86e96fb24f188a59de66176e8e6035c264aa1cfacd4261",
+      "sha256": "4f9ead52a58dae49341571607bd465fedcab999aab489566db038273ded28020",
       "bytes": 225
     },
     {

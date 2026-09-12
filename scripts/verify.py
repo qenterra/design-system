@@ -44,9 +44,10 @@ def python_sources() -> list[str]:
     paths: list[str] = []
     for parent in (ROOT / "scripts", ROOT / "tests"):
         for path in parent.rglob("*.py"):
-            if {".build", ".swiftpm", "__pycache__"}.intersection(path.parts):
+            relative = path.relative_to(ROOT)
+            if {".build", ".swiftpm", "__pycache__"}.intersection(relative.parts):
                 continue
-            paths.append(path.relative_to(ROOT).as_posix())
+            paths.append(relative.as_posix())
     return sorted(paths)
 
 

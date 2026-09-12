@@ -453,8 +453,8 @@ public final class NativeMediaTableCell: NSTableCellView {
         configureMetadataControl(collectionButton, identifier: "media-table.collection", action: #selector(collectionPressed))
         configureLabel(titleLabel, identifier: "media-table.title", font: .systemFont(ofSize: 13))
         configureLabel(explicitLabel, identifier: "media-table.explicit", font: .systemFont(ofSize: 9, weight: .bold), alignment: .center)
-        configureLabel(yearLabel, identifier: "media-table.year", alignment: .right)
-        configureLabel(durationLabel, identifier: "media-table.duration", alignment: .right)
+        configureLabel(yearLabel, identifier: "media-table.year", alignment: .center)
+        configureLabel(durationLabel, identifier: "media-table.duration", alignment: .center)
         durationLabel.font = .monospacedDigitSystemFont(ofSize: 13, weight: .regular)
 
         favoriteButton.imagePosition = .imageOnly
@@ -625,9 +625,11 @@ public final class NativeMediaTableCell: NSTableCellView {
         CATransaction.setDisableActions(true)
         selectionLayer.backgroundColor = rowState.fill.map(NSColor.designToken)?.cgColor
             ?? NSColor.clear.cgColor
-        selectionLayer.borderColor = rowState.border.map(NSColor.designToken)?.cgColor
+        let border = state.environment.productProfile == .cadence
+            && state.isSelected && !state.environment.isIncreasedContrast ? nil : rowState.border
+        selectionLayer.borderColor = border.map(NSColor.designToken)?.cgColor
             ?? NSColor.clear.cgColor
-        selectionLayer.borderWidth = rowState.border == nil ? 0 : CGFloat(rowState.borderWidth)
+        selectionLayer.borderWidth = border == nil ? 0 : CGFloat(rowState.borderWidth)
         artworkLayer.backgroundColor = NSColor.controlBackgroundColor.cgColor
         artworkOverlayLayer.backgroundColor = presentation.isCurrent
             ? NSColor.black.withAlphaComponent(

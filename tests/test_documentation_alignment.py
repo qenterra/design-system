@@ -9,15 +9,17 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class DocumentationAlignmentTests(unittest.TestCase):
-    def test_1_0_changelogs_are_finalized_for_the_canonical_release(self) -> None:
+    def test_changelogs_preserve_history_and_link_the_canonical_release(self) -> None:
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
         for relative in ("CHANGELOG.md", "packages/CHANGELOG.md"):
             text = (ROOT / relative).read_text(encoding="utf-8")
             with self.subTest(relative=relative):
+                self.assertRegex(text, rf"(?m)^## \[{re.escape(version)}\] - \d{{4}}-\d{{2}}-\d{{2}}$")
                 self.assertIn("## [1.0.1] - 2026-09-02", text)
                 self.assertIn("## [1.0.0] - 2026-09-01", text)
                 self.assertNotIn("## [1.0.0] - Pending release", text)
                 self.assertIn(
-                    "[Unreleased]: https://github.com/QenTerra/design-system/compare/v1.0.1...HEAD",
+                    f"[Unreleased]: https://github.com/QenTerra/design-system/compare/v{version}...HEAD",
                     text,
                 )
                 self.assertIn(

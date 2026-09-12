@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/qenterra-component-registry.schema.json",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "components": [
     {
       "id": "card-container",
@@ -900,6 +900,18 @@
       "deliveryProduct": "QenTerraMediaComponents",
       "publicSymbols": [
         "ArtworkAccentGradientSnapshot"
+      ],
+      "designTokens": true
+    },
+    {
+      "id": "media-metadata-link",
+      "name": "MediaMetadataLink",
+      "category": "media",
+      "status": "stable",
+      "sourcePath": "packages/Sources/QenTerra/MediaComponents/Metadata/MediaMetadataLink.swift",
+      "deliveryProduct": "QenTerraMediaComponents",
+      "publicSymbols": [
+        "MediaMetadataLink"
       ],
       "designTokens": true
     }

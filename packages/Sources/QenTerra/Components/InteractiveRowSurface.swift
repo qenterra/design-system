@@ -109,7 +109,6 @@ public struct InteractiveRowSurface<Content: View>: View {
     private var visibleBorder: DesignColorValue? {
         if nativeEnvironment.productProfile == .cadence,
            resolvedState.isSelected,
-           !resolvedState.isFocused,
            !resolvedState.isIncreasedContrast {
             return nil
         }

@@ -35,6 +35,35 @@ import Testing
     #expect(widths.duration == 64)
 }
 
+@Test @MainActor func cadenceSelectionUsesFillWithoutAnOutline() {
+    let cell = NativeMediaTableCell()
+    for focused in [false, true] {
+        cell.configure(
+            presentation: syntheticRow(id: "selected"),
+            state: MediaTableCellState(
+                isSelected: true,
+                isFocused: focused,
+                environment: DesignNativeEnvironment(
+                    appearance: .dark, productProfile: .cadence, density: .standard,
+                    isIncreasedContrast: false, reducesMotion: false, reducesTransparency: false
+                )
+            )
+        )
+        #expect(cell.selectionLayerBorderWidth == 0)
+        #expect(cell.selectionLayerBackgroundAlpha > 0)
+        #expect(cell.isAccessibilitySelected() == true)
+    }
+}
+
+@Test @MainActor func numericTableColumnsCenterTheirContent() throws {
+    let cell = NativeMediaTableCell()
+    cell.configure(presentation: syntheticRow(id: "columns"), state: .standard, columns: [.year, .duration])
+    for identifier in ["media-table.year", "media-table.duration"] {
+        let label = try #require(cell.descendant(identifier: identifier) as? NSTextField)
+        #expect(label.alignment == .center)
+    }
+}
+
 @Test func tableGeometryRejectsNonfiniteWidthsWithoutTrapping() {
     let geometry = MediaTableGeometry(density: .standard)
     let invalid = geometry.resolvedWidths(
