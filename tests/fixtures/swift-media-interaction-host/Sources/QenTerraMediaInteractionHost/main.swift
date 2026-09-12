@@ -1172,7 +1172,10 @@ private func runBehavioralChecks() throws {
 
     var accessibilityWasAvailable = false
     for kind in CompositionKind.allCases {
-        accessibilityWasAvailable = try exercise(kind) || accessibilityWasAvailable
+        // Reacquire a safe pointer position after the preceding control scans.
+        try withSafePhysicalCursor {
+            accessibilityWasAvailable = try exercise(kind) || accessibilityWasAvailable
+        }
     }
     if !accessibilityWasAvailable {
         print("MEDIA_INTERACTION_HOST_AX_UNAVAILABLE")
