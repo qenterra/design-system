@@ -129685,18 +129685,18 @@
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/README.md",
-      "sha256": "02600f264eb2ecd010142fc20c190ce4c327f5e3a3b683fa8327bb6f19de7aff",
-      "bytes": 5151
+      "sha256": "978386c403bb3ba2445f1c1f402355d6d2c084328f56e4e8c457b0b62d7fe9dc",
+      "bytes": 5774
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-26-arm64/about-two-products-dark.png",
-      "sha256": "b52c6de8f71c5758577a20af40082661fe466deaa8acde6aea6814384f198158",
-      "bytes": 98678
+      "sha256": "a36e0e2145f401a30c323078a2e89c2d82112d80a85cb3c4959d0caf5cdd7655",
+      "bytes": 98462
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-26-arm64/about-two-products-light.png",
-      "sha256": "db0c3f1c874ff9e9bba360667647d89a8574d59d64a95ca93e2bb83f07868a73",
-      "bytes": 95977
+      "sha256": "cfa2bc30fa80a938a0b8a992119947af40ced8e9b956ec5532662b376710d73a",
+      "bytes": 95742
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-26-arm64/controls-dark.png",
@@ -129850,13 +129850,13 @@
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-26-arm64/media-native-table-dark.png",
-      "sha256": "4c97ad1e753c3d647e3aad9d53fbc9f0387fce06e227f7854c605e4edc480919",
-      "bytes": 38437
+      "sha256": "92cead8443d8bd9707486bec7c3ad3080fd805d491d099847f5500bcaa4bf96a",
+      "bytes": 38892
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-26-arm64/media-native-table-light.png",
-      "sha256": "8c4e96f1ad4b1de56a6ef4bfc223edf1e2551c3c14c13af307c1a73e42888bb0",
-      "bytes": 37941
+      "sha256": "579c8c8813d5741b0108be587cf94c9831a2e2c40e72f188cebb60fc121504ee",
+      "bytes": 38309
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-26-arm64/media-player-dark.png",
@@ -129870,13 +129870,13 @@
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-26-arm64/media-queue-dark.png",
-      "sha256": "47d18aad19d103ebcc39aaca5e8df63db4133024b8a63f99f90deb130a5eade4",
-      "bytes": 49751
+      "sha256": "81ea47aab121843bec6ac97e4f07e3a01f2deef6e0f2d23e4232f8e73ec64b9d",
+      "bytes": 49649
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-26-arm64/media-queue-light.png",
-      "sha256": "32fb32d01a6d4b877168afc81d931837628b374c56b4d7483384fddab9091df8",
-      "bytes": 52232
+      "sha256": "96803ee691c4a8087253795c220a002b07b04f3152c34c1451660d31a21c9943",
+      "bytes": 52135
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-26-arm64/navigation-dark.png",

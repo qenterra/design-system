@@ -316,6 +316,11 @@ private final class NativeInteractionHarness {
     func movePointer(to frame: CGRect) throws {
         let physicalCursor = NSEvent.mouseLocation
         try placeTarget(frame, under: physicalCursor)
+        // Confirm WindowServer has applied the move before delivering the pointer event.
+        let pointerWindow = NSWindow.windowNumber(at: physicalCursor, belowWindowWithWindowNumber: 0)
+        try require(pointerWindow == window.windowNumber,
+                    "pointer target belongs to window \(pointerWindow), expected \(window.windowNumber)")
+        print("POINTER_WINDOW_TARGET_OK \(pointerWindow)")
         NSApp.postEvent(
             try mouseEvent(
                 type: .mouseMoved,
