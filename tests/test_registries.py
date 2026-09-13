@@ -224,7 +224,7 @@ class RegistryContractTests(unittest.TestCase):
             )
             self.assertEqual(component["deliveryProduct"], expected_product)
 
-    def test_migration_components_are_planned_for_2_0_0_and_absent_from_v1_0_1(self) -> None:
+    def test_migration_components_are_introduced_in_1_0_2_and_absent_from_v1_0_1(self) -> None:
         migration_ids = {
             "airplay-route-picker", "audio-details-view", "lyric-line",
             "lyrics-edge-fade", "lyrics-viewport", "media-metadata-badge",
@@ -245,7 +245,7 @@ class RegistryContractTests(unittest.TestCase):
         current = {item["id"]: item for item in load("registry/components.json")["components"]}
         self.assertTrue(migration_ids.issubset(current))
         for component_id in migration_ids:
-            self.assertEqual(current[component_id]["lifecycle"]["introduced"], "2.0.0")
+            self.assertEqual(current[component_id]["lifecycle"]["introduced"], "1.0.2")
 
         tagged = json.loads(
             subprocess.check_output(

@@ -2,7 +2,7 @@
   "$schema": "../schemas/products.schema.json",
   "meta": {
     "name": "QenTerra Product Archetypes",
-    "version": "2.0.0",
+    "version": "1.0.2",
     "type": "products",
     "description": "Reusable inheritance and exception profiles selected by interaction model."
   },
@@ -10,9 +10,30 @@
     "profile": "immersive-content",
     "density": "standard",
     "defaultNavigation": "expanded-rail",
-    "keep": ["adaptive Soft Graphite palette", "persistent content hierarchy", "stable data tables", "review-first import", "persistent task controls", "queue semantics", "guide mechanics", "recoverable removal"],
-    "adapt": ["navigation states", "settings containers", "buttons", "row interaction", "copy and localization", "screenshot harness"],
-    "replace": ["scattered radii and durations", "duplicate navigation symbols", "suppressed hover and focus", "persistence claims stronger than reality"],
+    "keep": [
+      "adaptive Soft Graphite palette",
+      "persistent content hierarchy",
+      "stable data tables",
+      "review-first import",
+      "persistent task controls",
+      "queue semantics",
+      "guide mechanics",
+      "recoverable removal"
+    ],
+    "adapt": [
+      "navigation states",
+      "settings containers",
+      "buttons",
+      "row interaction",
+      "copy and localization",
+      "screenshot harness"
+    ],
+    "replace": [
+      "scattered radii and durations",
+      "duplicate navigation symbols",
+      "suppressed hover and focus",
+      "persistence claims stronger than reality"
+    ],
     "cadence": {
       "archetype": "immersive-content",
       "density": "standard",
@@ -37,16 +58,60 @@
     "profile": "operational-dense",
     "density": "compact",
     "defaultNavigation": "responsive-compact-rail",
-    "keep": ["object-first hierarchy", "selection summary", "preflight", "conflict resolution", "operation history", "synthetic fixtures", "system integration"],
-    "adapt": ["toolbar wrapping", "settings rows", "scoped issue architecture", "localization", "responsive navigation"],
-    "replace": ["invisible filter overflow", "pristine-field errors", "unnamed toggles", "unconfirmed session discard", "global untyped errors"]
+    "keep": [
+      "object-first hierarchy",
+      "selection summary",
+      "preflight",
+      "conflict resolution",
+      "operation history",
+      "synthetic fixtures",
+      "system integration"
+    ],
+    "adapt": [
+      "toolbar wrapping",
+      "settings rows",
+      "scoped issue architecture",
+      "localization",
+      "responsive navigation"
+    ],
+    "replace": [
+      "invisible filter overflow",
+      "pristine-field errors",
+      "unnamed toggles",
+      "unconfirmed session discard",
+      "global untyped errors"
+    ]
   },
   "transientCapability": {
     "profile": "transient-capability",
     "density": "compact",
     "defaultNavigation": "transient-plus-settings-sidebar",
-    "keep": ["honest state vocabulary", "short semantic motion", "localization", "privacy language", "HUD", "quick history", "keycaps", "real-signal-only feedback", "diagnostics preview"],
-    "adapt": ["adaptive palette", "typography", "settings components", "button roles", "onboarding requirements", "lifecycle cards"],
-    "replace": ["forced appearance", "undersized typography", "generic recovery", "broken focus restoration", "fake trial flows", "stale visual sources"]
+    "keep": [
+      "honest state vocabulary",
+      "short semantic motion",
+      "localization",
+      "privacy language",
+      "HUD",
+      "quick history",
+      "keycaps",
+      "real-signal-only feedback",
+      "diagnostics preview"
+    ],
+    "adapt": [
+      "adaptive palette",
+      "typography",
+      "settings components",
+      "button roles",
+      "onboarding requirements",
+      "lifecycle cards"
+    ],
+    "replace": [
+      "forced appearance",
+      "undersized typography",
+      "generic recovery",
+      "broken focus restoration",
+      "fake trial flows",
+      "stale visual sources"
+    ]
   }
 }

@@ -1,6 +1,6 @@
 {
   "format": "design-system-figma-components-v1",
-  "version": "2.0.0",
+  "version": "1.0.2",
   "components": [
     {
       "id": "button",
@@ -127,7 +127,7 @@
         "web"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -306,7 +306,7 @@
         "web"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -384,7 +384,7 @@
         "web"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -459,7 +459,7 @@
         "web"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -529,7 +529,7 @@
         "web"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -599,7 +599,7 @@
         "web"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -838,7 +838,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -897,7 +897,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -967,7 +967,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -1040,7 +1040,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -1114,7 +1114,7 @@
         "web"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -1188,7 +1188,7 @@
         "web"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "minor"
       },
       "anatomy": [
@@ -1325,7 +1325,7 @@
         "web"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -1395,7 +1395,7 @@
         "web"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "minor"
       },
       "anatomy": [
@@ -1460,7 +1460,7 @@
         "web"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -1612,7 +1612,7 @@
         "web"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -1681,7 +1681,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -1741,7 +1741,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -1798,7 +1798,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -1856,7 +1856,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -1915,7 +1915,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "minor"
       },
       "anatomy": [
@@ -1971,7 +1971,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -2030,7 +2030,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -2097,7 +2097,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -2157,7 +2157,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -2218,7 +2218,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "minor"
       },
       "anatomy": [
@@ -2276,7 +2276,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "minor"
       },
       "anatomy": [
@@ -2345,7 +2345,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "minor"
       },
       "anatomy": [
@@ -2408,7 +2408,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "minor"
       },
       "anatomy": [
@@ -2472,7 +2472,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "minor"
       },
       "anatomy": [
@@ -2539,7 +2539,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "minor"
       },
       "anatomy": [
@@ -2594,7 +2594,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "minor"
       },
       "anatomy": [
@@ -2656,7 +2656,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "minor"
       },
       "anatomy": [
@@ -2719,7 +2719,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -2804,7 +2804,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "minor"
       },
       "anatomy": [
@@ -2876,7 +2876,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -2953,7 +2953,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -3032,7 +3032,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "minor"
       },
       "anatomy": [
@@ -3096,7 +3096,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -3171,7 +3171,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -3245,7 +3245,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "minor"
       },
       "anatomy": [
@@ -3309,7 +3309,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "minor"
       },
       "anatomy": [
@@ -3375,7 +3375,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -3446,7 +3446,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -3512,7 +3512,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -3587,7 +3587,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -3651,7 +3651,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -3724,7 +3724,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -3781,7 +3781,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -3851,7 +3851,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "minor"
       },
       "anatomy": [
@@ -3902,7 +3902,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "minor"
       },
       "anatomy": [
@@ -3962,7 +3962,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -4027,7 +4027,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -4093,7 +4093,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "minor"
       },
       "anatomy": [
@@ -4151,7 +4151,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "minor"
       },
       "anatomy": [
@@ -4209,7 +4209,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "minor"
       },
       "anatomy": [
@@ -4268,7 +4268,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -4359,7 +4359,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "minor"
       },
       "anatomy": [
@@ -4423,7 +4423,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "major"
       },
       "anatomy": [
@@ -4500,7 +4500,7 @@
         "macOS"
       ],
       "lifecycle": {
-        "introduced": "2.0.0",
+        "introduced": "1.0.2",
         "review": "minor"
       },
       "anatomy": [

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "2.0.0",
+  "version": "1.0.2",
   "repository": "https://github.com/qenterra/design-system",
   "files": [
     {
@@ -55,7 +55,7 @@
     },
     {
       "path": ".github/qenterra-repository.json",
-      "sha256": "44abdd1edfc89d84383771a16e86c7d6f198cf51549c6e82923ec4a280197967",
+      "sha256": "9144901e57c46758664c2fb6ebad9b26d80ef30c04ba1ceb08a32a79b6e80412",
       "bytes": 5793
     },
     {
@@ -90,8 +90,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "630648d73b03309d8e0d3f7d2b8522427f68133426cbda197b87d4985ce8115d",
-      "bytes": 10041
+      "sha256": "8fcb8757a2e4f053f05c40be32f0fc64879b32ba119c45575f56cb144d21c2ca",
+      "bytes": 10091
     },
     {
       "path": "CODE_OF_CONDUCT.md",
@@ -125,13 +125,13 @@
     },
     {
       "path": "README.md",
-      "sha256": "0094a3947fbdbb03ba1d4750a9505b2344979f06cd18dbbb44141c687abd7111",
+      "sha256": "edcf6fa708323e7f7265843c5c4b919d5b9148b903a79d1c53e57252a9e84a8c",
       "bytes": 8279
     },
     {
       "path": "SECURITY.md",
-      "sha256": "aacf54aa067f6431acf9a654c1a9d4a1e9e502bb16881014bbfdf0f8410427f0",
-      "bytes": 2349
+      "sha256": "555a4a507c5907e9a9a90f88ce0466206c082f0f0d0d37e87a247debb1238ddc",
+      "bytes": 2344
     },
     {
       "path": "SUPPORT.md",
@@ -10540,7 +10540,7 @@
     },
     {
       "path": "Sources/BootstrapIcons/manifest.json",
-      "sha256": "2f516d67ca83d000f97226c6162bbb3e8a25b6adccea52c38e8c0ca988b3e79e",
+      "sha256": "8ef58419d6b6b20cacab14c4dc595ed465c77e546a821618d7a946d3c5c624ee",
       "bytes": 851220
     },
     {
@@ -11655,7 +11655,7 @@
     },
     {
       "path": "Sources/ExploreSwiftUI/manifest.json",
-      "sha256": "1a2a4351124092f593307d848b9835f5d45799b01ce9d5f94b8b3fdaea7b586f",
+      "sha256": "57c9178c42f0f0c5ef6f8804afbbc413135eadda6cffd8ba84a41e9ae25f86bb",
       "bytes": 248777
     },
     {
@@ -20025,7 +20025,7 @@
     },
     {
       "path": "Sources/Iconoir/manifest.json",
-      "sha256": "b58fbb5afc90b82bb73a3e8ddf752878d4722622b539e5366172aae0bbc0aaab",
+      "sha256": "4bd91b6af95df1e10000fbaa1ec718ada7c5c71645ba33c1406566f311d0bc5e",
       "bytes": 736795
     },
     {
@@ -20800,7 +20800,7 @@
     },
     {
       "path": "Sources/MagicUI/manifest.json",
-      "sha256": "542ab9440df35a955771609328b3de46f7df1049d3e8359da77823b0d3876e4d",
+      "sha256": "f638ed0d16f5b29a511044e148ac0024085842e5114e7b7f3c0628fdb7a0f323",
       "bytes": 92963
     },
     {
@@ -66175,7 +66175,7 @@
     },
     {
       "path": "Sources/PhosphorIcons/manifest.json",
-      "sha256": "51b3d896c81fac3fc60df0d55301a89dee5a1e586a776ad681e71799d848bc07",
+      "sha256": "f741c6ba0bb002e920be7b53b54811f1f2001d88dff03d29f5ccdd624362de15",
       "bytes": 4143937
     },
     {
@@ -66335,17 +66335,17 @@
     },
     {
       "path": "Sources/QenTerra/DesignTokens/GeneratedIcons.swift",
-      "sha256": "005b6c794268e820ff7a92b7ef81fd9f8fbfc7b2d0b1cd88ca282fa28c8a6c0a",
+      "sha256": "6278a5bf61178941af8362d26e9b485c4fa4cb45770f95e579606d389903da88",
       "bytes": 579
     },
     {
       "path": "Sources/QenTerra/DesignTokens/GeneratedProductProfiles.swift",
-      "sha256": "cca2751ef113ad6be874d56d03455c2b72fe7157727d4d3f03df3f125bb71a52",
+      "sha256": "5ed806a9477127b5a619588f82c84a47673972ae186a0c57481d275700848501",
       "bytes": 414
     },
     {
       "path": "Sources/QenTerra/DesignTokens/GeneratedTokens.swift",
-      "sha256": "51e2a59e87a92db76cafef37259daa8f0b16f9327e067cff25fc6fdd012c4af4",
+      "sha256": "3cd9700c11749eb0151092a508eedab87249a2e210d097999814360522fb8f7d",
       "bytes": 33748
     },
     {
@@ -66615,7 +66615,7 @@
     },
     {
       "path": "Sources/QenTerra/manifest.json",
-      "sha256": "e5dcf1dd10b94a6e5df084cf51183db66916397c5ffc2397ccf8e7c6907570d7",
+      "sha256": "90871859c688c0c5a2ed20141271d8fb5c6680bd44ef5679965762d464e4de87",
       "bytes": 35079
     },
     {
@@ -90315,7 +90315,7 @@
     },
     {
       "path": "Sources/ReUI/manifest.json",
-      "sha256": "bd784cb30bebc5d4615926212391994ff0d4aef667f5103fd7de25dd937a1058",
+      "sha256": "d94fd45c0d14c7e1b2b10f8461222ea9cd7e7032f68d7cb73e68d03ede55cc4a",
       "bytes": 3801818
     },
     {
@@ -91240,7 +91240,7 @@
     },
     {
       "path": "Sources/ShadcnUI/manifest.json",
-      "sha256": "929d28f92c65fe8f61980e5a2e17f3fc96cc8d1269e7fa3684a76e6fbd790394",
+      "sha256": "9ed704faf74dd03530c1d03844cec8ed3dde1d78ddf0be69a37d6eb9c6559ef4",
       "bytes": 103050
     },
     {
@@ -122175,7 +122175,7 @@
     },
     {
       "path": "Sources/TablerIcons/manifest.json",
-      "sha256": "64d75c6abc7e23780156cc1c2ed498d931251098445f8ed98e6b603962a9419f",
+      "sha256": "e7affa13c63384d819ea52764749eb3e8c19c460249fa9bb88357e035bb8a124",
       "bytes": 2758421
     },
     {
@@ -129640,7 +129640,7 @@
     },
     {
       "path": "Sources/UIable/manifest.json",
-      "sha256": "39b69f2aaf81b921edc7b8aab406540f81121d4eefc3f3201182d75a70b7c9ab",
+      "sha256": "d0e99536a82147a85e78e70ca6f47d4446015b1b26bb69ff1dd3ea383e117586",
       "bytes": 998977
     },
     {
@@ -129685,8 +129685,8 @@
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/README.md",
-      "sha256": "978386c403bb3ba2445f1c1f402355d6d2c084328f56e4e8c457b0b62d7fe9dc",
-      "bytes": 5774
+      "sha256": "296e1561a16b05ae0ef988d845a4f8496f8a6ffcf1b999817a53c0562db5610e",
+      "bytes": 5821
     },
     {
       "path": "Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-26-arm64/about-two-products-dark.png",
@@ -130310,7 +130310,7 @@
     },
     {
       "path": "docs/RELEASING.md",
-      "sha256": "57698c30222699075cca37b31babdfabac8f51e277a35f61c8bc1bf8010e19fd",
+      "sha256": "cf833e503ed7580e582c0af9f19daeff0076b2a4792bb991021b39458d378423",
       "bytes": 2029
     },
     {
@@ -130325,7 +130325,7 @@
     },
     {
       "path": "docs/SWIFT_UTILITIES.md",
-      "sha256": "956407cd419d9599775a2212877c85707bbebf7a11ea7496f60562b836c1340d",
+      "sha256": "b15cbc3e50949720e386bac349f1086e9576ed38568977e3489281d28d82a97b",
       "bytes": 4790
     },
     {
@@ -130360,7 +130360,7 @@
     },
     {
       "path": "npm/design-tokens/dist/icons.json",
-      "sha256": "ad28fcf081c9298af436c3dd3b8dde746489486f8216a8e60b3e8d47dd2a71d5",
+      "sha256": "f5aef7219c52ec1bcae25653db6b973227fe8c95fbd4e60e9052690e16a96aea",
       "bytes": 1945
     },
     {
@@ -130370,17 +130370,17 @@
     },
     {
       "path": "npm/design-tokens/dist/tokens.css",
-      "sha256": "f5f5763da9cf8244cb8f59d18ec1462c405d37e89458c41f13d47a910199b9e6",
+      "sha256": "d675d1d7c2c8b8cc186ed993bc8662ab11d208858ebe1ef7883f4a4399a822fa",
       "bytes": 27815
     },
     {
       "path": "npm/design-tokens/dist/tokens.json",
-      "sha256": "f15ad0adb825905e4fd8029512d7a384d439268cf2ec94134b08c095777de65b",
+      "sha256": "ccd9e61aa9124897eea17934dad053624615e3621f738c3fbb71c3413fd762b8",
       "bytes": 48625
     },
     {
       "path": "npm/design-tokens/package.json",
-      "sha256": "86b7d93a42ff838bd73b5dca8c52d12303c84f2b2ba306aae345290061473fb1",
+      "sha256": "c06ccd1c1c2a0ca80152d8c48a8df240deee7141177177e6982877c8f4cf14c4",
       "bytes": 729
     },
     {
@@ -130430,7 +130430,7 @@
     },
     {
       "path": "npm/design-tokens/src/icons.json",
-      "sha256": "dfbfe6023a6cdc586f6ef39a86da096160ea1688bb4d066a8cbf9834eb084fb3",
+      "sha256": "0ad8da2b8960e4dd0d4a5b17bd058814e718e6c0179200ebbf5aeb296b70fd87",
       "bytes": 1998
     },
     {
@@ -130445,12 +130445,12 @@
     },
     {
       "path": "npm/design-tokens/src/tokens.json",
-      "sha256": "f15ad0adb825905e4fd8029512d7a384d439268cf2ec94134b08c095777de65b",
+      "sha256": "ccd9e61aa9124897eea17934dad053624615e3621f738c3fbb71c3413fd762b8",
       "bytes": 48625
     },
     {
       "path": "package.json",
-      "sha256": "4f9ead52a58dae49341571607bd465fedcab999aab489566db038273ded28020",
+      "sha256": "f16112348e97e0c73f67c4c32a664dd744c5c56de9dc2e9dbf55030b9e33814f",
       "bytes": 225
     },
     {

@@ -1,6 +1,6 @@
 # Design System
 
-Version 2.0.0 · Normative reference for people
+Version 1.0.2 · Normative reference for people
 
 ## 0. How to use this file
 

@@ -25,7 +25,7 @@ See the complete [repository structure](docs/REPOSITORY_STRUCTURE.md).
 ## Requirements and setup
 
 - Swift 5.9 or later for native packages.
-- macOS 26 or iOS 16 or later for supported Swift consumers in version `2.0.0`. Version `1.0.1` retains its original macOS 13 minimum.
+- macOS 26 or iOS 16 or later for supported Swift consumers in version `1.0.2`. Version `1.0.1` retains its original macOS 13 minimum.
 - Node.js 22 or later for npm package inspection.
 - Python 3.11 or later for repository verification.
 
@@ -76,7 +76,7 @@ Nikita Melnychenko (`@qenterra`) owns package APIs, release decisions, security 
 
 ## Version and release model
 
-All packages use one Semantic Versioning value. The maintained line began at `1.0.0` and the current source version is `2.0.0`; npm metadata, Swift source compatibility, source catalogs, release tags, changelog, and `release-manifest.json` move together. Tags use `v<version>` and published versions are immutable.
+All packages use one Semantic Versioning value. The maintained line began at `1.0.0` and the current source version is `1.0.2`; npm metadata, Swift source compatibility, source catalogs, release tags, changelog, and `release-manifest.json` move together. Tags use `v<version>` and published versions are immutable.
 
 From the repository root, `python3 scripts/set_version.py <MAJOR.MINOR.PATCH>` validates plain SemVer, stages the full alignment transaction, regenerates public outputs, and prints changed paths. It performs no Git or publication action.
 

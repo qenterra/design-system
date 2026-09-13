@@ -14,7 +14,7 @@ A hosted draft still requires publication authority.
 - Release owner: Nikita Melnychenko (QenTerra)
 - Version scheme: semver
 - Version source: `VERSION`
-- Current version: `2.0.0`
+- Current version: `1.0.2`
 
 The maintained release line starts at `1.0.0`. Earlier source snapshot identifiers remain in Git history, and npmjs retains immutable historical `@qenterra/design-tokens@5.0.0`; neither is rewritten or backfilled as a canonical release.
 
