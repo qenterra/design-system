@@ -2,7 +2,7 @@
   "$schema": "../schemas/motion.schema.json",
   "meta": {
     "name": "QenTerra Motion Tokens",
-    "version": "2.0.0",
+    "version": "1.0.2",
     "type": "motion",
     "description": "Short, interruptible, state-explanatory motion."
   },
@@ -19,25 +19,109 @@
     "spatialLong": 240
   },
   "curve": {
-    "standard": [0.2, 0.0, 0.0, 1.0],
-    "enter": [0.16, 1.0, 0.3, 1.0],
-    "exit": [0.4, 0.0, 1.0, 1.0],
-    "linear": [0.0, 0.0, 1.0, 1.0]
+    "standard": [
+      0.2,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "enter": [
+      0.16,
+      1.0,
+      0.3,
+      1.0
+    ],
+    "exit": [
+      0.4,
+      0.0,
+      1.0,
+      1.0
+    ],
+    "linear": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+    ]
   },
   "events": {
-    "feedback.press": {"duration": "press", "curve": "standard", "properties": ["opacity", "scale<=0.98"]},
-    "feedback.hover": {"duration": "hover", "curve": "standard", "properties": ["background", "foreground"]},
-    "state.replace": {"duration": "replace", "curve": "standard", "properties": ["opacity"]},
-    "floating.present": {"duration": "present", "curve": "enter", "properties": ["opacity", "scale:0.98->1"]},
-    "floating.dismiss": {"duration": "dismiss", "curve": "exit", "properties": ["opacity", "scale:1->0.99"]},
-    "disclosure.toggle": {"duration": "disclosure", "curve": "standard", "properties": ["height", "opacity"]},
-    "navigation.spatial": {"duration": "spatial", "curve": "standard", "properties": ["transform", "opacity"]},
-    "progress.continuous": {"duration": "instant", "curve": "linear", "properties": ["measured-progress"]}
+    "feedback.press": {
+      "duration": "press",
+      "curve": "standard",
+      "properties": [
+        "opacity",
+        "scale<=0.98"
+      ]
+    },
+    "feedback.hover": {
+      "duration": "hover",
+      "curve": "standard",
+      "properties": [
+        "background",
+        "foreground"
+      ]
+    },
+    "state.replace": {
+      "duration": "replace",
+      "curve": "standard",
+      "properties": [
+        "opacity"
+      ]
+    },
+    "floating.present": {
+      "duration": "present",
+      "curve": "enter",
+      "properties": [
+        "opacity",
+        "scale:0.98->1"
+      ]
+    },
+    "floating.dismiss": {
+      "duration": "dismiss",
+      "curve": "exit",
+      "properties": [
+        "opacity",
+        "scale:1->0.99"
+      ]
+    },
+    "disclosure.toggle": {
+      "duration": "disclosure",
+      "curve": "standard",
+      "properties": [
+        "height",
+        "opacity"
+      ]
+    },
+    "navigation.spatial": {
+      "duration": "spatial",
+      "curve": "standard",
+      "properties": [
+        "transform",
+        "opacity"
+      ]
+    },
+    "progress.continuous": {
+      "duration": "instant",
+      "curve": "linear",
+      "properties": [
+        "measured-progress"
+      ]
+    }
   },
   "reducedMotion": {
     "maximumDurationMs": 100,
-    "remove": ["scale", "translation", "parallax", "stagger", "auto-scroll-animation"],
-    "retain": ["opacity", "instant-state-replacement", "measured-progress"]
+    "remove": [
+      "scale",
+      "translation",
+      "parallax",
+      "stagger",
+      "auto-scroll-animation"
+    ],
+    "retain": [
+      "opacity",
+      "instant-state-replacement",
+      "measured-progress"
+    ]
   },
   "prohibited": [
     "layout-shifting selection",

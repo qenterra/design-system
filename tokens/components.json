@@ -2,24 +2,60 @@
   "$schema": "../schemas/components.schema.json",
   "meta": {
     "name": "QenTerra Component Tokens",
-    "version": "2.0.0",
+    "version": "1.0.2",
     "type": "components",
     "description": "Shared component metrics and mandatory state contracts."
   },
   "button": {
-    "heights": {"compact": "{size.controlCompact}", "standard": "{size.controlStandard}", "prominent": "{size.controlProminent}"},
-    "paddingX": {"compact": 10, "standard": 12, "prominent": 16},
+    "heights": {
+      "compact": "{size.controlCompact}",
+      "standard": "{size.controlStandard}",
+      "prominent": "{size.controlProminent}"
+    },
+    "paddingX": {
+      "compact": 10,
+      "standard": 12,
+      "prominent": 16
+    },
     "radius": "{radius.control}",
     "iconGap": "{space.2}",
-    "roles": ["primary", "secondary", "quiet", "destructive", "icon", "menuRow", "link"],
-    "states": ["default", "hover", "pressed", "focused", "selected", "disabled", "loading"]
+    "roles": [
+      "primary",
+      "secondary",
+      "quiet",
+      "destructive",
+      "icon",
+      "menuRow",
+      "link"
+    ],
+    "states": [
+      "default",
+      "hover",
+      "pressed",
+      "focused",
+      "selected",
+      "disabled",
+      "loading"
+    ]
   },
   "interactiveRow": {
-    "heights": {"compact": "{size.rowCompact}", "standard": "{size.rowStandard}", "comfortable": "{size.rowComfortable}"},
+    "heights": {
+      "compact": "{size.rowCompact}",
+      "standard": "{size.rowStandard}",
+      "comfortable": "{size.rowComfortable}"
+    },
     "radius": "{radius.control}",
     "paddingX": "{space.3}",
     "gap": "{space.3}",
-    "states": ["default", "hover", "pressed", "focused", "selected", "disabled", "unavailable"]
+    "states": [
+      "default",
+      "hover",
+      "pressed",
+      "focused",
+      "selected",
+      "disabled",
+      "unavailable"
+    ]
   },
   "group": {
     "radius": "{radius.group}",
@@ -218,10 +254,20 @@
     "height": "{size.controlStandard}",
     "radius": "{radius.control}",
     "paddingX": "{space.3}",
-    "states": ["pristine", "editing", "valid", "invalid", "disabled", "readOnly"]
+    "states": [
+      "pristine",
+      "editing",
+      "valid",
+      "invalid",
+      "disabled",
+      "readOnly"
+    ]
   },
   "table": {
-    "rowHeights": {"compact": "{size.rowCompact}", "standard": "{size.rowStandard}"},
+    "rowHeights": {
+      "compact": "{size.rowCompact}",
+      "standard": "{size.rowStandard}"
+    },
     "headerHeight": "{size.controlStandard}",
     "columnGap": "{space.4}",
     "selectionRequiresTextOrShape": true,
@@ -238,7 +284,13 @@
     "sidebarStandard": "{size.sidebarStandard}",
     "itemHeight": "{size.rowCompact}",
     "minimumIconTarget": "{size.targetPointer}",
-    "states": ["default", "hover", "focused", "selected", "disabled"]
+    "states": [
+      "default",
+      "hover",
+      "focused",
+      "selected",
+      "disabled"
+    ]
   },
   "overlay": {
     "popoverMaxWidth": 360,
@@ -258,7 +310,10 @@
     "iconSize": "{size.iconS}",
     "gap": 6,
     "colorAloneForbidden": true,
-    "requiredParts": ["symbol-or-shape", "plain-language-label"]
+    "requiredParts": [
+      "symbol-or-shape",
+      "plain-language-label"
+    ]
   },
   "extensions": {
     "rawMetricExceptions": {

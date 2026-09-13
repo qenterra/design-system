@@ -11,7 +11,7 @@ actual body, target, flags and assets after each authorised publication.
 - Release owner: Nikita Melnychenko (QenTerra)
 - Version scheme: Semantic Versioning
 - Version source: `release-manifest.json`
-- Current version: `2.0.0`
+- Current version: `1.0.2`
 - Tag format: `v<version>`
 
 The maintained package line starts at `1.0.0`. npmjs retains immutable historical `@qenterra/design-tokens@5.0.0` from the retired Packages repository; release verification must treat it as registry history rather than the predecessor of the new `1.x` line.

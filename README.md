@@ -2,7 +2,7 @@
 
 Universal foundations, reusable visual components, palettes, platform adapters, and engineering contracts for websites, native applications, and other interface-bearing projects.
 
-> **Status:** public canonical source, version `2.0.0`, licensed under MIT.
+> **Status:** public canonical source, version `1.0.2`, licensed under MIT.
 
 ## Use it
 
