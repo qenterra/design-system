@@ -1,6 +1,6 @@
 # Design System
 
-Version 1.0.2 · Normative reference for people
+Version 1.1.0 · Normative reference for people
 
 ## 0. How to use this file
 
@@ -277,6 +277,8 @@ Every layout defines:
 - focus order;
 - behavior under 30% string expansion and 200% web zoom.
 
+`DesignFlowLayout` proposes the available finite width during both child measurement and placement so long content can wrap vertically. It reports the actual measured size of content that explicitly refuses compression; it must not conceal overflow by reporting a smaller width.
+
 ## 4. Interaction states
 
 Every interactive component must define:
@@ -432,6 +434,8 @@ Shared navigation defines states, icon treatment, label behavior, keyboard movem
 - Each destination needs a unique symbol.
 - Expansion keeps icon anchors stable and animates width/label opacity only.
 - Compact mode must not hide the current location entirely.
+- Profiled rails scroll vertically when their expansion control, destinations, and footer exceed the available height. At taller heights the footer remains aligned to the bottom.
+- `NavigationRailItemBoundsKey<ID>` publishes actual destination and footer button bounds. Consumers resolve these anchors in their overlay coordinate space for product-owned reorder or decoration controls; fixed row offsets must not stand in for scrolling geometry.
 
 Archetype defaults:
 

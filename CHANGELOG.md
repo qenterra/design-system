@@ -4,6 +4,17 @@ All notable maintained Design System changes are recorded here. Versions follow 
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-10-22
+
+### Added
+
+- Added `NavigationRailItemBoundsKey<ID>` so consumer-owned overlays can follow actual destination and footer button bounds during scrolling and expansion. Existing rail APIs remain compatible.
+
+### Fixed
+
+- Keep profiled navigation destinations and footer controls reachable by vertical scrolling at short window heights, preserve bottom-aligned footers when space permits, and reveal keyboard-focused items.
+- Propose finite available widths when measuring and placing flow children, allowing long labels to wrap without underreporting the size of content that refuses compression.
+
 ## [1.0.2] - 2026-09-13
 
 ### Reusable application code
@@ -82,7 +93,8 @@ All notable maintained Design System changes are recorded here. Versions follow 
 - npmjs still retains the immutable historical `@qenterra/design-tokens@5.0.0` artifact whose metadata points to the retired Packages repository. Resetting source versioning does not erase or rewrite that registry fact.
 - No tag, GitHub Release, or npm publication is implied by this changelog entry. Publication remains a separately authorised operation.
 
-[Unreleased]: https://github.com/QenTerra/design-system/compare/v1.0.2...HEAD
+[Unreleased]: https://github.com/QenTerra/design-system/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/QenTerra/design-system/compare/v1.0.2...v1.1.0
 [1.0.2]: https://github.com/QenTerra/design-system/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/QenTerra/design-system/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/QenTerra/design-system/releases/tag/v1.0.0

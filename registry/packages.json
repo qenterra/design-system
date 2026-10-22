@@ -1,6 +1,6 @@
 {
   "$schema": "../schemas/package-registry.schema.json",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "repository": "https://github.com/qenterra/design-system",
   "versionPolicy": "shared",
   "packages": [
@@ -8,7 +8,7 @@
       "id": "repository-metadata",
       "ecosystem": "repository",
       "name": "qenterra/design-system",
-      "version": "1.0.2",
+      "version": "1.1.0",
       "publicPaths": [
         "packages/.editorconfig",
         "packages/.gitattributes",
@@ -25883,7 +25883,7 @@
       "id": "npm-design-tokens",
       "ecosystem": "npm",
       "name": "@qenterra/design-tokens",
-      "version": "1.0.2",
+      "version": "1.1.0",
       "publicPaths": [
         "packages/npm/design-tokens/LICENSE",
         "packages/npm/design-tokens/README.md",
@@ -25923,7 +25923,7 @@
       "id": "swift-components",
       "ecosystem": "swiftpm",
       "name": "QenTerraPackages",
-      "version": "1.0.2",
+      "version": "1.1.0",
       "products": [
         "QenTerraDesignTokens",
         "QenTerraComponents",
@@ -26012,6 +26012,7 @@
         "packages/Sources/QenTerra/DesignTokens/SwiftUIAdapters.swift",
         "packages/Tests/QenTerraDesignTokensTests/DesignTokensTests.swift",
         "packages/Tests/QenTerraComponentsTests/ComponentTests.swift",
+        "packages/Tests/QenTerraComponentsTests/ConstrainedLayoutTests.swift",
         "packages/Tests/QenTerraComponentSnapshotTests/SnapshotSupport.swift",
         "packages/Tests/QenTerraComponentSnapshotTests/SnapshotSupportTests.swift",
         "packages/Tests/QenTerraComponentSnapshotTests/CoreComponentSnapshots.swift",

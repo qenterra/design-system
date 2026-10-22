@@ -1,5 +1,5 @@
 {
-  "version": "1.0.2",
+  "version": "1.1.0",
   "sourceRegistry": "registry/qenterra-components.json",
   "components": [
     {
@@ -196,8 +196,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/Layout/FlowLayout.swift",
-      "sha256": "79e0787ed5488c7da0efe2163c6781d7d74b322ae09be2b3d4585074348a0c4e",
-      "bytes": 3173
+      "sha256": "9050b0876e315e3c4391366024448d9af441e5c3483d0f95c8781d795eed752e",
+      "bytes": 3546
     },
     {
       "id": "resizable-split-view",
@@ -254,6 +254,7 @@
       "deliveryProduct": "QenTerraComponents",
       "publicSymbols": [
         "NavigationRailItem",
+        "NavigationRailItemBoundsKey",
         "NavigationRailItemPresentation",
         "NavigationRailBackground",
         "NavigationRailPresentation",
@@ -262,8 +263,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/Navigation/NavigationRail.swift",
-      "sha256": "52cedea2609c98c289df27d0a7a8e6e6c23257c6cb14579e3c9ed21fafd4cec7",
-      "bytes": 16387
+      "sha256": "486c72ab98a4a482ad611e6b786e896c7ad3831178da65998665c25e02669a52",
+      "bytes": 17962
     },
     {
       "id": "tab-strip",

@@ -13,14 +13,14 @@ Pin the source release in your `Package.swift`:
 
 ```swift
 // Package dependencies
-.package(url: "https://github.com/QenTerra/design-system", exact: "1.0.2")
+.package(url: "https://github.com/QenTerra/design-system", exact: "1.1.0")
 
 // Dependencies of your application target
 .product(name: "QenTerraFoundation", package: "design-system"),
 .product(name: "QenTerraAudioAnalysis", package: "design-system")
 ```
 
-In Xcode, use **Add Package Dependencies**, enter the repository URL, choose exact version **1.0.2**, and add the required products to your target. Version 1.0.1 does not contain these APIs.
+In Xcode, use **Add Package Dependencies**, enter the repository URL, choose exact version **1.1.0**, and add the required products to your target. Version 1.0.1 does not contain these APIs.
 
 The package supports macOS 26 and iOS 16 with a compatible current Swift toolchain. PCM bass APIs are macOS-only; the presentation clock remains available on both platforms.
 
