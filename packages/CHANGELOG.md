@@ -4,6 +4,14 @@ All notable maintained Design System changes are recorded here. Versions follow 
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-10-22
+
+### Fixed
+
+- Preserve native button roles, activation, and unavailable states for media tiles and rows while keeping embedded favorite controls independent.
+- Preserve consumer-supplied accessibility values on idle interactive rows and expose the loading indicator while content is loading. Public APIs and platform requirements are unchanged.
+- Keep creator and metadata labels readable with semantic text colors, including stronger metadata contrast on selected, hovered, and focused media surfaces.
+
 ## [1.1.0] - 2026-10-22
 
 ### Added
@@ -93,7 +101,8 @@ All notable maintained Design System changes are recorded here. Versions follow 
 - npmjs still retains the immutable historical `@qenterra/design-tokens@5.0.0` artifact whose metadata points to the retired Packages repository. Resetting source versioning does not erase or rewrite that registry fact.
 - No tag, GitHub Release, or npm publication is implied by this changelog entry. Publication remains a separately authorised operation.
 
-[Unreleased]: https://github.com/QenTerra/design-system/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/QenTerra/design-system/compare/v1.1.1...HEAD
+[1.1.1]: https://github.com/QenTerra/design-system/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/QenTerra/design-system/compare/v1.0.2...v1.1.0
 [1.0.2]: https://github.com/QenTerra/design-system/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/QenTerra/design-system/compare/v1.0.0...v1.0.1

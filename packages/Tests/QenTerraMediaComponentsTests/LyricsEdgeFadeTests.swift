@@ -41,8 +41,17 @@ struct LyricsEdgeFadeTests {
                 .init(color: .clear, location: 1),
             ], startPoint: .top, endPoint: .bottom)
         }
-        let actualImage = try render(actual)
-        let equal = try pixels(actual) == pixels(reference)
+        // Separately rendered equivalent masks can differ by one 8-bit alpha
+        // quantum. Keep the geometry oracle exact in floating-point output.
+        let actualImage = try render(actual, colorMode: .extendedLinear)
+        let referenceImage = try render(reference, colorMode: .extendedLinear)
+        for image in [actualImage, referenceImage] {
+            #expect(image.bitsPerComponent == 16)
+            #expect(image.bitmapInfo.contains(.floatComponents))
+        }
+        let actualPixels = try #require(actualImage.dataProvider?.data) as Data
+        let referencePixels = try #require(referenceImage.dataProvider?.data) as Data
+        let equal = actualPixels == referencePixels
         #expect(equal)
         let bitmap = NSBitmapImageRep(cgImage: actualImage)
         let top = try #require(bitmap.colorAt(x: 60, y: 0))
@@ -51,6 +60,22 @@ struct LyricsEdgeFadeTests {
         #expect(top.alphaComponent < 0.05)
         #expect(plateau.alphaComponent > 0.99)
         #expect(bottom.alphaComponent < 0.05)
+    }
+
+    @Test
+    func viewportMaskDetectsAChangedOpaqueBoundary() throws {
+        let actual = Color.white.mask {
+            LyricsEdgeFade(presentation: .viewportMask(.init(
+                topOpaqueLocation: 0.18, bottomOpaqueLocation: 0.88
+            )))
+        }
+        let wrong = Color.white.mask {
+            LyricsEdgeFade(presentation: .viewportMask(.init(
+                topOpaqueLocation: 0.2, bottomOpaqueLocation: 0.88
+            )))
+        }
+        let differs = try pixels(actual, colorMode: .extendedLinear) != pixels(wrong, colorMode: .extendedLinear)
+        #expect(differs)
     }
 
     @Test
@@ -72,14 +97,15 @@ struct LyricsEdgeFadeTests {
         }
     }
 
-    private func pixels(_ view: some View) throws -> Data {
-        let image = try render(view)
+    private func pixels(_ view: some View, colorMode: ColorRenderingMode = .nonLinear) throws -> Data {
+        let image = try render(view, colorMode: colorMode)
         return try #require(image.dataProvider?.data) as Data
     }
 
-    private func render(_ view: some View) throws -> CGImage {
+    private func render(_ view: some View, colorMode: ColorRenderingMode = .nonLinear) throws -> CGImage {
         let renderer = ImageRenderer(content: view.frame(width: 120, height: 200))
         renderer.scale = 1
+        renderer.colorMode = colorMode
         return try #require(renderer.cgImage)
     }
 }

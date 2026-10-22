@@ -86,7 +86,6 @@ public struct InteractiveRowSurface<Content: View>: View {
                     : .easeOut(duration: DesignTokens.Motion.feedbackPress.seconds),
                 value: resolvedState
             )
-            .accessibilityValue(resolvedState.isLoading ? Text("Loading") : Text(""))
     }
 
     private var fillColor: Color {
@@ -118,11 +117,11 @@ public struct InteractiveRowSurface<Content: View>: View {
     @ViewBuilder private var loadingIndicator: some View {
         if reducesMotion {
             Image(systemName: "ellipsis")
-                .accessibilityHidden(true)
+                .accessibilityLabel(Text("Loading"))
         } else {
             ProgressView()
                 .controlSize(.small)
-                .accessibilityHidden(true)
+                .accessibilityLabel(Text("Loading"))
         }
     }
 
@@ -153,4 +152,5 @@ public struct InteractiveRowSurface<Content: View>: View {
         return Color(designToken: token)
     }
 }
+
 #endif

@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.1.1",
   "sourceRegistry": "registry/qenterra-components.json",
   "components": [
     {
@@ -75,8 +75,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/Components/InteractiveRowSurface.swift",
-      "sha256": "d260f9eca7c11b999951fa211c2f91e6dd76e0e78fc9477fa11ed7a24824c679",
-      "bytes": 4728
+      "sha256": "37ca30abd10b147c8adc8f7d0dab9eee917fc70d9ddd11347da55e36f608d659",
+      "bytes": 4663
     },
     {
       "id": "primary-button-style",
@@ -570,8 +570,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Collections/MediaTile.swift",
-      "sha256": "15918b8da9a70bf391c183d7a95a1bf2877c92c361905590e3c9630444747c29",
-      "bytes": 11758
+      "sha256": "a939e040180d907973ea765cdf8a830dc6550640e13e10e580f3d74eca9d46a7",
+      "bytes": 11890
     },
     {
       "id": "media-row",
@@ -584,8 +584,8 @@
       ],
       "designTokens": true,
       "sourcePath": "Sources/QenTerra/MediaComponents/Collections/MediaRow.swift",
-      "sha256": "1c9cb24ca4c7f0f2b3b7c64a66e86b8f4cd44b2b5b3bb887a3c7c3c2b9db652f",
-      "bytes": 5659
+      "sha256": "b0e906f9125e8e266d1438d35d55e5ddd077cd746c80e3b31b06217c6f488951",
+      "bytes": 5801
     },
     {
       "id": "media-grid",

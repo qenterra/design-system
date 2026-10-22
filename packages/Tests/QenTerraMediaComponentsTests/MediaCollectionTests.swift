@@ -1,5 +1,6 @@
 #if os(macOS)
 import AppKit
+import QenTerraComponents
 import QenTerraDesignTokens
 @testable import QenTerraMediaComponents
 import SwiftUI
@@ -466,6 +467,229 @@ private func alphaMask(of image: CGImage) throws -> (width: Int, height: Int, al
         }
     }
     return (image.width, image.height, mask)
+}
+
+@MainActor
+@Suite("Native media collection accessibility", .serialized)
+struct MediaCollectionAccessibilityTests {
+    @Test("Primary media actions retain native button semantics and independent embedded controls",
+          arguments: CollectionKind.allCases, [true, false])
+    func primaryActionIsAnAccessibleButton(kind: CollectionKind, isAvailable: Bool) throws {
+        let recorder = CollectionActionRecorder()
+        let primaryLabel = "Open Synthetic album with a long title — Сигналы после полуночи"
+        let accessoryLabel = "Save Synthetic album independently"
+        let item = MediaItemPresentation(
+            id: "native-accessibility", title: "Synthetic album with a long title — Сигналы после полуночи",
+            subtitle: "Synthetic Artist", metadata: "12 tracks", isSelected: true,
+            isCurrent: false, isPlaying: false, isAvailable: isAvailable
+        )
+        let favorite = FavoritePresentation(
+            isFavorite: false, isPending: false, isRevealed: true,
+            accessibilityLabel: accessoryLabel, accessibilityValue: "Not saved"
+        )
+        let content = VStack {
+            collection(kind: kind, item: item, label: primaryLabel, value: "12 tracks", favorite: favorite, recorder: recorder)
+            Button("Native action probe") { recorder.probes += 1 }
+                .accessibilityValue(Text(verbatim: "Probe value"))
+        }
+        let window = host(content)
+        defer { window.close() }
+        settle(window)
+        let host = try #require(window.contentView)
+        let elements = CollectionAccessibilityElement.descendants(in: host)
+        let probe = try #require(elements.first { $0.name == "Native action probe" })
+        #expect(probe.role == .button)
+        #expect(probe.spokenValue == "Probe value")
+        #expect(probe.press())
+        settle(window)
+        #expect(recorder.probes == 1)
+
+        let primary = try #require(CollectionAccessibilityElement.descendants(in: host).first { $0.name == primaryLabel })
+        #expect(primary.role == .button)
+        #expect(primary.spokenValue == "12 tracks")
+        #expect(primary.isEnabled == isAvailable)
+        if isAvailable {
+            #expect(primary.press())
+        } else {
+            _ = primary.press()
+        }
+        settle(window)
+        #expect(recorder.activations == (isAvailable ? 1 : 0))
+
+        let accessory = try #require(CollectionAccessibilityElement.descendants(in: host).first { $0.name == accessoryLabel })
+        #expect(accessory.role == .button)
+        #expect(accessory.spokenValue == "Not saved")
+        #expect(accessory.isEnabled == true)
+        #expect(accessory.press())
+        settle(window)
+        #expect(recorder.favoriteRequests == [true])
+        #expect(recorder.activations == (isAvailable ? 1 : 0))
+        #expect(recorder.probes == 1)
+    }
+
+    @Test("An absent consumer value does not invent spoken metadata", arguments: CollectionKind.allCases)
+    func absentValueDoesNotInventSpokenMetadata(kind: CollectionKind) throws {
+        let recorder = CollectionActionRecorder()
+        let label = "Open item without a consumer value"
+        let item = MediaItemPresentation(
+            id: "absent-value", title: "Synthetic album", subtitle: "Synthetic Artist", metadata: "12 tracks",
+            isSelected: false, isCurrent: false, isPlaying: false, isAvailable: true
+        )
+        let favorite = FavoritePresentation(
+            isFavorite: false, isPending: false, isRevealed: true,
+            accessibilityLabel: "Save item without a consumer value", accessibilityValue: "Not saved"
+        )
+        let window = host(collection(
+            kind: kind, item: item, label: label, value: nil, favorite: favorite, recorder: recorder
+        ))
+        defer { window.close() }
+        settle(window)
+        let host = try #require(window.contentView)
+        let primary = try #require(CollectionAccessibilityElement.descendants(in: host).first { $0.name == label })
+        #expect(primary.role == .button)
+        #expect(primary.spokenValue == nil || primary.spokenValue == "")
+        #expect(primary.press())
+        settle(window)
+        #expect(recorder.activations == 1)
+    }
+
+    @Test("The shared surface preserves idle values and exposes its actual loading indicator",
+          arguments: [false, true], [false, true])
+    func surfaceValueFollowsLoadingState(isLoading: Bool, reducesMotion: Bool) throws {
+        let window = host(InteractiveRowSurface(state: InteractiveRowState(isLoading: isLoading)) {
+            Button("Surface action probe") {}
+                .accessibilityValue(Text(verbatim: "Probe value"))
+        }.environment(\.designNativeEnvironment, DesignNativeEnvironment(
+            appearance: .light, productProfile: .cadence, density: .standard,
+            isIncreasedContrast: false, reducesMotion: reducesMotion, reducesTransparency: false
+        )))
+        defer { window.close() }
+        settle(window)
+        let host = try #require(window.contentView)
+        let elements = CollectionAccessibilityElement.descendants(in: host)
+        if isLoading {
+            #expect(!elements.contains { $0.name == "Surface action probe" })
+            #expect(elements.contains { $0.name == "Loading" })
+        } else {
+            let probe = try #require(elements.first { $0.name == "Surface action probe" })
+            #expect(probe.role == .button)
+            #expect(probe.spokenValue == "Probe value")
+            #expect(!elements.contains { $0.name == "Loading" })
+        }
+    }
+
+    enum CollectionKind: CaseIterable, Sendable {
+        case tile
+        case row
+    }
+
+    @ViewBuilder
+    private func collection(
+        kind: CollectionKind, item: MediaItemPresentation<String>, label: String, value: String?,
+        favorite: FavoritePresentation, recorder: CollectionActionRecorder
+    ) -> some View {
+        switch kind {
+        case .tile:
+            MediaTile(item: item, accessibilityLabel: label, accessibilityValue: value) {
+                Color.blue.frame(width: 100, height: 100)
+            } trailingAccessory: {
+                FavoriteControl(presentation: favorite) { recorder.favoriteRequests.append($0) }
+            } action: {
+                recorder.activations += 1
+            }
+        case .row:
+            MediaRow(item: item, accessibilityLabel: label, accessibilityValue: value) {
+                Color.blue
+            } trailingAccessory: {
+                FavoriteControl(presentation: favorite) { recorder.favoriteRequests.append($0) }
+            } action: {
+                recorder.activations += 1
+            }
+        }
+    }
+
+    private func host(_ content: some View) -> NSWindow {
+        _ = NSApplication.shared
+        let window = NSWindow(
+            contentRect: CGRect(x: 100, y: 100, width: 460, height: 360),
+            styleMask: [.titled], backing: .buffered, defer: false
+        )
+        window.isReleasedWhenClosed = false
+        window.contentView = NSHostingView(rootView: content)
+        window.orderFront(nil)
+        return window
+    }
+
+    private func settle(_ window: NSWindow) {
+        window.contentView?.layoutSubtreeIfNeeded()
+        RunLoop.main.run(until: Date().addingTimeInterval(0.03))
+        window.contentView?.layoutSubtreeIfNeeded()
+    }
+}
+
+@MainActor
+private final class CollectionActionRecorder {
+    var activations = 0
+    var favoriteRequests: [Bool] = []
+    var probes = 0
+}
+
+@MainActor
+private struct CollectionAccessibilityElement {
+    let object: NSObject
+
+    var name: String? {
+        (value("accessibilityLabel") as? String) ?? (value("accessibilityTitle") as? String)
+    }
+
+    var role: NSAccessibility.Role? {
+        (value("accessibilityRole") as? String).map(NSAccessibility.Role.init(rawValue:))
+    }
+
+    var spokenValue: String? {
+        if let description = value("accessibilityValueDescription") as? String, !description.isEmpty {
+            return description
+        }
+        return value("accessibilityValue") as? String
+    }
+
+    var isEnabled: Bool? {
+        let selector = NSSelectorFromString("isAccessibilityEnabled")
+        guard object.responds(to: selector) else { return nil }
+        typealias Getter = @convention(c) (AnyObject, Selector) -> Bool
+        return unsafeBitCast(object.method(for: selector), to: Getter.self)(object, selector)
+    }
+
+    func press() -> Bool {
+        let selector = NSSelectorFromString("accessibilityPerformPress")
+        guard object.responds(to: selector) else { return false }
+        typealias Action = @convention(c) (AnyObject, Selector) -> Bool
+        return unsafeBitCast(object.method(for: selector), to: Action.self)(object, selector)
+    }
+
+    private func value(_ name: String) -> Any? {
+        let selector = NSSelectorFromString(name)
+        guard object.responds(to: selector) else { return nil }
+        return object.perform(selector)?.takeUnretainedValue()
+    }
+
+    static func descendants(in root: Any) -> [Self] {
+        // Export the real SwiftUI nodes in this test host without system settings or external AX access.
+        NSApplication.shared.perform(
+            NSSelectorFromString("accessibilitySetValue:forAttribute:"),
+            with: NSNumber(value: true), with: "AXEnhancedUserInterface"
+        )
+        var visited = Set<ObjectIdentifier>()
+        func visit(_ value: Any, depth: Int) -> [Self] {
+            guard depth < 40, let object = value as? NSObject,
+                  visited.insert(ObjectIdentifier(object)).inserted else { return [] }
+            let element = Self(object: object)
+            let children = element.value("accessibilityChildren") as? [Any] ?? []
+            let nativeChildren = (value as? NSView)?.subviews ?? []
+            return [element] + (children + nativeChildren).flatMap { visit($0, depth: depth + 1) }
+        }
+        return visit(root, depth: 0)
+    }
 }
 
 #endif

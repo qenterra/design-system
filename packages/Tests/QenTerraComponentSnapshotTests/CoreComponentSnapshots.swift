@@ -63,11 +63,11 @@ struct CoreComponentSnapshots {
             size: CGSize(width: 620, height: 370), configuration: configuration(appearance),
             accessibility: .init(reducesMotion: true, reducesTransparency: true)
         ) { ReducedEffectsFixture() }
-        let regularImage = try regular.render()
-        let fallbackImage = try reducedTransparency.render()
+        let regularCapture = try regular.capture()
+        let fallbackCapture = try reducedTransparency.capture()
         // Shipped core surfaces are already opaque. Reduced Transparency must preserve them exactly.
-        #expect(regularImage == fallbackImage)
-        try assertSnapshotImage(fallbackImage, name: "reduced-effects-\(appearance.rawValue)")
+        #expect(regularCapture.image == fallbackCapture.image)
+        try assertSnapshotImage(fallbackCapture, name: "reduced-effects-\(appearance.rawValue)")
     }
 
     @Test func systemAppearanceChangesOnTheSameHost() throws {
@@ -79,19 +79,19 @@ struct CoreComponentSnapshots {
             ControlsFixture().background(EnvironmentProbe(observed: observed))
         }
         host.setAppearance(.aqua)
-        let light = try host.render()
+        let light = try host.capture()
         #expect(observed.value?.appearance == .light)
         let lightGeometry = host.view.frame
         host.setAppearance(.darkAqua)
-        let dark = try host.render()
+        let dark = try host.capture()
         #expect(observed.value?.appearance == .dark)
         #expect(configuration.appearance == .system)
         #expect(contentConstructions == 1)
         #expect(host.view.effectiveAppearance.bestMatch(from: [.aqua, .darkAqua]) == .darkAqua)
         #expect(host.view.frame == lightGeometry)
-        #expect(light.width == dark.width && light.height == dark.height)
-        #expect(light.pixels != dark.pixels)
-        #expect(throws: SnapshotFailure.self) { try light.compare(dark) }
+        #expect(light.image.width == dark.image.width && light.image.height == dark.image.height)
+        #expect(light.image.pixels != dark.image.pixels)
+        #expect(throws: SnapshotFailure.self) { try light.image.compare(dark.image) }
         try assertSnapshotImage(light, name: "system-live-light")
         try assertSnapshotImage(dark, name: "system-live-dark")
     }

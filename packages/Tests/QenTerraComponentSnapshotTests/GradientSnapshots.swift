@@ -95,7 +95,7 @@ struct GradientSnapshots {
             throw SnapshotFailure.rendering("Gradient boundary \(boundary.name) did not produce an image")
         }
         try assertSnapshotImage(
-            RGBAImage(cgImage: image),
+            .raster(RGBAImage(cgImage: image)),
             name: "gradient-boundary-\(boundary.name)"
         )
     }
@@ -117,7 +117,7 @@ struct GradientSnapshots {
             accessibility: .init(reducesMotion: reducesMotion),
             content: content
         )
-        try assertSnapshotImage(host.render(), name: name)
+        try assertSnapshotImage(host.capture(), name: name)
     }
 
     private func staticAppearance(for palette: ArtworkAccentPalette) -> ArtworkAccentGradientAppearance {

@@ -72,10 +72,60 @@ jobs:
         run: |
           test "$(sw_vers -productVersion | cut -d. -f1)" = "26"
           test "$(uname -m)" = "arm64"
+          reference_root=packages/Tests/QenTerraComponentSnapshotTests/__Snapshots__
+          preimages_root="$(mktemp -d "$RUNNER_TEMP/snapshot-preimages.XXXXXX")"
+          for profile in macos-26-arm64-backing-1x macos-26-arm64-backing-2x macos-26-arm64-raster; do
+            test ! -L "$reference_root/$profile"
+            if [ -e "$reference_root/$profile" ]; then
+              test -d "$reference_root/$profile"
+              mv "$reference_root/$profile" "$preimages_root/$profile"
+            fi
+          done
           swift test --package-path . --scratch-path "$RUNNER_TEMP/snapshot-build" --filter QenTerraComponentSnapshotTests
-          mkdir -p "$RUNNER_TEMP/snapshot-capture"
-          cp -R packages/Tests/QenTerraComponentSnapshotTests/__Snapshots__/macos-26-arm64 "$RUNNER_TEMP/snapshot-capture/"
+          native_profile=
+          for profile in macos-26-arm64-backing-1x macos-26-arm64-backing-2x; do
+            if [ -d "$reference_root/$profile" ]; then
+              if [ -n "$native_profile" ]; then
+                echo "Refusing ambiguous fresh native backing profiles" >&2
+                exit 1
+              fi
+              native_profile="$profile"
+            fi
+          done
+          if [ -z "$native_profile" ]; then
+            echo "No fresh native backing profile was captured" >&2
+            exit 1
+          fi
+          raster_profile=macos-26-arm64-raster
+          require_png_count() {
+            test -d "$1"
+            test ! -L "$1"
+            test -z "$(find "$1" -type l -print -quit)"
+            test "$(find "$1" -type f | wc -l | tr -d '[:space:]')" = "$2"
+            test "$(find "$1" -type f -name '*.png' | wc -l | tr -d '[:space:]')" = "$2"
+          }
+          require_png_count "$reference_root/$native_profile" 47
+          require_png_count "$reference_root/$raster_profile" 3
+          capture_root="$RUNNER_TEMP/snapshot-capture"
+          mkdir "$capture_root"
+          cp -R "$reference_root/$native_profile" "$capture_root/"
+          cp -R "$reference_root/$raster_profile" "$capture_root/"
+          swift -e '
+            import AppKit
+            import Foundation
+            _ = NSApplication.shared
+            let window = NSWindow(contentRect: NSRect(x: -10000, y: -10000, width: 1, height: 1), styleMask: .borderless, backing: .buffered, defer: false)
+            let screens = NSScreen.screens.map { screen -> [String: Any] in
+              ["name": screen.localizedName, "frame": NSStringFromRect(screen.frame), "backingScale": Double(screen.backingScaleFactor)]
+            }
+            let report: [String: Any] = ["scope": "Post-capture environment probe; captured native origins are identified by their profile", "windowBackingScale": Double(window.backingScaleFactor), "screens": screens]
+            FileHandle.standardOutput.write(try JSONSerialization.data(withJSONObject: report, options: [.prettyPrinted, .sortedKeys]))
+          ' > "$capture_root/native-environment.json"
+          actual_scale="${native_profile##*-backing-}"
+          actual_scale="${actual_scale%x}"
+          python3 -c 'import json, sys; report = json.load(open(sys.argv[1])); assert report["windowBackingScale"] == int(sys.argv[2]), "Post-capture window scale differs from the captured native profile"' "$capture_root/native-environment.json" "$actual_scale"
           {
+            printf 'captured_native_profile=%s\ncaptured_raster_profile=%s\n' "$native_profile" "$raster_profile"
             git rev-parse HEAD
             sw_vers
             uname -m
@@ -83,7 +133,7 @@ jobs:
             swift --version
             xcrun --sdk macosx --show-sdk-version
             printenv ImageOS ImageVersion
-          } > "$RUNNER_TEMP/snapshot-capture/environment.txt"
+          } > "$capture_root/environment.txt"
       - name: Preserve references for independent review
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:

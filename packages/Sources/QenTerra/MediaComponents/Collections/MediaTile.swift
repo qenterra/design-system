@@ -187,7 +187,7 @@ public struct MediaTile<ID: Hashable & Sendable, Artwork: View, TrailingAccessor
                         if !item.subtitle.isEmpty {
                             Text(verbatim: item.subtitle)
                                 .font(.subheadline)
-                                .foregroundStyle(.secondary)
+                                .foregroundStyle(Color(designToken: DesignTokens.Color.textSecondary))
                                 .lineLimit(1)
                                 .frame(maxWidth: .infinity, alignment: frameAlignment)
                         }
@@ -211,7 +211,6 @@ public struct MediaTile<ID: Hashable & Sendable, Artwork: View, TrailingAccessor
         .buttonStyle(MediaActivationButtonStyle())
         .focused($isFocused)
         .disabled(!item.isAvailable)
-        .accessibilityElement(children: .ignore)
         .accessibilityLabel(Text(verbatim: accessibilityLabel))
         .modifier(OptionalAccessibilityValue(value: accessibilityValue))
     }
@@ -262,8 +261,9 @@ public struct MediaTile<ID: Hashable & Sendable, Artwork: View, TrailingAccessor
         presentation.horizontalAlignment == .center ? .center : .leading
     }
 
-    private var metadataForegroundStyle: HierarchicalShapeStyle {
-        presentation.metadataStyle == .secondary ? .secondary : .tertiary
+    private var metadataForegroundStyle: Color {
+        let isEmphasized = presentation.metadataStyle == .secondary || item.isSelected || isHovered || isFocused
+        return Color(designToken: isEmphasized ? DesignTokens.Color.textSecondary : DesignTokens.Color.textTertiary)
     }
 
     private var accessoryInteractionContext: MediaAccessoryInteractionContext {
