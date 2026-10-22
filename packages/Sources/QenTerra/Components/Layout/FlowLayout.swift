@@ -28,9 +28,10 @@ public struct DesignFlowLayout: Layout {
         subviews: Subviews,
         cache: inout Void
     ) -> CGSize {
-        Self.arrangement(
-            sizes: subviews.map { $0.sizeThatFits(.unspecified) },
-            proposalWidth: proposal.width,
+        let childProposal = Self.childProposal(width: proposal.width)
+        return Self.arrangement(
+            sizes: subviews.map { $0.sizeThatFits(childProposal) },
+            proposalWidth: childProposal.width,
             horizontalSpacing: resolvedHorizontalSpacing,
             verticalSpacing: resolvedVerticalSpacing
         ).size
@@ -42,9 +43,10 @@ public struct DesignFlowLayout: Layout {
         subviews: Subviews,
         cache: inout Void
     ) {
+        let childProposal = Self.childProposal(width: proposal.width ?? bounds.width)
         let arrangement = Self.arrangement(
-            sizes: subviews.map { $0.sizeThatFits(.unspecified) },
-            proposalWidth: bounds.width,
+            sizes: subviews.map { $0.sizeThatFits(childProposal) },
+            proposalWidth: childProposal.width,
             horizontalSpacing: resolvedHorizontalSpacing,
             verticalSpacing: resolvedVerticalSpacing
         )
@@ -52,7 +54,7 @@ public struct DesignFlowLayout: Layout {
             subviews[index].place(
                 at: CGPoint(x: bounds.minX + origin.x, y: bounds.minY + origin.y),
                 anchor: .topLeading,
-                proposal: .unspecified
+                proposal: childProposal
             )
         }
     }
@@ -63,7 +65,7 @@ public struct DesignFlowLayout: Layout {
         horizontalSpacing: CGFloat,
         verticalSpacing: CGFloat
     ) -> Arrangement {
-        let width = proposalWidth ?? .greatestFiniteMagnitude
+        let width = childProposal(width: proposalWidth).width ?? .greatestFiniteMagnitude
         var origins: [CGPoint] = []
         var cursor = CGPoint.zero
         var rowHeight = CGFloat.zero
@@ -82,9 +84,13 @@ public struct DesignFlowLayout: Layout {
         }
 
         return Arrangement(
-            size: CGSize(width: min(usedWidth, width), height: cursor.y + rowHeight),
+            size: CGSize(width: usedWidth, height: cursor.y + rowHeight),
             origins: origins
         )
+    }
+
+    private static func childProposal(width: CGFloat?) -> ProposedViewSize {
+        ProposedViewSize(width: width.flatMap { $0.isFinite ? max(0, $0) : nil }, height: nil)
     }
 
     private var resolvedHorizontalSpacing: CGFloat {

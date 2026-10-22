@@ -1,6 +1,6 @@
 {
   "name": "@qenterra/design-tokens",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Public CSS, JSON, icon, and component-recipe adapters from Design System.",
   "license": "MIT",
   "repository": {

@@ -2,6 +2,19 @@
 import SwiftUI
 import QenTerraDesignTokens
 
+/// Actual item bounds for consumer-owned overlays, resolved in the overlay's coordinate space.
+/// Destination and footer identities must be unique within one rail.
+public struct NavigationRailItemBoundsKey<ID: Hashable & Sendable>: PreferenceKey {
+    public static var defaultValue: [ID: Anchor<CGRect>] { [:] }
+
+    public static func reduce(
+        value: inout [ID: Anchor<CGRect>],
+        nextValue: () -> [ID: Anchor<CGRect>]
+    ) {
+        value.merge(nextValue(), uniquingKeysWith: { _, next in next })
+    }
+}
+
 public struct NavigationRailItem<ID: Hashable & Sendable>: Identifiable, Equatable, Sendable {
     public let id: ID
     public let title: String
@@ -271,6 +284,9 @@ public struct NavigationRail<ID: Hashable & Sendable>: View {
                 .focused($focusedID, equals: item.id)
                 .accessibilityLabel(item.title)
                 .accessibilityValue(itemPresentation.isSelected ? Text("Selected") : Text(""))
+                .anchorPreference(key: NavigationRailItemBoundsKey<ID>.self, value: .bounds) {
+                    [item.id: $0]
+                }
             }
         }
         .frame(width: isCompact ? DesignTokens.Component.navigationRailCompact.points : nil)
@@ -278,29 +294,42 @@ public struct NavigationRail<ID: Hashable & Sendable>: View {
 
     private var profiledBody: some View {
         let isExpanded = expansion?.wrappedValue ?? !isCompact
-        return VStack(spacing: visualPresentation.rowSpacing) {
-            if expansion != nil, expansionConfiguration != nil {
-                expansionButton(isExpanded: isExpanded)
-                    .padding(.bottom, metrics.controlGap)
-            }
+        return GeometryReader { viewport in
+            ScrollViewReader { scroll in
+                ScrollView(.vertical) {
+                    VStack(spacing: visualPresentation.rowSpacing) {
+                        if expansion != nil, expansionConfiguration != nil {
+                            expansionButton(isExpanded: isExpanded)
+                                .padding(.bottom, metrics.controlGap)
+                        }
 
-            ForEach(items) { item in
-                profiledButton(item, isExpanded: isExpanded)
-            }
+                        ForEach(items) { item in
+                            profiledButton(item, isExpanded: isExpanded)
+                                .id(item.id)
+                        }
 
-            if !footerItems.isEmpty {
-                Spacer(minLength: metrics.controlGap)
-                ForEach(footerItems) { item in
-                    profiledButton(item, isExpanded: isExpanded)
+                        if !footerItems.isEmpty {
+                            Spacer(minLength: metrics.controlGap)
+                            ForEach(footerItems) { item in
+                                profiledButton(item, isExpanded: isExpanded)
+                                    .id(item.id)
+                            }
+                        }
+                    }
+                    .frame(width: visualPresentation.contentWidth(isExpanded: isExpanded))
+                    .frame(
+                        minHeight: max(0, viewport.size.height - visualPresentation.verticalInset * 2),
+                        alignment: .topLeading
+                    )
+                    .padding(.horizontal, visualPresentation.horizontalInset)
+                    .padding(.vertical, visualPresentation.verticalInset)
+                }
+                .scrollIndicators(.hidden)
+                .onChange(of: focusedID) { id in
+                    if let id { scroll.scrollTo(id) }
                 }
             }
         }
-        .frame(
-            width: visualPresentation.contentWidth(isExpanded: isExpanded),
-            alignment: .leading
-        )
-        .padding(.horizontal, visualPresentation.horizontalInset)
-        .padding(.vertical, visualPresentation.verticalInset)
         .frame(
             width: visualPresentation.totalWidth(isExpanded: isExpanded),
             alignment: .leading
@@ -381,6 +410,9 @@ public struct NavigationRail<ID: Hashable & Sendable>: View {
             width: visualPresentation.contentWidth(isExpanded: isExpanded),
             alignment: .center
         )
+        .anchorPreference(key: NavigationRailItemBoundsKey<ID>.self, value: .bounds) {
+            [item.id: $0]
+        }
     }
 
     private func profiledLabel(

@@ -1,6 +1,6 @@
 {
   "format": "design-system-figma-components-v1",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "components": [
     {
       "id": "button",
@@ -1808,7 +1808,8 @@
       ],
       "states": [
         "single-row",
-        "wrapped"
+        "wrapped",
+        "constrained"
       ],
       "stories": [
         {
@@ -1818,6 +1819,10 @@
         {
           "id": "wrapped",
           "state": "wrapped"
+        },
+        {
+          "id": "constrained",
+          "state": "constrained"
         }
       ],
       "keyboard": [
@@ -1827,7 +1832,9 @@
         "layout-adds-no-focus-target"
       ],
       "localization": [
-        "content wraps rather than clipping"
+        "content wraps rather than clipping",
+        "finite width constrains child measurement and placement",
+        "children that refuse compression retain their actual reported size"
       ],
       "evidence": [
         "schema",
@@ -2043,7 +2050,8 @@
         "compact",
         "selected",
         "focused",
-        "disabled"
+        "disabled",
+        "short-height"
       ],
       "stories": [
         {
@@ -2057,6 +2065,10 @@
         {
           "id": "selected",
           "state": "selected"
+        },
+        {
+          "id": "short-height",
+          "state": "short-height"
         }
       ],
       "keyboard": [
@@ -2065,7 +2077,9 @@
       "accessibility": [
         "native-button",
         "focus-independent-from-selection",
-        "current-destination-announced"
+        "current-destination-announced",
+        "profiled destinations and footer remain reachable by vertical scrolling",
+        "item bounds preferences track scrolling for consumer-owned overlays"
       ],
       "localization": [
         "expanded labels may truncate after stable icon anchors"

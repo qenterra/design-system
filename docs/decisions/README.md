@@ -21,5 +21,6 @@ Architecture decision records preserve consequential choices, alternatives, evid
 | `0014` | [Public canonical repository](0014-public-canonical-repository.md) | accepted; license clause superseded | `0016` |
 | `0015` | [Exact external icon source catalogs](0015-exact-icon-source-catalogs.md) | accepted | — |
 | `0016` | [MIT license for QenTerra material](0016-mit-license-for-qenterra-material.md) | accepted | — |
+| `0017` | [Navigation rail item bounds](0017-navigation-rail-item-bounds.md) | accepted | — |
 
 Use the next four-digit ID. Do not renumber or delete accepted records; mark a replaced decision as superseded and link its replacement.

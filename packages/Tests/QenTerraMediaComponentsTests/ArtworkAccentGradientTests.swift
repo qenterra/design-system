@@ -327,6 +327,8 @@
         view.update(palette: palette, appearance: idle)
         view.isPaused = true
         let idleImage = try #require(captureHostedView(view))
+        // Exercise transitions with a committed presentation layer, not only model-layer fallback.
+        CATransaction.flush()
         removeAnimations(in: view)
 
         view.update(palette: palette, appearance: active)
@@ -347,6 +349,14 @@
         removeAnimations(in: view)
         let blueImage = try #require(captureHostedView(view))
         #expect(imageBytes(activeImage) != imageBytes(blueImage))
+
+        // Bitmap capture reads model layers; commit the completed active state before testing its exit.
+        CATransaction.flush()
+        try #require(layerTree(in: view).contains {
+            guard let opacity = $0.presentation()?.opacity else { return false }
+            return abs($0.opacity - 0.75) <= 0.000_001
+                && abs(opacity - 0.75) <= 0.000_001
+        })
 
         view.update(palette: palette, appearance: idle)
         view.isPaused = true
