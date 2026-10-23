@@ -66,6 +66,11 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+      - name: Inventory available native display modes
+        run: |
+          swift scripts/native-display-inventory.swift --inventory \
+            > "$RUNNER_TEMP/native-display-inventory.json" \
+            2> "$RUNNER_TEMP/native-display-inventory.stderr"
       - name: Record complete synthetic component references
         env:
           QDS_RECORD_SNAPSHOTS: "1"
@@ -139,5 +144,15 @@ jobs:
         with:
           name: macos26-snapshot-reference-capture
           path: ${{ runner.temp }}/snapshot-capture
+          if-no-files-found: error
+          retention-days: 7
+      - name: Preserve native display mode inventory
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: macos26-native-display-inventory
+          path: |
+            ${{ runner.temp }}/native-display-inventory.json
+            ${{ runner.temp }}/native-display-inventory.stderr
           if-no-files-found: error
           retention-days: 7
