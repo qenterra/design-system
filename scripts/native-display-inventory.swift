@@ -167,7 +167,7 @@ func emitInventory(requiredMainScale: Double?) throws -> Bool {
     let environment = ProcessInfo.processInfo.environment
     let report: [String: Any] = [
         "schemaVersion": 1,
-        "scope": "Read-only disposable-CI advertised-mode and actual-window inventory; not QDS image acceptance",
+        "scope": "Read-only disposable-CI advertised-mode and actual-window inventory; not Design System image acceptance",
         "timestampUTC": ISO8601DateFormatter().string(from: Date()),
         "osVersion": ProcessInfo.processInfo.operatingSystemVersionString,
         "processArchitecture": processArchitecture(),
