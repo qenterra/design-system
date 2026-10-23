@@ -14,7 +14,7 @@ enum SnapshotFailure: Error, Equatable, CustomStringConvertible {
     var description: String {
         switch self {
         case let .missingProfile(path):
-            return "Missing native snapshot profile: \(path). Capture and visually review references on this OS/architecture; no other profile is substituted."
+            return "Missing snapshot profile: \(path). Capture and visually review this OS/architecture and native backing scale or raster origin; no other profile is substituted."
         case let .missingReference(path):
             return "Missing snapshot: \(path). Record explicitly with QDS_RECORD_SNAPSHOTS=1, then inspect the PNG."
         case let .dimensions(ew, eh, aw, ah):
@@ -89,6 +89,64 @@ struct RGBAImage: Equatable {
                 x: (index / 4) % width, y: (index / 4) / width, channel: index % 4,
                 expected: pixels[index], actual: actual.pixels[index]
             )
+        }
+    }
+}
+
+enum SnapshotCaptureOrigin: Equatable {
+    case native(backingScale: CGFloat)
+    case raster
+}
+
+struct SnapshotCapture {
+    let image: RGBAImage
+    let origin: SnapshotCaptureOrigin
+
+    var backingScale: CGFloat? {
+        if case let .native(scale) = origin { return scale }
+        return nil
+    }
+
+    private init(image: RGBAImage, origin: SnapshotCaptureOrigin) {
+        self.image = image
+        self.origin = origin
+    }
+
+    static func raster(_ image: RGBAImage) -> Self {
+        Self(image: image, origin: .raster)
+    }
+
+    @MainActor
+    static func native(window: NSWindow, render: () throws -> RGBAImage) throws -> Self {
+        let before = window.backingScaleFactor
+        try SnapshotProfile.validateBackingScale(before: before, after: before)
+        let image = try render()
+        try SnapshotProfile.validateBackingScale(before: before, after: window.backingScaleFactor)
+        return Self(image: image, origin: .native(backingScale: before))
+    }
+}
+
+enum SnapshotProfile {
+    static func directoryName(osMajor: Int, architecture: String, origin: SnapshotCaptureOrigin) throws -> String {
+        guard osMajor > 0, ["arm64", "x86_64"].contains(architecture) else {
+            throw SnapshotFailure.rendering("Unsupported snapshot OS or architecture")
+        }
+        let prefix = "macos-\(osMajor)-\(architecture)"
+        switch origin {
+        case let .native(backingScale):
+            try validateBackingScale(before: backingScale, after: backingScale)
+            return "\(prefix)-backing-\(Int(backingScale))x"
+        case .raster:
+            return "\(prefix)-raster"
+        }
+    }
+
+    static func validateBackingScale(before: CGFloat, after: CGFloat) throws {
+        guard before == 1 || before == 2, after == 1 || after == 2 else {
+            throw SnapshotFailure.rendering("Unsupported native backing scale; capture requires an actual 1× or 2× window")
+        }
+        guard before == after else {
+            throw SnapshotFailure.rendering("Native window backing scale changed from \(before) to \(after) during capture")
         }
     }
 }
@@ -233,13 +291,17 @@ final class NativeSnapshotHost<Content: View> {
                 bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false,
                 colorSpaceName: .deviceRGB, bytesPerRow: Int(size.width) * 4, bitsPerPixel: 32
               ) else { throw SnapshotFailure.rendering("Native view cannot cache its display") }
-        // An explicit 1× destination avoids depending on the attached screen's Retina scale; no image is resized.
+        // The 1× destination fixes output dimensions, not native glyph backing; no image is resized.
         bitmap.size = size
         view.effectiveAppearance.performAsCurrentDrawingAppearance {
             view.cacheDisplay(in: view.bounds, to: bitmap)
         }
         guard let image = bitmap.cgImage else { throw SnapshotFailure.rendering("Native cache has no CGImage") }
         return try RGBAImage(cgImage: image)
+    }
+
+    func capture() throws -> SnapshotCapture {
+        try SnapshotCapture.native(window: window) { try render() }
     }
 
     private func freezeTiming(_ view: NSView, at presentationTime: TimeInterval) {
@@ -288,10 +350,10 @@ func assertSnapshot<Content: View>(
     @ViewBuilder content: () -> Content
 ) throws {
     let host = try NativeSnapshotHost(size: size, configuration: configuration, content: content)
-    try assertSnapshotImage(host.render(), name: name)
+    try assertSnapshotImage(host.capture(), name: name)
 }
 
-func assertSnapshotImage(_ image: RGBAImage, name: String) throws {
+func assertSnapshotImage(_ capture: SnapshotCapture, name: String) throws {
     guard name.range(of: "^[a-z0-9-]+$", options: .regularExpression) != nil else {
         throw SnapshotFailure.rendering("Snapshot name must contain lowercase ASCII letters, numbers, or hyphens")
     }
@@ -303,19 +365,25 @@ func assertSnapshotImage(_ image: RGBAImage, name: String) throws {
     #else
     throw SnapshotFailure.rendering("No snapshot profile for this architecture")
     #endif
-    let profile = "macos-\(ProcessInfo.processInfo.operatingSystemVersion.majorVersion)-\(architecture)"
+    let profile = try SnapshotProfile.directoryName(
+        osMajor: ProcessInfo.processInfo.operatingSystemVersion.majorVersion,
+        architecture: architecture,
+        origin: capture.origin
+    )
     let sourceDirectory = URL(fileURLWithPath: #filePath).deletingLastPathComponent().appendingPathComponent("__Snapshots__")
     let rootDirectory = record ? sourceDirectory : Bundle.module.resourceURL!.appendingPathComponent("__Snapshots__")
     let directory = rootDirectory.appendingPathComponent(profile)
     let reference = directory.appendingPathComponent(name + ".png")
     do {
         try SnapshotReferenceStore.requireProfile(directory, record: record)
-        try SnapshotReferenceStore.check(image, reference: reference, record: record)
+        try SnapshotReferenceStore.check(capture.image, reference: reference, record: record)
     } catch {
-        let artifacts = FileManager.default.temporaryDirectory.appendingPathComponent("qenterra-component-snapshot-failures")
+        let artifacts = FileManager.default.temporaryDirectory
+            .appendingPathComponent("qenterra-component-snapshot-failures")
+            .appendingPathComponent(profile)
         try FileManager.default.createDirectory(at: artifacts, withIntermediateDirectories: true)
         let actual = artifacts.appendingPathComponent(name + ".actual.png")
-        try image.pngData().write(to: actual, options: .atomic)
+        try capture.image.pngData().write(to: actual, options: .atomic)
         print("Snapshot actual: \(actual.path)")
         throw error
     }

@@ -1,6 +1,6 @@
 # Design System
 
-Version 1.1.0 · Normative reference for people
+Version 1.1.1 · Normative reference for people
 
 ## 0. How to use this file
 
@@ -118,6 +118,8 @@ Text roles:
 - `text.tertiary`: low-priority metadata that remains readable;
 - `text.disabled`: unavailable content, never instructional content;
 - `text.link`: navigational text with non-color affordance on focus/hover.
+
+Media tiles and rows use these semantic roles for creator and metadata labels. Selected, hovered, and focused surfaces promote metadata to `text.secondary` so tinted backgrounds do not reduce its readability.
 
 Action roles:
 
@@ -861,10 +863,21 @@ The local version-alignment command accepts plain `MAJOR.MINOR.PATCH` only. It
 updates every declared canonical version surface through a staged transaction,
 regenerates derived and public manifests, and reports changed paths; it never
 commits, tags, pushes, publishes, or authorises a release. Native component
-snapshots use synthetic data and an exact OS/architecture profile. Recording is
-a separate focused operation followed by original-size review; the complete gate
-is comparison-only and covers core, media, native-table, Reduced Motion, fallback,
-and fixed-time gradient boundaries.
+snapshots use synthetic data and an exact profile for the runtime OS major
+version, architecture, and the capture window's actual backing scale (1× or 2×),
+for example `macos-27-arm64-backing-1x`. The output bitmap remains fixed at 1×;
+the backing-scale axis does not change its dimensions. A missing or unsupported
+profile fails; no other scale, OS, architecture, or legacy profile is substituted.
+Each supported scale requires its own actual native capture and original-size
+visual review. A 1× capture does not establish physical 2× display acceptance.
+Pure CGImage render boundaries use a separate `macos-27-arm64-raster` profile;
+they carry no native window-backing claim and never substitute for native profiles.
+
+Recording is a separate focused operation followed by original-size review; the
+complete gate is comparison-only and covers core, media, native-table, Reduced
+Motion, fallback, and fixed-time gradient boundaries. Legacy OS/architecture
+profiles and archived preimages remain preserved historical artifacts; they do
+not establish acceptance of the repaired 1.1.1 components.
 
 The package source tree has six deliberately separate zones. `Sources/QenTerra/`
 contains the installable, tokenized `QenTerraDesignTokens`, `QenTerraComponents`, and macOS-first

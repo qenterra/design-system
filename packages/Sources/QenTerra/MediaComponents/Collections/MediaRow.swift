@@ -86,7 +86,7 @@ public struct MediaRow<ID: Hashable & Sendable, Artwork: View, TrailingAccessory
                         .lineLimit(1)
                     Text(verbatim: item.subtitle)
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Color(designToken: DesignTokens.Color.textSecondary))
                         .lineLimit(1)
                 }
 
@@ -95,7 +95,8 @@ public struct MediaRow<ID: Hashable & Sendable, Artwork: View, TrailingAccessory
                 if let metadata = item.metadata {
                     Text(verbatim: metadata)
                         .font(.caption)
-                        .foregroundStyle(.tertiary)
+                        .foregroundStyle(Color(designToken: item.isSelected || isHovered || isFocused
+                            ? DesignTokens.Color.textSecondary : DesignTokens.Color.textTertiary))
                         .monospacedDigit()
                         .lineLimit(1)
                 }
@@ -105,7 +106,6 @@ public struct MediaRow<ID: Hashable & Sendable, Artwork: View, TrailingAccessory
         .buttonStyle(MediaActivationButtonStyle())
         .focused($isFocused)
         .disabled(!item.isAvailable)
-        .accessibilityElement(children: .ignore)
         .accessibilityLabel(Text(verbatim: accessibilityLabel))
         .modifier(OptionalAccessibilityValue(value: accessibilityValue))
     }

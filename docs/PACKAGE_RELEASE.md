@@ -3,7 +3,7 @@
 ## Registry contract
 
 - npm registry: `@qenterra/design-tokens`, Node.js 22 for verification, metadata in `packages/npm/design-tokens/package.json`.
-- Swift Package Manager: repository `https://github.com/QenTerra/design-system`, products `QenTerraDesignTokens`, `QenTerraComponents`, `QenTerraMediaComponents`, `QenTerraFoundation`, and `QenTerraAudioAnalysis`, Swift tools 5.9, macOS 26+, and iOS 16+ where supported in version `1.1.0`. Released `1.0.1` retains its macOS 13+ requirement.
+- Swift Package Manager: repository `https://github.com/QenTerra/design-system`, products `QenTerraDesignTokens`, `QenTerraComponents`, `QenTerraMediaComponents`, `QenTerraFoundation`, and `QenTerraAudioAnalysis`, Swift tools 5.9, macOS 26+, and iOS 16+ where supported in version `1.1.1`. Released `1.0.1` retains its macOS 13+ requirement.
 
 Despite the patch version number, the macOS minimum increase from 13 to 26 is a breaking compatibility change from `1.0.1`. Before adopting `1.0.2`, raise the consuming application's macOS deployment target to 26 or later. Consumers that need macOS 13–15 must remain on a compatible immutable release. iOS requirements are unchanged. Version metadata does not publish a package or replace an existing tag.
 

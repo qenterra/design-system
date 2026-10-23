@@ -9,6 +9,60 @@ import Testing
 
 @Suite("Snapshot comparison contracts")
 struct SnapshotSupportTests {
+    @Test func nativeProfilesKeepActualBackingScalesSeparate() throws {
+        let one = try SnapshotProfile.directoryName(osMajor: 27, architecture: "arm64", origin: .native(backingScale: 1))
+        let two = try SnapshotProfile.directoryName(osMajor: 27, architecture: "arm64", origin: .native(backingScale: 2))
+        #expect(one == "macos-27-arm64-backing-1x")
+        #expect(two == "macos-27-arm64-backing-2x")
+        #expect(one != two)
+    }
+
+    @Test func pureRasterProfileMakesNoNativeBackingClaim() throws {
+        let profile = try SnapshotProfile.directoryName(osMajor: 27, architecture: "arm64", origin: .raster)
+        #expect(profile == "macos-27-arm64-raster")
+        let image = try RGBAImage(width: 1, height: 1, pixels: [12, 24, 48, 255])
+        let capture = SnapshotCapture.raster(image)
+        #expect(capture.origin == .raster)
+        #expect(capture.backingScale == nil)
+        #expect(capture.image == image)
+    }
+
+    @Test func nativeProfilesRejectUnsupportedBackingScales() {
+        for scale: CGFloat in [0, -1, 1.5, 3, .nan, .infinity] {
+            #expect(throws: SnapshotFailure.self) {
+                try SnapshotProfile.directoryName(osMajor: 27, architecture: "arm64", origin: .native(backingScale: scale))
+            }
+        }
+    }
+
+    @Test func nativeCaptureRejectsBackingChanges() {
+        #expect(throws: SnapshotFailure.self) {
+            try SnapshotProfile.validateBackingScale(before: 1, after: 2)
+        }
+        #expect(throws: SnapshotFailure.self) {
+            try SnapshotProfile.validateBackingScale(before: 2, after: 1)
+        }
+    }
+
+    @Test @MainActor func nativeCaptureBindsTheActualMountedWindowScale() throws {
+        let host = try NativeSnapshotHost(size: CGSize(width: 320, height: 90), configuration: .init(appearance: .light)) {
+            HStack(spacing: 16) {
+                Text("Native capture").font(.system(size: 20))
+                Image(systemName: "heart.fill")
+            }.foregroundStyle(.black).padding(16)
+        }
+        let window = try #require(host.view.window)
+        let before = window.backingScaleFactor
+        let capture = try host.capture()
+        #expect(capture.backingScale == before)
+        #expect(capture.backingScale == window.backingScaleFactor)
+        #expect(capture.image.width == 320 && capture.image.height == 90)
+        let darkPixels = stride(from: 0, to: capture.image.pixels.count, by: 4).filter {
+            capture.image.pixels[$0] < 80 && capture.image.pixels[$0 + 3] == 255
+        }.count
+        #expect(darkPixels > 32, "The actual mounted text and symbol must remain visible")
+    }
+
     @Test @MainActor func firstNativeGradientFrameIncludesItsEffectTint() throws {
         func render(_ active: Bool) throws -> RGBAImage {
             let host = try NativeSnapshotHost(size: CGSize(width: 320, height: 240), configuration: .init(appearance: .dark)) {

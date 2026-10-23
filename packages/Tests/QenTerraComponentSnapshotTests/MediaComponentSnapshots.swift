@@ -112,7 +112,7 @@ struct MediaComponentSnapshots {
             materializesLayerPresentation: materializesLayerPresentation,
             content: content
         )
-        try assertSnapshotImage(host.render(), name: "\(stem)-\(appearance.rawValue)")
+        try assertSnapshotImage(host.capture(), name: "\(stem)-\(appearance.rawValue)")
     }
 }
 
